@@ -1,4 +1,4 @@
-package Model;
+package server.model.player;
 
 public class BookShelf {
 
