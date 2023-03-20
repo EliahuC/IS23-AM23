@@ -1,4 +1,4 @@
-package server.model.controller
+package server.model.controller;
 
 
 public class Controller {
