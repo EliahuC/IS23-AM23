@@ -1,6 +1,6 @@
-package Model;
+package server.model.player;
 
-import Model.PersonalGoalCard;
+import server.model.player.PersonalGoalCard;
 
 import java.awt.*;
 
