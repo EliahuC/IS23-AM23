@@ -1,4 +1,4 @@
-package it.polimi.ingsw;
+package server;
 import java.util.ArrayList;
 
 public class Launcher {
