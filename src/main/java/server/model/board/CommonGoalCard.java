@@ -1,4 +1,4 @@
-package Model;
+package server.model.board;
 
 public class CommonGoalCard {
     private final int id;
