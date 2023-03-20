@@ -1,4 +1,4 @@
-package it.polimi.ingsw;
+package server.model.board;
 
 public class ScoringToken extends Token {
     private int GoalCard;
