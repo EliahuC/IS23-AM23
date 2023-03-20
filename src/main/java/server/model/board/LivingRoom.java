@@ -1,4 +1,4 @@
-package it.polimi.ingsw;
+package server.model.board;
 
 public class LivingRoom {
     private myStruct Board;
