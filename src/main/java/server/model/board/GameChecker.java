@@ -1,4 +1,4 @@
-package server.model.board
+package server.model.board;
 
 public class GameChecker {
 
