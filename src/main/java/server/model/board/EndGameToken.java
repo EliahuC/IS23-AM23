@@ -1,4 +1,4 @@
-package it.polimi.ingsw;
+package server.model.board;
 
 public class EndGameToken extends Token{
 private static int Points=1;
