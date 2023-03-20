@@ -1,4 +1,4 @@
-package it.polimi.ingsw;
+package server.model.board;
 
 public abstract class Token {
 private final int Points;
