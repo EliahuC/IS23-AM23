@@ -1,6 +1,6 @@
-package it.polimi.ingsw;
+package server.model.board;
 
-public enum Category {
+public enum itemTileCategory {
     CATS,
     BOOKS,
     GAMES,
