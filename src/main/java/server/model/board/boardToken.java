@@ -1,6 +1,6 @@
 package it.polimi.ingsw;
 
-public enum Box {
+public enum boardToken {
     NORMAL,
     THREE,
     FOUR,
