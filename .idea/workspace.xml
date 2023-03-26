@@ -4,24 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c39c4350-8d8d-4a79-816d-4409ab0e2059" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/IS23-AM23.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/server/Launcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/Launcher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/server/model/GameChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/model/GameChecker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/server/model/board/CommonGoalCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/model/board/CommonGoalCard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/server/model/board/EndGameToken.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/model/board/EndGameToken.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/server/model/board/ItemTile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/model/board/ItemTile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/server/model/board/LivingRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/model/board/LivingRoom.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/server/model/board/LivingRoomSpace.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/model/board/LivingRoomSpace.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/server/model/board/itemTileCategory.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/server/model/player/BookShelf.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/model/player/BookShelf.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/server/model/player/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/model/player/Player.java" afterDir="false" />
-    </list>
+    <list default="true" id="c39c4350-8d8d-4a79-816d-4409ab0e2059" name="Changes" comment="sistemazione classi" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -65,8 +48,16 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1679846521060</updated>
-      <workItem from="1679846527183" duration="3367000" />
+      <workItem from="1679846527183" duration="3533000" />
     </task>
+    <task id="LOCAL-00001" summary="sistemazione classi">
+      <created>1679849977846</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1679849977846</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -82,5 +73,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="sistemazione classi" />
+    <option name="LAST_COMMIT_MESSAGE" value="sistemazione classi" />
   </component>
 </project>
