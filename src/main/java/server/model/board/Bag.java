@@ -2,21 +2,23 @@ package server.model.board;
 
 
 public class Bag {
-    private final int NumCats;
-    private final int NumBooks;
-    private final int NumPlants;
-    private final int NumGames;
-    private final int NumFrames;
-    private final int NumTrophies;
+    private int NumCats;
+    private int NumBooks;
+    private int NumPlants;
+    private int NumGames;
+    private int NumFrames;
+    private int NumTrophies;
+    private boolean ok;
 
 
-    public Bag(int Num) {
-        this.NumCats = Num;
-        this.NumBooks = Num;
-        this.NumPlants = Num;
-        this.NumGames = Num;
-        this.NumFrames = Num;
-        this.NumTrophies = Num;
+    public Bag() {
+        this.NumCats = 22;
+        this.NumBooks = 22;
+        this.NumPlants = 22;
+        this.NumGames = 22;
+        this.NumFrames = 22;
+        this.NumTrophies = 22;
+        ok=false;
     }
 
     public int getNumCats() {
@@ -42,9 +44,62 @@ public class Bag {
     public int getNumTrophies() {
         return NumTrophies;
     }
-
+    public boolean NoMoreTiles(){
+        if(NumFrames+NumBooks+NumCats+NumPlants+NumTrophies+NumGames==0) return true;
+        else return false;
+    }
     public ItemTile extract() {
-        //to do//
+        if(NoMoreTiles()==true) {
+        System.out.println("NO MORE TILES");
+        return null;
+        }
+        else {
+            ItemTile Tile = new ItemTile();
+            while (ok == false) {
+                switch (Tile.getCategory()) {
+                    case CATS:
+                        if (NumCats > 0) {
+                            NumCats--;
+                            ok = true;
+                            break;
+                        } else {Tile = new ItemTile();
+                        break;}
+                    case FRAMES:
+                        if (NumFrames > 0) {
+                            NumFrames--;
+                            ok = true;
+                            break;
+                        } else {Tile = new ItemTile();
+                            break;}
+                    case BOOKS:
+                        if (NumBooks > 0) {
+                            NumBooks--;
+                            break;
+                        }else {Tile = new ItemTile();
+                            break;}
+                    case GAMES:
+                        if (NumGames > 0) {
+                            NumGames--;
+                            break;
+                        } else {Tile = new ItemTile();
+                            break;}
+                    case PLANTS:
+                        if (NumPlants > 0) {
+                            NumPlants--;
+                            break;
+                        } else {Tile = new ItemTile();
+                            break;}
+                    case TROPHIES:
+                        if (NumTrophies > 0) {
+                            NumTrophies--;
+                            break;
+                        } else {Tile = new ItemTile();
+                            break;}
 
+                }
+
+            }
+            return Tile;
+        }
     }
 }
