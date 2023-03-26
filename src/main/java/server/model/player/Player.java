@@ -1,6 +1,6 @@
 package server.model.player;
 
-import server.model.player.PersonalGoalCard;
+
 
 import java.awt.*;
 
@@ -13,7 +13,7 @@ public class Player {
     private final BookShelf playerBookshelf;
 
 
-    private final Model.PersonalGoalCard PersonalGoalCard;
+    private final PersonalGoalCard PersonalGoalCard;
 
     private final boolean nowPlaying;
     private final boolean lastRound;

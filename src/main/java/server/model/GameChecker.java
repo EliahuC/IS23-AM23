@@ -1,5 +1,9 @@
 package server.model;
 
+import server.model.board.LivingRoom;
+import server.model.player.BookShelf;
+import server.model.player.Player;
+
 public class GameChecker {
 
     private boolean restorable;
@@ -64,14 +68,14 @@ public class GameChecker {
         return isYourTurn;
     }
 
-    public int getLastRound(){
+    public boolean getLastRound(){
         return lastRound;
 
     }
 
     public void checkRound(){
         if (lastRound == true)
-            System.out.println("Ultimo turno!")  }
+            System.out.println("Ultimo turno!");  }
 
 }
 

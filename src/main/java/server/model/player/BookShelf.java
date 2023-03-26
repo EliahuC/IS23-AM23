@@ -1,8 +1,9 @@
 package server.model.player;
 
+import server.model.board.ItemTile;
 public class BookShelf {
 
-    private final itemTile Shelf[6][5];
+    private ItemTile[][] Shelf;
 
     public BookShelf() {
         this.Shelf = null;

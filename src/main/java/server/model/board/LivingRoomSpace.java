@@ -1,15 +1,17 @@
 package server.model.board;
 
 public class LivingRoomSpace {
-private Box box;
+
 private ItemTile tile;
 
-    public ItemTile getTile(){
+    public ItemTile getTile() {
         return tile;
     }
 
-    public Box getBox(){
-        return box;
+    public ItemTile.itemTileCategory getEnum(){
+        return tile.getCategory();
     }
+
+
 
 }

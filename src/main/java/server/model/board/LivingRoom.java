@@ -1,10 +1,18 @@
 package server.model.board;
 
-public class LivingRoom {
-    private myStruct Board;
+import it.polimi.ingsw.boardToken;
 
-    public LivingRoom(myStuct Board) {
-        this.Board = Board;
+public class LivingRoom {
+
+
+    private boardToken[][] Board = new boardToken[9][9];
+
+    public LivingRoom() {
+        for(int i =0; i<=9 ;i++ ) {
+            for (int j = 0; j <= 9; j++) {
+                this.Board[i][j] = boardToken.UNAVAILABLE;
+            }
+        }
     }
 
     public void Start(int numPlayers){

@@ -1,5 +1,5 @@
 package server.model.board;
-
+import server.model.player.BookShelf;
 public class CommonGoalCard {
     private final int id;
     private final int numCompleted;

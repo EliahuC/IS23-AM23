@@ -1,28 +1,28 @@
 package server.model.board;
 
-import java.util.Objects;
+
+import java.util.Random;
 
 public class ItemTile {
-private final Category category;
-
-    public ItemTile(Category category){
-        this.category=category;
+     enum itemTileCategory {
+        CATS,
+        BOOKS,
+        GAMES,
+        FRAMES,
+        TROPHIES,
+        PLANTS;
     }
 
-    public Category getCategory(){
+    private final itemTileCategory category ;
+
+    public ItemTile(){
+        itemTileCategory[] values = itemTileCategory.values();
+        int length = values.length;
+        int randIndex = new Random().nextInt(length);
+        category=values[randIndex];
+    }
+
+    public itemTileCategory getCategory() {
         return category;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ItemTile itemTile = (ItemTile) o;
-        return category == itemTile.category;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(category);
     }
 }
