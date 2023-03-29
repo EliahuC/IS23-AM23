@@ -15,6 +15,12 @@ Giovanni Di Lorenzo (giovanni.dilorenzo@mail.polimi.it)
 
 |Functionality   	|State   	|Current   	|Comment   	|
 |---	|---	|---	|---	|
-|UML (Model and Controller)   	|🟢   	|Waiting for Peer Review   	|   	|
-|Java Implementation (Model and Controller)   	|🟡   	|Writing down   	|   	|
-|   	|   	|   	|   	|
+|UML (Model and Controller)   	|🟢   	|90%   	|   	|
+|UML (View and Connection)   	|🔴   	|0%   	|   	|
+|Completed Rules   	|🟡   	|50%   	|   	|
+|TUI   	|🔴   	|0%   	|    	|
+|GUI   	|🔴   	|0%   	|    	|
+|TCP   	|🔴   	|0%   	|    	|
+|RMI   	|🔴   	|0%   	|   	|
+|Resilience to disconnections   	|🔴   	|0%   	|   	|
+|Persistency   	|🔴   	|0%   	|   	|
