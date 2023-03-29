@@ -1,6 +1,9 @@
 package server.model.board;
 
 
+import java.security.Key;
+import java.security.KeyPair;
+
 public class Bag {
     private int NumCats;
     private int NumBooks;
@@ -9,6 +12,7 @@ public class Bag {
     private int NumFrames;
     private int NumTrophies;
     private boolean ok;
+
 
 
     public Bag() {
@@ -50,6 +54,7 @@ public class Bag {
     }
     public ItemTile extract() {
         if(NoMoreTiles()==true) {
+
         System.out.println("NO MORE TILES");
         return null;
         }

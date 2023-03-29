@@ -4,22 +4,38 @@ package server.model.board;
 import java.util.Random;
 
 public class ItemTile {
-     enum itemTileCategory {
-        CATS,
-        BOOKS,
-        GAMES,
-        FRAMES,
-        TROPHIES,
-        PLANTS;
-    }
 
-    private final itemTileCategory category ;
+
+    private itemTileCategory category=null ;
 
     public ItemTile(){
         itemTileCategory[] values = itemTileCategory.values();
         int length = values.length;
         int randIndex = new Random().nextInt(length);
-        category=values[randIndex];
+        this.category=values[randIndex];
+    }
+    public ItemTile(String x) {
+        switch(x){
+            case "CATS":
+                this.category=itemTileCategory.CATS;
+                break;
+
+            case "FRAMES":
+                this.category=itemTileCategory.FRAMES;
+                break;
+            case "BOOKS":
+                this.category=itemTileCategory.BOOKS;
+                break;
+            case "GAMES":
+                this.category=itemTileCategory.GAMES;
+                break;
+            case "PLANTS":
+                this.category=itemTileCategory.PLANTS;
+                break;
+            case "TROPHIES":
+                this.category=itemTileCategory.TROPHIES;
+                break;
+        }
     }
 
     public itemTileCategory getCategory() {

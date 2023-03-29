@@ -4,7 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c39c4350-8d8d-4a79-816d-4409ab0e2059" name="Changes" comment="sistemazione classi" />
+    <list default="true" id="c39c4350-8d8d-4a79-816d-4409ab0e2059" name="Changes" comment="sistemazione classi">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/server/model/board/Bag.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/model/board/Bag.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/server/model/board/CommonGoalCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/model/board/CommonGoalCard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/server/model/board/ItemTile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/model/board/ItemTile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/server/model/board/LivingRoomSpace.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/model/board/LivingRoomSpace.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/server/model/player/BookShelf.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/model/player/BookShelf.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/server/model/player/PersonalGoalCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/model/player/PersonalGoalCard.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,6 +22,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -28,18 +37,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -49,6 +58,7 @@
       <option name="presentableId" value="Default" />
       <updated>1679846521060</updated>
       <workItem from="1679846527183" duration="5390000" />
+      <workItem from="1680077986460" duration="7607000" />
     </task>
     <task id="LOCAL-00001" summary="sistemazione classi">
       <created>1679849977846</created>
