@@ -3,10 +3,10 @@ package server.model.player;
 import server.model.board.ItemTile;
 public class BookShelf {
 
-    private ItemTile[][] Shelf= new ItemTile[6][5];
+    private ItemTile[][] Shelf;
 
     public BookShelf() {
-        this.Shelf = null;
+        this.Shelf =  new ItemTile[6][5];
     }
 
     public ItemTile getTile(int x , int y) {

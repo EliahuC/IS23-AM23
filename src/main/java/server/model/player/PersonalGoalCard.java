@@ -129,24 +129,12 @@ public class PersonalGoalCard {
     public int GivePoints() {
 
         switch (completed) {
-            case 1:
-                points=1;
-                break;
-            case 2:
-                points=2;
-                break;
-            case 3:
-                points=4;
-                break;
-            case 4:
-                points=6;
-                break;
-            case 5:
-                points=9;
-                break;
-            case 6:
-                points=12;
-                break;
+            case 1 -> points = 1;
+            case 2 -> points = 2;
+            case 3 -> points = 4;
+            case 4 -> points = 6;
+            case 5 -> points = 9;
+            case 6 -> points = 12;
         }
         return points;
     }
