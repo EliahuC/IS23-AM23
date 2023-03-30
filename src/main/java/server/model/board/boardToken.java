@@ -7,7 +7,7 @@ public class boardToken {
 
     public boardToken() {
         this.Tile = null;
-        this.category=boardTokenCategory.UNAVAILABLE;
+        this.category=boardTokenCategory.NORMAL;
     }
 
     public boardTokenCategory getCategory() {
