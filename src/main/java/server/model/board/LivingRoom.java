@@ -30,6 +30,10 @@ public class LivingRoom {
                     Board[i][j].setCategory(boardToken.boardTokenCategory.UNAVAILABLE);
                 }
             }
+            Board[3][0].setCategory(boardToken.boardTokenCategory.UNAVAILABLE);
+            Board[0][5].setCategory(boardToken.boardTokenCategory.UNAVAILABLE);
+            Board[5][8].setCategory(boardToken.boardTokenCategory.UNAVAILABLE);
+            Board[8][3].setCategory(boardToken.boardTokenCategory.UNAVAILABLE);
         }
     public void SetThree (){
         Board[2][2].setCategory(boardToken.boardTokenCategory.THREE);
