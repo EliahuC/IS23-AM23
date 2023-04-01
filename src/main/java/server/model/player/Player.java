@@ -60,6 +60,10 @@ public class Player {
 
         return false;
     }
+
+    public boolean getNowPlaying(){
+        return nowPlaying;
+    }
 }
 
 

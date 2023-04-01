@@ -4,6 +4,9 @@ package server.model.board;
 public class boardToken {
     private ItemTile Tile ;
     private boardTokenCategory category;
+    private boardToken associatedBoard[][];
+    private int column;
+    private int row;
 
     public boardToken() {
         this.Tile = null;
@@ -26,10 +29,30 @@ public class boardToken {
         Tile = tile;
     }
 
-    enum boardTokenCategory {
+    public enum boardTokenCategory {
         NORMAL,
         THREE,
         FOUR,
         UNAVAILABLE
+    }
+
+    public boardToken[][] getBoard(){
+        return associatedBoard;
+    }
+
+    public int getCol(){
+        return column;
+    }
+
+    public void setCol(int column){
+        this.column = column;
+    }
+
+    public int getRow(){
+        return row;
+    }
+
+    public void setRow(int row){
+        this.row = row;
     }
 }

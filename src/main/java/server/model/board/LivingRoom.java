@@ -63,4 +63,8 @@ public class LivingRoom {
     public void restore(){
 
     }
+
+    public boardToken[][] getBoard(){
+        return Board;
+    }
 }
