@@ -28,7 +28,7 @@ public class GameChecker {
     public boolean isRestorable(LivingRoom board) {
         for (int i = 0; i < 9 && !restorable; i++){
             for (int j = 0; j < 9 && !restorable; j++){
-                if (board.getBoard()[i][j].getTile() != null && board.getBoard()[i][j].getCategory() == boardToken.boardTokenCategory.NORMAL || (board.getBoard()[i][j].getCategory() == boardToken.boardTokenCategory.THREE && numPlayers >= 3) || (board.getBoard()[i][j].getCategory() == boardToken.boardTokenCategory.FOUR && numPlayers == 4)){
+                if (board.getBoard()[i][j].getTile() != null && boardBoxIsValid(board.getBoard()[i][j])){
                     if (!hasAdjacentTiles(board.getBoard()[i][j])) {
                         restorable = true;
                         return true;
@@ -90,7 +90,7 @@ public class GameChecker {
     }
 
     public boolean isLegalAction(boardToken t1){
-        if (isExternal(t1) && (t1.getCategory() == boardToken.boardTokenCategory.NORMAL || (t1.getCategory() == boardToken.boardTokenCategory.THREE && numPlayers >= 3) || (t1.getCategory() == boardToken.boardTokenCategory.FOUR && numPlayers == 4))) {
+        if (isExternal(t1) && boardBoxIsValid(t1)) {
             legalSelection = true;
             return true;
         }else{
@@ -100,7 +100,7 @@ public class GameChecker {
     }
 
     public boolean isLegalAction(boardToken t1, boardToken t2){
-        if ((t1.getCategory() == boardToken.boardTokenCategory.NORMAL || (t1.getCategory() == boardToken.boardTokenCategory.THREE && numPlayers >= 3) || (t1.getCategory() == boardToken.boardTokenCategory.FOUR && numPlayers == 4)) && (t2.getCategory() == boardToken.boardTokenCategory.NORMAL || (t2.getCategory() == boardToken.boardTokenCategory.THREE && numPlayers >= 3) || (t2.getCategory() == boardToken.boardTokenCategory.FOUR && numPlayers == 4))){
+        if (boardBoxIsValid(t1) && boardBoxIsValid(t2)){
             //Checking if tiles are adjacent and in the same column.
             if (t1.getCol() == t2.getCol()) {
                 if (t1.getRow() == t2.getRow() - 1) {
@@ -126,7 +126,7 @@ public class GameChecker {
     }
 
     public boolean isLegalAction(boardToken t1, boardToken t2, boardToken t3){
-        if ((t1.getCategory() == boardToken.boardTokenCategory.NORMAL || (t1.getCategory() == boardToken.boardTokenCategory.THREE && numPlayers >= 3) || (t1.getCategory() == boardToken.boardTokenCategory.FOUR && numPlayers == 4)) && (t2.getCategory() == boardToken.boardTokenCategory.NORMAL || (t2.getCategory() == boardToken.boardTokenCategory.THREE && numPlayers >= 3) || (t2.getCategory() == boardToken.boardTokenCategory.FOUR && numPlayers == 4)) && (t3.getCategory() == boardToken.boardTokenCategory.NORMAL || (t3.getCategory() == boardToken.boardTokenCategory.THREE && numPlayers >= 3) || (t3.getCategory() == boardToken.boardTokenCategory.FOUR && numPlayers == 4))){
+        if (boardBoxIsValid(t1) && boardBoxIsValid(t2) && boardBoxIsValid(t3)){
             //Checking if tiles are adjacent and in the same column.
             if(t1.getCol() == t2.getCol() && t2.getCol() == t3.getCol()){
                 if(t1.getRow() == t2.getRow()-1 && t1.getRow() == t3.getRow()-2){
@@ -456,6 +456,13 @@ public class GameChecker {
                 freeSides++;
         }
         if (freeSides >= 2)
+            return true;
+        return false;
+    }
+
+    public boolean boardBoxIsValid(boardToken t){
+        boardToken.boardTokenCategory category = t.getCategory();
+        if(category == boardToken.boardTokenCategory.NORMAL || (category == boardToken.boardTokenCategory.THREE && numPlayers >= 3) || (category == boardToken.boardTokenCategory.FOUR && numPlayers == 4))
             return true;
         return false;
     }
