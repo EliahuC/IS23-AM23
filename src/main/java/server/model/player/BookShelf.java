@@ -7,6 +7,7 @@ public class BookShelf {
     private int counter;
     private int points;
 
+
     public BookShelf() {
         this.Shelf =  new ItemTile[6][5];
         this.counter = 1;
@@ -17,6 +18,11 @@ public class BookShelf {
         return  Shelf[x][y];
     }
 
+    public void resetVisited(){
+        for(int i=0; i<5;i++){
+            for (ItemTile T:Shelf[i])T.setVisited(false);
+        }
+    }
     public void AdjacentScore(){}
     
     public void SetPoints(){

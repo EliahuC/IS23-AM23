@@ -7,6 +7,15 @@ public class ItemTile {
 
 
     private itemTileCategory category=null ;
+    private boolean visited;
+
+    public boolean isVisited() {
+        return visited;
+    }
+
+    public void setVisited(boolean visited) {
+        this.visited = visited;
+    }
 
     public ItemTile(){
         itemTileCategory[] values = itemTileCategory.values();
