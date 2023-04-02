@@ -1,13 +1,13 @@
 package server.controller;
-
-
+import server.model.board.ItemTile;
+import server.model.player.BookShelf;
 public class Controller {
 
 
     public void extractAndRestore(){
     }
 
-    public selectTiles(){
+    public ItemTile selectTiles(){
     }
 
     public void insertIntoShelf(BookShelf s){

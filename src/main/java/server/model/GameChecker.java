@@ -15,6 +15,8 @@ public class GameChecker {
     private boolean legalSelection;
     private boolean lastRound;
     private boolean isYourTurn;
+    private int numPlayers ;
+    private Launcher L;
 
     public GameChecker() {
         this.restorable = false;
@@ -22,14 +24,15 @@ public class GameChecker {
         this.legalSelection = false;
         this.lastRound = false;
         this.isYourTurn = false;
+        this.numPlayers= L.getNumPlayers();
     }
 
 
-    public boolean isRestorable(LivingRoom board) {
+    public boolean isRestorable(boardToken[][] board) {
         for (int i = 0; i < 9 && !restorable; i++){
             for (int j = 0; j < 9 && !restorable; j++){
-                if (board.getBoard()[i][j].getTile() != null && boardBoxIsValid(board.getBoard()[i][j])){
-                    if (!hasAdjacentTiles(board.getBoard()[i][j])) {
+                if (board[i][j].getTile() != null && boardBoxIsValid(board[i][j])){
+                    if (!hasAdjacentTiles(board[i][j])) {
                         restorable = true;
                         return true;
                     }

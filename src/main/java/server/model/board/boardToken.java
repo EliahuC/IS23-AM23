@@ -4,7 +4,7 @@ package server.model.board;
 public class boardToken {
     private ItemTile Tile ;
     private boardTokenCategory category;
-    private boardToken associatedBoard[][];
+    private boardToken[][] associatedBoard;
     private int column;
     private int row;
 
