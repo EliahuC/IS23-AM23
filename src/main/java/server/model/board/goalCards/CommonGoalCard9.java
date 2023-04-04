@@ -1,5 +1,4 @@
 package server.model.board;
-import server.model.board.ItemTile;
 import server.model.player.BookShelf;
 
 import java.util.ArrayList;
@@ -7,7 +6,7 @@ import java.util.List;
 public class CommonGoalCard9 extends CommonGoalCard implements checkCommonGoalCard {
     private List<ItemTile> validGroups;
     private static int numColumnsToAchieve=2;
-    private List<itemTileCategory> cat = new ArrayList<>(); //I use an arrayList to track the categories in each column
+    private List<ItemTileCategory> cat = new ArrayList<>(); //I use an arrayList to track the categories in each column
                                                                 //of the bookshelf
     @Override
     public void checkGoal(BookShelf bs) {

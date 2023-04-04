@@ -1,14 +1,14 @@
 package server.model.board;
 
 
-public class boardToken {
+public class BoardToken {
     private ItemTile Tile ;
     private boardTokenCategory category;
-    private boardToken[][] associatedBoard;
+    private BoardToken[][] associatedBoard;
     private int column;
     private int row;
 
-    public boardToken() {
+    public BoardToken() {
         this.Tile = null;
         this.category=boardTokenCategory.NORMAL;
     }
@@ -36,7 +36,7 @@ public class boardToken {
         UNAVAILABLE
     }
 
-    public boardToken[][] getBoard(){
+    public BoardToken[][] getBoard(){
         return associatedBoard;
     }
 

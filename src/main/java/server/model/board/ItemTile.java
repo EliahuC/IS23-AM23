@@ -6,19 +6,20 @@ import java.util.Random;
 public class ItemTile {
 
 
-    private itemTileCategory category=null ;
-    private boolean visited;
+    private ItemTileCategory category=null ;
+  /*  private boolean visited;
 
     public boolean isVisited() {
         return visited;
     }
 
+
     public void setVisited(boolean visited) {
         this.visited = visited;
-    }
+    }*/
 
     public ItemTile(){
-        itemTileCategory[] values = itemTileCategory.values();
+        ItemTileCategory[] values = ItemTileCategory.values();
         int length = values.length;
         int randIndex = new Random().nextInt(length);
         this.category=values[randIndex];
@@ -26,28 +27,28 @@ public class ItemTile {
     public ItemTile(String x) {
         switch(x){
             case "CATS":
-                this.category=itemTileCategory.CATS;
+                this.category= ItemTileCategory.CATS;
                 break;
 
             case "FRAMES":
-                this.category=itemTileCategory.FRAMES;
+                this.category= ItemTileCategory.FRAMES;
                 break;
             case "BOOKS":
-                this.category=itemTileCategory.BOOKS;
+                this.category= ItemTileCategory.BOOKS;
                 break;
             case "GAMES":
-                this.category=itemTileCategory.GAMES;
+                this.category= ItemTileCategory.GAMES;
                 break;
             case "PLANTS":
-                this.category=itemTileCategory.PLANTS;
+                this.category= ItemTileCategory.PLANTS;
                 break;
             case "TROPHIES":
-                this.category=itemTileCategory.TROPHIES;
+                this.category= ItemTileCategory.TROPHIES;
                 break;
         }
     }
 
-    public itemTileCategory getCategory() {
+    public ItemTileCategory getCategory() {
         return category;
     }
 }

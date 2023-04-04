@@ -1,10 +1,9 @@
 package server.model;
 
-import server.model.board.LivingRoom;
 import server.model.player.BookShelf;
 import server.model.player.Player;
 import server.Launcher;
-import server.model.board.boardToken;
+import server.model.board.BoardToken;
 
 import java.util.Arrays;
 
@@ -28,7 +27,7 @@ public class GameChecker {
     }
 
 
-    public boolean isRestorable(boardToken[][] board) {
+    public boolean isRestorable(BoardToken[][] board) {
         for (int i = 0; i < 9 && !restorable; i++){
             for (int j = 0; j < 9 && !restorable; j++){
                 if (board[i][j].getTile() != null && boardBoxIsValid(board[i][j])){
@@ -92,7 +91,7 @@ public class GameChecker {
         return maxPickableTiles;
     }
 
-    public boolean isLegalAction(boardToken t1){
+    public boolean isLegalAction(BoardToken t1){
         if (isExternal(t1) && boardBoxIsValid(t1)) {
             legalSelection = true;
             return true;
@@ -102,7 +101,7 @@ public class GameChecker {
         }
     }
 
-    public boolean isLegalAction(boardToken t1, boardToken t2){
+    public boolean isLegalAction(BoardToken t1, BoardToken t2){
         if (boardBoxIsValid(t1) && boardBoxIsValid(t2)){
             //Checking if tiles are adjacent and in the same column.
             if (t1.getCol() == t2.getCol()) {
@@ -128,7 +127,7 @@ public class GameChecker {
         return false;
     }
 
-    public boolean isLegalAction(boardToken t1, boardToken t2, boardToken t3){
+    public boolean isLegalAction(BoardToken t1, BoardToken t2, BoardToken t3){
         if (boardBoxIsValid(t1) && boardBoxIsValid(t2) && boardBoxIsValid(t3)){
             //Checking if tiles are adjacent and in the same column.
             if(t1.getCol() == t2.getCol() && t2.getCol() == t3.getCol()){
@@ -181,7 +180,7 @@ public class GameChecker {
         return isYourTurn;
     }
 
-    public boolean hasAdjacentTiles(boardToken t){
+    public boolean hasAdjacentTiles(BoardToken t){
         //Tile is in the upper left corner.
         if (t.getCol() == 0 && t.getRow() == 0){
             if(t.getBoard()[t.getCol()+1][t.getRow()].getTile() != null && t.getBoard()[t.getCol()][t.getRow()+1].getTile() != null){
@@ -239,7 +238,7 @@ public class GameChecker {
         return false;
     }
 
-    public boolean isExternal (boardToken t){
+    public boolean isExternal (BoardToken t){
         int freeSides = 0;
         //Tile is on the left side.
         if(t.getCol() == 0){
@@ -293,7 +292,7 @@ public class GameChecker {
         return false;
     }
 
-    public boolean isExternal (boardToken t1, boardToken t2){
+    public boolean isExternal (BoardToken t1, BoardToken t2){
         int freeSides = 0;
         //Couple has vertical orientation and is on the left side.
         if(t1.getCol() == 0 && t2.getCol() == 0){
@@ -378,7 +377,7 @@ public class GameChecker {
         return false;
     }
 
-    public boolean isExternal (boardToken t1, boardToken t2, boardToken t3){
+    public boolean isExternal (BoardToken t1, BoardToken t2, BoardToken t3){
         int freeSides = 0;
         //Couple has vertical orientation and is on the left side.
         if(t1.getCol() == 0 && t2.getCol() == 0){
@@ -463,9 +462,9 @@ public class GameChecker {
         return false;
     }
 
-    public boolean boardBoxIsValid(boardToken t){
-        boardToken.boardTokenCategory category = t.getCategory();
-        if(category == boardToken.boardTokenCategory.NORMAL || (category == boardToken.boardTokenCategory.THREE && numPlayers >= 3) || (category == boardToken.boardTokenCategory.FOUR && numPlayers == 4))
+    public boolean boardBoxIsValid(BoardToken t){
+        BoardToken.boardTokenCategory category = t.getCategory();
+        if(category == BoardToken.boardTokenCategory.NORMAL || (category == BoardToken.boardTokenCategory.THREE && numPlayers >= 3) || (category == BoardToken.boardTokenCategory.FOUR && numPlayers == 4))
             return true;
         return false;
     }

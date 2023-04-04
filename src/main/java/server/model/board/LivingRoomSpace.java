@@ -8,7 +8,7 @@ private ItemTile tile;
         return tile;
     }
 
-    public itemTileCategory getEnum(){
+    public ItemTileCategory getEnum(){
         return tile.getCategory();
     }
 

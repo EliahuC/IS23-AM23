@@ -1,6 +1,6 @@
 package server.model.board;
 
-public enum itemTileCategory {
+public enum ItemTileCategory {
         CATS,
         BOOKS,
         GAMES,

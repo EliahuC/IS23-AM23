@@ -1,15 +1,37 @@
     package server.model.board.goalCards;
+    import server.model.board.CommonGoalCard;
     import server.model.board.ItemTile;
-    import server.model.board.itemTileCategory;
     import server.model.player.BookShelf;
 
     import java.util.ArrayList;
-    import java.util.Collection;
     import java.util.List;
 
-    public class CommonGoalCard6 extends CommonGoalCard implements checkCommonGoalCard {
-        private List<String> Colors=new ArrayList<>();
+    public class CommonGoalCard6 extends CommonGoalCard implements CheckCommonGoalCard {
 
+        //METODO ALTERNATIVO STILE C
+        public void checkGoal(BookShelf bs) {
+            int c1 = 0, c2 = 0, c3 = 0, c4 = 0, c5 = 0, c6 = 0;
+            for (int i = 0; i < 5; i++) {
+               for(int j=0;j<4;j++){
+                   switch (bs.getTile(i, j).getCategory()) {
+                       case CATS -> c1++;
+                       case FRAMES -> c2++;
+                       case BOOKS -> c3++;
+                       case GAMES -> c4++;
+                       case PLANTS -> c5++;
+                       case TROPHIES -> c6++;
+                   }
+               }
+            }
+            if(c1>7||c2>7||c3>7||c4>7||c5>7||c6>7) increaseNumCompleted();
+
+
+        }
+    }
+
+       /* private List<String> Colors=new ArrayList<>();
+
+    //METODO CHE VISITA TILES E SEGNA QUELLE VISITATE
 
         @Override
       public void checkGoal(BookShelf bs) {
@@ -55,28 +77,4 @@
             Colors.add("PLANTS");
         }
 
-    }
-
-
-        /*METODO ALTERNATIVO STILE C
-
-        public void checkGoal(BookShelf bs) {
-            int c1 = 0, c2 = 0, c3 = 0, c4 = 0, c5 = 0, c6 = 0;
-            for (int i = 0; i < 5; i++) {
-               for(int j=0;j<4;j++){
-                   switch (bs.getTile(i, j).getCategory()) {
-                       case CATS -> c1++;
-                       case FRAMES -> c2++;
-                       case BOOKS -> c3++;
-                       case GAMES -> c4++;
-                       case PLANTS -> c5++;
-                       case TROPHIES -> c6++;
-                   }
-               }
-            }
-            if(c1>7||c2>7||c3>7||c4>7||c5>7||c6>7) increaseNumCompleted();
-
-
-        }
-    }
-     */
+    }*/

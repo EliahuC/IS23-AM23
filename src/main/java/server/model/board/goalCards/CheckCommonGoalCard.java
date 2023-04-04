@@ -1,5 +1,5 @@
 package server.model.board.goalCards;
 import server.model.player.BookShelf;
-public interface checkCommonGoalCard {
+public interface CheckCommonGoalCard {
     public void checkGoal(BookShelf bs);
 }

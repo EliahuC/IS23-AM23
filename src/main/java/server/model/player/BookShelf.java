@@ -1,7 +1,7 @@
 package server.model.player;
 
 import server.model.board.ItemTile;
-import server.model.board.itemTileCategory;
+import server.model.board.ItemTileCategory;
 
 import java.util.ArrayList;
 
@@ -11,20 +11,19 @@ public class BookShelf {
     private  ArrayList<ItemTile> usedTiles = new ArrayList<>();
     private int counter;
 
-    private final int row;
+    private static final int MAX_Row =6;
     private int tileRow;
     private int tileColumn;
-    private itemTileCategory category;
+    private ItemTileCategory category;
 
-    private final int column;
+    private static final int MAX_Column =5;
     private int points;
 
     public BookShelf() {
-        this.row = 6;
-        this.column = 5;
+
         this.tileRow = 0;
         this.tileColumn = 0;
-        this.Shelf =  new ItemTile[6][5];
+        this.Shelf =  new ItemTile[MAX_Row][MAX_Column];
         this.counter = 1;
         this.points = 0;
         this.category = null;
@@ -70,8 +69,8 @@ public class BookShelf {
 
     public void SetLocation(ItemTile it){
         if(it != null){
-            for(int i = 0; i < row; i++)
-                for (int j = 0; j < column; j++) {
+            for(int i = 0; i < MAX_Row; i++)
+                for (int j = 0; j < MAX_Column; j++) {
                     if (getTile(i, j).equals(it)) {
                         tileRow = i;
                         tileColumn = j;
@@ -88,8 +87,8 @@ public class BookShelf {
     }
     public int NumTiles() {
         int tilesCounter = 0;
-        for(int i = 0; i < row; i++) {
-            for(int j = 0; j < column; j++) {
+        for(int i = 0; i < MAX_Row; i++) {
+            for(int j = 0; j < MAX_Column; j++) {
                 if(getTile(i, j) != null) {
                     tilesCounter++;
                 }
@@ -100,7 +99,7 @@ public class BookShelf {
 
 
     public ItemTile UpperTile(int x, int y){
-        if(x != row)
+        if(x != MAX_Row)
             {ItemTile it = getTile(x + 1, y);
                 return it;}
         else return null;
@@ -114,7 +113,7 @@ public class BookShelf {
     }
     
     public ItemTile RightTile(int x, int y){
-        if(y != column)
+        if(y != MAX_Column)
             {ItemTile it = getTile(x + 1, y);
             return it;}
         else return null;
@@ -130,8 +129,8 @@ public class BookShelf {
 
     public void SetFirstTile(){
 
-        for(int i = 0; i < row; i++){
-            for(int j = 0; i < column; j++){
+        for(int i = 0; i < MAX_Row; i++){
+            for(int j = 0; i < MAX_Column; j++){
                 ItemTile it = getTile(i, j);
                 if(!AlreadyUsed(it) && it != null && !it.getCategory().equals(category)){
                     usedTiles.add(it);
@@ -162,9 +161,9 @@ public class BookShelf {
         }
     }
 
-    public void resetVisited(){
+    /* public void resetVisited(){
         for(int i=0; i<5;i++){
             for (ItemTile T:Shelf[i])T.setVisited(false);
         }
-    }
+    } */
 }
