@@ -31,6 +31,15 @@ public class LivingRoom {
         SetFour();
 
         SetCommonGoalCard();
+
+        //Each board box gets row coordinate.
+        SetRow();
+
+        //Each board box gets column coordinate.
+        SetCol();
+
+        //Each board box gets board reference.
+        SetBoard();
     }
 
     private void SetUnavailable() {
@@ -136,8 +145,28 @@ public class LivingRoom {
 
 
     }
-        public BoardToken[][] getBoard() {
-            return Board;
-        }
+    public BoardToken[][] getBoard() {
+        return Board;
+    }
 
+    private void SetRow(){
+        for(int i = 0; i < MAX_Row; i++){
+            for(int j = 0; j < MAX_Column; j++)
+                this.Board[i][j].setRow(i);
+        }
+    }
+
+    private void SetCol(){
+        for(int i = 0; i < MAX_Row; i++){
+            for(int j = 0; j < MAX_Column; j++)
+                this.Board[i][j].setCol(j);
+        }
+    }
+
+    private void SetBoard(){
+        for(int i = 0; i < MAX_Row; i++){
+            for(int j = 0; j < MAX_Column; j++)
+                this.Board[i][j].setBoard(this.Board);
+        }
+    }
 }

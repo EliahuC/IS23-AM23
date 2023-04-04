@@ -40,6 +40,10 @@ public class BoardToken {
         return associatedBoard;
     }
 
+    public void setBoard(BoardToken[][] associatedBoard){
+        this.associatedBoard=associatedBoard;
+    }
+
     public int getCol(){
         return column;
     }

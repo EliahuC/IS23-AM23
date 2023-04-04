@@ -1,5 +1,7 @@
 package server.model.board.goalCards;
+
 import server.model.player.BookShelf;
+
 public abstract class CommonGoalCard {
     private int numCompleted = 0;
 
