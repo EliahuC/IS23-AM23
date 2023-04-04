@@ -1,6 +1,6 @@
-package server.model.board.goalCards;
+package server.model.board;
 import server.model.player.BookShelf;
-class CommonGoalCard {
+public abstract class CommonGoalCard {
     private int numCompleted = 0;
 
     public int getNumCompleted(){
@@ -8,7 +8,7 @@ class CommonGoalCard {
     }
 
     public void increaseNumCompleted() {
-        if(this.numCompleted <=4)
+        if(this.numCompleted < 4)
             this.numCompleted++;
     }
 
