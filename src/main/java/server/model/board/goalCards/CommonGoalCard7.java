@@ -1,5 +1,5 @@
 package server.model.board.goalCards;
-import server.model.board.CommonGoalCard;
+
 import server.model.board.ItemTile;
 import server.model.player.BookShelf;
 

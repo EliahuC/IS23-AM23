@@ -161,6 +161,16 @@ public class BookShelf {
         }
     }
 
+    public int getPoints(){
+        return points;
+    }
+    public static int getMAX_Row(){ return MAX_Row;
+    }
+
+    public static int getMAX_Column() {
+        return MAX_Column;
+    }
+
     /* public void resetVisited(){
         for(int i=0; i<5;i++){
             for (ItemTile T:Shelf[i])T.setVisited(false);

@@ -138,10 +138,10 @@ public class PersonalGoalCard {
             }
 
         }
-        return completed;
+        return GivePoints();
     }
 
-    public int GivePoints() {
+     private int GivePoints() {
 
         switch (completed) {
             case 1 -> points = 1;

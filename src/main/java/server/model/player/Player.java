@@ -8,13 +8,10 @@ public class Player {
 
     private final String NickName;
     private final int IPaddres[];
-    private final int score ;
+    private int score ;
     private final boolean firstPlayerSeat;
     private final BookShelf playerBookshelf;
-
-
     private final PersonalGoalCard PersonalGoalCard;
-
     private final boolean nowPlaying;
     private final boolean lastRound;
 
@@ -25,7 +22,7 @@ public class Player {
         this.score = 0;
         this.firstPlayerSeat = false;
         this.playerBookshelf = new BookShelf();
-        PersonalGoalCard = new PersonalGoalCard(1);
+        this.PersonalGoalCard = new PersonalGoalCard();
         this.nowPlaying = false;
         this.lastRound = false;
     }
@@ -50,15 +47,18 @@ public class Player {
         return firstPlayerSeat;
     }
 
-    public PersonalGoalCard getPersonalGoalCard() {
-        return PersonalGoalCard;
-    }
-
     public void insertToken(List selectedTokens, int numTokens, int column){}
 
-    public boolean compareGoalCardwithBookshelf (){
+    private void comparePersonalGoalCardwithBookshelf (){
 
-        return false;
+        score+=PersonalGoalCard.CheckGoal(playerBookshelf);
+
+    }
+
+    public void endGamePoints(){
+        comparePersonalGoalCardwithBookshelf();
+        playerBookshelf.AdjacentScore();
+        score+= playerBookshelf.getPoints();
     }
 
     public boolean getNowPlaying(){
