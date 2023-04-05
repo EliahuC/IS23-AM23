@@ -24,3 +24,4 @@ Giovanni Di Lorenzo (giovanni.dilorenzo@mail.polimi.it)
 |RMI   	|🔴   	|0%   	|   	|
 |Resilience to disconnections   	|🔴   	|0%   	|   	|
 |Persistency   	|🔴   	|0%   	|   	|
+|Chat   	|🔴   	|0%   	|   	|
