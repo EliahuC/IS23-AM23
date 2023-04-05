@@ -19,6 +19,8 @@ public class BookShelf {
     private static final int MAX_Column =5;
     private int points;
 
+    private int maxPickableTiles[] = {3,3,3,3,3};
+
     public BookShelf() {
 
         this.tileRow = 0;
@@ -176,4 +178,12 @@ public class BookShelf {
             for (ItemTile T:Shelf[i])T.setVisited(false);
         }
     } */
+
+    public int[] getMaxPickableTiles(){
+        return maxPickableTiles;
+    }
+
+    public void decreaseCapability(int i){
+        maxPickableTiles[i]--;
+    }
 }

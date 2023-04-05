@@ -18,22 +18,21 @@ public abstract class CommonGoalCard {
         this.numCompleted = 0;
     }
 
+    public int GivePoints(){
+            int points;
+        switch (numCompleted) {
 
-public int GivePoints(){
-        int points;
-    switch (numCompleted) {
-
-        case 1 -> {
-            points= 8;
-        }
-        case 2 -> {
-            points= 6;
-        }
-        case 3 -> {
-            points= 4;
-        }
-        default -> points=0;
-    }return points;
-   }
+            case 1 -> {
+                points= 8;
+            }
+            case 2 -> {
+                points= 6;
+            }
+            case 3 -> {
+                points= 4;
+            }
+            default -> points=0;
+        }return points;
+       }
 
 }
