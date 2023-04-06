@@ -22,7 +22,6 @@ public class GameChecker {
     private Launcher L;
     private static final int boardWidth = 9;
     private static final int shelfRows = 6;
-    private static final int shelfBoundRowForMaxCapability = 2;
     private static final int shelfCols = 5;
 
     public GameChecker() {
@@ -36,8 +35,8 @@ public class GameChecker {
 
 
     public boolean isRestorable(BoardToken[][] board) {
-        for (int i = 0; i < boardWidth && !restorable; i++){
-            for (int j = 0; j < boardWidth && !restorable; j++){
+        for (int i = 0; i < boardWidth; i++){
+            for (int j = 0; j < boardWidth; j++){
                 if (!boardBoxIsEmpty(board[i][j]) && boardBoxIsValid(board[i][j])){
                     if (!hasAdjacentTiles(board[i][j])) {
                         restorable = true;
