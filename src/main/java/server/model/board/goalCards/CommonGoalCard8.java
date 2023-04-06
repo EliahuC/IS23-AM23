@@ -1,12 +1,13 @@
-package server.model.board.goalCards;
+package server.model.board;
 
-import server.model.player.BookShelf;
 import server.model.board.ItemTile;
-import server.model.board.ItemTileCategory;
+import server.model.player.BookShelf;
+
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
-public class CommonGoalCard8 extends CommonGoalCard implements CheckCommonGoalCard{
+public class CommonGoalCard8 extends CommonGoalCard implements checkCommonGoalCard{
     private List<ItemTile> validGroups;
     private static int numRowsToAchieve=4;
     private static int numDifferentCategoriesAllowed=3;
@@ -14,17 +15,25 @@ public class CommonGoalCard8 extends CommonGoalCard implements CheckCommonGoalCa
     @Override                                                   //of the bookshelf
     public void checkGoal(BookShelf bs) {
         int counter=0;
-        for(int i=0; i<BookShelf.getMAX_Row() && counter<numRowsToAchieve; i++){
+        for(int i=0; i<Bookshelf_rows && counter<numRowsToAchieve; i++){
             cat.add(bs.getTile(i,0).getCategory());
-            for(int j = 0; j< BookShelf.getMAX_Column() && cat.size()<=numDifferentCategoriesAllowed; j++){
-                cat.add(bs.getTile(i,j).getCategory());
-            }
-            if (cat.size()<=numDifferentCategoriesAllowed)
+            if (CategoriesAllowed(bs,i,cat)<=numDifferentCategoriesAllowed)
                 counter++;
             cat.clear();
         }
         if (counter==numRowsToAchieve)
             increaseNumCompleted();
     }
+    public HashSet<ItemTileCategory> getCat(){
+        return cat;
+    }
+
+    public int CategoriesAllowed(BookShelf bs, int a, HashSet<ItemTileCategory> cat){
+        for(int j=0; j<Bookshelf_columns && cat.size()<=numDifferentCategoriesAllowed; j++){
+            cat.add(bs.getTile(a,j).getCategory());
+        }
+        return cat.size();
+    }
 }
+
 

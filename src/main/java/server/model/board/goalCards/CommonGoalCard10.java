@@ -1,29 +1,40 @@
-package server.model.board.goalCards;
-import server.model.player.BookShelf;
+package server.model.board;
 import server.model.board.ItemTile;
-import server.model.board.ItemTileCategory;
+import server.model.player.BookShelf;
+
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
-public class CommonGoalCard10 extends CommonGoalCard implements CheckCommonGoalCard {
+public class CommonGoalCard10 extends CommonGoalCard implements checkCommonGoalCard {
     private List<ItemTile> validGroups;
     private final static int numRowsToAchieve=2;
-    private final List<ItemTileCategory> cat = new ArrayList<>(); //I use an arrayList to track the categories in each row
-                                                                //of the bookshelf
+    private final HashSet<ItemTileCategory> cat = new HashSet<>(); //I use an arrayList to track the categories in each row
+    //of the bookshelf
     @Override
     public void checkGoal(BookShelf bs) {
         int counter=0;
-        boolean SameCategory=false;
-        for(int i=0; i<BookShelf.getMAX_Row() && counter<numRowsToAchieve; i++){
+        for(int i=0; i<Bookshelf_rows && counter<numRowsToAchieve; i++){
             cat.add(bs.getTile(i,0).getCategory());
-            for(int j=1; j<BookShelf.getMAX_Column() && !SameCategory; j++){
-                if(cat.contains(bs.getTile(i,j).getCategory()))
-                    SameCategory=true;
-            }
-            if (!SameCategory)
+            if(!SameCategory(bs,i,cat))
                 counter++;
             cat.clear();
         }
         if (counter==numRowsToAchieve)
             increaseNumCompleted();
     }
+
+    public boolean SameCategory(BookShelf bs,int a, HashSet<ItemTileCategory> category){
+        for(int j=1;j<Bookshelf_columns;j++){
+            if(cat.contains(bs.getTile(a,j).getCategory()))
+                return true;
+            else
+                cat.add(bs.getTile(a,j).getCategory());
+        }
+        return false;
+    }
+
+    public HashSet<ItemTileCategory> getCat() {
+        return cat;
+    }
 }
+
