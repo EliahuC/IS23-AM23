@@ -1,13 +1,13 @@
-package server.model.board;
+package server.model.board.goalCards;
 
 import server.model.board.ItemTile;
+import server.model.board.ItemTileCategory;
 import server.model.player.BookShelf;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
-public class CommonGoalCard5 extends CommonGoalCard implements checkCommonGoalCard {
+public class CommonGoalCard5 extends CommonGoalCard implements CheckCommonGoalCard {
     private List<ItemTile> validGroups;
     private static int numColumnsToAchieve = 3;
     private static int numDifferentCategoriesAllowed = 3;

@@ -1,11 +1,11 @@
-package server.model.board;
+package server.model.board.goalCards;
 import server.model.board.ItemTile;
+import server.model.board.ItemTileCategory;
 import server.model.player.BookShelf;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-public class CommonGoalCard10 extends CommonGoalCard implements checkCommonGoalCard {
+public class CommonGoalCard10 extends CommonGoalCard implements CheckCommonGoalCard {
     private List<ItemTile> validGroups;
     private final static int numRowsToAchieve=2;
     private final HashSet<ItemTileCategory> cat = new HashSet<>(); //I use an arrayList to track the categories in each row
