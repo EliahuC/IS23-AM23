@@ -1,8 +1,8 @@
-package server.model;
-import junit.framework.Test;
+package server.model.board.goalCards;
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
 import server.model.board.*;
+import server.model.board.goalCards.CommonGoalCard;
+import server.model.board.goalCards.CommonGoalCard8;
 import server.model.player.BookShelf;
 
 /**

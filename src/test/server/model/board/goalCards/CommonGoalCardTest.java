@@ -1,10 +1,10 @@
-package server.model;
+package server.model.board.goalCards;
 
-import junit.framework.Test;
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
-import server.model.board.*;
-import server.model.player.BookShelf;
+import server.model.board.goalCards.CommonGoalCard;
+import server.model.board.goalCards.CommonGoalCard7;
+import server.model.board.goalCards.CommonGoalCard8;
+import server.model.board.goalCards.CommonGoalCard9;
 
 /**
  * Unit test for simple App.
