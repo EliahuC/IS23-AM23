@@ -9,6 +9,10 @@ private int numPlayers;
         return numPlayers;
     }
 
+    public void setNumPlayers(int numPlayers){
+        this.numPlayers=numPlayers;
+    }
+
     private ArrayList<Player> players= new ArrayList<>();
 
     public void addPlayer(Player p){

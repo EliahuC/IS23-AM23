@@ -6,6 +6,7 @@ import server.model.player.Player;
 import server.Launcher;
 import server.model.board.BoardToken;
 
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Objects;
@@ -24,12 +25,13 @@ public class GameChecker {
     private static final int shelfRows = 6;
     private static final int shelfCols = 5;
 
-    public GameChecker() {
+    public GameChecker(Launcher L) {
         this.restorable = false;
         this.maxPickableTiles = 3;
         this.legalSelection = false;
         this.lastRound = false;
         this.isYourTurn = false;
+        this.L = L;
         this.numPlayers= L.getNumPlayers();
     }
 

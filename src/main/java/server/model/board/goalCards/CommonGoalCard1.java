@@ -28,9 +28,11 @@ public class CommonGoalCard1 extends CommonGoalCard implements CheckCommonGoalCa
 
     public ItemTile hasAdjacent(ItemTile selectedTile){
         //It does check if selectedTile has only one adjacent tile with the same category.
+        return null;
     }
 
     public ItemTile hasAdjacent(ItemTile checkingTile, ItemTile selectedTile){
         //It does check if checkingTile has no adjacent tiles with the same category unless for selectedTile.
+        return null;
     }
 }

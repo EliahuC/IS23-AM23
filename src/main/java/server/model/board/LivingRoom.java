@@ -45,39 +45,61 @@ public class LivingRoom {
     private void SetUnavailable() {
         for (int i = 0; i < 3 || i > 5; i++) {
             for (int j = 0; j < 3; j++) {
+                Board[i][j] = new BoardToken();
                 Board[i][j].setCategory(BoardToken.boardTokenCategory.UNAVAILABLE);
             }
         }
         for (int i = 0; i < 3 || i > 5; i++) {
             for (int j = 6; j < 9; j++) {
+                Board[i][j] = new BoardToken();
                 Board[i][j].setCategory(BoardToken.boardTokenCategory.UNAVAILABLE);
             }
         }
+        Board[3][0] = new BoardToken();
         Board[3][0].setCategory(BoardToken.boardTokenCategory.UNAVAILABLE);
+        Board[0][5] = new BoardToken();
         Board[0][5].setCategory(BoardToken.boardTokenCategory.UNAVAILABLE);
+        Board[5][8] = new BoardToken();
         Board[5][8].setCategory(BoardToken.boardTokenCategory.UNAVAILABLE);
+        Board[8][3] = new BoardToken();
         Board[8][3].setCategory(BoardToken.boardTokenCategory.UNAVAILABLE);
     }
 
     private void SetThree() {
+        Board[2][2] = new BoardToken();
         Board[2][2].setCategory(BoardToken.boardTokenCategory.THREE);
+        Board[2][6] = new BoardToken();
         Board[2][6].setCategory(BoardToken.boardTokenCategory.THREE);
+        Board[6][2] = new BoardToken();
         Board[6][2].setCategory(BoardToken.boardTokenCategory.THREE);
+        Board[6][6] = new BoardToken();
         Board[6][6].setCategory(BoardToken.boardTokenCategory.THREE);
+        Board[0][3] = new BoardToken();
         Board[0][3].setCategory(BoardToken.boardTokenCategory.THREE);
+        Board[3][8] = new BoardToken();
         Board[3][8].setCategory(BoardToken.boardTokenCategory.THREE);
+        Board[0][5] = new BoardToken();
         Board[0][5].setCategory(BoardToken.boardTokenCategory.THREE);
+        Board[8][5] = new BoardToken();
         Board[8][5].setCategory(BoardToken.boardTokenCategory.THREE);
     }
 
     private void SetFour() {
+        Board[0][4] = new BoardToken();
         Board[0][4].setCategory(BoardToken.boardTokenCategory.FOUR);
+        Board[1][5] = new BoardToken();
         Board[1][5].setCategory(BoardToken.boardTokenCategory.FOUR);
+        Board[3][1] = new BoardToken();
         Board[3][1].setCategory(BoardToken.boardTokenCategory.FOUR);
+        Board[4][0] = new BoardToken();
         Board[4][0].setCategory(BoardToken.boardTokenCategory.FOUR);
+        Board[4][8] = new BoardToken();
         Board[4][8].setCategory(BoardToken.boardTokenCategory.FOUR);
+        Board[5][7] = new BoardToken();
         Board[5][7].setCategory(BoardToken.boardTokenCategory.FOUR);
+        Board[7][3] = new BoardToken();
         Board[7][3].setCategory(BoardToken.boardTokenCategory.FOUR);
+        Board[8][4] = new BoardToken();
         Board[8][4].setCategory(BoardToken.boardTokenCategory.FOUR);
     }
 
@@ -142,7 +164,7 @@ public class LivingRoom {
     }
 
     public List<ItemTile> getTiles(String x){
-
+        return null;
 
     }
     public BoardToken[][] getBoard() {
