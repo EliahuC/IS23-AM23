@@ -7,8 +7,8 @@ public class Controller {
     public void extractAndRestore(){
     }
 
-    public ItemTile selectTiles(){
-    }
+    //public ItemTile selectTiles(){
+    //}
 
     public void insertIntoShelf(BookShelf s){
     }

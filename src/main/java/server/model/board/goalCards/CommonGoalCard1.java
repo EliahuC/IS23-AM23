@@ -3,7 +3,7 @@ import server.model.board.ItemTile;
 import server.model.player.BookShelf;
 
 import java.util.List;
-
+/*
 public class CommonGoalCard1 extends CommonGoalCard implements CheckCommonGoalCard {
     private List<ItemTile> validGroups;
     @Override
@@ -33,4 +33,4 @@ public class CommonGoalCard1 extends CommonGoalCard implements CheckCommonGoalCa
     public ItemTile hasAdjacent(ItemTile checkingTile, ItemTile selectedTile){
         //It does check if checkingTile has no adjacent tiles with the same category unless for selectedTile.
     }
-}
+}*/

@@ -16,7 +16,7 @@ public class CommonGoalCard5 extends CommonGoalCard implements CheckCommonGoalCa
     @Override                                                   //of the bookshelf
     public void checkGoal(BookShelf bs) {
         int counter = 0;
-        for (int j = 0; j < Bookshelf_columns && counter < numColumnsToAchieve; j++) {
+        for (int j = 0; j < BookShelf.getMAX_Column() && counter < numColumnsToAchieve; j++) {
             cat.add(bs.getTile(0, j).getCategory());
             if (CategoriesAllowed(bs,j,cat)<= numDifferentCategoriesAllowed)
                 counter++;
@@ -32,7 +32,7 @@ public class CommonGoalCard5 extends CommonGoalCard implements CheckCommonGoalCa
     }
 
     public int CategoriesAllowed(BookShelf bs, int a, HashSet<ItemTileCategory> cat) {
-        for (int i = 0; i < Bookshelf_rows && cat.size() <= numDifferentCategoriesAllowed; i++) {
+        for (int i = 0; i < BookShelf.getMAX_Row() && cat.size() <= numDifferentCategoriesAllowed; i++) {
             cat.add(bs.getTile(i, a).getCategory());
         }
         return cat.size();
