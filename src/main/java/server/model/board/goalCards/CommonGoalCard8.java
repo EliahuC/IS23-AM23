@@ -10,12 +10,12 @@ import java.util.List;
 public class CommonGoalCard8 extends CommonGoalCard implements CheckCommonGoalCard {
     private List<ItemTile> validGroups;
     private static int numRowsToAchieve=4;
-    private static int numDifferentCategoriesAllowed=3;
-    private HashSet<ItemTileCategory> cat = new HashSet<>(); //I use an hashset to track the categories in each row
+    private static final int numDifferentCategoriesAllowed=3;
+    private final HashSet<ItemTileCategory> cat = new HashSet<>(); //I use a hashset to track the categories in each row
     @Override                                                   //of the bookshelf
     public void checkGoal(BookShelf bs) {
         int counter=0;
-        for(int i=0; i<Bookshelf_rows && counter<numRowsToAchieve; i++){
+        for(int i=0; i< BookShelf.getMAX_Row() && counter<numRowsToAchieve; i++){
             cat.add(bs.getTile(i,0).getCategory());
             if (CategoriesAllowed(bs,i,cat)<=numDifferentCategoriesAllowed)
                 counter++;
@@ -24,12 +24,10 @@ public class CommonGoalCard8 extends CommonGoalCard implements CheckCommonGoalCa
         if (counter==numRowsToAchieve)
             increaseNumCompleted();
     }
-    public HashSet<ItemTileCategory> getCat(){
-        return cat;
-    }
+
 
     public int CategoriesAllowed(BookShelf bs, int a, HashSet<ItemTileCategory> cat){
-        for(int j=0; j<Bookshelf_columns && cat.size()<=numDifferentCategoriesAllowed; j++){
+        for(int j=0; j< BookShelf.getMAX_Column() && cat.size()<=numDifferentCategoriesAllowed; j++){
             cat.add(bs.getTile(a,j).getCategory());
         }
         return cat.size();
