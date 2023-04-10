@@ -160,8 +160,8 @@ public class LivingRoom {
         return null;
 
     }
-    public BoardToken getBoard(int i, int j) {
-        return Board[i][j];
+    public BoardToken[][] getBoard() {
+        return Board;
     }
 
     private void SetRow(){
