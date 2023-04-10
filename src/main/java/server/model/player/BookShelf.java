@@ -187,7 +187,7 @@ public class BookShelf {
         maxPickableTiles[i]--;
     }
 
-    public void putTile(ItemTile t, int i, int j){
+    public void setTile(int i, int j, ItemTile t){
         Shelf[i][j]=t;
     }
 
