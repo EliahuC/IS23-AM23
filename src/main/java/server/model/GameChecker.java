@@ -15,11 +15,11 @@ import java.util.Set;
 public class GameChecker {
 
     private boolean restorable;
-    private int maxPickableTiles;
+    private final int maxPickableTiles;
     private boolean legalSelection;
     private boolean lastRound;
     private boolean isYourTurn;
-    private int numPlayers ;
+    private final int numPlayers ;
     private Launcher L;
     private static final int boardWidth = 9;
     private static final int shelfRows = 6;

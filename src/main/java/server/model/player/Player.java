@@ -2,7 +2,10 @@ package server.model.player;
 
 
 
+import server.model.board.ItemTile;
+
 import java.awt.*;
+import java.util.ArrayList;
 
 public class Player {
 
@@ -47,12 +50,16 @@ public class Player {
         return firstPlayerSeat;
     }
 
-    public void insertToken(List selectedTokens, int numTokens, int column){}
+    public void insertToken(ArrayList<ItemTile> selectedTokens, int numTokens, int column){}
 
     private void comparePersonalGoalCardwithBookshelf (){
 
         score+=PersonalGoalCard.CheckGoal(playerBookshelf);
 
+    }
+
+    public void setScore(int score) {
+        this.score = score;
     }
 
     public void endGamePoints(){

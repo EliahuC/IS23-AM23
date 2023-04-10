@@ -12,6 +12,19 @@ public abstract class CommonGoalCard {
     public void increaseNumCompleted() {
         if(this.numCompleted < 4)
             this.numCompleted++;
+
+    }
+
+    public int getPoints() {
+        int points=0;
+        switch (numCompleted) {
+            case 1 -> points = 8;
+            case 2 -> points = 6;
+            case 3 -> points = 4;
+
+
+        }
+        return points;
     }
 
     public void initNumCompleted(){

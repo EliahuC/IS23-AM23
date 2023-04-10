@@ -2,6 +2,7 @@ package server.model.board;
 import server.Launcher;
 import server.model.GameChecker;
 import server.model.board.goalCards.*;
+import server.model.player.BookShelf;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -18,6 +19,8 @@ public class LivingRoom {
     private GameChecker G;
 
     private ArrayList<CommonGoalCard> CommonGoalCard = new ArrayList<>();
+    private CommonGoalCard C1;
+    private CommonGoalCard C2;
 
     public LivingRoom() {
 
@@ -131,6 +134,15 @@ public class LivingRoom {
         CommonGoalCard C2 = CommonGoalCard.remove(randIndex);
     }
 
+    public int checkCG(BookShelf bs){
+        int score=0;
+        C1.checkGoal(bs);
+        C2.checkGoal(bs);
+       score= C1.getPoints();
+       score=C2.getPoints();
+       return score;
+    }
+
 
     public void restore() {
         if (G.isRestorable(Board)) {
@@ -163,12 +175,12 @@ public class LivingRoom {
         return Board;
     }
 
-    public List<ItemTile> getTiles(String x){
+    public ArrayList<ItemTile> getTiles(String x){
         return null;
 
     }
-    public BoardToken[][] getBoard() {
-        return Board;
+    public BoardToken getBoard(int i, int j) {
+        return Board[i][j];
     }
 
     private void SetRow(){
