@@ -179,11 +179,6 @@ public class BookShelf {
         }
     } */
 
-    public void setTile(int i,int j , ItemTile t  ){
-        if(Shelf[i][j]==null) Shelf[i][j]=t;
-        else System.out.println("ILLEGAL MOVE");
-    }
-
     public int[] getMaxPickableTiles(){
         return maxPickableTiles;
     }

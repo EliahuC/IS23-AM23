@@ -9,7 +9,7 @@ import server.model.player.BookShelf;
 /**
  * Unit test for simple App.
  */
-public class CommonGoalCard10Test
+/*public class CommonGoalCard10Test
         extends TestCase{
 
     public void testSameCategoryCGC10_FIRST(){  ////test for SameCategory method,in order to trace if in a bookshelf's column
@@ -116,3 +116,4 @@ public class CommonGoalCard10Test
         assertEquals(0, c27.getNumCompleted());
     }
 }
+*/

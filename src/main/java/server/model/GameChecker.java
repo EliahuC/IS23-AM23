@@ -40,7 +40,7 @@ public class GameChecker {
         for (int i = 0; i < boardWidth; i++){
             for (int j = 0; j < boardWidth; j++){
                 if (!boardBoxIsEmpty(board[i][j]) && boardBoxIsValid(board[i][j])){
-                    if (!hasAdjacentTiles(board[i][j])) {
+                    if (hasNotAdjacentTiles(board[i][j])) {
                         restorable = true;
                         return true;
                     }
@@ -130,7 +130,7 @@ public class GameChecker {
         return isYourTurn;
     }
 
-    private boolean hasAdjacentTiles(BoardToken t){
+    private boolean hasNotAdjacentTiles(BoardToken t){
         //Tile is on the left side.
         if (boardTileLeft(t)){
              //Checking the upper tile.                                && Checking the right tile.                                && Checking the lower tile.
