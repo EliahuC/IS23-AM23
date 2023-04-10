@@ -9,7 +9,7 @@ import java.util.List;
 
 public class CommonGoalCard8 extends CommonGoalCard implements CheckCommonGoalCard {
     private List<ItemTile> validGroups;
-    private static int numRowsToAchieve=4;
+    private final static int numRowsToAchieve=4;
     private static final int numDifferentCategoriesAllowed=3;
     private final HashSet<ItemTileCategory> cat = new HashSet<>(); //I use a hashset to track the categories in each row
     @Override                                                   //of the bookshelf
@@ -31,6 +31,10 @@ public class CommonGoalCard8 extends CommonGoalCard implements CheckCommonGoalCa
             cat.add(bs.getTile(a,j).getCategory());
         }
         return cat.size();
+    }
+
+    public HashSet<ItemTileCategory> getCat(){
+        return cat;
     }
 }
 

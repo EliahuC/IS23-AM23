@@ -8,7 +8,7 @@ import server.model.player.BookShelf;
 /**
  * Unit test for simple App.
  */
-/*public class CommonGoalCard8Test
+public class CommonGoalCard8Test
         extends TestCase{
 
     public void testCategoriesAllowedCGC8_FIRST() { //testing of CategoriesAllowed method, if Hashset cat
@@ -133,4 +133,4 @@ import server.model.player.BookShelf;
     }
 
 }
-*/
+

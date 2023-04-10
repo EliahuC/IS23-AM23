@@ -25,7 +25,7 @@ public class CommonGoalCard10 extends CommonGoalCard implements CheckCommonGoalC
 
     public boolean SameCategory(BookShelf bs,int a, HashSet<ItemTileCategory> category){
         for(int j=1;j< BookShelf.getMAX_Column();j++){
-            if(cat.contains(bs.getTile(a,j).getCategory()))
+            if(category.contains(bs.getTile(a,j).getCategory()))
                 return true;
             else
                 cat.add(bs.getTile(a,j).getCategory());
@@ -33,6 +33,8 @@ public class CommonGoalCard10 extends CommonGoalCard implements CheckCommonGoalC
         return false;
     }
 
-
+    public HashSet<ItemTileCategory> getCat(){
+        return cat;
+    }
 }
 

@@ -10,8 +10,8 @@
         //METODO ALTERNATIVO STILE C
         public void checkGoal(BookShelf bs) {
             int c1 = 0, c2 = 0, c3 = 0, c4 = 0, c5 = 0, c6 = 0;
-            for (int i = 0; i < 5; i++) {
-               for(int j=0;j<4;j++){
+            for (int i = 0; i < BookShelf.getMAX_Row(); i++) {
+               for(int j=0;j<BookShelf.getMAX_Column();j++){
                    switch (bs.getTile(i, j).getCategory()) {
                        case CATS -> c1++;
                        case FRAMES -> c2++;
