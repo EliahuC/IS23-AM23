@@ -192,9 +192,7 @@ public class BookShelf {
         maxPickableTiles[i]--;
     }
 
-    public void setTile(int i, int j, ItemTile t){
-        Shelf[i][j] = t;
-    }
+
 
     public ItemTile[][] getShelf(){
         return Shelf;
