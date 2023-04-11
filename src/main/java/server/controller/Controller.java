@@ -1,10 +1,20 @@
 package server.controller;
+import server.Launcher;
 import server.model.board.ItemTile;
 import server.model.player.BookShelf;
-public class Controller {
+import server.model.*;
 
+public class Controller {
+     private final Game G;
+     private final Launcher launcher;
+
+     public Controller(){
+         this.launcher=new Launcher();
+         G= new Game(launcher);
+     }
 
     public void extractAndRestore(){
+         G.getLR().restore();
     }
 
     public ItemTile selectTiles(){
@@ -15,6 +25,7 @@ public class Controller {
     }
 
     public void endGame(){
+         G.endGame();
     }
 
     public void setScore(){

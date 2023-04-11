@@ -15,6 +15,7 @@ public class Game {
     private int currPlaying;
 
     private final GameChecker GC;
+    private boolean startedGame=false;
 
     public Game(Launcher L){
         Players=new ArrayList<>();
@@ -24,23 +25,29 @@ public class Game {
     }
 
     public synchronized void addPlayers(Player p){
-      if(Players.size()<5)
+      if(Players.size()<5&& (!startedGame))
         Players.add(p);
       else System.out.println("Game already full");
     }
 
-    public synchronized void playGame(){
+    public synchronized void startGame(){
         LR.Start(Players.size());
-        while(!GC.getLastRound()) {
-            //IPOTETICO
-            //JSON.GetString();
+        this.startedGame=true;
+    }
+    public synchronized void playMove(){
+        //IPOTETICO
+        //JSON.GetString();
           placeTiles();
           checkCGC();
-      }
-        checkPGC();
-       Optional<Player> P=whoWins();
-      System.out.println("AND THE WINNER IS...... PLAYER :"+ P.get().getNickName());
     }
+    public synchronized void endGame(){
+        for (Player p : Players) {
+            checkPGC();
+            Optional<Player> P=whoWins();
+            System.out.println("AND THE WINNER IS...... PLAYER :"+ P.get().getNickName());
+        }
+    }
+
 
     private void placeTiles(){
         String s="MI SERVE IL JSON";
@@ -101,5 +108,9 @@ public class Game {
     private void increseCurrPlaying() {
         if(currPlaying==4) currPlaying=1;
         else currPlaying++;
+    }
+
+    public LivingRoom getLR() {
+        return LR;
     }
 }
