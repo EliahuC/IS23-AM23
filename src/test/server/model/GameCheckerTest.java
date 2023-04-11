@@ -13,7 +13,7 @@ public class GameCheckerTest extends TestCase {
         l.setNumPlayers(4);
         GameChecker gc = new GameChecker(l);
         Bag bag = new Bag();
-        LivingRoom board = new LivingRoom(l, bag);
+        LivingRoom board = new LivingRoom(l);
         board.putTile(4,4);
         assertTrue(gc.isRestorable(board.getBoard()));
 

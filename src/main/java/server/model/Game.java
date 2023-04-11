@@ -6,6 +6,7 @@ import server.model.player.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class Game {
     private final LivingRoom LR;
@@ -17,7 +18,7 @@ public class Game {
 
     public Game(Launcher L){
         Players=new ArrayList<>();
-        LR=new LivingRoom();
+        LR=new LivingRoom(L);
         GC=new GameChecker(L);
         this.currPlaying=1;
     }
@@ -31,6 +32,8 @@ public class Game {
     public synchronized void playGame(){
         LR.Start(Players.size());
         while(!GC.getLastRound()) {
+            //IPOTETICO
+            //JSON.GetString();
           placeTiles();
           checkCGC();
       }
@@ -68,22 +71,26 @@ public class Game {
     }
 
     private Optional<Player> whoWins(){
-        Optional<Player> P=   Players.stream().reduce( (P1,P2) ->P1.getScore()>P2.getScore()? P1 : P2);
-        if(!P.isPresent()) {
+        Optional<Player> P=   Players.stream().reduce((P1,P2) ->P1.getScore()>P2.getScore()? P1 : P2);
+        if(P.isEmpty()) {
             System.out.println("2 Players with the same score");
-            //Optional<Player> PW=Players.stream().reduce(P1->P1.getScore()=P.get().getScore()&&)
-            //MI MANCA DA AGGIUNGERE QUALCOSA CHE MI FACCIA DISTINGUERE LA POSIZIONE DEL PLAYER PER RISOLVERE IL PROBLEMA
+             P= Optional.ofNullable(checkManually());
 
         }
         return P;
     }
 
-    private Optional<Player> checkManually() {
-        int s1=0,s2=0,s3=0,s4=0;
-        s1=Players.get(0).getScore();
-        s2=Players.get(1).getScore();
-        s3=Players.get(2).getScore();
-        s4=Players.get(3).getScore();
+    private Player checkManually() {
+        List<Integer> scores =new ArrayList<>();
+        scores.add(Players.get(0).getScore());
+        scores.add(Players.get(1).getScore());
+        scores.add(Players.get(2).getScore());
+        scores.add(Players.get(3).getScore());
+        scores.stream().sorted().collect(Collectors.toList());
+        if(Players.get(3).getScore()==scores.get(0)) return Players.get(3);
+        else if (Players.get(2).getScore()==scores.get(0)) return Players.get(2);
+        else if (Players.get(1).getScore()==scores.get(0)) return Players.get(1);
+        else return Players.get(0);
 
     }
 

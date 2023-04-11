@@ -10,21 +10,21 @@ import java.util.List;
 import java.util.Random;
 
 public class LivingRoom {
-    private static int MAX_Row=9;
-    private static int MAX_Column=9;
+    private static final int MAX_Row=9;
+    private static final int MAX_Column=9;
 
     private BoardToken[][] Board = new BoardToken[MAX_Row][MAX_Column];
-    private Launcher L;
-    private Bag bag;
+    private final Launcher L;
+    private final Bag bag;
     private GameChecker G;
 
-    private ArrayList<CommonGoalCard> CommonGoalCard = new ArrayList<>();
+    private final ArrayList<CommonGoalCard> CommonGoalCard = new ArrayList<>();
     private CommonGoalCard C1;
     private CommonGoalCard C2;
 
-    public LivingRoom(Launcher L, Bag bag) {
+    public LivingRoom(Launcher L) {
         this.L = L;
-        this.bag = bag;
+        this.bag = new Bag();
         buildTiles();
 
         //SET UNAVAILABLE
@@ -154,6 +154,10 @@ public class LivingRoom {
             }
         }
         return Board;
+    }
+
+    public Bag getBag() {
+        return bag;
     }
 
     public ArrayList<ItemTile> getTiles(String x){
