@@ -56,9 +56,11 @@ public class GameChecker {
     }
 
     public void checkColumnCapability(BookShelf bs){
-        fourthRowIsFull(bs);
-        fifthRowIsFull(bs);
-        sixthRowIsFull(bs);
+        if (fourthRowIsFull(bs)){
+            if (fifthRowIsFull(bs)){
+                sixthRowIsFull(bs);
+            }
+        }
     }
 
     public int getMaxPickableTiles(BookShelf bs){
@@ -216,8 +218,9 @@ public class GameChecker {
         boolean notYetFull = false;
         for (int i = 0; i < shelfCols; i++) {
             if (shelfBoxIsEmpty(bs.getTile(2, i))) {
-                bs.decreaseCapability(i);
                 notYetFull = true;
+            }else{
+                bs.setCapability(i,2);
             }
             if (notYetFull && i == shelfCols - 1)
                 return false;
@@ -229,8 +232,9 @@ public class GameChecker {
         boolean notYetFull = false;
         for (int i = 0; i < shelfCols; i++) {
             if (shelfBoxIsEmpty(bs.getTile(1, i))) {
-                bs.decreaseCapability(i);
                 notYetFull = true;
+            }else{
+                bs.setCapability(i, 1);
             }
             if (notYetFull && i == shelfCols - 1)
                 return false;
@@ -242,8 +246,9 @@ public class GameChecker {
         boolean notYetFull = false;
         for (int i = 0; i < shelfCols; i++) {
             if (shelfBoxIsEmpty(bs.getTile(0, i))) {
-                bs.decreaseCapability(i);
                 notYetFull = true;
+            }else{
+                bs.setCapability(i, 0);
             }
             if (notYetFull && i == shelfCols - 1)
                 return false;
