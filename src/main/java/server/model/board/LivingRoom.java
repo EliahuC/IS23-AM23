@@ -49,16 +49,39 @@ public class LivingRoom {
     }
 
     private void SetUnavailable() {
-        for (int i = 0; i < 3 || i > 5; i++) {
+        //TOP LEFT
+        for (int i = 0; i < 2; i++) {
             for (int j = 0; j < 3; j++) {
                 Board[i][j].setCategory(BoardToken.boardTokenCategory.UNAVAILABLE);
             }
         }
-        for (int i = 0; i < 3 || i > 5; i++) {
-            for (int j = 6; j < 9; j++) {
+        //TOP RIGHT
+        for (int i = 0; i < 2; i++) {
+            for (int j = 6; j < MAX_Column; j++) {
                 Board[i][j].setCategory(BoardToken.boardTokenCategory.UNAVAILABLE);
             }
         }
+        //LOW LEFT
+        for (int i = 7; i < MAX_Row; i++) {
+            for (int j = 0; j < 3; j++) {
+                Board[i][j].setCategory(BoardToken.boardTokenCategory.UNAVAILABLE);
+            }
+        }
+        //LOW RIGHT
+        for (int i = 7; i < MAX_Row; i++) {
+            for (int j = 6; j < MAX_Column; j++) {
+                Board[i][j].setCategory(BoardToken.boardTokenCategory.UNAVAILABLE);
+            }
+        }
+
+        Board[2][0].setCategory(BoardToken.boardTokenCategory.UNAVAILABLE);
+        Board[2][1].setCategory(BoardToken.boardTokenCategory.UNAVAILABLE);
+        Board[2][7].setCategory(BoardToken.boardTokenCategory.UNAVAILABLE);
+        Board[2][8].setCategory(BoardToken.boardTokenCategory.UNAVAILABLE);
+        Board[6][0].setCategory(BoardToken.boardTokenCategory.UNAVAILABLE);
+        Board[6][1].setCategory(BoardToken.boardTokenCategory.UNAVAILABLE);
+        Board[6][7].setCategory(BoardToken.boardTokenCategory.UNAVAILABLE);
+        Board[6][8].setCategory(BoardToken.boardTokenCategory.UNAVAILABLE);
         Board[3][0].setCategory(BoardToken.boardTokenCategory.UNAVAILABLE);
         Board[0][5].setCategory(BoardToken.boardTokenCategory.UNAVAILABLE);
         Board[5][8].setCategory(BoardToken.boardTokenCategory.UNAVAILABLE);
@@ -72,7 +95,7 @@ public class LivingRoom {
         Board[6][6].setCategory(BoardToken.boardTokenCategory.THREE);
         Board[0][3].setCategory(BoardToken.boardTokenCategory.THREE);
         Board[3][8].setCategory(BoardToken.boardTokenCategory.THREE);
-        Board[0][5].setCategory(BoardToken.boardTokenCategory.THREE);
+        Board[5][0].setCategory(BoardToken.boardTokenCategory.THREE);
         Board[8][5].setCategory(BoardToken.boardTokenCategory.THREE);
     }
 
@@ -110,9 +133,9 @@ public class LivingRoom {
             }
         }
         int randIndex = new Random().nextInt(CommonGoalCard.size());
-        CommonGoalCard C1 = CommonGoalCard.remove(randIndex);
+        C1 = CommonGoalCard.remove(randIndex);
         randIndex = new Random().nextInt(CommonGoalCard.size());
-        CommonGoalCard C2 = CommonGoalCard.remove(randIndex);
+        C2 = CommonGoalCard.remove(randIndex);
     }
 
     public int checkCG(BookShelf bs){

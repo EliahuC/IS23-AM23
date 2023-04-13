@@ -57,4 +57,43 @@ public class CommonGoalCardTest
         assertEquals(4, c5.getNumCompleted());
     }
 
+    public void testGetPoints1(){
+        CommonGoalCard c6 = new CommonGoalCard9();
+        c6.initNumCompleted();
+        assertEquals(0,c6.getPoints());
+    }
+
+    public void testGetPoints2(){
+        CommonGoalCard c7 = new CommonGoalCard9();
+        c7.initNumCompleted();
+        c7.increaseNumCompleted();
+        assertEquals(8,c7.getPoints());
+    }
+
+    public void testGetPoints3(){
+        CommonGoalCard c8 = new CommonGoalCard9();
+        c8.initNumCompleted();
+        c8.increaseNumCompleted();
+        c8.increaseNumCompleted();
+        assertEquals(6,c8.getPoints());
+    }
+
+    public void testGetPoints4(){
+        CommonGoalCard c9 = new CommonGoalCard9();
+        c9.initNumCompleted();
+        c9.increaseNumCompleted();
+        c9.increaseNumCompleted();
+        c9.increaseNumCompleted();
+        assertEquals(4,c9.getPoints());
+    }
+
+    public void testGetPoints5(){
+        CommonGoalCard c10 = new CommonGoalCard9();
+        c10.initNumCompleted();
+        c10.increaseNumCompleted();
+        c10.increaseNumCompleted();
+        c10.increaseNumCompleted();
+        c10.increaseNumCompleted();
+        assertEquals(0,c10.getPoints());
+    }
 }
