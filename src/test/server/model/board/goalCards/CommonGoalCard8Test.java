@@ -1,5 +1,6 @@
 package server.model.board.goalCards;
 import junit.framework.TestCase;
+import server.Launcher;
 import server.model.board.*;
 import server.model.board.goalCards.CommonGoalCard;
 import server.model.board.goalCards.CommonGoalCard8;
@@ -13,7 +14,7 @@ public class CommonGoalCard8Test
 
     public void testCategoriesAllowedCGC8_FIRST() { //testing of CategoriesAllowed method, if Hashset cat
                                                     //counts correctly how many categories are in a column of a bookshelf
-        CommonGoalCard8 c14 = new CommonGoalCard8();
+        CommonGoalCard8 c14 = new CommonGoalCard8(new Launcher());
         c14.initNumCompleted();
         BookShelf bs7 = new BookShelf();
         bs7.setTile(0,0,new ItemTile("PLANTS"));
@@ -27,7 +28,7 @@ public class CommonGoalCard8Test
     }
 
     public void testCategoriesAllowedCGC8_SECOND() {
-        CommonGoalCard8 c15 = new CommonGoalCard8();
+        CommonGoalCard8 c15 = new CommonGoalCard8(new Launcher());
         c15.initNumCompleted();
         BookShelf bs8 = new BookShelf();
         bs8.setTile(1,0,new ItemTile("CATS"));
@@ -40,7 +41,7 @@ public class CommonGoalCard8Test
     }
 
     public void testCategoriesAllowedCGC8_THIRD() {
-        CommonGoalCard8 c16 = new CommonGoalCard8();
+        CommonGoalCard8 c16 = new CommonGoalCard8(new Launcher());
         c16.initNumCompleted();
         BookShelf bs9 = new BookShelf();
         bs9.setTile(2,0,new ItemTile("TROPHIES"));
@@ -53,7 +54,7 @@ public class CommonGoalCard8Test
     }
 
     public void testCategoriesAllowedCGC8_FOURTH() {
-        CommonGoalCard8 c17 = new CommonGoalCard8();
+        CommonGoalCard8 c17 = new CommonGoalCard8(new Launcher());
         c17.initNumCompleted();
         BookShelf bs10 = new BookShelf();
         bs10.setTile(0,0,new ItemTile("PLANTS"));
@@ -67,7 +68,7 @@ public class CommonGoalCard8Test
 
 
     public void testCheckGoalCardCGC8_FIRST(){ //testing the functionality of checkGoalCard method, if a Player achieves
-        CommonGoalCard c18 = new CommonGoalCard8();//the goal of the CGC, the attribute "NumCompleted" will increment,
+        CommonGoalCard c18 = new CommonGoalCard8(new Launcher());//the goal of the CGC, the attribute "NumCompleted" will increment,
         c18.initNumCompleted();                     //if not, as in the next test, "NumCompleted" will remain 0
         BookShelf bs11 = new BookShelf();
         bs11.setTile(0,0,new ItemTile("PLANTS"));
@@ -95,7 +96,7 @@ public class CommonGoalCard8Test
     }
 
     public void testCheckGoalCardCGC8_SECOND(){
-        CommonGoalCard c19 = new CommonGoalCard8();
+        CommonGoalCard c19 = new CommonGoalCard8(new Launcher());
         c19.initNumCompleted();
         BookShelf bs12 = new BookShelf();
         bs12.setTile(0,0,new ItemTile("PLANTS"));

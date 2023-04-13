@@ -1,4 +1,5 @@
 package server.model.board.goalCards;
+import server.Launcher;
 import server.model.board.ItemTile;
 import server.model.board.ItemTileCategory;
 import server.model.player.BookShelf;
@@ -10,6 +11,11 @@ public class CommonGoalCard9 extends CommonGoalCard implements CheckCommonGoalCa
     private static int numColumnsToAchieve=2;
     private final HashSet<ItemTileCategory> cat = new HashSet<>(); //I use an arrayList to track the categories in each column
     //of the bookshelf
+    private final Launcher L;
+
+    public CommonGoalCard9(Launcher L) {
+        this.L = L;
+    }
     @Override
     public void checkGoal(BookShelf bs) {
         int counter=0;

@@ -111,18 +111,18 @@ public class LivingRoom {
     }
 
     private void SetCommonGoalCard(){
-        CommonGoalCard.add(new CommonGoalCard1());
-        CommonGoalCard.add(new CommonGoalCard2());
-        CommonGoalCard.add(new CommonGoalCard3());
-        CommonGoalCard.add(new CommonGoalCard4());
-        CommonGoalCard.add(new CommonGoalCard5());
-        CommonGoalCard.add(new CommonGoalCard6());
-        CommonGoalCard.add(new CommonGoalCard7());
-        CommonGoalCard.add(new CommonGoalCard8());
-        CommonGoalCard.add(new CommonGoalCard9());
-        CommonGoalCard.add(new CommonGoalCard10());
-        CommonGoalCard.add(new CommonGoalCard11());
-        CommonGoalCard.add(new CommonGoalCard12());
+        CommonGoalCard.add(new CommonGoalCard1(L));
+        CommonGoalCard.add(new CommonGoalCard2(L));
+        CommonGoalCard.add(new CommonGoalCard3(L));
+        CommonGoalCard.add(new CommonGoalCard4(L));
+        CommonGoalCard.add(new CommonGoalCard5(L));
+        CommonGoalCard.add(new CommonGoalCard6(L));
+        CommonGoalCard.add(new CommonGoalCard7(L));
+        CommonGoalCard.add(new CommonGoalCard8(L));
+        CommonGoalCard.add(new CommonGoalCard9(L));
+        CommonGoalCard.add(new CommonGoalCard10(L));
+        CommonGoalCard.add(new CommonGoalCard11(L));
+        CommonGoalCard.add(new CommonGoalCard12(L));
 
     }
 

@@ -2,6 +2,7 @@ package server.model.board.goalCards;
 
 import junit.framework.TestCase;
 import org.junit.jupiter.api.Test;
+import server.Launcher;
 import server.model.board.ItemTile;
 import server.model.player.BookShelf;
 
@@ -10,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class CommonGoalCard12Test extends TestCase {
 
     public void testcheckRtoL(){
-        CommonGoalCard c12=new CommonGoalCard12();
+        CommonGoalCard c12=new CommonGoalCard12(new Launcher());
         c12.initNumCompleted();
         BookShelf bs= new BookShelf();
         bs.setTile(5,0,new ItemTile());
@@ -34,7 +35,7 @@ public class CommonGoalCard12Test extends TestCase {
     }
 
     public void testcheckLtoR(){
-        CommonGoalCard c12=new CommonGoalCard12();
+        CommonGoalCard c12=new CommonGoalCard12(new Launcher());
         c12.initNumCompleted();
         BookShelf bs= new BookShelf();
         bs.setTile(5,4,new ItemTile());
@@ -57,7 +58,7 @@ public class CommonGoalCard12Test extends TestCase {
     }
 
     public void testFullShelf(){
-        CommonGoalCard c12=new CommonGoalCard12();
+        CommonGoalCard c12=new CommonGoalCard12(new Launcher());
         c12.initNumCompleted();
         BookShelf bs= new BookShelf();
         for(int i=0; i<BookShelf.getMAX_Row();i++){

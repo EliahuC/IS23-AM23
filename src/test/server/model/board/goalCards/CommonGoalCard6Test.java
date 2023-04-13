@@ -2,6 +2,7 @@ package server.model.board.goalCards;
 
 import junit.framework.TestCase;
 import org.junit.jupiter.api.Test;
+import server.Launcher;
 import server.model.board.ItemTile;
 import server.model.player.BookShelf;
 
@@ -9,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class CommonGoalCard6Test extends TestCase {
     public void testCheckGoalCardCGC6_FIRST() {
-        CommonGoalCard c33 = new CommonGoalCard6();
+        CommonGoalCard c33 = new CommonGoalCard6(new Launcher());
         c33.initNumCompleted();
         BookShelf bs26 = new BookShelf();
         bs26.setTile(0, 0, new ItemTile("CATS"));
@@ -47,7 +48,7 @@ public class CommonGoalCard6Test extends TestCase {
     }
 
     public void testCheckGoalCardCGC6_SECOND() {
-        CommonGoalCard c34 = new CommonGoalCard6();
+        CommonGoalCard c34 = new CommonGoalCard6(new Launcher());
         c34.initNumCompleted();
         BookShelf bs27 = new BookShelf();
         bs27.setTile(0, 0, new ItemTile("CATS"));

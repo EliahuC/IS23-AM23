@@ -1,6 +1,7 @@
 package server.model.board.goalCards;
 
 import junit.framework.TestCase;
+import server.Launcher;
 import server.model.board.ItemTile;
 import server.model.board.goalCards.CommonGoalCard7;
 import server.model.player.BookShelf;
@@ -12,7 +13,7 @@ public class CommonGoalCard7Test
         extends TestCase {
 
     public void testCheckGoalCardCGC7_FIRST() {
-        CommonGoalCard c28 = new CommonGoalCard7();
+        CommonGoalCard c28 = new CommonGoalCard7(new Launcher());
         c28.initNumCompleted();
         BookShelf bs21 = new BookShelf();
         bs21.setTile(0, 0, new ItemTile("CATS"));
@@ -38,7 +39,7 @@ public class CommonGoalCard7Test
     }
 
     public void testCheckGoalCardCGC7_SECOND() {
-        CommonGoalCard c29 = new CommonGoalCard7();
+        CommonGoalCard c29 = new CommonGoalCard7(new Launcher());
         c29.initNumCompleted();
         BookShelf bs22 = new BookShelf();
         bs22.setTile(0, 0, new ItemTile("PLANTS"));
@@ -65,7 +66,7 @@ public class CommonGoalCard7Test
     }
 
     public void testCheckGoalCardCGC7_THIRD() {
-        CommonGoalCard c30 = new CommonGoalCard7();
+        CommonGoalCard c30 = new CommonGoalCard7(new Launcher());
         c30.initNumCompleted();
         BookShelf bs23 = new BookShelf();
         bs23.setTile(0, 0, new ItemTile("PLANTS"));
@@ -91,7 +92,7 @@ public class CommonGoalCard7Test
     }
 
     public void testCheckGoalCardCGC7_FOURTH() {
-        CommonGoalCard c31 = new CommonGoalCard7();
+        CommonGoalCard c31 = new CommonGoalCard7(new Launcher());
         c31.initNumCompleted();
         BookShelf bs24 = new BookShelf();
         bs24.setTile(0, 0, new ItemTile("PLANTS"));
@@ -117,7 +118,7 @@ public class CommonGoalCard7Test
     }
 
     public void testCheckGoalCardCGC7_FIFTH() {
-        CommonGoalCard c32 = new CommonGoalCard7();
+        CommonGoalCard c32 = new CommonGoalCard7(new Launcher());
         c32.initNumCompleted();
         BookShelf bs25 = new BookShelf();
         bs25.setTile(0, 0, new ItemTile("PLANTS"));

@@ -5,6 +5,7 @@ import server.model.board.*;
 import server.model.board.goalCards.CommonGoalCard;
 import server.model.board.goalCards.CommonGoalCard2;
 import server.model.player.BookShelf;
+import server.Launcher;
 
 /**
  * Unit test for simple App.
@@ -13,7 +14,7 @@ public class CommonGoalCard2Test
         extends TestCase
 {
     public void testCheckGoalCardCGC2_FIRST() {
-        CommonGoalCard c6 = new CommonGoalCard2();
+        CommonGoalCard c6 = new CommonGoalCard2(new Launcher());
         c6.initNumCompleted();
         BookShelf bs = new BookShelf();
         bs.setTile(0,0,new ItemTile("CATS"));
@@ -25,7 +26,7 @@ public class CommonGoalCard2Test
     }
 
     public void testCheckGoalCardCGC2_SECOND() {
-        CommonGoalCard c7 = new CommonGoalCard2();
+        CommonGoalCard c7 = new CommonGoalCard2(new Launcher());
         c7.initNumCompleted();
         BookShelf bs = new BookShelf();
         bs.setTile(0,0,new ItemTile("CATS"));

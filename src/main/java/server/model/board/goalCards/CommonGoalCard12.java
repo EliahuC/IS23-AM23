@@ -1,10 +1,16 @@
 package server.model.board.goalCards;
 
+import server.Launcher;
 import server.model.player.BookShelf;
 
 
 
 public class CommonGoalCard12 extends CommonGoalCard implements CheckCommonGoalCard {
+    private final Launcher L;
+
+    public CommonGoalCard12(Launcher L) {
+        this.L = L;
+    }
 
     @Override
     public void checkGoal(BookShelf bs) {

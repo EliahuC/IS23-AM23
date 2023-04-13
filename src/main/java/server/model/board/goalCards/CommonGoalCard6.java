@@ -1,12 +1,17 @@
     package server.model.board.goalCards;
 
+    import server.Launcher;
     import server.model.player.BookShelf;
 
     import java.util.ArrayList;
     import java.util.List;
 
     public class CommonGoalCard6 extends CommonGoalCard implements CheckCommonGoalCard {
+        private final Launcher L;
 
+        public CommonGoalCard6(Launcher L){
+            this.L = L;
+        }
         //METODO ALTERNATIVO STILE C
         public void checkGoal(BookShelf bs) {
             int c1 = 0, c2 = 0, c3 = 0, c4 = 0, c5 = 0, c6 = 0;

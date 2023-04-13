@@ -1,11 +1,17 @@
 package server.model.board.goalCards;
 import server.model.board.ItemTile;
 import server.model.player.BookShelf;
+import server.Launcher;
 
 import java.util.List;
 
 public class CommonGoalCard1 extends CommonGoalCard implements CheckCommonGoalCard {
     private List<ItemTile> validGroups;
+    private final Launcher L;
+
+    public CommonGoalCard1(Launcher L){
+        this.L = L;
+    }
     @Override
     //Six groups of 2 adjacent tiles.
     public void checkGoal(BookShelf bs) {

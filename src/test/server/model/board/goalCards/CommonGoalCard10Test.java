@@ -1,6 +1,7 @@
 package server.model.board.goalCards;
 
 import junit.framework.TestCase;
+import server.Launcher;
 import server.model.board.*;
 import server.model.board.goalCards.CommonGoalCard;
 import server.model.board.goalCards.CommonGoalCard10;
@@ -14,7 +15,7 @@ public class CommonGoalCard10Test
 
     public void testSameCategoryCGC10_FIRST(){  ////test for SameCategory method,in order to trace if in a bookshelf's column
                                                         //are there any tiles with the same category
-        CommonGoalCard10 c24 = new CommonGoalCard10();
+        CommonGoalCard10 c24 = new CommonGoalCard10(new Launcher());
         c24.initNumCompleted();
         BookShelf bs17 = new BookShelf();
         bs17.setTile(0,0,new ItemTile("PLANTS"));
@@ -27,7 +28,7 @@ public class CommonGoalCard10Test
     }
 
     public void testSameCategoryCGC10_SECOND(){
-        CommonGoalCard10 c25 = new CommonGoalCard10();
+        CommonGoalCard10 c25 = new CommonGoalCard10(new Launcher());
         c25.initNumCompleted();
         BookShelf bs18 = new BookShelf();
         bs18.setTile(0,0,new ItemTile("PLANTS"));
@@ -40,7 +41,7 @@ public class CommonGoalCard10Test
     }
 
     public void testCheckGoalCardCGC10_FIRST(){
-        CommonGoalCard c26 = new CommonGoalCard10();
+        CommonGoalCard c26 = new CommonGoalCard10(new Launcher());
         c26.initNumCompleted();
         BookShelf bs19 = new BookShelf();
         bs19.setTile(0,0,new ItemTile("PLANTS"));
@@ -79,7 +80,7 @@ public class CommonGoalCard10Test
     }
 
     public void testCheckGoalCardCGC10_SECOND() {
-        CommonGoalCard c27 = new CommonGoalCard10();
+        CommonGoalCard c27 = new CommonGoalCard10(new Launcher());
         c27.initNumCompleted();
         BookShelf bs20 = new BookShelf();
         bs20.setTile(0,0,new ItemTile("PLANTS"));
