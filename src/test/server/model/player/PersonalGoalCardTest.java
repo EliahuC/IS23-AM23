@@ -8,8 +8,20 @@ import server.model.player.BookShelf;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class PersonalGoalCardTest extends TestCase {
-    public void testCheckGoalPGC1(){
-        PersonalGoalCard PG1 = new PersonalGoalCard(1);
+
+    public void testCheckGoalPGC1_0(){     // test in which a bookshelf doesn't match any ItemTile in the correct
+        PersonalGoalCard PG = new PersonalGoalCard(1);      //position
+        BookShelf b = new BookShelf();
+        b.setTile(0,0,new ItemTile("CATS"));
+        b.setTile(0,2, new ItemTile("TROPHIES"));
+        b.setTile(1,4, new ItemTile("PLANTS"));
+        b.setTile(2,3, new ItemTile("FRAMES"));
+        b.setTile(3,1, new ItemTile("BOOKS"));
+        b.setTile(5,2,new ItemTile("GAMES"));
+        assertEquals(0,PG.CheckGoal(b));
+    }
+    public void testCheckGoalPGC1_FIRST(){      //test in witch a bookshelf matches only one ItemTile in the correct
+        PersonalGoalCard PG1 = new PersonalGoalCard(1); //position
         BookShelf b = new BookShelf();
         b.setTile(0,0,new ItemTile("CATS"));
         b.setTile(0,2, new ItemTile("TROPHIES"));
@@ -20,8 +32,8 @@ public class PersonalGoalCardTest extends TestCase {
         assertEquals(1,PG1.CheckGoal(b));
         }
 
-    public void testCheckGoalPGC1_SECOND(){
-        PersonalGoalCard PG1 = new PersonalGoalCard(1);
+    public void testCheckGoalPGC1_SECOND(){     //test in witch a bookshelf matches two ItemTiles in the correct
+        PersonalGoalCard PG1 = new PersonalGoalCard(1); //position
         BookShelf b = new BookShelf();
         b.setTile(0,0,new ItemTile("CATS"));
         b.setTile(0,2, new ItemTile("FRAMES"));
@@ -32,8 +44,8 @@ public class PersonalGoalCardTest extends TestCase {
         assertEquals(2,PG1.CheckGoal(b));
     }
 
-    public void testCheckGoalPGC1_THIRD(){
-        PersonalGoalCard PG1 = new PersonalGoalCard(1);
+    public void testCheckGoalPGC1_THIRD(){      //test in witch a bookshelf matches three ItemTiles in the correct
+        PersonalGoalCard PG1 = new PersonalGoalCard(1); //position
         BookShelf b = new BookShelf();
         b.setTile(0,0,new ItemTile("CATS"));
         b.setTile(0,2, new ItemTile("FRAMES"));
@@ -44,8 +56,8 @@ public class PersonalGoalCardTest extends TestCase {
         assertEquals(4,PG1.CheckGoal(b));
     }
 
-    public void testCheckGoalPGC1_FOURTH(){
-        PersonalGoalCard PG1 = new PersonalGoalCard(1);
+    public void testCheckGoalPGC1_FOURTH(){     //test in witch a bookshelf matches four ItemTiles in the correct
+        PersonalGoalCard PG1 = new PersonalGoalCard(1); //position
         BookShelf b = new BookShelf();
         b.setTile(0,0,new ItemTile("PLANTS"));
         b.setTile(0,2, new ItemTile("FRAMES"));
@@ -56,8 +68,8 @@ public class PersonalGoalCardTest extends TestCase {
         assertEquals(6,PG1.CheckGoal(b));
     }
 
-    public void testCheckGoalPGC1_FIFTH(){
-        PersonalGoalCard PG1 = new PersonalGoalCard(1);
+    public void testCheckGoalPGC1_FIFTH(){      //test in witch a bookshelf matches five ItemTiles in the correct
+        PersonalGoalCard PG1 = new PersonalGoalCard(1); //position
         BookShelf b = new BookShelf();
         b.setTile(0,0,new ItemTile("PLANTS"));
         b.setTile(0,2, new ItemTile("FRAMES"));
@@ -68,8 +80,8 @@ public class PersonalGoalCardTest extends TestCase {
         assertEquals(9,PG1.CheckGoal(b));
     }
 
-    public void testCheckGoalPGC1_SIXTH(){
-        PersonalGoalCard PG1 = new PersonalGoalCard(1);
+    public void testCheckGoalPGC1_SIXTH(){      //test in witch a bookshelf matches six ItemTiles in the correct
+        PersonalGoalCard PG1 = new PersonalGoalCard(1); //position
         BookShelf b = new BookShelf();
         b.setTile(0,0,new ItemTile("PLANTS"));
         b.setTile(0,2, new ItemTile("FRAMES"));
@@ -80,6 +92,17 @@ public class PersonalGoalCardTest extends TestCase {
         assertEquals(12,PG1.CheckGoal(b));
     }
 
+    public void testCheckGoalPGC2_0(){
+        PersonalGoalCard PG = new PersonalGoalCard(2);
+        BookShelf b = new BookShelf();
+        b.setTile(1,1,new ItemTile("CATS"));
+        b.setTile(5,4, new ItemTile("TROPHIES"));
+        b.setTile(2,0, new ItemTile("PLANTS"));
+        b.setTile(3,4, new ItemTile("FRAMES"));
+        b.setTile(2,2, new ItemTile("BOOKS"));
+        b.setTile(4,3,new ItemTile("GAMES"));
+        assertEquals(0,PG.CheckGoal(b));
+    }
     public void testCheckGoalPGC2_FIRST(){
         PersonalGoalCard PG2 = new PersonalGoalCard(2);
         BookShelf b = new BookShelf();
@@ -152,6 +175,17 @@ public class PersonalGoalCardTest extends TestCase {
         assertEquals(12,PG2.CheckGoal(b));
     }
 
+    public void testCheckGoalPGC3_0(){
+        PersonalGoalCard PG = new PersonalGoalCard(3);
+        BookShelf b = new BookShelf();
+        b.setTile(2,2,new ItemTile("CATS"));
+        b.setTile(1,0, new ItemTile("TROPHIES"));
+        b.setTile(3,1, new ItemTile("PLANTS"));
+        b.setTile(5,0, new ItemTile("FRAMES"));
+        b.setTile(1,3, new ItemTile("BOOKS"));
+        b.setTile(3,4,new ItemTile("GAMES"));
+        assertEquals(0,PG.CheckGoal(b));
+    }
     public void testCheckGoalPGC3_FIRST(){
         PersonalGoalCard PG3 = new PersonalGoalCard(3);
         BookShelf b = new BookShelf();
@@ -224,6 +258,17 @@ public class PersonalGoalCardTest extends TestCase {
         assertEquals(12,PG3.CheckGoal(b));
     }
 
+    public void testCheckGoalPGC4_0(){
+        PersonalGoalCard PG = new PersonalGoalCard(4);
+        BookShelf b = new BookShelf();
+        b.setTile(3,3,new ItemTile("CATS"));
+        b.setTile(2,2, new ItemTile("TROPHIES"));
+        b.setTile(4,2, new ItemTile("PLANTS"));
+        b.setTile(4,1, new ItemTile("FRAMES"));
+        b.setTile(0,4, new ItemTile("BOOKS"));
+        b.setTile(2,0,new ItemTile("GAMES"));
+        assertEquals(0,PG.CheckGoal(b));
+    }
     public void testCheckGoalPGC4_FIRST(){
         PersonalGoalCard PG4 = new PersonalGoalCard(4);
         BookShelf b = new BookShelf();
@@ -296,6 +341,17 @@ public class PersonalGoalCardTest extends TestCase {
         assertEquals(12,PG4.CheckGoal(b));
     }
 
+    public void testCheckGoalPGC5_0(){
+        PersonalGoalCard PG = new PersonalGoalCard(5);
+        BookShelf b = new BookShelf();
+        b.setTile(4,4,new ItemTile("CATS"));
+        b.setTile(3,1, new ItemTile("TROPHIES"));
+        b.setTile(5,3, new ItemTile("PLANTS"));
+        b.setTile(3,2, new ItemTile("FRAMES"));
+        b.setTile(5,0, new ItemTile("BOOKS"));
+        b.setTile(1,1,new ItemTile("GAMES"));
+        assertEquals(0,PG.CheckGoal(b));
+    }
     public void testCheckGoalPGC5_FIRST(){
         PersonalGoalCard PG5 = new PersonalGoalCard(5);
         BookShelf b = new BookShelf();
@@ -368,6 +424,17 @@ public class PersonalGoalCardTest extends TestCase {
         assertEquals(12,PG5.CheckGoal(b));
     }
 
+    public void testCheckGoalPGC6_0(){
+        PersonalGoalCard PG = new PersonalGoalCard(6);
+        BookShelf b = new BookShelf();
+        b.setTile(5,0,new ItemTile("CATS"));
+        b.setTile(4,3, new ItemTile("TROPHIES"));
+        b.setTile(0,4, new ItemTile("PLANTS"));
+        b.setTile(2,3, new ItemTile("FRAMES"));
+        b.setTile(4,1, new ItemTile("BOOKS"));
+        b.setTile(5,2,new ItemTile("GAMES"));
+        assertEquals(0,PG.CheckGoal(b));
+    }
     public void testCheckGoalPGC6_FIRST(){
         PersonalGoalCard PG6 = new PersonalGoalCard(6);
         BookShelf b = new BookShelf();
@@ -440,6 +507,17 @@ public class PersonalGoalCardTest extends TestCase {
         assertEquals(12,PG6.CheckGoal(b));
     }
 
+    public void testCheckGoalPGC7_0(){
+        PersonalGoalCard PG = new PersonalGoalCard(7);
+        BookShelf b = new BookShelf();
+        b.setTile(2,1,new ItemTile("CATS"));
+        b.setTile(1,4, new ItemTile("TROPHIES"));
+        b.setTile(0,0, new ItemTile("PLANTS"));
+        b.setTile(5,2, new ItemTile("FRAMES"));
+        b.setTile(4,4, new ItemTile("BOOKS"));
+        b.setTile(3,0,new ItemTile("GAMES"));
+        assertEquals(0,PG.CheckGoal(b));
+    }
     public void testCheckGoalPGC7_FIRST(){
         PersonalGoalCard PG7 = new PersonalGoalCard(7);
         BookShelf b = new BookShelf();
@@ -512,6 +590,17 @@ public class PersonalGoalCardTest extends TestCase {
         assertEquals(12,PG7.CheckGoal(b));
     }
 
+    public void testCheckGoalPGC8_0(){
+        PersonalGoalCard PG = new PersonalGoalCard(8);
+        BookShelf b = new BookShelf();
+        b.setTile(3,0,new ItemTile("CATS"));
+        b.setTile(0,4, new ItemTile("TROPHIES"));
+        b.setTile(1,1, new ItemTile("PLANTS"));
+        b.setTile(4,3, new ItemTile("FRAMES"));
+        b.setTile(5,3, new ItemTile("BOOKS"));
+        b.setTile(2,2,new ItemTile("GAMES"));
+        assertEquals(0,PG.CheckGoal(b));
+    }
     public void testCheckGoalPGC8_FIRST(){
         PersonalGoalCard PG8 = new PersonalGoalCard(8);
         BookShelf b = new BookShelf();
@@ -584,6 +673,17 @@ public class PersonalGoalCardTest extends TestCase {
         assertEquals(12,PG8.CheckGoal(b));
     }
 
+    public void testCheckGoalPGC9_0(){
+        PersonalGoalCard PG = new PersonalGoalCard(9);
+        BookShelf b = new BookShelf();
+        b.setTile(4,4,new ItemTile("CATS"));
+        b.setTile(5,0, new ItemTile("TROPHIES"));
+        b.setTile(2,2, new ItemTile("PLANTS"));
+        b.setTile(3,4, new ItemTile("FRAMES"));
+        b.setTile(0,2, new ItemTile("BOOKS"));
+        b.setTile(4,1,new ItemTile("GAMES"));
+        assertEquals(0,PG.CheckGoal(b));
+    }
     public void testCheckGoalPGC9_FIRST(){
         PersonalGoalCard PG9 = new PersonalGoalCard(9);
         BookShelf b = new BookShelf();
@@ -656,6 +756,17 @@ public class PersonalGoalCardTest extends TestCase {
         assertEquals(12,PG9.CheckGoal(b));
     }
 
+    public void testCheckGoalPGC10_0(){
+        PersonalGoalCard PG = new PersonalGoalCard(10);
+        BookShelf b = new BookShelf();
+        b.setTile(5,3,new ItemTile("CATS"));
+        b.setTile(4,1, new ItemTile("TROPHIES"));
+        b.setTile(3,3, new ItemTile("PLANTS"));
+        b.setTile(2,0, new ItemTile("FRAMES"));
+        b.setTile(1,1, new ItemTile("BOOKS"));
+        b.setTile(0,4,new ItemTile("GAMES"));
+        assertEquals(0,PG.CheckGoal(b));
+    }
     public void testCheckGoalPGC10_FIRST(){
         PersonalGoalCard PG10 = new PersonalGoalCard(10);
         BookShelf b = new BookShelf();
@@ -728,6 +839,17 @@ public class PersonalGoalCardTest extends TestCase {
         assertEquals(12,PG10.CheckGoal(b));
     }
 
+    public void testCheckGoalPGC11_0(){
+        PersonalGoalCard PG = new PersonalGoalCard(11);
+        BookShelf b = new BookShelf();
+        b.setTile(0,2,new ItemTile("CATS"));
+        b.setTile(3,2, new ItemTile("TROPHIES"));
+        b.setTile(4,4, new ItemTile("PLANTS"));
+        b.setTile(1,1, new ItemTile("FRAMES"));
+        b.setTile(2,0, new ItemTile("BOOKS"));
+        b.setTile(5,3,new ItemTile("GAMES"));
+        assertEquals(0,PG.CheckGoal(b));
+    }
     public void testCheckGoalPGC11_FIRST(){
         PersonalGoalCard PG11 = new PersonalGoalCard(11);
         BookShelf b = new BookShelf();
@@ -800,6 +922,17 @@ public class PersonalGoalCardTest extends TestCase {
         assertEquals(12,PG11.CheckGoal(b));
     }
 
+    public void testCheckGoalPGC12_0(){
+        PersonalGoalCard PG = new PersonalGoalCard(12);
+        BookShelf b = new BookShelf();
+        b.setTile(1,1,new ItemTile("CATS"));
+        b.setTile(2,2, new ItemTile("TROPHIES"));
+        b.setTile(5,0, new ItemTile("PLANTS"));
+        b.setTile(0,2, new ItemTile("FRAMES"));
+        b.setTile(4,4, new ItemTile("BOOKS"));
+        b.setTile(3,3,new ItemTile("GAMES"));
+        assertEquals(0,PG.CheckGoal(b));
+    }
     public void testCheckGoalPGC12_FIRST(){
         PersonalGoalCard PG12 = new PersonalGoalCard(12);
         BookShelf b = new BookShelf();
