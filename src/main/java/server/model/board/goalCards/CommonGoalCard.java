@@ -49,6 +49,10 @@ public abstract class CommonGoalCard {
         this.numCompleted = 0;
     }
 
+    public Launcher getL (){
+        return L;
+    }
+
 
 }
 

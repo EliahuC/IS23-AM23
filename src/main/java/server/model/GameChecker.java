@@ -7,10 +7,7 @@ import server.Launcher;
 import server.model.board.BoardToken;
 
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 public class GameChecker {
 
@@ -308,8 +305,8 @@ public class GameChecker {
         return t.getRow() != 0 && t.getRow() != boardWidth-1 && t.getCol() != 0 && t.getCol() != boardWidth-1;
     }
 
-    private Set<BoardToken> addAdjacentTiles(BoardToken t){
-        Set<BoardToken> adjacentTiles = Collections.emptySet();
+    private HashSet<BoardToken> addAdjacentTiles(BoardToken t){
+        HashSet<BoardToken> adjacentTiles = new HashSet<>();
         if(boardTileUpper(t)){
             adjacentTiles.add(t.getBoard()[t.getRow()][t.getCol()+1]); //Adding right tile.
             adjacentTiles.add(t.getBoard()[t.getRow()+1][t.getCol()]); //Adding lower tile.

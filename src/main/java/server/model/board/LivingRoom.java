@@ -25,7 +25,7 @@ public class LivingRoom {
     public LivingRoom(Launcher L) {
         this.L = L;
         this.bag = new Bag();
-        //buildTiles();
+        buildTiles();
 
         //SET UNAVAILABLE
         SetUnavailable();
@@ -231,5 +231,9 @@ public class LivingRoom {
             for(int j = 0; j < MAX_Column; j++)
                 this.Board[i][j] = new BoardToken();
         }
+    }
+
+    public BoardToken getTile(int i, int j){
+        return Board[i][j];
     }
 }
