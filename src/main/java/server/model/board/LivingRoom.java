@@ -25,7 +25,7 @@ public class LivingRoom {
     public LivingRoom(Launcher L) {
         this.L = L;
         this.bag = new Bag();
-        buildTiles();
+        //buildTiles();
 
         //SET UNAVAILABLE
         SetUnavailable();
@@ -46,33 +46,19 @@ public class LivingRoom {
 
         //Each board box gets board reference.
         SetBoard();
+
+        Start(L.getNumPlayers());
     }
 
     private void SetUnavailable() {
         //TOP LEFT
-        for (int i = 0; i < 2; i++) {
-            for (int j = 0; j < 3; j++) {
-                Board[i][j].setCategory(BoardToken.boardTokenCategory.UNAVAILABLE);
-            }
-        }
+       setUTopLeft();
         //TOP RIGHT
-        for (int i = 0; i < 2; i++) {
-            for (int j = 6; j < MAX_Column; j++) {
-                Board[i][j].setCategory(BoardToken.boardTokenCategory.UNAVAILABLE);
-            }
-        }
-        //LOW LEFT
-        for (int i = 7; i < MAX_Row; i++) {
-            for (int j = 0; j < 3; j++) {
-                Board[i][j].setCategory(BoardToken.boardTokenCategory.UNAVAILABLE);
-            }
-        }
-        //LOW RIGHT
-        for (int i = 7; i < MAX_Row; i++) {
-            for (int j = 6; j < MAX_Column; j++) {
-                Board[i][j].setCategory(BoardToken.boardTokenCategory.UNAVAILABLE);
-            }
-        }
+        setUTopRight();
+        //DOWN LEFT
+        setUDownLeft();
+        //DOWN RIGHT
+        setUDownRight();
 
         Board[2][0].setCategory(BoardToken.boardTokenCategory.UNAVAILABLE);
         Board[2][1].setCategory(BoardToken.boardTokenCategory.UNAVAILABLE);
@@ -87,7 +73,35 @@ public class LivingRoom {
         Board[5][8].setCategory(BoardToken.boardTokenCategory.UNAVAILABLE);
         Board[8][3].setCategory(BoardToken.boardTokenCategory.UNAVAILABLE);
     }
+    private void setUTopLeft(){
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < 3; j++) {
+                Board[i][j].setCategory(BoardToken.boardTokenCategory.UNAVAILABLE);
+            }
+        }
+    }
 
+    private void setUDownLeft(){
+        for (int i = 7; i < MAX_Row; i++) {
+            for (int j = 0; j < 3; j++) {
+                Board[i][j].setCategory(BoardToken.boardTokenCategory.UNAVAILABLE);
+            }
+        }
+    }
+    private void setUTopRight(){
+        for (int i = 0; i < 2; i++) {
+            for (int j = 6; j < MAX_Column; j++) {
+                Board[i][j].setCategory(BoardToken.boardTokenCategory.UNAVAILABLE);
+            }
+        }
+    }
+    private void setUDownRight(){
+        for (int i = 7; i < MAX_Row; i++) {
+            for (int j = 6; j < MAX_Column; j++) {
+                Board[i][j].setCategory(BoardToken.boardTokenCategory.UNAVAILABLE);
+            }
+        }
+    }
     private void SetThree() {
         Board[2][2].setCategory(BoardToken.boardTokenCategory.THREE);
         Board[2][6].setCategory(BoardToken.boardTokenCategory.THREE);

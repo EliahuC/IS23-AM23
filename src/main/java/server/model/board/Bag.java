@@ -34,62 +34,35 @@ public Bag() {
 
     }
 
-    public int getNumCats() {
-        return NumCats;
-    }
 
-    public int getNumBooks() {
-        return NumBooks;
-    }
-
-    public int getNumPlants() {
-        return NumPlants;
-    }
-
-    public int getNumGames() {
-        return NumGames;
-    }
-
-    public int getNumFrames() {
-        return NumFrames;
-    }
-
-    public int getNumTrophies() {
-        return NumTrophies;
-    }
     public boolean NoMoreTiles(){
         return NumFrames + NumBooks + NumCats + NumPlants + NumTrophies + NumGames == 0;
     }
-    public ItemTile extract() {
-        if(NoMoreTiles()) {
-            System.out.println("NO MORE TILES");
-        return null;
-        }
-        else {
-
+        public ItemTile extract() {
+            if(NoMoreTiles()) return null;
             int randIndex = new Random().nextInt(Tiles.toArray().length -1);
-            ItemTile Tile = Tiles.remove(randIndex);
+                ItemTile Tile = Tiles.remove(randIndex);
 
-                    switch (Tile.getCategory()) {
-                        case CATS -> NumCats--;
+                        switch (Tile.getCategory()) {
+                            case CATS -> NumCats--;
 
-                        case FRAMES -> NumFrames--;
+                            case FRAMES -> NumFrames--;
 
-                        case BOOKS -> NumBooks--;
+                            case BOOKS -> NumBooks--;
 
-                        case GAMES -> NumGames--;
+                            case GAMES -> NumGames--;
 
-                        case PLANTS -> NumPlants--;
+                            case PLANTS -> NumPlants--;
 
-                        case TROPHIES -> NumTrophies--;
+                            case TROPHIES -> NumTrophies--;
 
-                    }
+                        }
 
 
-            return Tile;
-        }
+                return Tile;
+            }
     }
-}
+
 
 
 /*

@@ -5,12 +5,12 @@ import server.model.player.BookShelf;
 import server.model.*;
 
 public class Controller {
-     private final Game G;
+     private  Game G;
      private final Launcher launcher;
 
      public Controller(){
          this.launcher=new Launcher();
-         G= new Game(launcher);
+         this.G= new Game(launcher);
      }
 
     public void extractAndRestore(){

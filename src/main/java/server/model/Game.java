@@ -18,9 +18,9 @@ public class Game {
     private boolean startedGame=false;
 
     public Game(Launcher L){
-        Players=new ArrayList<>();
-        LR=new LivingRoom(L);
-        GC=new GameChecker(L);
+        this.Players=new ArrayList<>();
+        this.LR=new LivingRoom(L);
+        this.GC=new GameChecker(L);
         this.currPlaying=1;
     }
 
