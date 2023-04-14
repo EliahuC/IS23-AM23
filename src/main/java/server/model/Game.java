@@ -37,7 +37,7 @@ public class Game {
     public synchronized void playMove(){
         //IPOTETICO
         //JSON.GetString();
-          placeTiles();
+          //placeTiles();
           checkCGC();
     }
     public synchronized void endGame(){
@@ -49,7 +49,7 @@ public class Game {
     }
 
 
-    private void placeTiles(){
+    /*private void placeTiles(){
         String s="MI SERVE IL JSON";
         ArrayList<ItemTile> temporaryStorage ;
         temporaryStorage=LR.getTiles(s);
@@ -69,7 +69,7 @@ public class Game {
             }
         }
         increseCurrPlaying();
-    }
+    }*/
 
     private void checkPGC(){
         for(int i=0;i<3;i++ ){
