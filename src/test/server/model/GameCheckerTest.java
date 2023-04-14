@@ -228,20 +228,102 @@ public class GameCheckerTest extends TestCase {
         LivingRoom board3 = new LivingRoom(l3);
 
         board4.Start(4);
-        //assertTrue(gc4.isLegalAction(board4.getTile(8,4)));
+        assertTrue(gc4.isLegalAction(board4.getTile(8,4)));
         assertFalse(gc4.isLegalAction(board4.getTile(4,4)));
-        //assertFalse(gc4.isLegalAction(board4.getTile(0,8))); CONTROLLARE GLI ANGOLI
+        assertFalse(gc4.isLegalAction(board4.getTile(0,8)));
+        assertFalse(gc4.isLegalAction(board4.getTile(0,0)));
+        assertFalse(gc4.isLegalAction(board4.getTile(8,8)));
+        assertFalse(gc4.isLegalAction(board4.getTile(8,0)));
+        assertTrue(gc4.isLegalAction(board4.getTile(0,3)));
+        assertTrue(gc4.isLegalAction(board4.getTile(0,4)));
+        assertTrue(gc4.isLegalAction(board4.getTile(4,0)));
+        assertTrue(gc4.isLegalAction(board4.getTile(5,0)));
+        assertTrue(gc4.isLegalAction(board4.getTile(8,5)));
+        assertTrue(gc4.isLegalAction(board4.getTile(3,8)));
+        assertTrue(gc4.isLegalAction(board4.getTile(4,8)));
+        assertTrue(gc4.isLegalAction(board4.getTile(7,3)));
+        assertTrue(gc4.isLegalAction(board4.getTile(6,2)));
+        assertFalse(gc4.isLegalAction(board4.getTile(6,3)));
+        assertFalse(gc4.isLegalAction(board4.getTile(7,4)));
+        assertFalse(gc4.isLegalAction(board4.getTile(5,3)));
+        assertFalse(gc4.isLegalAction(board4.getTile(7,5)));
 
         board3.Start(3);
-        //RIVEDERE MODELLO PER I CASI LIMITE PER DETERMINARE L'ESTERNITA'
+        assertFalse(gc3.isLegalAction(board3.getTile(8,4)));
+        assertFalse(gc3.isLegalAction(board3.getTile(4,4)));
+        assertFalse(gc3.isLegalAction(board3.getTile(0,8)));
+        assertFalse(gc3.isLegalAction(board3.getTile(0,0)));
+        assertFalse(gc3.isLegalAction(board3.getTile(8,8)));
+        assertFalse(gc3.isLegalAction(board3.getTile(8,0)));
+        assertTrue(gc3.isLegalAction(board3.getTile(0,3)));
+        assertFalse(gc3.isLegalAction(board3.getTile(0,4)));
+        assertFalse(gc3.isLegalAction(board3.getTile(4,0)));
+        assertTrue(gc3.isLegalAction(board3.getTile(5,0)));
+        assertTrue(gc3.isLegalAction(board3.getTile(8,5)));
+        assertTrue(gc3.isLegalAction(board3.getTile(3,8)));
+        assertFalse(gc3.isLegalAction(board3.getTile(4,8)));
+        assertFalse(gc3.isLegalAction(board3.getTile(7,3)));
+        assertTrue(gc3.isLegalAction(board3.getTile(6,2)));
+        assertFalse(gc3.isLegalAction(board3.getTile(6,3)));
+        assertTrue(gc3.isLegalAction(board3.getTile(7,4)));
+        assertFalse(gc3.isLegalAction(board3.getTile(5,3)));
+        assertFalse(gc3.isLegalAction(board3.getTile(7,5)));
+
+        board2.Start(2);
+        assertFalse(gc2.isLegalAction(board2.getTile(8,4)));
+        assertFalse(gc2.isLegalAction(board2.getTile(4,4)));
+        assertFalse(gc2.isLegalAction(board2.getTile(0,8)));
+        assertFalse(gc2.isLegalAction(board2.getTile(0,0)));
+        assertFalse(gc2.isLegalAction(board2.getTile(8,8)));
+        assertFalse(gc2.isLegalAction(board2.getTile(8,0)));
+        assertFalse(gc2.isLegalAction(board2.getTile(0,3)));
+        assertFalse(gc2.isLegalAction(board2.getTile(0,4)));
+        assertFalse(gc2.isLegalAction(board2.getTile(4,0)));
+        assertFalse(gc2.isLegalAction(board2.getTile(5,0)));
+        assertFalse(gc2.isLegalAction(board2.getTile(8,5)));
+        assertFalse(gc2.isLegalAction(board2.getTile(3,8)));
+        assertFalse(gc2.isLegalAction(board2.getTile(4,8)));
+        assertFalse(gc2.isLegalAction(board2.getTile(7,3)));
+        assertFalse(gc2.isLegalAction(board2.getTile(6,2)));
+        assertTrue(gc2.isLegalAction(board2.getTile(6,3)));
+        assertTrue(gc2.isLegalAction(board2.getTile(7,4)));
+        assertFalse(gc2.isLegalAction(board2.getTile(5,3)));
+        assertTrue(gc2.isLegalAction(board2.getTile(7,5)));
     }
 
     public void testTestIsLegalAction() {
+        Launcher l4 = new Launcher();
+        l4.setNumPlayers(4);
+        Launcher l2 = new Launcher();
+        l2.setNumPlayers(2);
+        Launcher l3 = new Launcher();
+        l3.setNumPlayers(3);
+        GameChecker gc4 = new GameChecker(l4);
+        GameChecker gc2 = new GameChecker(l2);
+        GameChecker gc3 = new GameChecker(l3);
+        Bag bag = new Bag();
+        LivingRoom board4 = new LivingRoom(l4);
+        LivingRoom board2 = new LivingRoom(l2);
+        LivingRoom board3 = new LivingRoom(l3);
+
+        board4.Start(4);
     }
 
     public void testTestIsLegalAction1() {
-    }
+        Launcher l4 = new Launcher();
+        l4.setNumPlayers(4);
+        Launcher l2 = new Launcher();
+        l2.setNumPlayers(2);
+        Launcher l3 = new Launcher();
+        l3.setNumPlayers(3);
+        GameChecker gc4 = new GameChecker(l4);
+        GameChecker gc2 = new GameChecker(l2);
+        GameChecker gc3 = new GameChecker(l3);
+        Bag bag = new Bag();
+        LivingRoom board4 = new LivingRoom(l4);
+        LivingRoom board2 = new LivingRoom(l2);
+        LivingRoom board3 = new LivingRoom(l3);
 
-    public void testIsBookShelfFull() {
+        board4.Start(4);
     }
 }

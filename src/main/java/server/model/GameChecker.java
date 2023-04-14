@@ -164,10 +164,15 @@ public class GameChecker {
         return false;
     }
 
-    private boolean isExternal (BoardToken t){
-        Set<BoardToken> adjacentTiles = addAdjacentTiles(t);
-        if(checkFreeSides(adjacentTiles))
-            return true;
+    private boolean isExternal (BoardToken t) {
+        if(boardBoxIsValid(t)){
+            int threshold = 2;
+            Set<BoardToken> adjacentTiles = addAdjacentTiles(t);
+            if (isInBorderlinePosition(t))
+                threshold = 1;
+            if (checkFreeSides(adjacentTiles, threshold))
+                return true;
+        }
         return false;
     }
 
@@ -305,6 +310,10 @@ public class GameChecker {
         return t.getRow() != 0 && t.getRow() != boardWidth-1 && t.getCol() != 0 && t.getCol() != boardWidth-1;
     }
 
+    private boolean isInBorderlinePosition(BoardToken t){
+        return boardTileLeft(t) || boardTileRight(t) || boardTileLower(t) || boardTileUpper(t);
+    }
+
     private HashSet<BoardToken> addAdjacentTiles(BoardToken t){
         HashSet<BoardToken> adjacentTiles = new HashSet<>();
         if(boardTileUpper(t)){
@@ -336,8 +345,8 @@ public class GameChecker {
     return adjacentTiles;
     }
 
-    private boolean checkFreeSides(Set<BoardToken> borderTiles){
-        return borderTiles.stream().filter(bt -> bt.getTile() == null ).count() >= 2;
+    private boolean checkFreeSides(Set<BoardToken> borderTiles, int threshold){
+        return borderTiles.stream().filter(bt -> bt.getTile() == null ).count() >= threshold;
     }
 
     private boolean checkFreeSides(Set<BoardToken> borderTiles, BoardToken ignoredTile){

@@ -47,7 +47,7 @@ public class LivingRoom {
         //Each board box gets board reference.
         SetBoard();
 
-        Start(L.getNumPlayers());
+        //Start(L.getNumPlayers());
     }
 
     private void SetUnavailable() {
