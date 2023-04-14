@@ -23,6 +23,7 @@ public abstract class CommonGoalCard {
                     case 1 -> points = 8;
                     case 2 -> points = 4;
                 }
+                break;
             }
             case 3: {
                 switch (numCompleted) {
@@ -30,6 +31,7 @@ public abstract class CommonGoalCard {
                     case 2 -> points = 6;
                     case 3 -> points = 4;
                 }
+                break;
             }
             case 4: {
                 switch (numCompleted) {
@@ -38,9 +40,8 @@ public abstract class CommonGoalCard {
                     case 3 -> points = 4;
                     case 4 -> points = 2;
                 }
+                break;
             }
-
-
         }
         return points;
     }
