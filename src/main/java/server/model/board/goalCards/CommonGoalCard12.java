@@ -20,24 +20,33 @@ public class CommonGoalCard12 extends CommonGoalCard implements CheckCommonGoalC
     private boolean checkRtoL(BookShelf bs){
         int lastColumn=0;
         for(int i=0; i<BookShelf.getMAX_Column();i++){
-          if(countColumn(bs,i)!=lastColumn+1) return false;
-          else lastColumn=countColumn(bs,i);
+          if(countColumnRtoL(bs,i)!=lastColumn+1) return false;
+          else lastColumn=countColumnRtoL(bs,i);
         }
         return true;
     }
     private boolean checkLtoR(BookShelf bs){
         int lastColumn=0;
-        for(int i=0; i<BookShelf.getMAX_Column(); i++){
-            if(countColumn(bs,i)!=lastColumn-1) return false;
-            else lastColumn=countColumn(bs,i);
+        for(int i=BookShelf.getMAX_Column()-1; i>=0; i--){
+            if(countColumnLtoR(bs,i)!=lastColumn+1) return false;
+            else lastColumn=countColumnLtoR(bs,i);
+
         }
         return true;
     }
 
 
-    private int countColumn(BookShelf bs,int i){
+    private int countColumnRtoL(BookShelf bs,int i){
         int counter =0;
-        for (int j=0;j<BookShelf.getMAX_Row()&&bs.getTile(5-j,i)!=null;j++){
+        for (int j=0;j<BookShelf.getMAX_Row()&&bs.getTile(BookShelf.getMAX_Row()-1-j,i)!=null;j++){
+            counter++;
+        }
+        return counter;
+    }
+
+    private int countColumnLtoR(BookShelf bs, int i){
+        int counter =0;
+        for (int j=0;j<BookShelf.getMAX_Row()&&bs.getTile(BookShelf.getMAX_Row()-1-j,i)!=null;j++){
             counter++;
         }
         return counter;
