@@ -4,9 +4,7 @@ import server.model.GameChecker;
 import server.model.board.goalCards.*;
 import server.model.player.BookShelf;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 public class LivingRoom {
@@ -197,9 +195,16 @@ public class LivingRoom {
         return bag;
     }
 
-    public ArrayList<ItemTile> getTiles(String x){
-        return null;
-
+    public ArrayList<ItemTile> getTiles(ArrayList<Integer> requestedTiles){
+      ArrayList<ItemTile> tiles = new ArrayList<>();
+      int i=0;
+      while (i<requestedTiles.size()){
+          if(requestedTiles.get(i)==null) return tiles;
+          ItemTile tile= getBoardTile(requestedTiles.get(i),requestedTiles.get(i+1)).getTile();
+          tiles.add(tile);
+          i=i+2;
+       }
+      return tiles;
     }
     public BoardToken[][] getBoard() {
         return Board;
@@ -233,7 +238,7 @@ public class LivingRoom {
         }
     }
 
-    public BoardToken getTile(int i, int j){
+    public BoardToken getBoardTile(int i, int j){
         return Board[i][j];
     }
 }

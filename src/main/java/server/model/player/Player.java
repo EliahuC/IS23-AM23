@@ -3,6 +3,7 @@ package server.model.player;
 
 
 import server.model.board.ItemTile;
+import server.model.board.ItemTileCategory;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -50,7 +51,21 @@ public class Player {
         return firstPlayerSeat;
     }
 
-    public void insertToken(ArrayList<ItemTile> selectedTokens, int numTokens, int column){}
+    public void insertToken(ArrayList<ItemTile> selectedTokens, ArrayList<ItemTileCategory> order , int column){
+      for(int i=0;i<order.size();i++){
+          ItemTile tile=searchTile(selectedTokens,order.get(i));
+          playerBookshelf.setTile(column,tile);
+      }
+    }
+
+    private ItemTile searchTile(ArrayList<ItemTile> selectedTokens, ItemTileCategory category) {
+        ItemTile tile;
+        if(selectedTokens.get(0).getCategory()==category) tile=selectedTokens.remove(0);
+        else if (selectedTokens.get(1).getCategory()==category) tile=selectedTokens.remove(1);
+        else tile=selectedTokens.remove(3);
+        return tile;
+    }
+
 
     private void comparePersonalGoalCardwithBookshelf (){
 

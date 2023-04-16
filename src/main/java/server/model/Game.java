@@ -34,10 +34,8 @@ public class Game {
         LR.Start(Players.size());
         this.startedGame=true;
     }
-    public synchronized void playMove(){
-        //IPOTETICO
-        //JSON.GetString();
-          //placeTiles();
+    public synchronized void playMove(ArrayList<Integer> commands, ArrayList<ItemTileCategory> order, Integer column){
+          placeTiles(commands,order,column);
           checkCGC();
     }
     public synchronized void endGame(){
@@ -49,27 +47,30 @@ public class Game {
     }
 
 
-    /*private void placeTiles(){
-        String s="MI SERVE IL JSON";
+    private void placeTiles(ArrayList<Integer> commands, ArrayList<ItemTileCategory> order, Integer column){
+
         ArrayList<ItemTile> temporaryStorage ;
-        temporaryStorage=LR.getTiles(s);
+        temporaryStorage=LR.getTiles(commands);
         switch (temporaryStorage.size()) {
             case 1: {
-                if(GC.isLegalAction(LR.getBoard(s)))
-                    Players.get(currPlaying-1).insertToken(temporaryStorage,temporaryStorage.size(),column);
+                if(GC.isLegalAction(LR.getBoardTile(commands.get(0),commands.get(1))))
+                    Players.get(currPlaying-1).insertToken(temporaryStorage,order,column);
 
             }
             case 2:  {
-                if(GC.isLegalAction(LR.getBoard(s), LR.getBoard(s)))
-                    Players.get(currPlaying-1).insertToken(temporaryStorage,temporaryStorage.size(),column);
+                if(GC.isLegalAction(LR.getBoardTile(commands.get(0),commands.get(1)),
+                                    LR.getBoardTile(commands.get(2),commands.get(3))))
+                    Players.get(currPlaying-1).insertToken(temporaryStorage,order,column);
             }
             case 3:{
-                if(GC.isLegalAction(LR.getBoard(s),LR.getBoard(s),LR.getBoard(s)))
-                    Players.get(currPlaying-1).insertToken(temporaryStorage,temporaryStorage.size(),column);
+                if(GC.isLegalAction(LR.getBoardTile(commands.get(0),commands.get(1)),
+                                    LR.getBoardTile(commands.get(2),commands.get(3)),
+                                    LR.getBoardTile(commands.get(4),commands.get(5))))
+                    Players.get(currPlaying-1).insertToken(temporaryStorage,order,column);
             }
         }
         increseCurrPlaying();
-    }*/
+    }
 
     private void checkPGC(){
         for(int i=0;i<3;i++ ){
