@@ -1,10 +1,8 @@
 package server.model.board;
 
-import junit.framework.Test;
+
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
-import server.model.board.Bag;
-import server.model.board.ItemTile;
+
 
 public class BagTest
         extends TestCase
