@@ -24,12 +24,12 @@ public class Game {
         this.currPlaying=1;
     }
 
-    public synchronized void addPlayers(Player p){
-      if(Players.size()<5&& (!startedGame))
-        Players.add(p);
-      else System.out.println("Game already full");
+    public synchronized void addPlayers(String s) {
+        if (Players.size() < 4 && (!startedGame)) {
+            Player p = new Player(s);
+            Players.add(p);
+        }
     }
-
     public synchronized void startGame(){
         LR.Start(Players.size());
         this.startedGame=true;
@@ -37,39 +37,53 @@ public class Game {
     public synchronized void playMove(ArrayList<Integer> commands, ArrayList<ItemTileCategory> order, Integer column){
           placeTiles(commands,order,column);
           checkCGC();
+          if(GC.isRestorable(LR.getBoard())) LR.restore();
     }
-    public synchronized void endGame(){
-        for (Player p : Players) {
+    public synchronized Optional<Player> endGame(){
+        Optional<Player> P = Optional.empty();
+         for (Player p : Players) {
             checkPGC();
-            Optional<Player> P=whoWins();
-            System.out.println("AND THE WINNER IS...... PLAYER :"+ P.get().getNickName());
+             P=whoWins();
+            //System.out.println("AND THE WINNER IS...... PLAYER :"+ P.get().getNickName());
         }
+        return P;
     }
 
 
     private void placeTiles(ArrayList<Integer> commands, ArrayList<ItemTileCategory> order, Integer column){
+        ArrayList<ItemTile> temporaryStorage ;
+        temporaryStorage=LR.getTiles(commands);
+        if(checkLegalMove(commands)){;
+            Players.get(currPlaying-1).insertToken(temporaryStorage,order,column);
+            increseCurrPlaying();
+        }
+    }
 
+    private boolean checkLegalMove(ArrayList<Integer>commands){
         ArrayList<ItemTile> temporaryStorage ;
         temporaryStorage=LR.getTiles(commands);
         switch (temporaryStorage.size()) {
             case 1: {
                 if(GC.isLegalAction(LR.getBoardTile(commands.get(0),commands.get(1))))
-                    Players.get(currPlaying-1).insertToken(temporaryStorage,order,column);
+                    return true;
+
 
             }
             case 2:  {
                 if(GC.isLegalAction(LR.getBoardTile(commands.get(0),commands.get(1)),
-                                    LR.getBoardTile(commands.get(2),commands.get(3))))
-                    Players.get(currPlaying-1).insertToken(temporaryStorage,order,column);
+                        LR.getBoardTile(commands.get(2),commands.get(3))))
+                    return true;
+
             }
             case 3:{
                 if(GC.isLegalAction(LR.getBoardTile(commands.get(0),commands.get(1)),
-                                    LR.getBoardTile(commands.get(2),commands.get(3)),
-                                    LR.getBoardTile(commands.get(4),commands.get(5))))
-                    Players.get(currPlaying-1).insertToken(temporaryStorage,order,column);
+                        LR.getBoardTile(commands.get(2),commands.get(3)),
+                        LR.getBoardTile(commands.get(4),commands.get(5))))
+                    return true;
+
             }
         }
-        increseCurrPlaying();
+        return false;
     }
 
     private void checkPGC(){
@@ -81,7 +95,7 @@ public class Game {
     private Optional<Player> whoWins(){
         Optional<Player> P=   Players.stream().reduce((P1,P2) ->P1.getScore()>P2.getScore()? P1 : P2);
         if(P.isEmpty()) {
-            System.out.println("2 Players with the same score");
+            //System.out.println("2 Players with the same score");
              P= Optional.ofNullable(checkManually());
 
         }
@@ -94,7 +108,7 @@ public class Game {
         scores.add(Players.get(1).getScore());
         scores.add(Players.get(2).getScore());
         scores.add(Players.get(3).getScore());
-        scores.stream().sorted().collect(Collectors.toList());
+        scores= scores.stream().sorted().collect(Collectors.toList());
         if(Players.get(3).getScore()==scores.get(0)) return Players.get(3);
         else if (Players.get(2).getScore()==scores.get(0)) return Players.get(2);
         else if (Players.get(1).getScore()==scores.get(0)) return Players.get(1);
@@ -115,3 +129,6 @@ public class Game {
         return LR;
     }
 }
+
+
+
