@@ -53,16 +53,15 @@ public class Game {
     private void placeTiles(ArrayList<Integer> commands, ArrayList<ItemTileCategory> order, Integer column){
         ArrayList<ItemTile> temporaryStorage ;
         temporaryStorage=LR.getTiles(commands);
-        if(checkLegalMove(commands)){;
-            Players.get(currPlaying-1).insertToken(temporaryStorage,order,column);
-            increseCurrPlaying();
-        }
+        Players.get(currPlaying-1).insertToken(temporaryStorage,order,column);
+        increseCurrPlaying();
+
     }
 
-    private boolean checkLegalMove(ArrayList<Integer>commands){
-        ArrayList<ItemTile> temporaryStorage ;
-        temporaryStorage=LR.getTiles(commands);
-        switch (temporaryStorage.size()) {
+    public boolean checkLegalMove(ArrayList<Integer> commands, int size){
+
+        if(!checkNumber(size))return false;
+        switch (size) {
             case 1: {
                 if(GC.isLegalAction(LR.getBoardTile(commands.get(0),commands.get(1))))
                     return true;
@@ -84,6 +83,14 @@ public class Game {
             }
         }
         return false;
+    }
+
+    public boolean checkLegalColumn(int column,int numOfTiles){
+        return GC.checkColumn(Players.get(currPlaying-1).getPlayerBookshelf(),column,numOfTiles);
+    }
+
+    private boolean checkNumber(int i){
+        return GC.getMaxPickableTiles(Players.get(currPlaying - 1).getPlayerBookshelf()) >= i;
     }
 
     private void checkPGC(){
@@ -125,9 +132,7 @@ public class Game {
         else currPlaying++;
     }
 
-    public LivingRoom getLR() {
-        return LR;
-    }
+
 }
 
 
