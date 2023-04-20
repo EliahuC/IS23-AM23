@@ -4,7 +4,7 @@ import server.model.board.ItemTileCategory;
 
 import java.util.ArrayList;
 
-public class Move3 extends Move{
+public class Move_SelectOrder extends Move{
 
     //CLASSE DA DECIDERE, FORSE SI PUO FARE A MENO
 

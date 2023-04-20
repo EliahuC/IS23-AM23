@@ -20,6 +20,7 @@ public class Message {
         RETURN_MESSAGE,
         CREATE_LOBBY,
         START_GAME,
+        ENTER_LOBBY,
         WARNING;
 
     }

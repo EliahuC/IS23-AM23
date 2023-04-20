@@ -18,6 +18,7 @@ public class GameController {
      private final ArrayList<Integer> coordinates=new ArrayList<>();
      private Integer column;
      private final ArrayList<ItemTileCategory> order =new ArrayList<>();
+     private final ArrayList<Player> lobby=new ArrayList<>();
 
      public GameController(){
          this.launcher=new Launcher();
@@ -26,7 +27,7 @@ public class GameController {
 
      }
 
-     public synchronized void startGame(){
+     private synchronized void startGame(){
          G.startGame();
      }
 
@@ -45,6 +46,17 @@ public class GameController {
                  if(!G.checkLegalColumn(column,coordinates.size()/2))
                      sendErrorMessage();
                  break;
+             }
+             case START_GAME:{
+                 startGame();
+                 break;
+             }
+             case CREATE_LOBBY:{
+                 lobby.clear();
+                 lobby.add(0,new Player(m.getNickname()));
+             }
+             case ENTER_LOBBY:{
+                 lobby.add(new Player(m.getNickname()));
              }
              //case ORDER ->order.addAll(m.getMessageMove().getMove());
          }
@@ -66,11 +78,11 @@ public class GameController {
      }
 
 
-    public synchronized Message endGame() {
+    private synchronized Message endGame() {
         Optional<Player> P = G.endGame();
         return P.map(player -> new Message(null, player.getNickName())).orElse(null);
     }
-    public synchronized void addPlayer(String nickname){
+    private synchronized void addPlayer(String nickname){
          G.addPlayers(nickname);
     }
 
@@ -88,7 +100,7 @@ public class GameController {
          removeNullO(order);
     }
 
-    private void setCoordinates(Move1 m1){
+    private void setCoordinates(Move_SelectTiles m1){
         coordinates.clear();
         coordinates.add(m.getXmossa1());
         coordinates.add(m.getYmossa1());

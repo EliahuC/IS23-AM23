@@ -2,7 +2,7 @@ package server;
 
 import java.util.ArrayList;
 
-public class Move2 extends Move{
+public class Move_SelectColumn extends Move{
     private Integer YBookshelf=null;
 
     public void setYBookshelf(Integer YBookshelf) {

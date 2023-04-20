@@ -2,7 +2,7 @@ package server;
 
 import java.util.ArrayList;
 
-public class Move1 extends Move{
+public class Move_SelectTiles extends Move{
 
     private final ArrayList<Integer> coordinates=new ArrayList<>();
 
