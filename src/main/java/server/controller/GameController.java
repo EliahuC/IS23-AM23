@@ -26,36 +26,51 @@ public class GameController {
 
      }
 
-     public void startGame(){
+     public synchronized void startGame(){
          G.startGame();
      }
 
 
-     public void readMessage(String s){
+     public synchronized void readMessage(String s){
          m=gson.fromJson(s,Message.class);
          switch (m.getCategory()){
              case COORDINATES:{
                  coordinates.addAll(m.getMessageMove().getMove());
-                 G.checkLegalMove(coordinates,coordinates.size()/2);
+                 if(!G.checkLegalMove(coordinates,coordinates.size()/2))
+                     sendErrorMessage();
+                 break;
              }
              case COLUMN :{
                  column=m.getMessageMove().getMove().remove(0);
-                 G.checkLegalColumn(column,coordinates.size()/2);
+                 if(!G.checkLegalColumn(column,coordinates.size()/2))
+                     sendErrorMessage();
+                 break;
              }
              //case ORDER ->order.addAll(m.getMessageMove().getMove());
          }
      }
-     public void playMove(){
 
+    private void sendErrorMessage() {
+         Message error= new Message(null,"GameMaster");
+         error.setCategory(Message.MessageCategory.WARNING);
+         error.addReturnMessage("The move you made isn't a valid move");
+         //TO BE ADDED SOON
+        //sendingMethod.send(error);
+    }
+
+    public synchronized void playMove(){
          G.playMove(coordinates,order,column);
+         coordinates.clear();
+         order.clear();
+         column=null;
      }
 
 
-    public Message endGame() {
+    public synchronized Message endGame() {
         Optional<Player> P = G.endGame();
         return P.map(player -> new Message(null, player.getNickName())).orElse(null);
     }
-    public void addPlayer(String nickname){
+    public synchronized void addPlayer(String nickname){
          G.addPlayers(nickname);
     }
 
