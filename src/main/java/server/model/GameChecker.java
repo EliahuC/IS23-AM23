@@ -356,4 +356,12 @@ public class GameChecker {
     private boolean checkFreeSides(Set<BoardToken> borderTiles, BoardToken ignoredTile1, BoardToken ignoredTile2){
         return borderTiles.stream().filter(bt -> (bt.getTile() == null || bt.getTile() == ignoredTile1.getTile() || bt.getTile() == ignoredTile2.getTile())).count() >= 2;
     }
+
+    public boolean checkColumn(BookShelf b,int column,int numberOfTiles){
+      int counter=0;
+       for(int row=0;row<BookShelf.getMAX_Row();row++){
+         if(b.getTile(row,column)!=null)counter++;
+       }
+       return counter >= numberOfTiles;
+    }
 }
