@@ -3,8 +3,9 @@ import java.util.Scanner;
 
 import it.polimi.ingsw.Message;
 import it.polimi.ingsw.PossibleMoves.Move;
+import it.polimi.ingsw.Printer;
 
-public class MoveSerializer implements Printer{
+public class MoveSerializer implements Printer {
     private  String myMove=null;
     private Move lastMove;
     public void getFromKeyboard(){

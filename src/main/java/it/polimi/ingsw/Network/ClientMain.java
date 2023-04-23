@@ -1,7 +1,15 @@
 package it.polimi.ingsw.Network;
 
-public class ClientMain {
-    public static void main(String[] args){
+import it.polimi.ingsw.Printer;
 
+public class ClientMain implements Printer {
+    public static void main(String[] args) {
+
+    }
+
+
+    @Override
+    public void showMessage(String s) {
+        System.out.println(s);
     }
 }
