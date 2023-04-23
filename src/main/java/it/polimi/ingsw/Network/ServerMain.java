@@ -1,6 +1,6 @@
 package it.polimi.ingsw.Network;
 import it.polimi.ingsw.Loggable;
-import it.polimi.ingsw.view.Printer;
+import it.polimi.ingsw.Printer;
 
 
 import java.io.IOException;
@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 public class ServerMain implements Runnable, Printer, Loggable {
     private ServerSocket serverSocket;
-    private ArrayList<String> loggedUser=new ArrayList<>();
+    private final ArrayList<String> loggedUsers =new ArrayList<>();
 
     private int port;
 
@@ -54,14 +54,14 @@ public class ServerMain implements Runnable, Printer, Loggable {
 
     @Override
     public boolean login(String nick) throws RemoteException {
-        if(loggedUser.contains(nick))return false;
-        loggedUser.add(nick);
+        if(loggedUsers.contains(nick))return false;
+        loggedUsers.add(nick);
         return true;
     }
 
     @Override
     public void logout(String nick) throws RemoteException {
-        loggedUser.remove(nick);
+        loggedUsers.remove(nick);
     }
 
     public static void main(String[] args) {
