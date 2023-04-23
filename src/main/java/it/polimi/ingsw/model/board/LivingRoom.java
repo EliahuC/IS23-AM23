@@ -1,7 +1,7 @@
 package it.polimi.ingsw.model.board;
 import it.polimi.ingsw.model.board.goalCards.*;
 import it.polimi.ingsw.model.player.BookShelf;
-import model.board.goalCards.*;
+import it.polimi.ingsw.model.board.goalCards.*;
 import it.polimi.ingsw.Launcher;
 import it.polimi.ingsw.model.GameChecker;
 
@@ -241,5 +241,9 @@ public class LivingRoom {
 
     public BoardToken getBoardTile(int i, int j){
         return Board[i][j];
+    }
+
+    public GameChecker getG() {
+        return G;
     }
 }
