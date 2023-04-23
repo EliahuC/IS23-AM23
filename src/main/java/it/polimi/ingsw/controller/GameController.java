@@ -12,6 +12,7 @@ import java.util.Optional;
 
 public class GameController {
      private final Game G;
+     private static final int MAX_PLAYERS=4;
      private Message m;
      private final Launcher launcher;
      private final Gson gson = new Gson();
@@ -52,15 +53,25 @@ public class GameController {
                  break;
              }
              case CREATE_LOBBY:{
+                 if(!lobbyCheck()||(lobby.contains(m.getNickname()))) break;
                  lobby.clear();
                  lobby.add(0,new Player(m.getNickname()));
              }
              case ENTER_LOBBY:{
+                 if(!checkLobbySpace())break;
                  lobby.add(new Player(m.getNickname()));
              }
              //case ORDER ->order.addAll(m.getMessageMove().getMove());
          }
      }
+
+    private boolean checkLobbySpace() {
+         return lobby.size() <= MAX_PLAYERS;
+    }
+
+    private boolean lobbyCheck() {
+        return lobby.size() == 0;
+    }
 
     private void sendErrorMessage() {
          Message error= new Message(null,"GameMaster");
@@ -78,49 +89,11 @@ public class GameController {
      }
 
 
-    private synchronized Message endGame() {
-        Optional<Player> P = G.endGame();
-        return P.map(player -> new Message(null, player.getNickName())).orElse(null);
+    public synchronized Optional<Player> endGame() {
+        return G.endGame();
     }
     private synchronized void addPlayer(String nickname){
          G.addPlayers(nickname);
     }
 
- /*public void readMove(String s){
-         m=gson.fromJson(s,Move.class);
-         setCoordinates(m);
-         setOrder(m);
-     }
-
-    private void setOrder(Move m) {
-         order.clear();
-         order.add(m.getColore1());
-         order.add(m.getColore2());
-         order.add(m.getColore3());
-         removeNullO(order);
-    }
-
-    private void setCoordinates(Move_SelectTiles m1){
-        coordinates.clear();
-        coordinates.add(m.getXmossa1());
-        coordinates.add(m.getYmossa1());
-        coordinates.add(m.getXmossa2());
-        coordinates.add(m.getYmossa2());
-        coordinates.add(m.getXmossa3());
-        coordinates.add(m.getYmossa3());
-        // ??coordinates.removeAll(null);??
-        removeNullI(coordinates);
-    }
-
-    public void removeNullI(ArrayList<Integer> coordinates) {
-         for(int i=0;i<coordinates.size();i++){
-             if(coordinates.get(i)==null)coordinates.remove(i);
-         }
-    }
-
-    private void removeNullO(ArrayList<ItemTileCategory> coordinates) {
-        for(int i=0;i< order.size();i++){
-            if(order.get(i)==null)order.remove(i);
-        }
-    }*/
 }

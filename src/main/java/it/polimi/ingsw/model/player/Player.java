@@ -16,7 +16,7 @@ public class Player {
     private final BookShelf playerBookshelf;
     private final PersonalGoalCard PersonalGoalCard;
     private final boolean nowPlaying;
-    private final boolean lastRound;
+    private boolean lastRound;
 
 
     public Player(String nickName) {
@@ -55,7 +55,10 @@ public class Player {
           ItemTile tile=searchTile(selectedTokens,order.get(i));
           playerBookshelf.setTile(column,tile);
       }
+
     }
+
+
 
     private ItemTile searchTile(ArrayList<ItemTile> selectedTokens, ItemTileCategory category) {
         ItemTile tile;
@@ -84,6 +87,14 @@ public class Player {
 
     public boolean getNowPlaying(){
         return nowPlaying;
+    }
+
+    public boolean isLastRound() {
+        return lastRound;
+    }
+
+    public void setLastRound(boolean b){
+        this.lastRound=b;
     }
 }
 

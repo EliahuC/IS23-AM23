@@ -2,6 +2,7 @@ package it.polimi.ingsw.model;
 import it.polimi.ingsw.model.board.ItemTile;
 import it.polimi.ingsw.model.board.ItemTileCategory;
 import it.polimi.ingsw.model.board.LivingRoom;
+import it.polimi.ingsw.model.player.BookShelf;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.Launcher;
 
@@ -18,6 +19,8 @@ public class Game {
 
     private final GameChecker GC;
     private boolean startedGame=false;
+
+    private boolean finishedGame=false;
 
     public Game(Launcher L){
         this.Players=new ArrayList<>();
@@ -37,27 +40,35 @@ public class Game {
         this.startedGame=true;
     }
     public synchronized void playMove(ArrayList<Integer> commands, ArrayList<ItemTileCategory> order, Integer column){
-          placeTiles(commands,order,column);
-          checkCGC();
-          if(GC.isRestorable(LR.getBoard())) LR.restore();
+          if(!Players.get(currPlaying-1).isLastRound()) {
+              placeTiles(commands, order, column);
+              checkCGC();
+              if (GC.isRestorable(LR.getBoard())) LR.restore();
+          }
     }
     public synchronized Optional<Player> endGame(){
         Optional<Player> P = Optional.empty();
-         for (Player p : Players) {
-            checkPGC();
-             P=whoWins();
-            //System.out.println("AND THE WINNER IS...... PLAYER :"+ P.get().getNickName());
-        }
+         for (Player p : Players){
+             p.endGamePoints();
+         }
+         P=whoWins();
         return P;
     }
 
 
-    private void placeTiles(ArrayList<Integer> commands, ArrayList<ItemTileCategory> order, Integer column){
+    private synchronized void placeTiles(ArrayList<Integer> commands, ArrayList<ItemTileCategory> order, Integer column){
         ArrayList<ItemTile> temporaryStorage ;
         temporaryStorage=LR.getTiles(commands);
         Players.get(currPlaying-1).insertToken(temporaryStorage,order,column);
+        GC.isBookShelfFull(Players.get(currPlaying-1).getPlayerBookshelf());
+        if (GC.getLastRound())isLastTurn();
         increseCurrPlaying();
 
+    }
+
+    private synchronized void isLastTurn() {
+        for(Player p:Players)p.setLastRound(true);
+        if(currPlaying==4)finishedGame=true;
     }
 
     public boolean checkLegalMove(ArrayList<Integer> commands, int size){
@@ -95,13 +106,9 @@ public class Game {
         return GC.getMaxPickableTiles(Players.get(currPlaying - 1).getPlayerBookshelf()) >= i;
     }
 
-    private void checkPGC(){
-        for(int i=0;i<3;i++ ){
-           Players.get(i).endGamePoints();
-        }
-    }
 
-    private Optional<Player> whoWins(){
+
+    private synchronized Optional<Player> whoWins(){
         Optional<Player> P=   Players.stream().reduce((P1,P2) ->P1.getScore()>P2.getScore()? P1 : P2);
         if(P.isEmpty()) {
             //System.out.println("2 Players with the same score");
@@ -129,10 +136,11 @@ public class Game {
         Players.get(currPlaying-1).setScore(LR.checkCG(Players.get(currPlaying-1).getPlayerBookshelf()));
     }
 
-    private void increseCurrPlaying() {
-        if(currPlaying==4) currPlaying=1;
-        else currPlaying++;
+    private synchronized void increseCurrPlaying() {
+        if(currPlaying==4&&!finishedGame) currPlaying=1;
+        else if(currPlaying<4&&!finishedGame) currPlaying++;
     }
+
 
 
 }

@@ -23,6 +23,7 @@ public class Message {
         CREATE_LOBBY,
         START_GAME,
         ENTER_LOBBY,
+        END_GAME_MESSAGE,
         WARNING;
 
     }
