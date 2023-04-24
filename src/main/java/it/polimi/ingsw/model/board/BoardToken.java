@@ -59,4 +59,8 @@ public class BoardToken {
     public void setRow(int row){
         this.row = row;
     }
+    
+    public void freeTile(){
+        Tile=null;
+    }
 }
