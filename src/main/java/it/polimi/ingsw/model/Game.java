@@ -2,7 +2,6 @@ package it.polimi.ingsw.model;
 import it.polimi.ingsw.model.board.ItemTile;
 import it.polimi.ingsw.model.board.ItemTileCategory;
 import it.polimi.ingsw.model.board.LivingRoom;
-import it.polimi.ingsw.model.player.BookShelf;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.Launcher;
 
@@ -12,7 +11,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class Game {
-    private final LivingRoom LR;
+    private final LivingRoom livingRoom;
     private final List<Player> Players;
 
     private int currPlaying;
@@ -24,7 +23,7 @@ public class Game {
 
     public Game(Launcher L){
         this.Players=new ArrayList<>();
-        this.LR=new LivingRoom(L);
+        this.livingRoom =new LivingRoom(L);
         this.GC=new GameChecker(L);
         this.currPlaying=1;
     }
@@ -36,14 +35,14 @@ public class Game {
         }
     }
     public synchronized void startGame(){
-        LR.Start(Players.size());
+        livingRoom.Start(Players.size());
         this.startedGame=true;
     }
     public synchronized void playMove(ArrayList<Integer> commands, ArrayList<ItemTileCategory> order, Integer column){
           if(!Players.get(currPlaying-1).isLastRound()) {
               placeTiles(commands, order, column);
               checkCGC();
-              if (GC.isRestorable(LR.getBoard())) LR.restore();
+              if (GC.isRestorable(livingRoom.getBoard())) livingRoom.restore();
           }
     }
     public synchronized Optional<Player> endGame(){
@@ -58,7 +57,7 @@ public class Game {
 
     private synchronized void placeTiles(ArrayList<Integer> commands, ArrayList<ItemTileCategory> order, Integer column){
         ArrayList<ItemTile> temporaryStorage ;
-        temporaryStorage=LR.getTiles(commands);
+        temporaryStorage= livingRoom.getTiles(commands);
         Players.get(currPlaying-1).insertToken(temporaryStorage,order,column);
         GC.isBookShelfFull(Players.get(currPlaying-1).getPlayerBookshelf());
         if (GC.getLastRound())isLastTurn();
@@ -76,21 +75,21 @@ public class Game {
         if(!checkNumber(size))return false;
         switch (size) {
             case 1: {
-                if(GC.isLegalAction(LR.getBoardTile(commands.get(0),commands.get(1))))
+                if(GC.isLegalAction(livingRoom.getBoardTile(commands.get(0),commands.get(1))))
                     return true;
 
 
             }
             case 2:  {
-                if(GC.isLegalAction(LR.getBoardTile(commands.get(0),commands.get(1)),
-                        LR.getBoardTile(commands.get(2),commands.get(3))))
+                if(GC.isLegalAction(livingRoom.getBoardTile(commands.get(0),commands.get(1)),
+                        livingRoom.getBoardTile(commands.get(2),commands.get(3))))
                     return true;
 
             }
             case 3:{
-                if(GC.isLegalAction(LR.getBoardTile(commands.get(0),commands.get(1)),
-                        LR.getBoardTile(commands.get(2),commands.get(3)),
-                        LR.getBoardTile(commands.get(4),commands.get(5))))
+                if(GC.isLegalAction(livingRoom.getBoardTile(commands.get(0),commands.get(1)),
+                        livingRoom.getBoardTile(commands.get(2),commands.get(3)),
+                        livingRoom.getBoardTile(commands.get(4),commands.get(5))))
                     return true;
 
             }
@@ -133,7 +132,7 @@ public class Game {
     }
 
     private void checkCGC(){
-        Players.get(currPlaying-1).setScore(LR.checkCG(Players.get(currPlaying-1).getPlayerBookshelf()));
+        Players.get(currPlaying-1).setScore(livingRoom.checkCG(Players.get(currPlaying-1).getPlayerBookshelf()));
     }
 
     private synchronized void increseCurrPlaying() {
