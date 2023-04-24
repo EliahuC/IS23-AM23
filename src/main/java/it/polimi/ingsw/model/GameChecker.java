@@ -1,10 +1,10 @@
 package it.polimi.ingsw.model;
 
-import server.model.board.ItemTile;
-import server.model.player.BookShelf;
-import server.model.player.Player;
-import server.Launcher;
-import server.model.board.BoardToken;
+import it.polimi.ingsw.model.board.ItemTile;
+import it.polimi.ingsw.model.player.BookShelf;
+import it.polimi.ingsw.model.player.Player;
+import it.polimi.ingsw.Launcher;
+import it.polimi.ingsw.model.board.BoardToken;
 
 
 import java.util.*;
@@ -448,5 +448,12 @@ public class GameChecker {
         if((boardBoxIsEmpty(t1.getBoard()[t1.getRow()-1][t1.getCol()]) && boardBoxIsEmpty(t2.getBoard()[t2.getRow()-1][t2.getCol()]) && boardBoxIsEmpty(t3.getBoard()[t3.getRow()-1][t3.getCol()])) || (boardBoxIsEmpty(t1.getBoard()[t1.getRow()+1][t1.getCol()]) && boardBoxIsEmpty(t2.getBoard()[t2.getRow()+1][t2.getCol()]) && boardBoxIsEmpty(t3.getBoard()[t3.getRow()+1][t3.getCol()])))
             return true;
         return false;
+    }
+    public boolean checkColumn(BookShelf b,int column,int numberOfTiles){
+        int counter=0;
+        for(int row=0;row<BookShelf.getMAX_Row();row++){
+            if(b.getTile(row,column)!=null)counter++;
+        }
+        return counter >= numberOfTiles;
     }
 }
