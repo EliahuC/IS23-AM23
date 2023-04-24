@@ -243,7 +243,7 @@ public class LivingRoom {
         return Board[i][j];
     }
 
-    public GameChecker getG() {
+    public GameChecker getGameChecker() {
         return G;
     }
 }

@@ -101,6 +101,12 @@ public class Game {
         return GC.checkColumn(Players.get(currPlaying-1).getPlayerBookshelf(),column,numOfTiles);
     }
 
+    /*
+    public boolean checkLegalColumn(int column,int numOfTiles){
+        return Players.get(currPlaying-1).getPlayerBookshelf().getMaxPickableTiles()[column] >= numOfTiles;
+    }
+    */
+
     private boolean checkNumber(int i){
         return GC.getMaxPickableTiles(Players.get(currPlaying - 1).getPlayerBookshelf()) >= i;
     }
