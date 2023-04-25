@@ -1,4 +1,4 @@
-package it.polimi.ingsw.view;
+package it.polimi.ingsw.Network.Client;
 import java.util.Scanner;
 
 import it.polimi.ingsw.Network.Messages.ClientToServer.LobbyCreationMessage;

@@ -15,17 +15,19 @@ public class Game {
     private final List<Player> Players;
 
     private int currPlaying;
+    private final Integer gameNumPlayers;
 
     private final GameChecker GC;
     private boolean startedGame=false;
 
     private boolean finishedGame=false;
 
-    public Game(Launcher L){
+    public Game(Launcher L,Integer gameNumPlayers){
         this.Players=new ArrayList<>();
         this.livingRoom =new LivingRoom(L);
         this.GC=new GameChecker(L);
         this.currPlaying=1;
+        this.gameNumPlayers=gameNumPlayers;
     }
 
     public synchronized void addPlayers(String s) {
@@ -38,9 +40,9 @@ public class Game {
         livingRoom.Start(Players.size());
         this.startedGame=true;
     }
-    public synchronized void playMove(ArrayList<Integer> commands, ArrayList<ItemTileCategory> order, Integer column){
+    public synchronized void playMove(ArrayList<Integer> commands,  Integer column){
           if(!Players.get(currPlaying-1).isLastRound()) {
-              placeTiles(commands, order, column);
+              placeTiles(commands, column);
               checkCGC();
               if (GC.isRestorable(livingRoom.getBoard())) livingRoom.restore();
           }
@@ -55,10 +57,10 @@ public class Game {
     }
 
 
-    private synchronized void placeTiles(ArrayList<Integer> commands, ArrayList<ItemTileCategory> order, Integer column){
+    private synchronized void placeTiles(ArrayList<Integer> commands, Integer column){
         ArrayList<ItemTile> temporaryStorage ;
         temporaryStorage= livingRoom.getTiles(commands);
-        Players.get(currPlaying-1).insertToken(temporaryStorage,order,column);
+        Players.get(currPlaying-1).insertToken(temporaryStorage,column);
         GC.isBookShelfFull(Players.get(currPlaying-1).getPlayerBookshelf());
         if (GC.getLastRound())isLastTurn();
         increseCurrPlaying();
@@ -68,6 +70,7 @@ public class Game {
     private synchronized void isLastTurn() {
         for(Player p:Players)p.setLastRound(true);
         if(currPlaying==4)finishedGame=true;
+
     }
 
     public boolean checkLegalMove(ArrayList<Integer> commands, int size){
@@ -142,8 +145,8 @@ public class Game {
     }
 
     private synchronized void increseCurrPlaying() {
-        if(currPlaying==4&&!finishedGame) currPlaying=1;
-        else if(currPlaying<4&&!finishedGame) currPlaying++;
+        if(currPlaying==gameNumPlayers && !finishedGame) currPlaying=1;
+        else if(currPlaying<gameNumPlayers && !finishedGame) currPlaying++;
     }
 
 

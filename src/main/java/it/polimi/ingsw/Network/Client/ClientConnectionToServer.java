@@ -1,4 +1,4 @@
-package it.polimi.ingsw.Network.Server;
+package it.polimi.ingsw.Network.Client;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;

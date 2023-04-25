@@ -1,4 +1,4 @@
-package it.polimi.ingsw.Network;
+package it.polimi.ingsw.Network.Client;
 
 import it.polimi.ingsw.Printer;
 
