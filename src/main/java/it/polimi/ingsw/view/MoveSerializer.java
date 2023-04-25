@@ -21,7 +21,7 @@ public class MoveSerializer implements Printer {
     private void convertCommandToMove(String Command[]) {
       switch (checkCommand(Command[0])){
           case CREATE_LOBBY -> {
-              Message m=new LobbyCreationMessage(Command[1]);
+              Message m=new LobbyCreationMessage(Command[1],Integer.parseInt(Command[2]));
 
           }
           case INVALID_COMMAND -> {
@@ -32,7 +32,7 @@ public class MoveSerializer implements Printer {
     }
 
     private void commandList() {
-        showMessage("/create_lobby nickname");
+        showMessage("/create_lobby nickname numPlayers");
         showMessage("/enter_lobby nickname");
         showMessage("/start_game");
         showMessage("/select_tiles x1 y1 x2 y2 x3 y3");
