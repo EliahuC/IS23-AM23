@@ -2,7 +2,9 @@ package it.polimi.ingsw.controller;
 
 import com.google.gson.Gson;
 import it.polimi.ingsw.Launcher;
-import it.polimi.ingsw.Message;
+import it.polimi.ingsw.Network.Messages.ClientToServer.ClientMessage;
+import it.polimi.ingsw.Network.Messages.Message;
+import it.polimi.ingsw.Network.Messages.ServerToClient.ErrorMessage;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.board.ItemTileCategory;
@@ -13,7 +15,7 @@ import java.util.Optional;
 public class GameController {
      private final Game G;
      private static final int MAX_PLAYERS=4;
-     private Message m;
+     private ClientMessage m;
      private final Launcher launcher;
      private final Gson gson = new Gson();
      private final ArrayList<Integer> coordinates=new ArrayList<>();
@@ -34,7 +36,7 @@ public class GameController {
 
 
      public synchronized void readMessage(String s){
-         m=gson.fromJson(s,Message.class);
+         m=gson.fromJson(s,ClientMessage.class);
          switch (m.getCategory()){
              case COORDINATES:{
                  coordinates.addAll(m.getMessageMove().getMove());
@@ -56,10 +58,12 @@ public class GameController {
                  if(!lobbyCheck()||(lobby.contains(m.getNickname()))) break;
                  lobby.clear();
                  lobby.add(0,new Player(m.getNickname()));
+                 break;
              }
              case ENTER_LOBBY:{
                  if(!checkLobbySpace())break;
                  lobby.add(new Player(m.getNickname()));
+                 break;
              }
              //case ORDER ->order.addAll(m.getMessageMove().getMove());
          }
@@ -74,8 +78,7 @@ public class GameController {
     }
 
     private void sendErrorMessage() {
-         Message error= new Message(null,"GameMaster");
-         error.setCategory(Message.MessageCategory.WARNING);
+         Message error= new ErrorMessage();
          error.addReturnMessage("The move you made isn't a valid move");
          //TO BE ADDED SOON
         //sendingMethod.send(error);

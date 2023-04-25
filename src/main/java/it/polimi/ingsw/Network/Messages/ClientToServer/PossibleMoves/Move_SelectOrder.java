@@ -1,4 +1,4 @@
-package it.polimi.ingsw.PossibleMoves;
+package it.polimi.ingsw.Network.Messages.ClientToServer.PossibleMoves;
 
 import it.polimi.ingsw.model.board.ItemTileCategory;
 
