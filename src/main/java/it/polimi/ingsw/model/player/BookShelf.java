@@ -74,7 +74,15 @@ public class BookShelf {
         }
     }
 
-    private void SetLocation(ItemTile it) {
+    public int getTileRow() {
+        return tileRow;
+    }
+
+    public int getTileColumn() {
+        return tileColumn;
+    }
+
+    public void SetLocation(ItemTile it) {
         boolean c = false;
         for (int i = 0; i < MAX_Row; i++) {
             for (int j = 0; j < MAX_Column; j++) {
@@ -90,13 +98,13 @@ public class BookShelf {
                 break;
         }
     }
-    private boolean CheckCategory(ItemTile it){
+    public boolean CheckCategory(ItemTile it){
         if(it.getCategory().equals(category)){
             return true;
         }
         else return false;
     }
-    private int NumTiles() {
+    public int NumTiles() {
         int tilesCounter = 0;
         for(int i = 0; i < MAX_Row; i++) {
             for(int j = 0; j < MAX_Column; j++) {
@@ -109,28 +117,28 @@ public class BookShelf {
     }
 
 
-    private ItemTile UpperTile(int x, int y){
+    public ItemTile UpperTile(int x, int y){
         if(x != MAX_Row-1)
         {ItemTile it = getTile(x + 1, y);
             return it;}
         else return null;
     }
 
-    private ItemTile LowerTile(int x, int y){
+    public ItemTile LowerTile(int x, int y){
         if(x != 0)
         {ItemTile it = getTile(x - 1, y);
             return it;}
         else return null;
     }
 
-    private ItemTile RightTile(int x, int y){
+    public ItemTile RightTile(int x, int y){
         if(y != MAX_Column-1)
         {ItemTile it = getTile(x, y+1);
             return it;}
         else return null;
     }
 
-    private ItemTile LeftTile(int x, int y){
+    public ItemTile LeftTile(int x, int y){
         if(y != 0)
         {ItemTile it = getTile(x, y-1);
             return it;}
@@ -138,7 +146,11 @@ public class BookShelf {
     }
 
 
-    private void SetFirstTile(){
+    public ArrayList<ItemTile> getUsedTiles() {
+        return usedTiles;
+    }
+
+    public void SetFirstTile(){
         boolean c = false;
         for(int i = 0; i < MAX_Row; i++){
             for(int j = 0; j < MAX_Column; j++){
@@ -158,7 +170,7 @@ public class BookShelf {
         }
     }
 
-    private boolean AlreadyUsed(ItemTile it){
+    public boolean AlreadyUsed(ItemTile it){
         if(usedTiles.contains(it)){
             return true;
         }
@@ -205,7 +217,11 @@ public class BookShelf {
         Shelf[i][j]=t;
     }
 
-    public void setTile(int j,ItemTile t){
+    public ItemTileCategory getCategory() {
+        return category;
+    }
+
+    public void setTile(int j, ItemTile t){
        int i=0;
        while(Shelf[i][j]!=null)i++;
        Shelf[i][j]=t;

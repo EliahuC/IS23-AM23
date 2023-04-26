@@ -59,6 +59,7 @@ public class CommonGoalCard4 extends CommonGoalCard implements CheckCommonGoalCa
             SecondRow_ThirdRow1(bs);
             SecondRow_ThirdRow2(bs);
             SecondRow_ThirdRow3(bs);
+            SecondRow_ThirdRow4(bs);
             ThirdRow_FourthRow1(bs);
             ThirdRow_FourthRow2(bs);
             FourthRow_FifthRow1(bs);
