@@ -152,6 +152,9 @@ public class BookShelf {
 
     public void SetFirstTile(){
         boolean c = false;
+        if(tileColumn==BookShelf.getMAX_Column()-1){
+            category=null;
+        }
         for(int i = 0; i < MAX_Row; i++){
             for(int j = 0; j < MAX_Column; j++){
                 ItemTile it = getTile(i, j);

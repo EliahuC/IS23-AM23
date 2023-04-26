@@ -9,8 +9,6 @@ import java.util.List;
 
 public class CommonGoalCard1 extends CommonGoalCard implements CheckCommonGoalCard {
     private final List<ItemTile> validGroups = new ArrayList<>();
-    // private List<ItemTile> checkingGroups = new ArrayList<>();
-    private ItemTile it;
     private final Launcher L;
     private final static int Goal = 6;
 
@@ -60,7 +58,7 @@ public class CommonGoalCard1 extends CommonGoalCard implements CheckCommonGoalCa
                 count++;
             validGroups.clear();
         }
-        if(count==Goal)
+        if(count>=Goal)
             increaseNumCompleted();
     }
 }

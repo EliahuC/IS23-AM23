@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CommonGoalCard4 extends CommonGoalCard implements CheckCommonGoalCard {
-    private List<ItemTile> validGroups = new ArrayList<>();
+    private final List<ItemTile> validGroups;
     private int counterCats = 0;
     private int counterPlants = 0;
     private int counterTrophies = 0;
@@ -17,6 +17,7 @@ public class CommonGoalCard4 extends CommonGoalCard implements CheckCommonGoalCa
     private final Launcher L;
     public CommonGoalCard4(Launcher L){
         this.L = L;
+        validGroups = new ArrayList<>();
     }
 
     public int getCounterCats() {
@@ -467,8 +468,8 @@ public class CommonGoalCard4 extends CommonGoalCard implements CheckCommonGoalCa
         }
     }
     private boolean TwoSquares(){
-        if(getCounterBooks()==2 || getCounterCats()==2 || getCounterFrames()==2 || getCounterGames()==2 ||
-                getCounterPlants()==2 || getCounterTrophies()==2)
+        if(getCounterBooks()>=2 || getCounterCats()>=2 || getCounterFrames()>=2 || getCounterGames()>=2 ||
+                getCounterPlants()>=2 || getCounterTrophies()>=2)
             return true;
         else
             return false;

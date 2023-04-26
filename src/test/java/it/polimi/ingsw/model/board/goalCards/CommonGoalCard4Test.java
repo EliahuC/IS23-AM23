@@ -268,7 +268,7 @@ public class CommonGoalCard4Test extends TestCase {
         c39.checkGoal(bs26);
         assertEquals(0, c39.getNumCompleted());
     }
-    public void testCheckGoalCardCGC4_EIGHTH(){              //SQUARE 3 x 3, IT IS NOT CONSIDERED AS TWO SEPARATED
+    public void testCheckGoalCardCGC4_EIGHTH(){              //RECTANGLE 3 x 2, IT IS NOT CONSIDERED AS TWO SEPARATED
                                                                 //SQUARES 2 X 2
         CommonGoalCard c40 = new CommonGoalCard4(new Launcher());
         c40.initNumCompleted();
@@ -305,5 +305,43 @@ public class CommonGoalCard4Test extends TestCase {
         bs26.setTile(5, 4, new ItemTile("PLANTS"));
         c40.checkGoal(bs26);
         assertEquals(0, c40.getNumCompleted());
+    }
+    public void testCheckGoalCardCGC4_NINTH(){          //MORE THAN TWO SQUARES CASE, EXACTLY FOUR SQUARES (UPPER LEFT,
+                                                                //UPPER RIGHT, LOWER LEFT, LOWER RIGHT
+        CommonGoalCard c44 = new CommonGoalCard4(new Launcher());
+        c44.initNumCompleted();
+        BookShelf bs26 = new BookShelf();
+        bs26.setTile(0, 0, new ItemTile("PLANTS"));
+        bs26.setTile(0, 1, new ItemTile("PLANTS"));
+        bs26.setTile(1, 0, new ItemTile("PLANTS"));
+        bs26.setTile(1, 1, new ItemTile("PLANTS"));
+        bs26.setTile(0, 2, new ItemTile("GAMES"));
+        bs26.setTile(0, 3, new ItemTile("PLANTS"));
+        bs26.setTile(0, 4, new ItemTile("PLANTS"));
+        bs26.setTile(1, 2, new ItemTile("TROPHIES"));
+        bs26.setTile(1, 3, new ItemTile("PLANTS"));
+        bs26.setTile(1, 4, new ItemTile("PLANTS"));
+        bs26.setTile(2, 0, new ItemTile("PLANTS"));
+        bs26.setTile(2, 1, new ItemTile("CATS"));
+        bs26.setTile(2, 2, new ItemTile("BOOKS"));
+        bs26.setTile(2, 3, new ItemTile("FRAMES"));
+        bs26.setTile(2, 4, new ItemTile("GAMES"));
+        bs26.setTile(3, 0, new ItemTile("TROPHIES"));
+        bs26.setTile(3, 1, new ItemTile("GAMES"));
+        bs26.setTile(3, 2, new ItemTile("FRAMES"));
+        bs26.setTile(3, 3, new ItemTile("BOOKS"));
+        bs26.setTile(3, 4, new ItemTile("CATS"));
+        bs26.setTile(4, 0, new ItemTile("PLANTS"));
+        bs26.setTile(4, 1, new ItemTile("PLANTS"));
+        bs26.setTile(5, 0, new ItemTile("PLANTS"));
+        bs26.setTile(5, 1, new ItemTile("PLANTS"));
+        bs26.setTile(4, 2, new ItemTile("CATS"));
+        bs26.setTile(4, 3, new ItemTile("PLANTS"));
+        bs26.setTile(4, 4, new ItemTile("PLANTS"));
+        bs26.setTile(5, 2, new ItemTile("GAMES"));
+        bs26.setTile(5, 3, new ItemTile("PLANTS"));
+        bs26.setTile(5, 4, new ItemTile("PLANTS"));
+        c44.checkGoal(bs26);
+        assertEquals(1, c44.getNumCompleted());
     }
 }
