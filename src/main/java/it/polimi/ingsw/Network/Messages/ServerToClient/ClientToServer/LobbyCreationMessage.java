@@ -1,6 +1,4 @@
-package it.polimi.ingsw.Network.Messages.ClientToServer;
-
-import it.polimi.ingsw.Network.Messages.Message;
+package it.polimi.ingsw.Network.Messages.ServerToClient.ClientToServer;
 
 public class LobbyCreationMessage extends ClientMessage {
     private Integer numPlayers;

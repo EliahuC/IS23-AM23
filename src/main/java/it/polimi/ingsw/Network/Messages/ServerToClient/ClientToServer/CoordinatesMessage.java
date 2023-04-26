@@ -1,10 +1,6 @@
-package it.polimi.ingsw.Network.Messages.ClientToServer;
+package it.polimi.ingsw.Network.Messages.ServerToClient.ClientToServer;
 
-import it.polimi.ingsw.Network.Messages.ClientToServer.PossibleMoves.Move;
-import it.polimi.ingsw.Network.Messages.ClientToServer.PossibleMoves.Move_SelectTiles;
-import it.polimi.ingsw.Network.Messages.Message;
-
-import java.util.ArrayList;
+import it.polimi.ingsw.Network.Messages.ServerToClient.ClientToServer.PossibleMoves.Move_SelectTiles;
 
 public class CoordinatesMessage extends ClientMessage {
 

@@ -2,8 +2,12 @@ package it.polimi.ingsw.Network.Server;
 
 import com.google.gson.Gson;
 import it.polimi.ingsw.Network.Messages.Message;
+import it.polimi.ingsw.Network.Messages.ServerToClient.ClientToServer.ClientMessage;
+import it.polimi.ingsw.Network.Messages.ServerToClient.ClientToServer.LobbyCreationMessage;
+import it.polimi.ingsw.Network.Messages.ServerToClient.ErrorMessage;
 import it.polimi.ingsw.Network.Messages.ServerToClient.ServerMessage;
 import it.polimi.ingsw.Printer;
+import it.polimi.ingsw.model.player.Player;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -21,6 +25,7 @@ public class ServerConnectionToClient implements Runnable {
     private ObjectOutputStream output;
     private VirtualView virtualView;
     private Gson gson;
+    private Lobby lobby;
 
     public ServerConnectionToClient(Socket clientSocket) {
         this.clientSocket = clientSocket;
@@ -71,10 +76,42 @@ public class ServerConnectionToClient implements Runnable {
         }
     }
 
-    public synchronized void reciveMessage(Message message){
-
+    public synchronized void reciveMessage(String s){
+        ClientMessage m = gson.fromJson(s, ClientMessage.class);
+        switch (m.getCategory()) {
+            case CREATE_LOBBY: {
+                lobby=new Lobby();
+                if (lobby.getJoinedUsers().contains(m.getNickname())) {
+                    ErrorMessage errorMessage=new ErrorMessage();
+                    errorMessage.addReturnMessage("Lobby already present, please join that lobby");
+                    sendMessage(errorMessage);
+                    break;
+                }
+                lobby.addUser(m.getNickname());
+            }
+            case ENTER_LOBBY: {
+                if (!checkLobbySpace()) {
+                    ErrorMessage errorMessage=new ErrorMessage();
+                    errorMessage.addReturnMessage("the Lobby is full");
+                    sendMessage(errorMessage);
+                    break;
+                }
+                if (lobby.getJoinedUsers().contains(m.getNickname())) {
+                    ErrorMessage errorMessage=new ErrorMessage();
+                    errorMessage.addReturnMessage("Nickname already used in the lobby, please choose an other nickname");
+                    sendMessage(errorMessage);
+                    break;
+                }
+                lobby.addUser(m.getNickname());
+                break;
+            }
+            default: lobby.reciveMessage(m);
+        }
     }
 
+    private boolean checkLobbySpace() {
+        return lobby.getJoinedUsers().size()<=4;
+    }
 
 
     @Override

@@ -1,9 +1,9 @@
 package it.polimi.ingsw.Network.Client;
 import java.util.Scanner;
 
-import it.polimi.ingsw.Network.Messages.ClientToServer.LobbyCreationMessage;
+import it.polimi.ingsw.Network.Messages.ServerToClient.ClientToServer.LobbyCreationMessage;
 import it.polimi.ingsw.Network.Messages.Message;
-import it.polimi.ingsw.Network.Messages.ClientToServer.PossibleMoves.Move;
+import it.polimi.ingsw.Network.Messages.ServerToClient.ClientToServer.PossibleMoves.Move;
 import it.polimi.ingsw.Printer;
 
 public class MoveSerializer implements Printer {
