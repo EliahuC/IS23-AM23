@@ -18,6 +18,7 @@ public abstract class Message {
         COLUMN,
         RETURN_MESSAGE,
         CREATE_LOBBY,
+        SUCCESS,
         START_GAME,
         ENTER_LOBBY,
         END_GAME_MESSAGE,

@@ -1,4 +1,4 @@
-package it.polimi.ingsw.Network.Messages.ClientToServer.PossibleMoves;
+package it.polimi.ingsw.Network.Messages.ServerToClient.ClientToServer.PossibleMoves;
 
 import java.util.ArrayList;
 

@@ -22,20 +22,15 @@ public class Game {
 
     private boolean finishedGame=false;
 
-    public Game(Launcher L,Integer gameNumPlayers){
-        this.Players=new ArrayList<>();
+    public Game(Launcher L,ArrayList<Player> lobby){
+        this.Players=lobby;
         this.livingRoom =new LivingRoom(L);
         this.GC=new GameChecker(L);
         this.currPlaying=1;
-        this.gameNumPlayers=gameNumPlayers;
+        this.gameNumPlayers= lobby.size();
     }
 
-    public synchronized void addPlayers(String s) {
-        if (Players.size() < 4 && (!startedGame)) {
-            Player p = new Player(s);
-            Players.add(p);
-        }
-    }
+
     public synchronized void startGame(){
         livingRoom.Start(Players.size());
         this.startedGame=true;

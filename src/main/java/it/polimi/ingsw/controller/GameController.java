@@ -2,13 +2,12 @@ package it.polimi.ingsw.controller;
 
 import com.google.gson.Gson;
 import it.polimi.ingsw.Launcher;
-import it.polimi.ingsw.Network.Messages.ClientToServer.ClientMessage;
-import it.polimi.ingsw.Network.Messages.ClientToServer.LobbyCreationMessage;
+import it.polimi.ingsw.Network.Messages.ServerToClient.ClientToServer.ClientMessage;
+import it.polimi.ingsw.Network.Messages.ServerToClient.ClientToServer.LobbyCreationMessage;
 import it.polimi.ingsw.Network.Messages.Message;
 import it.polimi.ingsw.Network.Messages.ServerToClient.ErrorMessage;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.player.Player;
-import it.polimi.ingsw.model.board.ItemTileCategory;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -22,21 +21,24 @@ public class GameController {
      private Integer column;
      private final ArrayList<Player> lobby=new ArrayList<>();
      private Integer lobbyMaxSize;
-
-     public GameController(){
+     private boolean startedGame=false;
+     public GameController(ArrayList<Player> players){
          this.launcher=new Launcher();
-         this.G= new Game(launcher,lobbyMaxSize);
          this.m=null;
+         this.G=new Game(launcher,lobby);
+         lobby.addAll(players);
 
      }
 
+
      private synchronized void startGame(){
+         startedGame=true;
          G.startGame();
      }
 
 
-     public synchronized void readMessage(String s){
-         m=gson.fromJson(s,ClientMessage.class);
+     public synchronized void readMessage(ClientMessage m){
+
          switch (m.getCategory()){
              case COORDINATES:{
                  coordinates.addAll(m.getMessageMove().getMove());
@@ -54,29 +56,7 @@ public class GameController {
                  startGame();
                  break;
              }
-             case CREATE_LOBBY:{
-                 if(!lobbyCheck()||(lobby.contains(m.getNickname()))) {
-                     sendErrorMessage("Lobby already present, please join that lobby");
-                     break;
-                 }
 
-                 lobby.clear();
-                 lobby.add(0,new Player(m.getNickname()));
-                 lobbyMaxSize=((LobbyCreationMessage) m).getNumPlayers();
-                 break;
-             }
-             case ENTER_LOBBY:{
-                 if(!checkLobbySpace()){
-                     sendErrorMessage("the lobby is full");
-                     break;
-                 }
-                 if(checkNickName(m.getNickname())){
-                     sendErrorMessage("Nickname already used in the lobby, please choose an other nickname");
-                     break;
-                 }
-                 lobby.add(new Player(m.getNickname()));
-                 break;
-             }
 
          }
      }
@@ -89,9 +69,7 @@ public class GameController {
          return lobby.size() <= lobbyMaxSize;
     }
 
-    private boolean lobbyCheck() {
-        return lobby.size() == 0;
-    }
+
 
     private void sendErrorMessage(String ErrorMotivation) {
          Message error= new ErrorMessage();
@@ -117,8 +95,6 @@ public class GameController {
     public synchronized Optional<Player> endGame() {
         return G.endGame();
     }
-    private synchronized void addPlayer(String nickname){
-         G.addPlayers(nickname);
-    }
+
 
 }
