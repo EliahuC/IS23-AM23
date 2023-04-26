@@ -76,7 +76,8 @@ public class ServerConnectionToClient implements Runnable {
         }
     }
 
-    public synchronized void reciveMessage(String s){
+    public synchronized void receiveMessage() throws IOException, ClassNotFoundException {
+        String s= (String) input.readObject();
         ClientMessage m = gson.fromJson(s, ClientMessage.class);
         switch (m.getCategory()) {
             case CREATE_LOBBY: {
