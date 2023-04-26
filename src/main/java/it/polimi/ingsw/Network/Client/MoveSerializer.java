@@ -1,8 +1,9 @@
-package it.polimi.ingsw.view;
+package it.polimi.ingsw.Network.Client;
 import java.util.Scanner;
 
-import it.polimi.ingsw.Message;
-import it.polimi.ingsw.PossibleMoves.Move;
+import it.polimi.ingsw.Network.Messages.ClientToServer.LobbyCreationMessage;
+import it.polimi.ingsw.Network.Messages.Message;
+import it.polimi.ingsw.Network.Messages.ClientToServer.PossibleMoves.Move;
 import it.polimi.ingsw.Printer;
 
 public class MoveSerializer implements Printer {
@@ -20,8 +21,8 @@ public class MoveSerializer implements Printer {
     private void convertCommandToMove(String Command[]) {
       switch (checkCommand(Command[0])){
           case CREATE_LOBBY -> {
-              Message m=new Message(null,Command[1]);
-              m.setCategory(Message.MessageCategory.CREATE_LOBBY);
+              Message m=new LobbyCreationMessage(Command[1],Integer.parseInt(Command[2]));
+
           }
           case INVALID_COMMAND -> {
               showMessage("The command is invalid, please insert a valid command");
@@ -31,7 +32,7 @@ public class MoveSerializer implements Printer {
     }
 
     private void commandList() {
-        showMessage("/create_lobby nickname");
+        showMessage("/create_lobby nickname numPlayers");
         showMessage("/enter_lobby nickname");
         showMessage("/start_game");
         showMessage("/select_tiles x1 y1 x2 y2 x3 y3");

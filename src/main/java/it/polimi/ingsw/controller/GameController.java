@@ -2,7 +2,10 @@ package it.polimi.ingsw.controller;
 
 import com.google.gson.Gson;
 import it.polimi.ingsw.Launcher;
-import it.polimi.ingsw.Message;
+import it.polimi.ingsw.Network.Messages.ClientToServer.ClientMessage;
+import it.polimi.ingsw.Network.Messages.ClientToServer.LobbyCreationMessage;
+import it.polimi.ingsw.Network.Messages.Message;
+import it.polimi.ingsw.Network.Messages.ServerToClient.ErrorMessage;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.board.ItemTileCategory;
@@ -12,17 +15,17 @@ import java.util.Optional;
 
 public class GameController {
      private final Game G;
-     private Message m;
+     private ClientMessage m;
      private final Launcher launcher;
      private final Gson gson = new Gson();
      private final ArrayList<Integer> coordinates=new ArrayList<>();
      private Integer column;
-     private final ArrayList<ItemTileCategory> order =new ArrayList<>();
      private final ArrayList<Player> lobby=new ArrayList<>();
+     private Integer lobbyMaxSize;
 
      public GameController(){
          this.launcher=new Launcher();
-         this.G= new Game(launcher);
+         this.G= new Game(launcher,lobbyMaxSize);
          this.m=null;
 
      }
@@ -33,7 +36,7 @@ public class GameController {
 
 
      public synchronized void readMessage(String s){
-         m=gson.fromJson(s,Message.class);
+         m=gson.fromJson(s,ClientMessage.class);
          switch (m.getCategory()){
              case COORDINATES:{
                  coordinates.addAll(m.getMessageMove().getMove());
@@ -52,75 +55,70 @@ public class GameController {
                  break;
              }
              case CREATE_LOBBY:{
+                 if(!lobbyCheck()||(lobby.contains(m.getNickname()))) {
+                     sendErrorMessage("Lobby already present, please join that lobby");
+                     break;
+                 }
+
                  lobby.clear();
                  lobby.add(0,new Player(m.getNickname()));
+                 lobbyMaxSize=((LobbyCreationMessage) m).getNumPlayers();
+                 break;
              }
              case ENTER_LOBBY:{
+                 if(!checkLobbySpace()){
+                     sendErrorMessage("the lobby is full");
+                     break;
+                 }
+                 if(checkNickName(m.getNickname())){
+                     sendErrorMessage("Nickname already used in the lobby, please choose an other nickname");
+                     break;
+                 }
                  lobby.add(new Player(m.getNickname()));
+                 break;
              }
-             //case ORDER ->order.addAll(m.getMessageMove().getMove());
+
          }
      }
 
-    private void sendErrorMessage() {
-         Message error= new Message(null,"GameMaster");
-         error.setCategory(Message.MessageCategory.WARNING);
-         error.addReturnMessage("The move you made isn't a valid move");
+    private boolean checkNickName(String s) {
+         return lobby.contains(s);
+    }
+
+    private boolean checkLobbySpace() {
+         return lobby.size() <= lobbyMaxSize;
+    }
+
+    private boolean lobbyCheck() {
+        return lobby.size() == 0;
+    }
+
+    private void sendErrorMessage(String ErrorMotivation) {
+         Message error= new ErrorMessage();
+         error.addReturnMessage(ErrorMotivation);
          //TO BE ADDED SOON
+        //sendingMethod.send(error);
+    }
+    private void sendErrorMessage() {
+        Message error= new ErrorMessage();
+        error.addReturnMessage("The move you made isn't a valid move");
+        //TO BE ADDED SOON
         //sendingMethod.send(error);
     }
 
     public synchronized void playMove(){
-         G.playMove(coordinates,order,column);
+         G.playMove(coordinates,column);
          coordinates.clear();
-         order.clear();
+
          column=null;
      }
 
 
-    private synchronized Message endGame() {
-        Optional<Player> P = G.endGame();
-        return P.map(player -> new Message(null, player.getNickName())).orElse(null);
+    public synchronized Optional<Player> endGame() {
+        return G.endGame();
     }
     private synchronized void addPlayer(String nickname){
          G.addPlayers(nickname);
     }
 
- /*public void readMove(String s){
-         m=gson.fromJson(s,Move.class);
-         setCoordinates(m);
-         setOrder(m);
-     }
-
-    private void setOrder(Move m) {
-         order.clear();
-         order.add(m.getColore1());
-         order.add(m.getColore2());
-         order.add(m.getColore3());
-         removeNullO(order);
-    }
-
-    private void setCoordinates(Move_SelectTiles m1){
-        coordinates.clear();
-        coordinates.add(m.getXmossa1());
-        coordinates.add(m.getYmossa1());
-        coordinates.add(m.getXmossa2());
-        coordinates.add(m.getYmossa2());
-        coordinates.add(m.getXmossa3());
-        coordinates.add(m.getYmossa3());
-        // ??coordinates.removeAll(null);??
-        removeNullI(coordinates);
-    }
-
-    public void removeNullI(ArrayList<Integer> coordinates) {
-         for(int i=0;i<coordinates.size();i++){
-             if(coordinates.get(i)==null)coordinates.remove(i);
-         }
-    }
-
-    private void removeNullO(ArrayList<ItemTileCategory> coordinates) {
-        for(int i=0;i< order.size();i++){
-            if(order.get(i)==null)order.remove(i);
-        }
-    }*/
 }

@@ -11,19 +11,23 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class Game {
-    private final LivingRoom LR;
+    private final LivingRoom livingRoom;
     private final List<Player> Players;
 
     private int currPlaying;
+    private final Integer gameNumPlayers;
 
     private final GameChecker GC;
     private boolean startedGame=false;
 
-    public Game(Launcher L){
+    private boolean finishedGame=false;
+
+    public Game(Launcher L,Integer gameNumPlayers){
         this.Players=new ArrayList<>();
-        this.LR=new LivingRoom(L);
+        this.livingRoom =new LivingRoom(L);
         this.GC=new GameChecker(L);
         this.currPlaying=1;
+        this.gameNumPlayers=gameNumPlayers;
     }
 
     public synchronized void addPlayers(String s) {
@@ -33,30 +37,39 @@ public class Game {
         }
     }
     public synchronized void startGame(){
-        LR.Start(Players.size());
+        livingRoom.Start(Players.size());
         this.startedGame=true;
     }
-    public synchronized void playMove(ArrayList<Integer> commands, ArrayList<ItemTileCategory> order, Integer column){
-          placeTiles(commands,order,column);
-          checkCGC();
-          if(GC.isRestorable(LR.getBoard())) LR.restore();
+    public synchronized void playMove(ArrayList<Integer> commands,  Integer column){
+          if(!Players.get(currPlaying-1).isLastRound()) {
+              placeTiles(commands, column);
+              checkCGC();
+              if (GC.isRestorable(livingRoom.getBoard())) livingRoom.restore();
+          }
     }
     public synchronized Optional<Player> endGame(){
         Optional<Player> P = Optional.empty();
-         for (Player p : Players) {
-            checkPGC();
-             P=whoWins();
-            //System.out.println("AND THE WINNER IS...... PLAYER :"+ P.get().getNickName());
-        }
+         for (Player p : Players){
+             p.endGamePoints();
+         }
+         P=whoWins();
         return P;
     }
 
 
-    private void placeTiles(ArrayList<Integer> commands, ArrayList<ItemTileCategory> order, Integer column){
+    private synchronized void placeTiles(ArrayList<Integer> commands, Integer column){
         ArrayList<ItemTile> temporaryStorage ;
-        temporaryStorage=LR.getTiles(commands);
-        Players.get(currPlaying-1).insertToken(temporaryStorage,order,column);
+        temporaryStorage= livingRoom.getTiles(commands);
+        Players.get(currPlaying-1).insertToken(temporaryStorage,column);
+        GC.isBookShelfFull(Players.get(currPlaying-1).getPlayerBookshelf());
+        if (GC.getLastRound())isLastTurn();
         increseCurrPlaying();
+
+    }
+
+    private synchronized void isLastTurn() {
+        for(Player p:Players)p.setLastRound(true);
+        if(currPlaying==4)finishedGame=true;
 
     }
 
@@ -65,21 +78,21 @@ public class Game {
         if(!checkNumber(size))return false;
         switch (size) {
             case 1: {
-                if(GC.isLegalAction(LR.getBoardTile(commands.get(0),commands.get(1))))
+                if(GC.isLegalAction(livingRoom.getBoardTile(commands.get(0),commands.get(1))))
                     return true;
 
 
             }
             case 2:  {
-                if(GC.isLegalAction(LR.getBoardTile(commands.get(0),commands.get(1)),
-                        LR.getBoardTile(commands.get(2),commands.get(3))))
+                if(GC.isLegalAction(livingRoom.getBoardTile(commands.get(0),commands.get(1)),
+                        livingRoom.getBoardTile(commands.get(2),commands.get(3))))
                     return true;
 
             }
             case 3:{
-                if(GC.isLegalAction(LR.getBoardTile(commands.get(0),commands.get(1)),
-                        LR.getBoardTile(commands.get(2),commands.get(3)),
-                        LR.getBoardTile(commands.get(4),commands.get(5))))
+                if(GC.isLegalAction(livingRoom.getBoardTile(commands.get(0),commands.get(1)),
+                        livingRoom.getBoardTile(commands.get(2),commands.get(3)),
+                        livingRoom.getBoardTile(commands.get(4),commands.get(5))))
                     return true;
 
             }
@@ -91,17 +104,19 @@ public class Game {
         return GC.checkColumn(Players.get(currPlaying-1).getPlayerBookshelf(),column,numOfTiles);
     }
 
+    /*
+    public boolean checkLegalColumn(int column,int numOfTiles){
+        return Players.get(currPlaying-1).getPlayerBookshelf().getMaxPickableTiles()[column] >= numOfTiles;
+    }
+    */
+
     private boolean checkNumber(int i){
         return GC.getMaxPickableTiles(Players.get(currPlaying - 1).getPlayerBookshelf()) >= i;
     }
 
-    private void checkPGC(){
-        for(int i=0;i<3;i++ ){
-           Players.get(i).endGamePoints();
-        }
-    }
 
-    private Optional<Player> whoWins(){
+
+    private synchronized Optional<Player> whoWins(){
         Optional<Player> P=   Players.stream().reduce((P1,P2) ->P1.getScore()>P2.getScore()? P1 : P2);
         if(P.isEmpty()) {
             //System.out.println("2 Players with the same score");
@@ -126,13 +141,14 @@ public class Game {
     }
 
     private void checkCGC(){
-        Players.get(currPlaying-1).setScore(LR.checkCG(Players.get(currPlaying-1).getPlayerBookshelf()));
+        Players.get(currPlaying-1).setScore(livingRoom.checkCG(Players.get(currPlaying-1).getPlayerBookshelf()));
     }
 
-    private void increseCurrPlaying() {
-        if(currPlaying==4) currPlaying=1;
-        else currPlaying++;
+    private synchronized void increseCurrPlaying() {
+        if(currPlaying==gameNumPlayers && !finishedGame) currPlaying=1;
+        else if(currPlaying<gameNumPlayers && !finishedGame) currPlaying++;
     }
+
 
 
 }

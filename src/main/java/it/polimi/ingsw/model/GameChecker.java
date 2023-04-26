@@ -1,10 +1,10 @@
 package it.polimi.ingsw.model;
 
-import it.polimi.ingsw.model.board.BoardToken;
 import it.polimi.ingsw.model.board.ItemTile;
 import it.polimi.ingsw.model.player.BookShelf;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.Launcher;
+import it.polimi.ingsw.model.board.BoardToken;
 
 
 import java.util.*;
@@ -69,7 +69,7 @@ public class GameChecker {
     }
 
     public boolean isLegalAction(BoardToken t1){
-        legalSelection = isExternal(t1) && boardBoxIsValid(t1);
+        legalSelection = isExternal(t1);
         return legalSelection;
     }
 
@@ -166,30 +166,20 @@ public class GameChecker {
 
     private boolean isExternal (BoardToken t) {
         if(boardBoxIsValid(t)){
-            int threshold = 2;
-            Set<BoardToken> adjacentTiles = addAdjacentTiles(t);
-            if (isInBorderlinePosition(t))
-                threshold = 1;
-            if (checkFreeSides(adjacentTiles, threshold))
-                return true;
+            return checkSides(t);
         }
         return false;
     }
 
     private boolean isExternal (BoardToken t1, BoardToken t2){
-        Set<BoardToken> t1_adjacentTiles = addAdjacentTiles(t1);
-        Set<BoardToken> t2_adjacentTiles = addAdjacentTiles(t2);
-        if(checkFreeSides(t1_adjacentTiles, t2) && checkFreeSides(t2_adjacentTiles, t1))
-            return true;
+        if(boardBoxIsValid(t1) && boardBoxIsValid(t2))
+            return checkSides(t1, t2);
         return false;
     }
 
     private boolean isExternal (BoardToken t1, BoardToken t2, BoardToken t3){
-        Set<BoardToken> t1_adjacentTiles = addAdjacentTiles(t1);
-        Set<BoardToken> t2_adjacentTiles = addAdjacentTiles(t2);
-        Set<BoardToken> t3_adjacentTiles = addAdjacentTiles(t3);
-        if(checkFreeSides(t1_adjacentTiles, t2) && checkFreeSides(t2_adjacentTiles, t1, t3) && checkFreeSides(t3_adjacentTiles, t2))
-            return true;
+        if(boardBoxIsValid(t1) && boardBoxIsValid(t2) && boardBoxIsValid(t3))
+            return checkSides(t1, t2, t3);
         return false;
     }
 
@@ -314,54 +304,156 @@ public class GameChecker {
         return boardTileLeft(t) || boardTileRight(t) || boardTileLower(t) || boardTileUpper(t);
     }
 
-    private HashSet<BoardToken> addAdjacentTiles(BoardToken t){
-        HashSet<BoardToken> adjacentTiles = new HashSet<>();
-        if(boardTileUpper(t)){
-            adjacentTiles.add(t.getBoard()[t.getRow()][t.getCol()+1]); //Adding right tile.
-            adjacentTiles.add(t.getBoard()[t.getRow()+1][t.getCol()]); //Adding lower tile.
-            adjacentTiles.add(t.getBoard()[t.getRow()][t.getCol()-1]); //Adding left tile.
-        }
-        if(boardTileRight(t)){
-            adjacentTiles.add(t.getBoard()[t.getRow()-1][t.getCol()]); //Adding upper tile.
-            adjacentTiles.add(t.getBoard()[t.getRow()+1][t.getCol()]); //Adding lower tile.
-            adjacentTiles.add(t.getBoard()[t.getRow()][t.getCol()-1]); //Adding left tile.
-        }
-        if(boardTileLower(t)){
-            adjacentTiles.add(t.getBoard()[t.getRow()-1][t.getCol()]); //Adding upper tile.
-            adjacentTiles.add(t.getBoard()[t.getRow()][t.getCol()+1]); //Adding right tile.
-            adjacentTiles.add(t.getBoard()[t.getRow()][t.getCol()-1]); //Adding left tile.
-        }
-        if(boardTileLeft(t)){
-            adjacentTiles.add(t.getBoard()[t.getRow()-1][t.getCol()]); //Adding upper tile.
-            adjacentTiles.add(t.getBoard()[t.getRow()][t.getCol()+1]); //Adding right tile.
-            adjacentTiles.add(t.getBoard()[t.getRow()+1][t.getCol()]); //Adding lower tile.
-        }
-        if(boardTileNoBorderline(t)){
-            adjacentTiles.add(t.getBoard()[t.getRow()-1][t.getCol()]); //Adding upper tile.
-            adjacentTiles.add(t.getBoard()[t.getRow()][t.getCol()+1]); //Adding right tile.
-            adjacentTiles.add(t.getBoard()[t.getRow()+1][t.getCol()]); //Adding lower tile.
-            adjacentTiles.add(t.getBoard()[t.getRow()][t.getCol()-1]); //Adding left tile.
-        }
-    return adjacentTiles;
+    private boolean checkSides(BoardToken t){
+        return verticalCheck(t) && horizontalCheck(t);
     }
 
-    private boolean checkFreeSides(Set<BoardToken> borderTiles, int threshold){
-        return borderTiles.stream().filter(bt -> bt.getTile() == null ).count() >= threshold;
+    private boolean checkSides(BoardToken t1, BoardToken t2){
+        if(sameColumn(t1,t2))
+            return verticalCheck(t1,t2);
+        if(sameRow(t1,t2))
+            return horizontalCheck(t1,t2);
+        return false;
     }
 
-    private boolean checkFreeSides(Set<BoardToken> borderTiles, BoardToken ignoredTile){
-        return borderTiles.stream().filter(bt -> bt.getTile() == null || bt.getTile() == ignoredTile.getTile()).count() >= 2;
+    private boolean checkSides(BoardToken t1, BoardToken t2, BoardToken t3){
+        if(sameColumn(t1,t2,t3))
+            return verticalCheck(t1,t2,t3);
+        if(sameRow(t1,t2))
+            return horizontalCheck(t1,t2,t3);
+        return false;
     }
 
-    private boolean checkFreeSides(Set<BoardToken> borderTiles, BoardToken ignoredTile1, BoardToken ignoredTile2){
-        return borderTiles.stream().filter(bt -> (bt.getTile() == null || bt.getTile() == ignoredTile1.getTile() || bt.getTile() == ignoredTile2.getTile())).count() >= 2;
+    private boolean verticalCheck(BoardToken t){
+        if (!boardTileUpper(t) && !boardTileLower(t)){
+            if(!boardBoxIsEmpty(t.getBoard()[t.getRow()-1][t.getCol()])){
+                if(boardBoxIsEmpty(t.getBoard()[t.getRow()+1][t.getCol()]))
+                    return true;
+            }else{
+                if(!boardBoxIsEmpty(t.getBoard()[t.getRow()+1][t.getCol()]))
+                    return true;
+            }
+            if(boardBoxIsEmpty(t.getBoard()[t.getRow()-1][t.getCol()]) && boardBoxIsEmpty(t.getBoard()[t.getRow()+1][t.getCol()]))
+                return true;
+        }
+        return boardTileUpper(t) || boardTileLower(t);
     }
 
+    private boolean horizontalCheck(BoardToken t){
+        if (!boardTileLeft(t) && !boardTileRight(t)){
+            if(!boardBoxIsEmpty(t.getBoard()[t.getRow()][t.getCol()-1])){
+                if(boardBoxIsEmpty(t.getBoard()[t.getRow()][t.getCol()+1]))
+                    return true;
+            }else{
+                if(!boardBoxIsEmpty(t.getBoard()[t.getRow()][t.getCol()+1]))
+                    return true;
+            }
+            if(boardBoxIsEmpty(t.getBoard()[t.getRow()][t.getCol()-1]) && boardBoxIsEmpty(t.getBoard()[t.getRow()][t.getCol()+1]))
+                return true;
+        }
+        return boardTileLeft(t) || boardTileRight(t);
+    }
+
+    private boolean verticalCheck(BoardToken t1, BoardToken t2){
+        if(!isInBorderlinePosition(t1) && !isInBorderlinePosition(t2)){
+            if((!boardBoxIsEmpty(t1.getBoard()[t1.getRow()][t1.getCol()-1]) && boardBoxIsEmpty(t1.getBoard()[t1.getRow()][t1.getCol()+1]) && !boardBoxIsEmpty(t2.getBoard()[t2.getRow()][t2.getCol()-1]) && boardBoxIsEmpty(t2.getBoard()[t2.getRow()][t2.getCol()+1])) || (!boardBoxIsEmpty(t1.getBoard()[t1.getRow()][t1.getCol()+1]) && boardBoxIsEmpty(t1.getBoard()[t1.getRow()][t1.getCol()-1]) && !boardBoxIsEmpty(t2.getBoard()[t2.getRow()][t2.getCol()+1]) && boardBoxIsEmpty(t2.getBoard()[t2.getRow()][t2.getCol()-1]))){
+                if(boardBoxIsEmpty(t1.getBoard()[t1.getRow()-1][t1.getCol()]) || boardBoxIsEmpty(t2.getBoard()[t2.getRow()+1][t2.getCol()]))
+                    return true;
+            }
+        }
+        if(!boardTileLeft(t1) && !boardTileLeft(t2) && !boardTileRight(t1) && !boardTileRight(t2)) {
+            if ((boardBoxIsEmpty(t1.getBoard()[t1.getRow()][t1.getCol() - 1]) && boardBoxIsEmpty(t1.getBoard()[t1.getRow()][t1.getCol() + 1])) || (boardBoxIsEmpty(t2.getBoard()[t2.getRow()][t2.getCol() - 1]) && boardBoxIsEmpty(t2.getBoard()[t2.getRow()][t2.getCol() + 1])))
+                return true;
+        }
+        if(boardTileLower(t2)){
+            if((boardBoxIsEmpty(t1.getBoard()[t1.getRow()][t1.getCol()-1]) && boardBoxIsEmpty(t2.getBoard()[t2.getRow()][t2.getCol()-1])) || (boardBoxIsEmpty(t1.getBoard()[t1.getRow()][t1.getCol()+1]) && boardBoxIsEmpty(t2.getBoard()[t2.getRow()][t2.getCol()+1])))
+                return true;
+        }
+        if(boardTileUpper(t1)){
+            if((boardBoxIsEmpty(t1.getBoard()[t1.getRow()][t1.getCol()-1]) && boardBoxIsEmpty(t2.getBoard()[t2.getRow()][t2.getCol()-1])) || (boardBoxIsEmpty(t1.getBoard()[t1.getRow()][t1.getCol()+1]) && boardBoxIsEmpty(t2.getBoard()[t2.getRow()][t2.getCol()+1])))
+                return true;
+        }
+        return (boardTileLeft(t1) && boardTileLeft(t2)) || (boardTileRight(t1) && boardTileRight(t2));
+    }
+
+    private boolean horizontalCheck(BoardToken t1, BoardToken t2){
+        if(!isInBorderlinePosition(t1) && !isInBorderlinePosition(t2)){
+            if((!boardBoxIsEmpty(t1.getBoard()[t1.getRow()-1][t1.getCol()]) && boardBoxIsEmpty(t1.getBoard()[t1.getRow()+1][t1.getCol()]) && !boardBoxIsEmpty(t2.getBoard()[t2.getRow()-1][t2.getCol()]) && boardBoxIsEmpty(t2.getBoard()[t2.getRow()+1][t2.getCol()])) || (!boardBoxIsEmpty(t1.getBoard()[t1.getRow()+1][t1.getCol()]) && boardBoxIsEmpty(t1.getBoard()[t1.getRow()-1][t1.getCol()]) && !boardBoxIsEmpty(t2.getBoard()[t2.getRow()+1][t2.getCol()]) && boardBoxIsEmpty(t2.getBoard()[t2.getRow()-1][t2.getCol()]))){
+                if(boardBoxIsEmpty(t1.getBoard()[t1.getRow()][t1.getCol()-1]) || boardBoxIsEmpty(t2.getBoard()[t2.getRow()][t2.getCol()+1]))
+                    return true;
+            }
+        }
+        if(!boardTileUpper(t1) && !boardTileUpper(t2) && !boardTileLower(t1) && !boardTileLower(t2)) {
+            if ((boardBoxIsEmpty(t1.getBoard()[t1.getRow() - 1][t1.getCol()]) && boardBoxIsEmpty(t1.getBoard()[t1.getRow() + 1][t1.getCol()])) || (boardBoxIsEmpty(t2.getBoard()[t2.getRow() - 1][t2.getCol()]) && boardBoxIsEmpty(t2.getBoard()[t2.getRow() + 1][t2.getCol()])))
+                return true;
+        }
+        if(boardTileRight(t2)){
+            if((boardBoxIsEmpty(t1.getBoard()[t1.getRow()-1][t1.getCol()]) && boardBoxIsEmpty(t2.getBoard()[t2.getRow()-1][t2.getCol()])) || (boardBoxIsEmpty(t1.getBoard()[t1.getRow()+1][t1.getCol()]) && boardBoxIsEmpty(t2.getBoard()[t2.getRow()+1][t2.getCol()])))
+                return true;
+        }
+        if(boardTileLeft(t1)){
+            if((boardBoxIsEmpty(t1.getBoard()[t1.getRow()-1][t1.getCol()]) && boardBoxIsEmpty(t2.getBoard()[t2.getRow()-1][t2.getCol()])) || (boardBoxIsEmpty(t1.getBoard()[t1.getRow()+1][t1.getCol()]) && boardBoxIsEmpty(t2.getBoard()[t2.getRow()+1][t2.getCol()])))
+                return true;
+        }
+        return (boardTileUpper(t1) && boardTileUpper(t2)) || (boardTileLower(t1) && boardTileLower(t2));
+    }
+
+    private boolean verticalCheck(BoardToken t1, BoardToken t2, BoardToken t3){
+        if(!isInBorderlinePosition(t1) && !isInBorderlinePosition(t2) && !isInBorderlinePosition(t3)){
+            if((!boardBoxIsEmpty(t1.getBoard()[t1.getRow()][t1.getCol()-1]) && boardBoxIsEmpty(t1.getBoard()[t1.getRow()][t1.getCol()+1]) && !boardBoxIsEmpty(t2.getBoard()[t2.getRow()][t2.getCol()-1]) && boardBoxIsEmpty(t2.getBoard()[t2.getRow()][t2.getCol()+1]) && !boardBoxIsEmpty(t3.getBoard()[t3.getRow()][t3.getCol()-1]) && boardBoxIsEmpty(t3.getBoard()[t3.getRow()][t3.getCol()+1])) || (!boardBoxIsEmpty(t1.getBoard()[t1.getRow()][t1.getCol()+1]) && boardBoxIsEmpty(t1.getBoard()[t1.getRow()][t1.getCol()-1]) && !boardBoxIsEmpty(t2.getBoard()[t2.getRow()][t2.getCol()+1]) && boardBoxIsEmpty(t2.getBoard()[t2.getRow()][t2.getCol()-1])  && !boardBoxIsEmpty(t3.getBoard()[t3.getRow()][t3.getCol()+1]) && boardBoxIsEmpty(t3.getBoard()[t3.getRow()][t3.getCol()-1]))){
+                if(boardBoxIsEmpty(t1.getBoard()[t1.getRow()-1][t1.getCol()]) || boardBoxIsEmpty(t3.getBoard()[t3.getRow()+1][t3.getCol()]))
+                    return true;
+            }
+        }
+        /*if(!boardTileLeft(t1) && !boardTileLeft(t2) && !boardTileLeft(t3) && !boardTileRight(t1) && !boardTileRight(t2) && !boardTileRight(t3)) {
+            if ((boardBoxIsEmpty(t1.getBoard()[t1.getRow()][t1.getCol() - 1]) && boardBoxIsEmpty(t1.getBoard()[t1.getRow()][t1.getCol() + 1])) || (boardBoxIsEmpty(t2.getBoard()[t2.getRow()][t2.getCol() - 1]) && boardBoxIsEmpty(t2.getBoard()[t2.getRow()][t2.getCol() + 1]))  || (boardBoxIsEmpty(t3.getBoard()[t3.getRow()][t3.getCol() - 1]) && boardBoxIsEmpty(t3.getBoard()[t3.getRow()][t3.getCol() + 1])))
+                return true;
+        }*/
+        if(boardTileLower(t3)){
+            if (horizontalSidesAreFree(t1, t2, t3)) return true;
+        }
+        if(boardTileUpper(t1)){
+            if (horizontalSidesAreFree(t1, t2, t3)) return true;
+        }
+        return false;
+    }
+
+    private boolean horizontalSidesAreFree(BoardToken t1, BoardToken t2, BoardToken t3) {
+        if((boardBoxIsEmpty(t1.getBoard()[t1.getRow()][t1.getCol()-1]) && boardBoxIsEmpty(t2.getBoard()[t2.getRow()][t2.getCol()-1]) && boardBoxIsEmpty(t3.getBoard()[t3.getRow()][t3.getCol()-1])) || (boardBoxIsEmpty(t1.getBoard()[t1.getRow()][t1.getCol()+1]) && boardBoxIsEmpty(t2.getBoard()[t2.getRow()][t2.getCol()+1]) && boardBoxIsEmpty(t3.getBoard()[t3.getRow()][t3.getCol()+1])))
+            return true;
+        return false;
+    }
+
+    private boolean horizontalCheck(BoardToken t1, BoardToken t2, BoardToken t3){
+        if(!isInBorderlinePosition(t1) && !isInBorderlinePosition(t2) && !isInBorderlinePosition(t3)){
+            if((!boardBoxIsEmpty(t1.getBoard()[t1.getRow()-1][t1.getCol()]) && boardBoxIsEmpty(t1.getBoard()[t1.getRow()+1][t1.getCol()]) && !boardBoxIsEmpty(t2.getBoard()[t2.getRow()-1][t2.getCol()]) && boardBoxIsEmpty(t2.getBoard()[t2.getRow()+1][t2.getCol()]) && !boardBoxIsEmpty(t3.getBoard()[t3.getRow()-1][t3.getCol()]) && boardBoxIsEmpty(t3.getBoard()[t3.getRow()+1][t3.getCol()])) || (!boardBoxIsEmpty(t1.getBoard()[t1.getRow()+1][t1.getCol()]) && boardBoxIsEmpty(t1.getBoard()[t1.getRow()-1][t1.getCol()]) && !boardBoxIsEmpty(t2.getBoard()[t2.getRow()+1][t2.getCol()]) && boardBoxIsEmpty(t2.getBoard()[t2.getRow()-1][t2.getCol()]) && !boardBoxIsEmpty(t3.getBoard()[t3.getRow()+1][t3.getCol()]) && boardBoxIsEmpty(t3.getBoard()[t3.getRow()-1][t3.getCol()]))){
+                if(boardBoxIsEmpty(t1.getBoard()[t1.getRow()][t1.getCol()-1]) || boardBoxIsEmpty(t3.getBoard()[t3.getRow()][t3.getCol()+1]))
+                    return true;
+            }
+        }
+        /*if(!boardTileUpper(t1) && !boardTileUpper(t2) && !boardTileUpper(t3) && !boardTileLower(t1) && !boardTileLower(t2) && !boardTileLower(t3)) {
+            if ((boardBoxIsEmpty(t1.getBoard()[t1.getRow() - 1][t1.getCol()]) && boardBoxIsEmpty(t1.getBoard()[t1.getRow() + 1][t1.getCol()])) || (boardBoxIsEmpty(t2.getBoard()[t2.getRow() - 1][t2.getCol()]) && boardBoxIsEmpty(t2.getBoard()[t2.getRow() + 1][t2.getCol()])) || (boardBoxIsEmpty(t3.getBoard()[t3.getRow() - 1][t3.getCol()]) && boardBoxIsEmpty(t3.getBoard()[t3.getRow() + 1][t3.getCol()])))
+                return true;
+        }*/
+        if(boardTileRight(t3)){
+            if (verticalSidesAreFree(t1, t2, t3)) return true;
+        }
+        if(boardTileLeft(t1)){
+            if (verticalSidesAreFree(t1, t2, t3)) return true;
+        }
+        return false;
+    }
+
+    private boolean verticalSidesAreFree(BoardToken t1, BoardToken t2, BoardToken t3) {
+        if((boardBoxIsEmpty(t1.getBoard()[t1.getRow()-1][t1.getCol()]) && boardBoxIsEmpty(t2.getBoard()[t2.getRow()-1][t2.getCol()]) && boardBoxIsEmpty(t3.getBoard()[t3.getRow()-1][t3.getCol()])) || (boardBoxIsEmpty(t1.getBoard()[t1.getRow()+1][t1.getCol()]) && boardBoxIsEmpty(t2.getBoard()[t2.getRow()+1][t2.getCol()]) && boardBoxIsEmpty(t3.getBoard()[t3.getRow()+1][t3.getCol()])))
+            return true;
+        return false;
+    }
     public boolean checkColumn(BookShelf b,int column,int numberOfTiles){
-      int counter=0;
-       for(int row=0;row<BookShelf.getMAX_Row();row++){
-         if(b.getTile(row,column)!=null)counter++;
-       }
-       return counter >= numberOfTiles;
+        int counter=0;
+        for(int row=0;row<BookShelf.getMAX_Row();row++){
+            if(b.getTile(row,column)!=null)counter++;
+        }
+        return counter >= numberOfTiles;
     }
 }

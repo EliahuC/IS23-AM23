@@ -16,7 +16,7 @@ public class Player {
     private final BookShelf playerBookshelf;
     private final PersonalGoalCard PersonalGoalCard;
     private final boolean nowPlaying;
-    private final boolean lastRound;
+    private boolean lastRound;
 
 
     public Player(String nickName) {
@@ -50,20 +50,14 @@ public class Player {
         return firstPlayerSeat;
     }
 
-    public void insertToken(ArrayList<ItemTile> selectedTokens, ArrayList<ItemTileCategory> order , int column){
-      for(int i=0;i<order.size();i++){
-          ItemTile tile=searchTile(selectedTokens,order.get(i));
-          playerBookshelf.setTile(column,tile);
-      }
+    public void insertToken(ArrayList<ItemTile> selectedTokens , int column){
+        for (ItemTile tile : selectedTokens) {
+            playerBookshelf.setTile(column, tile);
+        }
+
     }
 
-    private ItemTile searchTile(ArrayList<ItemTile> selectedTokens, ItemTileCategory category) {
-        ItemTile tile;
-        if(selectedTokens.get(0).getCategory()==category) tile=selectedTokens.remove(0);
-        else if (selectedTokens.get(1).getCategory()==category) tile=selectedTokens.remove(1);
-        else tile=selectedTokens.remove(3);
-        return tile;
-    }
+
 
 
     private void comparePersonalGoalCardwithBookshelf (){
@@ -84,6 +78,14 @@ public class Player {
 
     public boolean getNowPlaying(){
         return nowPlaying;
+    }
+
+    public boolean isLastRound() {
+        return lastRound;
+    }
+
+    public void setLastRound(boolean b){
+        this.lastRound=b;
     }
 }
 

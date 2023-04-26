@@ -50,7 +50,7 @@ public abstract class CommonGoalCard {
         this.numCompleted = 0;
     }
 
-    public Launcher getL (){
+    public Launcher getLauncher(){
         return L;
     }
 
