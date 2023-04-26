@@ -1,6 +1,6 @@
-package it.polimi.ingsw.Network.Messages.ServerToClient.ClientToServer;
+package it.polimi.ingsw.Network.Messages.ClientToServer;
 
-import it.polimi.ingsw.Network.Messages.ServerToClient.ClientToServer.PossibleMoves.Move_SelectColumn;
+import it.polimi.ingsw.Network.Messages.ClientToServer.PossibleMoves.Move_SelectColumn;
 
 public class ColumnMessage extends ClientMessage{
 

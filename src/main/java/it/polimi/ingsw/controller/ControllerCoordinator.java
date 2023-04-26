@@ -1,6 +1,6 @@
 package it.polimi.ingsw.controller;
 
-import it.polimi.ingsw.Network.Messages.ServerToClient.ClientToServer.ClientMessage;
+import it.polimi.ingsw.Network.Messages.ClientToServer.ClientMessage;
 import it.polimi.ingsw.model.player.Player;
 
 import java.util.ArrayList;
@@ -36,5 +36,8 @@ public class ControllerCoordinator {
     }
     public void setMessage(ClientMessage message){
         gameController.readMessage(message);
+    }
+    public void startGame(){
+        gameController.startGame();
     }
 }

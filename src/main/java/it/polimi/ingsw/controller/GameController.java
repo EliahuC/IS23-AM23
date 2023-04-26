@@ -2,8 +2,7 @@ package it.polimi.ingsw.controller;
 
 import com.google.gson.Gson;
 import it.polimi.ingsw.Launcher;
-import it.polimi.ingsw.Network.Messages.ServerToClient.ClientToServer.ClientMessage;
-import it.polimi.ingsw.Network.Messages.ServerToClient.ClientToServer.LobbyCreationMessage;
+import it.polimi.ingsw.Network.Messages.ClientToServer.ClientMessage;
 import it.polimi.ingsw.Network.Messages.Message;
 import it.polimi.ingsw.Network.Messages.ServerToClient.ErrorMessage;
 import it.polimi.ingsw.model.Game;
@@ -13,8 +12,8 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 public class GameController {
-     private final Game G;
-     private ClientMessage m;
+     private final Game game;
+     private ClientMessage message;
      private final Launcher launcher;
      private final Gson gson = new Gson();
      private final ArrayList<Integer> coordinates=new ArrayList<>();
@@ -24,16 +23,17 @@ public class GameController {
      private boolean startedGame=false;
      public GameController(ArrayList<Player> players){
          this.launcher=new Launcher();
-         this.m=null;
-         this.G=new Game(launcher,lobby);
-         lobby.addAll(players);
+         this.message =null;
+         this.lobby.addAll(players);
+         this.game =new Game(launcher,lobby);
+
 
      }
 
 
-     private synchronized void startGame(){
+     public synchronized void startGame(){
          startedGame=true;
-         G.startGame();
+         game.startGame();
      }
 
 
@@ -42,13 +42,13 @@ public class GameController {
          switch (m.getCategory()){
              case COORDINATES:{
                  coordinates.addAll(m.getMessageMove().getMove());
-                 if(!G.checkLegalMove(coordinates,coordinates.size()/2))
+                 if(!game.checkLegalMove(coordinates,coordinates.size()/2))
                      sendErrorMessage();
                  break;
              }
              case COLUMN :{
                  column=m.getMessageMove().getMove().remove(0);
-                 if(!G.checkLegalColumn(column,coordinates.size()/2))
+                 if(!game.checkLegalColumn(column,coordinates.size()/2))
                      sendErrorMessage();
                  break;
              }
@@ -65,11 +65,6 @@ public class GameController {
          return lobby.contains(s);
     }
 
-    private boolean checkLobbySpace() {
-         return lobby.size() <= lobbyMaxSize;
-    }
-
-
 
     private void sendErrorMessage(String ErrorMotivation) {
          Message error= new ErrorMessage();
@@ -85,15 +80,14 @@ public class GameController {
     }
 
     public synchronized void playMove(){
-         G.playMove(coordinates,column);
+         game.playMove(coordinates,column);
          coordinates.clear();
-
          column=null;
      }
 
 
     public synchronized Optional<Player> endGame() {
-        return G.endGame();
+        return game.endGame();
     }
 
 

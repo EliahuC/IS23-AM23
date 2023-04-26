@@ -1,7 +1,7 @@
-package it.polimi.ingsw.Network.Messages.ServerToClient.ClientToServer;
+package it.polimi.ingsw.Network.Messages.ClientToServer;
 
+import it.polimi.ingsw.Network.Messages.ClientToServer.PossibleMoves.Move;
 import it.polimi.ingsw.Network.Messages.Message;
-import it.polimi.ingsw.Network.Messages.ServerToClient.ClientToServer.PossibleMoves.Move;
 
 public class ClientMessage extends Message {
     public final Move m;

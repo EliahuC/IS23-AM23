@@ -1,13 +1,11 @@
 package it.polimi.ingsw.Network.Server;
 
 import com.google.gson.Gson;
-import it.polimi.ingsw.Network.Messages.Message;
-import it.polimi.ingsw.Network.Messages.ServerToClient.ClientToServer.ClientMessage;
-import it.polimi.ingsw.Network.Messages.ServerToClient.ClientToServer.LobbyCreationMessage;
+import it.polimi.ingsw.Network.Messages.ClientToServer.ClientMessage;
+import it.polimi.ingsw.Network.Messages.ClientToServer.LobbyCreationMessage;
 import it.polimi.ingsw.Network.Messages.ServerToClient.ErrorMessage;
 import it.polimi.ingsw.Network.Messages.ServerToClient.ServerMessage;
-import it.polimi.ingsw.Printer;
-import it.polimi.ingsw.model.player.Player;
+
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -51,6 +49,7 @@ public class ServerConnectionToClient implements Runnable {
                     e.printStackTrace();
                 }
             }
+            //da aggiungere ping sending
         });
         ping.start();
     }
@@ -81,7 +80,7 @@ public class ServerConnectionToClient implements Runnable {
         ClientMessage m = gson.fromJson(s, ClientMessage.class);
         switch (m.getCategory()) {
             case CREATE_LOBBY: {
-                lobby=new Lobby();
+                lobby=new Lobby(((LobbyCreationMessage) m).getNumPlayers());
                 if (lobby.getJoinedUsers().contains(m.getNickname())) {
                     ErrorMessage errorMessage=new ErrorMessage();
                     errorMessage.addReturnMessage("Lobby already present, please join that lobby");
@@ -106,7 +105,7 @@ public class ServerConnectionToClient implements Runnable {
                 lobby.addUser(m.getNickname());
                 break;
             }
-            default: lobby.reciveMessage(m);
+            default: lobby.receiveMessage(m);
         }
     }
 
