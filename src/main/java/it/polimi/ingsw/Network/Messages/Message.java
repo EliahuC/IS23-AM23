@@ -21,6 +21,7 @@ public abstract class Message {
         SUCCESS,
         START_GAME,
         ENTER_LOBBY,
+        LOGOUT_LOBBY,
         END_GAME_MESSAGE,
         WARNING;
 

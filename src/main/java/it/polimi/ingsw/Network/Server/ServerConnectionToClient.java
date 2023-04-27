@@ -77,17 +77,17 @@ public class ServerConnectionToClient implements Runnable {
 
     public synchronized void receiveMessage() throws IOException, ClassNotFoundException {
         String s= (String) input.readObject();
-        ClientMessage m = gson.fromJson(s, ClientMessage.class);
-        switch (m.getCategory()) {
+        ClientMessage message = gson.fromJson(s, ClientMessage.class);
+        switch (message.getCategory()) {
             case CREATE_LOBBY: {
-                lobby=new Lobby(((LobbyCreationMessage) m).getNumPlayers());
-                if (lobby.getJoinedUsers().contains(m.getNickname())) {
+                lobby=new Lobby(((LobbyCreationMessage) message).getNumPlayers());
+                if (lobby.getJoinedUsers().contains(message.getNickname())) {
                     ErrorMessage errorMessage=new ErrorMessage();
                     errorMessage.addReturnMessage("Lobby already present, please join that lobby");
                     sendMessage(errorMessage);
                     break;
                 }
-                lobby.addUser(m.getNickname());
+                lobby.addUser(message.getNickname());
             }
             case ENTER_LOBBY: {
                 if (!checkLobbySpace()) {
@@ -96,16 +96,25 @@ public class ServerConnectionToClient implements Runnable {
                     sendMessage(errorMessage);
                     break;
                 }
-                if (lobby.getJoinedUsers().contains(m.getNickname())) {
+                if (lobby.getJoinedUsers().contains(message.getNickname())) {
                     ErrorMessage errorMessage=new ErrorMessage();
                     errorMessage.addReturnMessage("Nickname already used in the lobby, please choose an other nickname");
                     sendMessage(errorMessage);
                     break;
                 }
-                lobby.addUser(m.getNickname());
+                lobby.addUser(message.getNickname());
                 break;
             }
-            default: lobby.receiveMessage(m);
+            case LOGOUT_LOBBY:{
+                if(lobby.getStartedGame()){
+                    ErrorMessage errorMessage=new ErrorMessage();
+                    errorMessage.addReturnMessage("Game already started,you can't logout since the game is finished");
+                    sendMessage(errorMessage);
+                    break;
+                }
+                lobby.logoutFromLobby(message.getNickname());
+            }
+            default: lobby.receiveMessage(message);
         }
     }
 
