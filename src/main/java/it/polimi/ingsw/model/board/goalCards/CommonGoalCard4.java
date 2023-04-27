@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CommonGoalCard4 extends CommonGoalCard implements CheckCommonGoalCard {
-    private final List<ItemTile> validGroups;
+    private final List<ItemTile> validGroups = new ArrayList<>();
     private int counterCats = 0;
     private int counterPlants = 0;
     private int counterTrophies = 0;
@@ -17,7 +17,6 @@ public class CommonGoalCard4 extends CommonGoalCard implements CheckCommonGoalCa
     private final Launcher L;
     public CommonGoalCard4(Launcher L){
         this.L = L;
-        validGroups = new ArrayList<>();
     }
 
     public int getCounterCats() {

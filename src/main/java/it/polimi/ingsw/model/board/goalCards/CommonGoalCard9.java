@@ -4,11 +4,11 @@ import it.polimi.ingsw.Launcher;
 import it.polimi.ingsw.model.board.ItemTile;
 import it.polimi.ingsw.model.board.ItemTileCategory;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 public class CommonGoalCard9 extends CommonGoalCard implements CheckCommonGoalCard {
-    private List<ItemTile> validGroups;
-    private static int numColumnsToAchieve=2;
+    private final static int numColumnsToAchieve=2;
     private final HashSet<ItemTileCategory> cat = new HashSet<>(); //I use an arrayList to track the categories in each column
     //of the bookshelf
     private final Launcher L;

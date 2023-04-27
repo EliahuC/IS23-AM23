@@ -7,13 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CommonGoalCard3 extends CommonGoalCard implements CheckCommonGoalCard {
-    private final List<ItemTile> validGroups;
+    private final List<ItemTile> validGroups = new ArrayList<>();
     private final Launcher L;
     private final static int Goal = 4;
 
     public CommonGoalCard3(Launcher L){
         this.L = L;
-        validGroups=new ArrayList<>();
     }
     @Override
     public void checkGoal(BookShelf bs) {

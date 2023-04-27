@@ -3,10 +3,10 @@ import it.polimi.ingsw.model.player.BookShelf;
 import it.polimi.ingsw.Launcher;
 import it.polimi.ingsw.model.board.ItemTile;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CommonGoalCard2 extends CommonGoalCard implements CheckCommonGoalCard {
-    private List<ItemTile> validGroups;
     private final Launcher L;
 
     public CommonGoalCard2(Launcher L){

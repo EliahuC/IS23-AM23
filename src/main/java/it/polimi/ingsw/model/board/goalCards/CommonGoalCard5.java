@@ -5,18 +5,19 @@ import it.polimi.ingsw.Launcher;
 import it.polimi.ingsw.model.board.ItemTile;
 import it.polimi.ingsw.model.board.ItemTileCategory;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
 public class CommonGoalCard5 extends CommonGoalCard implements CheckCommonGoalCard {
-    private List<ItemTile> validGroups;
-    private static int numColumnsToAchieve = 3;
-    private static int numDifferentCategoriesAllowed = 3;
-    private HashSet<ItemTileCategory> cat = new HashSet<>(); //I use an hashset to track the categories in each column
+    private final static int numColumnsToAchieve = 3;
+    private final static int numDifferentCategoriesAllowed = 3;
+    private final HashSet<ItemTileCategory> cat = new HashSet<>(); //I use an hashset to track the categories in each column
     private final Launcher L;
 
     public CommonGoalCard5(Launcher L){
         this.L = L;
+
     }
     @Override                                                   //of the bookshelf
     public void checkGoal(BookShelf bs) {
