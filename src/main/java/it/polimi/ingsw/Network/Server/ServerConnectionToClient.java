@@ -28,7 +28,6 @@ public class ServerConnectionToClient implements Runnable {
     public ServerConnectionToClient(Socket clientSocket) {
         this.clientSocket = clientSocket;
         this.serverIsActive = true;
-
         try {
             output = new ObjectOutputStream(clientSocket.getOutputStream());
             input = new ObjectInputStream(clientSocket.getInputStream());

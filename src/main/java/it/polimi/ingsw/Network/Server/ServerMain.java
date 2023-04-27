@@ -26,22 +26,24 @@ public class ServerMain implements Runnable, Printer, Loggable {
         showMessage("INSERT NEW PORT OR PRESS ENTER TO USE THE DEFAULT PORT");
         Scanner input = new Scanner(System.in);
         String newPort = input.nextLine();
-        if(newPort.length()!=0) port = Integer.parseInt(newPort);
+        if (newPort.length() != 0) port = Integer.parseInt(newPort);
         try {
             serverSocket = new ServerSocket(port);
         } catch (IOException e) {
             e.printStackTrace();
         }
         showMessage("Accepting..");
+        //while(true){
         Socket clientSocket = null;
         try {
             clientSocket = serverSocket.accept();
             showMessage("Client successfully connected");
-            // Operazioni da aggiungere
+            ServerConnectionToClient serverConnectionToClient = new ServerConnectionToClient(clientSocket);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        PrintWriter out = null; // allocate to write answer to client.
+    //}
+        PrintWriter out = null;
         try {
             out = new PrintWriter(clientSocket.getOutputStream(), true);
         } catch (IOException e) {
