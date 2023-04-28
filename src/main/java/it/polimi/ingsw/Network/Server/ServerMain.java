@@ -32,52 +32,27 @@ public class ServerMain implements Runnable, Printer, Loggable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        showMessage("Accepting..");
-        //while(true){
+        showMessage("Server is done!");
+        while(true){
         Socket clientSocket = null;
         try {
             clientSocket = serverSocket.accept();
             showMessage("Client successfully connected");
             ServerConnectionToClient serverConnectionToClient = new ServerConnectionToClient(clientSocket);
+            new Thread(serverConnectionToClient).start();
+            //da aggiungere listener e richiesta
         } catch (IOException e) {
             e.printStackTrace();
         }
-    //}
-        PrintWriter out = null;
-        try {
-            out = new PrintWriter(clientSocket.getOutputStream(), true);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    }
 
-        try {
-            BufferedReader in = new BufferedReader(
-                    new InputStreamReader(clientSocket.getInputStream()));
-            readLoop(in, out);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
-        showMessage("Server done!");
+
 
     }
 
 
 
- private void readLoop(BufferedReader in, PrintWriter out) {
-     String s = "";
-     try {
-         while ((s = in.readLine()) != null) {
-             System.out.println(s);
-             out.println(s.toUpperCase());
-             out.flush();
-         }
-
-     } catch (IOException e) {
-         e.printStackTrace();
-     }
-
- }
 
 
     @Override

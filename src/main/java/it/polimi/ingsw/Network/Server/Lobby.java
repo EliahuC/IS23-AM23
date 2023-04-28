@@ -1,6 +1,7 @@
 package it.polimi.ingsw.Network.Server;
 
 import it.polimi.ingsw.Network.Messages.ClientToServer.ClientMessage;
+import it.polimi.ingsw.Network.Messages.Message;
 import it.polimi.ingsw.controller.ControllerCoordinator;
 import it.polimi.ingsw.model.player.Player;
 
