@@ -40,4 +40,5 @@ public class ControllerCoordinator {
     public void startGame(){
         gameController.startGame();
     }
+
 }
