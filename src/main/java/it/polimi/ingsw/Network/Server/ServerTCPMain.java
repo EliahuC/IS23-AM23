@@ -1,24 +1,19 @@
 package it.polimi.ingsw.Network.Server;
-import it.polimi.ingsw.Loggable;
-import it.polimi.ingsw.Printer;
 
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Scanner;
-public class ServerMain implements Runnable, Printer, Loggable {
+public class ServerTCPMain extends Server {
     private ServerSocket serverSocket;
     private final ArrayList<String> loggedUsers =new ArrayList<>();
 
     private int port;
 
-    public ServerMain(){
+    public ServerTCPMain(){
         this.port=49521;
     }
     @Override
@@ -73,7 +68,7 @@ public class ServerMain implements Runnable, Printer, Loggable {
     }
 
     public static void main(String[] args) {
-        ServerMain serverMain = new ServerMain();
+        ServerTCPMain serverMain = new ServerTCPMain();
         new Thread(serverMain).start();
     }
 }
