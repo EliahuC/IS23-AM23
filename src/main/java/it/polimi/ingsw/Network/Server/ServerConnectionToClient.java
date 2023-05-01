@@ -27,6 +27,7 @@ public class ServerConnectionToClient implements Runnable {
 
     public ServerConnectionToClient(Socket clientSocket) {
         this.clientSocket = clientSocket;
+
         this.serverIsActive = true;
         try {
             output = new ObjectOutputStream(clientSocket.getOutputStream());
@@ -116,6 +117,12 @@ public class ServerConnectionToClient implements Runnable {
             default: lobby.receiveMessage(message);
         }
     }
+    public void addVirtualView(VirtualView virtualView){
+        this.virtualView=virtualView;
+    }
+
+
+
 
     private boolean checkLobbySpace() {
         return lobby.getJoinedUsers().size()<=4;

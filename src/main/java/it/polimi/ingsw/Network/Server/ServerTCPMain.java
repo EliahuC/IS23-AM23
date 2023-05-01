@@ -10,6 +10,7 @@ import java.util.Scanner;
 public class ServerTCPMain extends Server {
     private ServerSocket serverSocket;
     private final ArrayList<String> loggedUsers =new ArrayList<>();
+    private final ArrayList<VirtualView> virtualViews=new ArrayList<>();
 
     private int port;
 
@@ -35,6 +36,9 @@ public class ServerTCPMain extends Server {
             showMessage("Client successfully connected");
             ServerConnectionToClient serverConnectionToClient = new ServerConnectionToClient(clientSocket);
             new Thread(serverConnectionToClient).start();
+            VirtualView virtualView=new VirtualView(serverConnectionToClient);
+            virtualViews.add(virtualView);
+            serverConnectionToClient.addVirtualView(virtualView);
             //da aggiungere listener e richiesta
         } catch (IOException e) {
             e.printStackTrace();
