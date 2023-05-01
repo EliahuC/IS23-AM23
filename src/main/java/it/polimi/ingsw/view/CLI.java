@@ -11,4 +11,9 @@ public class CLI extends View implements Printer {
     public void showMessage(String s) {
         //IMPLEMENTO VARI TIPI DI STAMPA PER CLI
     }
+
+    @Override
+    public void run() {
+
+    }
 }

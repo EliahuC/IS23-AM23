@@ -14,7 +14,7 @@ public class ServerTCPMain extends Server {
     private int port;
 
     public ServerTCPMain(){
-        this.port=49521;
+        this.port=2201;
     }
     @Override
     public void run() {
