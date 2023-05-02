@@ -202,6 +202,7 @@ public class LivingRoom {
       while (i<requestedTiles.size()){
           if(requestedTiles.get(i)==null) return tiles;
           ItemTile tile= getBoardTile(requestedTiles.get(i),requestedTiles.get(i+1)).getTile();
+          getBoardTile(requestedTiles.get(i),requestedTiles.get(i+1)).freeTile();
           tiles.add(tile);
           i=i+2;
        }
