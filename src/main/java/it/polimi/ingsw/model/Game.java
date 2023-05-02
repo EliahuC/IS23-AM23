@@ -36,7 +36,7 @@ public class Game {
         this.startedGame=true;
     }
     public synchronized void playMove(ArrayList<Integer> commands,  Integer column){
-          if(!Players.get(currPlaying-1).isLastRound()) {
+          if(!finishedGame) {
               placeTiles(commands, column);
               checkCGC();
               if (GC.isRestorable(livingRoom.getBoard())) livingRoom.restore();
