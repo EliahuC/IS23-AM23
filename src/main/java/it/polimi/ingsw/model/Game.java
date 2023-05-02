@@ -34,13 +34,16 @@ public class Game {
     public synchronized void startGame(){
         livingRoom.Start(Players.size());
         this.startedGame=true;
+
     }
-    public synchronized void playMove(ArrayList<Integer> commands,  Integer column){
+    public synchronized boolean playMove(ArrayList<Integer> commands,  Integer column){
           if(!finishedGame) {
               placeTiles(commands, column);
               checkCGC();
               if (GC.isRestorable(livingRoom.getBoard())) livingRoom.restore();
+              return true;
           }
+          return false;
     }
     public synchronized Optional<Player> endGame(){
         Optional<Player> P = Optional.empty();

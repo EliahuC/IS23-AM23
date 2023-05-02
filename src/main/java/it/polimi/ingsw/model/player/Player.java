@@ -5,6 +5,8 @@ package it.polimi.ingsw.model.player;
 import it.polimi.ingsw.model.board.ItemTile;
 import it.polimi.ingsw.model.board.ItemTileCategory;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 
 public class Player {
@@ -17,6 +19,7 @@ public class Player {
     private final PersonalGoalCard PersonalGoalCard;
     private final boolean nowPlaying;
     private boolean lastRound;
+    PropertyChangeListener listener;
 
 
     public Player(String nickName) {
@@ -51,9 +54,15 @@ public class Player {
     }
 
     public void insertToken(ArrayList<ItemTile> selectedTokens , int column){
+        PropertyChangeEvent evt = new PropertyChangeEvent(
+                this,
+                "BOOKSHELF_CHANGED",
+                this.playerBookshelf,
+                playerBookshelf);
         for (ItemTile tile : selectedTokens) {
             playerBookshelf.setTile(column, tile);
         }
+        this.listener.propertyChange(evt);
 
     }
 
@@ -86,6 +95,14 @@ public class Player {
 
     public void setLastRound(boolean b){
         this.lastRound=b;
+    }
+
+    public PropertyChangeListener getListener() {
+        return listener;
+    }
+
+    public void setListener(PropertyChangeListener listener) {
+        this.listener = listener;
     }
 }
 
