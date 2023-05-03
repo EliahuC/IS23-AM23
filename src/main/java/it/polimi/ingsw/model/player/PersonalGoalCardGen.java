@@ -121,6 +121,6 @@ public class PersonalGoalCardGen {
     }
     public HashMap<PGCKey,ItemTile> GetGoal(){
         int randIndex = new Random().nextInt(Goals.size());
-        return Goals.get(randIndex);
+        return Goals.remove(randIndex);
     }
 }

@@ -5,6 +5,9 @@ import it.polimi.ingsw.model.player.PersonalGoalCard;
 import it.polimi.ingsw.model.board.ItemTile;
 import it.polimi.ingsw.model.player.BookShelf;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public class PersonalGoalCardTest extends TestCase {
 
     public void testCheckGoalPGC1_0(){     // test in which a bookshelf doesn't match any ItemTile in the correct
@@ -1001,6 +1004,16 @@ public class PersonalGoalCardTest extends TestCase {
         b.setTile(4,4, new ItemTile("GAMES"));
         b.setTile(3,3,new ItemTile("TROPHIES"));
         assertEquals(12,PG12.CheckGoal(b));
+    }
+
+    public void testNotEqualsGoalCard(){
+        ArrayList<PersonalGoalCard> lista =new ArrayList<>();
+        ArrayList<PersonalGoalCard> confronto=new ArrayList<>();
+        for(int i=0;i<12;i++){
+          lista.add(new PersonalGoalCard());
+          confronto.add(new PersonalGoalCard(i+1));
+        }
+        assertTrue(lista.containsAll(confronto));
     }
 }
 
