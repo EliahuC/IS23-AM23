@@ -150,4 +150,8 @@ public class PersonalGoalCard {
         }
         return points;
     }
+
+    public HashMap<PGCKey, ItemTile> getGoal() {
+        return Goal;
+    }
 }
