@@ -102,11 +102,13 @@ public class Game {
     private ArrayList<Integer> sortTiles(ArrayList<Integer> commands) {
         ArrayList<Integer> comandi=new ArrayList<>();
         //tessere sulla stessa riga
-        if(Objects.equals(commands.get(0), commands.get(2)) && Objects.equals(commands.get(2), commands.get(4))){
+        if((Objects.equals(commands.get(0), commands.get(2)) && Objects.equals(commands.get(2), commands.get(4)))
+        ||(Objects.equals(commands.get(0), commands.get(2)) && Objects.equals(null, commands.get(4)))){
             sortRow(commands,comandi);
         }
         //tessere sulla stessa colonna
-        else if(Objects.equals(commands.get(1), commands.get(3)) && Objects.equals(commands.get(3), commands.get(5))){
+        else if((Objects.equals(commands.get(1), commands.get(3)) && Objects.equals(commands.get(3), commands.get(5)))
+            ||(Objects.equals(commands.get(1), commands.get(3)) && Objects.equals(null, commands.get(5)))){
            sortColumn(commands,comandi);
         }
       return comandi;
