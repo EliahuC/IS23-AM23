@@ -7,6 +7,7 @@ import it.polimi.ingsw.model.player.BookShelf;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.stream.Collectors;
 
 public class PersonalGoalCardTest extends TestCase {
 
@@ -1013,7 +1014,9 @@ public class PersonalGoalCardTest extends TestCase {
           lista.add(new PersonalGoalCard());
           confronto.add(new PersonalGoalCard(i+1));
         }
-        assertTrue(lista.containsAll(confronto));
+        lista= (ArrayList<PersonalGoalCard>) lista.stream().sorted().collect(Collectors.toList());
+        confronto= (ArrayList<PersonalGoalCard>) confronto.stream().sorted().collect(Collectors.toList());
+        assertEquals(lista,confronto);
     }
 }
 
