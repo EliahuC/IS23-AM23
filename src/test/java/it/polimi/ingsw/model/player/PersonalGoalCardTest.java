@@ -1027,17 +1027,21 @@ public class PersonalGoalCardTest extends TestCase {
             lista.add(new PersonalGoalCard());
             confronto.add(new PersonalGoalCard(i + 1));
         }
-        for (int j = 0; j == counter; j++) {
-            HashMap<PGCKey, ItemTile> goal = new HashMap<>(lista.get(0).getGoal());
-            for (PersonalGoalCard personalGoalCard : confronto) {
-                if (personalGoalCard.getGoal().equals(goal)) {
+        int j=0;
+        while(j == counter) {
+            HashMap<PGCKey, ItemTile> goal = new HashMap<>(confronto.get(0).getGoal());
+            for (int i=0;i<12 && lista.get(i)!=null;i++) {
+                if (lista.get(i).getGoal().equals(goal)) {
                     counter++;
+                    lista.remove(i);
                 }
             }
-            lista.remove(0);
+            confronto.remove(0);
+            j++;
         }
         assertEquals(12, counter);
         assertEquals(0,lista.size());
+        assertEquals(0,confronto.size());
     }
 }
 
