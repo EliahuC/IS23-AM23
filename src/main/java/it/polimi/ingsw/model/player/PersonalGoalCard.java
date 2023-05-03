@@ -10,7 +10,7 @@ public class PersonalGoalCard {
     private int points;
     private final int NumeroCarta;
     private final HashMap<PGCKey, ItemTile> Goal = new HashMap<>();
-    PersonalGoalCardGen Gen=new PersonalGoalCardGen();
+    private static final PersonalGoalCardGen Gen=new PersonalGoalCardGen();
 
 
     //METODO SWITCH
