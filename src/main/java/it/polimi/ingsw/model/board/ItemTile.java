@@ -45,9 +45,6 @@ public class ItemTile {
             case "TROPHIES":
                 this.category= ItemTileCategory.TROPHIES;
                 break;
-            case "NULL" :
-                this.category=null;
-                break;
         }
     }
 
