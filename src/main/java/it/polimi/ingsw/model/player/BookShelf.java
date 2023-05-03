@@ -225,8 +225,8 @@ public class BookShelf {
     }
 
     public void setTile(int j, ItemTile t){
-       int i=0;
-       while(Shelf[i][j]!=null)i++;
+       int i=BookShelf.getMAX_Row()-1;
+       while(Shelf[i][j]!=null)i--;
        Shelf[i][j]=t;
     }
 
