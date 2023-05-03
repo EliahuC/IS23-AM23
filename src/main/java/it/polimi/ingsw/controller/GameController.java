@@ -50,6 +50,7 @@ public class GameController {
                  column=m.getMessageMove().getMove().remove(0);
                  if(!game.checkLegalColumn(column,coordinates.size()/2))
                      sendErrorMessage();
+                 else playMove();
                  break;
              }
              case START_GAME:{
