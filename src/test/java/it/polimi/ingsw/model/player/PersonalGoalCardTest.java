@@ -1035,9 +1035,12 @@ public class PersonalGoalCardTest extends TestCase {
                     confronto.remove(p1);
                 }
             }
-            assertEquals(12, counter);
-            assertEquals(0, confronto.size());
+            lista.remove(p);
+
         }
+        assertEquals(12, counter);
+        assertEquals(0, confronto.size());
+        assertEquals(0,lista.size());
     }
 }
 
