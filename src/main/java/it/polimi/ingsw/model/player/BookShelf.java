@@ -29,6 +29,7 @@ public class BookShelf {
         this.counter = 1;
         this.points = 0;
         this.category = null;
+        buildShelf();
     }
 
     public ItemTile getTile(int x , int y) {
@@ -232,5 +233,12 @@ public class BookShelf {
 
     public ItemTile[][] getShelf(){
         return Shelf;
+    }
+    
+    private void buildShelf(){
+        for(int i=0;i<MAX_Row;i++){
+            for(int j=0;i<MAX_Column;j++)
+                this.Shelf[i][j]=new ItemTile("NULL");
+        }
     }
 }
