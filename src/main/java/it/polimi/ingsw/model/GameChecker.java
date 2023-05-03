@@ -265,29 +265,19 @@ public class GameChecker {
     }
 
     private boolean verticallyAdjacent(BoardToken t1, BoardToken t2){
-        return (t1.getRow() == t2.getRow() - 1) || (t2.getRow()==t1.getRow()-1);
+        return t1.getRow() == t2.getRow() - 1;
     }
 
     private boolean verticallyAdjacent(BoardToken t1, BoardToken t2, BoardToken t3){
-        return (t1.getRow() == t2.getRow() - 1 && t1.getRow() == t3.getRow() - 2) ||
-                (t1.getRow() == t3.getRow()-1 && t1.getRow()==t2.getRow()-2) ||
-                (t2.getRow()==t1.getRow()-1 && t2.getRow()==t3.getRow()-2) ||
-                (t2.getRow()==t3.getRow()-1 && t2.getRow()==t1.getRow()-2) ||
-                (t3.getRow()== t2.getRow()-1 && t3.getRow()==t1.getRow()-2) ||
-                (t3.getRow()== t1.getRow()-1 && t3.getRow()==t2.getRow()-2);
+        return t1.getRow() == t2.getRow() - 1 && t1.getRow() == t3.getRow() - 2;
     }
 
     private boolean horizontallyAdjacent(BoardToken t1, BoardToken t2){
-        return (t1.getCol() == t2.getCol() - 1) || (t2.getCol() == t1.getCol()-1);
+        return t1.getCol() == t2.getCol() - 1;
     }
 
     private boolean horizontallyAdjacent(BoardToken t1, BoardToken t2, BoardToken t3){
-        return (t1.getCol() == t2.getCol() - 1 && t1.getCol() == t3.getCol() - 2) ||
-                (t1.getCol() == t3.getCol()-1 && t1.getCol()==t2.getCol()-2) ||
-                (t2.getCol()==t1.getCol()-1 && t2.getCol()==t3.getCol()-2) ||
-                (t2.getCol()==t3.getCol()-1 && t2.getCol()==t1.getCol()-2) ||
-                (t3.getCol()== t2.getCol()-1 && t3.getCol()==t1.getCol()-2) ||
-                (t3.getCol()== t1.getCol()-1 && t3.getCol()==t2.getCol()-2);
+        return t1.getCol() == t2.getCol() - 1 && t1.getCol() == t3.getCol() - 2;
     }
 
     private boolean boardTileUpper(BoardToken t){

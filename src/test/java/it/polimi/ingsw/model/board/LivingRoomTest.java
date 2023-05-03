@@ -255,24 +255,7 @@ public class LivingRoomTest extends TestCase {
         assertNull(L15.getBoardTile(8, 5).getTile());
         assertNull(L15.getBoardTile(8, 4).getTile());
     }
-
-    public void testNullTileAfterExtraction_FOURTH() {
-        LivingRoom L16;
-        Launcher L = new Launcher();
-        L.setNumPlayers(4);
-        L16 = new LivingRoom(L);
-        L16.Start(L.getNumPlayers());
-        ArrayList<Integer> CoordinatesTiles = new ArrayList<>();
-        CoordinatesTiles.add(3);
-        CoordinatesTiles.add(8);
-        CoordinatesTiles.add(4);
-        CoordinatesTiles.add(8);
-        L16.getTiles(CoordinatesTiles);
-        assertNull(L16.getBoardTile(3, 8).getTile());
-        assertNull(L16.getBoardTile(4, 8).getTile());
-    }
-
-    public void testNullTileAfterExtraction_FIFTH() {   //AFTER A PLAYER'S LEGAL MOVE, TAKING THREE ITEM TILES FROM THE
+    public void testNullTileAfterExtraction_FOURTH() {   //AFTER A PLAYER'S LEGAL MOVE, TAKING THREE ITEM TILES FROM THE
         LivingRoom L17;                                     //LIVINGROOM, TILES' REFERENCES ARE SETTED TO NULL
         Launcher L = new Launcher();
         L.setNumPlayers(4);
@@ -280,111 +263,15 @@ public class LivingRoomTest extends TestCase {
         L17.Start(L.getNumPlayers());
         ArrayList<Integer> CoordinatesTiles = new ArrayList<>();
         CoordinatesTiles.add(3);
-        CoordinatesTiles.add(8);
-        CoordinatesTiles.add(4);
-        CoordinatesTiles.add(8);
-        L17.getTiles(CoordinatesTiles);
-        CoordinatesTiles.clear();
-        CoordinatesTiles.add(3);
         CoordinatesTiles.add(7);
         CoordinatesTiles.add(4);
         CoordinatesTiles.add(7);
         CoordinatesTiles.add(5);
         CoordinatesTiles.add(7);
         L17.getTiles(CoordinatesTiles);
-        assertNull(L17.getBoardTile(3, 8).getTile());
-        assertNull(L17.getBoardTile(4, 8).getTile());
         assertNull(L17.getBoardTile(3, 7).getTile());
         assertNull(L17.getBoardTile(4, 7).getTile());
         assertNull(L17.getBoardTile(5, 7).getTile());
     }
-    public void testNullTileAfterExtraction_SIXTH() {
-        LivingRoom L18;
-        Launcher L = new Launcher();
-        L.setNumPlayers(4);
-        L18 = new LivingRoom(L);
-        L18.Start(L.getNumPlayers());
-        ArrayList<Integer> CoordinatesTiles = new ArrayList<>();
-        CoordinatesTiles.add(8);
-        CoordinatesTiles.add(5);
-        CoordinatesTiles.add(8);
-        CoordinatesTiles.add(4);
-        L18.getTiles(CoordinatesTiles);
-        CoordinatesTiles.clear();
-        CoordinatesTiles.add(7);
-        CoordinatesTiles.add(3);
-        CoordinatesTiles.add(7);
-        CoordinatesTiles.add(4);
-        CoordinatesTiles.add(7);
-        CoordinatesTiles.add(5);
-        L18.getTiles(CoordinatesTiles);
-        assertNull(L18.getBoardTile(8, 5).getTile());
-        assertNull(L18.getBoardTile(8, 4).getTile());
-        assertNull(L18.getBoardTile(7, 3).getTile());
-        assertNull(L18.getBoardTile(7, 4).getTile());
-        assertNull(L18.getBoardTile(7, 5).getTile());
-    }
-    public void testNullTileAfterExtraction_SEVENTH() {       //IF A MOVE IS NOT LEGAL, THE METHOD GET TILES WILL RETURN
-        LivingRoom L19;                                  //NULL
-        Launcher L = new Launcher();
-        L.setNumPlayers(4);
-        L19 = new LivingRoom(L);
-        L19.Start(L.getNumPlayers());
-        ArrayList<Integer> CoordinatesTiles = new ArrayList<>();
-        CoordinatesTiles.add(3);
-        CoordinatesTiles.add(4);
-        assertNull(L19.getTiles(CoordinatesTiles));
-    }
-    public void testNullTileAfterExtraction_EIGHT() {           //TAKING AN ITEM TILE IN A BOARDTOKEN WITH CATEGORY
-        LivingRoom L19;                                         //UNAVAILABLE
-        Launcher L = new Launcher();
-        L.setNumPlayers(4);
-        L19 = new LivingRoom(L);
-        L19.Start(L.getNumPlayers());
-        ArrayList<Integer> CoordinatesTiles = new ArrayList<>();
-        CoordinatesTiles.add(2);
-        CoordinatesTiles.add(7);
-        assertNull(L19.getTiles(CoordinatesTiles));
-    }
-    public void testNullTileAfterExtraction_NINTH() {
-        LivingRoom L20;
-        Launcher L = new Launcher();
-        L.setNumPlayers(4);
-        L20 = new LivingRoom(L);
-        L20.Start(L.getNumPlayers());
-        ArrayList<Integer> CoordinatesTiles = new ArrayList<>();
-        CoordinatesTiles.add(3);
-        CoordinatesTiles.add(7);
-        CoordinatesTiles.add(4);
-        CoordinatesTiles.add(7);
-        assertNull(L20.getTiles(CoordinatesTiles));
-    }
-    public void testNullTileAfterExtraction_TENTH() {
-        LivingRoom L21;
-        Launcher L = new Launcher();
-        L.setNumPlayers(4);
-        L21 = new LivingRoom(L);
-        L21.Start(L.getNumPlayers());
-        ArrayList<Integer> CoordinatesTiles = new ArrayList<>();
-        CoordinatesTiles.add(6);
-        CoordinatesTiles.add(3);
-        CoordinatesTiles.add(6);
-        CoordinatesTiles.add(4);
-        CoordinatesTiles.add(6);
-        CoordinatesTiles.add(5);
-        assertNull(L21.getTiles(CoordinatesTiles));
-    }
-    public void testNullTileAfterExtraction_ELEVENTH() {
-        LivingRoom L22;
-        Launcher L = new Launcher();
-        L.setNumPlayers(4);
-        L22 = new LivingRoom(L);
-        L22.Start(L.getNumPlayers());
-        ArrayList<Integer> CoordinatesTiles = new ArrayList<>();
-        CoordinatesTiles.add(2);
-        CoordinatesTiles.add(2);
-        CoordinatesTiles.add(1);
-        CoordinatesTiles.add(3);
-        assertNull(L22.getTiles(CoordinatesTiles));
-    }
+
 }

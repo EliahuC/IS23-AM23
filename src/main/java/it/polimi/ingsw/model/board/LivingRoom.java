@@ -1,4 +1,5 @@
 package it.polimi.ingsw.model.board;
+import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.board.goalCards.*;
 import it.polimi.ingsw.model.player.BookShelf;
 import it.polimi.ingsw.model.board.goalCards.*;
@@ -199,42 +200,16 @@ public class LivingRoom {
 
     public ArrayList<ItemTile> getTiles(ArrayList<Integer> requestedTiles) {
         ArrayList<ItemTile> tiles = new ArrayList<>();
-        int i = 0, counter = 1;
+        int i = 0;
         while (i < requestedTiles.size()) {
-            switch (counter) {
-                case 1:
-                    if (this.getGameChecker().isLegalAction(getBoardTile(requestedTiles.get(i),requestedTiles.get(i + 1)))) {
-                        ItemTile tile1 = getBoardTile(requestedTiles.get(i), requestedTiles.get(i + 1)).getTile();
-                        tiles.add(tile1);
-                        i = i + 2;
-                        counter++;
-                        break;
-                    } else return null;
-                case 2:
-                    if (this.getGameChecker().isLegalAction(getBoardTile(requestedTiles.get(0),
-                            requestedTiles.get(1)), getBoardTile(requestedTiles.get(i), requestedTiles.get(i + 1)))) {
-                        ItemTile tile2 = getBoardTile(requestedTiles.get(i), requestedTiles.get(i + 1)).getTile();
-                        tiles.add(tile2);
-                        i = i + 2;
-                        counter++;
-                        break;
-                    } else return null;
-                case 3:
-                    if (this.getGameChecker().isLegalAction(getBoardTile(requestedTiles.get(0), requestedTiles.get(1)),
-                            getBoardTile(requestedTiles.get(2), requestedTiles.get(3)), getBoardTile(requestedTiles.get(i),
-                                    requestedTiles.get(i + 1)))) {
-                        ItemTile tile3 = getBoardTile(requestedTiles.get(i), requestedTiles.get(i + 1)).getTile();
-                        //getBoardTile(requestedTiles.get(i), requestedTiles.get(i + 1)).freeTile();
-                        tiles.add(tile3);
-                        i = i + 2;
-                        break;
-                    } else return null;
-            }
-
+            ItemTile tile = getBoardTile(requestedTiles.get(i), requestedTiles.get(i + 1)).getTile();
+            getBoardTile(requestedTiles.get(i), requestedTiles.get(i + 1)).freeTile();
+            tiles.add(tile);
+            i = i + 2;
         }
-        DeleteFromLivingRoom(requestedTiles);
         return tiles;
     }
+
     public BoardToken[][] getBoard() {
         return Board;
     }
@@ -274,11 +249,5 @@ public class LivingRoom {
     public GameChecker getGameChecker() {
         return G;
     }
-    private void DeleteFromLivingRoom(ArrayList<Integer> I){
-        int y = 0;
-        while(y<I.size()){
-            getBoardTile(I.get(y), I.get(y + 1)).freeTile();
-            y=y+2;
-        }
-    }
+
 }
