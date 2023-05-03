@@ -10,7 +10,6 @@ public class PersonalGoalCard {
     private int points;
     private final int NumeroCarta;
     private final HashMap<PGCKey, ItemTile> Goal = new HashMap<>();
-    private static final PersonalGoalCardGen Gen=new PersonalGoalCardGen();
 
 
     //METODO SWITCH
@@ -121,7 +120,7 @@ public class PersonalGoalCard {
     //METODO MAPPA DI MAPPA
     public PersonalGoalCard(){
             this.NumeroCarta=0;
-            Goal.putAll(Gen.GetGoal());
+            Goal.putAll(PersonalGoalCardGen.GetGoal());
             this.completed = 0;
             this.points=0;
 
