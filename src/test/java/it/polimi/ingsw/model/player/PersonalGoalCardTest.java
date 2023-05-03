@@ -1010,13 +1010,19 @@ public class PersonalGoalCardTest extends TestCase {
     public void testNotEqualsGoalCard(){
         ArrayList<PersonalGoalCard> lista =new ArrayList<>();
         ArrayList<PersonalGoalCard> confronto=new ArrayList<>();
+        int counter=0;
         for(int i=0;i<12;i++){
           lista.add(new PersonalGoalCard());
           confronto.add(new PersonalGoalCard(i+1));
         }
-        lista= (ArrayList<PersonalGoalCard>) lista.stream().sorted().collect(Collectors.toList());
-        confronto= (ArrayList<PersonalGoalCard>) confronto.stream().sorted().collect(Collectors.toList());
-        assertEquals(lista,confronto);
+        for(PersonalGoalCard p:lista){
+            if(confronto.contains(p)){
+                counter++;
+                confronto.remove(p);
+            }
+        }
+        assertEquals(12, counter);
+        assertEquals(0, confronto.size());
     }
 }
 
