@@ -2,6 +2,7 @@ package it.polimi.ingsw.model.player;
 
 
 
+import it.polimi.ingsw.Network.Server.VirtualView;
 import it.polimi.ingsw.model.board.ItemTile;
 import it.polimi.ingsw.model.board.ItemTileCategory;
 
@@ -31,6 +32,7 @@ public class Player {
         this.PersonalGoalCard = new PersonalGoalCard();
         this.nowPlaying = false;
         this.lastRound = false;
+
     }
 
     public String getNickName() {

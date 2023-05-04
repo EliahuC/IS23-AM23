@@ -161,7 +161,7 @@ public class PersonalGoalCard {
     public boolean equals(HashMap<PGCKey, ItemTile> mappa) {
         int counter=0;
       for(PGCKey k: mappa.keySet()){
-          if(this.Goal.keySet().contains(k))counter++;
+          if(this.Goal.keySet().contains(k) && this.Goal.get(k)==mappa.get(k))counter++;
       }
       return counter==6;
     }
