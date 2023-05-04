@@ -13,16 +13,18 @@
         public void checkGoal(BookShelf bs) {
             int c1 = 0, c2 = 0, c3 = 0, c4 = 0, c5 = 0, c6 = 0;
             for (int i = 0; i < BookShelf.getMAX_Row(); i++) {
-               for(int j=0;j<BookShelf.getMAX_Column();j++){
-                   switch (bs.getTile(i, j).getCategory()) {
-                       case CATS -> c1++;
-                       case FRAMES -> c2++;
-                       case BOOKS -> c3++;
-                       case GAMES -> c4++;
-                       case PLANTS -> c5++;
-                       case TROPHIES -> c6++;
-                   }
-               }
+                for (int j = 0; j < BookShelf.getMAX_Column(); j++) {
+                    if (bs.getTile(i, j) != null) {
+                        switch (bs.getTile(i, j).getCategory()) {
+                            case CATS -> c1++;
+                            case FRAMES -> c2++;
+                            case BOOKS -> c3++;
+                            case GAMES -> c4++;
+                            case PLANTS -> c5++;
+                            case TROPHIES -> c6++;
+                        }
+                    }
+                }
             }
             if(c1>7||c2>7||c3>7||c4>7||c5>7||c6>7) increaseNumCompleted();
 
