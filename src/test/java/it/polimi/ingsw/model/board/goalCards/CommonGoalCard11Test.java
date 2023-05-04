@@ -121,4 +121,40 @@ public class CommonGoalCard11Test extends TestCase {
         c50.checkGoal(bs35);
         assertEquals(0, c50.getNumCompleted());
     }
+    public void testCheckGoalCardCGC11_FOURTH() {
+        CommonGoalCard c50 = new CommonGoalCard11(new Launcher());
+        c50.initNumCompleted();
+        BookShelf bs35 = new BookShelf();
+        bs35.setTile(3,2,new ItemTile("CATS"));
+        bs35.setTile(3,4,new ItemTile("CATS"));
+        bs35.setTile(4,3,new ItemTile("CATS"));
+        bs35.setTile(5,2,new ItemTile("CATS"));
+        bs35.setTile(5,4,new ItemTile("CATS"));
+        c50.checkGoal(bs35);
+        assertEquals(1, c50.getNumCompleted());
+    }
+    public void testCheckGoalCardCGC11_FIFTH() {
+        CommonGoalCard c50 = new CommonGoalCard11(new Launcher());
+        c50.initNumCompleted();
+        BookShelf bs35 = new BookShelf();
+        bs35.setTile(3,2,new ItemTile("CATS"));
+        bs35.setTile(3,3,new ItemTile("CATS"));
+        bs35.setTile(4,1,new ItemTile("CATS"));
+        bs35.setTile(5,0,new ItemTile("CATS"));
+        bs35.setTile(5,4,new ItemTile("CATS"));
+        c50.checkGoal(bs35);
+        assertEquals(0, c50.getNumCompleted());
+    }
+    public void testCheckGoalCardCGC11_SIXTH() {
+        CommonGoalCard c50 = new CommonGoalCard11(new Launcher());
+        c50.initNumCompleted();
+        BookShelf bs35 = new BookShelf();
+        bs35.setTile(3,2,new ItemTile("CATS"));
+        bs35.setTile(3,4,new ItemTile("CATS"));
+        bs35.setTile(4,3,new ItemTile("CATS"));
+        bs35.setTile(5,2,new ItemTile("CATS"));
+        bs35.setTile(5,4,new ItemTile("GAMES"));
+        c50.checkGoal(bs35);
+        assertEquals(0, c50.getNumCompleted());
+    }
 }

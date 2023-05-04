@@ -132,6 +132,22 @@ public class CommonGoalCard8Test
         c19.checkGoal(bs12);
         assertEquals(0, c19.getNumCompleted());
     }
-
+    public void testCheckGoalCardCGC8_THIRD() {
+        CommonGoalCard c19 = new CommonGoalCard8(new Launcher());
+        c19.initNumCompleted();
+        BookShelf bs12 = new BookShelf();
+        bs12.setTile(0, 0, new ItemTile("PLANTS"));
+        bs12.setTile(0, 1, new ItemTile("PLANTS"));
+        bs12.setTile(0, 2, new ItemTile("GAMES"));
+        bs12.setTile(0, 3, new ItemTile("CATS"));
+        bs12.setTile(0, 4, new ItemTile("FRAMES"));
+        bs12.setTile(1, 0, new ItemTile("TROPHIES"));
+        bs12.setTile(1, 1, new ItemTile("CATS"));
+        bs12.setTile(1, 2, new ItemTile("PLANTS"));
+        bs12.setTile(1, 3, new ItemTile("BOOKS"));
+        bs12.setTile(1, 4, new ItemTile("GAMES"));
+        c19.checkGoal(bs12);
+        assertEquals(0, c19.getNumCompleted());
+    }
 }
 

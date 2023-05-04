@@ -18,22 +18,28 @@ public class CommonGoalCard10 extends CommonGoalCard implements CheckCommonGoalC
     @Override
     public void checkGoal(BookShelf bs) {
         int counter=0;
-        for(int i=0; i< BookShelf.getMAX_Row() && counter<numRowsToAchieve; i++){
-            cat.add(bs.getTile(i,0).getCategory());
-            if(!SameCategory(bs,i,cat))
-                counter++;
-            cat.clear();
+        for(int i=0; i< BookShelf.getMAX_Row() && counter<numRowsToAchieve; i++) {
+            if (bs.getTile(i, 0) != null) {
+                cat.add(bs.getTile(i, 0).getCategory());
+                if (!SameCategory(bs, i, cat))
+                    counter++;
+                cat.clear();
+            }
         }
-        if (counter==numRowsToAchieve)
+        if (counter>=numRowsToAchieve)
             increaseNumCompleted();
     }
 
     public boolean SameCategory(BookShelf bs,int a, HashSet<ItemTileCategory> category){
-        for(int j=1;j< BookShelf.getMAX_Column();j++){
-            if(category.contains(bs.getTile(a,j).getCategory()))
+        for(int j=1;j< BookShelf.getMAX_Column();j++) {
+            if (bs.getTile(a, j) == null)
                 return true;
-            else
-                cat.add(bs.getTile(a,j).getCategory());
+            else {
+                if (category.contains(bs.getTile(a, j).getCategory()))
+                    return true;
+                else
+                    cat.add(bs.getTile(a, j).getCategory());
+            }
         }
         return false;
     }

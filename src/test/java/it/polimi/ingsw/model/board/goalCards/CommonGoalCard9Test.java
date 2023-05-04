@@ -118,4 +118,17 @@ public class CommonGoalCard9Test
         c23.checkGoal(bs16);
         assertEquals(0, c23.getNumCompleted());
     }
+    public void testCheckGoalCardCGC9_THIRD() {
+        CommonGoalCard c23 = new CommonGoalCard9(new Launcher());
+        c23.initNumCompleted();
+        BookShelf bs15 = new BookShelf();
+        bs15.setTile(0, 4, new ItemTile("BOOKS"));
+        bs15.setTile(1, 4, new ItemTile("GAMES"));
+        bs15.setTile(2, 4, new ItemTile("FRAMES"));
+        bs15.setTile(3, 4, new ItemTile("PLANTS"));
+        bs15.setTile(4, 4, new ItemTile("CATS"));
+        bs15.setTile(5, 4, new ItemTile("TROPHIES"));
+        c23.checkGoal(bs15);
+        assertEquals(0, c23.getNumCompleted());
+    }
 }
