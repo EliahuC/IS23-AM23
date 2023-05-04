@@ -4,17 +4,20 @@ import it.polimi.ingsw.model.board.ItemTile;
 
 
 import java.util.HashMap;
+import java.util.Objects;
 
 public class PersonalGoalCard {
     private int completed;
     private int points;
-    private final int NumeroCarta;
-    private final HashMap<PGCKey, ItemTile> Goal = new HashMap<>();
+    private final Integer NumeroCarta;
+    private final HashMap<PGCKey, ItemTile> Goal;
+
 
 
     //METODO SWITCH
     public PersonalGoalCard(int x) {
         this.NumeroCarta = x;
+        Goal=new HashMap<>();
         switch (NumeroCarta) {
             case 1 -> {
                 Goal.put(new PGCKey(0, 0), new ItemTile("PLANTS"));
@@ -119,12 +122,11 @@ public class PersonalGoalCard {
 
     //METODO MAPPA DI MAPPA
     public PersonalGoalCard(){
-            this.NumeroCarta=0;
-            Goal.putAll(PersonalGoalCardGen.GetGoal());
-            this.completed = 0;
-            this.points=0;
-
-
+        PersonalGoalCardGen istanza= PersonalGoalCardGen.getInstance();
+        Goal=new HashMap<>(istanza.GetGoal());
+        this.completed = 0;
+        this.points=0;
+        this.NumeroCarta=null;
     }
 
 
@@ -154,4 +156,14 @@ public class PersonalGoalCard {
     public HashMap<PGCKey, ItemTile> getGoal() {
         return Goal;
     }
+
+
+    public boolean equals(HashMap<PGCKey, ItemTile> mappa) {
+        int counter=0;
+      for(PGCKey k: mappa.keySet()){
+          if(this.Goal.keySet().contains(k))counter++;
+      }
+      return counter==6;
+    }
+
 }

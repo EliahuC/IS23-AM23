@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
+//SINGLETON PATTERN
 public class PersonalGoalCardGen {
     private static PersonalGoalCardGen generator=null;
     private static final ArrayList<HashMap<PGCKey, ItemTile>> Goals = new ArrayList<>();
@@ -120,12 +121,17 @@ public class PersonalGoalCardGen {
         goal.put(new PGCKey(3, 3), new ItemTile("TROPHIES"));
         Goals.add(goal);
     }
-    public static HashMap<PGCKey,ItemTile> GetGoal(){
+
+    public static synchronized PersonalGoalCardGen getInstance(){
         if(generator==null){
             generator=new PersonalGoalCardGen();
         }
-        int randIndex = new Random().nextInt(Goals.size());
-        return generator.getGoals(randIndex);
+        return generator;
+    }
+    public synchronized HashMap<PGCKey,ItemTile> GetGoal(){
+      if(Goals.size()==0)generator=new PersonalGoalCardGen();
+      int randIndex = new Random().nextInt(Goals.size());
+      return generator.getGoals(randIndex);
     }
 
     private HashMap<PGCKey, ItemTile> getGoals(int randIndex) {
