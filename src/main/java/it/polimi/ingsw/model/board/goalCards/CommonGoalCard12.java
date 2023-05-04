@@ -17,16 +17,16 @@ public class CommonGoalCard12 extends CommonGoalCard implements CheckCommonGoalC
     }
 
     private boolean checkRtoL(BookShelf bs){
-        int lastColumn=0;
-        for(int i=0; i<BookShelf.getMAX_Column();i++){
+        int lastColumn=countColumnRtoL(bs,0);
+        for(int i=1; i<BookShelf.getMAX_Column();i++){
           if(countColumnRtoL(bs,i)!=lastColumn+1) return false;
           else lastColumn=countColumnRtoL(bs,i);
         }
         return true;
     }
     private boolean checkLtoR(BookShelf bs){
-        int lastColumn=0;
-        for(int i=BookShelf.getMAX_Column()-1; i>=0; i--){
+        int lastColumn=countColumnLtoR(bs,BookShelf.getMAX_Row()-1);
+        for(int i=BookShelf.getMAX_Column()-2; i>=0; i--){
             if(countColumnLtoR(bs,i)!=lastColumn+1) return false;
             else lastColumn=countColumnLtoR(bs,i);
 
