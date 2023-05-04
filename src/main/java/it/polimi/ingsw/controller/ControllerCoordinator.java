@@ -7,23 +7,24 @@ import it.polimi.ingsw.model.player.Player;
 import java.util.ArrayList;
 
 public class ControllerCoordinator {
-    private final VirtualView view;
+
     private final GameController gameController;
     private final ConnectionController connectionController = new ConnectionController();
     //EndGameController endGameController=new EndGameController(gameController.endGame());
     private final ArrayList<Player> connectedPlayers;
 
-    public ControllerCoordinator(ArrayList<String> players,VirtualView view) {
+    public ControllerCoordinator() {
         this.connectedPlayers = new ArrayList<>();
-        this.view=view;
-        joinPlayers(players);
         gameController =new GameController(connectedPlayers);
     }
 
-    private void joinPlayers(ArrayList<String> players) {
-        for(String s:players)connectedPlayers.add(new Player(s));
+    public void joinPlayer(String s,VirtualView view) {
+        if (!connectedPlayers.contains(s)) {
+            Player p = new Player(s);
+            p.setListener(view);
+            connectedPlayers.add(p);
+        }
     }
-
 
     public GameController getGameController() {
         return gameController;

@@ -20,6 +20,7 @@ public class Player {
     private final PersonalGoalCard PersonalGoalCard;
     private final boolean nowPlaying;
     private boolean lastRound;
+
     PropertyChangeListener listener;
 
 
@@ -32,6 +33,7 @@ public class Player {
         this.PersonalGoalCard = new PersonalGoalCard();
         this.nowPlaying = false;
         this.lastRound = false;
+
 
     }
 

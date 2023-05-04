@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import it.polimi.ingsw.Network.Messages.ClientToServer.ClientMessage;
 import it.polimi.ingsw.Network.Messages.ClientToServer.LobbyCreationMessage;
 import it.polimi.ingsw.Network.Messages.ServerToClient.ErrorMessage;
+import it.polimi.ingsw.Network.Messages.ServerToClient.PingMessage;
 import it.polimi.ingsw.Network.Messages.ServerToClient.ServerMessage;
 
 
@@ -23,7 +24,7 @@ public class ServerConnectionToClient implements Runnable {
     private ObjectOutputStream output;
     private VirtualView virtualView;
     private Gson gson;
-    private Lobby lobby;
+    private static Lobby lobby;
 
     public ServerConnectionToClient(Socket clientSocket) {
         this.clientSocket = clientSocket;
@@ -49,9 +50,15 @@ public class ServerConnectionToClient implements Runnable {
                     e.printStackTrace();
                 }
             }
-            //da aggiungere ping sending
+            sendPing();
         });
         ping.start();
+    }
+
+    private void sendPing() {
+        ServerMessage m=new PingMessage();
+        asyncSendMessage(m);
+
     }
 
     private void closeConnection() {
@@ -80,14 +87,20 @@ public class ServerConnectionToClient implements Runnable {
         ClientMessage message = gson.fromJson(s, ClientMessage.class);
         switch (message.getCategory()) {
             case CREATE_LOBBY: {
-                lobby=new Lobby(((LobbyCreationMessage) message).getNumPlayers());
-                if (lobby.getJoinedUsers().contains(message.getNickname())) {
+                if(lobby!=null){
                     ErrorMessage errorMessage=new ErrorMessage();
                     errorMessage.addReturnMessage("Lobby already present, please join that lobby");
                     sendMessage(errorMessage);
                     break;
                 }
-                lobby.addUser(message.getNickname());
+                if (lobby.getJoinedUsers().contains(message.getNickname())) {
+                    ErrorMessage errorMessage=new ErrorMessage();
+                    errorMessage.addReturnMessage("You are already part of the lobby");
+                    sendMessage(errorMessage);
+                    break;
+                }
+                lobby=new Lobby(((LobbyCreationMessage) message).getNumPlayers());
+                lobby.addUser(message.getNickname(),virtualView);
             }
             case ENTER_LOBBY: {
                 if (!checkLobbySpace()) {
@@ -102,7 +115,7 @@ public class ServerConnectionToClient implements Runnable {
                     sendMessage(errorMessage);
                     break;
                 }
-                lobby.addUser(message.getNickname());
+                lobby.addUser(message.getNickname(),virtualView);
                 break;
             }
             case LOGOUT_LOBBY:{
@@ -126,6 +139,9 @@ public class ServerConnectionToClient implements Runnable {
 
     private boolean checkLobbySpace() {
         return lobby.getJoinedUsers().size()<=4;
+    }
+    private void asyncSendMessage(ServerMessage m){
+        new Thread(()->sendMessage(m)).start();
     }
 
 

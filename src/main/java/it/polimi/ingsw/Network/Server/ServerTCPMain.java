@@ -4,12 +4,11 @@ package it.polimi.ingsw.Network.Server;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Scanner;
 public class ServerTCPMain extends Server {
     private ServerSocket serverSocket;
-    private final ArrayList<String> loggedUsers =new ArrayList<>();
+
     private final ArrayList<VirtualView> virtualViews=new ArrayList<>();
 
     private int port;
@@ -39,18 +38,11 @@ public class ServerTCPMain extends Server {
             VirtualView virtualView=new VirtualView(serverConnectionToClient);
             virtualViews.add(virtualView);
             serverConnectionToClient.addVirtualView(virtualView);
-            //da aggiungere listener e richiesta
         } catch (IOException e) {
             e.printStackTrace();
         }
+     }
     }
-
-
-
-
-    }
-
-
 
 
 
@@ -59,17 +51,7 @@ public class ServerTCPMain extends Server {
         System.out.println("s");
     }
 
-    @Override
-    public boolean login(String nick) throws RemoteException {
-        if(loggedUsers.contains(nick))return false;
-        loggedUsers.add(nick);
-        return true;
-    }
 
-    @Override
-    public void logout(String nick) throws RemoteException {
-        loggedUsers.remove(nick);
-    }
 
     public static void main(String[] args) {
         ServerTCPMain serverMain = new ServerTCPMain();

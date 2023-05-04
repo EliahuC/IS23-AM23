@@ -9,15 +9,18 @@ import java.util.ArrayList;
 
 public class Lobby {
     private final Integer NumPlayersLobby;
-    private ControllerCoordinator controllerCoordinator;
+    private final ControllerCoordinator controllerCoordinator;
     private final ArrayList<String> joinedUsers;
     private Boolean startedGame=false;
     public Lobby(Integer numPlayersLobby){
         this.NumPlayersLobby=numPlayersLobby;
         this.joinedUsers=new ArrayList<>();
+        this.controllerCoordinator=new ControllerCoordinator();
     }
-    public synchronized void addUser(String s){
+    public synchronized void addUser(String s,VirtualView view){
         joinedUsers.add(s);
+        controllerCoordinator.joinPlayer(s,view);
+        if(controllerCoordinator.getConnectedPlayers().size()==NumPlayersLobby)startGameLobby();
     }
 
     public synchronized ArrayList<String> getJoinedUsers() {
@@ -29,6 +32,7 @@ public class Lobby {
     }
     public synchronized void logoutFromLobby(String s){
         joinedUsers.remove(s);
+        controllerCoordinator.getConnectedPlayers().remove(s);
     }
 
     public synchronized void startGameLobby(){

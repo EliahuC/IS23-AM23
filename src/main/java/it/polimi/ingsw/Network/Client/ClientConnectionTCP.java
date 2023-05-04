@@ -5,7 +5,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
-public class ClientConnectionToServer implements Runnable{
+public class ClientConnectionTCP extends ConnectionClient{
     private final Socket socket;
     private String address;
     private boolean active;
@@ -13,7 +13,7 @@ public class ClientConnectionToServer implements Runnable{
     private ObjectInputStream input;
     private ObjectOutputStream output;
 
-    public ClientConnectionToServer(Socket socket) {
+    public ClientConnectionTCP(Socket socket) {
         this.active=true;
         this.socket = socket;
     }
@@ -40,6 +40,7 @@ public class ClientConnectionToServer implements Runnable{
         }
         //Scrivo reazione view all'evento
       while(active){
+
 
       }
 

@@ -40,6 +40,7 @@ public class MoveSerializer implements Printer {
     private void commandList() {
         showMessage("/create_lobby nickname numPlayers (numPlayers can only be 2/3/4)");
         showMessage("/enter_lobby nickname");
+        showMessage("/exit_lobby");
         showMessage("/start_game");
         showMessage("/select_tiles x1 y1 x2 y2 x3 y3");
         showMessage("/select_column y");
@@ -59,6 +60,9 @@ public class MoveSerializer implements Printer {
             case "/ENTER_LOBBY"-> {
                 return MoveCategory.ENTER_LOBBY;
             }
+            case "EXIT_LOBBY"->{
+                return MoveCategory.EXIT_LOBBY;
+            }
             case "/SELECT_TILES"-> {
                 return MoveCategory.SELECT_TILES;
             }
@@ -75,6 +79,7 @@ public class MoveSerializer implements Printer {
     public enum MoveCategory{
         CREATE_LOBBY,
         ENTER_LOBBY,
+        EXIT_LOBBY,
         START_GAME,
         SELECT_TILES,
         SELECT_COLUMN,

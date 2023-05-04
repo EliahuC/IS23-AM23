@@ -1,6 +1,5 @@
 package it.polimi.ingsw.Network.Server;
 
-import it.polimi.ingsw.Network.Client.ClientConnectionToServer;
 import it.polimi.ingsw.Network.Messages.ServerToClient.BookshelfMessage;
 import it.polimi.ingsw.Network.Messages.ServerToClient.ErrorMessage;
 import it.polimi.ingsw.Network.Messages.ServerToClient.LastTurnMessage;
@@ -9,9 +8,6 @@ import it.polimi.ingsw.model.player.BookShelf;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.net.Socket;
 
 
 public class VirtualView implements PropertyChangeListener {

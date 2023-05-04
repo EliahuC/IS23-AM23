@@ -11,7 +11,7 @@ import java.net.Socket;
 
 public class ClientMain implements Printer {
     private static View view;
-    private static Server server;
+    private static ConnectionClient connectionClient;
 
 
 
@@ -19,7 +19,7 @@ public class ClientMain implements Printer {
     public static void main(String[] args) {
         argsParser(args);
         new Thread(view).start();
-        new Thread(server).start();
+        new Thread(connectionClient).start();
     }
 
     private static void argsParser(String[] args) {
@@ -32,8 +32,8 @@ public class ClientMain implements Printer {
         }
         temporaryStorage=args[1];
         switch (temporaryStorage){
-            case "--RMI"-> server=new ServerRMIMain();
-            case "--TCP"-> server=new ServerTCPMain();
+            case "--RMI"-> connectionClient=new ClientRMIMain();
+            case "--TCP"-> connectionClient=new ClientConnectionTCP(new Socket());
             default -> System.out.println("Communication command isn't valid");
         }
 
