@@ -44,6 +44,8 @@ public class MoveSerializer implements Printer {
         showMessage("/start_game");
         showMessage("/select_tiles x1 y1 x2 y2 x3 y3");
         showMessage("/select_column y");
+        showMessage("/select_order t1 t2 t3 (t1 t2 t3 must be numbers of your previous selection." +
+                " for exemple if you have selected 2 tiles t1 == tile with coordinates(x1,y1)...");
         showMessage("");
 
     }
@@ -69,6 +71,9 @@ public class MoveSerializer implements Printer {
             case "/SELECT_COLUMN"-> {
                 return MoveCategory.SELECT_COLUMN;
             }
+            case "/SELECT_ORDER"->{
+                return MoveCategory.SELECT_ORDER;
+            }
             default -> {
                 return MoveCategory.INVALID_COMMAND;
             }
@@ -83,6 +88,7 @@ public class MoveSerializer implements Printer {
         START_GAME,
         SELECT_TILES,
         SELECT_COLUMN,
+        SELECT_ORDER,
         INVALID_COMMAND,
 
 

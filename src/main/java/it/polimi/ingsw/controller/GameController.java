@@ -17,6 +17,7 @@ public class GameController {
      private final Launcher launcher;
      private final Gson gson = new Gson();
      private final ArrayList<Integer> coordinates=new ArrayList<>();
+    private final ArrayList<Integer> order=new ArrayList<>();
      private Integer column;
      private final ArrayList<Player> lobby=new ArrayList<>();
      private Integer lobbyMaxSize;
@@ -50,8 +51,14 @@ public class GameController {
                  column=m.getMessageMove().getMove().remove(0);
                  if(!game.checkLegalColumn(column,coordinates.size()/2))
                      sendErrorMessage();
-                 else playMove();
+
                  break;
+             }
+             case ORDER:{
+                 order.addAll(m.getMessageMove().getMove());
+                 if(!checkOrder()&&!checkNumbers())
+                     sendErrorMessage();
+                 else playMove();
              }
              case START_GAME:{
                  startGame();
@@ -61,6 +68,17 @@ public class GameController {
 
          }
      }
+
+    private boolean checkNumbers() {
+         for(int i=0;i<order.size();i++){
+             if(order.get(i)>3 || order.get(i)<1) return false;
+         }
+         return true;
+    }
+
+    private boolean checkOrder() {
+         return order.size()==coordinates.size()/2;
+    }
 
     private boolean checkNickName(String s) {
          return lobby.contains(s);
@@ -81,9 +99,10 @@ public class GameController {
     }
 
     public synchronized void playMove(){
-         game.playMove(coordinates,column);
+         game.playMove(coordinates,column,order);
          coordinates.clear();
          column=null;
+         order.clear();
      }
 
 

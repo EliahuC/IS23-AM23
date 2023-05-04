@@ -16,6 +16,9 @@ public abstract class Message {
     public enum MessageCategory{
         COORDINATES,
         COLUMN,
+        ORDER,
+        BOOKSHELF,
+        LIVINGROOM,
         RETURN_MESSAGE,
         CREATE_LOBBY,
         SUCCESS,

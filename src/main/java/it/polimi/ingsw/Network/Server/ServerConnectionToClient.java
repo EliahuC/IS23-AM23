@@ -13,6 +13,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.SocketException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
 public class ServerConnectionToClient implements Runnable {
@@ -24,7 +26,9 @@ public class ServerConnectionToClient implements Runnable {
     private ObjectOutputStream output;
     private VirtualView virtualView;
     private Gson gson;
-    private static Lobby lobby;
+    private static final ArrayList<Lobby> lobbies=new ArrayList<>();
+    private static final ArrayList<Lobby> startedLobbies=new ArrayList<>();
+    private Lobby lobby;
 
     public ServerConnectionToClient(Socket clientSocket) {
         this.clientSocket = clientSocket;
@@ -101,22 +105,29 @@ public class ServerConnectionToClient implements Runnable {
                 }
                 lobby=new Lobby(((LobbyCreationMessage) message).getNumPlayers());
                 lobby.addUser(message.getNickname(),virtualView);
+                lobbies.add(lobby);
             }
             case ENTER_LOBBY: {
+                synchronized (lobbies){
+                lobby=lobbies.get(0);
                 if (!checkLobbySpace()) {
                     ErrorMessage errorMessage=new ErrorMessage();
                     errorMessage.addReturnMessage("the Lobby is full");
                     sendMessage(errorMessage);
                     break;
                 }
+
                 if (lobby.getJoinedUsers().contains(message.getNickname())) {
                     ErrorMessage errorMessage=new ErrorMessage();
                     errorMessage.addReturnMessage("Nickname already used in the lobby, please choose an other nickname");
                     sendMessage(errorMessage);
                     break;
                 }
+
                 lobby.addUser(message.getNickname(),virtualView);
+                checkCompletedLobby();
                 break;
+             }
             }
             case LOGOUT_LOBBY:{
                 if(lobby.getStartedGame()){
@@ -130,6 +141,16 @@ public class ServerConnectionToClient implements Runnable {
             default: lobby.receiveMessage(message);
         }
     }
+
+    private void checkCompletedLobby() {
+        if(lobby.getNumPlayersLobby()==lobby.getJoinedUsers().size()){
+            startedLobbies.add(lobby);
+            lobbies.remove(lobby);
+            lobby.startGameLobby();
+        }
+    }
+
+
     public void addVirtualView(VirtualView virtualView){
         this.virtualView=virtualView;
     }

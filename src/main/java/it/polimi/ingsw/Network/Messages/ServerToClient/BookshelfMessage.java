@@ -5,7 +5,7 @@ import it.polimi.ingsw.model.player.BookShelf;
 public class BookshelfMessage extends ServerMessage{
     private BookShelf playerBookshelf;
     public BookshelfMessage(BookShelf bookShelf) {
-        super(MessageCategory.RETURN_MESSAGE);
+        super(MessageCategory.BOOKSHELF);
         this.playerBookshelf=bookShelf;
     }
     public BookShelf getPlayerBookshelf() {

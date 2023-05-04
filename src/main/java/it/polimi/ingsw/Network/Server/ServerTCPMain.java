@@ -18,6 +18,7 @@ public class ServerTCPMain extends Server {
     }
     @Override
     public void run() {
+        //seleziono port alternativa per server
         showMessage("INSERT NEW PORT OR PRESS ENTER TO USE THE DEFAULT PORT");
         Scanner input = new Scanner(System.in);
         String newPort = input.nextLine();
@@ -28,6 +29,7 @@ public class ServerTCPMain extends Server {
             e.printStackTrace();
         }
         showMessage("Server is done!");
+        //Accettazione client
         while(true){
         Socket clientSocket = null;
         try {

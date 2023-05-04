@@ -1,4 +1,5 @@
 package it.polimi.ingsw.model;
+import it.polimi.ingsw.Network.Server.VirtualView;
 import it.polimi.ingsw.model.board.ItemTile;
 import it.polimi.ingsw.model.board.LivingRoom;
 import it.polimi.ingsw.model.player.Player;
@@ -25,9 +26,18 @@ public class Game {
     public Game(Launcher L,ArrayList<Player> lobby){
         this.Players=lobby;
         this.livingRoom =new LivingRoom(L);
+        setLivingRoomListener();
         this.gameChecker =new GameChecker(L);
         this.currPlaying=1;
         this.gameNumPlayers= lobby.size();
+    }
+
+    private void setLivingRoomListener() {
+        ArrayList<VirtualView> listeners =new ArrayList<>();
+        for(Player p:Players){
+            listeners.add((VirtualView) p.getListener());
+        }
+        livingRoom.setListeners(listeners);
     }
 
 
@@ -36,9 +46,9 @@ public class Game {
         this.startedGame=true;
 
     }
-    public synchronized boolean playMove(ArrayList<Integer> commands,  Integer column){
+    public synchronized boolean playMove(ArrayList<Integer> commands,  Integer column, ArrayList<Integer> order){
           if(!finishedGame) {
-              placeTiles(commands, column);
+              placeTiles(commands, column,order);
               checkCGC();
               if (gameChecker.isRestorable(livingRoom.getBoard())) livingRoom.restore();
               return true;
@@ -55,14 +65,23 @@ public class Game {
     }
 
 
-    private synchronized void placeTiles(ArrayList<Integer> commands, Integer column){
+    private synchronized void placeTiles(ArrayList<Integer> commands, Integer column,ArrayList<Integer> order){
         ArrayList<ItemTile> temporaryStorage ;
         temporaryStorage= livingRoom.getTiles(commands);
+        temporaryStorage=sortMyTiles(temporaryStorage,order);
         Players.get(currPlaying-1).insertToken(temporaryStorage,column);
         gameChecker.isBookShelfFull(Players.get(currPlaying-1).getPlayerBookshelf());
         if (gameChecker.getLastRound())isLastTurn();
         increseCurrPlaying();
 
+    }
+
+    private ArrayList<ItemTile> sortMyTiles(ArrayList<ItemTile> temporaryStorage, ArrayList<Integer> order) {
+        ArrayList<ItemTile> sortedTiles=new ArrayList<>();
+        for (Integer integer : order) {
+            sortedTiles.add(temporaryStorage.get(integer-1));
+        }
+        return sortedTiles;
     }
 
     private synchronized void isLastTurn() {

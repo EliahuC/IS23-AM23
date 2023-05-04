@@ -1,17 +1,19 @@
 package it.polimi.ingsw.model.board;
-import it.polimi.ingsw.model.Game;
+import it.polimi.ingsw.Network.Server.VirtualView;
 import it.polimi.ingsw.model.board.goalCards.*;
 import it.polimi.ingsw.model.player.BookShelf;
-import it.polimi.ingsw.model.board.goalCards.*;
 import it.polimi.ingsw.Launcher;
 import it.polimi.ingsw.model.GameChecker;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.Random;
 
 public class LivingRoom {
-    private static final int MAX_Row=9;
-    private static final int MAX_Column=9;
+    public static final int MAX_Row=9;
+    public static final int MAX_Column=9;
+    ArrayList<PropertyChangeListener> listeners=new ArrayList<>();
 
     private BoardToken[][] Board = new BoardToken[MAX_Row][MAX_Column];
     private final Launcher L;
@@ -199,6 +201,11 @@ public class LivingRoom {
     }
 
     public ArrayList<ItemTile> getTiles(ArrayList<Integer> requestedTiles) {
+        PropertyChangeEvent evt = new PropertyChangeEvent(
+                this,
+                "BOARD_CHANGED",
+                this.Board,
+                Board);
         ArrayList<ItemTile> tiles = new ArrayList<>();
         int i = 0;
         while (i < requestedTiles.size()) {
@@ -206,6 +213,9 @@ public class LivingRoom {
             getBoardTile(requestedTiles.get(i), requestedTiles.get(i + 1)).freeTile();
             tiles.add(tile);
             i = i + 2;
+        }
+        for(PropertyChangeListener l:listeners){
+            l.propertyChange(evt);
         }
         return tiles;
     }
@@ -246,8 +256,12 @@ public class LivingRoom {
         return Board[i][j];
     }
 
-    public GameChecker getGameChecker() {
-        return G;
+    public ArrayList<PropertyChangeListener> getListener() {
+        return listeners;
+    }
+
+    public void setListeners(ArrayList<VirtualView> listener) {
+         listeners.addAll(listener);
     }
 
 }
