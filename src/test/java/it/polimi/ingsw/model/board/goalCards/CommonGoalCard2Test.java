@@ -36,6 +36,14 @@ public class CommonGoalCard2Test
         c7.checkGoal(bs);
         assertEquals(0, c7.getNumCompleted());
     }
-
+    public void testCheckGoalCardCGC2_THIRD() {
+        CommonGoalCard c7 = new CommonGoalCard2(new Launcher());
+        c7.initNumCompleted();
+        BookShelf bs = new BookShelf();
+        bs.setTile(0, 0, new ItemTile("CATS"));
+        bs.setTile(5, 4, new ItemTile("CATS"));
+        c7.checkGoal(bs);
+        assertEquals(0, c7.getNumCompleted());
+    }
 }
 
