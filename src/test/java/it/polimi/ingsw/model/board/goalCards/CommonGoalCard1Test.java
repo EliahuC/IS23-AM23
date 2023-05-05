@@ -121,4 +121,50 @@ public class CommonGoalCard1Test extends TestCase {
         c43.checkGoal(bs29);
         assertEquals(1, c43.getNumCompleted());
     }
+    public void testCheckGoalCardCGC1_FOURTH() {
+        CommonGoalCard c43 = new CommonGoalCard1(new Launcher());
+        c43.initNumCompleted();
+        BookShelf bs29 = new BookShelf();
+        bs29.setTile(0, 0, new ItemTile("BOOKS"));
+        bs29.setTile(1, 0, new ItemTile("BOOKS"));
+        bs29.setTile(2, 1, new ItemTile("BOOKS"));
+        bs29.setTile(3, 1, new ItemTile("BOOKS"));
+        bs29.setTile(2, 3, new ItemTile("BOOKS"));
+        bs29.setTile(3, 3, new ItemTile("BOOKS"));
+        bs29.setTile(4, 0, new ItemTile("BOOKS"));
+        bs29.setTile(5, 0, new ItemTile("BOOKS"));
+        bs29.setTile(4, 4, new ItemTile("BOOKS"));
+        bs29.setTile(5, 4, new ItemTile("BOOKS"));
+        bs29.setTile(0, 4, new ItemTile("BOOKS"));
+        bs29.setTile(1, 4, new ItemTile("BOOKS"));
+        bs29.setTile(4, 1, new ItemTile("TROPHIES"));
+        bs29.setTile(5, 1, new ItemTile("TROPHIES"));
+        bs29.setTile(4, 3, new ItemTile("TROPHIES"));
+        bs29.setTile(5, 3, new ItemTile("TROPHIES"));
+        c43.checkGoal(bs29);
+        assertEquals(1, c43.getNumCompleted());
+    }
+    public void testCheckGoalCardCGC1_FIFTH() {
+        CommonGoalCard c43 = new CommonGoalCard1(new Launcher());
+        c43.initNumCompleted();
+        BookShelf bs29 = new BookShelf();
+        bs29.setTile(0, 0, new ItemTile("BOOKS"));
+        bs29.setTile(1, 0, new ItemTile("BOOKS"));
+        bs29.setTile(2, 1, new ItemTile("BOOKS"));
+        bs29.setTile(3, 1, new ItemTile("BOOKS"));
+        bs29.setTile(2, 3, new ItemTile("BOOKS"));
+        bs29.setTile(3, 3, new ItemTile("BOOKS"));
+        bs29.setTile(4, 0, new ItemTile("BOOKS"));
+        bs29.setTile(5, 0, new ItemTile("BOOKS"));
+        bs29.setTile(4, 4, new ItemTile("BOOKS"));
+        bs29.setTile(5, 4, new ItemTile("BOOKS"));
+        bs29.setTile(0, 4, new ItemTile("BOOKS"));
+        bs29.setTile(1, 4, new ItemTile("BOOKS"));
+        bs29.setTile(4, 1, new ItemTile("BOOKS"));
+        bs29.setTile(5, 1, new ItemTile("BOOKS"));
+        bs29.setTile(4, 3, new ItemTile("TROPHIES"));
+        bs29.setTile(5, 3, new ItemTile("TROPHIES"));
+        c43.checkGoal(bs29);
+        assertEquals(0, c43.getNumCompleted());
+    }
 }
