@@ -133,4 +133,29 @@ public class CommonGoalCard5Test
         c9.checkGoal(bs2);
         assertEquals(0, c9.getNumCompleted());
     }
+    public void testCheckGoalCardCGC5_THIRD() {
+        CommonGoalCard c9 = new CommonGoalCard5(new Launcher());
+        c9.initNumCompleted();
+        BookShelf bs2 = new BookShelf();
+        bs2.setTile(0, 0, new ItemTile("PLANTS"));
+        bs2.setTile(1, 0, new ItemTile("PLANTS"));
+        bs2.setTile(2, 0, new ItemTile("PLANTS"));
+        bs2.setTile(3, 0, new ItemTile("CATS"));
+        bs2.setTile(4, 0, new ItemTile("FRAMES"));
+        bs2.setTile(5, 0, new ItemTile("TROPHIES"));
+        bs2.setTile(0, 1, new ItemTile("CATS"));
+        bs2.setTile(1, 1, new ItemTile("TROPHIES"));
+        bs2.setTile(2, 1, new ItemTile("BOOKS"));
+        bs2.setTile(3, 1, new ItemTile("GAMES"));
+        bs2.setTile(4, 1, new ItemTile("GAMES"));
+        bs2.setTile(5, 1, new ItemTile("GAMES"));
+        bs2.setTile(0, 2, new ItemTile("TROPHIES"));
+        bs2.setTile(1, 2, new ItemTile("TROPHIES"));
+        bs2.setTile(2, 2, new ItemTile("GAMES"));
+        bs2.setTile(3, 2, new ItemTile("FRAMES"));
+        bs2.setTile(4, 2, new ItemTile("BOOKS"));
+        bs2.setTile(5, 2, new ItemTile("PLANTS"));
+        c9.checkGoal(bs2);
+        assertEquals(0, c9.getNumCompleted());
+    }
 }

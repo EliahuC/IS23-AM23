@@ -83,4 +83,51 @@ public class CommonGoalCard6Test extends TestCase {
         c34.checkGoal(bs27);
         assertEquals(0, c34.getNumCompleted());
     }
+    public void testCheckGoalCardCGC6_THIRD() {
+        CommonGoalCard c34 = new CommonGoalCard6(new Launcher());
+        c34.initNumCompleted();
+        BookShelf bs27 = new BookShelf();
+        bs27.setTile(0, 0, new ItemTile("CATS"));
+        bs27.setTile(5, 0, new ItemTile("CATS"));
+        bs27.setTile(4, 3, new ItemTile("CATS"));
+        bs27.setTile(2, 2, new ItemTile("CATS"));
+        bs27.setTile(4, 1, new ItemTile("CATS"));
+        bs27.setTile(3, 2, new ItemTile("CATS"));
+        bs27.setTile(0, 1, new ItemTile("CATS"));
+        bs27.setTile(1, 4, new ItemTile("CATS"));
+        bs27.setTile(2, 1, new ItemTile("GAMES"));
+        bs27.setTile(3, 1, new ItemTile("TROPHIES"));
+        c34.checkGoal(bs27);
+        assertEquals(1, c34.getNumCompleted());
+    }
+
+    public void testCheckGoalCardCGC6_FOURTH() {
+        CommonGoalCard c34 = new CommonGoalCard6(new Launcher());
+        c34.initNumCompleted();
+        BookShelf bs27 = new BookShelf();
+        bs27.setTile(0, 0, new ItemTile("CATS"));
+        bs27.setTile(5, 0, new ItemTile("CATS"));
+        bs27.setTile(4, 3, new ItemTile("GAMES"));
+        bs27.setTile(2, 2, new ItemTile("BOOKS"));
+        bs27.setTile(4, 1, new ItemTile("FRAMES"));
+        bs27.setTile(3, 2, new ItemTile("PLANTS"));
+        bs27.setTile(0, 1, new ItemTile("PLANTS"));
+        bs27.setTile(1, 4, new ItemTile("CATS"));
+        bs27.setTile(2, 1, new ItemTile("GAMES"));
+        bs27.setTile(3, 1, new ItemTile("TROPHIES"));
+        c34.checkGoal(bs27);
+        assertEquals(0, c34.getNumCompleted());
+    }
+
+    public void testCheckGoalCardCGC6_FIFTH() {
+        CommonGoalCard c34 = new CommonGoalCard6(new Launcher());
+        c34.initNumCompleted();
+        BookShelf bs27 = new BookShelf();
+        bs27.setTile(0, 0, new ItemTile("CATS"));
+        bs27.setTile(5, 0, new ItemTile("CATS"));
+        bs27.setTile(4, 3, new ItemTile("CATS"));
+        bs27.setTile(2, 2, new ItemTile("CATS"));
+        c34.checkGoal(bs27);
+        assertEquals(0, c34.getNumCompleted());
+    }
 }

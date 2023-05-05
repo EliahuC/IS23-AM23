@@ -148,4 +148,30 @@ public class BookShelfTest extends TestCase {
         B.AdjacentScore();
         assertEquals(8,B.getPoints());
     }
+    public void testAdjacentScore_FIFTH(){         //EXAMPLE 5
+        BookShelf B = new BookShelf();
+        B.setTile(0, 0, new ItemTile("FRAMES"));
+        B.setTile(1, 0, new ItemTile("FRAMES"));
+        B.setTile(2, 0, new ItemTile("FRAMES"));
+        B.setTile(3, 0, new ItemTile("FRAMES"));
+        B.setTile(4, 0, new ItemTile("TROPHIES"));
+        B.setTile(5, 0, new ItemTile("TROPHIES"));
+        B.setTile(5, 1, new ItemTile("CATS"));
+        B.setTile(5, 2, new ItemTile("CATS"));
+        B.setTile(5, 3, new ItemTile("CATS"));
+        B.setTile(5, 4, new ItemTile("CATS"));
+        B.setTile(4, 4, new ItemTile("CATS"));
+        B.setTile(1, 4, new ItemTile("GAMES"));
+        B.setTile(2, 4, new ItemTile("GAMES"));
+        B.setTile(3, 4, new ItemTile("GAMES"));
+        B.setTile(0, 1, new ItemTile("BOOKS"));
+        B.setTile(0, 2, new ItemTile("BOOKS"));
+        B.setTile(0, 3, new ItemTile("CATS"));
+        B.setTile(0, 4, new ItemTile("CATS"));
+        B.setTile(1, 2, new ItemTile("BOOKS"));
+        B.setTile(2, 2, new ItemTile("BOOKS"));
+        B.setTile(3, 2, new ItemTile("BOOKS"));
+        B.AdjacentScore();
+        assertEquals(15,B.getPoints());
+    }
 }

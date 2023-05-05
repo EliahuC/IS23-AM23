@@ -19,24 +19,29 @@ public class CommonGoalCard9 extends CommonGoalCard implements CheckCommonGoalCa
     @Override
     public void checkGoal(BookShelf bs) {
         int counter=0;
-        for(int j=0; j< BookShelf.getMAX_Column() && counter<numColumnsToAchieve; j++){
-            cat.add(bs.getTile(0,j).getCategory());
-            if(!SameCategory(bs,j,cat)) {
-                counter++;
+        for(int j=0; j< BookShelf.getMAX_Column() && counter<numColumnsToAchieve; j++) {
+            if (bs.getTile(0, j) != null) {
+                cat.add(bs.getTile(0, j).getCategory());
+                if (!SameCategory(bs, j, cat)) {
+                    counter++;
+                }
+                cat.clear();
             }
-            cat.clear();
-            }
-
-        if (counter==numColumnsToAchieve)
-            increaseNumCompleted();
         }
+        if (counter>=numColumnsToAchieve)
+            increaseNumCompleted();
+    }
 
-    public boolean SameCategory(BookShelf bs, int a, HashSet<ItemTileCategory> category){
-        for(int i=1;i< BookShelf.getMAX_Row();i++){
-            if(cat.contains(bs.getTile(i,a).getCategory()))
+    public boolean SameCategory(BookShelf bs, int a, HashSet<ItemTileCategory> category) {
+        for (int i = 1; i < BookShelf.getMAX_Row(); i++) {
+            if (bs.getTile(i, a) == null)
                 return true;
-            else
-                cat.add(bs.getTile(i,a).getCategory());
+            else {
+                if (cat.contains(bs.getTile(i, a).getCategory()))
+                    return true;
+                else
+                    cat.add(bs.getTile(i, a).getCategory());
+            }
         }
         return false;
     }

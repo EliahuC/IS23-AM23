@@ -86,10 +86,12 @@ public class BookShelf {
         boolean c = false;
         for (int i = 0; i < MAX_Row; i++) {
             for (int j = 0; j < MAX_Column; j++) {
-                if (getTile(i, j).equals(it)) {
-                    tileRow = i;
-                    tileColumn = j;
-                    c = true;
+                if(getTile(i,j)!=null) {
+                    if (getTile(i, j).equals(it)) {
+                        tileRow = i;
+                        tileColumn = j;
+                        c = true;
+                    }
                 }
                 if (c)
                     break;
@@ -152,13 +154,10 @@ public class BookShelf {
 
     public void SetFirstTile(){
         boolean c = false;
-        if(tileColumn==BookShelf.getMAX_Column()-1){
-            category=null;
-        }
         for(int i = 0; i < MAX_Row; i++){
             for(int j = 0; j < MAX_Column; j++){
                 ItemTile it = getTile(i, j);
-                if(!AlreadyUsed(it) && it != null && !it.getCategory().equals(category)){
+                if(!AlreadyUsed(it) && it != null){
                     usedTiles.add(it);
                     tileColumn = j;
                     tileRow = i;

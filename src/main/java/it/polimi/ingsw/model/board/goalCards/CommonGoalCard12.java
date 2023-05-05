@@ -16,28 +16,31 @@ public class CommonGoalCard12 extends CommonGoalCard implements CheckCommonGoalC
         if(checkRtoL(bs)||checkLtoR(bs)) increaseNumCompleted();
     }
 
-    private boolean checkRtoL(BookShelf bs){
-        int lastColumn=countColumnRtoL(bs,0);
-        for(int i=1; i<BookShelf.getMAX_Column();i++){
-          if(countColumnRtoL(bs,i)!=lastColumn+1) return false;
-          else lastColumn=countColumnRtoL(bs,i);
-        }
-        return true;
+    private boolean checkRtoL(BookShelf bs) {
+        int lastColumn = countColumnRtoL(bs, BookShelf.getMAX_Column() - 1);
+        if (lastColumn >= 5) {
+            for (int i = 3; i >=0; i--) {
+                if (countColumnRtoL(bs, i) != lastColumn - 1) return false;
+                else lastColumn = countColumnRtoL(bs, i);
+            }
+            return true;
+        } else return false;
     }
-    private boolean checkLtoR(BookShelf bs){
-        int lastColumn=countColumnLtoR(bs,BookShelf.getMAX_Row()-1);
-        for(int i=BookShelf.getMAX_Column()-2; i>=0; i--){
-            if(countColumnLtoR(bs,i)!=lastColumn+1) return false;
-            else lastColumn=countColumnLtoR(bs,i);
+    private boolean checkLtoR(BookShelf bs) {
+        int lastColumn = countColumnLtoR(bs, 0);
+        if (lastColumn >= 5) {
+            for (int i = 1; i <= BookShelf.getMAX_Column()-1; i++) {
+                if (countColumnLtoR(bs, i) != lastColumn - 1) return false;
+                else lastColumn = countColumnLtoR(bs, i);
 
-        }
-        return true;
+            }
+            return true;
+        }else return false;
     }
-
 
     private int countColumnRtoL(BookShelf bs,int i){
         int counter =0;
-        for (int j=0;j<BookShelf.getMAX_Row()&&bs.getTile(BookShelf.getMAX_Row()-1-j,i)!=null;j++){
+        for (int j=BookShelf.getMAX_Row()-1;j>=0&&bs.getTile(j,i)!=null;j--){
             counter++;
         }
         return counter;
@@ -45,7 +48,7 @@ public class CommonGoalCard12 extends CommonGoalCard implements CheckCommonGoalC
 
     private int countColumnLtoR(BookShelf bs, int i){
         int counter =0;
-        for (int j=0;j<BookShelf.getMAX_Row()&&bs.getTile(BookShelf.getMAX_Row()-1-j,i)!=null;j++){
+        for (int j=BookShelf.getMAX_Row()-1;j>=0&&bs.getTile(j,i)!=null;j--){
             counter++;
         }
         return counter;

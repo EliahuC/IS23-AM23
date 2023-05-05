@@ -195,4 +195,76 @@ public class CommonGoalCard3Test extends TestCase {
         c47.checkGoal(bs33);
         assertEquals(1, c47.getNumCompleted());
     }
+    public void testCheckGoalCardCGC3_SIXTH() {
+        CommonGoalCard c47 = new CommonGoalCard3(new Launcher());
+        c47.initNumCompleted();
+        BookShelf bs33 = new BookShelf();
+        bs33.setTile(0, 0, new ItemTile("FRAMES"));
+        bs33.setTile(1, 0, new ItemTile("FRAMES"));
+        bs33.setTile(2, 0, new ItemTile("FRAMES"));
+        bs33.setTile(3, 0, new ItemTile("FRAMES"));
+        bs33.setTile(4, 0, new ItemTile("TROPHIES"));
+        bs33.setTile(5, 0, new ItemTile("FRAMES"));
+        bs33.setTile(5, 1, new ItemTile("FRAMES"));
+        bs33.setTile(5, 2, new ItemTile("FRAMES"));
+        bs33.setTile(5, 3, new ItemTile("FRAMES"));
+        bs33.setTile(1, 4, new ItemTile("FRAMES"));
+        bs33.setTile(2, 4, new ItemTile("FRAMES"));
+        bs33.setTile(3, 4, new ItemTile("FRAMES"));
+        bs33.setTile(4, 4, new ItemTile("FRAMES"));
+        bs33.setTile(0, 2, new ItemTile("FRAMES"));
+        bs33.setTile(1, 2, new ItemTile("FRAMES"));
+        bs33.setTile(2, 2, new ItemTile("FRAMES"));
+        bs33.setTile(3, 2, new ItemTile("FRAMES"));
+        c47.checkGoal(bs33);
+        assertEquals(1, c47.getNumCompleted());
+    }
+    public void testCheckGoalCardCGC3_SEVENTH() {
+        CommonGoalCard c47 = new CommonGoalCard3(new Launcher());
+        c47.initNumCompleted();
+        BookShelf bs33 = new BookShelf();
+        bs33.setTile(0, 0, new ItemTile("FRAMES"));
+        bs33.setTile(1, 0, new ItemTile("FRAMES"));
+        bs33.setTile(2, 0, new ItemTile("FRAMES"));
+        bs33.setTile(3, 0, new ItemTile("FRAMES"));
+        bs33.setTile(4, 0, new ItemTile("FRAMES"));
+        bs33.setTile(5, 0, new ItemTile("FRAMES"));
+        bs33.setTile(5, 1, new ItemTile("FRAMES"));
+        bs33.setTile(5, 2, new ItemTile("FRAMES"));
+        bs33.setTile(5, 3, new ItemTile("FRAMES"));
+        bs33.setTile(1, 4, new ItemTile("FRAMES"));
+        bs33.setTile(2, 4, new ItemTile("FRAMES"));
+        bs33.setTile(3, 4, new ItemTile("FRAMES"));
+        bs33.setTile(4, 4, new ItemTile("FRAMES"));
+        bs33.setTile(0, 2, new ItemTile("FRAMES"));
+        bs33.setTile(1, 2, new ItemTile("FRAMES"));
+        bs33.setTile(2, 2, new ItemTile("FRAMES"));
+        bs33.setTile(3, 2, new ItemTile("FRAMES"));
+        c47.checkGoal(bs33);
+        assertEquals(0, c47.getNumCompleted());
+    }
+    public void testCheckGoalCardCGC3_EIGHTH() {
+        CommonGoalCard c47 = new CommonGoalCard3(new Launcher());
+        c47.initNumCompleted();
+        BookShelf bs33 = new BookShelf();
+        bs33.setTile(0, 0, new ItemTile("FRAMES"));
+        bs33.setTile(1, 0, new ItemTile("FRAMES"));
+        bs33.setTile(2, 0, new ItemTile("FRAMES"));
+        bs33.setTile(3, 0, new ItemTile("FRAMES"));
+        bs33.setTile(4, 0, new ItemTile("TROPHIES"));
+        bs33.setTile(5, 0, new ItemTile("CATS"));
+        bs33.setTile(5, 1, new ItemTile("CATS"));
+        bs33.setTile(5, 2, new ItemTile("CATS"));
+        bs33.setTile(5, 3, new ItemTile("CATS"));
+        bs33.setTile(1, 4, new ItemTile("GAMES"));
+        bs33.setTile(2, 4, new ItemTile("GAMES"));
+        bs33.setTile(3, 4, new ItemTile("GAMES"));
+        bs33.setTile(4, 4, new ItemTile("GAMES"));
+        bs33.setTile(0, 2, new ItemTile("BOOKS"));
+        bs33.setTile(1, 2, new ItemTile("BOOKS"));
+        bs33.setTile(2, 2, new ItemTile("BOOKS"));
+        bs33.setTile(3, 2, new ItemTile("BOOKS"));
+        c47.checkGoal(bs33);
+        assertEquals(1, c47.getNumCompleted());
+    }
 }
