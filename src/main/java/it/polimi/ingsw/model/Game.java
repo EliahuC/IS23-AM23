@@ -5,10 +5,7 @@ import it.polimi.ingsw.model.board.LivingRoom;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.Launcher;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Game {
@@ -44,8 +41,23 @@ public class Game {
     public synchronized void startGame(){
         livingRoom.Start(Players.size());
         this.startedGame=true;
-
+        ArrayList<Player> mixedPlayers;
+        mixedPlayers=mixPlayersOrder(Players);
+        Players.clear();
+        Players.addAll(mixedPlayers);
+        Players.get(0).setFirstPlayerSeat(true);
     }
+
+    private ArrayList<Player> mixPlayersOrder(List<Player> players) {
+        ArrayList<Player> mixedPlayers=new ArrayList<>();
+        int size=players.size();
+        for(int i=0;i<size;i++){
+            int randIndex = new Random().nextInt(players.size());
+            mixedPlayers.add(i,players.remove(randIndex));
+        }
+        return mixedPlayers;
+    }
+
     public synchronized boolean playMove(ArrayList<Integer> commands,  Integer column, ArrayList<Integer> order){
           if(!finishedGame) {
               placeTiles(commands, column,order);
@@ -72,7 +84,7 @@ public class Game {
         Players.get(currPlaying-1).insertToken(temporaryStorage,column);
         gameChecker.isBookShelfFull(Players.get(currPlaying-1).getPlayerBookshelf());
         if (gameChecker.getLastRound())isLastTurn();
-        increseCurrPlaying();
+        increaseCurrPlaying();
 
     }
 
@@ -209,7 +221,7 @@ public class Game {
         Players.get(currPlaying-1).setScore(livingRoom.checkCG(Players.get(currPlaying-1).getPlayerBookshelf()));
     }
 
-    private synchronized void increseCurrPlaying() {
+    private synchronized void increaseCurrPlaying() {
         if(currPlaying==gameNumPlayers && !finishedGame) currPlaying=1;
         else if(currPlaying<gameNumPlayers && !finishedGame) currPlaying++;
     }

@@ -14,7 +14,6 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.SocketException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
 public class ServerConnectionToClient implements Runnable {
@@ -86,25 +85,27 @@ public class ServerConnectionToClient implements Runnable {
         }
     }
 
+
     public synchronized void receiveMessage() throws IOException, ClassNotFoundException {
         String s= (String) input.readObject();
         ClientMessage message = gson.fromJson(s, ClientMessage.class);
         switch (message.getCategory()) {
             case CREATE_LOBBY: {
-                if(lobby!=null){
-                    ErrorMessage errorMessage=new ErrorMessage();
-                    errorMessage.addReturnMessage("Lobby already present, please join that lobby");
-                    sendMessage(errorMessage);
-                    break;
-                }
-                if (lobby.getJoinedUsers().contains(message.getNickname())) {
-                    ErrorMessage errorMessage=new ErrorMessage();
-                    errorMessage.addReturnMessage("You are already part of the lobby");
-                    sendMessage(errorMessage);
-                    break;
-                }
+                    if(lobby!=null){
+                        if (lobby.getJoinedUsers().contains(message.getNickname())) {
+                        ErrorMessage errorMessage=new ErrorMessage();
+                        errorMessage.addReturnMessage("You are already part of the lobby");
+                        sendMessage(errorMessage);
+                        break;
+                        }
+                        ErrorMessage errorMessage=new ErrorMessage();
+                        errorMessage.addReturnMessage("Lobby already present, please join that lobby");
+                        sendMessage(errorMessage);
+                        break;
+                    }
+
                 lobby=new Lobby(((LobbyCreationMessage) message).getNumPlayers());
-                lobby.addUser(message.getNickname(),virtualView);
+                lobby.addUser(this, message.getNickname(),virtualView);
                 lobbies.add(lobby);
             }
             case ENTER_LOBBY: {
@@ -124,7 +125,7 @@ public class ServerConnectionToClient implements Runnable {
                     break;
                 }
 
-                lobby.addUser(message.getNickname(),virtualView);
+                lobby.addUser(this,message.getNickname(),virtualView);
                 checkCompletedLobby();
                 break;
              }
@@ -138,7 +139,7 @@ public class ServerConnectionToClient implements Runnable {
                 }
                 lobby.logoutFromLobby(message.getNickname());
             }
-            default: lobby.receiveMessage(message);
+            default: sendMessage((ServerMessage) lobby.receiveMessage(message));
         }
     }
 

@@ -10,7 +10,7 @@ import java.beans.PropertyChangeListener;
 
 
 public class VirtualView implements PropertyChangeListener {
-    private ServerConnectionToClient clientConnection;
+    private final ServerConnectionToClient clientConnection;
 
     public VirtualView(ServerConnectionToClient connection) {
         this.clientConnection = connection;
