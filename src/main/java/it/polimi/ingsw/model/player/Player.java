@@ -15,7 +15,7 @@ public class Player {
     private final String NickName;
     private final int IPaddres[];
     private int score ;
-    private final boolean firstPlayerSeat;
+    private boolean firstPlayerSeat;
     private final BookShelf playerBookshelf;
     private final PersonalGoalCard PersonalGoalCard;
     private final boolean nowPlaying;
@@ -28,13 +28,16 @@ public class Player {
         NickName = nickName;
         this.IPaddres = null;
         this.score = 0;
-        this.firstPlayerSeat = false;
         this.playerBookshelf = new BookShelf();
         this.PersonalGoalCard = new PersonalGoalCard();
         this.nowPlaying = false;
         this.lastRound = false;
 
 
+    }
+
+    public void setFirstPlayerSeat(boolean firstPlayerSeat) {
+        this.firstPlayerSeat = firstPlayerSeat;
     }
 
     public String getNickName() {
