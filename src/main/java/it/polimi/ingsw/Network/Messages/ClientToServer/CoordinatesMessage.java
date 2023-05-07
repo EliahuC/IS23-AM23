@@ -4,8 +4,8 @@ import it.polimi.ingsw.Network.Messages.ClientToServer.PossibleMoves.Move_Select
 
 public class CoordinatesMessage extends ClientMessage {
 
-    public CoordinatesMessage(Move_SelectTiles move, String nickname) {
-        super(MessageCategory.COORDINATES, move, nickname);
+    public CoordinatesMessage(Move_SelectTiles move) {
+        super(MessageCategory.COORDINATES, move,"Client");
     }
 
    public Integer getSpecificCoordinate(int i){

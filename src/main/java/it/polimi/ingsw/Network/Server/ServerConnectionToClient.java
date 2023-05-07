@@ -144,7 +144,7 @@ public class ServerConnectionToClient implements Runnable {
                     sendMessage(errorMessage);
                     break;
                 }
-                lobby.logoutFromLobby(message.getNickname());
+                lobby.logoutFromLobby(namePlayer);
             }
             default: sendMessage((ServerMessage) lobby.receiveMessage(message));
         }

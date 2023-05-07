@@ -4,7 +4,7 @@ import it.polimi.ingsw.Network.Messages.ClientToServer.PossibleMoves.Move_Select
 
 public class ColumnMessage extends ClientMessage{
 
-    public ColumnMessage(Move_SelectColumn move, String nickname) {
-        super(MessageCategory.COLUMN, move, nickname);
+    public ColumnMessage(Move_SelectColumn move) {
+        super(MessageCategory.COLUMN, move,"Client");
     }
 }

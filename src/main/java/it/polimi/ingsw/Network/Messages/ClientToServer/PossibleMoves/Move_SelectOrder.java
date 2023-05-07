@@ -5,8 +5,8 @@ import java.util.ArrayList;
 public class Move_SelectOrder extends Move{
     private final ArrayList<Integer> order=new ArrayList<>();
 
-    public void setCoordinates(Integer i) {
-        this.order.add(i);
+    public void setOrder(ArrayList<Integer> order) {
+        this.order.addAll(order);
     }
 
     @Override

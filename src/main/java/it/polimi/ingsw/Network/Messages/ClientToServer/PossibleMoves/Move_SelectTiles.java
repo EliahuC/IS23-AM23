@@ -6,8 +6,8 @@ public class Move_SelectTiles extends Move {
 
     private final ArrayList<Integer> coordinates=new ArrayList<>();
 
-    public void setCoordinates(Integer i) {
-        this.coordinates.add(i);
+    public void setCoordinates(ArrayList<Integer> coordinates) {
+        this.coordinates.addAll(coordinates);
     }
 
     @Override
