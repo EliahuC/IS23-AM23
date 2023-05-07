@@ -68,6 +68,7 @@ public class Game {
           if(!finishedGame) {
               placeTiles(commands, column,order);
               checkCGC();
+              increaseCurrPlaying();
               if (gameChecker.isRestorable(livingRoom.getBoard())) livingRoom.restore();
               return true;
           }
@@ -85,7 +86,6 @@ public class Game {
 
     private synchronized void placeTiles(ArrayList<Integer> commands, Integer column,ArrayList<Integer> order){
         if(disconnectedPlayers.contains(Players.get(currPlaying-1))){
-            increaseCurrPlaying();
             return;
         }
         ArrayList<ItemTile> temporaryStorage ;
@@ -94,7 +94,6 @@ public class Game {
         Players.get(currPlaying-1).insertToken(temporaryStorage,column);
         gameChecker.isBookShelfFull(Players.get(currPlaying-1).getPlayerBookshelf());
         if (gameChecker.getLastRound())isLastTurn();
-        increaseCurrPlaying();
 
     }
 
