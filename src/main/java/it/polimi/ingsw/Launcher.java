@@ -25,4 +25,7 @@ private int numPlayers;
     public ArrayList<Player> getPlayers() {
         return players;
     }
+
+    public void addPlayer(Player p1) {
+    }
 }

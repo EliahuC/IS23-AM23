@@ -243,6 +243,18 @@ public class Game {
     public ArrayList<Player> getDisconnectedPlayers() {
         return disconnectedPlayers;
     }
+
+    public boolean isStartedGame() {
+        return startedGame;
+    }
+
+    public ArrayList<Player> getPlayers() {
+        return Players;
+    }
+
+    public LivingRoom getLivingRoom() {
+        return livingRoom;
+    }
 }
 
 
