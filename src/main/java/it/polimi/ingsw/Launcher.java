@@ -21,4 +21,8 @@ private int numPlayers;
     public void addPlayers(ArrayList<Player> players){
         this.players.addAll(players);
     }
+
+    public ArrayList<Player> getPlayers() {
+        return players;
+    }
 }
