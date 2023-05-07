@@ -1,6 +1,8 @@
-package it.polimi.ingsw.Network.Server;
+package it.polimi.ingsw.Network.Server.RMI;
 
 import it.polimi.ingsw.Loggable;
+import it.polimi.ingsw.Network.Server.Server;
+
 import java.rmi.AlreadyBoundException;
 import java.rmi.registry.Registry;
 import java.rmi.registry.LocateRegistry;

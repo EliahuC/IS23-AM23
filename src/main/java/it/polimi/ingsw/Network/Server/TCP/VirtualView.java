@@ -1,8 +1,7 @@
-package it.polimi.ingsw.Network.Server;
+package it.polimi.ingsw.Network.Server.TCP;
 
 import it.polimi.ingsw.Network.Messages.ServerToClient.*;
 import it.polimi.ingsw.model.board.BoardToken;
-import it.polimi.ingsw.model.board.LivingRoom;
 import it.polimi.ingsw.model.player.BookShelf;
 
 import java.beans.PropertyChangeEvent;

@@ -1,4 +1,4 @@
-package it.polimi.ingsw.Network.Client;
+package it.polimi.ingsw.Network.Client.RMI;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,6 +7,8 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+
+import it.polimi.ingsw.Network.Client.ChatClient;
 import it.polimi.ingsw.Network.Server.ChatServer;
 import it.polimi.ingsw.Settings;
 

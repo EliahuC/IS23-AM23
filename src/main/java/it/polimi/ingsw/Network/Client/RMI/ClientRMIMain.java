@@ -1,6 +1,8 @@
-package it.polimi.ingsw.Network.Client;
+package it.polimi.ingsw.Network.Client.RMI;
 
 import it.polimi.ingsw.Loggable;
+import it.polimi.ingsw.Network.Client.ConnectionClient;
+
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 

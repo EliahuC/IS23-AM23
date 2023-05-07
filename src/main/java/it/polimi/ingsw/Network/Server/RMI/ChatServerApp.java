@@ -1,6 +1,7 @@
-package it.polimi.ingsw.Network.Server;
+package it.polimi.ingsw.Network.Server.RMI;
 
 import it.polimi.ingsw.Network.Client.ChatClient;
+import it.polimi.ingsw.Network.Server.ChatServer;
 import it.polimi.ingsw.Settings;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;

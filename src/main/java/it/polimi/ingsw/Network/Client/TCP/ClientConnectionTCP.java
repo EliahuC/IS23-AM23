@@ -1,5 +1,7 @@
-package it.polimi.ingsw.Network.Client;
+package it.polimi.ingsw.Network.Client.TCP;
 
+import it.polimi.ingsw.Network.Client.ConnectionClient;
+import it.polimi.ingsw.Network.Client.MoveSerializer;
 import it.polimi.ingsw.Network.Messages.ClientToServer.ClientMessage;
 import it.polimi.ingsw.Network.Messages.ClientToServer.PingToServer;
 import it.polimi.ingsw.Network.Messages.Message;
@@ -10,7 +12,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
-public class ClientConnectionTCP extends ConnectionClient{
+public class ClientConnectionTCP extends ConnectionClient {
     private MoveSerializer moveSerializer;
     private final Socket socket;
     private String IPAddress;
