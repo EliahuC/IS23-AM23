@@ -94,7 +94,7 @@ public class ServerConnectionToClient implements Runnable {
                     if(lobby!=null){
                         if (lobby.getJoinedUsers().contains(message.getNickname())) {
                         ErrorMessage errorMessage=new ErrorMessage();
-                        errorMessage.addReturnMessage("You are already part of the lobby");
+                        errorMessage.addReturnMessage("You are already part of a lobby,please log out if you want to create a new lobby.");
                         sendMessage(errorMessage);
                         break;
                         }
@@ -106,10 +106,17 @@ public class ServerConnectionToClient implements Runnable {
 
                 lobby=new Lobby(((LobbyCreationMessage) message).getNumPlayers());
                 lobby.addUser(this, message.getNickname(),virtualView);
+                namePlayer= message.getNickname();
                 lobbies.add(lobby);
             }
             case ENTER_LOBBY: {
                 synchronized (lobbies){
+                if (lobbies.size()==0){
+                    ErrorMessage errorMessage =new ErrorMessage();
+                    errorMessage.addReturnMessage("There isn't any lobby, please create yours");
+                    sendMessage(errorMessage);
+                    return;
+                }
                 lobby=lobbies.get(0);
                 if (!checkLobbySpace()) {
                     ErrorMessage errorMessage=new ErrorMessage();
@@ -166,6 +173,13 @@ public class ServerConnectionToClient implements Runnable {
         new Thread(()->sendMessage(m)).start();
     }
 
+    public  ArrayList<Lobby> getStartedLobbies(){
+        return new ArrayList<>(startedLobbies);
+    }
+
+    public String getNamePlayer() {
+        return namePlayer;
+    }
 
     @Override
     public void run() {

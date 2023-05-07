@@ -226,6 +226,10 @@ public class Game {
         else if(currPlaying<gameNumPlayers && !finishedGame) currPlaying++;
     }
 
+    public synchronized String getCurrPlaying(){
+        return Players.get(currPlaying-1).getNickName();
+    }
+
 
 
 }

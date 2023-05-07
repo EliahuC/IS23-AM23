@@ -11,6 +11,7 @@ import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.player.Player;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Optional;
 
 public class GameController {
@@ -41,7 +42,8 @@ public class GameController {
 
 
      public synchronized Message readMessage(ClientMessage m){
-
+         if(!(Objects.equals(m.getNickname(), game.getCurrPlaying())))
+             return sendErrorMessage("It's not your turn");
          switch (m.getCategory()) {
              case COORDINATES -> {
                  coordinates.addAll(m.getMessageMove().getMove());
