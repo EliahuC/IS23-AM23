@@ -344,4 +344,34 @@ public class CommonGoalCard4Test extends TestCase {
         c44.checkGoal(bs26);
         assertEquals(1, c44.getNumCompleted());
     }
+    public void testCheckGoalCardCGC4_TENTH() {
+        CommonGoalCard c44 = new CommonGoalCard4(new Launcher());
+        c44.initNumCompleted();
+        BookShelf bs26 = new BookShelf();
+        bs26.setTile(4, 0, new ItemTile("PLANTS"));
+        bs26.setTile(4, 1, new ItemTile("PLANTS"));
+        bs26.setTile(5, 0, new ItemTile("PLANTS"));
+        bs26.setTile(5, 1, new ItemTile("PLANTS"));
+        bs26.setTile(4, 3, new ItemTile("PLANTS"));
+        bs26.setTile(4, 4, new ItemTile("PLANTS"));
+        bs26.setTile(5, 3, new ItemTile("PLANTS"));
+        bs26.setTile(5, 4, new ItemTile("PLANTS"));
+        c44.checkGoal(bs26);
+        assertEquals(1, c44.getNumCompleted());
+    }
+    public void testCheckGoalCardCGC4_ELEVENTH() {
+        CommonGoalCard c44 = new CommonGoalCard4(new Launcher());
+        c44.initNumCompleted();
+        BookShelf bs26 = new BookShelf();
+        bs26.setTile(4, 0, new ItemTile("PLANTS"));
+        bs26.setTile(4, 1, new ItemTile("PLANTS"));
+        bs26.setTile(5, 0, new ItemTile("PLANTS"));
+        bs26.setTile(5, 1, new ItemTile("PLANTS"));
+        bs26.setTile(4, 3, new ItemTile("PLANTS"));
+        bs26.setTile(4, 4, new ItemTile("CATS"));
+        bs26.setTile(5, 3, new ItemTile("CATS"));
+        bs26.setTile(5, 4, new ItemTile("PLANTS"));
+        c44.checkGoal(bs26);
+        assertEquals(0, c44.getNumCompleted());
+    }
 }
