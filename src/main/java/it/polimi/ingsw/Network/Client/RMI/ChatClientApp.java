@@ -8,13 +8,15 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
-import it.polimi.ingsw.Network.Client.ChatClient;
 import it.polimi.ingsw.Network.Server.ChatServer;
 import it.polimi.ingsw.Settings;
 
 public class ChatClientApp extends UnicastRemoteObject implements ChatClient {
 
     private ChatServer cs;
+
+    protected ChatClientApp() throws RemoteException {
+    }
 
     public void receive (String message) throws RemoteException {
         System.out.println(message);

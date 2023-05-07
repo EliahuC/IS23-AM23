@@ -1,6 +1,6 @@
 package it.polimi.ingsw.Network.Server.RMI;
 
-import it.polimi.ingsw.Network.Client.ChatClient;
+import it.polimi.ingsw.Network.Client.RMI.ChatClient;
 import it.polimi.ingsw.Network.Server.ChatServer;
 import it.polimi.ingsw.Settings;
 import java.rmi.RemoteException;

@@ -1,6 +1,5 @@
 package it.polimi.ingsw.Network.Server.TCP;
 
-import it.polimi.ingsw.Network.Server.Lobby;
 import it.polimi.ingsw.Printer;
 import it.polimi.ingsw.model.player.Player;
 
