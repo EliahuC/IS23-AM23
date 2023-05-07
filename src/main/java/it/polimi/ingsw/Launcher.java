@@ -15,7 +15,10 @@ private int numPlayers;
 
     private ArrayList<Player> players= new ArrayList<>();
 
-    public void addPlayer(Player p){
-        players.add(p);
+
+
+
+    public void addPlayers(ArrayList<Player> players){
+        this.players.addAll(players);
     }
 }

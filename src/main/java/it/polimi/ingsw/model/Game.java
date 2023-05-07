@@ -10,7 +10,8 @@ import java.util.stream.Collectors;
 
 public class Game {
     private final LivingRoom livingRoom;
-    private final List<Player> Players;
+    private final ArrayList<Player> Players;
+    private final ArrayList<Player> disconnectedPlayers;
 
     private int currPlaying;
     private final Integer gameNumPlayers;
@@ -22,6 +23,7 @@ public class Game {
 
     public Game(Launcher L,ArrayList<Player> lobby){
         this.Players=lobby;
+        this.disconnectedPlayers=new ArrayList<>();
         this.livingRoom =new LivingRoom(L);
         setLivingRoomListener();
         this.gameChecker =new GameChecker(L);
@@ -36,9 +38,13 @@ public class Game {
         }
         livingRoom.setListeners(listeners);
     }
+    public void setDisconnectedPlayers(Player p){
+        disconnectedPlayers.add(p);
+    }
 
 
     public synchronized void startGame(){
+
         livingRoom.Start(Players.size());
         this.startedGame=true;
         ArrayList<Player> mixedPlayers;
@@ -78,6 +84,10 @@ public class Game {
 
 
     private synchronized void placeTiles(ArrayList<Integer> commands, Integer column,ArrayList<Integer> order){
+        if(disconnectedPlayers.contains(Players.get(currPlaying-1))){
+            increaseCurrPlaying();
+            return;
+        }
         ArrayList<ItemTile> temporaryStorage ;
         temporaryStorage= livingRoom.getTiles(commands);
         temporaryStorage=sortMyTiles(temporaryStorage,order);
@@ -230,8 +240,9 @@ public class Game {
         return Players.get(currPlaying-1).getNickName();
     }
 
-
-
+    public ArrayList<Player> getDisconnectedPlayers() {
+        return disconnectedPlayers;
+    }
 }
 
 

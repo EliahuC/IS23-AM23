@@ -14,6 +14,7 @@ public abstract class Message {
         this.nickname=n;
     }
     public enum MessageCategory{
+        PING,
         COORDINATES,
         COLUMN,
         ORDER,

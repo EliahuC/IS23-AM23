@@ -55,5 +55,15 @@ public class ControllerCoordinator {
         gameController=new GameController(connectedPlayers);
         gameController.startGame();
     }
+    public ArrayList<Player> getDisconnectedPlayers(){
+        return gameController.getDisconnectedPlayers();
+    }
 
+    public Player getConnectedPlayer(String nickname) {
+        Player player=null;
+        for(Player p: connectedPlayers){
+            if(p.getNickName().equals(nickname))player=p;
+        }
+      return player;
+    }
 }

@@ -16,19 +16,18 @@ import java.util.Optional;
 
 public class GameController {
      private final Game game;
-     private ClientMessage message;
      private final Launcher launcher;
      private final Gson gson = new Gson();
      private final ArrayList<Integer> coordinates=new ArrayList<>();
-    private final ArrayList<Integer> order=new ArrayList<>();
+     private final ArrayList<Integer> order=new ArrayList<>();
      private Integer column;
      private final ArrayList<Player> players =new ArrayList<>();
-     private Integer lobbyMaxSize;
      private boolean startedGame=false;
      public GameController(ArrayList<Player> players){
          this.launcher=new Launcher();
-         this.message =null;
          this.players.addAll(players);
+         launcher.addPlayers(players);
+         launcher.setNumPlayers(players.size());
          this.game =new Game(launcher, this.players);
 
 
@@ -91,7 +90,7 @@ public class GameController {
     }
 
     public synchronized void playMove(){
-         game.playMove(coordinates,column,order);
+         if(!game.playMove(coordinates,column,order))sendErrorMessage() ;
          coordinates.clear();
          column=null;
          order.clear();
@@ -100,6 +99,10 @@ public class GameController {
 
     public synchronized Optional<Player> endGame() {
         return game.endGame();
+    }
+
+    public ArrayList<Player> getDisconnectedPlayers(){
+         return game.getDisconnectedPlayers();
     }
 
 
