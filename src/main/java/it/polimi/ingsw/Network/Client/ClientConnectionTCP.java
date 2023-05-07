@@ -55,7 +55,7 @@ public class ClientConnectionTCP extends ConnectionClient{
               if (serverMessage.getCategory() != Message.MessageCategory.PING) {
                   if (GUIisActive) {
                       //GUIEvent.recieveMessage(serverMessage);
-                  } else //CLIEvent.recieveMessage(serverMessage);
+                  } else; //CLIEvent.recieveMessage(serverMessage);
               } else sendPing();
           } catch (IOException e){
               closeConnection();
