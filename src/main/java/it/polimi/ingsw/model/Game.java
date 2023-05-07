@@ -27,6 +27,7 @@ public class Game {
         this.gameChecker =new GameChecker(L);
         this.currPlaying=1;
         this.gameNumPlayers= lobby.size();
+        startGame();
     }
 
     private void setLivingRoomListener() {
@@ -230,8 +231,17 @@ public class Game {
         return Players.get(currPlaying-1).getNickName();
     }
 
+    public List<Player> getPlayers() {
+        return Players;
+    }
 
+    public boolean isStartedGame() {
+        return startedGame;
+    }
 
+    public LivingRoom getLivingRoom() {
+        return livingRoom;
+    }
 }
 
 

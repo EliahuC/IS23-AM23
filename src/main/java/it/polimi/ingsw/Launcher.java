@@ -18,4 +18,8 @@ private int numPlayers;
     public void addPlayer(Player p){
         players.add(p);
     }
+
+    public ArrayList<Player> getPlayers() {
+        return players;
+    }
 }
