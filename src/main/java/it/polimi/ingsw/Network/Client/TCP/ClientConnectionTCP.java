@@ -1,5 +1,6 @@
 package it.polimi.ingsw.Network.Client.TCP;
 
+import com.google.gson.Gson;
 import it.polimi.ingsw.Network.Client.ConnectionClient;
 import it.polimi.ingsw.Network.Client.MoveSerializer;
 import it.polimi.ingsw.Network.Messages.ClientToServer.ClientMessage;
@@ -11,6 +12,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.concurrent.TimeUnit;
 
 public class ClientConnectionTCP extends ConnectionClient {
     private MoveSerializer moveSerializer;
@@ -21,6 +23,7 @@ public class ClientConnectionTCP extends ConnectionClient {
     private ObjectInputStream input;
     private ObjectOutputStream output;
     private Boolean GUIisActive=false;
+    private final Gson gson=new Gson();
 
     public ClientConnectionTCP(Socket socket) {
         this.clientIsActive =true;
@@ -64,6 +67,8 @@ public class ClientConnectionTCP extends ConnectionClient {
               notifyDisconnection();
           }catch (ClassNotFoundException e){
               e.printStackTrace();
+          } catch (InterruptedException e) {
+              throw new RuntimeException(e);
           }
       }
 
@@ -90,7 +95,8 @@ public class ClientConnectionTCP extends ConnectionClient {
     }
     private void sendMessage(ClientMessage message){
         try{
-            output.writeObject(message);
+            String m=gson.toJson(message);
+            output.writeObject(m);
             output.flush();
             output.reset();
         } catch (IOException e) {
@@ -100,8 +106,9 @@ public class ClientConnectionTCP extends ConnectionClient {
     }
 
 
-    private void sendPing() {
+    private void sendPing() throws InterruptedException {
         PingToServer ping=new PingToServer(playerName);
+        TimeUnit.SECONDS.sleep(15);
         asyncSendPing(ping);
     }
 

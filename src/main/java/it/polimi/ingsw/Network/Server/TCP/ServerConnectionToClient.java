@@ -27,7 +27,7 @@ public class ServerConnectionToClient implements Runnable {
     private ObjectInputStream input;
     private ObjectOutputStream output;
     private VirtualView virtualView;
-    private Gson gson;
+    private final Gson gson=new Gson();
     private static final ArrayList<Lobby> lobbies=new ArrayList<>();
     private static final ArrayList<Lobby> startedLobbies=new ArrayList<>();
     private Lobby lobby;

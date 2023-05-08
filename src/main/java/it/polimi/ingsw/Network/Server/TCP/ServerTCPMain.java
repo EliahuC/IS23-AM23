@@ -52,7 +52,7 @@ public class ServerTCPMain extends Server {
 
     @Override
     public void showMessage(String s) {
-        System.out.println("s");
+        System.out.println(s);
     }
 
 

@@ -6,7 +6,10 @@ import it.polimi.ingsw.Printer;
 import it.polimi.ingsw.view.*;
 
 
+import java.io.IOException;
+import java.net.InetAddress;
 import java.net.Socket;
+import java.net.UnknownHostException;
 
 public class ClientMain implements Printer {
     private static View view;
@@ -15,24 +18,28 @@ public class ClientMain implements Printer {
 
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         argsParser(args);
         new Thread(view).start();
         new Thread(connectionClient).start();
     }
 
-    private static void argsParser(String[] args) {
+    private static void argsParser(String[] args) throws IOException {
         String temporaryStorage=args[0];
-        temporaryStorage.toUpperCase();
+        temporaryStorage=temporaryStorage.toUpperCase();
         switch (temporaryStorage) {
             case "--CLI" -> view = new CLI();
             case "--GUI" -> view = new GUI();
             default -> System.out.println("View command isn't valid");
         }
         temporaryStorage=args[1];
+        temporaryStorage=temporaryStorage.toUpperCase();
         switch (temporaryStorage){
             case "--RMI"-> connectionClient=new ClientRMIMain();
-            case "--TCP"-> connectionClient=new ClientConnectionTCP(new Socket());
+            case "--TCP"->{
+                Socket socket=new Socket(InetAddress.getLocalHost(),1455);
+             connectionClient=new ClientConnectionTCP(socket);
+            }
             default -> System.out.println("Communication command isn't valid");
         }
 
