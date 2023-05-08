@@ -3,6 +3,8 @@ import it.polimi.ingsw.Launcher;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.board.ItemTile;
 import java.util.ArrayList;
+import java.util.Optional;
+
 import junit.framework.TestCase;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -16,6 +18,7 @@ public class GameTest extends TestCase {
             L.addPlayer(p1);
             L.addPlayer(p2);
             Game G = new Game(L,L.getPlayers());
+            G.startGame();
             assertTrue(G.isStartedGame());
         }
         public void testStartGameG_SECOND(){        //PLAYER IN FIRST POSITION IN L.getPlayers (after calling startGame()
@@ -26,6 +29,7 @@ public class GameTest extends TestCase {
             L.addPlayer(p1);
             L.addPlayer(p2);
             Game G = new Game(L,L.getPlayers());
+            G.startGame();
             assertTrue(G.getPlayers().get(0).isFirstPlayerSeat());
         }
         public void testStartGameG_THIRD(){         //PLAYER NOT IN FIRST POSITION IN L.getPlayers (after calling startGame()
@@ -40,6 +44,7 @@ public class GameTest extends TestCase {
             L.addPlayer(p3);
             L.addPlayer(p4);
             Game G = new Game(L,L.getPlayers());
+            G.startGame();
             assertFalse(G.getPlayers().get(1).isFirstPlayerSeat());
             assertFalse(G.getPlayers().get(2).isFirstPlayerSeat());
             assertFalse(G.getPlayers().get(3).isFirstPlayerSeat());
@@ -56,6 +61,7 @@ public class GameTest extends TestCase {
             L.addPlayer(p4);
             L.setNumPlayers(4);
             Game G = new Game(L,L.getPlayers());
+            G.startGame();
             ArrayList<Integer> CoordinatesTiles = new ArrayList<>();
             CoordinatesTiles.add(3);
             CoordinatesTiles.add(8);
@@ -78,6 +84,7 @@ public class GameTest extends TestCase {
             L.addPlayer(p4);
             L.setNumPlayers(4);
             Game G = new Game(L,L.getPlayers());
+            G.startGame();
             ArrayList<Integer> CoordinatesTiles = new ArrayList<>();
             CoordinatesTiles.add(3);
             CoordinatesTiles.add(8);
@@ -104,6 +111,7 @@ public class GameTest extends TestCase {
             L.addPlayer(p4);
             L.setNumPlayers(4);
             Game G = new Game(L,L.getPlayers());
+            G.startGame();
             ArrayList<Integer> CoordinatesTiles = new ArrayList<>();
             CoordinatesTiles.add(3);
             CoordinatesTiles.add(8);
@@ -130,6 +138,7 @@ public class GameTest extends TestCase {
             L.addPlayer(p4);
             L.setNumPlayers(4);
             Game G = new Game(L,L.getPlayers());
+            G.startGame();
             ArrayList<Integer> CoordinatesTiles = new ArrayList<>();
             CoordinatesTiles.add(3);
             CoordinatesTiles.add(8);
@@ -169,6 +178,7 @@ public class GameTest extends TestCase {
             L.addPlayer(p4);
             L.setNumPlayers(4);
             Game G = new Game(L,L.getPlayers());
+            G.startGame();
             ArrayList<Integer> CoordinatesTiles = new ArrayList<>();
             CoordinatesTiles.add(3);
             CoordinatesTiles.add(8);
@@ -221,6 +231,7 @@ public class GameTest extends TestCase {
             L.addPlayer(p4);
             L.setNumPlayers(4);
             Game G = new Game(L,L.getPlayers());
+            G.startGame();
             ArrayList<Integer> CoordinatesTiles = new ArrayList<>();
             CoordinatesTiles.add(3);
             CoordinatesTiles.add(8);
@@ -291,6 +302,7 @@ public class GameTest extends TestCase {
             L.addPlayer(p4);
             L.setNumPlayers(4);
             Game G = new Game(L,L.getPlayers());
+            G.startGame();
             ArrayList<Integer> CoordinatesTiles = new ArrayList<>();
             CoordinatesTiles.add(3);
             CoordinatesTiles.add(8);
@@ -364,4 +376,151 @@ public class GameTest extends TestCase {
             assertEquals(j,G.getPlayers().get(0).getPlayerBookshelf().getTile(5,4));
             assertEquals(u,G.getPlayers().get(0).getPlayerBookshelf().getTile(4,4));
         }
+    public void testEndgame_FIRST() {
+        Player p = new Player("Tom", 2);
+        Player p2 = new Player("Butch", 12);
+        Launcher L = new Launcher();
+        L.addPlayer(p);
+        L.addPlayer(p2);
+        L.setNumPlayers(2);
+        Game G = new Game(L, L.getPlayers());
+        G.startGame();
+        p.getPlayerBookshelf().setTile(1, 1, new ItemTile("PLANTS"));
+        p.getPlayerBookshelf().setTile(5, 4, new ItemTile("FRAMES"));
+        p.getPlayerBookshelf().setTile(2, 0, new ItemTile("PLANTS"));
+        p.getPlayerBookshelf().setTile(3, 4, new ItemTile("BOOKS"));
+        p.getPlayerBookshelf().setTile(2, 2, new ItemTile("GAMES"));
+        p.getPlayerBookshelf().setTile(4, 3, new ItemTile("TROPHIES"));
+        p.getPlayerBookshelf().setTile(0, 0, new ItemTile("PLANTS"));
+        p.getPlayerBookshelf().setTile(0, 1, new ItemTile("PLANTS"));
+        p.getPlayerBookshelf().setTile(1, 0, new ItemTile("PLANTS"));
+        p.getPlayerBookshelf().setTile(0, 2, new ItemTile("BOOKS"));
+        p.getPlayerBookshelf().setTile(0, 3, new ItemTile("CATS"));
+        p.getPlayerBookshelf().setTile(0, 4, new ItemTile("GAMES"));
+        p.getPlayerBookshelf().setTile(1, 2, new ItemTile("FRAMES"));
+        p.getPlayerBookshelf().setTile(1, 3, new ItemTile("GAMES"));
+        p.getPlayerBookshelf().setTile(1, 4, new ItemTile("GAMES"));
+        p.getPlayerBookshelf().setTile(2, 1, new ItemTile("BOOKS"));
+        p.getPlayerBookshelf().setTile(2, 3, new ItemTile("FRAMES"));
+        p.getPlayerBookshelf().setTile(2, 4, new ItemTile("FRAMES"));
+        p.getPlayerBookshelf().setTile(3, 0, new ItemTile("BOOKS"));
+        p.getPlayerBookshelf().setTile(3, 1, new ItemTile("BOOKS"));
+        p.getPlayerBookshelf().setTile(3, 2, new ItemTile("TROPHIES"));
+        p.getPlayerBookshelf().setTile(3, 3, new ItemTile("CATS"));
+        p.getPlayerBookshelf().setTile(4, 0, new ItemTile("CATS"));
+        p.getPlayerBookshelf().setTile(4, 1, new ItemTile("BOOKS"));
+        p.getPlayerBookshelf().setTile(4, 2, new ItemTile("CATS"));
+        p.getPlayerBookshelf().setTile(4, 4, new ItemTile("BOOKS"));
+        p.getPlayerBookshelf().setTile(5, 0, new ItemTile("BOOKS"));
+        p.getPlayerBookshelf().setTile(5, 1, new ItemTile("CATS"));
+        p.getPlayerBookshelf().setTile(5, 2, new ItemTile("TROPHIES"));
+        p.getPlayerBookshelf().setTile(5, 3, new ItemTile("FRAMES"));
+        p2.getPlayerBookshelf().setTile(1, 1, new ItemTile("PLANTS"));
+        p2.getPlayerBookshelf().setTile(2, 2, new ItemTile("FRAMES"));
+        p2.getPlayerBookshelf().setTile(5, 0, new ItemTile("CATS"));
+        p2.getPlayerBookshelf().setTile(0, 2, new ItemTile("BOOKS"));
+        p2.getPlayerBookshelf().setTile(4, 4, new ItemTile("GAMES"));
+        p2.getPlayerBookshelf().setTile(3, 3, new ItemTile("TROPHIES"));
+        p2.getPlayerBookshelf().setTile(0, 0, new ItemTile("PLANTS"));
+        p2.getPlayerBookshelf().setTile(0, 1, new ItemTile("PLANTS"));
+        p2.getPlayerBookshelf().setTile(0, 3, new ItemTile("BOOKS"));
+        p2.getPlayerBookshelf().setTile(0, 4, new ItemTile("BOOKS"));
+        p2.getPlayerBookshelf().setTile(1, 0, new ItemTile("GAMES"));
+        p2.getPlayerBookshelf().setTile(1, 2, new ItemTile("PLANTS"));
+        p2.getPlayerBookshelf().setTile(1, 3, new ItemTile("FRAMES"));
+        p2.getPlayerBookshelf().setTile(1, 4, new ItemTile("BOOKS"));
+        p2.getPlayerBookshelf().setTile(2, 0, new ItemTile("GAMES"));
+        p2.getPlayerBookshelf().setTile(2, 1, new ItemTile("GAMES"));
+        p2.getPlayerBookshelf().setTile(2, 3, new ItemTile("FRAMES"));
+        p2.getPlayerBookshelf().setTile(2, 4, new ItemTile("CATS"));
+        p2.getPlayerBookshelf().setTile(3, 0, new ItemTile("BOOKS"));
+        p2.getPlayerBookshelf().setTile(3, 1, new ItemTile("BOOKS"));
+        p2.getPlayerBookshelf().setTile(3, 2, new ItemTile("GAMES"));
+        p2.getPlayerBookshelf().setTile(3, 4, new ItemTile("TROPHIES"));
+        p2.getPlayerBookshelf().setTile(4, 0, new ItemTile("CATS"));
+        p2.getPlayerBookshelf().setTile(4, 1, new ItemTile("GAMES"));
+        p2.getPlayerBookshelf().setTile(4, 2, new ItemTile("BOOKS"));
+        p2.getPlayerBookshelf().setTile(4, 3, new ItemTile("TROPHIES"));
+        p2.getPlayerBookshelf().setTile(5, 1, new ItemTile("PLANTS"));
+        p2.getPlayerBookshelf().setTile(5, 2, new ItemTile("TROPHIES"));
+        p2.getPlayerBookshelf().setTile(5, 3, new ItemTile("TROPHIES"));
+        p2.getPlayerBookshelf().setTile(5, 4, new ItemTile("TROPHIES"));
+        Optional<Player> player = Optional.ofNullable(p2);
+        assertEquals(player, G.endGame());
+    }
+
+    public void testEndgame_SECOND() {
+        Player p = new Player("Spike", 2);
+        Player p2 = new Player("Jerry", 12);
+        Launcher L = new Launcher();
+        L.addPlayer(p);
+        L.addPlayer(p2);
+        L.setNumPlayers(2);
+        Game G = new Game(L, L.getPlayers());
+        G.startGame();
+        p.getPlayerBookshelf().setTile(1, 1, new ItemTile("PLANTS"));
+        p.getPlayerBookshelf().setTile(5, 4, new ItemTile("FRAMES"));
+        p.getPlayerBookshelf().setTile(2, 0, new ItemTile("PLANTS"));
+        p.getPlayerBookshelf().setTile(3, 4, new ItemTile("BOOKS"));
+        p.getPlayerBookshelf().setTile(2, 2, new ItemTile("GAMES"));
+        p.getPlayerBookshelf().setTile(4, 3, new ItemTile("TROPHIES"));
+        p.getPlayerBookshelf().setTile(0, 0, new ItemTile("PLANTS"));
+        p.getPlayerBookshelf().setTile(0, 1, new ItemTile("PLANTS"));
+        p.getPlayerBookshelf().setTile(1, 0, new ItemTile("PLANTS"));
+        p.getPlayerBookshelf().setTile(0, 2, new ItemTile("BOOKS"));
+        p.getPlayerBookshelf().setTile(0, 3, new ItemTile("CATS"));
+        p.getPlayerBookshelf().setTile(0, 4, new ItemTile("GAMES"));
+        p.getPlayerBookshelf().setTile(1, 2, new ItemTile("FRAMES"));
+        p.getPlayerBookshelf().setTile(1, 3, new ItemTile("GAMES"));
+        p.getPlayerBookshelf().setTile(1, 4, new ItemTile("GAMES"));
+        p.getPlayerBookshelf().setTile(2, 1, new ItemTile("BOOKS"));
+        p.getPlayerBookshelf().setTile(2, 3, new ItemTile("FRAMES"));
+        p.getPlayerBookshelf().setTile(2, 4, new ItemTile("FRAMES"));
+        p.getPlayerBookshelf().setTile(3, 0, new ItemTile("BOOKS"));
+        p.getPlayerBookshelf().setTile(3, 1, new ItemTile("BOOKS"));
+        p.getPlayerBookshelf().setTile(3, 2, new ItemTile("TROPHIES"));
+        p.getPlayerBookshelf().setTile(3, 3, new ItemTile("CATS"));
+        p.getPlayerBookshelf().setTile(4, 0, new ItemTile("CATS"));
+        p.getPlayerBookshelf().setTile(4, 1, new ItemTile("BOOKS"));
+        p.getPlayerBookshelf().setTile(4, 2, new ItemTile("CATS"));
+        p.getPlayerBookshelf().setTile(4, 4, new ItemTile("BOOKS"));
+        p.getPlayerBookshelf().setTile(5, 0, new ItemTile("BOOKS"));
+        p.getPlayerBookshelf().setTile(5, 1, new ItemTile("CATS"));
+        p.getPlayerBookshelf().setTile(5, 2, new ItemTile("TROPHIES"));
+        p.getPlayerBookshelf().setTile(5, 3, new ItemTile("FRAMES"));
+        p2.getPlayerBookshelf().setTile(1, 1, new ItemTile("PLANTS"));
+        p2.getPlayerBookshelf().setTile(2, 2, new ItemTile("FRAMES"));
+        p2.getPlayerBookshelf().setTile(5, 0, new ItemTile("CATS"));
+        p2.getPlayerBookshelf().setTile(0, 2, new ItemTile("BOOKS"));
+        p2.getPlayerBookshelf().setTile(4, 4, new ItemTile("GAMES"));
+        p2.getPlayerBookshelf().setTile(3, 3, new ItemTile("TROPHIES"));
+        p2.getPlayerBookshelf().setTile(0, 0, new ItemTile("PLANTS"));
+        p2.getPlayerBookshelf().setTile(0, 1, new ItemTile("PLANTS"));
+        p2.getPlayerBookshelf().setTile(0, 3, new ItemTile("BOOKS"));
+        p2.getPlayerBookshelf().setTile(0, 4, new ItemTile("BOOKS"));
+        p2.getPlayerBookshelf().setTile(1, 0, new ItemTile("GAMES"));
+        p2.getPlayerBookshelf().setTile(1, 1, new ItemTile("PLANTS"));
+        p2.getPlayerBookshelf().setTile(1, 2, new ItemTile("CATS"));
+        p2.getPlayerBookshelf().setTile(1, 3, new ItemTile("FRAMES"));
+        p2.getPlayerBookshelf().setTile(1, 4, new ItemTile("TROPHIES"));
+        p2.getPlayerBookshelf().setTile(2, 0, new ItemTile("PLANTS"));
+        p2.getPlayerBookshelf().setTile(2, 1, new ItemTile("PLANTS"));
+        p2.getPlayerBookshelf().setTile(2, 3, new ItemTile("TROPHIES"));
+        p2.getPlayerBookshelf().setTile(2, 4, new ItemTile("FRAMES"));
+        p2.getPlayerBookshelf().setTile(3, 0, new ItemTile("GAMES"));
+        p2.getPlayerBookshelf().setTile(3, 1, new ItemTile("BOOKS"));
+        p2.getPlayerBookshelf().setTile(3, 2, new ItemTile("CATS"));
+        p2.getPlayerBookshelf().setTile(3, 4, new ItemTile("GAMES"));
+        p2.getPlayerBookshelf().setTile(4, 0, new ItemTile("GAMES"));
+        p2.getPlayerBookshelf().setTile(4, 1, new ItemTile("CATS"));
+        p2.getPlayerBookshelf().setTile(4, 2, new ItemTile("FRAMES"));
+        p2.getPlayerBookshelf().setTile(4, 3, new ItemTile("BOOKS"));
+        p2.getPlayerBookshelf().setTile(5, 1, new ItemTile("BOOKS"));
+        p2.getPlayerBookshelf().setTile(5, 2, new ItemTile("BOOKS"));
+        p2.getPlayerBookshelf().setTile(5, 3, new ItemTile("FRAMES"));
+        p2.getPlayerBookshelf().setTile(5, 4, new ItemTile("TROPHIES"));
+        Optional<Player> player = Optional.ofNullable(G.getPlayers().get(1));
+        assertEquals(player, G.endGame());
+    }
+
 }

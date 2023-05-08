@@ -33,6 +33,16 @@ public class Player {
 
 
     }
+    public Player(String nickName,int x) {      //THIS METHOD IS CREATED DUE TO MAKE TESTS
+        NickName = nickName;
+        this.IPaddres = null;
+        this.score = 0;
+        this.playerBookshelf = new BookShelf();
+        this.PersonalGoalCard = new PersonalGoalCard(x);
+        this.nowPlaying = false;
+        this.lastRound = false;
+
+    }
 
     public void setFirstPlayerSeat(boolean firstPlayerSeat) {
         this.firstPlayerSeat = firstPlayerSeat;

@@ -27,5 +27,6 @@ private int numPlayers;
     }
 
     public void addPlayer(Player p1) {
+        players.add(p1);
     }
 }
