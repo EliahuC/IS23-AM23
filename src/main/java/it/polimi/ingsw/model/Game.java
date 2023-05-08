@@ -121,6 +121,7 @@ public class Game {
             case 1: {
                 if(gameChecker.isLegalAction(livingRoom.getBoardTile(commands.get(0),commands.get(1))))
                     return true;
+                break;
 
 
             }
@@ -128,6 +129,7 @@ public class Game {
                 if(gameChecker.isLegalAction(livingRoom.getBoardTile(commands.get(0),commands.get(1)),
                         livingRoom.getBoardTile(commands.get(2),commands.get(3))))
                     return true;
+                break;
 
             }
             case 3:{
@@ -135,7 +137,7 @@ public class Game {
                         livingRoom.getBoardTile(commands.get(2),commands.get(3)),
                         livingRoom.getBoardTile(commands.get(4),commands.get(5))))
                     return true;
-
+                break;
             }
         }
         return false;

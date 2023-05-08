@@ -565,4 +565,32 @@ public class GameTest extends TestCase {
         GC.checkColumnCapability(G.getPlayers().get(0).getPlayerBookshelf());
         assertFalse(G.checkLegalMove(Coordinates,Coordinates.size()/2));
     }
+    public void testCheckLegalMove_SECOND() {
+        Player y = new Player("Yoda");
+        Player d = new Player("Darth Vader");
+        Launcher L = new Launcher();
+        L.addPlayer(y);
+        L.addPlayer(d);
+        L.setNumPlayers(2);
+        ArrayList<Integer> Coordinates = new ArrayList<>();
+        Game G = new Game(L, L.getPlayers());
+        G.startGame();
+        Coordinates.add(7);
+        Coordinates.add(5);
+        assertTrue(G.checkLegalMove(Coordinates, Coordinates.size() / 2));
+    }
+    public void testCheckLegalMove_THIRD() {
+        Player y = new Player("Yoda");
+        Player d = new Player("Darth Vader");
+        Launcher L = new Launcher();
+        L.addPlayer(y);
+        L.addPlayer(d);
+        L.setNumPlayers(2);
+        ArrayList<Integer> Coordinates = new ArrayList<>();
+        Game G = new Game(L, L.getPlayers());
+        G.startGame();
+        Coordinates.add(3);
+        Coordinates.add(3);
+        assertFalse(G.checkLegalMove(Coordinates, Coordinates.size() / 2));
+    }
 }
