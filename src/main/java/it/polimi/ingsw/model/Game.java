@@ -113,8 +113,10 @@ public class Game {
 
     public boolean checkLegalMove(ArrayList<Integer> coordinates, int size){
         ArrayList<Integer> commands = new ArrayList<>(coordinates);
-        commands=sortTiles(commands);
-        if(!checkNumber(size))return false;
+        if(commands.size()>2) {
+            commands = sortTiles(commands);
+            if (!checkNumber(size)) return false;
+        }
         switch (size) {
             case 1: {
                 if(gameChecker.isLegalAction(livingRoom.getBoardTile(commands.get(0),commands.get(1))))
@@ -141,51 +143,66 @@ public class Game {
 
     private ArrayList<Integer> sortTiles(ArrayList<Integer> commands) {
         ArrayList<Integer> comandi=new ArrayList<>();
-        //tessere sulla stessa riga
-        if((Objects.equals(commands.get(0), commands.get(2)) && Objects.equals(commands.get(2), commands.get(4)))
-        ||(Objects.equals(commands.get(0), commands.get(2)) && Objects.equals(null, commands.get(4)))){
-            sortRow(commands,comandi);
+        switch(commands.size()){
+            case 4 : {
+                //tessere sulla stessa riga
+                if(Objects.equals(commands.get(0), commands.get(2)))
+                    sortRow(commands,comandi);
+                    //tessere sulla stessa colonna
+                else if(Objects.equals(commands.get(1), commands.get(3)))
+                    sortColumn(commands,comandi);
+                break;
+            }
+
+            case 6 : {
+                //tessere sulla stessa riga
+                if((Objects.equals(commands.get(0), commands.get(2))) && (Objects.equals(commands.get(2), commands.get(4))))
+                    sortRow(commands,comandi);
+                    //tessere sulla stessa colonna
+                else if((Objects.equals(commands.get(1), commands.get(3)))&& Objects.equals(commands.get(3), commands.get(5)))
+                    sortColumn(commands,comandi);
+                break;
+            }
         }
-        //tessere sulla stessa colonna
-        else if((Objects.equals(commands.get(1), commands.get(3)) && Objects.equals(commands.get(3), commands.get(5)))
-            ||(Objects.equals(commands.get(1), commands.get(3)) && Objects.equals(null, commands.get(5)))){
-           sortColumn(commands,comandi);
-        }
-      return comandi;
+        return comandi;
     }
 
     private void sortColumn(ArrayList<Integer> commands, ArrayList<Integer> comandi) {
-        ArrayList<Integer> y=new ArrayList<>();
-        Integer support=null;
-        support=commands.get(1);
+        ArrayList<Integer> y = new ArrayList<>();
+        Integer support = null;
+        support = commands.get(1);
         y.add(commands.get(0));
         y.add(commands.get(2));
-        y.add(commands.get(4));
-        y= (ArrayList<Integer>) y.stream().sorted().collect(Collectors.toList());
+        if (commands.size() > 4)
+            y.add(commands.get(4));
+        y = (ArrayList<Integer>) y.stream().sorted().collect(Collectors.toList());
         comandi.add(y.get(0));
         comandi.add(support);
         comandi.add(y.get(1));
         comandi.add(support);
-        comandi.add(y.get(2));
-        comandi.add(support);
+        if (commands.size() > 4) {
+            comandi.add(y.get(2));
+            comandi.add(support);
+        }
     }
-
     private void sortRow(ArrayList<Integer> commands, ArrayList<Integer> comandi) {
-        ArrayList<Integer> x=new ArrayList<>();
-        Integer support=null;
-        support=commands.get(0);
+        ArrayList<Integer> x = new ArrayList<>();
+        Integer support = null;
+        support = commands.get(0);
         x.add(commands.get(1));
         x.add(commands.get(3));
-        x.add(commands.get(5));
-        x= (ArrayList<Integer>) x.stream().sorted().collect(Collectors.toList());
+        if (commands.size() > 4)
+            x.add(commands.get(5));
+        x = (ArrayList<Integer>) x.stream().sorted().collect(Collectors.toList());
         comandi.add(support);
         comandi.add(x.get(0));
         comandi.add(support);
         comandi.add(x.get(1));
-        comandi.add(support);
-        comandi.add(x.get(2));
+        if (commands.size() > 4) {
+            comandi.add(support);
+            comandi.add(x.get(2));
+        }
     }
-
     public boolean checkLegalColumn(int column,int numOfTiles){
         return gameChecker.checkColumn(Players.get(currPlaying-1).getPlayerBookshelf(),column,numOfTiles);
     }

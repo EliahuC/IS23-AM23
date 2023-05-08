@@ -522,5 +522,47 @@ public class GameTest extends TestCase {
         Optional<Player> player = Optional.ofNullable(G.getPlayers().get(1));
         assertEquals(player, G.endGame());
     }
-
+    public void testCheckLegalMove_FIRST(){
+        Player y = new Player("Yoda");
+        Player d = new Player("Darth Vader");
+        Launcher L = new Launcher();
+        L.addPlayer(y);
+        L.addPlayer(d);
+        L.setNumPlayers(2);
+        GameChecker GC = new GameChecker(L);
+        ArrayList<Integer> Coordinates = new ArrayList<>();
+        Game G = new Game(L, L.getPlayers());
+        G.startGame();
+        G.getPlayers().get(0).getPlayerBookshelf().setTile(5,0,new ItemTile());
+        G.getPlayers().get(0).getPlayerBookshelf().setTile(4,0,new ItemTile());
+        G.getPlayers().get(0).getPlayerBookshelf().setTile(3,0, new ItemTile());
+        G.getPlayers().get(0).getPlayerBookshelf().setTile(2,0, new ItemTile());
+        G.getPlayers().get(0).getPlayerBookshelf().setTile(1,0, new ItemTile());
+        G.getPlayers().get(0).getPlayerBookshelf().setTile(5,1,new ItemTile());
+        G.getPlayers().get(0).getPlayerBookshelf().setTile(4,1,new ItemTile());
+        G.getPlayers().get(0).getPlayerBookshelf().setTile(3,1,new ItemTile());
+        G.getPlayers().get(0).getPlayerBookshelf().setTile(2,1,new ItemTile());
+        G.getPlayers().get(0).getPlayerBookshelf().setTile(1,1,new ItemTile());
+        G.getPlayers().get(0).getPlayerBookshelf().setTile(5,2,new ItemTile());
+        G.getPlayers().get(0).getPlayerBookshelf().setTile(4,2,new ItemTile());
+        G.getPlayers().get(0).getPlayerBookshelf().setTile(3,2,new ItemTile());
+        G.getPlayers().get(0).getPlayerBookshelf().setTile(2,2,new ItemTile());
+        G.getPlayers().get(0).getPlayerBookshelf().setTile(1,2,new ItemTile());
+        G.getPlayers().get(0).getPlayerBookshelf().setTile(5,3,new ItemTile());
+        G.getPlayers().get(0).getPlayerBookshelf().setTile(4,3,new ItemTile());
+        G.getPlayers().get(0).getPlayerBookshelf().setTile(3,3,new ItemTile());
+        G.getPlayers().get(0).getPlayerBookshelf().setTile(2,3,new ItemTile());
+        G.getPlayers().get(0).getPlayerBookshelf().setTile(1,3,new ItemTile());
+        G.getPlayers().get(0).getPlayerBookshelf().setTile(5,4,new ItemTile());
+        G.getPlayers().get(0).getPlayerBookshelf().setTile(4,4,new ItemTile());
+        G.getPlayers().get(0).getPlayerBookshelf().setTile(3,4,new ItemTile());
+        G.getPlayers().get(0).getPlayerBookshelf().setTile(2,4,new ItemTile());
+        G.getPlayers().get(0).getPlayerBookshelf().setTile(1,4,new ItemTile());
+        Coordinates.add(1);
+        Coordinates.add(3);
+        Coordinates.add(1);
+        Coordinates.add(4);
+        GC.checkColumnCapability(G.getPlayers().get(0).getPlayerBookshelf());
+        assertFalse(G.checkLegalMove(Coordinates,Coordinates.size()/2));
+    }
 }
