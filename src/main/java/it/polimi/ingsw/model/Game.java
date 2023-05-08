@@ -156,34 +156,43 @@ public class Game {
 
     private void sortColumn(ArrayList<Integer> commands, ArrayList<Integer> comandi) {
         ArrayList<Integer> y=new ArrayList<>();
-        Integer support=null;
-        support=commands.get(1);
+        Integer size=commands.size();
+        Integer support=commands.get(1);
         y.add(commands.get(0));
-        y.add(commands.get(2));
-        y.add(commands.get(4));
+        if(size>2) y.add(commands.get(2));
+        if(size>4)y.add(commands.get(4));
         y= (ArrayList<Integer>) y.stream().sorted().collect(Collectors.toList());
         comandi.add(y.get(0));
         comandi.add(support);
-        comandi.add(y.get(1));
-        comandi.add(support);
-        comandi.add(y.get(2));
-        comandi.add(support);
+        if (size>2){
+            comandi.add(y.get(1));
+            comandi.add(support);
+        }
+        if (size > 4) {
+            comandi.add(y.get(2));
+            comandi.add(support);
+        }
+
     }
 
     private void sortRow(ArrayList<Integer> commands, ArrayList<Integer> comandi) {
         ArrayList<Integer> x=new ArrayList<>();
-        Integer support=null;
-        support=commands.get(0);
+        Integer size=commands.size();
+        Integer support=commands.get(0);
         x.add(commands.get(1));
-        x.add(commands.get(3));
-        x.add(commands.get(5));
+        if(size>2)x.add(commands.get(3));
+        if(size>4)x.add(commands.get(5));
         x= (ArrayList<Integer>) x.stream().sorted().collect(Collectors.toList());
         comandi.add(support);
         comandi.add(x.get(0));
-        comandi.add(support);
-        comandi.add(x.get(1));
-        comandi.add(support);
-        comandi.add(x.get(2));
+        if(size>2){
+            comandi.add(support);
+            comandi.add(x.get(1));
+        }
+        if(size>4){
+            comandi.add(support);
+            comandi.add(x.get(2));
+        }
     }
 
     public boolean checkLegalColumn(int column,int numOfTiles){
