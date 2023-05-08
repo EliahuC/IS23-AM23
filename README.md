@@ -15,13 +15,13 @@ Giovanni Di Lorenzo (giovanni.dilorenzo@mail.polimi.it)
 
 |Functionality   	|State   	|Current   	|Comment   	|
 |---	|---	|---	|---	|
-|UML (Model and Controller)   	|🟢   	|90%   	|   	|
-|UML (View and Connection)   	|🔴   	|0%   	|   	|
-|Completed Rules   	|🟡   	|50%   	|   	|
-|TUI   	|🔴   	|0%   	|    	|
+|UML (Model and Controller)   	|🟢   	|100%   	|   	|
+|Completed Rules   	|🟢   	|100%   	|   	|
+|TUI   	|🟡   	|0%   	|    	|
 |GUI   	|🔴   	|0%   	|    	|
-|TCP   	|🔴   	|0%   	|    	|
-|RMI   	|🔴   	|0%   	|   	|
+|TCP   	|🟡   	|99%   	|    	|
+|RMI   	|🟡   	|20%   	|   	|
 |Resilience to disconnections   	|🔴   	|0%   	|   	|
 |Persistency   	|🔴   	|0%   	|   	|
 |Chat   	|🔴   	|0%   	|   	|
+|Multiple games   	|🔴   	|0%   	|   	|
