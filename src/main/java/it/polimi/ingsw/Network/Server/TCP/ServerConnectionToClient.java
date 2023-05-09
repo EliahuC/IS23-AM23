@@ -88,7 +88,7 @@ public class ServerConnectionToClient implements Runnable {
     }
     public synchronized void sendMessage(ServerMessage message){
         String sms;
-        sms=gson.toJson(message);
+        sms=gson.toJson((PingFromServer)message);
         try{
             output.reset();
             output.writeObject(sms);
