@@ -105,5 +105,11 @@ public class GameController {
          return game.getDisconnectedPlayers();
     }
 
+    public Game getGame() {
+        return game;
+    }
 
+    public boolean isStartedGame() {
+        return startedGame;
+    }
 }
