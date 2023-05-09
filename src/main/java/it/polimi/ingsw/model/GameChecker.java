@@ -452,7 +452,7 @@ public class GameChecker {
     public boolean checkColumn(BookShelf b,int column,int numberOfTiles){
         int counter=0;
         for(int row=0;row<BookShelf.getMAX_Row();row++){
-            if(b.getTile(row,column)!=null)counter++;
+            if(b.getTile(row,column)==null)counter++;
         }
         return counter >= numberOfTiles;
     }

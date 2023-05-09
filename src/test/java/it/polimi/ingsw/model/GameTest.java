@@ -593,4 +593,117 @@ public class GameTest extends TestCase {
         Coordinates.add(3);
         assertFalse(G.checkLegalMove(Coordinates, Coordinates.size() / 2));
     }
+    public void testCheckLegalMove_FOURTH() {
+        Player y = new Player("Yoda");
+        Player d = new Player("Darth Vader");
+        Launcher L = new Launcher();
+        L.addPlayer(y);
+        L.addPlayer(d);
+        L.setNumPlayers(2);
+        ArrayList<Integer> Coordinates = new ArrayList<>();
+        Game G = new Game(L, L.getPlayers());
+        G.startGame();
+        Coordinates.add(3);
+        Coordinates.add(7);
+        Coordinates.add(4);
+        Coordinates.add(7);
+        assertTrue(G.checkLegalMove(Coordinates, Coordinates.size() / 2));
+    }
+    public void testCheckLegalMove_FIFTH() {
+        Player y = new Player("Yoda");
+        Player d = new Player("Darth Vader");
+        Launcher L = new Launcher();
+        L.addPlayer(y);
+        L.addPlayer(d);
+        L.setNumPlayers(2);
+        ArrayList<Integer> Coordinates = new ArrayList<>();
+        Game G = new Game(L, L.getPlayers());
+        G.startGame();
+        Coordinates.add(3);
+        Coordinates.add(6);
+        Coordinates.add(4);
+        Coordinates.add(6);
+        assertFalse(G.checkLegalMove(Coordinates, Coordinates.size() / 2));
+    }
+    public void testCheckLegalMove_SIXTH() {
+        Player y = new Player("Yoda");
+        Player d = new Player("Darth Vader");
+        Launcher L = new Launcher();
+        L.addPlayer(y);
+        L.addPlayer(d);
+        L.setNumPlayers(2);
+        ArrayList<Integer> Coordinates = new ArrayList<>();
+        Game G = new Game(L, L.getPlayers());
+        G.startGame();
+        Coordinates.add(3);
+        Coordinates.add(2);
+        Coordinates.add(4);
+        Coordinates.add(2);
+        Coordinates.add(5);
+        Coordinates.add(2);
+        assertFalse(G.checkLegalMove(Coordinates, Coordinates.size() / 2));
+    }
+    public void testCheckLegalMove_SEVENTH() {
+        Player y = new Player("Yoda");
+        Player d = new Player("Darth Vader");
+        Launcher L = new Launcher();
+        L.addPlayer(y);
+        L.addPlayer(d);
+        L.setNumPlayers(2);
+        ArrayList<Integer> Coordinates = new ArrayList<>();
+        Game G = new Game(L, L.getPlayers());
+        G.startGame();
+        Coordinates.add(4);
+        Coordinates.add(1);
+        Coordinates.add(5);
+        Coordinates.add(1);
+        G.getLivingRoom().getTiles(Coordinates);
+        Coordinates.clear();
+        Coordinates.add(3);
+        Coordinates.add(2);
+        Coordinates.add(4);
+        Coordinates.add(2);
+        Coordinates.add(5);
+        Coordinates.add(2);
+        assertTrue(G.checkLegalMove(Coordinates, Coordinates.size() / 2));
+    }
+    public void testCheckColumn_FIRST(){
+        Player y = new Player("Spiderman");
+        Player d = new Player("Batman");
+        Launcher L = new Launcher();
+        L.addPlayer(y);
+        L.addPlayer(d);
+        L.setNumPlayers(2);
+        GameChecker GC = new GameChecker(L);
+        ArrayList<Integer> Coordinates = new ArrayList<>();
+        Game G = new Game(L, L.getPlayers());
+        G.startGame();
+        G.getPlayers().get(0).getPlayerBookshelf().setTile(5, 0, new ItemTile());
+        G.getPlayers().get(0).getPlayerBookshelf().setTile(4, 0, new ItemTile());
+        G.getPlayers().get(0).getPlayerBookshelf().setTile(3, 0, new ItemTile());
+        G.getPlayers().get(0).getPlayerBookshelf().setTile(2, 0, new ItemTile());
+        G.getPlayers().get(0).getPlayerBookshelf().setTile(1, 0, new ItemTile());
+        Coordinates.add(4);
+        Coordinates.add(1);
+        Coordinates.add(5);
+        Coordinates.add(1);
+        assertFalse(G.checkLegalColumn(0,Coordinates.size()/2));
+    }
+    public void testCheckColumn_SECOND(){
+        Player y = new Player("Spiderman");
+        Player d = new Player("Batman");
+        Launcher L = new Launcher();
+        L.addPlayer(y);
+        L.addPlayer(d);
+        L.setNumPlayers(2);
+        GameChecker GC = new GameChecker(L);
+        ArrayList<Integer> Coordinates = new ArrayList<>();
+        Game G = new Game(L, L.getPlayers());
+        G.startGame();
+        Coordinates.add(4);
+        Coordinates.add(1);
+        Coordinates.add(5);
+        Coordinates.add(1);
+        assertTrue(G.checkLegalColumn(0,Coordinates.size()/2));
+    }
 }
