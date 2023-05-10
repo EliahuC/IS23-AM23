@@ -9,7 +9,13 @@ public class ClientMessage extends Message {
         super(messageCategory,nickname);
         this.m=move;
     }
+
+    public Move getM() {
+        return m;
+    }
+
     public Move getMessageMove() {
         return m;
+
     }
 }

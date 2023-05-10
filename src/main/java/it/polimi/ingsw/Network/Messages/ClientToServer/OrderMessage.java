@@ -8,4 +8,5 @@ public class OrderMessage extends ClientMessage {
     public OrderMessage(Move_SelectOrder move) {
         super(MessageCategory.ORDER, move, "Client");
     }
+
 }

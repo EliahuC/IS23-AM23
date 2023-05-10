@@ -21,10 +21,6 @@ public class ServerTCPMain extends Server {
     @Override
     public void run() {
         //seleziono port alternativa per server
-        showMessage("INSERT NEW PORT OR PRESS ENTER TO USE THE DEFAULT PORT");
-        Scanner input = new Scanner(System.in);
-        String newPort = input.nextLine();
-        if (newPort.length() != 0) port = Integer.parseInt(newPort);
         try {
             serverSocket = new ServerSocket(port);
         } catch (IOException e) {

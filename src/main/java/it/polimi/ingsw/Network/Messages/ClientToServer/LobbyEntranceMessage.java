@@ -7,6 +7,7 @@ public class LobbyEntranceMessage extends ClientMessage{
         super(MessageCategory.ENTER_LOBBY,null, nickname);
     }
 
-
-
+    public LobbyEntranceMessage(MessageCategory messageCategory, Move move, String nickname) {
+        super(messageCategory, move, nickname);
+    }
 }

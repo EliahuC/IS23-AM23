@@ -11,4 +11,5 @@ public class CoordinatesMessage extends ClientMessage {
    public Integer getSpecificCoordinate(int i){
         return getMessageMove().getMove().get(i);
    }
+
 }

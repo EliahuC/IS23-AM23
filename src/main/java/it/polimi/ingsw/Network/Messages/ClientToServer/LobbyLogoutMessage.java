@@ -11,4 +11,10 @@ public class LobbyLogoutMessage extends ClientMessage{
     public void setNickname(String s){
         nickname=s;
     }
+
+    @Override
+    public String getNickname() {
+        return nickname;
+    }
+
 }
