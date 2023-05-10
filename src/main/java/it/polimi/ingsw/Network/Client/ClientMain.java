@@ -37,7 +37,7 @@ public class ClientMain implements Printer {
         switch (temporaryStorage){
             case "--RMI"-> connectionClient=new ClientRMIMain();
             case "--TCP"->{
-                Socket socket=new Socket(InetAddress.getLocalHost(),1455);
+                Socket socket=new Socket(InetAddress.getLocalHost(),2201);
              connectionClient=new ClientConnectionTCP(socket);
             }
             default -> System.out.println("Communication command isn't valid");

@@ -43,29 +43,25 @@ public class ServerConnectionToClient implements Runnable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        try {
-            clientSocket.setSoTimeout(3600);
+        /*try {
+            clientSocket.setSoTimeout(3600000);
         } catch (SocketException e) {
             e.printStackTrace();
-        }
+        }*/
         ping = new Thread(() -> {
             while (serverIsActive) {
                 try {
                     //Metto a dormire thread per 15 secondi
-                    TimeUnit.SECONDS.sleep(15);
+                    TimeUnit.SECONDS.sleep(5);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+                sendPing();
             }
-            sendPing();
+
         });
         ping.start();
-        ServerMessage m=new ServerMessage(Message.MessageCategory.RETURN_MESSAGE);
-        if(lobbies.size()==0)m.addReturnMessage("There isn't any lobby where you can join, please create your own lobby");
-        else {
-            m.addReturnMessage("There are some lobby where you can join, enter this lobby / create your own lobby");
-        }
-        sendMessage(m);
+
     }
 
     protected synchronized static void removeVoidLobby(Lobby lobby) {
@@ -73,9 +69,22 @@ public class ServerConnectionToClient implements Runnable {
     }
 
     private void sendPing() {
-        ServerMessage m=new PingFromServer();
-        asyncSendMessage(m);
+        String m="HEY";
+        sendMessage(m);
+       // asyncSendMessage(m);
 
+    }
+    public /*synchronized*/ void sendMessage(String message){
+        System.out.println("Ciao");
+
+        try{
+            //output.reset();
+            output.writeObject(message);
+            output.flush();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void closeConnection() {

@@ -25,10 +25,12 @@ public class ClientConnectionTCP extends ConnectionClient {
     private Boolean GUIisActive=false;
     private final Gson gson=new Gson();
 
-    public ClientConnectionTCP(Socket socket) {
+    public ClientConnectionTCP(Socket socket) throws IOException {
         this.clientIsActive =true;
         this.socket = socket;
 
+        this.output = new ObjectOutputStream(socket.getOutputStream());
+        this.input = new ObjectInputStream(socket.getInputStream());
 
     }
 
@@ -47,36 +49,37 @@ public class ClientConnectionTCP extends ConnectionClient {
 
     @Override
     public void run() {
-        try{
+        /*try{
             output = new ObjectOutputStream(socket.getOutputStream());
             input = new ObjectInputStream(socket.getInputStream());
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
         //Scrivo reazione view all'evento
       while(clientIsActive){
+          String message;
           try {
-              ServerMessage serverMessage = receiveMessage();
-              if (serverMessage.getCategory() != Message.MessageCategory.PING) {
+
+              message = receiveMessage();
+              System.out.println(message);
+             /* if (serverMessage.getCategory() != Message.MessageCategory.PING) {
                   System.out.println("ciao");
                   //if (GUIisActive) {
                       //GUIEvent.recieveMessage(serverMessage);
                  // } else; //CLIEvent.recieveMessage(serverMessage);
-              } else sendPing();
+              } else sendPing();*/
           } catch (IOException e){
               closeConnection();
               notifyDisconnection();
           }catch (ClassNotFoundException e){
               e.printStackTrace();
-          } catch (InterruptedException e) {
-              throw new RuntimeException(e);
           }
       }
+  }
 
-    }
 
-    private ServerMessage receiveMessage() throws IOException, ClassNotFoundException {
-        return (ServerMessage) input.readObject();
+    private String receiveMessage() throws IOException, ClassNotFoundException {
+        return (String) input.readObject();
     }
 
     private void notifyDisconnection() {
