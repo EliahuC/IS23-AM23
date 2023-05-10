@@ -5,7 +5,6 @@ import it.polimi.ingsw.Launcher;
 import it.polimi.ingsw.Network.Messages.ClientToServer.ClientMessage;
 import it.polimi.ingsw.Network.Messages.Message;
 import it.polimi.ingsw.Network.Messages.ServerToClient.ErrorMessage;
-import it.polimi.ingsw.Network.Messages.ServerToClient.SuccessMessage;
 import it.polimi.ingsw.Network.Messages.ServerToClient.ValidMoveMessage;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.player.Player;
@@ -80,12 +79,12 @@ public class GameController {
 
     private Message sendErrorMessage(String ErrorMotivation) {
          Message error= new ErrorMessage();
-         error.addReturnMessage(ErrorMotivation);
+         error.setReturnMessage(ErrorMotivation);
          return error;
     }
     private Message sendErrorMessage() {
         Message error= new ErrorMessage();
-        error.addReturnMessage("The move you made isn't a valid move");
+        error.setReturnMessage("The move you made isn't a valid move");
         return error;
     }
 

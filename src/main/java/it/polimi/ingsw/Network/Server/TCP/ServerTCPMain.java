@@ -33,19 +33,19 @@ public class ServerTCPMain extends Server {
         showMessage("Server is done!");
         //Accettazione client
         while(true){
-        Socket clientSocket = null;
-        try {
-            clientSocket = serverSocket.accept();
-            showMessage("Client successfully connected");
-            ServerConnectionToClient serverConnectionToClient = new ServerConnectionToClient(clientSocket);
-            new Thread(serverConnectionToClient).start();
-            VirtualView virtualView=new VirtualView(serverConnectionToClient);
-            virtualViews.add(virtualView);
-            serverConnectionToClient.addVirtualView(virtualView);
-        } catch (IOException e) {
-            e.printStackTrace();
+            Socket clientSocket = null;
+            try {
+                clientSocket = serverSocket.accept();
+                showMessage("Client successfully connected");
+                ServerConnectionToClient serverConnectionToClient = new ServerConnectionToClient(clientSocket);
+                new Thread(serverConnectionToClient).start();
+                VirtualView virtualView=new VirtualView(serverConnectionToClient);
+                virtualViews.add(virtualView);
+                serverConnectionToClient.addVirtualView(virtualView);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-     }
     }
 
 

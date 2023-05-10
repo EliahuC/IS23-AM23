@@ -1,11 +1,9 @@
 package it.polimi.ingsw.Network.Messages;
 
-import java.util.Optional;
-
 public abstract class Message {
 
     private final String nickname;
-    private Optional<String> returnMessage;
+    private String returnMessage;
 
     public MessageCategory MC;
 
@@ -39,17 +37,25 @@ public abstract class Message {
 
 
 
-    public void addReturnMessage(String s){
-        returnMessage= s.describeConstable();
+    public void setReturnMessage(String s){
+        returnMessage= s;
     }
 
-    public Optional<String> getReturnMessage(){
-        if(returnMessage.isPresent())return returnMessage;
-        returnMessage= "there isn't any return message".describeConstable();
+    public String getReturnMessage(){
+
         return returnMessage;
     }
 
     public String getNickname() {
         return nickname;
     }
+
+    public MessageCategory getMC() {
+        return MC;
+    }
+
+    public void setMC(MessageCategory MC) {
+        this.MC = MC;
+    }
+
 }

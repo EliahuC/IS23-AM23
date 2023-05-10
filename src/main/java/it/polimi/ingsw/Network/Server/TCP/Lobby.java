@@ -6,8 +6,6 @@ import it.polimi.ingsw.Network.Messages.ServerToClient.ErrorMessage;
 import it.polimi.ingsw.Network.Messages.ServerToClient.ServerMessage;
 import it.polimi.ingsw.Network.Messages.ServerToClient.StartingGameMessage;
 import it.polimi.ingsw.Network.Messages.ServerToClient.ValidMoveMessage;
-import it.polimi.ingsw.Network.Server.TCP.ServerConnectionToClient;
-import it.polimi.ingsw.Network.Server.TCP.VirtualView;
 import it.polimi.ingsw.controller.ControllerCoordinator;
 import it.polimi.ingsw.model.player.Player;
 
@@ -46,7 +44,7 @@ public class Lobby {
             if(p.getNickName().equals(message.getNickname()))
             {
                 ErrorMessage errorMessage= new ErrorMessage();
-                errorMessage.addReturnMessage("The player is disconnected from the game, please log in first.");
+                errorMessage.setReturnMessage("The player is disconnected from the game, please log in first.");
                 return errorMessage;
             }
         }

@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit;
 
 public class ServerConnectionToClient implements Runnable {
     private final Socket clientSocket;
-    private final Thread ping;
+    private Thread ping;
     private boolean serverIsActive;
     private String namePlayer;
     private ObjectInputStream input;
@@ -44,23 +44,10 @@ public class ServerConnectionToClient implements Runnable {
             e.printStackTrace();
         }
         /*try {
-            clientSocket.setSoTimeout(3600000);
+            clientSocket.setSoTimeout(3600);
         } catch (SocketException e) {
             e.printStackTrace();
         }*/
-        ping = new Thread(() -> {
-            while (serverIsActive) {
-                try {
-                    //Metto a dormire thread per 15 secondi
-                    TimeUnit.SECONDS.sleep(5);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                sendPing();
-            }
-
-        });
-        ping.start();
 
     }
 
@@ -69,22 +56,9 @@ public class ServerConnectionToClient implements Runnable {
     }
 
     private void sendPing() {
-        String m="HEY";
+        ServerMessage m=new PingFromServer();
         sendMessage(m);
-       // asyncSendMessage(m);
 
-    }
-    public /*synchronized*/ void sendMessage(String message){
-        System.out.println("Ciao");
-
-        try{
-            //output.reset();
-            output.writeObject(message);
-            output.flush();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     private void closeConnection() {
@@ -95,12 +69,11 @@ public class ServerConnectionToClient implements Runnable {
             e.printStackTrace();
         }
     }
-    public synchronized void sendMessage(ServerMessage message){
-        String sms;
-        sms=gson.toJson((PingFromServer)message);
+    public void sendMessage(ServerMessage message){
+        String m=gson.toJson(message,ServerMessage.class);
         try{
-            output.reset();
-            output.writeObject(sms);
+            //    output.reset();
+            output.writeObject(m);
             output.flush();
 
         } catch (IOException e) {
@@ -109,23 +82,27 @@ public class ServerConnectionToClient implements Runnable {
     }
 
 
-    public synchronized void receiveMessage() throws IOException, ClassNotFoundException {
-        String s= (String) input.readObject();
-        ClientMessage message = gson.fromJson(s, ClientMessage.class);
+    public void receiveMessage() throws IOException, ClassNotFoundException {
+
+        ClientMessage message =gson.fromJson((String) input.readObject(),ClientMessage.class);
         switch (message.getCategory()) {
+            case PING:{
+                System.out.println("Ping arrived");
+                break;
+            }
             case CREATE_LOBBY: {
-                    if(lobby!=null){
-                        if (lobby.getJoinedUsers().contains(message.getNickname())) {
+                if(lobby!=null){
+                    if (lobby.getJoinedUsers().contains(message.getNickname())) {
                         ErrorMessage errorMessage=new ErrorMessage();
-                        errorMessage.addReturnMessage("You are already part of a lobby,please log out if you want to create a new lobby.");
-                        sendMessage(errorMessage);
-                        break;
-                        }
-                        ErrorMessage errorMessage=new ErrorMessage();
-                        errorMessage.addReturnMessage("Lobby already present, please join that lobby");
+                        errorMessage.setReturnMessage("You are already part of a lobby,please log out if you want to create a new lobby.");
                         sendMessage(errorMessage);
                         break;
                     }
+                    ErrorMessage errorMessage=new ErrorMessage();
+                    errorMessage.setReturnMessage("Lobby already present, please join that lobby");
+                    sendMessage(errorMessage);
+                    break;
+                }
 
                 lobby=new Lobby(((LobbyCreationMessage) message).getNumPlayers());
                 disconnectionHandler=new DisconnectionHandler(lobby);
@@ -136,57 +113,57 @@ public class ServerConnectionToClient implements Runnable {
             case ENTER_LOBBY: {
                 synchronized (lobbies){
                     //nessuna lobby presente
-                if (lobbies.size()==0){
-                    ErrorMessage errorMessage =new ErrorMessage();
-                    errorMessage.addReturnMessage("There isn't any lobby, please create yours");
-                    sendMessage(errorMessage);
-                    return;
-                }
-                //player gia in una lobby
-                if(lobby!=null){
-                    ErrorMessage errorMessage =new ErrorMessage();
-                    errorMessage.addReturnMessage("you are already part of the lobby");
-                    sendMessage(errorMessage);
-                    return;
-                }
-                //player che prova a riconnettersi
-                for(Lobby l:startedLobbies){
-                    for(Player p:l.getDisconnectedPlayers()){
-                        if(Objects.equals(p.getNickName(), message.getNickname())&& !l.getFullLobby()){
-                            lobby=l;
-                            disconnectionHandler=new DisconnectionHandler(lobby);
-                            disconnectionHandler.clientReconnection(message.getNickname());
-                            checkCompletedLobby();
-                            break;
+                    if (lobbies.size()==0){
+                        ErrorMessage errorMessage =new ErrorMessage();
+                        errorMessage.setReturnMessage("There isn't any lobby, please create yours");
+                        sendMessage(errorMessage);
+                        return;
+                    }
+                    //player gia in una lobby
+                    if(lobby!=null){
+                        ErrorMessage errorMessage =new ErrorMessage();
+                        errorMessage.setReturnMessage("you are already part of the lobby");
+                        sendMessage(errorMessage);
+                        return;
+                    }
+                    //player che prova a riconnettersi
+                    for(Lobby l:startedLobbies){
+                        for(Player p:l.getDisconnectedPlayers()){
+                            if(Objects.equals(p.getNickName(), message.getNickname())&& !l.getFullLobby()){
+                                lobby=l;
+                                disconnectionHandler=new DisconnectionHandler(lobby);
+                                disconnectionHandler.clientReconnection(message.getNickname());
+                                checkCompletedLobby();
+                                break;
+                            }
                         }
                     }
-                }
 
-                lobby=lobbies.get(0);
-                disconnectionHandler=new DisconnectionHandler(lobby);
-                if (!checkLobbySpace()) {
-                    ErrorMessage errorMessage=new ErrorMessage();
-                    errorMessage.addReturnMessage("the Lobby is full");
-                    sendMessage(errorMessage);
+                    lobby=lobbies.get(0);
+                    disconnectionHandler=new DisconnectionHandler(lobby);
+                    if (!checkLobbySpace()) {
+                        ErrorMessage errorMessage=new ErrorMessage();
+                        errorMessage.setReturnMessage("the Lobby is full");
+                        sendMessage(errorMessage);
+                        break;
+                    }
+
+                    if (lobby.getJoinedUsers().contains(message.getNickname())) {
+                        ErrorMessage errorMessage=new ErrorMessage();
+                        errorMessage.setReturnMessage("Nickname already used in the lobby, please choose an other nickname");
+                        sendMessage(errorMessage);
+                        break;
+                    }
+
+                    lobby.addUser(this,message.getNickname(),virtualView);
+                    checkCompletedLobby();
                     break;
                 }
-
-                if (lobby.getJoinedUsers().contains(message.getNickname())) {
-                    ErrorMessage errorMessage=new ErrorMessage();
-                    errorMessage.addReturnMessage("Nickname already used in the lobby, please choose an other nickname");
-                    sendMessage(errorMessage);
-                    break;
-                }
-
-                lobby.addUser(this,message.getNickname(),virtualView);
-                checkCompletedLobby();
-                break;
-             }
             }
             case LOGOUT_LOBBY:{
                 if(lobby.getStartedGame()){
                     ErrorMessage errorMessage=new ErrorMessage();
-                    errorMessage.addReturnMessage("Game already started,you can't logout since the game is finished");
+                    errorMessage.setReturnMessage("Game already started,you can't logout since the game is finished");
                     sendMessage(errorMessage);
                     break;
                 }
@@ -215,9 +192,9 @@ public class ServerConnectionToClient implements Runnable {
     private boolean checkLobbySpace() {
         return lobby.getJoinedUsers().size()<=4;
     }
-    private void asyncSendMessage(ServerMessage m){
+  /*  private void asyncSendMessage(ServerMessage m){
         new Thread(()->sendMessage(m)).start();
-    }
+    }*/
 
     public  ArrayList<Lobby> getStartedLobbies(){
         return new ArrayList<>(startedLobbies);
@@ -229,6 +206,20 @@ public class ServerConnectionToClient implements Runnable {
 
     @Override
     public void run() {
+        ping = new Thread(() -> {
+            while (serverIsActive) {
+                try {
+                    //Metto a dormire thread per 15 secondi
+                    TimeUnit.SECONDS.sleep(5);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                sendPing();
+            }
+
+        });
+        ping.start();
+
         try{
             while(serverIsActive){
                 receiveMessage();
@@ -236,8 +227,6 @@ public class ServerConnectionToClient implements Runnable {
             }
         }catch(IOException e){
             closeConnection();
-            //if(namePlayer!=null)
-                //HandlerDisconnessionePlayers
         }
         catch (ClassNotFoundException e){
             e.printStackTrace();

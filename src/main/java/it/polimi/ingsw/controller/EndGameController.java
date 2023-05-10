@@ -16,7 +16,7 @@ public class EndGameController implements PropertyChangeListener {
     public Message endGameMessage(Optional<Player> p){
         this.winner=p;
         Message M=new EndGameMessage();
-        M.addReturnMessage("The winner of this game is: "+ winner.get().getNickName());
+        M.setReturnMessage("The winner of this game is: "+ winner.get().getNickName());
         return M;
     }
 
