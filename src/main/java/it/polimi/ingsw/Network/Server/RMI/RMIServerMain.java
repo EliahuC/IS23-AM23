@@ -9,13 +9,13 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
-public class ServerRMIMain extends Server implements Loggable {
+public class RMIServerMain extends Server implements Loggable {
     static int PORT = 1234;
     public static void main( String[] args )
     {
         System.out.println( "Hello from Server!" );
         Loggable stub = null;
-        ServerRMIMain obj = new ServerRMIMain();
+        RMIServerMain obj = new RMIServerMain();
         try {
             stub = (Loggable) UnicastRemoteObject.exportObject(
                     obj, PORT);

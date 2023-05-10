@@ -7,15 +7,15 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.Scanner;
-public class ServerTCPMain extends Server {
+
+public class TCPServerMain extends Server {
     private ServerSocket serverSocket;
 
     private final ArrayList<VirtualView> virtualViews=new ArrayList<>();
 
     private int port;
 
-    public ServerTCPMain(){
+    public TCPServerMain(){
         this.port=2201;
     }
     @Override
@@ -54,7 +54,7 @@ public class ServerTCPMain extends Server {
 
 
     public static void main(String[] args) {
-        ServerTCPMain serverMain = new ServerTCPMain();
+        TCPServerMain serverMain = new TCPServerMain();
         new Thread(serverMain).start();
     }
 }
