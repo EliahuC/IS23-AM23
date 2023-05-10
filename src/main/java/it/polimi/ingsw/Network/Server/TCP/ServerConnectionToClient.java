@@ -13,10 +13,12 @@ import it.polimi.ingsw.model.player.Player;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 public class ServerConnectionToClient implements Runnable {
@@ -24,8 +26,8 @@ public class ServerConnectionToClient implements Runnable {
     private Thread ping;
     private boolean serverIsActive;
     private String namePlayer;
-    private ObjectInputStream input;
-    private ObjectOutputStream output;
+    private Scanner input;
+    private PrintWriter output;
     private VirtualView virtualView;
     private final Gson gson=new Gson();
     private static final ArrayList<Lobby> lobbies=new ArrayList<>();
@@ -38,8 +40,8 @@ public class ServerConnectionToClient implements Runnable {
 
         this.serverIsActive = true;
         try {
-            output = new ObjectOutputStream(clientSocket.getOutputStream());
-            input = new ObjectInputStream(clientSocket.getInputStream());
+            output = new PrintWriter(clientSocket.getOutputStream());
+            input = new Scanner(clientSocket.getInputStream());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -71,113 +73,129 @@ public class ServerConnectionToClient implements Runnable {
     }
     public void sendMessage(ServerMessage message){
         String m=gson.toJson(message,ServerMessage.class);
-        try{
-            //    output.reset();
-            output.writeObject(m);
-            output.flush();
+        //    output.reset();
+        output.println(m);
+        output.flush();
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
 
     public void receiveMessage() throws IOException, ClassNotFoundException {
-
-        ClientMessage message =gson.fromJson((String) input.readObject(),ClientMessage.class);
+        String s = input.nextLine();
+        ClientMessage message = gson.fromJson(s, ClientMessage.class);
         switch (message.getCategory()) {
-            case PING:{
+            case PING: {
                 System.out.println("Ping arrived");
                 break;
             }
             case CREATE_LOBBY: {
-                if(lobby!=null){
-                    if (lobby.getJoinedUsers().contains(message.getNickname())) {
-                        ErrorMessage errorMessage=new ErrorMessage();
-                        errorMessage.setReturnMessage("You are already part of a lobby,please log out if you want to create a new lobby.");
-                        sendMessage(errorMessage);
-                        break;
-                    }
-                    ErrorMessage errorMessage=new ErrorMessage();
-                    errorMessage.setReturnMessage("Lobby already present, please join that lobby");
-                    sendMessage(errorMessage);
-                    break;
-                }
-
-                lobby=new Lobby(((LobbyCreationMessage) message).getNumPlayers());
-                disconnectionHandler=new DisconnectionHandler(lobby);
-                lobby.addUser(this, message.getNickname(),virtualView);
-                namePlayer= message.getNickname();
+                alreadyExistentLobby(message);
+                lobby = new Lobby(((LobbyCreationMessage) message).getNumPlayers());
+                disconnectionHandler = new DisconnectionHandler(lobby);
+                lobby.addUser(this, message.getNickname(), virtualView);
+                namePlayer = message.getNickname();
                 lobbies.add(lobby);
             }
             case ENTER_LOBBY: {
-                synchronized (lobbies){
+                synchronized (lobbies) {
                     //nessuna lobby presente
-                    if (lobbies.size()==0){
-                        ErrorMessage errorMessage =new ErrorMessage();
-                        errorMessage.setReturnMessage("There isn't any lobby, please create yours");
-                        sendMessage(errorMessage);
-                        return;
-                    }
+                    noLobbyInServer(message);
                     //player gia in una lobby
-                    if(lobby!=null){
-                        ErrorMessage errorMessage =new ErrorMessage();
-                        errorMessage.setReturnMessage("you are already part of the lobby");
-                        sendMessage(errorMessage);
-                        return;
-                    }
-                    //player che prova a riconnettersi
-                    for(Lobby l:startedLobbies){
-                        for(Player p:l.getDisconnectedPlayers()){
-                            if(Objects.equals(p.getNickName(), message.getNickname())&& !l.getFullLobby()){
-                                lobby=l;
-                                disconnectionHandler=new DisconnectionHandler(lobby);
-                                disconnectionHandler.clientReconnection(message.getNickname());
-                                checkCompletedLobby();
-                                break;
-                            }
-                        }
-                    }
+                    alreadyExistentLobby(message);
+                }
+                //player che prova a riconnettersi
+                reconnectedPlayer(message);
 
-                    lobby=lobbies.get(0);
-                    disconnectionHandler=new DisconnectionHandler(lobby);
-                    if (!checkLobbySpace()) {
-                        ErrorMessage errorMessage=new ErrorMessage();
-                        errorMessage.setReturnMessage("the Lobby is full");
-                        sendMessage(errorMessage);
-                        break;
-                    }
 
-                    if (lobby.getJoinedUsers().contains(message.getNickname())) {
-                        ErrorMessage errorMessage=new ErrorMessage();
-                        errorMessage.setReturnMessage("Nickname already used in the lobby, please choose an other nickname");
-                        sendMessage(errorMessage);
-                        break;
-                    }
+                lobby = lobbies.get(0);
+                disconnectionHandler = new DisconnectionHandler(lobby);
+                lobbyIsFull();
 
-                    lobby.addUser(this,message.getNickname(),virtualView);
+                nickNameAlreadyUsed(message);
+                lobby.addUser(this, message.getNickname(), virtualView);
+                checkCompletedLobby();
+                break;
+            }
+
+            case LOGOUT_LOBBY: {
+                gameAlreadyStarted();
+                lobby.logoutFromLobby(namePlayer);
+            }
+            default:
+                sendMessage((ServerMessage) lobby.receiveMessage(message));
+        }
+    }
+
+    private void gameAlreadyStarted() {
+        if (lobby.getStartedGame()) {
+            ErrorMessage errorMessage = new ErrorMessage();
+            errorMessage.setReturnMessage("Game already started,you can't logout since the game is finished");
+            sendMessage(errorMessage);
+        }
+    }
+
+    private void nickNameAlreadyUsed(ClientMessage message) {
+        if (lobby.getJoinedUsers().contains(message.getNickname())) {
+            ErrorMessage errorMessage = new ErrorMessage();
+            errorMessage.setReturnMessage("Nickname already used in the lobby, please choose an other nickname");
+            sendMessage(errorMessage);
+
+        }
+    }
+
+    private void lobbyIsFull() {
+        if (!checkLobbySpace()) {
+            ErrorMessage errorMessage = new ErrorMessage();
+            errorMessage.setReturnMessage("the Lobby is full");
+            sendMessage(errorMessage);
+
+        }
+    }
+
+    private void reconnectedPlayer(ClientMessage message) {
+        for (Lobby l : startedLobbies) {
+            for (Player p : l.getDisconnectedPlayers()) {
+                if (Objects.equals(p.getNickName(), message.getNickname()) && !l.getFullLobby()) {
+                    lobby = l;
+                    disconnectionHandler = new DisconnectionHandler(lobby);
+                    disconnectionHandler.clientReconnection(message.getNickname());
                     checkCompletedLobby();
                     break;
                 }
             }
-            case LOGOUT_LOBBY:{
-                if(lobby.getStartedGame()){
-                    ErrorMessage errorMessage=new ErrorMessage();
-                    errorMessage.setReturnMessage("Game already started,you can't logout since the game is finished");
-                    sendMessage(errorMessage);
-                    break;
-                }
-                lobby.logoutFromLobby(namePlayer);
-            }
-            default: sendMessage((ServerMessage) lobby.receiveMessage(message));
         }
     }
+
+    private void noLobbyInServer(ClientMessage message) {
+        if (lobbies.size()==0){
+            ErrorMessage errorMessage =new ErrorMessage();
+            errorMessage.setReturnMessage("There isn't any lobby, please create yours");
+            sendMessage(errorMessage);
+            return;
+        }
+    }
+
+
 
     private void checkCompletedLobby() {
         if(lobby.getNumPlayersLobby()==lobby.getJoinedUsers().size()){
             startedLobbies.add(lobby);
             lobbies.remove(lobby);
             lobby.startGameLobby();
+        }
+    }
+
+    private void alreadyExistentLobby(ClientMessage message){
+        if(lobby!=null){
+            if (lobby.getJoinedUsers().contains(message.getNickname())) {
+                ErrorMessage errorMessage=new ErrorMessage();
+                errorMessage.setReturnMessage("You are already part of a lobby,please log out if you want to create a new lobby.");
+                sendMessage(errorMessage);
+                return;
+            }
+            ErrorMessage errorMessage=new ErrorMessage();
+            errorMessage.setReturnMessage("Lobby already present, please join that lobby");
+            sendMessage(errorMessage);
         }
     }
 

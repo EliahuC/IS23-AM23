@@ -11,7 +11,9 @@ import it.polimi.ingsw.Network.Messages.ServerToClient.ServerMessage;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 public class ClientConnectionTCP extends ConnectionClient {
@@ -20,8 +22,8 @@ public class ClientConnectionTCP extends ConnectionClient {
     private String IPAddress;
     private boolean clientIsActive;
     private String playerName;
-    private ObjectInputStream input;
-    private ObjectOutputStream output;
+    private Scanner input;
+    private PrintWriter output;
     private Boolean GUIisActive=false;
     private final Gson gson=new Gson();
 
@@ -29,8 +31,8 @@ public class ClientConnectionTCP extends ConnectionClient {
         this.clientIsActive =true;
         this.socket = socket;
         try{
-            this.output = new ObjectOutputStream(socket.getOutputStream());
-            this.input = new ObjectInputStream(socket.getInputStream());
+            this.output = new PrintWriter(socket.getOutputStream());
+            this.input = new Scanner(socket.getInputStream());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -78,7 +80,8 @@ public class ClientConnectionTCP extends ConnectionClient {
     }
 
     private ServerMessage receiveMessage() throws IOException, ClassNotFoundException {
-        return  gson.fromJson((String) input.readObject(),ServerMessage.class);
+        String s=input.nextLine();
+        return  gson.fromJson(s,ServerMessage.class);
     }
 
     private void notifyDisconnection() {
@@ -98,14 +101,9 @@ public class ClientConnectionTCP extends ConnectionClient {
     }
     private void sendMessage(ClientMessage message){
         String m=gson.toJson(message,ClientMessage.class);
-        try{
-            //       output.reset();
-            output.writeObject(message);
-            output.flush();
-        } catch (IOException e) {
-            closeConnection();
-            notifyDisconnection();
-        }
+        //       output.reset();
+        output.println(message);
+        output.flush();
     }
 
 
