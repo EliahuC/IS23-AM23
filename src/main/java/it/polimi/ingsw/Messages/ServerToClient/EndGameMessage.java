@@ -1,6 +1,4 @@
-package it.polimi.ingsw.Network.Messages.ServerToClient;
-
-import it.polimi.ingsw.Network.Messages.Message;
+package it.polimi.ingsw.Messages.ServerToClient;
 
 public class EndGameMessage extends ServerMessage {
     public EndGameMessage() {

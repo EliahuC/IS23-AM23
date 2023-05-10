@@ -3,18 +3,15 @@ package it.polimi.ingsw.Network.Client.TCP;
 import com.google.gson.Gson;
 import it.polimi.ingsw.Network.Client.ConnectionClient;
 import it.polimi.ingsw.Network.Client.MoveSerializer;
-import it.polimi.ingsw.Network.Messages.ClientToServer.ClientMessage;
-import it.polimi.ingsw.Network.Messages.ClientToServer.PingToServer;
-import it.polimi.ingsw.Network.Messages.Message;
-import it.polimi.ingsw.Network.Messages.ServerToClient.ServerMessage;
+import it.polimi.ingsw.Messages.ClientToServer.ClientMessage;
+import it.polimi.ingsw.Messages.ClientToServer.PingToServer;
+import it.polimi.ingsw.Messages.Message;
+import it.polimi.ingsw.Messages.ServerToClient.ServerMessage;
 
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
-import java.util.concurrent.TimeUnit;
 
 public class ClientConnectionTCP extends ConnectionClient {
     private MoveSerializer moveSerializer;
@@ -45,7 +42,7 @@ public class ClientConnectionTCP extends ConnectionClient {
 
     public void setPlayerName(String playerName) {
         this.playerName = playerName;
-        this.moveSerializer=new MoveSerializer(playerName);
+        this.moveSerializer=new MoveSerializer();
     }
 
     public void setAddress(String address) {
@@ -81,6 +78,9 @@ public class ClientConnectionTCP extends ConnectionClient {
 
     private ServerMessage receiveMessage() throws IOException, ClassNotFoundException {
         String s=input.nextLine();
+        //MoveSerializer moveSerializer1=new MoveSerializer(playerName);
+       // moveSerializer1.getFromKeyboard(s);
+
         return  gson.fromJson(s,ServerMessage.class);
     }
 

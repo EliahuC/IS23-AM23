@@ -1,6 +1,4 @@
-package it.polimi.ingsw.Network.Messages.ClientToServer;
-
-import it.polimi.ingsw.Network.Messages.ClientToServer.PossibleMoves.Move;
+package it.polimi.ingsw.Messages.ClientToServer;
 
 public class LobbyLogoutMessage extends ClientMessage{
     private String nickname;

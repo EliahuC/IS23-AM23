@@ -1,6 +1,6 @@
-package it.polimi.ingsw.Network.Messages.ServerToClient;
+package it.polimi.ingsw.Messages.ServerToClient;
 
-import it.polimi.ingsw.Network.Messages.Message;
+import it.polimi.ingsw.Messages.Message;
 
 public class ServerMessage extends Message {
     private final static String sender="GameMaster";

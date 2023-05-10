@@ -1,6 +1,6 @@
 package it.polimi.ingsw.controller;
-import it.polimi.ingsw.Network.Messages.Message;
-import it.polimi.ingsw.Network.Messages.ServerToClient.EndGameMessage;
+import it.polimi.ingsw.Messages.Message;
+import it.polimi.ingsw.Messages.ServerToClient.EndGameMessage;
 import it.polimi.ingsw.model.player.Player;
 
 import java.beans.PropertyChangeEvent;

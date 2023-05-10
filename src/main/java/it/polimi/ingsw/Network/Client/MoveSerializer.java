@@ -1,31 +1,32 @@
 package it.polimi.ingsw.Network.Client;
 import java.util.ArrayList;
-import java.util.Scanner;
 
-import it.polimi.ingsw.Network.Messages.ClientToServer.*;
-import it.polimi.ingsw.Network.Messages.ClientToServer.PossibleMoves.Move_SelectColumn;
-import it.polimi.ingsw.Network.Messages.ClientToServer.PossibleMoves.Move_SelectOrder;
-import it.polimi.ingsw.Network.Messages.ClientToServer.PossibleMoves.Move_SelectTiles;
-import it.polimi.ingsw.Network.Messages.Message;
-import it.polimi.ingsw.Network.Messages.ClientToServer.PossibleMoves.Move;
-import it.polimi.ingsw.Network.Messages.ServerToClient.StartingGameMessage;
+import it.polimi.ingsw.Messages.ClientToServer.*;
+import it.polimi.ingsw.Messages.ClientToServer.PossibleMoves.Move_SelectColumn;
+import it.polimi.ingsw.Messages.ClientToServer.PossibleMoves.Move_SelectOrder;
+import it.polimi.ingsw.Messages.ClientToServer.PossibleMoves.Move_SelectTiles;
+import it.polimi.ingsw.Messages.Message;
+import it.polimi.ingsw.Messages.ClientToServer.PossibleMoves.Move;
+import it.polimi.ingsw.Messages.ServerToClient.StartingGameMessage;
 import it.polimi.ingsw.Printer;
 
 public class MoveSerializer implements Printer {
     private  String myMove=null;
     private Move lastMove;
 
-    public MoveSerializer(String nickname){
+    public MoveSerializer(){
 
     }
-    public Message getFromKeyboard(){
-        Scanner keyboard = new Scanner(System.in);
-        showMessage("It's your turn, do your move");
-        myMove = keyboard.nextLine();
-        myMove=myMove.toUpperCase();
-        String tokens[]=myMove.split(" ");
+    public Message getFromKeyboard(String s){
+
+        return convertCommandToMove(s);
+    }
+
+    private Message convertCommandToMove(String string) {
+        String[] tokens = string.toUpperCase().split(" ");
         return convertCommandToMove(tokens);
     }
+
 
     private Message convertCommandToMove(String Command[]) {
       switch (checkCommand(Command[0])){
@@ -114,8 +115,8 @@ public class MoveSerializer implements Printer {
         showMessage("/select_tiles x1 y1 x2 y2 x3 y3");
         showMessage("/select_column y");
         showMessage("/select_order t1 t2 t3 (t1 t2 t3 must be numbers of your previous selection" +
-                " for example if you have selected 2 tiles t1 == tile with coordinates(x1,y1)  " +
-                "and t2 == tile with coordinates (x2,y2) and the order you want is  t2 t1 you have to write 2 1");
+                      " for example if you have selected 2 tiles t1 == tile with coordinates(x1,y1)  " +
+                      "and t2 == tile with coordinates (x2,y2) and the order you want is  t2 t1 you have to write 2 1");
         showMessage("");
 
     }

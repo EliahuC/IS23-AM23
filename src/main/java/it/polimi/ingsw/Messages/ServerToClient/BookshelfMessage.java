@@ -1,4 +1,4 @@
-package it.polimi.ingsw.Network.Messages.ServerToClient;
+package it.polimi.ingsw.Messages.ServerToClient;
 
 import it.polimi.ingsw.model.player.BookShelf;
 

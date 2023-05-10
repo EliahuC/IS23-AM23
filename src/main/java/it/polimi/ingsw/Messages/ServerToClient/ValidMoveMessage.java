@@ -1,4 +1,4 @@
-package it.polimi.ingsw.Network.Messages.ServerToClient;
+package it.polimi.ingsw.Messages.ServerToClient;
 
 public class ValidMoveMessage extends ServerMessage{
     public ValidMoveMessage() {

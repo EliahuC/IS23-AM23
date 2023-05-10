@@ -1,6 +1,6 @@
 package it.polimi.ingsw.Network.Server.TCP;
 
-import it.polimi.ingsw.Network.Messages.ServerToClient.*;
+import it.polimi.ingsw.Messages.ServerToClient.*;
 import it.polimi.ingsw.model.board.BoardToken;
 import it.polimi.ingsw.model.player.BookShelf;
 

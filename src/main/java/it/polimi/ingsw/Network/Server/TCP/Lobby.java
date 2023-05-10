@@ -1,11 +1,11 @@
 package it.polimi.ingsw.Network.Server.TCP;
 
-import it.polimi.ingsw.Network.Messages.ClientToServer.ClientMessage;
-import it.polimi.ingsw.Network.Messages.Message;
-import it.polimi.ingsw.Network.Messages.ServerToClient.ErrorMessage;
-import it.polimi.ingsw.Network.Messages.ServerToClient.ServerMessage;
-import it.polimi.ingsw.Network.Messages.ServerToClient.StartingGameMessage;
-import it.polimi.ingsw.Network.Messages.ServerToClient.ValidMoveMessage;
+import it.polimi.ingsw.Messages.ClientToServer.ClientMessage;
+import it.polimi.ingsw.Messages.Message;
+import it.polimi.ingsw.Messages.ServerToClient.ErrorMessage;
+import it.polimi.ingsw.Messages.ServerToClient.ServerMessage;
+import it.polimi.ingsw.Messages.ServerToClient.StartingGameMessage;
+import it.polimi.ingsw.Messages.ServerToClient.ValidMoveMessage;
 import it.polimi.ingsw.controller.ControllerCoordinator;
 import it.polimi.ingsw.model.player.Player;
 

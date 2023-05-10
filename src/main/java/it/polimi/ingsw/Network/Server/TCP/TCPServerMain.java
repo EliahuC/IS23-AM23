@@ -22,6 +22,7 @@ public class TCPServerMain extends Server {
 
     public void go() {
         //seleziono port alternativa per server
+
         try {
             serverSocket = new ServerSocket(port);
         } catch (IOException e) {

@@ -1,21 +1,18 @@
 package it.polimi.ingsw.Network.Server.TCP;
 
 import com.google.gson.Gson;
-import it.polimi.ingsw.Network.Messages.ClientToServer.ClientMessage;
-import it.polimi.ingsw.Network.Messages.ClientToServer.LobbyCreationMessage;
-import it.polimi.ingsw.Network.Messages.Message;
-import it.polimi.ingsw.Network.Messages.ServerToClient.ErrorMessage;
-import it.polimi.ingsw.Network.Messages.ServerToClient.PingFromServer;
-import it.polimi.ingsw.Network.Messages.ServerToClient.ServerMessage;
+import com.google.gson.JsonSyntaxException;
+import it.polimi.ingsw.Messages.ClientToServer.ClientMessage;
+import it.polimi.ingsw.Messages.ClientToServer.LobbyCreationMessage;
+import it.polimi.ingsw.Messages.ServerToClient.ErrorMessage;
+import it.polimi.ingsw.Messages.ServerToClient.PingFromServer;
+import it.polimi.ingsw.Messages.ServerToClient.ServerMessage;
 import it.polimi.ingsw.model.player.Player;
 
 
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
@@ -29,7 +26,7 @@ public class ServerConnectionToClient implements Runnable {
     private Scanner input;
     private PrintWriter output;
     private VirtualView virtualView;
-    private final Gson gson=new Gson();
+
     private static final ArrayList<Lobby> lobbies=new ArrayList<>();
     private static final ArrayList<Lobby> startedLobbies=new ArrayList<>();
     private Lobby lobby;
@@ -57,8 +54,9 @@ public class ServerConnectionToClient implements Runnable {
         lobbies.remove(lobby);
     }
 
-    private void sendPing() {
-        ServerMessage m=new PingFromServer();
+    private void sendPing(int pingCount) {
+        ServerMessage m=new PingFromServer(pingCount);
+
         sendMessage(m);
 
     }
@@ -72,7 +70,8 @@ public class ServerConnectionToClient implements Runnable {
         }
     }
     public void sendMessage(ServerMessage message){
-        String m=gson.toJson(message,ServerMessage.class);
+        Gson gson =new Gson();
+        String m=gson.toJson(message);
         //    output.reset();
         output.println(m);
         output.flush();
@@ -81,11 +80,26 @@ public class ServerConnectionToClient implements Runnable {
 
 
     public void receiveMessage() throws IOException, ClassNotFoundException {
+        Gson gson =new Gson();
         String s = input.nextLine();
-        ClientMessage message = gson.fromJson(s, ClientMessage.class);
+        //System.out.println(s);
+        ClientMessage message=null;
+        try{
+            Object obj = gson.fromJson(s, Object.class);
+            System.out.println(obj.toString());
+            message = gson.fromJson(s, ClientMessage.class);
+        }catch (JsonSyntaxException e){
+           // e.printStackTrace();
+           // return;
+        }
+
+        if(message!=null)
+            messageParser(message);
+    }
+    private void messageParser(ClientMessage message){
         switch (message.getCategory()) {
             case PING: {
-                System.out.println("Ping arrived");
+                message.dumpPingMessage();
                 break;
             }
             case CREATE_LOBBY: {
@@ -125,6 +139,8 @@ public class ServerConnectionToClient implements Runnable {
                 sendMessage((ServerMessage) lobby.receiveMessage(message));
         }
     }
+
+
 
     private void gameAlreadyStarted() {
         if (lobby.getStartedGame()) {
@@ -225,6 +241,7 @@ public class ServerConnectionToClient implements Runnable {
     @Override
     public void run() {
         ping = new Thread(() -> {
+            int pingCount=0;
             while (serverIsActive) {
                 try {
                     //Metto a dormire thread per 15 secondi
@@ -232,7 +249,9 @@ public class ServerConnectionToClient implements Runnable {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                sendPing();
+                sendPing(pingCount);
+                pingCount++;
+
             }
 
         });
