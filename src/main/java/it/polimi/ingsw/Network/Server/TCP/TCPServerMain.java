@@ -11,22 +11,23 @@ import java.util.ArrayList;
 public class TCPServerMain extends Server {
     private ServerSocket serverSocket;
 
-    private final ArrayList<VirtualView> virtualViews=new ArrayList<>();
+   // private final ArrayList<VirtualView> virtualViews=new ArrayList<>();
 
-    private int port;
+    private final int port;
 
-    public TCPServerMain(){
-        this.port=2201;
+    public TCPServerMain(int port){
+        this.port = port;
+        go();
     }
-    @Override
-    public void run() {
+
+    public void go() {
         //seleziono port alternativa per server
         try {
             serverSocket = new ServerSocket(port);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        showMessage("Server is done!");
+        showMessage("Server is started!");
         //Accettazione client
         while(true){
             Socket clientSocket = null;
@@ -35,9 +36,9 @@ public class TCPServerMain extends Server {
                 showMessage("Client successfully connected");
                 ServerConnectionToClient serverConnectionToClient = new ServerConnectionToClient(clientSocket);
                 new Thread(serverConnectionToClient).start();
-                VirtualView virtualView=new VirtualView(serverConnectionToClient);
-                virtualViews.add(virtualView);
-                serverConnectionToClient.addVirtualView(virtualView);
+                // VirtualView virtualView=new VirtualView(serverConnectionToClient);
+                //virtualViews.add(virtualView);
+                //serverConnectionToClient.addVirtualView(virtualView);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -54,7 +55,12 @@ public class TCPServerMain extends Server {
 
 
     public static void main(String[] args) {
-        TCPServerMain serverMain = new TCPServerMain();
-        new Thread(serverMain).start();
+
+        int port = TCPParams.PORT;
+        if (args.length > 0) {
+            port = Integer.parseInt( args[0] );
+        }
+        TCPServerMain serverMain = new TCPServerMain(port);
+// NO new Thread(serverMain).start();
     }
 }

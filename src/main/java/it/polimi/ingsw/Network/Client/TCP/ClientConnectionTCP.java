@@ -102,7 +102,7 @@ public class ClientConnectionTCP extends ConnectionClient {
     private void sendMessage(ClientMessage message){
         String m=gson.toJson(message,ClientMessage.class);
         //       output.reset();
-        output.println(message);
+        output.println(m);
         output.flush();
     }
 

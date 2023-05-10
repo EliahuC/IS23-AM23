@@ -52,8 +52,5 @@ public class RMIServerMain extends Server implements Loggable {
 
     }
 
-    @Override
-    public void run() {
 
-    }
 }
