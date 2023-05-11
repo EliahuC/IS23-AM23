@@ -194,6 +194,7 @@ public class GameControllerTest extends TestCase {
         Optional<Player> player = Optional.ofNullable(GC.getGame().getPlayers().get(1));
         assertEquals(player, GC.endGame());
     }
+    /*METODO COMMENTATO PERCHE IMPLEMENTATA PERSISTENZA
     public void testPlayMoveGC_FIRST(){
         Player p1 = new Player("Alice");
         Player p2 = new Player("Bob");
@@ -215,7 +216,7 @@ public class GameControllerTest extends TestCase {
         Controller.setColumn(3);
         Controller.playMove();
         assertTrue(Controller.getGame().playMove(Controller.getCoordinates(), Controller.getColumn(), Controller.getOrder()));
-    }
+    }*/
     public void testPlayMoveGC_SECOND(){      //ONE MOVE
         Player p1 = new Player("Alice");
         Player p2 = new Player("Bob");

@@ -13,7 +13,7 @@ public class Savings {
     }
 
     public void saveGame(GameSavings savings){
-       this.gameSavings=gameSavings;
+       this.gameSavings=savings;
        savingNumber++;
     }
 

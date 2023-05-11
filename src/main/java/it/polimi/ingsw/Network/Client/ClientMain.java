@@ -29,7 +29,7 @@ public class ClientMain implements Printer {
         temporaryStorage=temporaryStorage.toUpperCase();
         switch (temporaryStorage) {
             case "--CLI" -> view = new CLI();
-            case "--GUI" -> view = new GUI();
+           // case "--GUI" -> view = new GUI();
             default -> System.out.println("View command isn't valid");
         }
         temporaryStorage=args[1];

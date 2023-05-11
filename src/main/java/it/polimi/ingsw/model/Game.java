@@ -7,10 +7,12 @@ import it.polimi.ingsw.model.player.PersonalGoalCard;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.Launcher;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class Game {
+public class Game  {
     private final LivingRoom livingRoom;
     private final ArrayList<Player> Players;
     private final ArrayList<Player> disconnectedPlayers;
@@ -20,12 +22,15 @@ public class Game {
 
     private final GameChecker gameChecker;
     private boolean startedGame=false;
+    private final ArrayList<VirtualView> listeners ;
+    private final Timer turnTimer=new Timer();
 
     private boolean finishedGame=false;
 
 
 
     public Game(Launcher L,ArrayList<Player> lobby){
+        listeners=new ArrayList<>();
         this.Players=lobby;
         this.disconnectedPlayers=new ArrayList<>();
         this.livingRoom =new LivingRoom(L);
@@ -75,9 +80,10 @@ public class Game {
         if(!finishedGame) {
               placeTiles(commands, column,order);
               checkCGC();
+              turnTimer.cancel();
               increaseCurrPlaying();
+              turnTimer(turnTimer);
               if (gameChecker.isRestorable(livingRoom.getBoard())) livingRoom.restore();
-
               return setGameSavings();
           }
           return null;
@@ -127,7 +133,17 @@ public class Game {
 
     private synchronized void isLastTurn() {
         for(Player p:Players)p.setLastRound(true);
-        if(currPlaying==4)finishedGame=true;
+        if(currPlaying==4){
+            finishedGame=true;
+            PropertyChangeEvent evt = new PropertyChangeEvent(
+                    this,
+                    "GAME_ENDED",
+                    null,
+                    whoWins());
+            for(PropertyChangeListener l:listeners){
+                l.propertyChange(evt);
+            }
+        }
 
     }
 
@@ -298,6 +314,19 @@ public class Game {
 
     public LivingRoom getLivingRoom() {
         return livingRoom;
+    }
+
+    /**
+     * method that increase currPlaying every 2 minutes
+     */
+    private void turnTimer(Timer timer)  {
+            TimerTask timerTask=new TimerTask() {
+                @Override
+                public void run() {
+                    increaseCurrPlaying();
+                }
+            };
+            timer.schedule(timerTask,120000);
     }
 }
 

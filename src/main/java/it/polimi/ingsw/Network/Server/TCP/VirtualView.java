@@ -3,6 +3,7 @@ package it.polimi.ingsw.Network.Server.TCP;
 import it.polimi.ingsw.Messages.ServerToClient.*;
 import it.polimi.ingsw.model.board.BoardToken;
 import it.polimi.ingsw.model.player.BookShelf;
+import it.polimi.ingsw.model.player.Player;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -27,6 +28,7 @@ public class VirtualView implements PropertyChangeListener {
             case "LAST_TURN"-> serverMessage=new LastTurnMessage();
             case "BOOKSHELF_CHANGED"-> serverMessage=new BookshelfMessage((BookShelf)evt.getNewValue());
             case "BOARD_CHANGED"-> serverMessage=new LivingRoomMessage((BoardToken[][]) evt.getNewValue());
+            case "GAME_ENDED"->serverMessage =new EndGameMessage((Player) evt.getNewValue());
             default -> serverMessage= new ErrorMessage();
         }
         return serverMessage;

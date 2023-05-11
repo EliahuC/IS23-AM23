@@ -20,7 +20,7 @@ public class LivingRoom {
     private final Bag bag;
     private final GameChecker gameChecker;
 
-    private final ArrayList<it.polimi.ingsw.model.board.goalCards.CommonGoalCard> CommonGoalCard = new ArrayList<>();
+    private final ArrayList<CommonGoalCard> CommonGoalCard = new ArrayList<>();
     private CommonGoalCard commonGoalCard1;
     private CommonGoalCard commonGoalCard2;
 

@@ -31,6 +31,7 @@ public class ServerConnectionToClient implements Runnable {
     private static final ArrayList<Lobby> startedLobbies=new ArrayList<>();
     private Lobby lobby;
     private DisconnectionHandler disconnectionHandler;
+    private static Integer idLobbies =0;
 
     public ServerConnectionToClient(Socket clientSocket) {
         this.clientSocket = clientSocket;
@@ -104,7 +105,8 @@ public class ServerConnectionToClient implements Runnable {
             }
             case CREATE_LOBBY: {
                 alreadyExistentLobby(message);
-                lobby = new Lobby(((LobbyCreationMessage) message).getNumPlayers());
+                lobby = new Lobby(((LobbyCreationMessage) message).getNumPlayers(), idLobbies);
+                idLobbies++;
                 disconnectionHandler = new DisconnectionHandler(lobby);
                 lobby.addUser(this, message.getNickname(), virtualView);
                 namePlayer = message.getNickname();

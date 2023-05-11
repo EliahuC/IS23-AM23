@@ -29,6 +29,9 @@ public class TCPServerMain extends Server {
             e.printStackTrace();
         }
         showMessage("Server is started!");
+        Integer i=10;
+        String s="sium"+String.valueOf(i);
+        System.out.println(s);
         //Accettazione client
         while(true){
             Socket clientSocket = null;
