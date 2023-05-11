@@ -7,6 +7,7 @@ import it.polimi.ingsw.Messages.ClientToServer.PossibleMoves.Move;
 import it.polimi.ingsw.Messages.ClientToServer.PossibleMoves.Move_SelectTiles;
 import it.polimi.ingsw.Messages.Message;
 import it.polimi.ingsw.Messages.ServerToClient.ErrorMessage;
+import it.polimi.ingsw.Messages.ServerToClient.ValidMoveMessage;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.board.ItemTile;
 import it.polimi.ingsw.model.player.Player;
@@ -258,5 +259,90 @@ public class GameControllerTest extends TestCase {
         Message error= new ErrorMessage();
         error.setReturnMessage("It's not your turn");
         assertEquals(error,Controller.readMessage(m));
+    }
+    public void testReadMessage_SECOND(){
+        Player p1 = new Player("Alice");
+        Player p2 = new Player("Bob");
+        Player p3 = new Player("Carlos");
+        Player p4 = new Player("Diego");
+        ArrayList<Player> Players = new ArrayList<>();
+        Players.add(p1);
+        Players.add(p2);
+        Players.add(p3);
+        Players.add(p4);
+        GameController Controller = new GameController(Players);
+        Controller.startGame();
+        Move_SelectTiles M = new Move_SelectTiles();
+        M.setCoordinates(new ArrayList<Integer>());
+        ClientMessage m = new ClientMessage(Message.MessageCategory.COLUMN,M,Controller.getGame().getPlayers().get(1).getNickName());
+        Message error= new ErrorMessage();
+        error.setReturnMessage("It's not your turn");
+        assertEquals(error,Controller.readMessage(m));
+    }
+    public void testReadMessage_THIRD(){
+        Player p1 = new Player("Alice");
+        Player p2 = new Player("Bob");
+        Player p3 = new Player("Carlos");
+        Player p4 = new Player("Diego");
+        ArrayList<Player> Players = new ArrayList<>();
+        Players.add(p1);
+        Players.add(p2);
+        Players.add(p3);
+        Players.add(p4);
+        GameController Controller = new GameController(Players);
+        Controller.startGame();
+        Move_SelectTiles M = new Move_SelectTiles();
+        M.setCoordinates(new ArrayList<Integer>());
+        ClientMessage m = new ClientMessage(Message.MessageCategory.ORDER,M,Controller.getGame().getPlayers().get(1).getNickName());
+        Message error= new ErrorMessage();
+        error.setReturnMessage("It's not your turn");
+        assertEquals(error,Controller.readMessage(m));
+    }
+    public void testReadMessage_FOURTH(){
+        Player p1 = new Player("Alice");
+        Player p2 = new Player("Bob");
+        Player p3 = new Player("Carlos");
+        Player p4 = new Player("Diego");
+        ArrayList<Player> Players = new ArrayList<>();
+        Players.add(p1);
+        Players.add(p2);
+        Players.add(p3);
+        Players.add(p4);
+        GameController Controller = new GameController(Players);
+        Controller.startGame();
+        ArrayList<Integer> E = new ArrayList<>();
+        E.add(3);
+        E.add(4);
+        E.add(3);
+        E.add(3);
+        Move_SelectTiles M = new Move_SelectTiles();
+        M.setCoordinates(E);
+        ClientMessage m = new ClientMessage(Message.MessageCategory.COORDINATES,M,Controller.getGame().getPlayers().get(0).getNickName());
+        Message error= new ErrorMessage();
+        error.setReturnMessage("The move you made isn't a valid move");
+        assertEquals(error,Controller.readMessage(m));
+    }
+    public void testReadMessage_FIFTH(){
+        Player p1 = new Player("Alice");
+        Player p2 = new Player("Bob");
+        Player p3 = new Player("Carlos");
+        Player p4 = new Player("Diego");
+        ArrayList<Player> Players = new ArrayList<>();
+        Players.add(p1);
+        Players.add(p2);
+        Players.add(p3);
+        Players.add(p4);
+        GameController Controller = new GameController(Players);
+        Controller.startGame();
+        ArrayList<Integer> E = new ArrayList<>();
+        E.add(0);
+        E.add(4);
+        E.add(0);
+        E.add(3);
+        Move_SelectTiles M = new Move_SelectTiles();
+        M.setCoordinates(E);
+        ClientMessage m = new ClientMessage(Message.MessageCategory.COORDINATES,M,Controller.getGame().getPlayers().get(0).getNickName());
+        ValidMoveMessage valid= new ValidMoveMessage();
+        assertEquals(valid,Controller.readMessage(m));
     }
 }
