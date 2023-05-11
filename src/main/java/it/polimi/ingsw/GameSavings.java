@@ -7,7 +7,7 @@ import it.polimi.ingsw.model.player.Player;
 
 import java.util.ArrayList;
 
-public class Savings {
+public class GameSavings {
     private Integer numPlayers;
     private final ArrayList<Player> players;
     private LivingRoom livingRoom=null;
@@ -20,7 +20,7 @@ public class Savings {
     private boolean finishedGame=false;
 
 
-    public Savings(int numPlayers){
+    public GameSavings(int numPlayers){
         this.numPlayers=numPlayers;
         players=new ArrayList<>();
     }
