@@ -1,6 +1,12 @@
 package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.Launcher;
+import it.polimi.ingsw.Messages.ClientToServer.ClientMessage;
+import it.polimi.ingsw.Messages.ClientToServer.CoordinatesMessage;
+import it.polimi.ingsw.Messages.ClientToServer.PossibleMoves.Move;
+import it.polimi.ingsw.Messages.ClientToServer.PossibleMoves.Move_SelectTiles;
+import it.polimi.ingsw.Messages.Message;
+import it.polimi.ingsw.Messages.ServerToClient.ErrorMessage;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.board.ItemTile;
 import it.polimi.ingsw.model.player.Player;
@@ -209,5 +215,48 @@ public class GameControllerTest extends TestCase {
         Controller.playMove();
         assertTrue(Controller.getGame().playMove(Controller.getCoordinates(), Controller.getColumn(), Controller.getOrder()));
     }
-
+    public void testPlayMoveGC_SECOND(){      //ONE MOVE
+        Player p1 = new Player("Alice");
+        Player p2 = new Player("Bob");
+        Player p3 = new Player("Carlos");
+        Player p4 = new Player("Diego");
+        ArrayList<Player> Players = new ArrayList<>();
+        Players.add(p1);
+        Players.add(p2);
+        Players.add(p3);
+        Players.add(p4);
+        GameController Controller = new GameController(Players);
+        Controller.startGame();
+        Controller.getCoordinates().add(3);
+        Controller.getCoordinates().add(8);
+        Controller.getCoordinates().add(4);
+        Controller.getCoordinates().add(8);
+        Controller.getOrder().add(1);
+        Controller.getOrder().add(2);
+        ItemTile i = Controller.getGame().getLivingRoom().getBoardTile(3,8).getTile();
+        ItemTile it = Controller.getGame().getLivingRoom().getBoardTile(4,8).getTile();
+        Controller.setColumn(3);
+        Controller.playMove();
+        assertEquals(i,Controller.getGame().getPlayers().get(0).getPlayerBookshelf().getTile(5,3));
+        assertEquals(it,Controller.getGame().getPlayers().get(0).getPlayerBookshelf().getTile(4,3));
+    }
+    public void testReadMessage_FIRST(){
+        Player p1 = new Player("Alice");
+        Player p2 = new Player("Bob");
+        Player p3 = new Player("Carlos");
+        Player p4 = new Player("Diego");
+        ArrayList<Player> Players = new ArrayList<>();
+        Players.add(p1);
+        Players.add(p2);
+        Players.add(p3);
+        Players.add(p4);
+        GameController Controller = new GameController(Players);
+        Controller.startGame();
+        Move_SelectTiles M = new Move_SelectTiles();
+        M.setCoordinates(new ArrayList<Integer>());
+        ClientMessage m = new ClientMessage(Message.MessageCategory.COORDINATES,M,Controller.getGame().getPlayers().get(1).getNickName());
+        Message error= new ErrorMessage();
+        error.setReturnMessage("It's not your turn");
+        assertEquals(error,Controller.readMessage(m));
+    }
 }

@@ -1,5 +1,7 @@
 package it.polimi.ingsw.Messages;
 
+import java.util.Objects;
+
 public abstract class Message {
 
     private final String nickname;
@@ -71,5 +73,18 @@ public abstract class Message {
 
     public void dumpPingMessage() {
         System.out.println(this.toString());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Message message = (Message) o;
+        return nickname.equals(message.nickname) && returnMessage.equals(message.returnMessage) && MC == message.MC;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nickname, returnMessage, MC);
     }
 }
