@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class GameControllerTest extends TestCase {
 
-    public void testStartGame_FIRST(){
+    public void testStartGameGC_FIRST(){
         Player p1 = new Player("Alice");
         Player p2 = new Player("Bob");
         ArrayList<Player> Players = new ArrayList<>();
@@ -24,7 +24,7 @@ public class GameControllerTest extends TestCase {
         assertTrue(GC.isStartedGame());
         assertTrue(GC.getGame().isStartedGame());
     }
-    public void testStartGame_SECOND(){
+    public void testStartGameGC_SECOND(){
         Player p1 = new Player("Alice");
         Player p2 = new Player("Bob");
         ArrayList<Player> Players = new ArrayList<>();
@@ -34,7 +34,7 @@ public class GameControllerTest extends TestCase {
         GC.startGame();
         assertTrue(GC.getGame().getPlayers().get(0).isFirstPlayerSeat());
     }
-    public void testStartGame_THIRD(){
+    public void testStartGameGC_THIRD(){
         Player p1 = new Player("Alice");
         Player p2 = new Player("Bob");
         ArrayList<Player> Players = new ArrayList<>();
@@ -44,7 +44,7 @@ public class GameControllerTest extends TestCase {
         GC.startGame();
         assertFalse(GC.getGame().getPlayers().get(1).isFirstPlayerSeat());
     }
-    public void testEndgame_FIRST() {
+    public void testEndgameGC_FIRST() {
         Player p = new Player("Alice", 2);
         Player p2 = new Player("Bob", 12);
         ArrayList<Player> Players = new ArrayList<>();
@@ -115,7 +115,7 @@ public class GameControllerTest extends TestCase {
         Optional<Player> player = Optional.ofNullable(p2);
         assertEquals(player, GC.endGame());
     }
-    public void testEndgame_SECOND() {
+    public void testEndgameGC_SECOND() {
         Player p = new Player("Alice", 2);
         Player p2 = new Player("Bob", 12);
         ArrayList<Player> Players= new ArrayList<>();
@@ -187,4 +187,27 @@ public class GameControllerTest extends TestCase {
         Optional<Player> player = Optional.ofNullable(GC.getGame().getPlayers().get(1));
         assertEquals(player, GC.endGame());
     }
+    public void testPlayMoveGC_FIRST(){
+        Player p1 = new Player("Alice");
+        Player p2 = new Player("Bob");
+        Player p3 = new Player("Carlos");
+        Player p4 = new Player("Diego");
+        ArrayList<Player> Players = new ArrayList<>();
+        Players.add(p1);
+        Players.add(p2);
+        Players.add(p3);
+        Players.add(p4);
+        GameController Controller = new GameController(Players);
+        Controller.startGame();
+        Controller.getCoordinates().add(3);
+        Controller.getCoordinates().add(8);
+        Controller.getCoordinates().add(4);
+        Controller.getCoordinates().add(8);
+        Controller.getOrder().add(1);
+        Controller.getOrder().add(2);
+        Controller.setColumn(3);
+        Controller.playMove();
+        assertTrue(Controller.getGame().playMove(Controller.getCoordinates(), Controller.getColumn(), Controller.getOrder()));
+    }
+
 }

@@ -111,4 +111,23 @@ public class GameController {
     public boolean isStartedGame() {
         return startedGame;
     }
+    public ArrayList<Integer> getCoordinates() {
+        return coordinates;
+    }
+
+    public ArrayList<Integer> getOrder() {
+        return order;
+    }
+
+    public void setColumn(Integer column) {
+        this.column = column;
+    }
+
+    public Integer getColumn() {
+        return column;
+    }
+
+    public ArrayList<Player> getPlayers() {
+        return players;
+    }
 }
