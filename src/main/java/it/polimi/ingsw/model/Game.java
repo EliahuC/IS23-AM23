@@ -1,4 +1,5 @@
 package it.polimi.ingsw.model;
+import it.polimi.ingsw.GameSavings;
 import it.polimi.ingsw.Network.Server.TCP.VirtualView;
 import it.polimi.ingsw.model.board.ItemTile;
 import it.polimi.ingsw.model.board.LivingRoom;
@@ -21,6 +22,8 @@ public class Game {
     private boolean startedGame=false;
 
     private boolean finishedGame=false;
+
+    private GameSavings savings=null;
 
     public Game(Launcher L,ArrayList<Player> lobby){
         this.Players=lobby;
