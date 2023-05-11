@@ -20,9 +20,8 @@ public class GameSavings {
     private boolean finishedGame=false;
 
 
-    public GameSavings(int numPlayers){
-        this.numPlayers=numPlayers;
-        players=new ArrayList<>();
+    public GameSavings(ArrayList<Player> players){
+        this.players=players;
     }
 
     public Integer getNumPlayers() {

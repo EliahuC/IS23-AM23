@@ -23,14 +23,14 @@ public class Game {
 
     private boolean finishedGame=false;
 
-    private GameSavings savings=null;
+
 
     public Game(Launcher L,ArrayList<Player> lobby){
         this.Players=lobby;
         this.disconnectedPlayers=new ArrayList<>();
         this.livingRoom =new LivingRoom(L);
         setLivingRoomListener();
-        this.gameChecker =new GameChecker(L);
+        this.gameChecker =livingRoom.getGameChecker();
         this.currPlaying=1;
         this.gameNumPlayers= lobby.size();
     }
@@ -71,16 +71,29 @@ public class Game {
         return mixedPlayers;
     }
 
-    public synchronized boolean playMove(ArrayList<Integer> commands,  Integer column, ArrayList<Integer> order){
-          if(!finishedGame) {
+    public synchronized GameSavings playMove(ArrayList<Integer> commands,  Integer column, ArrayList<Integer> order){
+        if(!finishedGame) {
               placeTiles(commands, column,order);
               checkCGC();
               increaseCurrPlaying();
               if (gameChecker.isRestorable(livingRoom.getBoard())) livingRoom.restore();
-              return true;
+
+              return setGameSavings();
           }
-          return false;
+          return null;
     }
+
+    private GameSavings setGameSavings() {
+        GameSavings savings=new GameSavings(Players);
+        savings.setFinishedGame(finishedGame);
+        savings.setCommonGoalCard1(livingRoom.getCommonGoalCard1());
+        savings.setCommonGoalCard2(livingRoom.getCommonGoalCard2());
+        savings.setStartedGame(startedGame);
+        savings.setCurrPlaying(currPlaying);
+        savings.setNumPlayers(gameNumPlayers);
+        return savings;
+    }
+
     public synchronized Optional<Player> endGame(){
         Optional<Player> P = Optional.empty();
          for (Player p : Players){

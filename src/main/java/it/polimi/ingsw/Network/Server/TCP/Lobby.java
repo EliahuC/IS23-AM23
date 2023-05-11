@@ -1,5 +1,6 @@
 package it.polimi.ingsw.Network.Server.TCP;
 
+import com.google.gson.Gson;
 import it.polimi.ingsw.Messages.ClientToServer.ClientMessage;
 import it.polimi.ingsw.Messages.Message;
 import it.polimi.ingsw.Messages.ServerToClient.ErrorMessage;
@@ -9,9 +10,13 @@ import it.polimi.ingsw.Messages.ServerToClient.ValidMoveMessage;
 import it.polimi.ingsw.controller.ControllerCoordinator;
 import it.polimi.ingsw.model.player.Player;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 
 public class Lobby {
+
     private final Integer NumPlayersLobby;
     private final ArrayList<ServerConnectionToClient> connections;
     private final ControllerCoordinator controllerCoordinator;
@@ -55,8 +60,24 @@ public class Lobby {
             }
             return new ErrorMessage();
         }
-        return controllerCoordinator.setMessage(message);
+        ValidMoveMessage returnMessage= (ValidMoveMessage) controllerCoordinator.setMessage(message);
+        if(returnMessage.getCategory()== Message.MessageCategory.RETURN_MESSAGE){
+            saveGame(returnMessage);
+        }
+        return returnMessage;
     }
+
+    private void saveGame(ValidMoveMessage returnMessage) {
+        Gson gson=new Gson();
+        if(returnMessage.getSavings()==null) return;
+        try{
+            Files.writeString(Path.of("./"/* +saveFilePath) */),gson.toJson(returnMessage.getSavings()) );
+            System.out.println("The game is saved");
+        }catch (IOException e){
+            throw new RuntimeException(e);
+        }
+    }
+
     public synchronized void logoutFromLobby(String s){
         joinedUsers.remove(s);
         controllerCoordinator.getConnectedPlayers().remove(s);

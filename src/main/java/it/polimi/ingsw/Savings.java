@@ -4,16 +4,36 @@ import it.polimi.ingsw.Network.Server.TCP.Lobby;
 
 public class Savings {
     private Integer savingNumber;
-    private Lobby lobby=null;
+    private final Lobby lobby;
     private GameSavings gameSavings=null;
 
-    public Savings(){
+    public Savings(Lobby lobby){
+        this.lobby=lobby;
         this.savingNumber=0;
     }
 
-    public void saveGame(GameSavings savings,Lobby lobby){
-       this.lobby=lobby;
+    public void saveGame(GameSavings savings){
        this.gameSavings=gameSavings;
        savingNumber++;
+    }
+
+    public Lobby getLobby() {
+        return lobby;
+    }
+
+    public GameSavings getGameSavings() {
+        return gameSavings;
+    }
+
+    public void setGameSavings(GameSavings gameSavings) {
+        this.gameSavings = gameSavings;
+    }
+
+    public Integer getSavingNumber() {
+        return savingNumber;
+    }
+
+    public void setSavingNumber(Integer savingNumber) {
+        this.savingNumber = savingNumber;
     }
 }

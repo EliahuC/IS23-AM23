@@ -1,6 +1,7 @@
 package it.polimi.ingsw.controller;
 
 import com.google.gson.Gson;
+import it.polimi.ingsw.GameSavings;
 import it.polimi.ingsw.Launcher;
 import it.polimi.ingsw.Messages.ClientToServer.ClientMessage;
 import it.polimi.ingsw.Messages.Message;
@@ -40,6 +41,7 @@ public class GameController {
 
 
      public synchronized Message readMessage(ClientMessage m){
+         ValidMoveMessage message=new ValidMoveMessage();
          if(!(Objects.equals(m.getNickname(), game.getCurrPlaying())))
              return sendErrorMessage("It's not your turn");
          switch (m.getCategory()) {
@@ -58,10 +60,11 @@ public class GameController {
                  order.addAll(m.getMessageMove().getMove());
                  if (!checkOrder() && !checkNumbers())
                      return sendErrorMessage();
-                 playMove();
+                 GameSavings savings=playMove();
+                 message.setSavings(savings);
              }
          }
-         return new ValidMoveMessage();
+         return message;
      }
 
     private boolean checkNumbers() {
@@ -88,11 +91,13 @@ public class GameController {
         return error;
     }
 
-    public synchronized void playMove(){
-         if(!game.playMove(coordinates,column,order))sendErrorMessage() ;
+    public synchronized GameSavings playMove(){
+         GameSavings savings=game.playMove(coordinates,column,order);
+         if(savings==null)sendErrorMessage() ;
          coordinates.clear();
          column=null;
          order.clear();
+         return savings;
      }
 
 
