@@ -1,6 +1,7 @@
 package it.polimi.ingsw.Network.Client;
 import java.util.ArrayList;
 
+import it.polimi.ingsw.CLICommands.CLICommandList;
 import it.polimi.ingsw.Messages.ClientToServer.*;
 import it.polimi.ingsw.Messages.ClientToServer.PossibleMoves.Move_SelectColumn;
 import it.polimi.ingsw.Messages.ClientToServer.PossibleMoves.Move_SelectOrder;
@@ -11,13 +12,13 @@ import it.polimi.ingsw.Messages.ServerToClient.StartingGameMessage;
 import it.polimi.ingsw.Printer;
 
 public class MoveSerializer implements Printer {
-    private  String myMove=null;
+
     private Move lastMove;
 
     public MoveSerializer(){
 
     }
-    public Message getFromKeyboard(String s){
+    public Message serializeInput(String s){
 
         return convertCommandToMove(s);
     }
@@ -108,41 +109,31 @@ public class MoveSerializer implements Printer {
     }
 
     private void commandList() {
-        showMessage("/create_lobby nickname numPlayers (numPlayers can only be 2/3/4)");
-        showMessage("/enter_lobby nickname");
-        showMessage("/exit_lobby ");
-        showMessage("/start_game");
-        showMessage("/select_tiles x1 y1 x2 y2 x3 y3");
-        showMessage("/select_column y");
-        showMessage("/select_order t1 t2 t3 (t1 t2 t3 must be numbers of your previous selection" +
-                      " for example if you have selected 2 tiles t1 == tile with coordinates(x1,y1)  " +
-                      "and t2 == tile with coordinates (x2,y2) and the order you want is  t2 t1 you have to write 2 1");
-        showMessage("");
-
+        System.out.println(CLICommandList.getCommands());
     }
 
 
     private MoveCategory checkCommand(String s){
         switch(s){
-            case "/START_GAME" -> {
+            case "/START" -> {
                 return MoveCategory.START_GAME;
             }
-            case "/CREATE_LOBBY" -> {
+            case "/CREATE" -> {
                 return MoveCategory.CREATE_LOBBY;
             }
-            case "/ENTER_LOBBY"-> {
+            case "/ENTER"-> {
                 return MoveCategory.ENTER_LOBBY;
             }
-            case "EXIT_LOBBY"->{
+            case "EXIT"->{
                 return MoveCategory.EXIT_LOBBY;
             }
-            case "/SELECT_TILES"-> {
+            case "/SELECT"-> {
                 return MoveCategory.SELECT_TILES;
             }
-            case "/SELECT_COLUMN"-> {
+            case "/COLUMN"-> {
                 return MoveCategory.SELECT_COLUMN;
             }
-            case "/SELECT_ORDER"->{
+            case "/ORDER"->{
                 return MoveCategory.SELECT_ORDER;
             }
             default -> {

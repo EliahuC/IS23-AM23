@@ -16,7 +16,7 @@ class MoveSerializerTest {
 
         String s1= CLICommandList.getCommands().get(1);
         MoveSerializer ms1= new MoveSerializer();
-        Message m1= ms1.getFromKeyboard(s1);
+        Message m1= ms1.serializeInput(s1);
         String sj1=gson.toJson(m1);
         assertEquals("{\"nickname\":\"NICKNAME\",\"MC\":\"ENTER_LOBBY\"}",sj1);
 
