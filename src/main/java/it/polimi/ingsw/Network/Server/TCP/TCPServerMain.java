@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class TCPServerMain extends Server {
     private ServerSocket serverSocket;
 
-   // private final ArrayList<VirtualView> virtualViews=new ArrayList<>();
+    private final ArrayList<VirtualView> virtualViews=new ArrayList<>();
 
     private final int port;
 
@@ -37,9 +37,9 @@ public class TCPServerMain extends Server {
                 showMessage("Client successfully connected");
                 ServerConnectionToClient serverConnectionToClient = new ServerConnectionToClient(clientSocket);
                 new Thread(serverConnectionToClient).start();
-                // VirtualView virtualView=new VirtualView(serverConnectionToClient);
-                //virtualViews.add(virtualView);
-                //serverConnectionToClient.addVirtualView(virtualView);
+                VirtualView virtualView=new VirtualView(serverConnectionToClient);
+                virtualViews.add(virtualView);
+                serverConnectionToClient.addVirtualView(virtualView);
             } catch (IOException e) {
                 e.printStackTrace();
             }

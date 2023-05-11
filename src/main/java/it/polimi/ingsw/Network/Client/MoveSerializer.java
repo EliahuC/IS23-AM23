@@ -8,12 +8,12 @@ import it.polimi.ingsw.Messages.ClientToServer.PossibleMoves.Move_SelectOrder;
 import it.polimi.ingsw.Messages.ClientToServer.PossibleMoves.Move_SelectTiles;
 import it.polimi.ingsw.Messages.Message;
 import it.polimi.ingsw.Messages.ClientToServer.PossibleMoves.Move;
+import it.polimi.ingsw.Messages.ServerToClient.ErrorMessage;
 import it.polimi.ingsw.Messages.ServerToClient.StartingGameMessage;
 import it.polimi.ingsw.Printer;
 
 public class MoveSerializer implements Printer {
 
-    private Move lastMove;
 
     public MoveSerializer(){
 
@@ -29,14 +29,15 @@ public class MoveSerializer implements Printer {
     }
 
 
-    private Message convertCommandToMove(String Command[]) {
+    private Message convertCommandToMove(String[] Command) {
       switch (checkCommand(Command[0])){
           case CREATE_LOBBY -> {
               if((Integer.parseInt(Command[2])<5)||(Integer.parseInt(Command[2])>1)){
                   Message m=new LobbyCreationMessage(Command[1],Integer.parseInt(Command[2]));
                   return m;
               }
-              else invalidCommand();
+              else
+                  return invalidCommand();
           }
           case EXIT_LOBBY ->{
               Message m =new LobbyLogoutMessage();
@@ -56,13 +57,11 @@ public class MoveSerializer implements Printer {
                   coordinates.add(Integer.parseInt(Command[i]));
               }
               if(coordinates.size()%2==1){
-                  invalidCommand();
-                  return null;
+                  return invalidCommand();
               }
               for(Integer i: coordinates){
                   if(i<0||i>8){
-                      invalidCommand();
-                      return null;
+                      return invalidCommand();
                   }
               }
               Move_SelectTiles move=new Move_SelectTiles();
@@ -72,8 +71,8 @@ public class MoveSerializer implements Printer {
           }
           case SELECT_COLUMN -> {
               if(Integer.parseInt(Command[1])>4||Integer.parseInt(Command[1])<0){
-                  invalidCommand();
-                  return null;
+                  return invalidCommand();
+
               }
               Move_SelectColumn move =new Move_SelectColumn();
               move.setYBookshelf(Integer.parseInt(Command[1]));
@@ -87,8 +86,7 @@ public class MoveSerializer implements Printer {
               }
               for(Integer i: order){
                   if(i<1||i>3){
-                      invalidCommand();
-                      return null;
+                      return invalidCommand();
                   }
               }
               Move_SelectOrder move=new Move_SelectOrder();
@@ -97,15 +95,17 @@ public class MoveSerializer implements Printer {
               return m;
           }
           case INVALID_COMMAND -> {
-             invalidCommand();
+             return invalidCommand();
           }
       }
       return null;
     }
 
-    private void invalidCommand() {
-        showMessage("The command is invalid, please insert a valid command");
-        commandList();
+    private Message invalidCommand() {
+       ErrorMessage e=new ErrorMessage();
+       e.setReturnMessage("The command isn't valid" +
+                          "Command List: "+ CLICommandList.getCommands());
+       return e;
     }
 
     private void commandList() {

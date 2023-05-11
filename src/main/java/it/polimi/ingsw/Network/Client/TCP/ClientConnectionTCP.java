@@ -78,8 +78,6 @@ public class ClientConnectionTCP extends ConnectionClient {
 
     private ServerMessage receiveMessage() throws IOException, ClassNotFoundException {
         String s=input.nextLine();
-        //MoveSerializer moveSerializer1=new MoveSerializer(playerName);
-       // moveSerializer1.getFromKeyboard(s);
 
         return  gson.fromJson(s,ServerMessage.class);
     }
