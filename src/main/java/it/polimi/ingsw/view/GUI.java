@@ -1,5 +1,5 @@
 package it.polimi.ingsw.view;
-/*
+
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -11,7 +11,7 @@ import javafx.scene.Scene;
 
 import java.io.IOException;
 
-public class Main extends Application{
+public class GUI extends Application{
     Stage window;
     Scene scene1, scene2;
 
@@ -47,4 +47,3 @@ public class Main extends Application{
         //window.setFullScreen(true);
     }
 }
-*/
