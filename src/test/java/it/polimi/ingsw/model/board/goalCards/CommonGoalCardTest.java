@@ -1,7 +1,7 @@
 package it.polimi.ingsw.model.board.goalCards;
 
-import junit.framework.TestCase;
 import it.polimi.ingsw.Launcher;
+import junit.framework.TestCase;
 
 /**
  * Unit test for simple App.

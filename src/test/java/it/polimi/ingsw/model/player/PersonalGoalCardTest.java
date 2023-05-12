@@ -1,13 +1,7 @@
 package it.polimi.ingsw.model.player;
 
-import junit.framework.TestCase;
-import it.polimi.ingsw.model.player.PersonalGoalCard;
 import it.polimi.ingsw.model.board.ItemTile;
-import it.polimi.ingsw.model.player.BookShelf;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.stream.Collectors;
+import junit.framework.TestCase;
 
 public class PersonalGoalCardTest extends TestCase {
 

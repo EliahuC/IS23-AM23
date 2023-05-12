@@ -1,9 +1,10 @@
 package it.polimi.ingsw.model.board;
+
+import it.polimi.ingsw.Launcher;
 import it.polimi.ingsw.Network.Server.TCP.VirtualView;
+import it.polimi.ingsw.model.GameChecker;
 import it.polimi.ingsw.model.board.goalCards.*;
 import it.polimi.ingsw.model.player.BookShelf;
-import it.polimi.ingsw.Launcher;
-import it.polimi.ingsw.model.GameChecker;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;

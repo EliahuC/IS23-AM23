@@ -5,11 +5,9 @@ import it.polimi.ingsw.Network.Client.TCP.ClientConnectionTCP;
 import it.polimi.ingsw.Printer;
 import it.polimi.ingsw.view.*;
 
-
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.Socket;
-import java.net.UnknownHostException;
 
 public class ClientMain implements Printer {
     private static View view;

@@ -1,5 +1,4 @@
 package it.polimi.ingsw.Network.Client;
-import java.util.ArrayList;
 
 import it.polimi.ingsw.CLICommands.CLICommandList;
 import it.polimi.ingsw.Messages.ClientToServer.*;
@@ -7,10 +6,11 @@ import it.polimi.ingsw.Messages.ClientToServer.PossibleMoves.Move_SelectColumn;
 import it.polimi.ingsw.Messages.ClientToServer.PossibleMoves.Move_SelectOrder;
 import it.polimi.ingsw.Messages.ClientToServer.PossibleMoves.Move_SelectTiles;
 import it.polimi.ingsw.Messages.Message;
-import it.polimi.ingsw.Messages.ClientToServer.PossibleMoves.Move;
 import it.polimi.ingsw.Messages.ServerToClient.ErrorMessage;
 import it.polimi.ingsw.Messages.ServerToClient.StartingGameMessage;
 import it.polimi.ingsw.Printer;
+
+import java.util.ArrayList;
 
 public class MoveSerializer implements Printer {
 

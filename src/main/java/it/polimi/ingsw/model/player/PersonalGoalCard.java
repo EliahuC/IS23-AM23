@@ -2,9 +2,7 @@ package it.polimi.ingsw.model.player;
 
 import it.polimi.ingsw.model.board.ItemTile;
 
-
 import java.util.HashMap;
-import java.util.Objects;
 
 public class PersonalGoalCard {
     private int completed;

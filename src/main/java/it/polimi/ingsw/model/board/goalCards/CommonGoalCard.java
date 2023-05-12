@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model.board.goalCards;
-import it.polimi.ingsw.model.player.BookShelf;
+
 import it.polimi.ingsw.Launcher;
+import it.polimi.ingsw.model.player.BookShelf;
 public abstract class CommonGoalCard {
     private int numCompleted = 0;
     private final Launcher L = new Launcher();

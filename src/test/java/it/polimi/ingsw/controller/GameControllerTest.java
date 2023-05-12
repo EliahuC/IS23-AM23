@@ -1,14 +1,10 @@
 package it.polimi.ingsw.controller;
 
-import it.polimi.ingsw.Launcher;
 import it.polimi.ingsw.Messages.ClientToServer.ClientMessage;
-import it.polimi.ingsw.Messages.ClientToServer.CoordinatesMessage;
-import it.polimi.ingsw.Messages.ClientToServer.PossibleMoves.Move;
 import it.polimi.ingsw.Messages.ClientToServer.PossibleMoves.Move_SelectTiles;
 import it.polimi.ingsw.Messages.Message;
 import it.polimi.ingsw.Messages.ServerToClient.ErrorMessage;
 import it.polimi.ingsw.Messages.ServerToClient.ValidMoveMessage;
-import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.board.ItemTile;
 import it.polimi.ingsw.model.player.Player;
 import junit.framework.TestCase;

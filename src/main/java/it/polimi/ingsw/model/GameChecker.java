@@ -1,13 +1,12 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.Launcher;
+import it.polimi.ingsw.model.board.BoardToken;
 import it.polimi.ingsw.model.board.ItemTile;
 import it.polimi.ingsw.model.player.BookShelf;
 import it.polimi.ingsw.model.player.Player;
-import it.polimi.ingsw.Launcher;
-import it.polimi.ingsw.model.board.BoardToken;
 
-
-import java.util.*;
+import java.util.Arrays;
 
 public class GameChecker {
 

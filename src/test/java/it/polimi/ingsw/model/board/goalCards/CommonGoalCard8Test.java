@@ -1,10 +1,9 @@
 package it.polimi.ingsw.model.board.goalCards;
-import junit.framework.TestCase;
-import it.polimi.ingsw.model.board.ItemTile;
+
 import it.polimi.ingsw.Launcher;
-import it.polimi.ingsw.model.board.goalCards.CommonGoalCard;
-import it.polimi.ingsw.model.board.goalCards.CommonGoalCard8;
+import it.polimi.ingsw.model.board.ItemTile;
 import it.polimi.ingsw.model.player.BookShelf;
+import junit.framework.TestCase;
 
 /**
  * Unit test for simple App.

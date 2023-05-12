@@ -1,10 +1,9 @@
 package it.polimi.ingsw.model.player;
 
-import junit.framework.TestCase;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 import it.polimi.ingsw.model.board.ItemTile;
+import junit.framework.TestCase;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class BookShelfTest extends TestCase {
 

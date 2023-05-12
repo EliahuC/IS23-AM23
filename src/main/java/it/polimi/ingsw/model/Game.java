@@ -1,11 +1,12 @@
 package it.polimi.ingsw.model;
+
 import it.polimi.ingsw.GameSavings;
+import it.polimi.ingsw.Launcher;
 import it.polimi.ingsw.Network.Server.TCP.VirtualView;
 import it.polimi.ingsw.model.board.ItemTile;
 import it.polimi.ingsw.model.board.LivingRoom;
 import it.polimi.ingsw.model.player.PersonalGoalCard;
 import it.polimi.ingsw.model.player.Player;
-import it.polimi.ingsw.Launcher;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;

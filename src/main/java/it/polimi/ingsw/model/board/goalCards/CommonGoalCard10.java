@@ -1,7 +1,8 @@
 package it.polimi.ingsw.model.board.goalCards;
-import it.polimi.ingsw.model.player.BookShelf;
+
 import it.polimi.ingsw.Launcher;
 import it.polimi.ingsw.model.board.ItemTileCategory;
+import it.polimi.ingsw.model.player.BookShelf;
 
 import java.util.HashSet;
 

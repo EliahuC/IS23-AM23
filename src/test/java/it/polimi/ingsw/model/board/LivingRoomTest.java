@@ -1,9 +1,7 @@
 package it.polimi.ingsw.model.board;
 
-import junit.framework.TestCase;
-import it.polimi.ingsw.model.board.LivingRoom;
 import it.polimi.ingsw.Launcher;
-import it.polimi.ingsw.model.board.BoardToken;
+import junit.framework.TestCase;
 
 import java.util.ArrayList;
 

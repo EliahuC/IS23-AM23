@@ -1,6 +1,8 @@
 package it.polimi.ingsw;
-import java.util.ArrayList;
+
 import it.polimi.ingsw.model.player.Player;
+
+import java.util.ArrayList;
 public class Launcher {
 private Player host;
 private int numPlayers;

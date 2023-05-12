@@ -4,9 +4,9 @@ import it.polimi.ingsw.Loggable;
 import it.polimi.ingsw.Network.Server.Server;
 
 import java.rmi.AlreadyBoundException;
-import java.rmi.registry.Registry;
-import java.rmi.registry.LocateRegistry;
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
 public class RMIServerMain extends Server implements Loggable {

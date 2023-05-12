@@ -1,12 +1,12 @@
 package it.polimi.ingsw.Network.Client.TCP;
 
 import com.google.gson.Gson;
-import it.polimi.ingsw.Network.Client.ConnectionClient;
-import it.polimi.ingsw.Network.Client.MoveSerializer;
 import it.polimi.ingsw.Messages.ClientToServer.ClientMessage;
 import it.polimi.ingsw.Messages.ClientToServer.PingToServer;
 import it.polimi.ingsw.Messages.Message;
 import it.polimi.ingsw.Messages.ServerToClient.ServerMessage;
+import it.polimi.ingsw.Network.Client.ConnectionClient;
+import it.polimi.ingsw.Network.Client.MoveSerializer;
 
 import java.io.IOException;
 import java.io.PrintWriter;

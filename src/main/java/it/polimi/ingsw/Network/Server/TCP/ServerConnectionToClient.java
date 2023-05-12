@@ -9,7 +9,6 @@ import it.polimi.ingsw.Messages.ServerToClient.PingFromServer;
 import it.polimi.ingsw.Messages.ServerToClient.ServerMessage;
 import it.polimi.ingsw.model.player.Player;
 
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;

@@ -1,11 +1,12 @@
 package it.polimi.ingsw.model;
+
 import it.polimi.ingsw.Launcher;
-import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.board.ItemTile;
+import it.polimi.ingsw.model.player.Player;
+import junit.framework.TestCase;
+
 import java.util.ArrayList;
 import java.util.Optional;
-
-import junit.framework.TestCase;
 
 import static org.junit.jupiter.api.Assertions.*;
 

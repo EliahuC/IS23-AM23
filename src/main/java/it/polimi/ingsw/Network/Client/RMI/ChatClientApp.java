@@ -1,5 +1,8 @@
 package it.polimi.ingsw.Network.Client.RMI;
 
+import it.polimi.ingsw.Network.Server.ChatServer;
+import it.polimi.ingsw.Settings;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -7,9 +10,6 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
-
-import it.polimi.ingsw.Network.Server.ChatServer;
-import it.polimi.ingsw.Settings;
 
 public class ChatClientApp extends UnicastRemoteObject implements ChatClient {
 

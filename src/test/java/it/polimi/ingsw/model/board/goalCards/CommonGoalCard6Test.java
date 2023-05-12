@@ -1,11 +1,9 @@
 package it.polimi.ingsw.model.board.goalCards;
 
-import junit.framework.TestCase;
-import it.polimi.ingsw.model.board.goalCards.CommonGoalCard;
-import it.polimi.ingsw.model.board.goalCards.CommonGoalCard6;
 import it.polimi.ingsw.Launcher;
 import it.polimi.ingsw.model.board.ItemTile;
 import it.polimi.ingsw.model.player.BookShelf;
+import junit.framework.TestCase;
 
 public class CommonGoalCard6Test extends TestCase {
     public void testCheckGoalCardCGC6_FIRST() {

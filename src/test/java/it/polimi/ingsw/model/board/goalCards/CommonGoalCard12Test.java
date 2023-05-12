@@ -1,13 +1,12 @@
 package it.polimi.ingsw.model.board.goalCards;
 
-import junit.framework.TestCase;
-import it.polimi.ingsw.model.board.goalCards.CommonGoalCard;
-import it.polimi.ingsw.model.board.goalCards.CommonGoalCard12;
 import it.polimi.ingsw.Launcher;
 import it.polimi.ingsw.model.board.ItemTile;
 import it.polimi.ingsw.model.player.BookShelf;
+import junit.framework.TestCase;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class CommonGoalCard12Test extends TestCase {
 

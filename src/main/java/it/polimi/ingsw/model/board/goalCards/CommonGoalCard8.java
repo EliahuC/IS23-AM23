@@ -1,13 +1,10 @@
 package it.polimi.ingsw.model.board.goalCards;
 
-import it.polimi.ingsw.model.player.BookShelf;
 import it.polimi.ingsw.Launcher;
-import it.polimi.ingsw.model.board.ItemTile;
 import it.polimi.ingsw.model.board.ItemTileCategory;
+import it.polimi.ingsw.model.player.BookShelf;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 
 public class CommonGoalCard8 extends CommonGoalCard implements CheckCommonGoalCard {
     private final static int numRowsToAchieve=4;
