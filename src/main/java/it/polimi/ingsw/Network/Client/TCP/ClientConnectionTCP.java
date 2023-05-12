@@ -3,16 +3,15 @@ package it.polimi.ingsw.Network.Client.TCP;
 import com.google.gson.Gson;
 import it.polimi.ingsw.Network.Client.ConnectionClient;
 import it.polimi.ingsw.Network.Client.MoveSerializer;
-import it.polimi.ingsw.Network.Messages.ClientToServer.ClientMessage;
-import it.polimi.ingsw.Network.Messages.ClientToServer.PingToServer;
-import it.polimi.ingsw.Network.Messages.Message;
-import it.polimi.ingsw.Network.Messages.ServerToClient.ServerMessage;
+import it.polimi.ingsw.Messages.ClientToServer.ClientMessage;
+import it.polimi.ingsw.Messages.ClientToServer.PingToServer;
+import it.polimi.ingsw.Messages.Message;
+import it.polimi.ingsw.Messages.ServerToClient.ServerMessage;
 
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
 import java.net.Socket;
-import java.util.concurrent.TimeUnit;
+import java.util.Scanner;
 
 public class ClientConnectionTCP extends ConnectionClient {
     private MoveSerializer moveSerializer;
@@ -20,15 +19,20 @@ public class ClientConnectionTCP extends ConnectionClient {
     private String IPAddress;
     private boolean clientIsActive;
     private String playerName;
-    private ObjectInputStream input;
-    private ObjectOutputStream output;
+    private Scanner input;
+    private PrintWriter output;
     private Boolean GUIisActive=false;
     private final Gson gson=new Gson();
 
     public ClientConnectionTCP(Socket socket) {
         this.clientIsActive =true;
         this.socket = socket;
-
+        try{
+            this.output = new PrintWriter(socket.getOutputStream());
+            this.input = new Scanner(socket.getInputStream());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -38,7 +42,7 @@ public class ClientConnectionTCP extends ConnectionClient {
 
     public void setPlayerName(String playerName) {
         this.playerName = playerName;
-        this.moveSerializer=new MoveSerializer(playerName);
+        this.moveSerializer=new MoveSerializer();
     }
 
     public void setAddress(String address) {
@@ -47,35 +51,35 @@ public class ClientConnectionTCP extends ConnectionClient {
 
     @Override
     public void run() {
-        try{
-            output = new ObjectOutputStream(socket.getOutputStream());
-            input = new ObjectInputStream(socket.getInputStream());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
         //Scrivo reazione view all'evento
-      while(clientIsActive){
-          try {
-              ServerMessage serverMessage = receiveMessage();
-              if (serverMessage.getCategory() != Message.MessageCategory.PING) {
-                  if (GUIisActive) {
-                      //GUIEvent.recieveMessage(serverMessage);
-                  } else; //CLIEvent.recieveMessage(serverMessage);
-              } else sendPing();
-          } catch (IOException e){
-              closeConnection();
-              notifyDisconnection();
-          }catch (ClassNotFoundException e){
-              e.printStackTrace();
-          } catch (InterruptedException e) {
-              throw new RuntimeException(e);
-          }
-      }
+        while(clientIsActive){
+            try {
+                ServerMessage serverMessage = receiveMessage();
+                if (serverMessage.getCategory() != Message.MessageCategory.PING) {
+                    if (GUIisActive) {
+                        //GUIEvent.recieveMessage(serverMessage);
+                    } else; //CLIEvent.recieveMessage(serverMessage);
+                } else if(serverMessage.getCategory()== Message.MessageCategory.PING){
+                    System.out.println("Ping arrived");
+                    sendPing();
+                }
+            } catch (IOException e){
+                closeConnection();
+                notifyDisconnection();
+            }catch (ClassNotFoundException e){
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
 
     }
 
     private ServerMessage receiveMessage() throws IOException, ClassNotFoundException {
-        return (ServerMessage) input.readObject();
+        String s=input.nextLine();
+
+        return  gson.fromJson(s,ServerMessage.class);
     }
 
     private void notifyDisconnection() {
@@ -94,22 +98,17 @@ public class ClientConnectionTCP extends ConnectionClient {
         clientIsActive = false;
     }
     private void sendMessage(ClientMessage message){
-        try{
-            String m=gson.toJson(message);
-            output.writeObject(m);
-            output.flush();
-            output.reset();
-        } catch (IOException e) {
-            closeConnection();
-            notifyDisconnection();
-        }
+        String m=gson.toJson(message,ClientMessage.class);
+        //       output.reset();
+        output.println(m);
+        output.flush();
     }
 
 
     private void sendPing() throws InterruptedException {
         PingToServer ping=new PingToServer(playerName);
-        TimeUnit.SECONDS.sleep(15);
-        asyncSendPing(ping);
+        //TimeUnit.SECONDS.sleep(5);
+        sendMessage(ping);
     }
 
     private void asyncSendPing(PingToServer ping) {

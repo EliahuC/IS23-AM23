@@ -1,14 +1,18 @@
 package it.polimi.ingsw.model;
+import it.polimi.ingsw.GameSavings;
 import it.polimi.ingsw.Network.Server.TCP.VirtualView;
 import it.polimi.ingsw.model.board.ItemTile;
 import it.polimi.ingsw.model.board.LivingRoom;
+import it.polimi.ingsw.model.player.PersonalGoalCard;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.Launcher;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class Game {
+public class Game  {
     private final LivingRoom livingRoom;
     private final ArrayList<Player> Players;
     private final ArrayList<Player> disconnectedPlayers;
@@ -18,15 +22,20 @@ public class Game {
 
     private final GameChecker gameChecker;
     private boolean startedGame=false;
+    private final ArrayList<VirtualView> listeners ;
+    private final Timer turnTimer=new Timer();
 
     private boolean finishedGame=false;
 
+
+
     public Game(Launcher L,ArrayList<Player> lobby){
+        listeners=new ArrayList<>();
         this.Players=lobby;
         this.disconnectedPlayers=new ArrayList<>();
         this.livingRoom =new LivingRoom(L);
         setLivingRoomListener();
-        this.gameChecker =new GameChecker(L);
+        this.gameChecker =livingRoom.getGameChecker();
         this.currPlaying=1;
         this.gameNumPlayers= lobby.size();
     }
@@ -52,6 +61,9 @@ public class Game {
         Players.clear();
         Players.addAll(mixedPlayers);
         Players.get(0).setFirstPlayerSeat(true);
+        for(Player p:Players){
+            p.setPersonalGoalCard(new PersonalGoalCard());
+        }
     }
 
     private ArrayList<Player> mixPlayersOrder(List<Player> players) {
@@ -64,16 +76,30 @@ public class Game {
         return mixedPlayers;
     }
 
-    public synchronized boolean playMove(ArrayList<Integer> commands,  Integer column, ArrayList<Integer> order){
-          if(!finishedGame) {
+    public synchronized GameSavings playMove(ArrayList<Integer> commands,  Integer column, ArrayList<Integer> order){
+        if(!finishedGame) {
               placeTiles(commands, column,order);
               checkCGC();
+              turnTimer.cancel();
               increaseCurrPlaying();
+              turnTimer(turnTimer);
               if (gameChecker.isRestorable(livingRoom.getBoard())) livingRoom.restore();
-              return true;
+              return setGameSavings();
           }
-          return false;
+          return null;
     }
+
+    private GameSavings setGameSavings() {
+        GameSavings savings=new GameSavings(Players);
+        savings.setFinishedGame(finishedGame);
+        savings.setCommonGoalCard1(livingRoom.getCommonGoalCard1());
+        savings.setCommonGoalCard2(livingRoom.getCommonGoalCard2());
+        savings.setStartedGame(startedGame);
+        savings.setCurrPlaying(currPlaying);
+        savings.setNumPlayers(gameNumPlayers);
+        return savings;
+    }
+
     public synchronized Optional<Player> endGame(){
         Optional<Player> P = Optional.empty();
          for (Player p : Players){
@@ -107,7 +133,17 @@ public class Game {
 
     private synchronized void isLastTurn() {
         for(Player p:Players)p.setLastRound(true);
-        if(currPlaying==4)finishedGame=true;
+        if(currPlaying==4){
+            finishedGame=true;
+            PropertyChangeEvent evt = new PropertyChangeEvent(
+                    this,
+                    "GAME_ENDED",
+                    null,
+                    whoWins());
+            for(PropertyChangeListener l:listeners){
+                l.propertyChange(evt);
+            }
+        }
 
     }
 
@@ -278,6 +314,19 @@ public class Game {
 
     public LivingRoom getLivingRoom() {
         return livingRoom;
+    }
+
+    /**
+     * method that increase currPlaying every 2 minutes
+     */
+    private void turnTimer(Timer timer)  {
+            TimerTask timerTask=new TimerTask() {
+                @Override
+                public void run() {
+                    increaseCurrPlaying();
+                }
+            };
+            timer.schedule(timerTask,120000);
     }
 }
 

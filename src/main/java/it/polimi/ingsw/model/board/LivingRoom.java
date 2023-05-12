@@ -18,16 +18,16 @@ public class LivingRoom {
     private BoardToken[][] Board = new BoardToken[MAX_Row][MAX_Column];
     private final Launcher L;
     private final Bag bag;
-    private final GameChecker G;
+    private final GameChecker gameChecker;
 
-    private final ArrayList<it.polimi.ingsw.model.board.goalCards.CommonGoalCard> CommonGoalCard = new ArrayList<>();
-    private CommonGoalCard C1;
-    private CommonGoalCard C2;
+    private final ArrayList<CommonGoalCard> CommonGoalCard = new ArrayList<>();
+    private CommonGoalCard commonGoalCard1;
+    private CommonGoalCard commonGoalCard2;
 
     public LivingRoom(Launcher L) {
         this.L = L;
         this.bag = new Bag();
-        this.G=new GameChecker(L);
+        this.gameChecker =new GameChecker(L);
         buildTiles();
 
         //SET UNAVAILABLE
@@ -150,23 +150,23 @@ public class LivingRoom {
             }
         }
         int randIndex = new Random().nextInt(CommonGoalCard.size());
-        C1 = CommonGoalCard.remove(randIndex);
+        commonGoalCard1 = CommonGoalCard.remove(randIndex);
         randIndex = new Random().nextInt(CommonGoalCard.size());
-        C2 = CommonGoalCard.remove(randIndex);
+        commonGoalCard2 = CommonGoalCard.remove(randIndex);
     }
 
     public int checkCG(BookShelf bs){
         int score=0;
-        C1.checkGoal(bs);
-        C2.checkGoal(bs);
-       score= C1.getPoints();
-       score=C2.getPoints();
+        commonGoalCard1.checkGoal(bs);
+        commonGoalCard2.checkGoal(bs);
+       score= commonGoalCard1.getPoints();
+       score= commonGoalCard2.getPoints();
        return score;
     }
 
 
     public void restore() {
-        if (G.isRestorable(Board)) {
+        if (gameChecker.isRestorable(Board)) {
             for (int i = 0; i < MAX_Row; i++) {
                 for (int j = 0; j < MAX_Column; j++) {
                     if (Board[i][j].getTile() == null) {
@@ -264,4 +264,15 @@ public class LivingRoom {
          listeners.addAll(listener);
     }
 
+    public CommonGoalCard getCommonGoalCard1() {
+        return commonGoalCard1;
+    }
+
+    public CommonGoalCard getCommonGoalCard2() {
+        return commonGoalCard2;
+    }
+
+    public GameChecker getGameChecker() {
+        return gameChecker;
+    }
 }

@@ -1,12 +1,12 @@
 package it.polimi.ingsw.controller;
 
 import com.google.gson.Gson;
+import it.polimi.ingsw.GameSavings;
 import it.polimi.ingsw.Launcher;
-import it.polimi.ingsw.Network.Messages.ClientToServer.ClientMessage;
-import it.polimi.ingsw.Network.Messages.Message;
-import it.polimi.ingsw.Network.Messages.ServerToClient.ErrorMessage;
-import it.polimi.ingsw.Network.Messages.ServerToClient.SuccessMessage;
-import it.polimi.ingsw.Network.Messages.ServerToClient.ValidMoveMessage;
+import it.polimi.ingsw.Messages.ClientToServer.ClientMessage;
+import it.polimi.ingsw.Messages.Message;
+import it.polimi.ingsw.Messages.ServerToClient.ErrorMessage;
+import it.polimi.ingsw.Messages.ServerToClient.ValidMoveMessage;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.player.Player;
 
@@ -41,6 +41,7 @@ public class GameController {
 
 
      public synchronized Message readMessage(ClientMessage m){
+         ValidMoveMessage message=new ValidMoveMessage();
          if(!(Objects.equals(m.getNickname(), game.getCurrPlaying())))
              return sendErrorMessage("It's not your turn");
          switch (m.getCategory()) {
@@ -59,10 +60,11 @@ public class GameController {
                  order.addAll(m.getMessageMove().getMove());
                  if (!checkOrder() && !checkNumbers())
                      return sendErrorMessage();
-                 playMove();
+                 GameSavings savings=playMove();
+                 message.setSavings(savings);
              }
          }
-         return new ValidMoveMessage();
+         return message;
      }
 
     private boolean checkNumbers() {
@@ -80,20 +82,22 @@ public class GameController {
 
     private Message sendErrorMessage(String ErrorMotivation) {
          Message error= new ErrorMessage();
-         error.addReturnMessage(ErrorMotivation);
+         error.setReturnMessage(ErrorMotivation);
          return error;
     }
     private Message sendErrorMessage() {
         Message error= new ErrorMessage();
-        error.addReturnMessage("The move you made isn't a valid move");
+        error.setReturnMessage("The move you made isn't a valid move");
         return error;
     }
 
-    public synchronized void playMove(){
-         if(!game.playMove(coordinates,column,order))sendErrorMessage() ;
+    public synchronized GameSavings playMove(){
+         GameSavings savings=game.playMove(coordinates,column,order);
+         if(savings==null)sendErrorMessage() ;
          coordinates.clear();
          column=null;
          order.clear();
+         return savings;
      }
 
 
@@ -111,5 +115,24 @@ public class GameController {
 
     public boolean isStartedGame() {
         return startedGame;
+    }
+    public ArrayList<Integer> getCoordinates() {
+        return coordinates;
+    }
+
+    public ArrayList<Integer> getOrder() {
+        return order;
+    }
+
+    public void setColumn(Integer column) {
+        this.column = column;
+    }
+
+    public Integer getColumn() {
+        return column;
+    }
+
+    public ArrayList<Player> getPlayers() {
+        return players;
     }
 }

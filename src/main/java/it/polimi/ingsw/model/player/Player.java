@@ -11,11 +11,10 @@ import java.util.ArrayList;
 public class Player {
 
     private final String NickName;
-    private final int IPaddres[];
     private int score ;
     private boolean firstPlayerSeat;
     private final BookShelf playerBookshelf;
-    private final PersonalGoalCard PersonalGoalCard;
+    private PersonalGoalCard personalGoalCard;
     private final boolean nowPlaying;
     private boolean lastRound;
 
@@ -24,10 +23,8 @@ public class Player {
 
     public Player(String nickName) {
         NickName = nickName;
-        this.IPaddres = null;
         this.score = 0;
         this.playerBookshelf = new BookShelf();
-        this.PersonalGoalCard = new PersonalGoalCard();
         this.nowPlaying = false;
         this.lastRound = false;
 
@@ -35,10 +32,10 @@ public class Player {
     }
     public Player(String nickName,int x) {      //THIS METHOD IS CREATED DUE TO MAKE TESTS
         NickName = nickName;
-        this.IPaddres = null;
+
         this.score = 0;
         this.playerBookshelf = new BookShelf();
-        this.PersonalGoalCard = new PersonalGoalCard(x);
+        this.personalGoalCard = new PersonalGoalCard(x);
         this.nowPlaying = false;
         this.lastRound = false;
 
@@ -52,9 +49,7 @@ public class Player {
         return NickName;
     }
 
-    public int[] getIPaddres() {
-        return IPaddres;
-    }
+
 
     public int getScore() {
         return score;
@@ -86,7 +81,7 @@ public class Player {
 
     private void comparePersonalGoalCardwithBookshelf (){
 
-        score+=PersonalGoalCard.CheckGoal(playerBookshelf);
+        score+= personalGoalCard.CheckGoal(playerBookshelf);
 
     }
 
@@ -119,6 +114,16 @@ public class Player {
     public void setListener(PropertyChangeListener listener) {
         this.listener = listener;
     }
+
+    public PersonalGoalCard getPersonalGoalCard() {
+        return personalGoalCard;
+    }
+
+    public void setPersonalGoalCard(PersonalGoalCard personalGoalCard) {
+        this.personalGoalCard = personalGoalCard;
+    }
+
+
 }
 
 

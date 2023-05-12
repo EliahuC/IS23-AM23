@@ -1,27 +1,35 @@
 package it.polimi.ingsw.Network.Server.TCP;
 
-import it.polimi.ingsw.Network.Messages.ClientToServer.ClientMessage;
-import it.polimi.ingsw.Network.Messages.Message;
-import it.polimi.ingsw.Network.Messages.ServerToClient.ErrorMessage;
-import it.polimi.ingsw.Network.Messages.ServerToClient.ServerMessage;
-import it.polimi.ingsw.Network.Messages.ServerToClient.StartingGameMessage;
-import it.polimi.ingsw.Network.Messages.ServerToClient.ValidMoveMessage;
-import it.polimi.ingsw.Network.Server.TCP.ServerConnectionToClient;
-import it.polimi.ingsw.Network.Server.TCP.VirtualView;
+import com.google.gson.Gson;
+import it.polimi.ingsw.Messages.ClientToServer.ClientMessage;
+import it.polimi.ingsw.Messages.Message;
+import it.polimi.ingsw.Messages.ServerToClient.ErrorMessage;
+import it.polimi.ingsw.Messages.ServerToClient.ServerMessage;
+import it.polimi.ingsw.Messages.ServerToClient.StartingGameMessage;
+import it.polimi.ingsw.Messages.ServerToClient.ValidMoveMessage;
+import it.polimi.ingsw.Savings;
 import it.polimi.ingsw.controller.ControllerCoordinator;
 import it.polimi.ingsw.model.player.Player;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 
 public class Lobby {
+
     private final Integer NumPlayersLobby;
     private final ArrayList<ServerConnectionToClient> connections;
     private final ControllerCoordinator controllerCoordinator;
     private final ArrayList<String> joinedUsers;
     private Boolean startedGame=false;
     private Boolean fullLobby=false;
-    public Lobby(Integer numPlayersLobby){
+    private String saveFilePath="c/Program Files (x86)/GitHub/IS23-AM23/SavedGames/";
+    private final Integer idLobby;
+    public Lobby(Integer numPlayersLobby,Integer ID){
         this.NumPlayersLobby=numPlayersLobby;
+        this.idLobby=ID;
         connections=new ArrayList<>();
         this.joinedUsers=new ArrayList<>();
         this.controllerCoordinator=new ControllerCoordinator();
@@ -46,7 +54,7 @@ public class Lobby {
             if(p.getNickName().equals(message.getNickname()))
             {
                 ErrorMessage errorMessage= new ErrorMessage();
-                errorMessage.addReturnMessage("The player is disconnected from the game, please log in first.");
+                errorMessage.setReturnMessage("The player is disconnected from the game, please log in first.");
                 return errorMessage;
             }
         }
@@ -57,8 +65,39 @@ public class Lobby {
             }
             return new ErrorMessage();
         }
-        return controllerCoordinator.setMessage(message);
+        ValidMoveMessage returnMessage= (ValidMoveMessage) controllerCoordinator.setMessage(message);
+        if(returnMessage.getCategory()== Message.MessageCategory.RETURN_MESSAGE){
+            saveGame(returnMessage);
+        }
+        if(returnMessage.getCategory()== Message.MessageCategory.END_GAME_MESSAGE){
+            deleteFile();
+        }
+        return returnMessage;
     }
+
+    private void deleteFile() {
+        File file=new File(saveFilePath);
+        if(!file.exists())
+            System.out.println("There isn't any saved game");
+        boolean success = file.delete();
+        if(!success)
+            throw new IllegalArgumentException("Delete failed");
+        System.out.println("File correctly deleted");
+    }
+
+    private void saveGame(ValidMoveMessage returnMessage) {
+        Gson gson=new Gson();
+        if(returnMessage.getSavings()==null) return;
+        try{
+            Savings savings=new Savings(this);
+            savings.saveGame(returnMessage.getSavings());
+            Files.writeString(Path.of("./" +saveFilePath) ,gson.toJson(savings) );
+            System.out.println("The game is saved");
+        }catch (IOException e){
+            throw new RuntimeException(e);
+        }
+    }
+
     public synchronized void logoutFromLobby(String s){
         joinedUsers.remove(s);
         controllerCoordinator.getConnectedPlayers().remove(s);
@@ -67,7 +106,14 @@ public class Lobby {
     public synchronized void startGameLobby(){
         startedGame=true;
         controllerCoordinator.startGame();
+        setSavesOfTheLobby();
         sendMessageToAllTheLobby(new StartingGameMessage());
+    }
+
+    private void setSavesOfTheLobby() {
+        String fileName="Lobby"+String.valueOf(idLobby)+".txt";
+        saveFilePath=saveFilePath+fileName;
+        File myObj=new File(saveFilePath);
     }
 
     public synchronized Boolean getStartedGame() {
