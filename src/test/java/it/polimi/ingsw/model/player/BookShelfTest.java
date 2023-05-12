@@ -1,0 +1,176 @@
+package it.polimi.ingsw.model.player;
+
+import it.polimi.ingsw.model.board.ItemTile;
+import junit.framework.TestCase;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+public class BookShelfTest extends TestCase {
+
+    public void testAdjacentScore_FIRST(){          //EXAMPLE 1, PROVIDED BY RULEBOOK FILE
+        BookShelf B = new BookShelf();
+        B.setTile(0,0,new ItemTile("PLANTS"));
+        B.setTile(0,1,new ItemTile("PLANTS"));
+        B.setTile(0,2,new ItemTile("FRAMES"));
+        B.setTile(0,3,new ItemTile("GAMES"));
+        B.setTile(0,4,new ItemTile("CATS"));
+        B.setTile(1,0,new ItemTile("PLANTS"));
+        B.setTile(1,1,new ItemTile("PLANTS"));
+        B.setTile(1,2,new ItemTile("PLANTS"));
+        B.setTile(1,3,new ItemTile("PLANTS"));
+        B.setTile(1,4,new ItemTile("BOOKS"));
+        B.setTile(2,0,new ItemTile("FRAMES"));
+        B.setTile(2,1,new ItemTile("FRAMES"));
+        B.setTile(2,2,new ItemTile("PLANTS"));
+        B.setTile(2,3,new ItemTile("PLANTS"));
+        B.setTile(2,4,new ItemTile("BOOKS"));
+        B.setTile(3,0,new ItemTile("FRAMES"));
+        B.setTile(3,1,new ItemTile("GAMES"));
+        B.setTile(3,2,new ItemTile("GAMES"));
+        B.setTile(3,3,new ItemTile("GAMES"));
+        B.setTile(3,4,new ItemTile("BOOKS"));
+        B.setTile(4,0,new ItemTile("FRAMES"));
+        B.setTile(4,1,new ItemTile("TROPHIES"));
+        B.setTile(4,2,new ItemTile("CATS"));
+        B.setTile(4,3,new ItemTile("CATS"));
+        B.setTile(4,4,new ItemTile("CATS"));
+        B.setTile(5,0,new ItemTile("TROPHIES"));
+        B.setTile(5,1,new ItemTile("TROPHIES"));
+        B.setTile(5,2,new ItemTile("TROPHIES"));
+        B.setTile(5,3,new ItemTile("CATS"));
+        B.setTile(5,4,new ItemTile("CATS"));
+        B.AdjacentScore();
+        assertEquals(23,B.getPoints());
+    }
+    public void testAdjacentScore_SECOND(){             //EXAMPLE 2 WITHOUT ANY ADJACENT TILES
+        BookShelf B = new BookShelf();
+        B.setTile(0,0,new ItemTile("FRAMES"));
+        B.setTile(0,1,new ItemTile("GAMES"));
+        B.setTile(0,2,new ItemTile("TROPHIES"));
+        B.setTile(0,3,new ItemTile("PLANTS"));
+        B.setTile(0,4,new ItemTile("BOOKS"));
+        B.setTile(1,0,new ItemTile("GAMES"));
+        B.setTile(1,1,new ItemTile("BOOKS"));
+        B.setTile(1,2,new ItemTile("GAMES"));
+        B.setTile(1,3,new ItemTile("TROPHIES"));
+        B.setTile(1,4,new ItemTile("CATS"));
+        B.setTile(2,0,new ItemTile("PLANTS"));
+        B.setTile(2,1,new ItemTile("PLANTS"));
+        B.setTile(2,2,new ItemTile("BOOKS"));
+        B.setTile(2,3,new ItemTile("FRAMES"));
+        B.setTile(2,4,new ItemTile("GAMES"));
+        B.setTile(3,0,new ItemTile("TROPHIES"));
+        B.setTile(3,1,new ItemTile("BOOKS"));
+        B.setTile(3,2,new ItemTile("PLANTS"));
+        B.setTile(3,3,new ItemTile("GAMES"));
+        B.setTile(3,4,new ItemTile("FRAMES"));
+        B.setTile(4,0,new ItemTile("BOOKS"));
+        B.setTile(4,1,new ItemTile("PLANTS"));
+        B.setTile(4,2,new ItemTile("TROPHIES"));
+        B.setTile(4,3,new ItemTile("FRAMES"));
+        B.setTile(4,4,new ItemTile("GAMES"));
+        B.setTile(5,0,new ItemTile("FRAMES"));
+        B.setTile(5,1,new ItemTile("PLANTS"));
+        B.setTile(5,2,new ItemTile("GAMES"));
+        B.setTile(5,3,new ItemTile("TROPHIES"));
+        B.setTile(5,4,new ItemTile("GAMES"));
+        B.AdjacentScore();
+        assertEquals(0,B.getPoints());
+    }
+    public void testAdjacentScore_THIRD(){          //EXAMPLE 3
+        BookShelf B = new BookShelf();
+        B.setTile(0,0,new ItemTile("GAMES"));
+        B.setTile(0,1,new ItemTile("GAMES"));
+        B.setTile(0,2,new ItemTile("GAMES"));
+        B.setTile(0,3,new ItemTile("TROPHIES"));
+        B.setTile(0,4,new ItemTile("CATS"));
+        B.setTile(1,0,new ItemTile("BOOKS"));
+        B.setTile(1,1,new ItemTile("BOOKS"));
+        B.setTile(1,2,new ItemTile("GAMES"));
+        B.setTile(1,3,new ItemTile("GAMES"));
+        B.setTile(1,4,new ItemTile("BOOKS"));
+        B.setTile(2,0,new ItemTile("BOOKS"));
+        B.setTile(2,1,new ItemTile("PLANTS"));
+        B.setTile(2,2,new ItemTile("GAMES"));
+        B.setTile(2,3,new ItemTile("FRAMES"));
+        B.setTile(2,4,new ItemTile("TROPHIES"));
+        B.setTile(3,0,new ItemTile("BOOKS"));
+        B.setTile(3,1,new ItemTile("BOOKS"));
+        B.setTile(3,2,new ItemTile("PLANTS"));
+        B.setTile(3,3,new ItemTile("TROPHIES"));
+        B.setTile(3,4,new ItemTile("CATS"));
+        B.setTile(4,0,new ItemTile("CATS"));
+        B.setTile(4,1,new ItemTile("FRAMES"));
+        B.setTile(4,2,new ItemTile("TROPHIES"));
+        B.setTile(4,3,new ItemTile("GAMES"));
+        B.setTile(4,4,new ItemTile("BOOKS"));
+        B.setTile(5,0,new ItemTile("TROPHIES"));
+        B.setTile(5,1,new ItemTile("PLANTS"));
+        B.setTile(5,2,new ItemTile("GAMES"));
+        B.setTile(5,3,new ItemTile("GAMES"));
+        B.setTile(5,4,new ItemTile("GAMES"));
+        B.AdjacentScore();
+        assertEquals(16,B.getPoints());
+    }
+    public void testAdjacentScore_FOURTH(){         //EXAMPLE 4
+        BookShelf B = new BookShelf();
+        B.setTile(0,0,new ItemTile("GAMES"));
+        B.setTile(0,1,new ItemTile("TROPHIES"));
+        B.setTile(0,2,new ItemTile("GAMES"));
+        B.setTile(0,3,new ItemTile("PLANTS"));
+        B.setTile(0,4,new ItemTile("PLANTS"));
+        B.setTile(1,0,new ItemTile("PLANTS"));
+        B.setTile(1,1,new ItemTile("GAMES"));
+        B.setTile(1,2,new ItemTile("GAMES"));
+        B.setTile(1,3,new ItemTile("PLANTS"));
+        B.setTile(1,4,new ItemTile("PLANTS"));
+        B.setTile(2,0,new ItemTile("BOOKS"));
+        B.setTile(2,1,new ItemTile("TROPHIES"));
+        B.setTile(2,2,new ItemTile("PLANTS"));
+        B.setTile(2,3,new ItemTile("FRAMES"));
+        B.setTile(2,4,new ItemTile("TROPHIES"));
+        B.setTile(3,0,new ItemTile("CATS"));
+        B.setTile(3,1,new ItemTile("FRAMES"));
+        B.setTile(3,2,new ItemTile("FRAMES"));
+        B.setTile(3,3,new ItemTile("TROPHIES"));
+        B.setTile(3,4,new ItemTile("PLANTS"));
+        B.setTile(4,0,new ItemTile("PLANTS"));
+        B.setTile(4,1,new ItemTile("BOOKS"));
+        B.setTile(4,2,new ItemTile("TROPHIES"));
+        B.setTile(4,3,new ItemTile("TROPHIES"));
+        B.setTile(4,4,new ItemTile("PLANTS"));
+        B.setTile(5,0,new ItemTile("TROPHIES"));
+        B.setTile(5,1,new ItemTile("CATS"));
+        B.setTile(5,2,new ItemTile("TROPHIES"));
+        B.setTile(5,3,new ItemTile("BOOKS"));
+        B.setTile(5,4,new ItemTile("BOOKS"));
+        B.AdjacentScore();
+        assertEquals(8,B.getPoints());
+    }
+    public void testAdjacentScore_FIFTH(){         //EXAMPLE 5
+        BookShelf B = new BookShelf();
+        B.setTile(0, 0, new ItemTile("FRAMES"));
+        B.setTile(1, 0, new ItemTile("FRAMES"));
+        B.setTile(2, 0, new ItemTile("FRAMES"));
+        B.setTile(3, 0, new ItemTile("FRAMES"));
+        B.setTile(4, 0, new ItemTile("TROPHIES"));
+        B.setTile(5, 0, new ItemTile("TROPHIES"));
+        B.setTile(5, 1, new ItemTile("CATS"));
+        B.setTile(5, 2, new ItemTile("CATS"));
+        B.setTile(5, 3, new ItemTile("CATS"));
+        B.setTile(5, 4, new ItemTile("CATS"));
+        B.setTile(4, 4, new ItemTile("CATS"));
+        B.setTile(1, 4, new ItemTile("GAMES"));
+        B.setTile(2, 4, new ItemTile("GAMES"));
+        B.setTile(3, 4, new ItemTile("GAMES"));
+        B.setTile(0, 1, new ItemTile("BOOKS"));
+        B.setTile(0, 2, new ItemTile("BOOKS"));
+        B.setTile(0, 3, new ItemTile("CATS"));
+        B.setTile(0, 4, new ItemTile("CATS"));
+        B.setTile(1, 2, new ItemTile("BOOKS"));
+        B.setTile(2, 2, new ItemTile("BOOKS"));
+        B.setTile(3, 2, new ItemTile("BOOKS"));
+        B.AdjacentScore();
+        assertEquals(15,B.getPoints());
+    }
+}
