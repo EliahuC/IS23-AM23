@@ -6,6 +6,9 @@ import it.polimi.ingsw.model.player.BookShelf;
 
 import java.util.HashSet;
 
+/**
+ * @author Giovanni Di Lorenzo
+ */
 public class CommonGoalCard8 extends CommonGoalCard implements CheckCommonGoalCard {
     private final static int numRowsToAchieve=4;
     private static final int numDifferentCategoriesAllowed=3;

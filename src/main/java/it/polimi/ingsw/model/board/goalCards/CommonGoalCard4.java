@@ -7,6 +7,10 @@ import it.polimi.ingsw.model.player.BookShelf;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Giovanni Di Lorenzo
+ */
+
 public class CommonGoalCard4 extends CommonGoalCard implements CheckCommonGoalCard {
     private final List<ItemTile> validGroups = new ArrayList<>();
     private int counterCats = 0;

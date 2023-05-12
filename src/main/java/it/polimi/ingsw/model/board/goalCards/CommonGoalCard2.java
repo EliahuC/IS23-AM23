@@ -8,6 +8,11 @@ public class CommonGoalCard2 extends CommonGoalCard implements CheckCommonGoalCa
     public CommonGoalCard2(Launcher L){
         this.L = L;
     }
+
+    /**
+     * @author Eliahu Cohen and Giovanni di Lorenzo
+     * @param bs bookshelf of the player to check the goal
+     */
     public void checkGoal(BookShelf bs) {
         if (NoItemsNull(bs)) {
             if ((bs.getTile(0, 0).getCategory() == bs.getTile(0, 4).getCategory()
@@ -16,6 +21,12 @@ public class CommonGoalCard2 extends CommonGoalCard implements CheckCommonGoalCa
                 increaseNumCompleted();
         }
     }
+
+    /**
+     * @author Giovanni Di Lorenzo
+     * @param bs
+     * @return
+     */
     private boolean NoItemsNull(BookShelf bs){
         if((bs.getTile(0,0)!=null) && (bs.getTile(0,4)!=null) &&
                 (bs.getTile(5,0)!=null) && (bs.getTile(5,4) != null))

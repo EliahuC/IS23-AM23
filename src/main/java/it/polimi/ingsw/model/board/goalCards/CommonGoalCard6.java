@@ -9,7 +9,11 @@
         public CommonGoalCard6(Launcher L){
             this.L = L;
         }
-        //METODO ALTERNATIVO STILE C
+
+        /**
+         * @author Eliahu Cohen
+         * @param bs bookshelf of the player to check the goal
+         */
         public void checkGoal(BookShelf bs) {
             int c1 = 0, c2 = 0, c3 = 0, c4 = 0, c5 = 0, c6 = 0;
             for (int i = 0; i < BookShelf.getMAX_Row(); i++) {

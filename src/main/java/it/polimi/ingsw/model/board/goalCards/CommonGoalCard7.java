@@ -4,6 +4,10 @@ import it.polimi.ingsw.Launcher;
 import it.polimi.ingsw.model.board.ItemTile;
 import it.polimi.ingsw.model.player.BookShelf;
 
+/**
+ * @author Eliahu Cohen and Giovanni di Lorenzo
+ */
+
 public class CommonGoalCard7 extends CommonGoalCard implements CheckCommonGoalCard {
     private final Launcher L;
 

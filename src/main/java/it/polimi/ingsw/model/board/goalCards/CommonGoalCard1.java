@@ -16,6 +16,10 @@ public class CommonGoalCard1 extends CommonGoalCard implements CheckCommonGoalCa
         this.L = L;
     }
 
+    /**
+     * @author Giovanni Di Lorenzo
+     * @param bs bookshelf of the player to check the goal
+     */
     @Override
     //Six groups of 2 adjacent tiles.
     public void checkGoal(BookShelf bs) {
