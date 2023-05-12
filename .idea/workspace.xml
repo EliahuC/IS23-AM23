@@ -4,13 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1a09081d-0fed-4085-87b1-329ed1328de2" name="Changes" comment="fixino">
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/Network/Server/RMI/RMIparams.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/Network/Server/RMI/RMIServerMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/Network/Server/RMI/RMIServerMain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/Network/Server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/Network/Server/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/Network/Server/TCP/ServerConnectionToClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/Network/Server/TCP/ServerConnectionToClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/Network/Server/TCP/TCPParams.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/Network/Server/TCP/TCPParams.java" afterDir="false" />
-    </list>
+    <list default="true" id="1a09081d-0fed-4085-87b1-329ed1328de2" name="Changes" comment="fixino" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -135,7 +129,7 @@
       <workItem from="1683879534448" duration="312000" />
       <workItem from="1683879896451" duration="58000" />
       <workItem from="1683879989944" duration="690000" />
-      <workItem from="1683885596490" duration="1052000" />
+      <workItem from="1683885596490" duration="1086000" />
     </task>
     <task id="LOCAL-00001" summary="fixino">
       <created>1683879294038</created>
