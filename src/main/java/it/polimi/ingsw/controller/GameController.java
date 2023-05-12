@@ -58,7 +58,7 @@ public class GameController {
              }
              case ORDER -> {
                  order.addAll(m.getMessageMove().getMove());
-                 if (!checkOrder() && !checkNumbers())
+                 if (!checkOrder() || !checkNumbers())
                      return sendErrorMessage();
                  GameSavings savings=playMove();
                  message.setSavings(savings);
