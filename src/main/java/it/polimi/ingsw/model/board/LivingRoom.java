@@ -11,6 +11,11 @@ import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * @author Eliahu Cohen
+ * class that rapresent the game board
+ */
+
 public class LivingRoom {
     public static final int MAX_Row=9;
     public static final int MAX_Column=9;
@@ -54,6 +59,10 @@ public class LivingRoom {
         //Start(L.getNumPlayers());
     }
 
+    /**
+     * @author Eliahu Cohen
+     * set the unavailable spaces
+     */
     private void SetUnavailable() {
         //TOP LEFT
        setUTopLeft();
@@ -106,6 +115,11 @@ public class LivingRoom {
             }
         }
     }
+
+    /**
+     * @author Eliahu Cohen
+     * method that sets the 3 player spaces
+     */
     private void SetThree() {
         Board[2][2].setCategory(BoardToken.boardTokenCategory.THREE);
         Board[2][6].setCategory(BoardToken.boardTokenCategory.THREE);
@@ -117,6 +131,10 @@ public class LivingRoom {
         Board[8][5].setCategory(BoardToken.boardTokenCategory.THREE);
     }
 
+    /**
+     * @author Eliahu Cohen
+     * method that sets the 4 player spaces
+     */
     private void SetFour() {
         Board[0][4].setCategory(BoardToken.boardTokenCategory.FOUR);
         Board[1][5].setCategory(BoardToken.boardTokenCategory.FOUR);
@@ -128,6 +146,10 @@ public class LivingRoom {
         Board[8][4].setCategory(BoardToken.boardTokenCategory.FOUR);
     }
 
+    /**
+     * @author Eliahu Cohen
+     * method that create the 12 common goal cards
+     */
     private void SetCommonGoalCard(){
         CommonGoalCard.add(new CommonGoalCard1(L));
         CommonGoalCard.add(new CommonGoalCard2(L));
@@ -144,6 +166,11 @@ public class LivingRoom {
 
     }
 
+    /**
+     * @author Eliahu Cohen
+     * @param numPlayers that play the game
+     * method that stars the living room based on the number of players
+     */
     public void Start(int numPlayers) {
         for (int i = 0; i < MAX_Row; i++) {
             for (int j = 0; j < MAX_Column; j++) {
@@ -156,6 +183,11 @@ public class LivingRoom {
         commonGoalCard2 = CommonGoalCard.remove(randIndex);
     }
 
+    /**
+     * @author Eliahu Cohen
+     * @param bs player bookshelf
+     * @return the score of the player after the check of the common goal cards
+     */
     public int checkCG(BookShelf bs){
         int score=0;
         commonGoalCard1.checkGoal(bs);
@@ -165,7 +197,10 @@ public class LivingRoom {
        return score;
     }
 
-
+    /**
+     * @author Eliahu Cohen
+     * method that restores the tiles on the living room
+     */
     public void restore() {
         if (gameChecker.isRestorable(Board)) {
             for (int i = 0; i < MAX_Row; i++) {
@@ -178,7 +213,12 @@ public class LivingRoom {
         }
     }
 
-
+    /**
+     * @author Eliahu Cohen
+     * @param i row
+     * @param j column
+     * @return board
+     */
     public BoardToken[][] putTile(int i, int j) {
         switch (L.getNumPlayers()) {
             case 2 -> {
@@ -201,6 +241,11 @@ public class LivingRoom {
         return bag;
     }
 
+    /**
+     * @author Eliahu Cohen
+     * @param requestedTiles tiles that the player want to extract from the living room
+     * @return the tiles
+     */
     public ArrayList<ItemTile> getTiles(ArrayList<Integer> requestedTiles) {
         PropertyChangeEvent evt = new PropertyChangeEvent(
                 this,
