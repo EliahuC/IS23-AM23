@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1a09081d-0fed-4085-87b1-329ed1328de2" name="Changes" comment="fixino">
-      <change afterPath="$PROJECT_DIR$/target/classes/it/polimi/ingsw/view/GUI.class" afterDir="false" />
-    </list>
+    <list default="true" id="1a09081d-0fed-4085-87b1-329ed1328de2" name="Changes" comment="fixino" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -123,7 +121,7 @@
       <workItem from="1683879227666" duration="71000" />
       <workItem from="1683879534448" duration="312000" />
       <workItem from="1683879896451" duration="58000" />
-      <workItem from="1683879989944" duration="665000" />
+      <workItem from="1683879989944" duration="690000" />
     </task>
     <task id="LOCAL-00001" summary="fixino">
       <created>1683879294038</created>
@@ -160,7 +158,21 @@
       <option name="project" value="LOCAL" />
       <updated>1683880644925</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="fixino">
+      <created>1683880658453</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1683880658453</updated>
+    </task>
+    <task id="LOCAL-00007" summary="fixino">
+      <created>1683880667168</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1683880667168</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
