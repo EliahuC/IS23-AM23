@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -42,8 +43,8 @@ public class GUI extends Application{
         window.setTitle("My Shelfie");
         window.show();
 
-        // Image Icon = new Image("Icon 50x50px.png");
-        //window.getIcons().add(Icon);
-        //window.setFullScreen(true);
+         Image Icon = new Image("Icon 50x50px.png");
+        window.getIcons().add(Icon);
+        window.setFullScreen(true);
     }
 }
