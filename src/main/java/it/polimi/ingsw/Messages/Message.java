@@ -15,19 +15,23 @@ public abstract class Message {
         this.nickname=n;
     }
     public enum MessageCategory{
-        PING,
+        PINGTOSERVER,
+        PINGFROMSERVER,
         COORDINATES,
         COLUMN,
         ORDER,
         BOOKSHELF,
         LIVINGROOM,
-        RETURN_MESSAGE,
+        LAST_TURN_MESSAGE,
+        VALID_MESSAGE,
+        STARTING_GAME_MESSAGE,
         CREATE_LOBBY,
         SUCCESS,
         START_GAME,
         ENTER_LOBBY,
         LOGOUT_LOBBY,
         END_GAME_MESSAGE,
+        RETURN_MESSAGE,
         WARNING;
 
     }

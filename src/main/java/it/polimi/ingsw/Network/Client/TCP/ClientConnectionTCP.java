@@ -4,9 +4,10 @@ import com.google.gson.Gson;
 import it.polimi.ingsw.Messages.ClientToServer.ClientMessage;
 import it.polimi.ingsw.Messages.ClientToServer.PingToServer;
 import it.polimi.ingsw.Messages.Message;
+import it.polimi.ingsw.Messages.MoveDeserializer;
 import it.polimi.ingsw.Messages.ServerToClient.ServerMessage;
 import it.polimi.ingsw.Network.Client.ConnectionClient;
-import it.polimi.ingsw.Network.Client.MoveSerializer;
+import it.polimi.ingsw.Messages.MoveSerializer;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,7 +15,7 @@ import java.net.Socket;
 import java.util.Scanner;
 
 public class ClientConnectionTCP extends ConnectionClient {
-    private MoveSerializer moveSerializer;
+
     private final Socket socket;
     private String IPAddress;
     private boolean clientIsActive;
@@ -47,7 +48,6 @@ public class ClientConnectionTCP extends ConnectionClient {
 
     public void setPlayerName(String playerName) {
         this.playerName = playerName;
-        this.moveSerializer=new MoveSerializer();
     }
 
     public void setAddress(String address) {
@@ -61,11 +61,11 @@ public class ClientConnectionTCP extends ConnectionClient {
         while(clientIsActive){
             try {
                 ServerMessage serverMessage = receiveMessage();
-                if (serverMessage.getCategory() != Message.MessageCategory.PING) {
+                if (serverMessage.getCategory() != Message.MessageCategory.PINGFROMSERVER) {
                     if (GUIisActive) {
                         //GUIEvent.recieveMessage(serverMessage);
                     } else; //CLIEvent.recieveMessage(serverMessage);
-                } else if(serverMessage.getCategory()== Message.MessageCategory.PING){
+                } else if(serverMessage.getCategory()== Message.MessageCategory.PINGFROMSERVER){
                     //System.out.println("Ping arrived");
                     sendPing();
                 }
@@ -84,7 +84,7 @@ public class ClientConnectionTCP extends ConnectionClient {
     public ServerMessage receiveMessage() throws IOException, ClassNotFoundException {
         String s=input.nextLine();
 
-        return  gson.fromJson(s,ServerMessage.class);
+        return (ServerMessage) MoveDeserializer.deserializeOutput(s);
     }
 
     private void notifyDisconnection() {

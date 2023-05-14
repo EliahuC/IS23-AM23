@@ -1,6 +1,8 @@
 package it.polimi.ingsw.Network.Server.TCP;
 
 
+import com.google.gson.Gson;
+import it.polimi.ingsw.Messages.ClientToServer.PingToServer;
 import it.polimi.ingsw.Network.Server.Server;
 
 import java.io.IOException;
@@ -28,10 +30,8 @@ public class TCPServerMain extends Server {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        showMessage("Server is started!");
-        Integer i=10;
-        String s=String.valueOf(port);
-        System.out.println(s);
+        showMessage("Server is started !");
+
         //Accettazione client
         while(true){
             Socket clientSocket = null;

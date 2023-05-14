@@ -5,7 +5,7 @@ import it.polimi.ingsw.GameSavings;
 public class ValidMoveMessage extends ServerMessage{
     private GameSavings savings=null;
     public ValidMoveMessage() {
-        super(MessageCategory.RETURN_MESSAGE);
+        super(MessageCategory.VALID_MESSAGE);
         setReturnMessage("The move that you made is valid");
     }
 

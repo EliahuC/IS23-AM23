@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import it.polimi.ingsw.Messages.ClientToServer.ClientMessage;
 import it.polimi.ingsw.Messages.ClientToServer.LobbyCreationMessage;
+import it.polimi.ingsw.Messages.MoveDeserializer;
 import it.polimi.ingsw.Messages.ServerToClient.ErrorMessage;
 import it.polimi.ingsw.Messages.ServerToClient.PingFromServer;
 import it.polimi.ingsw.Messages.ServerToClient.ServerMessage;
@@ -80,25 +81,21 @@ public class ServerConnectionToClient implements Runnable {
 
 
     public void receiveMessage() throws IOException, ClassNotFoundException {
-        Gson gson =new Gson();
         String s = input.nextLine();
-        //System.out.println(s);
-        ClientMessage message=null;
-        try{
-            Object obj = gson.fromJson(s, Object.class);
-            System.out.println(obj.toString());
-            message = gson.fromJson(s, ClientMessage.class);
-        }catch (JsonSyntaxException e){
-           // e.printStackTrace();
-           // return;
+        ClientMessage message;
+        try {
+            message = (ClientMessage) MoveDeserializer.deserializeOutput(s);
+        } catch (JsonSyntaxException e) {
+            e.printStackTrace();
+            return;
         }
 
-        if(message!=null)
+        if (message != null)
             messageParser(message);
     }
     private void messageParser(ClientMessage message){
         switch (message.getCategory()) {
-            case PING: {
+            case PINGTOSERVER: {
                 message.dumpPingMessage();
                 break;
             }

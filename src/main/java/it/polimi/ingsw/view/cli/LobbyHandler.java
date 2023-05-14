@@ -4,12 +4,9 @@ import it.polimi.ingsw.Messages.ClientToServer.ClientMessage;
 import it.polimi.ingsw.Messages.Message;
 import it.polimi.ingsw.Messages.ServerToClient.ServerMessage;
 import it.polimi.ingsw.Network.Client.ConnectionClient;
-import it.polimi.ingsw.Network.Client.MoveSerializer;
-import it.polimi.ingsw.Network.Client.TCP.ClientConnectionTCP;
-import it.polimi.ingsw.Network.Server.TCP.ServerConnectionToClient;
+import it.polimi.ingsw.Messages.MoveSerializer;
 
 import java.io.IOException;
-import java.net.Socket;
 import java.util.Objects;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;

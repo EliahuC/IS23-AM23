@@ -4,7 +4,7 @@ public class PingFromServer extends ServerMessage{
     private int pingCount;
 
     public PingFromServer(int pingCount) {
-        super(MessageCategory.PING);
+        super(MessageCategory.PINGFROMSERVER);
         this.pingCount=pingCount;
 
     }

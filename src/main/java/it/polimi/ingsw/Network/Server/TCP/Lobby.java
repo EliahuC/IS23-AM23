@@ -5,7 +5,7 @@ import it.polimi.ingsw.Messages.ClientToServer.ClientMessage;
 import it.polimi.ingsw.Messages.Message;
 import it.polimi.ingsw.Messages.ServerToClient.ErrorMessage;
 import it.polimi.ingsw.Messages.ServerToClient.ServerMessage;
-import it.polimi.ingsw.Messages.ServerToClient.StartingGameMessage;
+import it.polimi.ingsw.Messages.ServerToClient.GameIsStartingMessage;
 import it.polimi.ingsw.Messages.ServerToClient.ValidMoveMessage;
 import it.polimi.ingsw.Savings;
 import it.polimi.ingsw.controller.ControllerCoordinator;
@@ -66,7 +66,7 @@ public class Lobby {
             return new ErrorMessage();
         }
         ValidMoveMessage returnMessage= (ValidMoveMessage) controllerCoordinator.setMessage(message);
-        if(returnMessage.getCategory()== Message.MessageCategory.RETURN_MESSAGE){
+        if(returnMessage.getCategory()== Message.MessageCategory.VALID_MESSAGE){
             saveGame(returnMessage);
         }
         if(returnMessage.getCategory()== Message.MessageCategory.END_GAME_MESSAGE){
@@ -107,7 +107,7 @@ public class Lobby {
         startedGame=true;
         controllerCoordinator.startGame();
         setSavesOfTheLobby();
-        sendMessageToAllTheLobby(new StartingGameMessage());
+        sendMessageToAllTheLobby(new GameIsStartingMessage());
     }
 
     private void setSavesOfTheLobby() {

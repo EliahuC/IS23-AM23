@@ -1,0 +1,67 @@
+package it.polimi.ingsw.Messages;
+
+import com.google.gson.Gson;
+import it.polimi.ingsw.Messages.ClientToServer.*;
+import it.polimi.ingsw.Messages.ServerToClient.*;
+
+public class MoveDeserializer {
+
+   public static Message deserializeOutput(String s){
+        String[] tokens = s.toUpperCase().split(" ");
+        String[] tokens2= tokens[1].split(",");
+        Gson gson=new Gson();
+        switch (tokens2[0]){
+            case "PINGFROMSERVER":{
+                return gson.fromJson(s,PingFromServer.class);
+            }
+            case "COORDINATES":{
+               return gson.fromJson(s, CoordinatesMessage.class) ;
+            }
+            case "COLUMN":{
+                return gson.fromJson(s, ColumnMessage.class);
+            }
+            case "ORDER":{
+                return gson.fromJson(s, OrderMessage.class);
+            }
+            case "BOOKSHELF":{
+                return gson.fromJson(s, BookshelfMessage.class);
+            }
+            case "LIVINGROOM":{
+                return gson.fromJson(s, LivingRoomMessage.class);
+            }
+            case "VALID_MESSAGE":{
+                return gson.fromJson(s, ValidMoveMessage.class);
+            }
+            case "STARTING_GAME_MESSAGE":{
+                return gson.fromJson(s, GameIsStartingMessage.class);
+            }
+            case "LAST_TURN_MESSAGE":{
+                return gson.fromJson(s, LastTurnMessage.class);
+            }
+            case "CREATE_LOBBY":{
+                return gson.fromJson(s, LobbyCreationMessage.class);
+            }
+            case "SUCCESS":{
+                return gson.fromJson(s, SuccessMessage.class);
+            }
+            case "START_GAME":{
+                return gson.fromJson(s, StartGameMessage.class);
+            }
+            case "ENTER_LOBBY":{
+                return gson.fromJson(s, LobbyEntranceMessage.class);
+            }
+            case "LOGOUT_LOBBY":{
+                return gson.fromJson(s, LobbyLogoutMessage.class);
+            }
+            case "END_GAME_MESSAGE":{
+                return gson.fromJson(s, EndGameMessage.class);
+            }
+            case "WARNING":{
+                return gson.fromJson(s, ErrorMessage.class);
+            }
+        }
+        return null;
+    }
+
+
+}

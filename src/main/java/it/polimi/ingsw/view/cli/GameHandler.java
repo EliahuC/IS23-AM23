@@ -4,7 +4,7 @@ import it.polimi.ingsw.Messages.ClientToServer.ClientMessage;
 import it.polimi.ingsw.Messages.Message;
 import it.polimi.ingsw.Messages.ServerToClient.ServerMessage;
 import it.polimi.ingsw.Network.Client.ConnectionClient;
-import it.polimi.ingsw.Network.Client.MoveSerializer;
+import it.polimi.ingsw.Messages.MoveSerializer;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -12,11 +12,10 @@ import java.util.Scanner;
 
 public class GameHandler {
     private ConnectionClient connectionClient;
-    private MoveSerializer moveSerializer;
+
 
     public GameHandler(ConnectionClient connectionClient) {
         this.connectionClient = connectionClient;
-        moveSerializer = new MoveSerializer();
     }
 
     public void start(){
@@ -46,7 +45,7 @@ public class GameHandler {
     }
 
     private void showBoard(){
-        ServerMessage serverMessage = new ServerMessage(Message.MessageCategory.PING);
+        ServerMessage serverMessage = new ServerMessage(Message.MessageCategory.PINGFROMSERVER);
         try {
             serverMessage = connectionClient.receiveMessage();
         }catch (IOException | ClassNotFoundException e){};
@@ -66,7 +65,7 @@ public class GameHandler {
             if(Objects.equals(command.toUpperCase(), "/GOALS")){
                 showGoals("Living Board");
             }
-            Message message = moveSerializer.serializeInput(command);
+            Message message = MoveSerializer.serializeInput(command);
             connectionClient.sendMessage((ClientMessage) message);
             try {
                 serverMessage = connectionClient.receiveMessage();
@@ -117,7 +116,7 @@ public class GameHandler {
             if(Objects.equals(command.toUpperCase(), "/GOALS")){
                 showGoals("BookshelfOrder");
             }
-            Message message = moveSerializer.serializeInput(command);
+            Message message = MoveSerializer.serializeInput(command);
             connectionClient.sendMessage((ClientMessage) message);
             //if(il comando è stato scritto correttamente) Non so se esiste il controllo on server
             break;
@@ -135,7 +134,7 @@ public class GameHandler {
             if(Objects.equals(command.toUpperCase(), "/GOALS")){
                 showGoals("BookshelfColumn");
             }
-            Message message = moveSerializer.serializeInput(command);
+            Message message = MoveSerializer.serializeInput(command);
             connectionClient.sendMessage((ClientMessage) message);
             //if(la colonna scelta non è piena) Non so se sia compreso in un messaggio.
             break;

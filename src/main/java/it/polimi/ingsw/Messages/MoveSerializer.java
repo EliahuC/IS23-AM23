@@ -1,13 +1,12 @@
-package it.polimi.ingsw.Network.Client;
+package it.polimi.ingsw.Messages;
 
 import it.polimi.ingsw.CLICommands.CLICommandList;
 import it.polimi.ingsw.Messages.ClientToServer.*;
 import it.polimi.ingsw.Messages.ClientToServer.PossibleMoves.Move_SelectColumn;
 import it.polimi.ingsw.Messages.ClientToServer.PossibleMoves.Move_SelectOrder;
 import it.polimi.ingsw.Messages.ClientToServer.PossibleMoves.Move_SelectTiles;
-import it.polimi.ingsw.Messages.Message;
 import it.polimi.ingsw.Messages.ServerToClient.ErrorMessage;
-import it.polimi.ingsw.Messages.ServerToClient.StartingGameMessage;
+import it.polimi.ingsw.Messages.ServerToClient.GameIsStartingMessage;
 import it.polimi.ingsw.Printer;
 
 import java.util.ArrayList;
@@ -15,21 +14,19 @@ import java.util.ArrayList;
 public class MoveSerializer implements Printer {
 
 
-    public MoveSerializer(){
 
-    }
-    public Message serializeInput(String s){
+    public static Message serializeInput(String s){
 
         return convertCommandToMove(s);
     }
 
-    private Message convertCommandToMove(String string) {
+    private static Message convertCommandToMove(String string) {
         String[] tokens = string.toUpperCase().split(" ");
         return convertCommandToMove(tokens);
     }
 
 
-    private Message convertCommandToMove(String[] Command) {
+    private static Message convertCommandToMove(String[] Command) {
       switch (checkCommand(Command[0])){
           case CREATE_LOBBY -> {
               if((Integer.parseInt(Command[2])<5)||(Integer.parseInt(Command[2])>1)){
@@ -48,7 +45,7 @@ public class MoveSerializer implements Printer {
               return m;
           }
           case START_GAME -> {
-              Message m=new StartingGameMessage();
+              Message m=new GameIsStartingMessage();
               return m;
           }
           case SELECT_TILES -> {
@@ -101,7 +98,7 @@ public class MoveSerializer implements Printer {
       return null;
     }
 
-    private Message invalidCommand() {
+    private static Message invalidCommand() {
        ErrorMessage e=new ErrorMessage();
        e.setReturnMessage("The command isn't valid" +
                           "Command List: "+ CLICommandList.getCommands());
@@ -113,7 +110,7 @@ public class MoveSerializer implements Printer {
     }
 
 
-    private MoveCategory checkCommand(String s){
+    private static MoveCategory checkCommand(String s){
         switch(s){
             case "/START" -> {
                 return MoveCategory.START_GAME;

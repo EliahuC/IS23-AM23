@@ -3,6 +3,7 @@ package it.polimi.ingsw.Network.Client;
 import com.google.gson.Gson;
 import it.polimi.ingsw.CLICommands.CLICommandList;
 import it.polimi.ingsw.Messages.Message;
+import it.polimi.ingsw.Messages.MoveSerializer;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
