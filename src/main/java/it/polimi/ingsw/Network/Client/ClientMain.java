@@ -4,6 +4,7 @@ import it.polimi.ingsw.Network.Client.RMI.ClientRMIMain;
 import it.polimi.ingsw.Network.Client.TCP.ClientConnectionTCP;
 import it.polimi.ingsw.Printer;
 import it.polimi.ingsw.view.*;
+import it.polimi.ingsw.view.cli.CLI;
 
 import java.io.IOException;
 import java.net.InetAddress;
@@ -19,7 +20,7 @@ public class ClientMain implements Printer {
     public static void main(String[] args) throws IOException {
         argsParser(args);
         new Thread(view).start();
-        new Thread(connectionClient).start();
+        //new Thread(connectionClient).start();
     }
 
     private static void argsParser(String[] args) throws IOException {
@@ -30,7 +31,7 @@ public class ClientMain implements Printer {
            // case "--GUI" -> view = new GUI();
             default -> System.out.println("View command isn't valid");
         }
-        temporaryStorage=args[1];
+        /*temporaryStorage=args[1];
         temporaryStorage=temporaryStorage.toUpperCase();
         switch (temporaryStorage){
             case "--RMI"-> connectionClient=new ClientRMIMain();
@@ -39,7 +40,7 @@ public class ClientMain implements Printer {
                 connectionClient=new ClientConnectionTCP(socket);
             }
             default -> System.out.println("Communication command isn't valid");
-        }
+        }*/
 
 
     }

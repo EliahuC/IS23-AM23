@@ -30,7 +30,7 @@ public class TCPServerMain extends Server {
         }
         showMessage("Server is started!");
         Integer i=10;
-        String s="sium"+String.valueOf(i);
+        String s=String.valueOf(port);
         System.out.println(s);
         //Accettazione client
         while(true){

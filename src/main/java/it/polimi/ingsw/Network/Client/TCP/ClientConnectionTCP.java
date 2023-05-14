@@ -18,6 +18,11 @@ public class ClientConnectionTCP extends ConnectionClient {
     private final Socket socket;
     private String IPAddress;
     private boolean clientIsActive;
+
+    public String getPlayerName() {
+        return playerName;
+    }
+
     private String playerName;
     private Scanner input;
     private PrintWriter output;
@@ -61,7 +66,7 @@ public class ClientConnectionTCP extends ConnectionClient {
                         //GUIEvent.recieveMessage(serverMessage);
                     } else; //CLIEvent.recieveMessage(serverMessage);
                 } else if(serverMessage.getCategory()== Message.MessageCategory.PING){
-                    System.out.println("Ping arrived");
+                    //System.out.println("Ping arrived");
                     sendPing();
                 }
             } catch (IOException e){
@@ -76,7 +81,7 @@ public class ClientConnectionTCP extends ConnectionClient {
 
     }
 
-    private ServerMessage receiveMessage() throws IOException, ClassNotFoundException {
+    public ServerMessage receiveMessage() throws IOException, ClassNotFoundException {
         String s=input.nextLine();
 
         return  gson.fromJson(s,ServerMessage.class);
@@ -97,7 +102,7 @@ public class ClientConnectionTCP extends ConnectionClient {
         }
         clientIsActive = false;
     }
-    private void sendMessage(ClientMessage message){
+    public void sendMessage(ClientMessage message){
         String m=gson.toJson(message,ClientMessage.class);
         //       output.reset();
         output.println(m);

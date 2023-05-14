@@ -154,7 +154,7 @@ public class ServerConnectionToClient implements Runnable {
     private void nickNameAlreadyUsed(ClientMessage message) {
         if (lobby.getJoinedUsers().contains(message.getNickname())) {
             ErrorMessage errorMessage = new ErrorMessage();
-            errorMessage.setReturnMessage("Nickname already used in the lobby, please choose an other nickname");
+            errorMessage.setReturnMessage("Sorry, that nickname is already used. Please, insert a new one using again the command.\\n");
             sendMessage(errorMessage);
 
         }
@@ -186,7 +186,9 @@ public class ServerConnectionToClient implements Runnable {
     private void noLobbyInServer(ClientMessage message) {
         if (lobbies.size()==0){
             ErrorMessage errorMessage =new ErrorMessage();
-            errorMessage.setReturnMessage("There isn't any lobby, please create yours");
+            errorMessage.setReturnMessage("There is no available lobby, create a new one using the command:\n" +
+                    "/CREATE_LOBBY <your nickname> <number of players>\n" +
+                    "Remember that the number of players can only be 2, 3 or 4!");
             sendMessage(errorMessage);
             return;
         }
