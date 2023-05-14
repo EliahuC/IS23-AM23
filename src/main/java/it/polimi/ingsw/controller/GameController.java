@@ -14,6 +14,10 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * @author Eliahu Cohen
+ * Controller that make the changes on the model
+ */
 public class GameController {
      private final Game game;
      private final Launcher launcher;
@@ -33,13 +37,20 @@ public class GameController {
 
      }
 
-
+    /**
+     * @author Eliahu Cohen
+     * method that starts the game
+     */
      public synchronized void startGame(){
          startedGame=true;
          game.startGame();
      }
 
-
+    /**
+     * @author Eliahu Cohen
+     * @param m message from the client
+     * @return message to send to the client to confirm the success of his move/an error
+     */
      public synchronized Message readMessage(ClientMessage m){
          ValidMoveMessage message=new ValidMoveMessage();
          if(!(Objects.equals(m.getNickname(), game.getCurrPlaying())))
@@ -67,6 +78,10 @@ public class GameController {
          return message;
      }
 
+    /**
+     * @author Eliahu Cohen
+     * @return true if the order command that the client sent is ok
+     */
     private boolean checkNumbers() {
          for(int i=0;i<order.size();i++){
              if(order.get(i)>3 || order.get(i)<1) return false;
@@ -74,23 +89,41 @@ public class GameController {
          return true;
     }
 
+    /**
+     * @author Eliahu Cohen
+     * @return true if the number of tiles i want to order is == number of tiles extracted from the living room
+     */
     private boolean checkOrder() {
          return order.size()==coordinates.size()/2;
     }
 
 
-
+    /**
+     * @author Eliahu Cohen
+     * @param ErrorMotivation string that indicates the motivation of the error
+     * @return error message to send to the client
+     */
     private Message sendErrorMessage(String ErrorMotivation) {
          Message error= new ErrorMessage();
          error.setReturnMessage(ErrorMotivation);
          return error;
     }
+
+    /**
+     * @author Eliahu Cohen
+     * @return default error message to send to the client
+     */
     private Message sendErrorMessage() {
         Message error= new ErrorMessage();
         error.setReturnMessage("The move you made isn't a valid move");
         return error;
     }
 
+    /**
+     * @author Eliahu Cohen
+     * @return savings of the game after a move
+     * method that calls the Game method to play a move
+     */
     public synchronized GameSavings playMove(){
          GameSavings savings=game.playMove(coordinates,column,order);
          if(savings==null)sendErrorMessage() ;
@@ -100,7 +133,10 @@ public class GameController {
          return savings;
      }
 
-
+    /**
+     * @author Eliahu Cohen
+     * @return the player that wins the game
+     */
     public synchronized Optional<Player> endGame() {
         return game.endGame();
     }

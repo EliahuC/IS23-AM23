@@ -8,6 +8,10 @@ import it.polimi.ingsw.model.player.Player;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+/**
+ * @author Eliahu Cohen
+ * class that will be notificated when an event to display to the client will happen and send the message to the client
+ */
 
 public class VirtualView implements PropertyChangeListener {
     private final ServerConnectionTCP clientConnection;

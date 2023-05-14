@@ -8,6 +8,10 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 
+/**
+ * @author Eliahu Cohen
+ * TCP SERVER
+ */
 public class TCPServerMain extends Server implements Runnable {
     private ServerSocket serverSocket;
 
@@ -20,7 +24,6 @@ public class TCPServerMain extends Server implements Runnable {
     }
 
     public void run() {
-        //seleziono port alternativa per server
 
         try {
             serverSocket = new ServerSocket(port);
@@ -29,7 +32,7 @@ public class TCPServerMain extends Server implements Runnable {
         }
         showMessage("Server is started !");
 
-        //Accettazione client
+        //Client Connection
         while(true){
             Socket clientSocket = null;
             try {

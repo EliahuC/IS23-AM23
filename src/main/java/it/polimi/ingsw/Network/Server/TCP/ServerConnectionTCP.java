@@ -21,6 +21,10 @@ import java.util.Objects;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * @author Eliahu Cohen
+ * class that handles the tcp connection between the server and the client
+ */
 public class ServerConnectionTCP implements ServerConnection {
     private final Socket clientSocket;
     private Thread ping;
@@ -57,13 +61,21 @@ public class ServerConnectionTCP implements ServerConnection {
         Server.lobbies.remove(lobby);
     }
 
-    private void sendPing(int pingCount) {
+    /**
+     * @author Eliahu Cohen
+     * @param pingCount number of pings server have sent till now
+     */
+    public void sendPing(int pingCount) {
         ServerMessage m=new PingFromServer(pingCount);
 
         sendMessage(m);
 
     }
 
+    /**
+     * @author Eliahu Cohen
+     * method to close the connection between the server and the client
+     */
     private void closeConnection() {
         serverIsActive = false;
         try {
@@ -72,6 +84,12 @@ public class ServerConnectionTCP implements ServerConnection {
             e.printStackTrace();
         }
     }
+
+    /**
+     * @author Eliahu Cohen
+     * @param message to send to the client
+     * method to send to the client a message using Json
+     */
     public void sendMessage(ServerMessage message){
         Gson gson =new Gson();
         String m=gson.toJson(message);
@@ -81,7 +99,12 @@ public class ServerConnectionTCP implements ServerConnection {
 
     }
 
-
+    /**
+     * @author Eliahu Cohen
+     * @throws IOException
+     * @throws ClassNotFoundException
+     * Method to receive a message from the client
+     */
     public void receiveMessage() throws IOException, ClassNotFoundException {
         String s = input.nextLine();
         ClientMessage message;
@@ -95,6 +118,12 @@ public class ServerConnectionTCP implements ServerConnection {
         if (message != null)
             messageParser(message);
     }
+
+    /**
+     * @author Eliahu Cohen
+     * @param message received from client
+     * Method that response to the message received with an action on the server
+     */
     private void messageParser(ClientMessage message){
         switch (message.getCategory()) {
             case PINGTOSERVER: {
@@ -159,17 +188,26 @@ public class ServerConnectionTCP implements ServerConnection {
                 lobby.logoutFromLobby(namePlayer);
             }
             default:
-                sendMessage((ServerMessage) lobby.receiveMessage(message));
+                if(lobby!=null)
+                    sendMessage((ServerMessage) lobby.receiveMessage(message));
         }
     }
 
+    /**
+     * @author Eliahu Cohen
+     * @param message received from the client
+     * send an error message if there is a player logged with the nickname of the sender
+     */
     private void alreadyLoggedNickName(ClientMessage message) {
             ErrorMessage errorMessage=new ErrorMessage();
             errorMessage.setReturnMessage("nickname already used");
             sendMessage(errorMessage);
     }
 
-
+    /**
+     * @author Eliahu Cohen
+     * method that send an error message if the client tryies to logout from an already started game
+     */
     private void gameAlreadyStarted() {
             ErrorMessage errorMessage = new ErrorMessage();
             errorMessage.setReturnMessage("Game already started,you can't logout since the game is finished");
@@ -177,7 +215,10 @@ public class ServerConnectionTCP implements ServerConnection {
 
     }
 
-
+    /**
+     * @author Eliahu Cohen
+     * Method that checks if the lobby is full
+     */
     private void lobbyIsFull() {
 
             ErrorMessage errorMessage = new ErrorMessage();
@@ -186,7 +227,11 @@ public class ServerConnectionTCP implements ServerConnection {
 
         }
 
-
+    /**
+     * @author Eliahu Cohen
+     * @param message received from client
+     * method that checks if the player was connected before
+     */
     private void reconnectedPlayer(ClientMessage message) {
         for (Lobby l : Server.startedLobbies) {
             for (Player p : l.getDisconnectedPlayers()) {
@@ -201,6 +246,11 @@ public class ServerConnectionTCP implements ServerConnection {
         }
     }
 
+    /**
+     * @author Eliahu Cohen
+     * @param message received from the client
+     * Method that responce to a entrance message but without any lobby
+     */
     private void noLobbyInServer(ClientMessage message) {
 
             ErrorMessage errorMessage =new ErrorMessage();
@@ -212,7 +262,10 @@ public class ServerConnectionTCP implements ServerConnection {
     }
 
 
-
+    /**
+     * @author Eliahu Cohen
+     * method that checks if the lobby is now full
+     */
     private void checkCompletedLobby() {
         if(lobby.getNumPlayersLobby()==lobby.getJoinedUsers().size()){
             Server.startedLobbies.add(lobby);
@@ -221,6 +274,11 @@ public class ServerConnectionTCP implements ServerConnection {
         }
     }
 
+    /**
+     * @author Eliahu Cohen
+     * @param message received from client
+     * Method that sends an error message because the client is already into a lobby
+     */
     private void alreadyExistentLobby(ClientMessage message){
             if (lobby.getJoinedUsers().contains(message.getNickname())) {
                 ErrorMessage errorMessage=new ErrorMessage();
@@ -240,8 +298,10 @@ public class ServerConnectionTCP implements ServerConnection {
     }
 
 
-
-
+    /**
+     * @author Eliahu Cohen
+     * @return true if the lobby has <=4 users
+     */
     private boolean checkLobbySpace() {
         return lobby.getJoinedUsers().size()<=4;
     }
@@ -249,14 +309,15 @@ public class ServerConnectionTCP implements ServerConnection {
         new Thread(()->sendMessage(m)).start();
     }*/
 
-    public  ArrayList<Lobby> getStartedLobbies(){
-        return new ArrayList<>(Server.startedLobbies);
-    }
 
     public String getNamePlayer() {
         return namePlayer;
     }
 
+    /**
+     * @author Eliahu Cohen
+     * method that starts a ping exchange with the client and waits to the clients moves
+     */
     @Override
     public void run() {
         ping = new Thread(() -> {

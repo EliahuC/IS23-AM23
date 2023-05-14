@@ -9,6 +9,10 @@ import it.polimi.ingsw.Printer;
 
 import java.util.ArrayList;
 
+/**
+ * @author Eliahu Cohen
+ * Server that contains RMI and TCP servers
+ */
 public class Server implements Printer {
      public static final ArrayList<Lobby> lobbies=new ArrayList<>();
     public static final ArrayList<Lobby> startedLobbies=new ArrayList<>();

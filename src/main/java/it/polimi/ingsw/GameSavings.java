@@ -7,6 +7,10 @@ import it.polimi.ingsw.model.player.Player;
 
 import java.util.ArrayList;
 
+/**
+ * @author Eliahu Cohen
+ * Class that rapresent the game savings
+ */
 public class GameSavings {
     private Integer numPlayers;
     private final ArrayList<Player> players;

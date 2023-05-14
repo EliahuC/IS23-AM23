@@ -2,6 +2,10 @@ package it.polimi.ingsw;
 
 import it.polimi.ingsw.Network.Server.TCP.Lobby;
 
+/**
+ * @author Eliahu Cohen
+ * Class that rapresent the savings of a particular lobby
+ */
 public class Savings {
     private Integer savingNumber;
     private final Lobby lobby;
@@ -12,6 +16,11 @@ public class Savings {
         this.savingNumber=0;
     }
 
+    /**
+     * @author Eliahu Cohen
+     * @param savings
+     * method to save a game
+     */
     public void saveGame(GameSavings savings){
        this.gameSavings=savings;
        savingNumber++;

@@ -17,6 +17,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 
+/**
+ * @author Eliahu Cohen
+ * Lobby concept class
+ */
 public class Lobby {
 
     private final Integer NumPlayersLobby;
@@ -34,6 +38,14 @@ public class Lobby {
         this.joinedUsers=new ArrayList<>();
         this.controllerCoordinator=new ControllerCoordinator();
     }
+
+    /**
+     * @author Eliahu Cohen
+     * @param serverConnectionTCP connection with the client
+     * @param s nickname
+     * @param view
+     * method that adds a user to the lobby
+     */
     public synchronized void addUser(ServerConnectionTCP serverConnectionTCP, String s, VirtualView view){
         if(connections.size()==NumPlayersLobby) return;
         connections.add(serverConnectionTCP);
@@ -49,6 +61,12 @@ public class Lobby {
         return joinedUsers;
     }
 
+    /**
+     * @author Eliahu Cohen
+     * @param message received from client
+     * @return the server response to the client
+     * Method that react to the client move
+     */
     public synchronized Message receiveMessage(ClientMessage message){
         for(Player p:getDisconnectedPlayers()) {
             if(p.getNickName().equals(message.getNickname()))
@@ -75,6 +93,10 @@ public class Lobby {
         return returnMessage;
     }
 
+    /**
+     * @author Eliahu Cohen
+     * method that delete the lobby savings from disk
+     */
     private void deleteFile() {
         File file=new File(saveFilePath);
         if(!file.exists())
@@ -85,6 +107,11 @@ public class Lobby {
         System.out.println("File correctly deleted");
     }
 
+    /**
+     * @author Eliahu Cohen
+     * @param returnMessage
+     * Method that saves the current status of the game
+     */
     private void saveGame(ValidMoveMessage returnMessage) {
         Gson gson=new Gson();
         if(returnMessage.getSavings()==null) return;
@@ -98,11 +125,20 @@ public class Lobby {
         }
     }
 
+    /**
+     * @author Eliahu Cohen
+     * @param s nickname
+     * Logout the player from the lobby
+     */
     public synchronized void logoutFromLobby(String s){
         joinedUsers.remove(s);
         controllerCoordinator.getConnectedPlayers().remove(s);
     }
 
+    /**
+     * @author Eliahu Cohen
+     * starts the game of the lobby
+     */
     public synchronized void startGameLobby(){
         startedGame=true;
         controllerCoordinator.startGame();
@@ -110,6 +146,10 @@ public class Lobby {
         sendMessageToAllTheLobby(new GameIsStartingMessage());
     }
 
+    /**
+     * @author Eliahu Cohen
+     * Method that sets the saves of the game
+     */
     private void setSavesOfTheLobby() {
         String fileName="Lobby"+String.valueOf(idLobby)+".txt";
         saveFilePath=saveFilePath+fileName;
@@ -136,7 +176,10 @@ public class Lobby {
         return controllerCoordinator.getDisconnectedPlayers();
     }
 
-
+    /**
+     * @author Eliahu Cohen
+     * method to delete the lobby
+     */
     protected synchronized void deleteLobby() {
         ServerConnectionTCP.removeVoidLobby(this);
     }

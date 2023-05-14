@@ -9,6 +9,10 @@ import it.polimi.ingsw.model.player.Player;
 import java.util.ArrayList;
 import java.util.Objects;
 
+/**
+ * @author Eliahu Cohen
+ * controller that coordinates the other controllers
+ */
 public class ControllerCoordinator {
     private Boolean startedGame=false;
 
@@ -20,6 +24,12 @@ public class ControllerCoordinator {
         this.connectedPlayers = new ArrayList<>();
     }
 
+    /**
+     * @author Eliahu Cohen
+     * @param s nickname
+     * @param view listener of the player
+     * adding a player to the current game
+     */
     public void joinPlayer(String s, VirtualView view) {
         for (Player p: connectedPlayers){
             if (Objects.equals(p.getNickName(), s)) {
@@ -49,6 +59,11 @@ public class ControllerCoordinator {
         }
         return new ErrorMessage();
     }
+
+    /**
+     * @author Eliahu Cohen
+     * method called to start the game
+     */
     public void startGame(){
         startedGame=true;
         gameController=new GameController(connectedPlayers);
