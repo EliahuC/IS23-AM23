@@ -1,16 +1,18 @@
 package it.polimi.ingsw.Messages;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import it.polimi.ingsw.Messages.ClientToServer.*;
 import it.polimi.ingsw.Messages.ServerToClient.*;
 
 public class MoveDeserializer {
 
    public static Message deserializeOutput(String s){
-        String[] tokens = s.toUpperCase().split(",");
-        String[] tokens2= tokens[1].split(":");
+        JsonObject o=new JsonParser().parse(s).getAsJsonObject();
+        String category=o.get("messageCategory").getAsString();
         Gson gson=new Gson();
-        switch (tokens2[1]){
+        switch (category){
             case "PINGFROMSERVER":{
                 return gson.fromJson(s,PingFromServer.class);
             }
