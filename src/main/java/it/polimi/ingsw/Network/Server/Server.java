@@ -9,18 +9,25 @@ import it.polimi.ingsw.Printer;
 
 import java.util.ArrayList;
 
-public class Server implements  Printer {
+public class Server implements Printer {
      public static final ArrayList<Lobby> lobbies=new ArrayList<>();
     public static final ArrayList<Lobby> startedLobbies=new ArrayList<>();
     public static void main(String args[]){
 
         TCPServerMain tcpServerMain =new TCPServerMain(TCPParams.PORT);
         RMIServerMain rmiServerMain=new RMIServerMain(RMIparams.PORT);
-
+        Thread thread1=new Thread(tcpServerMain);
+        Thread thread2=new Thread(rmiServerMain);
+        thread1.start();
+        thread2.start();
     }
 
     @Override
     public void showMessage(String s) {
         System.out.println(s);
     }
+
+
+
+    //TODO ricaricamento dei salvataggi delle lobby
 }

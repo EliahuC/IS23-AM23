@@ -10,7 +10,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 
-public class TCPServerMain extends Server {
+public class TCPServerMain extends Server implements Runnable {
     private ServerSocket serverSocket;
 
     private final ArrayList<VirtualView> virtualViews=new ArrayList<>();
@@ -19,10 +19,9 @@ public class TCPServerMain extends Server {
 
     public TCPServerMain(int port){
         this.port = port;
-        go();
     }
 
-    public void go() {
+    public void run() {
         //seleziono port alternativa per server
 
         try {
@@ -65,6 +64,7 @@ public class TCPServerMain extends Server {
             port = Integer.parseInt( args[0] );
         }
         TCPServerMain serverMain = new TCPServerMain(port);
+        new Thread(serverMain).start();
 // NO new Thread(serverMain).start();
     }
 }
