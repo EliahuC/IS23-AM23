@@ -67,7 +67,7 @@ public class LobbyHandler {
                 continue;
             }
             if(serverMessage.getCategory()==Message.MessageCategory.RETURN_MESSAGE){
-                System.out.print("The lobby is full! The game will begin soon!\n");
+                System.out.print(serverMessage.getReturnMessage());
                 break;
             }
         }
