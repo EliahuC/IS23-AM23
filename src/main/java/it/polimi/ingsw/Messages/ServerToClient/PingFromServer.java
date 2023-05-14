@@ -12,7 +12,7 @@ public class PingFromServer extends ServerMessage{
     @Override
     public String toString() {
         return "PingFromServer{" +
-                "MC=" + MC +
+                "MC=" + messageCategory +
                 "pingCount:"+ pingCount+
                 '}';
     }

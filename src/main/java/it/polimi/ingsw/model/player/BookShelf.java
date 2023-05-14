@@ -20,6 +20,9 @@ public class BookShelf {
     private int points;
 
     private final int maxPickableTiles[] = {3,3,3,3,3};
+    private boolean commonGoalCard1Completed;
+    private boolean commonGoalCard2Completed;
+
 
     public BookShelf() {
 
@@ -34,6 +37,11 @@ public class BookShelf {
     public ItemTile getTile(int x , int y) {
         return  Shelf[x][y];
     }
+
+    /**
+     * @author Andrea Bricchi
+     * method that increase the score of the player caused on the adjacent tiles goals
+     */
 
     public void AdjacentScore(){
         ItemTile it = new ItemTile();
@@ -231,5 +239,20 @@ public class BookShelf {
 
     public ItemTile[][] getShelf(){
         return Shelf;
+    }
+    public boolean isCommonGoalCard1Completed() {
+        return commonGoalCard1Completed;
+    }
+
+    public void setCommonGoalCard1Completed(boolean commonGoalCard1Completed) {
+        this.commonGoalCard1Completed = commonGoalCard1Completed;
+    }
+
+    public boolean isCommonGoalCard2Completed() {
+        return commonGoalCard2Completed;
+    }
+
+    public void setCommonGoalCard2Completed(boolean commonGoalCard2Completed) {
+        this.commonGoalCard2Completed = commonGoalCard2Completed;
     }
 }

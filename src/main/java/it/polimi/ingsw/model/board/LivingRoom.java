@@ -190,10 +190,21 @@ public class LivingRoom {
      */
     public int checkCG(BookShelf bs){
         int score=0;
-        commonGoalCard1.checkGoal(bs);
-        commonGoalCard2.checkGoal(bs);
-       score= commonGoalCard1.getPoints();
-       score= commonGoalCard2.getPoints();
+        if(!bs.isCommonGoalCard1Completed()) {
+            int score1=0;
+            commonGoalCard1.checkGoal(bs);
+            score1= commonGoalCard1.getPoints();
+            if(score1!=0)bs.setCommonGoalCard1Completed(true);
+            score+=score1;
+        }
+        if(!bs.isCommonGoalCard2Completed()) {
+            int score2=0;
+            commonGoalCard2.checkGoal(bs);
+            score2= commonGoalCard2.getPoints();
+            if(score2!=0)bs.setCommonGoalCard2Completed(true);
+            score+=score2;
+        }
+
        return score;
     }
 

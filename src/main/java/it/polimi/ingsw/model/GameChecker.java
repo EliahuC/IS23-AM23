@@ -8,6 +8,10 @@ import it.polimi.ingsw.model.player.Player;
 
 import java.util.Arrays;
 
+/**
+ * @author Simone Controguerra
+ * Class that checks all the legal/illegal moves pf the game
+ */
 public class GameChecker {
 
     private boolean restorable;
@@ -448,6 +452,14 @@ public class GameChecker {
             return true;
         return false;
     }
+
+    /**
+     * @author Eliahu Cohen
+     * @param b bookshelf to check
+     * @param column to check
+     * @param numberOfTiles to insert
+     * @return true if you can insert that number of tiles in the selected column
+     */
     public boolean checkColumn(BookShelf b,int column,int numberOfTiles){
         int counter=0;
         for(int row=0;row<BookShelf.getMAX_Row();row++){
