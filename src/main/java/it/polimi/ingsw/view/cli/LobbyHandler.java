@@ -31,8 +31,8 @@ public class LobbyHandler {
                     "/CREATE  <number of players> (Remember that the number of players can only be 2, 3 or 4!)\n" +
                     "/ENTER \n");
 
-            command = input.nextLine().toUpperCase();
-            if(Objects.equals(command.split(" ")[0], "/CREATE") || Objects.equals(command.split(" ")[0], "/ENTER"))
+            command = input.nextLine();
+            if(Objects.equals(command.split(" ")[0].toUpperCase(), "/CREATE") || Objects.equals(command.split(" ")[0].toUpperCase(), "/ENTER"))
                 break;
             System.out.print("Please, use the correct commands.\n");
         }
@@ -44,7 +44,7 @@ public class LobbyHandler {
             }catch (IOException | ClassNotFoundException e){
                 continue;
             }
-            if(serverMessage.getCategory()==Message.MessageCategory.WARNING){
+            if(serverMessage!=null && serverMessage.getCategory()==Message.MessageCategory.WARNING){
                 System.out.print(serverMessage.getReturnMessage());
                 command = input.nextLine();
                 message = moveSerializer.serializeInput(command);

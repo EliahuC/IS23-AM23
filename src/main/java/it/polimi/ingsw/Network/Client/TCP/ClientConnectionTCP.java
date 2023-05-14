@@ -64,11 +64,11 @@ public class ClientConnectionTCP extends ConnectionClient {
         while(clientIsActive){
             try {
                 ServerMessage serverMessage = receiveMessage();
-                if (serverMessage.getCategory() != Message.MessageCategory.PINGFROMSERVER) {
+                if (serverMessage!= null && serverMessage.getCategory() != Message.MessageCategory.PINGFROMSERVER) {
                     if (GUIisActive) {
                         //GUIEvent.recieveMessage(serverMessage);
                     } else; //CLIEvent.recieveMessage(serverMessage);
-                } else if(serverMessage.getCategory()== Message.MessageCategory.PINGFROMSERVER){
+                } else if(serverMessage!= null && serverMessage.getCategory()== Message.MessageCategory.PINGFROMSERVER){
                     //System.out.println("Ping arrived");
                     sendPing();
                 }
