@@ -4,14 +4,14 @@ import java.util.Objects;
 
 public abstract class Message {
 
+    public MessageCategory messageCategory;
     private final String nickname;
     private String returnMessage;
 
 
-    public MessageCategory MC;
 
-    public Message(MessageCategory MC,String n){
-        this.MC=MC;
+    public Message(MessageCategory messageCategory, String n){
+        this.messageCategory = messageCategory;
         this.nickname=n;
     }
     public enum MessageCategory{
@@ -35,7 +35,7 @@ public abstract class Message {
 
 
     public MessageCategory getCategory(){
-        return MC;
+        return messageCategory;
     }
 
 
@@ -53,8 +53,8 @@ public abstract class Message {
         return nickname;
     }
 
-    public MessageCategory getMC() {
-        return MC;
+    public MessageCategory getMessageCategory() {
+        return messageCategory;
     }
 
     @Override
@@ -62,12 +62,12 @@ public abstract class Message {
         return "Message{" +
                 "nickname='" + nickname + '\'' +
                 ", returnMessage='" + returnMessage + '\'' +
-                ", MC=" + MC +
+                ", MC=" + messageCategory +
                 '}';
     }
 
-    public void setMC(MessageCategory MC) {
-        this.MC = MC;
+    public void setMessageCategory(MessageCategory messageCategory) {
+        this.messageCategory = messageCategory;
     }
 
 
@@ -80,11 +80,11 @@ public abstract class Message {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Message message = (Message) o;
-        return nickname.equals(message.nickname) && returnMessage.equals(message.returnMessage) && MC == message.MC;
+        return nickname.equals(message.nickname) && returnMessage.equals(message.returnMessage) && messageCategory == message.messageCategory;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(nickname, returnMessage, MC);
+        return Objects.hash(nickname, returnMessage, messageCategory);
     }
 }

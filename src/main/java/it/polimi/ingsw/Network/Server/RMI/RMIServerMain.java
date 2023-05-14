@@ -10,12 +10,12 @@ import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
 public class RMIServerMain extends Server implements Loggable {
-    static int PORT = 1234;
+    private static int PORT = 1234;
     public static void main( String[] args )
     {
         System.out.println( "Hello from Server!" );
         Loggable stub = null;
-        RMIServerMain obj = new RMIServerMain();
+        RMIServerMain obj = new RMIServerMain(PORT);
         try {
             stub = (Loggable) UnicastRemoteObject.exportObject(
                     obj, PORT);
@@ -50,6 +50,9 @@ public class RMIServerMain extends Server implements Loggable {
     @Override
     public void showMessage(String s) {
 
+    }
+    public RMIServerMain(int port){
+        PORT=port;
     }
 
 

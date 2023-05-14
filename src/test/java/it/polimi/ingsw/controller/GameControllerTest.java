@@ -1,6 +1,8 @@
 package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.Messages.ClientToServer.ClientMessage;
+import it.polimi.ingsw.Messages.ClientToServer.PossibleMoves.Move_SelectColumn;
+import it.polimi.ingsw.Messages.ClientToServer.PossibleMoves.Move_SelectOrder;
 import it.polimi.ingsw.Messages.ClientToServer.PossibleMoves.Move_SelectTiles;
 import it.polimi.ingsw.Messages.Message;
 import it.polimi.ingsw.Messages.ServerToClient.ErrorMessage;
@@ -342,4 +344,133 @@ public class GameControllerTest extends TestCase {
         ValidMoveMessage valid= new ValidMoveMessage();
         assertEquals(valid,Controller.readMessage(m));
     }
+    public void testReadMessage_SIXTH(){
+        Player p1 = new Player("Alice");
+        Player p2 = new Player("Bob");
+        Player p3 = new Player("Carlos");
+        Player p4 = new Player("Diego");
+        ArrayList<Player> Players = new ArrayList<>();
+        Players.add(p1);
+        Players.add(p2);
+        Players.add(p3);
+        Players.add(p4);
+        GameController Controller = new GameController(Players);
+        Controller.startGame();
+        Controller.getGame().getPlayers().get(0).getPlayerBookshelf().setTile(5, 0, new ItemTile());
+        Controller.getGame().getPlayers().get(0).getPlayerBookshelf().setTile(4, 0, new ItemTile());
+        Controller.getGame().getPlayers().get(0).getPlayerBookshelf().setTile(3, 0, new ItemTile());
+        Controller.getGame().getPlayers().get(0).getPlayerBookshelf().setTile(2, 0, new ItemTile());
+        Controller.getGame().getPlayers().get(0).getPlayerBookshelf().setTile(1, 0, new ItemTile());
+        Controller.getCoordinates().add(0);
+        Controller.getCoordinates().add(4);
+        Controller.getCoordinates().add(0);
+        Controller.getCoordinates().add(3);
+        Move_SelectColumn M = new Move_SelectColumn();
+        M.setYBookshelf(0);
+        ClientMessage m = new ClientMessage(Message.MessageCategory.COLUMN,M,Controller.getGame().getPlayers().get(0).getNickName());
+        Message error= new ErrorMessage();
+        error.setReturnMessage("The move you made isn't a valid move");
+        assertEquals(error,Controller.readMessage(m));
+    }
+    public void testReadMessage_SEVENTH(){
+        Player p1 = new Player("Alice");
+        Player p2 = new Player("Bob");
+        Player p3 = new Player("Carlos");
+        Player p4 = new Player("Diego");
+        ArrayList<Player> Players = new ArrayList<>();
+        Players.add(p1);
+        Players.add(p2);
+        Players.add(p3);
+        Players.add(p4);
+        GameController Controller = new GameController(Players);
+        Controller.startGame();
+        Controller.getCoordinates().add(0);
+        Controller.getCoordinates().add(4);
+        Controller.getCoordinates().add(0);
+        Controller.getCoordinates().add(3);
+        Move_SelectColumn M = new Move_SelectColumn();
+        M.setYBookshelf(0);
+        ClientMessage m = new ClientMessage(Message.MessageCategory.COLUMN,M,Controller.getGame().getPlayers().get(0).getNickName());
+        ValidMoveMessage valid= new ValidMoveMessage();
+        assertEquals(valid,Controller.readMessage(m));
+    }
+    public void testReadMessage_EIGHTH(){
+        Player p1 = new Player("Alice");
+        Player p2 = new Player("Bob");
+        Player p3 = new Player("Carlos");
+        Player p4 = new Player("Diego");
+        ArrayList<Player> Players = new ArrayList<>();
+        Players.add(p1);
+        Players.add(p2);
+        Players.add(p3);
+        Players.add(p4);
+        GameController Controller = new GameController(Players);
+        Controller.startGame();
+        Controller.getCoordinates().add(0);
+        Controller.getCoordinates().add(4);
+        Controller.getCoordinates().add(0);
+        Controller.getCoordinates().add(3);
+        ArrayList<Integer> E = new ArrayList<>();
+        E.add(4);
+        E.add(2);
+        Move_SelectOrder M = new Move_SelectOrder();
+        M.setOrder(E);
+        ClientMessage m = new ClientMessage(Message.MessageCategory.ORDER,M,Controller.getGame().getPlayers().get(0).getNickName());
+        Message error= new ErrorMessage();
+        error.setReturnMessage("The move you made isn't a valid move");
+        assertEquals(error,Controller.readMessage(m));
+    }
+    public void testReadMessage_NINTH(){
+        Player p1 = new Player("Alice");
+        Player p2 = new Player("Bob");
+        Player p3 = new Player("Carlos");
+        Player p4 = new Player("Diego");
+        ArrayList<Player> Players = new ArrayList<>();
+        Players.add(p1);
+        Players.add(p2);
+        Players.add(p3);
+        Players.add(p4);
+        GameController Controller = new GameController(Players);
+        Controller.startGame();
+        Controller.getCoordinates().add(0);
+        Controller.getCoordinates().add(4);
+        Controller.getCoordinates().add(0);
+        Controller.getCoordinates().add(3);
+        ArrayList<Integer> E = new ArrayList<>();
+        E.add(1);
+        E.add(2);
+        E.add(3);
+        Move_SelectOrder M = new Move_SelectOrder();
+        M.setOrder(E);
+        ClientMessage m = new ClientMessage(Message.MessageCategory.ORDER,M,Controller.getGame().getPlayers().get(0).getNickName());
+        Message error= new ErrorMessage();
+        error.setReturnMessage("The move you made isn't a valid move");
+        assertEquals(error,Controller.readMessage(m));
+    }
+    /*public void testReadMessage_TENTH(){
+        Player p1 = new Player("Alice");
+        Player p2 = new Player("Bob");
+        Player p3 = new Player("Carlos");
+        Player p4 = new Player("Diego");
+        ArrayList<Player> Players = new ArrayList<>();
+        Players.add(p1);
+        Players.add(p2);
+        Players.add(p3);
+        Players.add(p4);
+        GameController Controller = new GameController(Players);
+        Controller.startGame();
+        Controller.getCoordinates().add(0);
+        Controller.getCoordinates().add(4);
+        Controller.getCoordinates().add(0);
+        Controller.getCoordinates().add(3);
+        ArrayList<Integer> E = new ArrayList<>();
+        E.add(1);
+        E.add(2);
+        Move_SelectOrder M = new Move_SelectOrder();
+        M.setOrder(E);
+        Controller.setColumn(3);
+        ClientMessage m = new ClientMessage(Message.MessageCategory.ORDER,M,Controller.getGame().getPlayers().get(0).getNickName());
+        ValidMoveMessage valid= new ValidMoveMessage();
+        assertEquals(valid,Controller.readMessage(m));
+    }*/
 }

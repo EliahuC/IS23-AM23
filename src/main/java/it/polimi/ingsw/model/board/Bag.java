@@ -4,6 +4,10 @@ package it.polimi.ingsw.model.board;
 
 import java.util.ArrayList;
 import java.util.Random;
+/**
+ * @author Eliahu Cohen
+ * Method that rapresent the bag that contains the tiles
+ */
 
 public class Bag {
     private int NumCats;
@@ -34,34 +38,42 @@ public Bag() {
 
     }
 
-
+    /**
+     * @author Eliahu Cohen
+     * @return true if there isn't any tile in the bag
+     */
     public boolean NoMoreTiles(){
         return NumFrames + NumBooks + NumCats + NumPlants + NumTrophies + NumGames == 0;
     }
-        public ItemTile extract() {
-            if(NoMoreTiles()) return null;
-            int randIndex = new Random().nextInt(Tiles.toArray().length -1);
-                ItemTile Tile = Tiles.remove(randIndex);
 
-                        switch (Tile.getCategory()) {
-                            case CATS -> NumCats--;
+    /**
+     * @author Eliahu Cohen
+     * @return the tile extracted from the bag
+     */
+    public ItemTile extract() {
+        if(NoMoreTiles()) return null;
+        int randIndex = new Random().nextInt(Tiles.toArray().length -1);
+            ItemTile Tile = Tiles.remove(randIndex);
 
-                            case FRAMES -> NumFrames--;
+                    switch (Tile.getCategory()) {
+                        case CATS -> NumCats--;
 
-                            case BOOKS -> NumBooks--;
+                        case FRAMES -> NumFrames--;
 
-                            case GAMES -> NumGames--;
+                        case BOOKS -> NumBooks--;
 
-                            case PLANTS -> NumPlants--;
+                        case GAMES -> NumGames--;
 
-                            case TROPHIES -> NumTrophies--;
+                        case PLANTS -> NumPlants--;
 
-                        }
+                        case TROPHIES -> NumTrophies--;
+
+                    }
 
 
-                return Tile;
-            }
-    }
+            return Tile;
+        }
+}
 
 
 

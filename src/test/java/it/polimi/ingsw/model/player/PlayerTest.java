@@ -3,6 +3,8 @@ package it.polimi.ingsw.model.player;
 import it.polimi.ingsw.model.board.ItemTile;
 import junit.framework.TestCase;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -21,6 +23,13 @@ public class PlayerTest extends TestCase {
         tiles.add(i1);
         tiles.add(i2);
         tiles.add(i3);
+        PropertyChangeListener l = new PropertyChangeListener() {
+            @Override
+            public void propertyChange(PropertyChangeEvent evt) {
+
+            }
+        };
+        p.setListener(l);
         p.insertToken(tiles,3);
         assertEquals(i1,p.getPlayerBookshelf().getTile(5,3));
         assertEquals(i2,p.getPlayerBookshelf().getTile(4,3));
@@ -35,6 +44,13 @@ public class PlayerTest extends TestCase {
         tiles.add(i1);
         tiles.add(i2);
         tiles.add(i3);
+        PropertyChangeListener l = new PropertyChangeListener() {
+            @Override
+            public void propertyChange(PropertyChangeEvent evt) {
+
+            }
+        };
+        p.setListener(l);
         p.insertToken(tiles,3);
         assertNull(p.getPlayerBookshelf().getTile(2,3));
         assertNull(p.getPlayerBookshelf().getTile(1,3));
@@ -55,6 +71,13 @@ public class PlayerTest extends TestCase {
         p.getPlayerBookshelf().setTile(5,3,i1);
         p.getPlayerBookshelf().setTile(4,3,i2);
         p.getPlayerBookshelf().setTile(3,3,i3);
+        PropertyChangeListener l = new PropertyChangeListener() {
+            @Override
+            public void propertyChange(PropertyChangeEvent evt) {
+
+            }
+        };
+        p.setListener(l);
         p.insertToken(tiles,3);
         assertEquals(i1,p.getPlayerBookshelf().getTile(5,3));
         assertEquals(i2,p.getPlayerBookshelf().getTile(4,3));

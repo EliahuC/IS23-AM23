@@ -15,6 +15,11 @@ public class CommonGoalCard3 extends CommonGoalCard implements CheckCommonGoalCa
     public CommonGoalCard3(Launcher L){
         this.L = L;
     }
+
+    /**
+     * @author Giovanni Di Lorenzo
+     * @param bs bookshelf of the player to check the goal
+     */
     @Override
     public void checkGoal(BookShelf bs) {
         int count = 0;

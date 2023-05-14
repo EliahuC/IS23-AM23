@@ -4,6 +4,13 @@ import it.polimi.ingsw.model.board.ItemTile;
 
 import java.util.HashMap;
 
+/**
+ * @author Eliahu Cohen
+ * Class that represent the Personal Goal Card
+ * The card is stored in a HashMap built in the following method:
+ * The key of the map is the coordinates (x,y) in the bookshelf of the Item Tile that may be in that position.
+ */
+
 public class PersonalGoalCard {
     private int completed;
     private int points;
@@ -11,8 +18,11 @@ public class PersonalGoalCard {
     private final HashMap<PGCKey, ItemTile> Goal;
 
 
-
-    //METODO SWITCH
+    /**
+     * @author Eliahu Cohen
+     * @param x is the number of the personal goal card that I want to generate
+     * Constructor that generate a specific personal goal card based
+     */
     public PersonalGoalCard(int x) {
         this.NumeroCarta = x;
         Goal=new HashMap<>();
@@ -118,7 +128,11 @@ public class PersonalGoalCard {
         this.points=0;
     }
 
-    //METODO MAPPA DI MAPPA
+    /**
+     * @author Eliahu Cohen
+     * Constructor that generate the personal goal card with the help of a generator
+     * and using the singleton pattern
+     */
     public PersonalGoalCard(){
         PersonalGoalCardGen istanza= PersonalGoalCardGen.getInstance();
         Goal=new HashMap<>(istanza.GetGoal());
@@ -127,7 +141,11 @@ public class PersonalGoalCard {
         this.NumeroCarta=null;
     }
 
-
+    /**
+     * @author Eliahu Cohen
+     * @param playerBS palyer bookshelf
+     * @return the points that the player gained with the personal goal card
+     */
     public int CheckGoal(BookShelf playerBS) {
         for (PGCKey key : Goal.keySet()) {
             if (playerBS.getTile(key.getX(), key.getY()).getCategory() == Goal.get(key).getCategory()) {
@@ -138,6 +156,10 @@ public class PersonalGoalCard {
         return GivePoints();
     }
 
+    /**
+     * @author Eliahu Cohen
+     * @return the points based on how much correct position tiles that the player gets
+     */
      private int GivePoints() {
 
         switch (completed) {

@@ -8,6 +8,10 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 
+/**
+ * @author Eliahu Cohen,Giovanni di Lorenzo and Simone Controguerra
+ */
+
 public class Player {
 
     private final String NickName;
@@ -18,9 +22,14 @@ public class Player {
     private final boolean nowPlaying;
     private boolean lastRound;
 
+
     PropertyChangeListener listener;
 
-
+    /**
+     * @author Eliahu Cohen
+     * @param nickName of the player
+     * Standard constructor used in the other classes
+     */
     public Player(String nickName) {
         NickName = nickName;
         this.score = 0;
@@ -30,7 +39,15 @@ public class Player {
 
 
     }
-    public Player(String nickName,int x) {      //THIS METHOD IS CREATED DUE TO MAKE TESTS
+
+    /**
+     * @author Giovanni Di Lorenzo
+     * @param nickName of the player
+     * @param x number of Personal Goal card requested
+     *
+     * THIS METHOD IS CREATED DUE TO MAKE TESTS
+     */
+    public Player(String nickName,int x) {
         NickName = nickName;
 
         this.score = 0;
@@ -41,6 +58,10 @@ public class Player {
 
     }
 
+    /**
+     * @author Eliahu Cohen
+     * @param firstPlayerSeat boolean that indicates if the player is the first one
+     */
     public void setFirstPlayerSeat(boolean firstPlayerSeat) {
         this.firstPlayerSeat = firstPlayerSeat;
     }
@@ -63,13 +84,20 @@ public class Player {
         return firstPlayerSeat;
     }
 
-    public void insertToken(ArrayList<ItemTile> selectedTokens , int column){
+    /**
+     * @author Eliahu Cohen
+     * @param selectedTiles array of the tiles extracted from the living room
+     * @param column where I want to put the tiles
+     * method that insert the tiles in the bookshelf of the player
+     * This method uses an event to notify to the listener that the bookshelf is changed
+     */
+    public void insertToken(ArrayList<ItemTile> selectedTiles , int column){
         PropertyChangeEvent evt = new PropertyChangeEvent(
                 this,
                 "BOOKSHELF_CHANGED",
                 this.playerBookshelf,
                 playerBookshelf);
-        for (ItemTile tile : selectedTokens) {
+        for (ItemTile tile : selectedTiles) {
             playerBookshelf.setTile(column, tile);
         }
         this.listener.propertyChange(evt);
@@ -77,8 +105,10 @@ public class Player {
     }
 
 
-
-
+    /**
+     * @author Eliahu Cohen
+     * Method to compare the playerBookshelf with the personal goal card that he have
+     */
     private void comparePersonalGoalCardwithBookshelf (){
 
         score+= personalGoalCard.CheckGoal(playerBookshelf);
@@ -89,6 +119,11 @@ public class Player {
         this.score = score;
     }
 
+    /**
+     * @author Eliahu Cohen
+     * Method to add the final points gained with the adjacens and the personal goal card
+     * it used only when the game is finished
+     */
     public void endGamePoints(){
         comparePersonalGoalCardwithBookshelf();
         playerBookshelf.AdjacentScore();

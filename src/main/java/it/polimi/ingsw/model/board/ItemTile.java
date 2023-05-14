@@ -3,6 +3,11 @@ package it.polimi.ingsw.model.board;
 
 import java.util.Random;
 
+/**
+ * @author Eliahu Cohen
+ * class that rapresent the item tile
+ */
+
 public class ItemTile {
 
 

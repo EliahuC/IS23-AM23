@@ -6,6 +6,9 @@ import it.polimi.ingsw.model.player.BookShelf;
 
 import java.util.HashSet;
 
+/**
+ * @author Giovanni Di Lorenzo
+ */
 public class CommonGoalCard9 extends CommonGoalCard implements CheckCommonGoalCard {
     private final static int numColumnsToAchieve=2;
     private final HashSet<ItemTileCategory> cat = new HashSet<>(); //I use an arrayList to track the categories in each column

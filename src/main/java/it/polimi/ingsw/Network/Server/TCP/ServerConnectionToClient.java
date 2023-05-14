@@ -7,6 +7,7 @@ import it.polimi.ingsw.Messages.ClientToServer.LobbyCreationMessage;
 import it.polimi.ingsw.Messages.ServerToClient.ErrorMessage;
 import it.polimi.ingsw.Messages.ServerToClient.PingFromServer;
 import it.polimi.ingsw.Messages.ServerToClient.ServerMessage;
+import it.polimi.ingsw.Network.Server.Server;
 import it.polimi.ingsw.model.player.Player;
 
 import java.io.IOException;
@@ -26,8 +27,7 @@ public class ServerConnectionToClient implements Runnable {
     private PrintWriter output;
     private VirtualView virtualView;
 
-    private static final ArrayList<Lobby> lobbies=new ArrayList<>();
-    private static final ArrayList<Lobby> startedLobbies=new ArrayList<>();
+
     private Lobby lobby;
     private DisconnectionHandler disconnectionHandler;
     private static Integer idLobbies =0;
@@ -51,7 +51,7 @@ public class ServerConnectionToClient implements Runnable {
     }
 
     protected synchronized static void removeVoidLobby(Lobby lobby) {
-        lobbies.remove(lobby);
+        Server.lobbies.remove(lobby);
     }
 
     private void sendPing(int pingCount) {
@@ -109,10 +109,10 @@ public class ServerConnectionToClient implements Runnable {
                 disconnectionHandler = new DisconnectionHandler(lobby);
                 lobby.addUser(this, message.getNickname(), virtualView);
                 namePlayer = message.getNickname();
-                lobbies.add(lobby);
+                Server.lobbies.add(lobby);
             }
             case ENTER_LOBBY: {
-                synchronized (lobbies) {
+                synchronized (Server.lobbies) {
                     //nessuna lobby presente
                     noLobbyInServer(message);
                     //player gia in una lobby
@@ -122,7 +122,7 @@ public class ServerConnectionToClient implements Runnable {
                 reconnectedPlayer(message);
 
 
-                lobby = lobbies.get(0);
+                lobby = Server.lobbies.get(0);
                 disconnectionHandler = new DisconnectionHandler(lobby);
                 lobbyIsFull();
 
@@ -170,7 +170,7 @@ public class ServerConnectionToClient implements Runnable {
     }
 
     private void reconnectedPlayer(ClientMessage message) {
-        for (Lobby l : startedLobbies) {
+        for (Lobby l : Server.startedLobbies) {
             for (Player p : l.getDisconnectedPlayers()) {
                 if (Objects.equals(p.getNickName(), message.getNickname()) && !l.getFullLobby()) {
                     lobby = l;
@@ -184,7 +184,7 @@ public class ServerConnectionToClient implements Runnable {
     }
 
     private void noLobbyInServer(ClientMessage message) {
-        if (lobbies.size()==0){
+        if (Server.lobbies.size()==0){
             ErrorMessage errorMessage =new ErrorMessage();
             errorMessage.setReturnMessage("There is no available lobby, create a new one using the command:\n" +
                     "/CREATE_LOBBY <your nickname> <number of players>\n" +
@@ -198,8 +198,8 @@ public class ServerConnectionToClient implements Runnable {
 
     private void checkCompletedLobby() {
         if(lobby.getNumPlayersLobby()==lobby.getJoinedUsers().size()){
-            startedLobbies.add(lobby);
-            lobbies.remove(lobby);
+            Server.startedLobbies.add(lobby);
+            Server.lobbies.remove(lobby);
             lobby.startGameLobby();
         }
     }
@@ -234,7 +234,7 @@ public class ServerConnectionToClient implements Runnable {
     }*/
 
     public  ArrayList<Lobby> getStartedLobbies(){
-        return new ArrayList<>(startedLobbies);
+        return new ArrayList<>(Server.startedLobbies);
     }
 
     public String getNamePlayer() {
