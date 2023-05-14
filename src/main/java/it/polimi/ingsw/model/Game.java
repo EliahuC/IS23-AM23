@@ -52,7 +52,6 @@ public class Game  {
      * method that sets to the livingroom all his listeners
      */
     private void setLivingRoomListener() {
-        ArrayList<VirtualView> listeners =new ArrayList<>();
         for(Player p:Players){
             listeners.add((VirtualView) p.getListener());
         }

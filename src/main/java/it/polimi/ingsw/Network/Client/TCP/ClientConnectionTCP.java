@@ -2,6 +2,7 @@ package it.polimi.ingsw.Network.Client.TCP;
 
 import com.google.gson.Gson;
 import it.polimi.ingsw.Messages.ClientToServer.ClientMessage;
+import it.polimi.ingsw.Messages.ClientToServer.NickNameMessage;
 import it.polimi.ingsw.Messages.ClientToServer.PingToServer;
 import it.polimi.ingsw.Messages.Message;
 import it.polimi.ingsw.Messages.MoveDeserializer;
@@ -30,7 +31,8 @@ public class ClientConnectionTCP extends ConnectionClient {
     private Boolean GUIisActive=false;
     private final Gson gson=new Gson();
 
-    public ClientConnectionTCP(Socket socket) {
+    public ClientConnectionTCP(Socket socket,String nickname) {
+        this.playerName=nickname;
         this.clientIsActive =true;
         this.socket = socket;
         try{
@@ -39,6 +41,7 @@ public class ClientConnectionTCP extends ConnectionClient {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        sendMessage(new NickNameMessage(playerName));
 
     }
 
@@ -103,7 +106,7 @@ public class ClientConnectionTCP extends ConnectionClient {
         clientIsActive = false;
     }
     public void sendMessage(ClientMessage message){
-        String m=gson.toJson(message,ClientMessage.class);
+        String m=gson.toJson(message);
         //       output.reset();
         output.println(m);
         output.flush();

@@ -10,9 +10,9 @@ import java.beans.PropertyChangeListener;
 
 
 public class VirtualView implements PropertyChangeListener {
-    private final ServerConnectionToClient clientConnection;
+    private final ServerConnectionTCP clientConnection;
 
-    public VirtualView(ServerConnectionToClient connection) {
+    public VirtualView(ServerConnectionTCP connection) {
         this.clientConnection = connection;
     }
 
@@ -34,6 +34,6 @@ public class VirtualView implements PropertyChangeListener {
         return serverMessage;
     }
 
-    //DA IMPLEMENTARE TUTTE LE REAZIONI VIEW AI MESSAGGI
+    //TODO Reazione viwe messaggi
 
 }

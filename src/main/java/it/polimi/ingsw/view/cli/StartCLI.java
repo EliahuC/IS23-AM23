@@ -27,12 +27,11 @@ public class StartCLI {
     public void startClient(){
         //stampare schermata iniziale
         while(true){
-            /*System.out.print("INSERT YOUR NICKNAME:");
+            System.out.print("INSERT YOUR NICKNAME:");
             Scanner input = new Scanner(System.in);
-            nickname= input.nextLine();*/
+            nickname= input.nextLine();
 
             System.out.print("INSERT IP ADDRESS:");
-            Scanner input = new Scanner(System.in);
             serverAddr = input.nextLine();
             System.out.print("INSERT PORT NUMBER:");
             String portNumber = input.nextLine();
@@ -44,7 +43,7 @@ public class StartCLI {
                 case "TCP":
                     try {
                         socket = new Socket(serverAddr, portNum);
-                        connectionClient = new ClientConnectionTCP(socket);
+                        connectionClient = new ClientConnectionTCP(socket,nickname);
                         new Thread(connectionClient).start();
                         break;
                     } catch (IOException e) {

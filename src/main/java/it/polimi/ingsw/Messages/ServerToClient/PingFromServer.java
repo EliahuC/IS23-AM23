@@ -1,14 +1,13 @@
 package it.polimi.ingsw.Messages.ServerToClient;
 
 public class PingFromServer extends ServerMessage{
-    private int pingCount;
 
     public PingFromServer(int pingCount) {
         super(MessageCategory.PINGFROMSERVER);
         this.pingCount=pingCount;
 
     }
-
+    private int pingCount;
     @Override
     public String toString() {
         return "PingFromServer{" +

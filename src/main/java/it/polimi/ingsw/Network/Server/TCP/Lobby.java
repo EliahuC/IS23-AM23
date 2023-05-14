@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public class Lobby {
 
     private final Integer NumPlayersLobby;
-    private final ArrayList<ServerConnectionToClient> connections;
+    private final ArrayList<ServerConnectionTCP> connections;
     private final ControllerCoordinator controllerCoordinator;
     private final ArrayList<String> joinedUsers;
     private Boolean startedGame=false;
@@ -34,9 +34,9 @@ public class Lobby {
         this.joinedUsers=new ArrayList<>();
         this.controllerCoordinator=new ControllerCoordinator();
     }
-    public synchronized void addUser(ServerConnectionToClient serverConnectionToClient, String s, VirtualView view){
+    public synchronized void addUser(ServerConnectionTCP serverConnectionTCP, String s, VirtualView view){
         if(connections.size()==NumPlayersLobby) return;
-        connections.add(serverConnectionToClient);
+        connections.add(serverConnectionTCP);
         joinedUsers.add(s);
         controllerCoordinator.joinPlayer(s,view);
         if(controllerCoordinator.getConnectedPlayers().size()==NumPlayersLobby){
@@ -124,11 +124,11 @@ public class Lobby {
         return NumPlayersLobby;
     }
 
-    public synchronized ArrayList<ServerConnectionToClient> getConnections() {
+    public synchronized ArrayList<ServerConnectionTCP> getConnections() {
         return connections;
     }
     public synchronized void sendMessageToAllTheLobby(ServerMessage message){
-        for(ServerConnectionToClient s:connections){
+        for(ServerConnectionTCP s:connections){
             s.sendMessage(message);
         }
     }
@@ -138,7 +138,7 @@ public class Lobby {
 
 
     protected synchronized void deleteLobby() {
-        ServerConnectionToClient.removeVoidLobby(this);
+        ServerConnectionTCP.removeVoidLobby(this);
     }
 
     public Player getPlayer(String nickname) {

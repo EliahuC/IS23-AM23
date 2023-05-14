@@ -7,10 +7,10 @@ import it.polimi.ingsw.Messages.ServerToClient.*;
 public class MoveDeserializer {
 
    public static Message deserializeOutput(String s){
-        String[] tokens = s.toUpperCase().split(" ");
-        String[] tokens2= tokens[1].split(",");
+        String[] tokens = s.toUpperCase().split(",");
+        String[] tokens2= tokens[1].split(":");
         Gson gson=new Gson();
-        switch (tokens2[0]){
+        switch (tokens2[1]){
             case "PINGFROMSERVER":{
                 return gson.fromJson(s,PingFromServer.class);
             }
@@ -58,6 +58,12 @@ public class MoveDeserializer {
             }
             case "WARNING":{
                 return gson.fromJson(s, ErrorMessage.class);
+            }
+            case "NICKNAME":{
+                return gson.fromJson(s, NickNameMessage.class);
+            }
+            case "VALID_NICKNAME":{
+                return gson.fromJson(s, ValidNicknameMessage.class);
             }
         }
         return null;

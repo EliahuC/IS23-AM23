@@ -1,8 +1,6 @@
 package it.polimi.ingsw.Network.Server.TCP;
 
 
-import com.google.gson.Gson;
-import it.polimi.ingsw.Messages.ClientToServer.PingToServer;
 import it.polimi.ingsw.Network.Server.Server;
 
 import java.io.IOException;
@@ -37,11 +35,11 @@ public class TCPServerMain extends Server implements Runnable {
             try {
                 clientSocket = serverSocket.accept();
                 showMessage("Client successfully connected");
-                ServerConnectionToClient serverConnectionToClient = new ServerConnectionToClient(clientSocket);
-                new Thread(serverConnectionToClient).start();
-                VirtualView virtualView=new VirtualView(serverConnectionToClient);
+                ServerConnectionTCP serverConnectionTCP = new ServerConnectionTCP(clientSocket);
+                new Thread(serverConnectionTCP).start();
+                VirtualView virtualView=new VirtualView(serverConnectionTCP);
                 virtualViews.add(virtualView);
-                serverConnectionToClient.addVirtualView(virtualView);
+                serverConnectionTCP.addVirtualView(virtualView);
             } catch (IOException e) {
                 e.printStackTrace();
             }

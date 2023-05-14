@@ -12,6 +12,7 @@ import java.util.ArrayList;
 public class Server implements Printer {
      public static final ArrayList<Lobby> lobbies=new ArrayList<>();
     public static final ArrayList<Lobby> startedLobbies=new ArrayList<>();
+    public static final ArrayList<String> connectedPlayers=new ArrayList<>();
     public static void main(String args[]){
 
         TCPServerMain tcpServerMain =new TCPServerMain(TCPParams.PORT);

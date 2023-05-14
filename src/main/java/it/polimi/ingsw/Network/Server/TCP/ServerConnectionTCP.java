@@ -8,7 +8,9 @@ import it.polimi.ingsw.Messages.MoveDeserializer;
 import it.polimi.ingsw.Messages.ServerToClient.ErrorMessage;
 import it.polimi.ingsw.Messages.ServerToClient.PingFromServer;
 import it.polimi.ingsw.Messages.ServerToClient.ServerMessage;
+import it.polimi.ingsw.Messages.ServerToClient.ValidNicknameMessage;
 import it.polimi.ingsw.Network.Server.Server;
+import it.polimi.ingsw.Network.Server.ServerConnection;
 import it.polimi.ingsw.model.player.Player;
 
 import java.io.IOException;
@@ -19,7 +21,7 @@ import java.util.Objects;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
-public class ServerConnectionToClient implements Runnable {
+public class ServerConnectionTCP implements ServerConnection {
     private final Socket clientSocket;
     private Thread ping;
     private boolean serverIsActive;
@@ -33,7 +35,7 @@ public class ServerConnectionToClient implements Runnable {
     private DisconnectionHandler disconnectionHandler;
     private static Integer idLobbies =0;
 
-    public ServerConnectionToClient(Socket clientSocket) {
+    public ServerConnectionTCP(Socket clientSocket) {
         this.clientSocket = clientSocket;
 
         this.serverIsActive = true;
@@ -99,38 +101,60 @@ public class ServerConnectionToClient implements Runnable {
                 message.dumpPingMessage();
                 break;
             }
+            case NICKNAME:{
+                if(Server.connectedPlayers.contains(message.getNickname())){
+                    alreadyLoggedNickName(message);
+                    break;
+                }
+                Server.connectedPlayers.add(message.getNickname());
+                namePlayer=message.getNickname();
+                sendMessage(new ValidNicknameMessage());
+            }
             case CREATE_LOBBY: {
-                alreadyExistentLobby(message);
+                if(lobby!=null){
+                    alreadyExistentLobby(message);
+                    break;
+                }
                 lobby = new Lobby(((LobbyCreationMessage) message).getNumPlayers(), idLobbies);
                 idLobbies++;
                 disconnectionHandler = new DisconnectionHandler(lobby);
-                lobby.addUser(this, message.getNickname(), virtualView);
-                namePlayer = message.getNickname();
+                lobby.addUser(this, namePlayer, virtualView);
                 Server.lobbies.add(lobby);
             }
             case ENTER_LOBBY: {
                 synchronized (Server.lobbies) {
-                    //nessuna lobby presente
-                    noLobbyInServer(message);
-                    //player gia in una lobby
-                    alreadyExistentLobby(message);
+                    //zero lobby
+                    if (Server.lobbies.size()==0){
+                        noLobbyInServer(message);
+                        break;
+                    }
+                    //player already in the lobby
+                    if (lobby.getJoinedUsers().contains(message.getNickname())) {
+                        alreadyExistentLobby(message);
+                        break;
+                    }
                 }
-                //player che prova a riconnettersi
+                //player try to reconnect
                 reconnectedPlayer(message);
 
 
                 lobby = Server.lobbies.get(0);
                 disconnectionHandler = new DisconnectionHandler(lobby);
-                lobbyIsFull();
+                if (!checkLobbySpace()){
+                    lobbyIsFull();
+                    break;
+                }
 
-                nickNameAlreadyUsed(message);
                 lobby.addUser(this, message.getNickname(), virtualView);
                 checkCompletedLobby();
                 break;
             }
 
             case LOGOUT_LOBBY: {
-                gameAlreadyStarted();
+                if (lobby.getStartedGame()){
+                    gameAlreadyStarted();
+                    break;
+                }
                 lobby.logoutFromLobby(namePlayer);
             }
             default:
@@ -138,33 +162,29 @@ public class ServerConnectionToClient implements Runnable {
         }
     }
 
+    private void alreadyLoggedNickName(ClientMessage message) {
+            ErrorMessage errorMessage=new ErrorMessage();
+            errorMessage.setReturnMessage("nickname already used");
+            sendMessage(errorMessage);
+    }
 
 
     private void gameAlreadyStarted() {
-        if (lobby.getStartedGame()) {
             ErrorMessage errorMessage = new ErrorMessage();
             errorMessage.setReturnMessage("Game already started,you can't logout since the game is finished");
             sendMessage(errorMessage);
-        }
+
     }
 
-    private void nickNameAlreadyUsed(ClientMessage message) {
-        if (lobby.getJoinedUsers().contains(message.getNickname())) {
-            ErrorMessage errorMessage = new ErrorMessage();
-            errorMessage.setReturnMessage("Sorry, that nickname is already used. Please, insert a new one using again the command.\\n");
-            sendMessage(errorMessage);
-
-        }
-    }
 
     private void lobbyIsFull() {
-        if (!checkLobbySpace()) {
+
             ErrorMessage errorMessage = new ErrorMessage();
             errorMessage.setReturnMessage("the Lobby is full");
             sendMessage(errorMessage);
 
         }
-    }
+
 
     private void reconnectedPlayer(ClientMessage message) {
         for (Lobby l : Server.startedLobbies) {
@@ -181,14 +201,13 @@ public class ServerConnectionToClient implements Runnable {
     }
 
     private void noLobbyInServer(ClientMessage message) {
-        if (Server.lobbies.size()==0){
+
             ErrorMessage errorMessage =new ErrorMessage();
             errorMessage.setReturnMessage("There is no available lobby, create a new one using the command:\n" +
                     "/CREATE_LOBBY <your nickname> <number of players>\n" +
                     "Remember that the number of players can only be 2, 3 or 4!");
             sendMessage(errorMessage);
-            return;
-        }
+
     }
 
 
@@ -202,7 +221,6 @@ public class ServerConnectionToClient implements Runnable {
     }
 
     private void alreadyExistentLobby(ClientMessage message){
-        if(lobby!=null){
             if (lobby.getJoinedUsers().contains(message.getNickname())) {
                 ErrorMessage errorMessage=new ErrorMessage();
                 errorMessage.setReturnMessage("You are already part of a lobby,please log out if you want to create a new lobby.");
@@ -212,7 +230,7 @@ public class ServerConnectionToClient implements Runnable {
             ErrorMessage errorMessage=new ErrorMessage();
             errorMessage.setReturnMessage("Lobby already present, please join that lobby");
             sendMessage(errorMessage);
-        }
+
     }
 
 

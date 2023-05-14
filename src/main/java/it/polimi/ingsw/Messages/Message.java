@@ -32,6 +32,8 @@ public abstract class Message {
         LOGOUT_LOBBY,
         END_GAME_MESSAGE,
         RETURN_MESSAGE,
+        NICKNAME,
+        VALID_NICKNAME,
         WARNING;
 
     }
