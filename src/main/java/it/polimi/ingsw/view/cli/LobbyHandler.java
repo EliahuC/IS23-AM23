@@ -28,10 +28,10 @@ public class LobbyHandler {
         while(true) {
             System.out.print("Do you want to look for a lobby to join or do you prefer to make a new one?\n" +
                     "Please use the following commands:\n" +
-                    "/CREATE <your nickname> <number of players> (Remember that the number of players can only be 2, 3 or 4!)\n" +
-                    "/ENTER <your nickname>\n");
+                    "/CREATE  <number of players> (Remember that the number of players can only be 2, 3 or 4!)\n" +
+                    "/ENTER \n");
 
-            command = input.nextLine();
+            command = input.nextLine().toUpperCase();
             if(Objects.equals(command.split(" ")[0], "/CREATE") || Objects.equals(command.split(" ")[0], "/ENTER"))
                 break;
             System.out.print("Please, use the correct commands.\n");

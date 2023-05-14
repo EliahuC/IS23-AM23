@@ -109,6 +109,7 @@ public class ServerConnectionTCP implements ServerConnection {
                 Server.connectedPlayers.add(message.getNickname());
                 namePlayer=message.getNickname();
                 sendMessage(new ValidNicknameMessage());
+                break;
             }
             case CREATE_LOBBY: {
                 if(lobby!=null){
