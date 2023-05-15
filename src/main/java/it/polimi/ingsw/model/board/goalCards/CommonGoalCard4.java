@@ -504,4 +504,9 @@ public class CommonGoalCard4 extends CommonGoalCard implements CheckCommonGoalCa
             return true;
         else return false;
     }
+
+    public void print(){
+        System.out.print("TWO SQUARES. Make 2 groups each containing 4 tiles of the same type in a 2x2 square.\n" +
+                "The tiles of one square can be different from those of the other square. --> You can still get" + getPoints() + "POINTS\n");
+    }
 }

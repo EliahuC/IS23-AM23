@@ -64,4 +64,8 @@ public class CommonGoalCard3 extends CommonGoalCard implements CheckCommonGoalCa
         if(count>=Goal)
             increaseNumCompleted();
     }
+
+    public void print(){
+        System.out.print("TILES ON THE CORNER. Insert 4 tiles of the same type in the four corners of the bookshelf. --> You can still get" + getPoints() + "POINTS\n");
+    }
 }

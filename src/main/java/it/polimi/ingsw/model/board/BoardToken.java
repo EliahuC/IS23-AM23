@@ -66,4 +66,13 @@ public class BoardToken {
     public void freeTile(){
         Tile=null;
     }
+
+    public void print(){
+        if(this.getCategory()==boardTokenCategory.UNAVAILABLE)
+            System.out.print("   ");
+        else if(this.getTile()==null)
+            System.out.print(" □ ");
+        else
+            this.getTile().print();
+    }
 }

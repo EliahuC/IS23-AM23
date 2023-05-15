@@ -332,4 +332,16 @@ public class LivingRoom {
     public GameChecker getGameChecker() {
         return gameChecker;
     }
+
+    public void print(){
+        for (int i=0; i<MAX_Row;i++){
+            for(int j=0; j<MAX_Column; j++){
+                getBoardTile(i,j).print();
+                if(j==MAX_Column-1)
+                    System.out.print("  ["+i+"]\n");
+            }
+        }
+        for(int j=0; j<MAX_Column;j++)
+            System.out.print("["+j+"]");
+    }
 }

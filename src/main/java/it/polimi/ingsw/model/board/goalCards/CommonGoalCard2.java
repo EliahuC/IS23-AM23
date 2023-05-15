@@ -33,4 +33,9 @@ public class CommonGoalCard2 extends CommonGoalCard implements CheckCommonGoalCa
             return true;
         else return false;
     }
+
+    public void print(){
+        System.out.print("FOUR GROUPS FORMED OF FOUR TILES. Make 4 separated groups each containing 4 tiles of the same type." +
+                " The tiles of one group can be different from those of another group. --> You can still get" + getPoints() + "POINTS\n");
+    }
 }

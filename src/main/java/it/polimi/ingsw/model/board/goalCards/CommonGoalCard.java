@@ -80,6 +80,8 @@ public abstract class CommonGoalCard {
         return L;
     }
 
-
+    public void print(){
+        System.out.print("This method prints the description of the goal card.");
+    };
 }
 

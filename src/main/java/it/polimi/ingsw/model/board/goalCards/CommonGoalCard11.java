@@ -51,4 +51,8 @@ public class CommonGoalCard11 extends CommonGoalCard implements CheckCommonGoalC
             return true;
         else return false;
     }
+
+    public void print(){
+        System.out.print("CROSS TILES. Insert 5 tiles of the same type forming an X. --> You can still get" + getPoints() + "POINTS\n");
+    }
 }

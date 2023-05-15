@@ -34,6 +34,11 @@
 
 
         }
+
+        public void print(){
+            System.out.print("EIGHT SAME TILES. Insert 8 tiles of the same type." +
+                    "There’s no restriction about the position of these tiles. --> You can still get" + getPoints() + "POINTS\n");
+        }
     }
 
        /* private List<String> Colors=new ArrayList<>();
