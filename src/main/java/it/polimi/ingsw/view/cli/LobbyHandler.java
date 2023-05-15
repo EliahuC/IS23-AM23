@@ -19,7 +19,7 @@ public class LobbyHandler {
         this.connectionClient = connectionClient;
         moveSerializer = new MoveSerializer();
     }
-/*
+
     public void start() {
         String command;
         Scanner input = new Scanner(System.in);
@@ -38,7 +38,7 @@ public class LobbyHandler {
         }
         Message message = moveSerializer.serializeInput(command);
         connectionClient.sendMessage((ClientMessage) message);
-        while(true) {
+        /*while(true) {
             try {
                 serverMessage = connectionClient.receiveMessage();
             }catch (IOException | ClassNotFoundException e){
@@ -51,7 +51,7 @@ public class LobbyHandler {
                 connectionClient.sendMessage((ClientMessage) message);
             } else
                 break;
-        }
+        }*/
 
         System.out.print("Hi" + connectionClient.getPlayerName() + "! Let's wait for other players to begin the game...\n" +
                 "If you want to exit from the game, please use the command: /EXIT\n");
@@ -60,7 +60,7 @@ public class LobbyHandler {
         connectionClient.sendMessage(message);*/
         //}
 
-      /*  while(true) {
+        /*while(true) {
             try {
                 serverMessage = connectionClient.receiveMessage();
             }catch (IOException | ClassNotFoundException e){
@@ -70,7 +70,7 @@ public class LobbyHandler {
                 System.out.print(serverMessage.getReturnMessage());
                 break;
             }
-        }
+        }*/
 
         try{
             TimeUnit.SECONDS.sleep(3);
@@ -78,5 +78,5 @@ public class LobbyHandler {
             iE.printStackTrace();
         }
         new GameHandler(connectionClient).start();
-    }*/
+    }
 }

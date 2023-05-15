@@ -14,12 +14,12 @@ public class ItemTile {
     private ItemTileCategory category=null ;
     private String color;
     public static final String RESET = "\u001B[0m";
-    public static final String GREEN = "\u001B[32m";
-    public static final String WHITE = "\u001B[37m";
-    public static final String YELLOW = "\u001B[33m";
-    public static final String BLUE = "\u001B[34m";
-    public static final String CYAN = "\u001B[36m";
-    public static final String PINK = "\u001B[35m";
+    public static final String GREEN = "\u001b[48;2;145;165;65m";
+    public static final String WHITE = "\u001b[48;2;236;225;189m";
+    public static final String YELLOW = "\u001b[48;2;223;169;59m";
+    public static final String BLUE = "\u001b[48;2;0;104;146m";
+    public static final String CYAN = "\u001b[48;2;106;183;183m";
+    public static final String PINK = "\u001b[48;2;198;77;124m";
   /*  private boolean visited;
 
     public boolean isVisited() {
@@ -41,28 +41,28 @@ public class ItemTile {
         switch(x){
             case "CATS":
                 this.category= ItemTileCategory.CATS;
-                this.color=GREEN + " ■ " + RESET;
+                this.color=GREEN + "   " + RESET;
                 break;
 
             case "FRAMES":
                 this.category= ItemTileCategory.FRAMES;
-                this.color=BLUE + " ■ " + RESET;
+                this.color=BLUE + "   " + RESET;
                 break;
             case "BOOKS":
                 this.category= ItemTileCategory.BOOKS;
-                this.color=RESET + " ■ " + RESET;
+                this.color=WHITE + "   " + RESET;
                 break;
             case "GAMES":
                 this.category= ItemTileCategory.GAMES;
-                this.color=YELLOW + " ■ " + RESET;
+                this.color=YELLOW + "   " + RESET;
                 break;
             case "PLANTS":
                 this.category= ItemTileCategory.PLANTS;
-                this.color=PINK + " ■ " + RESET;
+                this.color=PINK + "   " + RESET;
                 break;
             case "TROPHIES":
                 this.category= ItemTileCategory.TROPHIES;
-                this.color=CYAN + " ■ " + RESET;
+                this.color=CYAN + "   " + RESET;
                 break;
         }
     }
