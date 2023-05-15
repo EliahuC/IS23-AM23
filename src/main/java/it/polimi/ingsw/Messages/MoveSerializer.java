@@ -30,19 +30,16 @@ public class MoveSerializer implements Printer {
       switch (checkCommand(Command[0])){
           case CREATE_LOBBY -> {
               if((Integer.parseInt(Command[1])<5)||(Integer.parseInt(Command[1])>1)){
-                  Message m=new LobbyCreationMessage(null,Integer.parseInt(Command[1]));
-                  return m;
+                  return new LobbyCreationMessage(null,Integer.parseInt(Command[1]));
               }
               else
                   return invalidCommand();
           }
           case EXIT_LOBBY ->{
-              Message m =new LobbyLogoutMessage();
-              return m;
+              return new LobbyLogoutMessage();
           }
           case ENTER_LOBBY -> {
-              Message m=new LobbyEntranceMessage();
-              return m;
+              return new LobbyEntranceMessage();
           }
           case START_GAME -> {
               Message m=new StartGameMessage("Player");
@@ -91,6 +88,9 @@ public class MoveSerializer implements Printer {
               Message m=new OrderMessage(move);
               return m;
           }
+          case CLOSE -> {
+              return new CloseMessage();
+          }
           case INVALID_COMMAND -> {
              return invalidCommand();
           }
@@ -133,6 +133,9 @@ public class MoveSerializer implements Printer {
             case "/ORDER"->{
                 return MoveCategory.SELECT_ORDER;
             }
+            case "/CLOSE"->{
+                return MoveCategory.CLOSE;
+            }
             default -> {
                 return MoveCategory.INVALID_COMMAND;
             }
@@ -142,6 +145,7 @@ public class MoveSerializer implements Printer {
 
     public enum MoveCategory{
         CREATE_LOBBY,
+        CLOSE,
         ENTER_LOBBY,
         EXIT_LOBBY,
         START_GAME,

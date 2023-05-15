@@ -13,6 +13,7 @@ public class CLICommandList {
         commands.add("/start");
         commands.add("/select x1 y1 x2 y2 x3 y3");
         commands.add("/column y");
+        commands.add("/close");
         commands.add("/order t1 t2 t3 (t1 t2 t3 must be numbers of your previous selection" +
                      " for example if you have selected 2 tiles t1 == tile with coordinates(x1,y1)  " +
                      "and t2 == tile with coordinates (x2,y2) and the order you want is  t2 t1 you have to write 2 1");

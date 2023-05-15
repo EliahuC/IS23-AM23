@@ -5,7 +5,7 @@ import java.util.Objects;
 public abstract class Message {
 
     public MessageCategory messageCategory;
-    private final String nickname;
+    private  String nickname;
     private String returnMessage;
 
 
@@ -34,6 +34,7 @@ public abstract class Message {
         RETURN_MESSAGE,
         NICKNAME,
         VALID_NICKNAME,
+        CLOSE,
         WARNING;
 
     }
@@ -89,8 +90,13 @@ public abstract class Message {
         return nickname.equals(message.nickname) && returnMessage.equals(message.returnMessage) && messageCategory == message.messageCategory;
     }
 
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(nickname, returnMessage, messageCategory);
     }
+
 }

@@ -8,9 +8,7 @@ import java.io.IOException;
 public abstract class ConnectionClient implements Runnable {
     public void sendMessage(ClientMessage message){};
 
-    public ServerMessage receiveMessage() throws IOException, ClassNotFoundException {
-        return null;
-    };
+    public void receiveMessage(String s){};
 
     public String getPlayerName() {
         return null;

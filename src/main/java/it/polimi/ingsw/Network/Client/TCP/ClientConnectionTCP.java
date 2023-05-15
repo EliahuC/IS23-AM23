@@ -62,33 +62,27 @@ public class ClientConnectionTCP extends ConnectionClient {
 
         //Scrivo reazione view all'evento
         while(clientIsActive){
-            try {
-                ServerMessage serverMessage = receiveMessage();
-                if (serverMessage!= null && serverMessage.getCategory() != Message.MessageCategory.PINGFROMSERVER) {
-                    if (GUIisActive) {
-                        //GUIEvent.recieveMessage(serverMessage);
-                    } else; //CLIEvent.recieveMessage(serverMessage);
-                } else if(serverMessage!= null && serverMessage.getCategory()== Message.MessageCategory.PINGFROMSERVER){
-                    //System.out.println("Ping arrived");
-                    sendPing();
-                }
-            } catch (IOException e){
-                closeConnection();
-                notifyDisconnection();
-            }catch (ClassNotFoundException e){
-                e.printStackTrace();
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
+            String s = input.nextLine();
+            receiveMessage(s);
         }
 
     }
-
-    public ServerMessage receiveMessage() throws IOException, ClassNotFoundException {
-        String s=input.nextLine();
-
-        return (ServerMessage) MoveDeserializer.deserializeOutput(s);
-    }
+@Override
+        public void receiveMessage(String s) {
+            ServerMessage serverMessage= (ServerMessage) MoveDeserializer.deserializeOutput(s);
+            try{
+                if (serverMessage!= null && serverMessage.getCategory() != Message.MessageCategory.PINGFROMSERVER) {
+                    if (GUIisActive) {
+                //GUIEvent.recieveMessage(serverMessage);
+                        } else; //CLIEvent.recieveMessage(serverMessage);
+        } else if(serverMessage!= null && serverMessage.getCategory()== Message.MessageCategory.PINGFROMSERVER){
+            //System.out.println("Ping arrived")
+                    sendPing();
+                }
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        }
 
     private void notifyDisconnection() {
         if(GUIisActive){
@@ -106,6 +100,7 @@ public class ClientConnectionTCP extends ConnectionClient {
         clientIsActive = false;
     }
     public void sendMessage(ClientMessage message){
+        message.setNickname(playerName);
         String m=gson.toJson(message);
         //       output.reset();
         output.println(m);

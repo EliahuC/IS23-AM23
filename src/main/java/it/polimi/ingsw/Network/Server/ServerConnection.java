@@ -12,4 +12,6 @@ public interface ServerConnection  {
         Server.lobbies.remove(lobby);
     }
     void sendMessage(ServerMessage serverMessage);
+
+     void receiveMessage(String s);
 }

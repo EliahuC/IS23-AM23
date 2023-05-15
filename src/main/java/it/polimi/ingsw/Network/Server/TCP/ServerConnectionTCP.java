@@ -97,12 +97,9 @@ public class ServerConnectionTCP implements ServerConnection,Runnable {
 
     /**
      * @author Eliahu Cohen
-     * @throws IOException
-     * @throws ClassNotFoundException
-     * Method to receive a message from the client
      */
-    public void receiveMessage() throws IOException, ClassNotFoundException {
-        String s = input.nextLine();
+    public void receiveMessage(String s) {
+
         ClientMessage message;
         try {
             message = (ClientMessage) MoveDeserializer.deserializeOutput(s);
@@ -122,6 +119,9 @@ public class ServerConnectionTCP implements ServerConnection,Runnable {
      */
     private void messageParser(ClientMessage message){
         switch (message.getCategory()) {
+            case CLOSE:{
+                closeConnection();
+            }
             case PINGTOSERVER: {
                 message.dumpPingMessage();
                 break;
@@ -335,16 +335,10 @@ public class ServerConnectionTCP implements ServerConnection,Runnable {
         });
         ping.start();
 
-        try{
-            while(serverIsActive){
-                receiveMessage();
+        while(serverIsActive){
+            String s= input.nextLine();
+            receiveMessage( s);
 
-            }
-        }catch(IOException e){
-            closeConnection();
-        }
-        catch (ClassNotFoundException e){
-            e.printStackTrace();
         }
 
     }

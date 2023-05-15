@@ -58,7 +58,7 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
     }
 
     //Metodo che riceve il messaggio da client
-    public void sendMessage(String message) {
+    public void receiveMessage(String message) {
         ClientMessage m= (ClientMessage) MoveDeserializer.deserializeOutput(message);
 
         if (m != null) {
@@ -143,7 +143,7 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
     public void sendMessage(ServerMessage message) {
         Gson gson=new Gson();
         String s=gson.toJson(message);
-        skeleton.sendMessage(s);
+        skeleton.receiveMessage(s);
 
     }
 

@@ -9,15 +9,11 @@ import it.polimi.ingsw.Messages.ServerToClient.ServerMessage;
 import it.polimi.ingsw.Network.Client.ConnectionClient;
 import it.polimi.ingsw.Network.Server.RMI.ServerConnectionRMI;
 
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.net.MalformedURLException;
-import java.net.Socket;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
-import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 public class ClientConnectionRMI extends ConnectionClient implements Remote {
@@ -62,7 +58,7 @@ public class ClientConnectionRMI extends ConnectionClient implements Remote {
     }
 
 //Ricevo il messagio
-    public void sendMessage(String message) {
+    public void receiveMessage(String message) {
         ServerMessage serverMessage= (ServerMessage) MoveDeserializer.deserializeOutput(message);
         if (serverMessage!= null && serverMessage.getCategory() != Message.MessageCategory.PINGFROMSERVER) {
             if (GUIisActive) {
@@ -79,9 +75,10 @@ public class ClientConnectionRMI extends ConnectionClient implements Remote {
 
 //Metodo che manda messaggio al server
     public void sendMessage(ClientMessage message){
+        message.setNickname(playerName);
         Gson gson=new Gson();
         String m=gson.toJson(message);
-        stub.sendMessage(m);
+        stub.receiveMessage(m);
     }
 
     @Override
