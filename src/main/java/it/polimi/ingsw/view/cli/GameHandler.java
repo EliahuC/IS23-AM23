@@ -20,7 +20,7 @@ public class GameHandler {
 
     public void start(){
         ServerMessage serverMessage;
-        while(true){
+        /*while(true){
             showBoard();
             showBookshelfOrder();
             showBookshelfColumn();
@@ -32,7 +32,7 @@ public class GameHandler {
             if(serverMessage.getCategory()==Message.MessageCategory.END_GAME_MESSAGE)
                 break;
             waiting();
-        }
+        }*/
         showEnd();
     }
 
@@ -46,9 +46,9 @@ public class GameHandler {
 
     private void showBoard(){
         ServerMessage serverMessage = new ServerMessage(Message.MessageCategory.PINGFROMSERVER);
-        try {
+        /*try {
             serverMessage = connectionClient.receiveMessage();
-        }catch (IOException | ClassNotFoundException e){};
+        }catch (IOException | ClassNotFoundException e){};*/
 
         System.out.print("LIVING BOARD\n");
         //printer della board
@@ -67,11 +67,11 @@ public class GameHandler {
             }
             Message message = MoveSerializer.serializeInput(command);
             connectionClient.sendMessage((ClientMessage) message);
-            try {
+            /*try {
                 serverMessage = connectionClient.receiveMessage();
             }catch (IOException | ClassNotFoundException e){
                 continue;
-            }
+            }*/
             if(serverMessage.getCategory()==Message.MessageCategory.RETURN_MESSAGE)
                 break;
             System.out.print("Your move is not valid. Please, pick again and correctly your tiles.\n");

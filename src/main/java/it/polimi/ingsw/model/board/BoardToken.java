@@ -71,7 +71,7 @@ public class BoardToken {
         if(this.getCategory()==boardTokenCategory.UNAVAILABLE)
             System.out.print("   ");
         else if(this.getTile()==null)
-            System.out.print(" □ ");
+            System.out.print("   ");
         else
             this.getTile().print();
     }
