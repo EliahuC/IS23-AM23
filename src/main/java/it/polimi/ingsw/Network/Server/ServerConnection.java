@@ -14,4 +14,5 @@ public interface ServerConnection  {
     void sendMessage(ServerMessage serverMessage);
 
      void receiveMessage(String s);
+
 }

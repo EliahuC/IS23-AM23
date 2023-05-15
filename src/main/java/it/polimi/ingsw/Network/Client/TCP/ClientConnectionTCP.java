@@ -8,7 +8,7 @@ import it.polimi.ingsw.Messages.Message;
 import it.polimi.ingsw.Messages.MoveDeserializer;
 import it.polimi.ingsw.Messages.ServerToClient.ServerMessage;
 import it.polimi.ingsw.Network.Client.ConnectionClient;
-import it.polimi.ingsw.Messages.MoveSerializer;
+
 
 import java.io.IOException;
 import java.io.PrintWriter;
