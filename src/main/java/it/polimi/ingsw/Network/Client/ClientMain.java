@@ -1,14 +1,10 @@
 package it.polimi.ingsw.Network.Client;
 
-import it.polimi.ingsw.Network.Client.RMI.ClientRMIMain;
-import it.polimi.ingsw.Network.Client.TCP.ClientConnectionTCP;
 import it.polimi.ingsw.Printer;
 import it.polimi.ingsw.view.*;
 import it.polimi.ingsw.view.cli.CLI;
 
 import java.io.IOException;
-import java.net.InetAddress;
-import java.net.Socket;
 
 public class ClientMain implements Printer {
     private static View view;

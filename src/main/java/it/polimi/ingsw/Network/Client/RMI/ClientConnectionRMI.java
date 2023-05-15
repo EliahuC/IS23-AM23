@@ -36,7 +36,6 @@ public class ClientConnectionRMI extends ConnectionClient implements Remote {
             throw new RuntimeException(e);
         }
         ping = new Thread(() -> {
-            int pingCount=0;
             while (clientIsActive) {
                 try {
                     //Metto a dormire thread per 5 secondi
@@ -52,7 +51,6 @@ public class ClientConnectionRMI extends ConnectionClient implements Remote {
 
 
             }
-
         });
 
     }
@@ -64,9 +62,6 @@ public class ClientConnectionRMI extends ConnectionClient implements Remote {
             if (GUIisActive) {
                 //GUIEvent.recieveMessage(serverMessage);
             } else; //CLIEvent.recieveMessage(serverMessage);
-        } else if(serverMessage!= null && serverMessage.getCategory()== Message.MessageCategory.PINGFROMSERVER){
-            //System.out.println("Ping arrived");
-            //sendPing();
         }
 
 
@@ -83,7 +78,7 @@ public class ClientConnectionRMI extends ConnectionClient implements Remote {
 
     @Override
     public String getPlayerName() {
-        return null;
+        return playerName;
     }
 
 

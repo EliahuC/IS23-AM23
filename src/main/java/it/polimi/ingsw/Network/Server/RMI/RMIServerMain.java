@@ -57,6 +57,7 @@ public class RMIServerMain extends Server implements Loggable,Runnable {
         try {
             ServerConnectionRMI rmiHandler = new ServerConnectionRMI();
             Registry registry = LocateRegistry.createRegistry(PORT);
+            showMessage("Server is ready!!");
             while(true){
                 Naming.rebind("rmi://localhost:"+22011+"/RMIServer",rmiHandler);
                 showMessage("Client successfully connected");

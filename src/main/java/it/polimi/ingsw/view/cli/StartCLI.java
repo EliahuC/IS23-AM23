@@ -1,8 +1,6 @@
 package it.polimi.ingsw.view.cli;
 
-import it.polimi.ingsw.Messages.Message;
 import it.polimi.ingsw.Network.Client.ConnectionClient;
-import it.polimi.ingsw.Network.Client.RMI.ClientRMIMain;
 import it.polimi.ingsw.Network.Client.TCP.ClientConnectionTCP;
 
 import java.io.IOException;
