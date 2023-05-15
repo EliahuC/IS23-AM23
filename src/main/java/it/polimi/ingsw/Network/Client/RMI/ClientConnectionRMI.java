@@ -2,26 +2,36 @@ package it.polimi.ingsw.Network.Client.RMI;
 
 import com.google.gson.Gson;
 import it.polimi.ingsw.Messages.ClientToServer.ClientMessage;
+import it.polimi.ingsw.Messages.ClientToServer.NickNameMessage;
 import it.polimi.ingsw.Messages.Message;
 import it.polimi.ingsw.Messages.MoveDeserializer;
 import it.polimi.ingsw.Messages.ServerToClient.ServerMessage;
 import it.polimi.ingsw.Network.Client.ConnectionClient;
-import it.polimi.ingsw.Network.Server.RMI.RMIConnection;
 import it.polimi.ingsw.Network.Server.RMI.ServerConnectionRMI;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.MalformedURLException;
+import java.net.Socket;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 public class ClientConnectionRMI extends ConnectionClient implements Remote {
     private static ServerConnectionRMI stub;
-    private boolean clientIsActive=true;
+    private final String playerName;
+    private boolean clientIsActive;
     private boolean GUIisActive;
     private Thread ping;
+    public ClientConnectionRMI(String nickname) {
+        this.playerName=nickname;
+        this.clientIsActive =true;
+        sendMessage(new NickNameMessage(playerName));
+    }
+
     @Override
     public void run() {
         try{
@@ -93,5 +103,13 @@ public class ClientConnectionRMI extends ConnectionClient implements Remote {
             return;
         }
         System.out.println("connection crushed");
+    }
+
+    public boolean isGUIisActive() {
+        return GUIisActive;
+    }
+
+    public void setGUIisActive(boolean GUIisActive) {
+        this.GUIisActive = GUIisActive;
     }
 }

@@ -27,7 +27,7 @@ public class ServerConnectionTCP implements ServerConnection,Runnable {
     private final Socket clientSocket;
     private Thread ping;
     private boolean serverIsActive;
-    private String namePlayer;
+    private String namePlayer=null;
     private Scanner input;
     private PrintWriter output;
     private VirtualView virtualView;
@@ -137,7 +137,7 @@ public class ServerConnectionTCP implements ServerConnection,Runnable {
                 break;
             }
             case CREATE_LOBBY: {
-                if(lobby!=null){
+                if(lobby!=null||namePlayer==null){
                     alreadyExistentLobby(message);
                     break;
                 }
@@ -148,6 +148,7 @@ public class ServerConnectionTCP implements ServerConnection,Runnable {
                 Server.lobbies.add(lobby);
             }
             case ENTER_LOBBY: {
+                if(namePlayer==null)break;
                 synchronized (Server.lobbies) {
                     //zero lobby
                     if (Server.lobbies.size()==0){
@@ -177,6 +178,7 @@ public class ServerConnectionTCP implements ServerConnection,Runnable {
             }
 
             case LOGOUT_LOBBY: {
+                if (namePlayer==null)break;
                 if (lobby.getStartedGame()){
                     gameAlreadyStarted();
                     break;

@@ -122,4 +122,13 @@ public class ClientConnectionTCP extends ConnectionClient {
     private void asyncSendPing(PingToServer ping) {
         new Thread(()-> sendMessage(ping)).start();
     }
+
+    public Boolean getGUIisActive() {
+        return GUIisActive;
+    }
+
+    public void setGUIisActive(Boolean GUIisActive) {
+        this.GUIisActive = GUIisActive;
+    }
+
 }

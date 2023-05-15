@@ -26,7 +26,7 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
     private static ClientConnectionRMI skeleton;
     private boolean serverIsActive;
 
-    private String namePlayer;
+    private String namePlayer=null;
     private DisconnectionHandler disconnectionHandler;
     private VirtualView virtualView;
     private boolean pingIsArrived =false;
@@ -83,7 +83,7 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
                 break;
             }
             case CREATE_LOBBY: {
-                if(lobby!=null){
+                if(lobby!=null||namePlayer==null){
                     //lreadyExistentLobby(message);
                     break;
                 }
@@ -94,6 +94,7 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
                 Server.lobbies.add(lobby);
             }
             case ENTER_LOBBY: {
+                if(namePlayer==null)break;
                 synchronized (Server.lobbies) {
                     //zero lobby
                     if (Server.lobbies.size()==0){
@@ -123,7 +124,7 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
             }
 
             case LOGOUT_LOBBY: {
-                if (lobby.getStartedGame()){
+                if (lobby.getStartedGame()||namePlayer==null){
                     //gameAlreadyStarted();
                     break;
                 }
