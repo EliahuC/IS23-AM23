@@ -1,4 +1,4 @@
-package it.polimi.ingsw.Network.Server.TCP;
+package it.polimi.ingsw.Network.Server;
 
 import com.google.gson.Gson;
 import it.polimi.ingsw.Messages.ClientToServer.ClientMessage;
@@ -7,6 +7,7 @@ import it.polimi.ingsw.Messages.ServerToClient.ErrorMessage;
 import it.polimi.ingsw.Messages.ServerToClient.ServerMessage;
 import it.polimi.ingsw.Messages.ServerToClient.GameIsStartingMessage;
 import it.polimi.ingsw.Messages.ServerToClient.ValidMoveMessage;
+import it.polimi.ingsw.Network.Server.TCP.ServerConnectionTCP;
 import it.polimi.ingsw.Savings;
 import it.polimi.ingsw.controller.ControllerCoordinator;
 import it.polimi.ingsw.model.player.Player;
@@ -24,7 +25,7 @@ import java.util.ArrayList;
 public class Lobby {
 
     private final Integer NumPlayersLobby;
-    private final ArrayList<ServerConnectionTCP> connections;
+    private final ArrayList<ServerConnection> connections;
     private final ControllerCoordinator controllerCoordinator;
     private final ArrayList<String> joinedUsers;
     private Boolean startedGame=false;
@@ -41,14 +42,14 @@ public class Lobby {
 
     /**
      * @author Eliahu Cohen
-     * @param serverConnectionTCP connection with the client
+     * @param serverConnection connection with the client
      * @param s nickname
      * @param view
      * method that adds a user to the lobby
      */
-    public synchronized void addUser(ServerConnectionTCP serverConnectionTCP, String s, VirtualView view){
+    public synchronized void addUser(ServerConnection serverConnection, String s, VirtualView view){
         if(connections.size()==NumPlayersLobby) return;
-        connections.add(serverConnectionTCP);
+        connections.add(serverConnection);
         joinedUsers.add(s);
         controllerCoordinator.joinPlayer(s,view);
         if(controllerCoordinator.getConnectedPlayers().size()==NumPlayersLobby){
@@ -164,11 +165,11 @@ public class Lobby {
         return NumPlayersLobby;
     }
 
-    public synchronized ArrayList<ServerConnectionTCP> getConnections() {
+    public synchronized ArrayList<ServerConnection> getConnections() {
         return connections;
     }
     public synchronized void sendMessageToAllTheLobby(ServerMessage message){
-        for(ServerConnectionTCP s:connections){
+        for(ServerConnection s:connections){
             s.sendMessage(message);
         }
     }

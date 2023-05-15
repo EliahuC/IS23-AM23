@@ -1,6 +1,6 @@
 package it.polimi.ingsw;
 
-import it.polimi.ingsw.Network.Server.TCP.Lobby;
+import it.polimi.ingsw.Network.Server.Lobby;
 
 /**
  * @author Eliahu Cohen

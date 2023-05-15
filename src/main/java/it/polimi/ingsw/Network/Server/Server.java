@@ -2,7 +2,6 @@ package it.polimi.ingsw.Network.Server;
 
 import it.polimi.ingsw.Network.Server.RMI.RMIServerMain;
 import it.polimi.ingsw.Network.Server.RMI.RMIparams;
-import it.polimi.ingsw.Network.Server.TCP.Lobby;
 import it.polimi.ingsw.Network.Server.TCP.TCPParams;
 import it.polimi.ingsw.Network.Server.TCP.TCPServerMain;
 import it.polimi.ingsw.Printer;
@@ -14,6 +13,9 @@ import java.util.ArrayList;
  * Server that contains RMI and TCP servers
  */
 public class Server implements Printer {
+    public static Integer idLobbies = 0;
+
+
      public static final ArrayList<Lobby> lobbies=new ArrayList<>();
     public static final ArrayList<Lobby> startedLobbies=new ArrayList<>();
     public static final ArrayList<String> connectedPlayers=new ArrayList<>();

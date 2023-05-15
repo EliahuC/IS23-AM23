@@ -2,7 +2,7 @@ package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.GameSavings;
 import it.polimi.ingsw.Launcher;
-import it.polimi.ingsw.Network.Server.TCP.VirtualView;
+import it.polimi.ingsw.Network.Server.VirtualView;
 import it.polimi.ingsw.model.board.ItemTile;
 import it.polimi.ingsw.model.board.LivingRoom;
 import it.polimi.ingsw.model.player.PersonalGoalCard;
@@ -66,6 +66,11 @@ public class Game  {
      * Method that sets what he needs and starts the game
      */
     public synchronized void startGame(){
+        PropertyChangeEvent evt = new PropertyChangeEvent(
+                this,
+                "GAME_STARTED",
+                null,
+                this);
 
         livingRoom.Start(Players.size());
         this.startedGame=true;
@@ -78,6 +83,9 @@ public class Game  {
             p.setPersonalGoalCard(new PersonalGoalCard());
         }
         turnTimer(turnTimer);
+        for(PropertyChangeListener l:listeners){
+            l.propertyChange(evt);
+        }
     }
 
     /**

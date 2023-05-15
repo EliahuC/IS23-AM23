@@ -3,9 +3,11 @@ package it.polimi.ingsw.Network.Server.RMI;
 import it.polimi.ingsw.Loggable;
 import it.polimi.ingsw.Network.Server.Server;
 import it.polimi.ingsw.Network.Server.TCP.TCPParams;
+import it.polimi.ingsw.Network.Server.VirtualView;
 
 import java.io.IOException;
-import java.rmi.AlreadyBoundException;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -13,6 +15,7 @@ import java.util.ArrayList;
 
 public class RMIServerMain extends Server implements Loggable,Runnable {
     private static int PORT = 22011;
+    private final ArrayList<VirtualView> virtualViews=new ArrayList<>();
 
     public static void main(String[] args) {
         int port = TCPParams.PORT;
@@ -50,12 +53,22 @@ public class RMIServerMain extends Server implements Loggable,Runnable {
 
     @Override
     public void run() {
+
         try {
             ServerConnectionRMI rmiHandler = new ServerConnectionRMI();
             Registry registry = LocateRegistry.createRegistry(PORT);
-            registry.bind("AdrenalineServer", rmiHandler);
-        } catch (IOException | AlreadyBoundException e) {
+            while(true){
+                Naming.rebind("rmi://localhost:"+22011+"/RMIServer",rmiHandler);
+                showMessage("Client successfully connected");
+                VirtualView virtualView=new VirtualView(rmiHandler);
+                virtualViews.add(virtualView);
+                rmiHandler.addVirtualView(virtualView);
+            }
+
+        } catch (IOException e) {
             e.printStackTrace();
+        } catch (NotBoundException e) {
+            throw new RuntimeException(e);
         }
     }
 }

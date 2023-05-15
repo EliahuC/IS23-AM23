@@ -10,7 +10,7 @@ import java.rmi.RemoteException;
 public interface RemoteInterface extends Remote {
      void sendMessage(ServerMessage message);
 
-     void receiveMessage();
+
     void login(String username, ClientConnectionRMI client) throws RemoteException;
     void disconnectMe() throws RemoteException;
 }

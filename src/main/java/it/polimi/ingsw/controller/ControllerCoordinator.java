@@ -3,7 +3,7 @@ package it.polimi.ingsw.controller;
 import it.polimi.ingsw.Messages.ClientToServer.ClientMessage;
 import it.polimi.ingsw.Messages.Message;
 import it.polimi.ingsw.Messages.ServerToClient.ErrorMessage;
-import it.polimi.ingsw.Network.Server.TCP.VirtualView;
+import it.polimi.ingsw.Network.Server.VirtualView;
 import it.polimi.ingsw.model.player.Player;
 
 import java.util.ArrayList;

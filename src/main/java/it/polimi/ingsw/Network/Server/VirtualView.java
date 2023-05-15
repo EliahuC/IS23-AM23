@@ -1,6 +1,8 @@
-package it.polimi.ingsw.Network.Server.TCP;
+package it.polimi.ingsw.Network.Server;
 
 import it.polimi.ingsw.Messages.ServerToClient.*;
+import it.polimi.ingsw.Network.Server.ServerConnection;
+import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.board.BoardToken;
 import it.polimi.ingsw.model.player.BookShelf;
 import it.polimi.ingsw.model.player.Player;
@@ -14,9 +16,9 @@ import java.beans.PropertyChangeListener;
  */
 
 public class VirtualView implements PropertyChangeListener {
-    private final ServerConnectionTCP clientConnection;
+    private final ServerConnection clientConnection;
 
-    public VirtualView(ServerConnectionTCP connection) {
+    public VirtualView(ServerConnection connection) {
         this.clientConnection = connection;
     }
 
@@ -33,6 +35,7 @@ public class VirtualView implements PropertyChangeListener {
             case "BOOKSHELF_CHANGED"-> serverMessage=new BookshelfMessage((BookShelf)evt.getNewValue());
             case "BOARD_CHANGED"-> serverMessage=new LivingRoomMessage((BoardToken[][]) evt.getNewValue());
             case "GAME_ENDED"->serverMessage =new EndGameMessage((Player) evt.getNewValue());
+            case "GAME_STARTED"->serverMessage=new GameIsStartingMessage((Game) evt.getNewValue());
             default -> serverMessage= new ErrorMessage();
         }
         return serverMessage;

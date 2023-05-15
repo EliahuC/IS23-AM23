@@ -7,6 +7,7 @@ import it.polimi.ingsw.Messages.ServerToClient.ServerMessage;
  * interface that will be implemented from RMI connection and TCP connection
  */
 public interface ServerConnection extends Runnable {
-    public abstract void sendMessage(ServerMessage message);
 
+
+    void sendMessage(ServerMessage serverMessage);
 }

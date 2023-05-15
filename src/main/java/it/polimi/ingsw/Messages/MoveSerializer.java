@@ -29,8 +29,8 @@ public class MoveSerializer implements Printer {
     private static Message convertCommandToMove(String[] Command) {
       switch (checkCommand(Command[0])){
           case CREATE_LOBBY -> {
-              if((Integer.parseInt(Command[2])<5)||(Integer.parseInt(Command[2])>1)){
-                  Message m=new LobbyCreationMessage(Command[1],Integer.parseInt(Command[2]));
+              if((Integer.parseInt(Command[1])<5)||(Integer.parseInt(Command[1])>1)){
+                  Message m=new LobbyCreationMessage(null,Integer.parseInt(Command[1]));
                   return m;
               }
               else
@@ -41,11 +41,11 @@ public class MoveSerializer implements Printer {
               return m;
           }
           case ENTER_LOBBY -> {
-              Message m=new LobbyEntranceMessage(Command[1]);
+              Message m=new LobbyEntranceMessage();
               return m;
           }
           case START_GAME -> {
-              Message m=new GameIsStartingMessage();
+              Message m=new StartGameMessage("Player");
               return m;
           }
           case SELECT_TILES -> {

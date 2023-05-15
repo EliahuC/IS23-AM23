@@ -9,14 +9,12 @@ import it.polimi.ingsw.Messages.ServerToClient.ErrorMessage;
 import it.polimi.ingsw.Messages.ServerToClient.PingFromServer;
 import it.polimi.ingsw.Messages.ServerToClient.ServerMessage;
 import it.polimi.ingsw.Messages.ServerToClient.ValidNicknameMessage;
-import it.polimi.ingsw.Network.Server.Server;
-import it.polimi.ingsw.Network.Server.ServerConnection;
+import it.polimi.ingsw.Network.Server.*;
 import it.polimi.ingsw.model.player.Player;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
@@ -37,7 +35,7 @@ public class ServerConnectionTCP implements ServerConnection {
 
     private Lobby lobby;
     private DisconnectionHandler disconnectionHandler;
-    private static Integer idLobbies =0;
+
 
     public ServerConnectionTCP(Socket clientSocket) {
         this.clientSocket = clientSocket;
@@ -145,8 +143,8 @@ public class ServerConnectionTCP implements ServerConnection {
                     alreadyExistentLobby(message);
                     break;
                 }
-                lobby = new Lobby(((LobbyCreationMessage) message).getNumPlayers(), idLobbies);
-                idLobbies++;
+                lobby = new Lobby(((LobbyCreationMessage) message).getNumPlayers(), Server.idLobbies);
+                Server.idLobbies++;
                 disconnectionHandler = new DisconnectionHandler(lobby);
                 lobby.addUser(this, namePlayer, virtualView);
                 Server.lobbies.add(lobby);
