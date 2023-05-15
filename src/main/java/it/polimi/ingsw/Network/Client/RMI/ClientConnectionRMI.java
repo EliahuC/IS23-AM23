@@ -15,11 +15,13 @@ import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.concurrent.TimeUnit;
 
 public class ClientConnectionRMI extends ConnectionClient implements Remote {
     private static ServerConnectionRMI stub;
     private boolean clientIsActive=true;
     private boolean GUIisActive;
+    private Thread ping;
     @Override
     public void run() {
         try{
@@ -27,6 +29,25 @@ public class ClientConnectionRMI extends ConnectionClient implements Remote {
         } catch (MalformedURLException | NotBoundException | RemoteException e) {
             throw new RuntimeException(e);
         }
+        ping = new Thread(() -> {
+            int pingCount=0;
+            while (clientIsActive) {
+                try {
+                    //Metto a dormire thread per 5 secondi
+                    TimeUnit.SECONDS.sleep(5);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    sendPing();
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+
+
+            }
+
+        });
 
     }
 
@@ -56,5 +77,21 @@ public class ClientConnectionRMI extends ConnectionClient implements Remote {
     @Override
     public String getPlayerName() {
         return null;
+    }
+
+
+    public boolean getPing() {
+        return true;
+
+    }
+    public void sendPing() throws InterruptedException {
+        boolean pingIsOk=false;
+        pingIsOk=stub.getPing();
+        TimeUnit.SECONDS.sleep(3);
+        if(pingIsOk){
+            System.out.println("ping arrived");
+            return;
+        }
+        System.out.println("connection crushed");
     }
 }

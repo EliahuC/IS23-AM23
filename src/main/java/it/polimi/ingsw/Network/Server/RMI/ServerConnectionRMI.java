@@ -18,18 +18,43 @@ import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.concurrent.TimeUnit;
 
 public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteInterface, ServerConnection {
     private RMIConnection rmiConnection;
     private Lobby lobby;
     private static ClientConnectionRMI skeleton;
+    private boolean serverIsActive;
 
     private String namePlayer;
     private DisconnectionHandler disconnectionHandler;
     private VirtualView virtualView;
+    private boolean pingIsArrived =false;
+    private Thread ping;
 
     protected ServerConnectionRMI() throws RemoteException, MalformedURLException, NotBoundException {
         skeleton =(ClientConnectionRMI) Naming.lookup("rmi://localhost:"+22011+"/RMIServer");
+        serverIsActive=true;
+        ping = new Thread(() -> {
+            int pingCount=0;
+            while (serverIsActive) {
+                try {
+                    //Metto a dormire thread per 5 secondi
+                    TimeUnit.SECONDS.sleep(5);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    sendPing();
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+
+
+            }
+
+        });
+        ping.start();
     }
 
     //Metodo che riceve il messaggio da client
@@ -135,8 +160,21 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
         this.virtualView=virtualView;
     }
 
-    @Override
-    public void run() {
+    public void sendPing() throws InterruptedException {
+        boolean pingIsOk=false;
+        pingIsOk=skeleton.getPing();
+        TimeUnit.SECONDS.sleep(3);
+        if(pingIsOk){
+            System.out.println("ping arrived");
+            return;
+        }
+        System.out.println("Connection crushed");
+        //closeConnection();
+        //notifyDisconnection();
+    }
+
+    public boolean getPing() {
+        return true;
 
     }
 }

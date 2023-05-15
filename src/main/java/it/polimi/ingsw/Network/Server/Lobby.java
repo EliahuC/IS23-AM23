@@ -144,7 +144,7 @@ public class Lobby {
         startedGame=true;
         controllerCoordinator.startGame();
         setSavesOfTheLobby();
-        sendMessageToAllTheLobby(new GameIsStartingMessage());
+
     }
 
     /**
@@ -182,7 +182,7 @@ public class Lobby {
      * method to delete the lobby
      */
     protected synchronized void deleteLobby() {
-        ServerConnectionTCP.removeVoidLobby(this);
+        ServerConnection.removeVoidLobby(this);
     }
 
     public Player getPlayer(String nickname) {

@@ -23,7 +23,7 @@ import java.util.concurrent.TimeUnit;
  * @author Eliahu Cohen
  * class that handles the tcp connection between the server and the client
  */
-public class ServerConnectionTCP implements ServerConnection {
+public class ServerConnectionTCP implements ServerConnection,Runnable {
     private final Socket clientSocket;
     private Thread ping;
     private boolean serverIsActive;
@@ -55,9 +55,7 @@ public class ServerConnectionTCP implements ServerConnection {
 
     }
 
-    protected synchronized static void removeVoidLobby(Lobby lobby) {
-        Server.lobbies.remove(lobby);
-    }
+
 
     /**
      * @author Eliahu Cohen
