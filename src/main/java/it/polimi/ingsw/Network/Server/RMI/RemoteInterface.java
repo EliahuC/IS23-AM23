@@ -8,7 +8,7 @@ import java.rmi.RemoteException;
 
 
 public interface RemoteInterface extends Remote {
-     void sendMessage(ServerMessage message);
+     void sendMessage(ServerMessage message)throws RemoteException;
 
 
     void login(String username, ClientConnectionRMI client) throws RemoteException;
