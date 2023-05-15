@@ -36,7 +36,7 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
     private Thread ping;
 
     protected ServerConnectionRMI() throws RemoteException, MalformedURLException, NotBoundException {
-        skeleton =(ClientConnectionRMI) Naming.lookup("rmi://localhost:"+22011+"/RMIServer");
+        skeleton = (ClientConnectionRMI) Naming.lookup("rmi://localhost:"+22011+"/RMIServer");
         serverIsActive=true;
         ping = new Thread(() -> {
             int pingCount=0;
