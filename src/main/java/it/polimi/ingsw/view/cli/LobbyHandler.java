@@ -77,6 +77,6 @@ public class LobbyHandler {
         }catch (InterruptedException iE){
             iE.printStackTrace();
         }
-        new GameHandler(connectionClient).start();
+        //new GameHandler(connectionClient).start();
     }
 }

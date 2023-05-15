@@ -33,8 +33,8 @@ public class GameHandler {
                 break;
             waiting();
         }*/
-        showEnd();
-    }
+        //showEnd();
+    //}
 
     private void waiting(){
         //while(non è il tuo turno) //Il player è associato alla classe?
@@ -93,7 +93,7 @@ public class GameHandler {
             break;
             case "BookshelfOrder": showBookshelfOrder();
             break;
-            case "BookshelfColumn": showBookshelfColumn();
+            case "BookshelfColumn": //showBookshelfColumn();
             break;
         }
 
@@ -124,7 +124,7 @@ public class GameHandler {
         }
     }
 
-    private void showBookshelfColumn(){
+   /* private void showBookshelfColumn(){
         Scanner input = new Scanner(System.in);
         System.out.print("Now, it's time to choose the column where you want to insert the picked tiles using the command /COLUMN <column>\n" +
                 "<column> value can be 0 (the first column on the left), 1, 2, 3 or 4 (the first column on the right).\n\n" +

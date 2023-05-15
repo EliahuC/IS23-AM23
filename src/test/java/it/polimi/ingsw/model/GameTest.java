@@ -725,6 +725,7 @@ public class GameTest extends TestCase {
         L.addPlayer(p3);
         L.addPlayer(p4);
         L.setNumPlayers(4);
+
         Game G = new Game(L, L.getPlayers());
         G.startGame();
         ArrayList<Integer> CoordinatesTiles = new ArrayList<>();
