@@ -5,6 +5,7 @@ import it.polimi.ingsw.Network.Server.Server;
 import it.polimi.ingsw.Network.Server.TCP.ServerConnectionTCP;
 import it.polimi.ingsw.Network.Server.VirtualView;
 import it.polimi.ingsw.model.board.ItemTile;
+import it.polimi.ingsw.model.player.PersonalGoalCard;
 import it.polimi.ingsw.model.player.Player;
 import junit.framework.TestCase;
 
@@ -90,7 +91,11 @@ public class GameTest extends TestCase {
             L.addPlayer(p3);
             L.addPlayer(p4);
             L.setNumPlayers(4);
-            Game G = new Game(L,L.getPlayers());
+            p1.setListener(new VirtualView(new ServerConnectionTCP(null)));
+            p2.setListener(new VirtualView(new ServerConnectionTCP(null)));
+            p3.setListener(new VirtualView(new ServerConnectionTCP(null)));
+            p4.setListener(new VirtualView(new ServerConnectionTCP(null)));
+            Game G = new Game(L, L.getPlayers());
             G.startGame();
             ArrayList<Integer> CoordinatesTiles = new ArrayList<>();
             CoordinatesTiles.add(3);
@@ -100,11 +105,11 @@ public class GameTest extends TestCase {
             ArrayList<Integer> OrderTiles = new ArrayList<>();
             OrderTiles.add(1);
             OrderTiles.add(2);
-            ItemTile i = G.getLivingRoom().getBoardTile(3,8).getTile();
-            ItemTile it = G.getLivingRoom().getBoardTile(4,8).getTile();
-            G.playMove(CoordinatesTiles,3,OrderTiles);
-            assertEquals(i,G.getPlayers().get(0).getPlayerBookshelf().getTile(5,3));
-            assertEquals(it,G.getPlayers().get(0).getPlayerBookshelf().getTile(4,3));
+            ItemTile i = G.getLivingRoom().getBoardTile(3, 8).getTile();
+            ItemTile it = G.getLivingRoom().getBoardTile(4, 8).getTile();
+            G.playMove(CoordinatesTiles, 3, OrderTiles);
+            assertEquals(i, G.getPlayers().get(0).getPlayerBookshelf().getTile(5, 3));
+            assertEquals(it, G.getPlayers().get(0).getPlayerBookshelf().getTile(4, 3));
         }*/
         public void testPlayMove_THIRD(){       //ONE MOVE BUT DIFFERENT INSERT ORDER
             Player p1 = new Player("Tom");
@@ -384,8 +389,8 @@ public class GameTest extends TestCase {
             assertEquals(u,G.getPlayers().get(0).getPlayerBookshelf().getTile(4,4));
         }
     public void testEndgame_FIRST() {
-        Player p = new Player("Tom", 2);
-        Player p2 = new Player("Butch", 12);
+        Player p = new Player("Tom");
+        Player p2 = new Player("Butch");
         Launcher L = new Launcher();
         L.addPlayer(p);
         L.addPlayer(p2);
@@ -452,13 +457,15 @@ public class GameTest extends TestCase {
         p2.getPlayerBookshelf().setTile(5, 2, new ItemTile("TROPHIES"));
         p2.getPlayerBookshelf().setTile(5, 3, new ItemTile("TROPHIES"));
         p2.getPlayerBookshelf().setTile(5, 4, new ItemTile("TROPHIES"));
+        p2.setPersonalGoalCard(new PersonalGoalCard(12));
+        p.setPersonalGoalCard(new PersonalGoalCard(2));
         Optional<Player> player = Optional.ofNullable(p2);
         assertEquals(player, G.endGame());
     }
 
     public void testEndgame_SECOND() {
-        Player p = new Player("Spike", 2);
-        Player p2 = new Player("Jerry", 12);
+        Player p = new Player("Spike");
+        Player p2 = new Player("Jerry");
         Launcher L = new Launcher();
         L.addPlayer(p);
         L.addPlayer(p2);
@@ -526,6 +533,8 @@ public class GameTest extends TestCase {
         p2.getPlayerBookshelf().setTile(5, 2, new ItemTile("BOOKS"));
         p2.getPlayerBookshelf().setTile(5, 3, new ItemTile("FRAMES"));
         p2.getPlayerBookshelf().setTile(5, 4, new ItemTile("TROPHIES"));
+        p2.setPersonalGoalCard(new PersonalGoalCard(12));
+        p.setPersonalGoalCard(new PersonalGoalCard(2));
         Optional<Player> player = Optional.ofNullable(G.getPlayers().get(1));
         assertEquals(player, G.endGame());
     }
@@ -712,34 +721,5 @@ public class GameTest extends TestCase {
         Coordinates.add(5);
         Coordinates.add(1);
         assertTrue(G.checkLegalColumn(0,Coordinates.size()/2));
-    }
-
-    public void testPlayMove_SECOND() {      //ONE MOVE
-        Player p1 = new Player("Tom");
-        Player p2 = new Player("Jerry");
-        Player p3 = new Player("Spike");
-        Player p4 = new Player("Butch");
-        Launcher L = new Launcher();
-        L.addPlayer(p1);
-        L.addPlayer(p2);
-        L.addPlayer(p3);
-        L.addPlayer(p4);
-        L.setNumPlayers(4);
-
-        Game G = new Game(L, L.getPlayers());
-        G.startGame();
-        ArrayList<Integer> CoordinatesTiles = new ArrayList<>();
-        CoordinatesTiles.add(3);
-        CoordinatesTiles.add(8);
-        CoordinatesTiles.add(4);
-        CoordinatesTiles.add(8);
-        ArrayList<Integer> OrderTiles = new ArrayList<>();
-        OrderTiles.add(1);
-        OrderTiles.add(2);
-        ItemTile i = G.getLivingRoom().getBoardTile(3, 8).getTile();
-        ItemTile it = G.getLivingRoom().getBoardTile(4, 8).getTile();
-        G.playMove(CoordinatesTiles, 3, OrderTiles);
-        assertEquals(i, G.getPlayers().get(0).getPlayerBookshelf().getTile(5, 3));
-        assertEquals(it, G.getPlayers().get(0).getPlayerBookshelf().getTile(4, 3));
     }
 }

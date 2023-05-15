@@ -8,6 +8,7 @@ import it.polimi.ingsw.Messages.Message;
 import it.polimi.ingsw.Messages.ServerToClient.ErrorMessage;
 import it.polimi.ingsw.Messages.ServerToClient.ValidMoveMessage;
 import it.polimi.ingsw.model.board.ItemTile;
+import it.polimi.ingsw.model.player.PersonalGoalCard;
 import it.polimi.ingsw.model.player.Player;
 import junit.framework.TestCase;
 
@@ -50,8 +51,8 @@ public class GameControllerTest extends TestCase {
         assertFalse(GC.getGame().getPlayers().get(1).isFirstPlayerSeat());
     }
     public void testEndgameGC_FIRST() {
-        Player p = new Player("Alice", 2);
-        Player p2 = new Player("Bob", 12);
+        Player p = new Player("Alice");
+        Player p2 = new Player("Bob");
         ArrayList<Player> Players = new ArrayList<>();
         Players.add(p);
         Players.add(p2);
@@ -117,12 +118,14 @@ public class GameControllerTest extends TestCase {
         p2.getPlayerBookshelf().setTile(5, 2, new ItemTile("TROPHIES"));
         p2.getPlayerBookshelf().setTile(5, 3, new ItemTile("TROPHIES"));
         p2.getPlayerBookshelf().setTile(5, 4, new ItemTile("TROPHIES"));
+        p2.setPersonalGoalCard(new PersonalGoalCard(12));
+        p.setPersonalGoalCard(new PersonalGoalCard(2));
         Optional<Player> player = Optional.ofNullable(p2);
         assertEquals(player, GC.endGame());
     }
     public void testEndgameGC_SECOND() {
-        Player p = new Player("Alice", 2);
-        Player p2 = new Player("Bob", 12);
+        Player p = new Player("Alice");
+        Player p2 = new Player("Bob");
         ArrayList<Player> Players= new ArrayList<>();
         Players.add(p);
         Players.add(p2);
@@ -189,6 +192,8 @@ public class GameControllerTest extends TestCase {
         p2.getPlayerBookshelf().setTile(5, 2, new ItemTile("BOOKS"));
         p2.getPlayerBookshelf().setTile(5, 3, new ItemTile("FRAMES"));
         p2.getPlayerBookshelf().setTile(5, 4, new ItemTile("TROPHIES"));
+        p2.setPersonalGoalCard(new PersonalGoalCard(12));
+        p.setPersonalGoalCard(new PersonalGoalCard(2));
         Optional<Player> player = Optional.ofNullable(GC.getGame().getPlayers().get(1));
         assertEquals(player, GC.endGame());
     }

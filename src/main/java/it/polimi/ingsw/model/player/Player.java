@@ -40,23 +40,7 @@ public class Player {
 
     }
 
-    /**
-     * @author Giovanni Di Lorenzo
-     * @param nickName of the player
-     * @param x number of Personal Goal card requested
-     *
-     * THIS METHOD IS CREATED DUE TO MAKE TESTS
-     */
-    public Player(String nickName,int x) {
-        NickName = nickName;
 
-        this.score = 0;
-        this.playerBookshelf = new BookShelf();
-        this.personalGoalCard = new PersonalGoalCard(x);
-        this.nowPlaying = false;
-        this.lastRound = false;
-
-    }
 
     /**
      * @author Eliahu Cohen

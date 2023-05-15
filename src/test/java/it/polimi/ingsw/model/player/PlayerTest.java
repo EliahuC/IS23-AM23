@@ -87,8 +87,8 @@ public class PlayerTest extends TestCase {
         assertEquals(i6,p.getPlayerBookshelf().getTile(0,3));
     }
     public void testEndGamePoints_SECOND(){
-        Player p = new Player("Tom",2);
-        Player p2 = new Player("Butch",12);
+        Player p = new Player("Tom");
+        Player p2 = new Player("Butch");
         p.getPlayerBookshelf().setTile(1,1, new ItemTile("PLANTS"));
         p.getPlayerBookshelf().setTile(5,4, new ItemTile("FRAMES"));
         p.getPlayerBookshelf().setTile(2,0, new ItemTile("PLANTS"));
@@ -150,8 +150,10 @@ public class PlayerTest extends TestCase {
         p2.getPlayerBookshelf().setTile(5, 2, new ItemTile("TROPHIES"));
         p2.getPlayerBookshelf().setTile(5, 3, new ItemTile("TROPHIES"));
         p2.getPlayerBookshelf().setTile(5, 4, new ItemTile("TROPHIES"));
+        p.setPersonalGoalCard(new PersonalGoalCard(2));
         p.endGamePoints();
         assertEquals(19,p.getScore());
+        p2.setPersonalGoalCard(new PersonalGoalCard(12));
         p2.endGamePoints();
         assertEquals(30,p2.getScore());
     }
