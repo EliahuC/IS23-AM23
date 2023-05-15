@@ -7,7 +7,7 @@ package it.polimi.ingsw.model.board;
 public class BoardToken {
     private ItemTile Tile ;
     private boardTokenCategory category;
-    private BoardToken[][] associatedBoard;
+    private transient BoardToken[][] associatedBoard;
     private int column;
     private int row;
 

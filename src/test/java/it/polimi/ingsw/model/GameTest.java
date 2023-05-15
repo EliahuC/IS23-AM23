@@ -1,10 +1,15 @@
 package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.Launcher;
+import it.polimi.ingsw.Network.Server.Server;
+import it.polimi.ingsw.Network.Server.TCP.ServerConnectionTCP;
+import it.polimi.ingsw.Network.Server.VirtualView;
 import it.polimi.ingsw.model.board.ItemTile;
 import it.polimi.ingsw.model.player.Player;
 import junit.framework.TestCase;
 
+import java.io.IOException;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -74,7 +79,7 @@ public class GameTest extends TestCase {
             OrderTiles.add(2);
             assertTrue(G.playMove(CoordinatesTiles,3,OrderTiles));
         }*/
-        public void testPlayMove_SECOND(){      //ONE MOVE
+       /* public void testPlayMove_SECOND(){      //ONE MOVE
             Player p1 = new Player("Tom");
             Player p2 = new Player("Jerry");
             Player p3 = new Player("Spike");
@@ -100,7 +105,7 @@ public class GameTest extends TestCase {
             G.playMove(CoordinatesTiles,3,OrderTiles);
             assertEquals(i,G.getPlayers().get(0).getPlayerBookshelf().getTile(5,3));
             assertEquals(it,G.getPlayers().get(0).getPlayerBookshelf().getTile(4,3));
-        }
+        }*/
         public void testPlayMove_THIRD(){       //ONE MOVE BUT DIFFERENT INSERT ORDER
             Player p1 = new Player("Tom");
             Player p2 = new Player("Jerry");
@@ -707,5 +712,33 @@ public class GameTest extends TestCase {
         Coordinates.add(5);
         Coordinates.add(1);
         assertTrue(G.checkLegalColumn(0,Coordinates.size()/2));
+    }
+
+    public void testPlayMove_SECOND() {      //ONE MOVE
+        Player p1 = new Player("Tom");
+        Player p2 = new Player("Jerry");
+        Player p3 = new Player("Spike");
+        Player p4 = new Player("Butch");
+        Launcher L = new Launcher();
+        L.addPlayer(p1);
+        L.addPlayer(p2);
+        L.addPlayer(p3);
+        L.addPlayer(p4);
+        L.setNumPlayers(4);
+        Game G = new Game(L, L.getPlayers());
+        G.startGame();
+        ArrayList<Integer> CoordinatesTiles = new ArrayList<>();
+        CoordinatesTiles.add(3);
+        CoordinatesTiles.add(8);
+        CoordinatesTiles.add(4);
+        CoordinatesTiles.add(8);
+        ArrayList<Integer> OrderTiles = new ArrayList<>();
+        OrderTiles.add(1);
+        OrderTiles.add(2);
+        ItemTile i = G.getLivingRoom().getBoardTile(3, 8).getTile();
+        ItemTile it = G.getLivingRoom().getBoardTile(4, 8).getTile();
+        G.playMove(CoordinatesTiles, 3, OrderTiles);
+        assertEquals(i, G.getPlayers().get(0).getPlayerBookshelf().getTile(5, 3));
+        assertEquals(it, G.getPlayers().get(0).getPlayerBookshelf().getTile(4, 3));
     }
 }

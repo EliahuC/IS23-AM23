@@ -217,7 +217,7 @@ public class LivingRoomTest extends TestCase {
         Launcher L = new Launcher();
         L.setNumPlayers(4);
         L13 = new LivingRoom(L);
-        L13.Start(L.getNumPlayers());
+        L13.start(L.getNumPlayers());
         ArrayList<Integer> CoordinatesTiles = new ArrayList<>();
         CoordinatesTiles.add(8);
         CoordinatesTiles.add(5);
@@ -230,7 +230,7 @@ public class LivingRoomTest extends TestCase {
         Launcher L = new Launcher();
         L.setNumPlayers(4);
         L14 = new LivingRoom(L);
-        L14.Start(L.getNumPlayers());
+        L14.start(L.getNumPlayers());
         ArrayList<Integer> CoordinatesTiles = new ArrayList<>();
         CoordinatesTiles.add(8);
         CoordinatesTiles.add(5);
@@ -243,7 +243,7 @@ public class LivingRoomTest extends TestCase {
         Launcher L = new Launcher();
         L.setNumPlayers(4);
         L15 = new LivingRoom(L);
-        L15.Start(L.getNumPlayers());
+        L15.start(L.getNumPlayers());
         ArrayList<Integer> CoordinatesTiles = new ArrayList<>();
         CoordinatesTiles.add(8);
         CoordinatesTiles.add(5);
@@ -258,7 +258,7 @@ public class LivingRoomTest extends TestCase {
         Launcher L = new Launcher();
         L.setNumPlayers(4);
         L17 = new LivingRoom(L);
-        L17.Start(L.getNumPlayers());
+        L17.start(L.getNumPlayers());
         ArrayList<Integer> CoordinatesTiles = new ArrayList<>();
         CoordinatesTiles.add(3);
         CoordinatesTiles.add(7);

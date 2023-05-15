@@ -19,7 +19,7 @@ public class LobbyHandler {
         this.connectionClient = connectionClient;
         moveSerializer = new MoveSerializer();
     }
-
+/*
     public void start() {
         String command;
         Scanner input = new Scanner(System.in);
@@ -60,7 +60,7 @@ public class LobbyHandler {
         connectionClient.sendMessage(message);*/
         //}
 
-        while(true) {
+      /*  while(true) {
             try {
                 serverMessage = connectionClient.receiveMessage();
             }catch (IOException | ClassNotFoundException e){
@@ -78,5 +78,5 @@ public class LobbyHandler {
             iE.printStackTrace();
         }
         new GameHandler(connectionClient).start();
-    }
+    }*/
 }

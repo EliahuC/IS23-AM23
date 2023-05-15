@@ -22,7 +22,7 @@ public class StartCLI {
         this.socket = socket;*/
     }
 
-    public void startClient(){
+    /*public void startClient(){
         //stampare schermata iniziale
         while(true){
             System.out.print("INSERT YOUR NICKNAME:");
@@ -57,7 +57,7 @@ public class StartCLI {
                     break;
                 /*case "RMI":
                     connectionClient = new ClientRMIMain();
-                    new Thread(connectionClient).start();*/
+                    new Thread(connectionClient).start();
                 default:System.out.println("Please, insert again a CORRECT address.\n");
                 break;
             }
@@ -65,5 +65,5 @@ public class StartCLI {
                 break;
         }
         new LobbyHandler(connectionClient).start();
-    }
+    }*/
 }

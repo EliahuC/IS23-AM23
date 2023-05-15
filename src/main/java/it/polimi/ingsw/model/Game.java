@@ -72,7 +72,7 @@ public class Game  {
                 null,
                 this);
 
-        livingRoom.Start(Players.size());
+        livingRoom.start(Players.size());
         this.startedGame=true;
         ArrayList<Player> mixedPlayers;
         mixedPlayers=mixPlayersOrder(Players);

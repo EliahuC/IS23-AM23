@@ -171,7 +171,7 @@ public class LivingRoom {
      * @param numPlayers that play the game
      * method that stars the living room based on the number of players
      */
-    public void Start(int numPlayers) {
+    public void start(int numPlayers) {
         for (int i = 0; i < MAX_Row; i++) {
             for (int j = 0; j < MAX_Column; j++) {
                 putTile(i, j);
@@ -258,6 +258,7 @@ public class LivingRoom {
      * @return the tiles
      */
     public ArrayList<ItemTile> getTiles(ArrayList<Integer> requestedTiles) {
+
         PropertyChangeEvent evt = new PropertyChangeEvent(
                 this,
                 "BOARD_CHANGED",

@@ -4,8 +4,6 @@ import it.polimi.ingsw.Launcher;
 import it.polimi.ingsw.model.GameChecker;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class LivingRoomPrintTest {
 
     @Test
@@ -24,19 +22,19 @@ class LivingRoomPrintTest {
         LivingRoom board2 = new LivingRoom(l2);
         LivingRoom board3 = new LivingRoom(l3);
 
-        board4.Start(4);
+        board4.start(4);
         board4.print();
 
         System.out.print("\n\n\n\n");
         System.out.flush();
 
-        board3.Start(4);
+        board3.start(4);
         board3.print();
 
         System.out.print("\n\n\n\n");
         System.out.flush();
 
-        board2.Start(4);
+        board2.start(4);
         board2.print();
     }
 }

@@ -18,12 +18,13 @@ public class RMIServerMain extends Server implements Loggable,Runnable {
     private final ArrayList<VirtualView> virtualViews=new ArrayList<>();
 
     public static void main(String[] args) {
-        int port = TCPParams.PORT;
+        int port = RMIparams.PORT;
         if (args.length > 0) {
             port = Integer.parseInt(args[0]);
         }
         RMIServerMain serverMain = new RMIServerMain(port);
-        new Thread(serverMain).start();
+        Thread thread = new Thread(serverMain);
+        thread.start();
     }
 
     @Override
@@ -55,21 +56,18 @@ public class RMIServerMain extends Server implements Loggable,Runnable {
     public void run() {
 
         try {
-            ServerConnectionRMI rmiHandler = new ServerConnectionRMI();
             Registry registry = LocateRegistry.createRegistry(PORT);
             showMessage("Server is ready!!");
             while(true){
+                ServerConnectionRMI rmiHandler = new ServerConnectionRMI();
                 Naming.rebind("rmi://localhost:"+22011+"/RMIServer",rmiHandler);
                 showMessage("Client successfully connected");
                 VirtualView virtualView=new VirtualView(rmiHandler);
                 virtualViews.add(virtualView);
                 rmiHandler.addVirtualView(virtualView);
             }
-
         } catch (IOException e) {
             e.printStackTrace();
-        } catch (NotBoundException e) {
-            throw new RuntimeException(e);
         }
     }
 }

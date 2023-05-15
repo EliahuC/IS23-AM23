@@ -10,6 +10,6 @@ public class CLI extends View implements Printer {
 
     @Override
     public void run() {
-        new StartCLI().startClient();
+        //new StartCLI().startClient();
     }
 }

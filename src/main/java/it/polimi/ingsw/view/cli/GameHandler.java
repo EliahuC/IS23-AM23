@@ -16,7 +16,7 @@ public class GameHandler {
 
     public GameHandler(ConnectionClient connectionClient) {
         this.connectionClient = connectionClient;
-    }
+    }/*
 
     public void start(){
         ServerMessage serverMessage;
@@ -140,5 +140,5 @@ public class GameHandler {
             break;
             //System.out.print("The chosen column is too full. Please, choose another one.\n");
         }
-    }
+    }*/
 }

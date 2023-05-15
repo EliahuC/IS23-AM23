@@ -23,7 +23,7 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
-public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteInterface, ServerConnection {
+public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteInterface, ServerConnection,Runnable {
     private RMIConnection rmiConnection;
     private Lobby lobby;
     private static ClientConnectionRMI skeleton;
@@ -35,29 +35,8 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
     private boolean pingIsArrived =false;
     private Thread ping;
 
-    protected ServerConnectionRMI() throws RemoteException, MalformedURLException, NotBoundException {
-        skeleton = (ClientConnectionRMI) Naming.lookup("rmi://localhost:"+22011+"/RMIServer");
-        serverIsActive=true;
-        ping = new Thread(() -> {
-            int pingCount=0;
-            while (serverIsActive) {
-                try {
-                    //Metto a dormire thread per 5 secondi
-                    TimeUnit.SECONDS.sleep(5);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    sendPing();
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-
-
-            }
-
-        });
-        ping.start();
+    public ServerConnectionRMI() throws RemoteException {
+        super();
     }
 
     //Metodo che riceve il messaggio da client
@@ -214,7 +193,7 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
     /**
      * @author Eliahu Cohen
      * @param message received from the client
-     * Method that responce to a entrance message but without any lobby
+     * Method that response to an entrance message but without any lobby
      */
     private void noLobbyInServer(ClientMessage message) {
 
@@ -282,5 +261,33 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
     public boolean getPing() {
         return true;
 
+    }
+
+    public void run(){
+        try {
+            skeleton = (ClientConnectionRMI) Naming.lookup("rmi://localhost:"+22011+"/RMIServer");
+        } catch (NotBoundException | MalformedURLException | RemoteException e) {
+            throw new RuntimeException(e);
+        }
+        serverIsActive=true;
+        ping = new Thread(() -> {
+            while (serverIsActive) {
+                try {
+                    //Metto a dormire thread per 5 secondi
+                    TimeUnit.SECONDS.sleep(5);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    sendPing();
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+
+
+            }
+
+        });
+        ping.start();
     }
 }
