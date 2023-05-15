@@ -67,4 +67,7 @@ public class CommonGoalCard7 extends CommonGoalCard implements CheckCommonGoalCa
         } else return false;
     }
 
+    public void print(){
+        System.out.print("DIAGONAL TILES. Insert 5 tiles of the same type forming a diagonal. --> You can still get" + getPoints() + "POINTS\n");
+    }
 }

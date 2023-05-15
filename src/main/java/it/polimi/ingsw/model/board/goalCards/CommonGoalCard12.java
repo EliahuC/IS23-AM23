@@ -74,4 +74,10 @@ public class CommonGoalCard12 extends CommonGoalCard implements CheckCommonGoalC
         }
         return counter;
     }
+
+    public void print(){
+        System.out.print("STAIRCASE OF TILES. Insert 5 columns of increasing or decreasing height." +
+                "Starting from the first column on the left or on the right, each next column\n" +
+                "must be made of exactly one more tile. Tiles can be of any type. --> You can still get" + getPoints() + "POINTS\n");
+    }
 }

@@ -16,6 +16,8 @@ public class PersonalGoalCard {
     private int points;
     private final Integer NumeroCarta;
     private final HashMap<PGCKey, ItemTile> Goal;
+    private static final int MAX_Row =6;
+    private static final int MAX_Column =5;
 
 
     /**
@@ -186,4 +188,19 @@ public class PersonalGoalCard {
       return counter==6;
     }
 
+    public void print(){
+         String[][] temp= new String[6][5];
+         for(PGCKey k: Goal.keySet())
+             temp[k.getX()][k.getY()] = Goal.get(k).getColor();
+         for(int i=0; i<MAX_Row; i++){
+            for(int j=0; j<MAX_Column; j++){
+                if(temp[i][j]==null)
+                    System.out.print(" □ ");
+                else
+                    System.out.print(temp[i][j]);
+                if(j==MAX_Column-1)
+                    System.out.print("\n");
+            }
+        }
+    }
 }

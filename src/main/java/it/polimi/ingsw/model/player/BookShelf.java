@@ -255,4 +255,19 @@ public class BookShelf {
     public void setCommonGoalCard2Completed(boolean commonGoalCard2Completed) {
         this.commonGoalCard2Completed = commonGoalCard2Completed;
     }
+
+    public void print(){
+        for(int i=0; i<MAX_Row; i++){
+            for(int j=0; j<MAX_Column; j++){
+                if(getTile(i,j)==null)
+                    System.out.print(" □ ");
+                else
+                    getTile(i,j).print();
+                if(j==MAX_Column-1)
+                    System.out.print("  ["+i+"]\n");
+            }
+        }
+        for(int j=0; j<MAX_Column;j++)
+            System.out.print("["+j+"]");
+    }
 }

@@ -65,4 +65,9 @@ public class CommonGoalCard1 extends CommonGoalCard implements CheckCommonGoalCa
         if(count>=Goal)
             increaseNumCompleted();
     }
+
+    public void print(){
+        System.out.print("SIX GROUPS FORMED OF TWO TILES. Make 6 separated groups each containing 2 tiles of the same type." +
+                " The tiles of one group can be different from those of another group. --> You can still get" + getPoints() + "POINTS\n");
+    }
 }

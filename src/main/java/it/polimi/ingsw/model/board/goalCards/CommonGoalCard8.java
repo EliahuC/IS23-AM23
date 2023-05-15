@@ -47,6 +47,11 @@ public class CommonGoalCard8 extends CommonGoalCard implements CheckCommonGoalCa
     public HashSet<ItemTileCategory> getCat(){
         return cat;
     }
+
+    public void print(){
+        System.out.print("FOUR FULL ROWS. Make 4 lines each formed by 5 tiles of maximum three different types." +
+                "One line can show the same or a different combination of another line. --> You can still get" + getPoints() + "POINTS\n");
+    }
 }
 
 

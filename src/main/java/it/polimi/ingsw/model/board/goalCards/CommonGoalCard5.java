@@ -46,4 +46,9 @@ public class CommonGoalCard5 extends CommonGoalCard implements CheckCommonGoalCa
         }
         return cat.size();
     }
+
+    public void print(){
+        System.out.print("THREE FULL COLUMNS. Make 3 columns each formed by 6 tiles of maximum three different types." +
+                "One column can show the same or a different combination of another column. --> You can still get" + getPoints() + "POINTS\n");
+    }
 }

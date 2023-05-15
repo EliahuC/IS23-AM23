@@ -51,5 +51,9 @@ public class CommonGoalCard9 extends CommonGoalCard implements CheckCommonGoalCa
     public HashSet<ItemTileCategory> getCat(){
         return cat;
     }
+
+    public void print(){
+        System.out.print("TWO COLUMNS WITH DIFFERENT TILES. Make 2 columns each formed by 6 different types of tiles. --> You can still get" + getPoints() + "POINTS\n");
+    }
 }
 
