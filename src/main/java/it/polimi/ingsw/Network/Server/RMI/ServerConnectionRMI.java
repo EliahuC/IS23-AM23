@@ -49,6 +49,7 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
         if (m != null) {
             messageParser(m, client);
         }
+        lobby=null;
     }
 
     /**
@@ -58,6 +59,7 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
      * Method that response to the message received with an action on the server
      */
     private void messageParser(ClientMessage message, RemoteInterfaceClient client){
+        lobby=lobbyResearch(message);
         namePlayer=message.getNickname();
         switch (message.getCategory()) {
             case PINGTOSERVER: {
@@ -129,6 +131,20 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
                 }
             }
         }
+    }
+
+    private Lobby lobbyResearch(ClientMessage message) {
+        for(Lobby l: Server.lobbies){
+            if(l.getJoinedUsers().contains(message.getNickname())){
+                return l;
+            }
+        }
+        for(Lobby l: Server.startedLobbies){
+            if(l.getJoinedUsers().contains(message.getNickname())){
+                return l;
+            }
+        }
+        return null;
     }
 
 
