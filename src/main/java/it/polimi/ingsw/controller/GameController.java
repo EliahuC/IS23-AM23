@@ -73,7 +73,7 @@ public class GameController {
                      return sendErrorMessage();
              }
          }
-         if((order.size()!=0)&&(coordinates.size()!=0)&&(column>0&&column<4)){
+         if((order.size()!=0)&&(coordinates.size()!=0)&&(column>=0&&column<=4)){
              GameSavings savings=playMove();
              message.setSavings(savings);
          }
