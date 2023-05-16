@@ -24,8 +24,9 @@ public class CommonGoalCard2 extends CommonGoalCard implements CheckCommonGoalCa
 
     /**
      * @author Giovanni Di Lorenzo
-     * @param bs
-     * @return
+     * @param bs Player's bookshelf
+     * @return this method checks if the itemtiles on upper right, upper left, lower right and lower left corners are not
+     * null
      */
     private boolean NoItemsNull(BookShelf bs){
         if((bs.getTile(0,0)!=null) && (bs.getTile(0,4)!=null) &&
@@ -35,7 +36,6 @@ public class CommonGoalCard2 extends CommonGoalCard implements CheckCommonGoalCa
     }
 
     public void print(){
-        System.out.print("FOUR GROUPS FORMED OF FOUR TILES. Make 4 separated groups each containing 4 tiles of the same type." +
-                " The tiles of one group can be different from those of another group. --> You can still get" + getPoints() + "POINTS\n");
+        System.out.print("TILES ON THE CORNER. Insert 4 tiles of the same type in the four corners of the bookshelf. --> You can still get" + getPoints() + "POINTS\n");
     }
 }
