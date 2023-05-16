@@ -41,15 +41,16 @@ public class ServerConnectionTCP implements ServerConnection{
         this.clientSocket = clientSocket;
 
         this.serverIsActive = true;
-        try {
-            output = new PrintWriter(clientSocket.getOutputStream());
-            input = new Scanner(clientSocket.getInputStream());
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (clientSocket != null) {
+            try {
+                output = new PrintWriter(clientSocket.getOutputStream());
+                input = new Scanner(clientSocket.getInputStream());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
         }
-
     }
-
 
 
     /**
@@ -86,8 +87,10 @@ public class ServerConnectionTCP implements ServerConnection{
         Gson gson =new Gson();
         String m=gson.toJson(message);
         //    output.reset();
-        output.println(m);
-        output.flush();
+        if(output!=null) {
+            output.println(m);
+            output.flush();
+        }
 
     }
 

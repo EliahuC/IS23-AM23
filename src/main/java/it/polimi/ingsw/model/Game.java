@@ -116,7 +116,7 @@ public class Game  {
               checkCGC();
               turnTimer.cancel();
               increaseCurrPlaying();
-              turnTimer(turnTimer);
+             turnTimer(turnTimer);
               if (gameChecker.isRestorable(livingRoom.getBoard())) livingRoom.restore();
               return setGameSavings();
           }
@@ -447,6 +447,7 @@ public class Game  {
                     increaseCurrPlaying();
                 }
             };
+            timer = new Timer();
             timer.schedule(timerTask,120000);
     }
 }

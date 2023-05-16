@@ -14,7 +14,7 @@ public class CommonGoalCard9 extends CommonGoalCard implements CheckCommonGoalCa
     private final static int numColumnsToAchieve=2;
     private final HashSet<ItemTileCategory> cat = new HashSet<>(); //I use an arrayList to track the categories in each column
     //of the bookshelf
-    private final Launcher L;
+    private transient final Launcher L;
 
     public CommonGoalCard9(Launcher L) {
         this.L = L;

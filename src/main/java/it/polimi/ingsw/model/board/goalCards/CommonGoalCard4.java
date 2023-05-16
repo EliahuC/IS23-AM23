@@ -19,7 +19,7 @@ public class CommonGoalCard4 extends CommonGoalCard implements CheckCommonGoalCa
     private int counterFrames = 0;
     private int counterGames = 0;
     private int counterBooks = 0;
-    private final Launcher L;
+    private transient final Launcher L;
     public CommonGoalCard4(Launcher L){
         this.L = L;
     }

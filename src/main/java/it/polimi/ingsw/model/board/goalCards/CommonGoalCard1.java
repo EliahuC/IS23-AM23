@@ -9,7 +9,7 @@ import java.util.List;
 
 public class CommonGoalCard1 extends CommonGoalCard implements CheckCommonGoalCard {
     private final List<ItemTile> validGroups = new ArrayList<>();
-    private final Launcher L;
+    private transient final Launcher L;
     private final static int Goal = 6;
 
     public CommonGoalCard1(Launcher L) {

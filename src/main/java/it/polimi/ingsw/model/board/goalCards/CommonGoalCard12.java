@@ -9,7 +9,7 @@ import it.polimi.ingsw.model.player.BookShelf;
  */
 
 public class CommonGoalCard12 extends CommonGoalCard implements CheckCommonGoalCard {
-    private final Launcher L;
+    private transient final Launcher L;
 
     public CommonGoalCard12(Launcher L) {
         this.L = L;

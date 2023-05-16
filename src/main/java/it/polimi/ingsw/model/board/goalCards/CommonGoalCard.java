@@ -9,7 +9,7 @@ import it.polimi.ingsw.model.player.BookShelf;
  */
 public abstract class CommonGoalCard {
     private int numCompleted = 0;
-    private final Launcher L = new Launcher();
+    private transient final Launcher L = new Launcher();
 
     /**
      * @author Eliahu Cohen
