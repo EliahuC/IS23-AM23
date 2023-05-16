@@ -1,6 +1,7 @@
 package it.polimi.ingsw.view.cli;
 
 import it.polimi.ingsw.Network.Client.ConnectionClient;
+import it.polimi.ingsw.Network.Client.RMI.ClientConnectionRMI;
 import it.polimi.ingsw.Network.Client.TCP.ClientConnectionTCP;
 
 import java.io.IOException;
@@ -22,15 +23,13 @@ public class StartCLI {
         this.socket = socket;*/
     }
 
-    /*public void startClient(){
+    public void startClient(){
         //stampare schermata iniziale
         while(true){
             System.out.print("INSERT YOUR NICKNAME:");
             Scanner input = new Scanner(System.in);
             nickname= input.nextLine();
 
-
-            CLIEvent cliEvent=new CLIEvent();
             System.out.print("INSERT IP ADDRESS:");
             serverAddr = input.nextLine();
             System.out.print("INSERT PORT NUMBER:");
@@ -44,7 +43,6 @@ public class StartCLI {
                     try {
                         socket = new Socket(serverAddr, portNum);
                         connectionClient = new ClientConnectionTCP(socket,nickname);
-                        connectionClient.setListener(cliEvent);
                         new Thread(connectionClient).start();
                         break;
                     } catch (IOException e) {
@@ -59,15 +57,14 @@ public class StartCLI {
                     }
                     break;
                 /*case "RMI":
-                    connectionClient = new ClientRMIMain();
-                    connectionClient.setListener(cliEvent);
-                    new Thread(connectionClient).start();
-                default:System.out.println("Please, insert again a CORRECT address.\n");
+                    connectionClient = new ClientConnectionRMI(nickname);
+                    new Thread(connectionClient).start();*/
+                default: System.out.println("Please, insert again a CORRECT address.\n");
                 break;
             }
             if(connectionClient!=null)
                 break;
         }
         new LobbyHandler(connectionClient).start();
-    }*/
+    }
 }

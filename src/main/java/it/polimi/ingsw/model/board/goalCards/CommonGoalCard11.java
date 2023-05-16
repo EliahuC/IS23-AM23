@@ -68,6 +68,24 @@ public class CommonGoalCard11 extends CommonGoalCard implements CheckCommonGoalC
     }
 
     public void print(){
-        System.out.print("CROSS TILES. Insert 5 tiles of the same type forming an X. --> You can still get" + getPoints() + "POINTS\n");
+        System.out.print("CROSS TILES.\n\n");
+
+        BookShelf example= new BookShelf();
+        ItemTile green =new ItemTile("CATS");
+        ItemTile white =new ItemTile("BOOKS");
+        ItemTile yellow =new ItemTile("GAMES");
+        ItemTile blue =new ItemTile("FRAMES");
+        ItemTile cyan =new ItemTile("TROPHIES");
+        ItemTile pink =new ItemTile("PLANTS");
+        example.setTile(4,1, white);
+        example.setTile(4,3, white);
+        example.setTile(3,2, white);
+        example.setTile(2,1, white);
+        example.setTile(2,3, white);
+
+        example.printCGC();
+
+        System.out.print("\nDESCRIPTION: Five tiles of the same type forming an X.\n");
+        System.out.print("POINTS:" + getPoints() + "\n\n");
     }
 }

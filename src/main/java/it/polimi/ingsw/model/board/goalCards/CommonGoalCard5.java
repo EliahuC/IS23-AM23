@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model.board.goalCards;
 
 import it.polimi.ingsw.Launcher;
+import it.polimi.ingsw.model.board.ItemTile;
 import it.polimi.ingsw.model.board.ItemTileCategory;
 import it.polimi.ingsw.model.player.BookShelf;
 
@@ -56,7 +57,38 @@ public class CommonGoalCard5 extends CommonGoalCard implements CheckCommonGoalCa
     }
 
     public void print(){
-        System.out.print("THREE FULL COLUMNS. Make 3 columns each formed by 6 tiles of maximum three different types." +
-                "One column can show the same or a different combination of another column. --> You can still get" + getPoints() + "POINTS\n");
+        System.out.print("THREE FULL COLUMNS.\n\n");
+
+        BookShelf example= new BookShelf();
+        ItemTile green =new ItemTile("CATS");
+        ItemTile white =new ItemTile("BOOKS");
+        ItemTile yellow =new ItemTile("GAMES");
+        ItemTile blue =new ItemTile("FRAMES");
+        ItemTile cyan =new ItemTile("TROPHIES");
+        ItemTile pink =new ItemTile("PLANTS");
+        example.setTile(5,0, cyan);
+        example.setTile(4,0, cyan);
+        example.setTile(3,0, cyan);
+        example.setTile(2,0, cyan);
+        example.setTile(1,0, cyan);
+        example.setTile(0,0, cyan);
+        example.setTile(5,2, green);
+        example.setTile(4,2, green);
+        example.setTile(3,2, yellow);
+        example.setTile(2,2, white);
+        example.setTile(1,2, green);
+        example.setTile(0,2, yellow);
+        example.setTile(5,4, blue);
+        example.setTile(4,4, cyan);
+        example.setTile(3,4, cyan);
+        example.setTile(2,4, blue);
+        example.setTile(1,4, pink);
+        example.setTile(0,4, pink);
+
+        example.printCGC();
+
+        System.out.print("\nDESCRIPTION: Three columns each formed by 6 tiles of maximum three different types.\n" +
+                "One column can show the same or a different combination of another column.\n");
+        System.out.print("POINTS:" + getPoints() + "\n\n");
     }
 }

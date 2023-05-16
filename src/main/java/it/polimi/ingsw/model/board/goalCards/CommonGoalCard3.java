@@ -67,7 +67,23 @@ public class CommonGoalCard3 extends CommonGoalCard implements CheckCommonGoalCa
     }
 
     public void print(){
-        System.out.print("FOUR GROUPS FORMED OF FOUR TILES. Make 4 separated groups each containing 4 tiles of the same type." +
-                " The tiles of one group can be different from those of another group. --> You can still get" + getPoints() + "POINTS\n");
+        System.out.print("TILES ON THE CORNER.\n\n");
+
+        BookShelf example= new BookShelf();
+        ItemTile green =new ItemTile("CATS");
+        ItemTile white =new ItemTile("BOOKS");
+        ItemTile yellow =new ItemTile("GAMES");
+        ItemTile blue =new ItemTile("FRAMES");
+        ItemTile cyan =new ItemTile("TROPHIES");
+        ItemTile pink =new ItemTile("PLANTS");
+        example.setTile(5,0, cyan);
+        example.setTile(5,4, cyan);
+        example.setTile(0,0, cyan);
+        example.setTile(0,4, cyan);
+
+        example.printCGC();
+
+        System.out.print("\nDESCRIPTION: Four tiles of the same type in the four corners of the bookshelf.\n");
+        System.out.print("POINTS:" + getPoints() + "\n\n");
     }
 }

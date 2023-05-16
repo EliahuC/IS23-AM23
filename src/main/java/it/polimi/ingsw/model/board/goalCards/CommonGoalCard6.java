@@ -1,6 +1,7 @@
     package it.polimi.ingsw.model.board.goalCards;
 
     import it.polimi.ingsw.Launcher;
+    import it.polimi.ingsw.model.board.ItemTile;
     import it.polimi.ingsw.model.player.BookShelf;
 
     public class CommonGoalCard6 extends CommonGoalCard implements CheckCommonGoalCard {
@@ -36,8 +37,29 @@
         }
 
         public void print(){
-            System.out.print("EIGHT SAME TILES. Insert 8 tiles of the same type." +
-                    "There’s no restriction about the position of these tiles. --> You can still get" + getPoints() + "POINTS\n");
+            System.out.print("EIGHT SAME TILES.\n\n");
+
+            BookShelf example= new BookShelf();
+            ItemTile green =new ItemTile("CATS");
+            ItemTile white =new ItemTile("BOOKS");
+            ItemTile yellow =new ItemTile("GAMES");
+            ItemTile blue =new ItemTile("FRAMES");
+            ItemTile cyan =new ItemTile("TROPHIES");
+            ItemTile pink =new ItemTile("PLANTS");
+            example.setTile(5,0, green);
+            example.setTile(5,2, green);
+            example.setTile(5,4, green);
+            example.setTile(3,0, green);
+            example.setTile(3,2, green);
+            example.setTile(3,4, green);
+            example.setTile(1,1, green);
+            example.setTile(1,3, green);
+
+            example.printCGC();
+
+            System.out.print("\nDESCRIPTION: Eight tiles of the same type.\n" +
+                    "There’s no restriction about the position of these tiles.\n");
+            System.out.print("POINTS:" + getPoints() + "\n\n");
         }
     }
 

@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model.board.goalCards;
 
 import it.polimi.ingsw.Launcher;
+import it.polimi.ingsw.model.board.ItemTile;
 import it.polimi.ingsw.model.board.ItemTileCategory;
 import it.polimi.ingsw.model.player.BookShelf;
 
@@ -57,8 +58,41 @@ public class CommonGoalCard8 extends CommonGoalCard implements CheckCommonGoalCa
     }
 
     public void print(){
-        System.out.print("FOUR FULL ROWS. Make 4 lines each formed by 5 tiles of maximum three different types." +
-                "One line can show the same or a different combination of another line. --> You can still get" + getPoints() + "POINTS\n");
+        System.out.print("FOUR FULL ROWS.\n\n");
+
+        BookShelf example= new BookShelf();
+        ItemTile green =new ItemTile("CATS");
+        ItemTile white =new ItemTile("BOOKS");
+        ItemTile yellow =new ItemTile("GAMES");
+        ItemTile blue =new ItemTile("FRAMES");
+        ItemTile cyan =new ItemTile("TROPHIES");
+        ItemTile pink =new ItemTile("PLANTS");
+        example.setTile(5,0, pink);
+        example.setTile(5,1, pink);
+        example.setTile(5,2, pink);
+        example.setTile(5,3, pink);
+        example.setTile(5,4, pink);
+        example.setTile(3,0, blue);
+        example.setTile(3,1, cyan);
+        example.setTile(3,2, cyan);
+        example.setTile(3,3, blue);
+        example.setTile(3,4, cyan);
+        example.setTile(2,0, yellow);
+        example.setTile(2,1, yellow);
+        example.setTile(2,2, white);
+        example.setTile(2,3, yellow);
+        example.setTile(2,4, green);
+        example.setTile(0,0, cyan);
+        example.setTile(0,1, green);
+        example.setTile(0,2, green);
+        example.setTile(0,3, cyan);
+        example.setTile(0,4, cyan);
+
+        example.printCGC();
+
+        System.out.print("\nDESCRIPTION: Four lines each formed by 5 tiles of maximum three different types.\n" +
+                "One line can show the same or a different combination of another line.\n");
+        System.out.print("POINTS:" + getPoints() + "\n\n");
     }
 }
 

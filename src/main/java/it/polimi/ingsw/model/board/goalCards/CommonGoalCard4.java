@@ -624,7 +624,28 @@ public class CommonGoalCard4 extends CommonGoalCard implements CheckCommonGoalCa
     }
 
     public void print(){
-        System.out.print("TWO SQUARES. Make 2 groups each containing 4 tiles of the same type in a 2x2 square.\n" +
-                "The tiles of one square can be different from those of the other square. --> You can still get" + getPoints() + "POINTS\n");
+        System.out.print("TWO SQUARES.\n\n");
+
+        BookShelf example= new BookShelf();
+        ItemTile green =new ItemTile("CATS");
+        ItemTile white =new ItemTile("BOOKS");
+        ItemTile yellow =new ItemTile("GAMES");
+        ItemTile blue =new ItemTile("FRAMES");
+        ItemTile cyan =new ItemTile("TROPHIES");
+        ItemTile pink =new ItemTile("PLANTS");
+        example.setTile(5,2, cyan);
+        example.setTile(5,1, cyan);
+        example.setTile(4,2, cyan);
+        example.setTile(4,1, cyan);
+        example.setTile(1,3, blue);
+        example.setTile(1,4, blue);
+        example.setTile(0,3, blue);
+        example.setTile(0,4, blue);
+
+        example.printCGC();
+
+        System.out.print("\nDESCRIPTION: Two groups each containing 4 tiles of the same type in a 2x2 square.\n" +
+                "The tiles of one square can be different from those of the other square.\n");
+        System.out.print("POINTS:" + getPoints() + "\n\n");
     }
 }

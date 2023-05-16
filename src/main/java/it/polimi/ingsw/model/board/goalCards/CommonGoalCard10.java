@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model.board.goalCards;
 
 import it.polimi.ingsw.Launcher;
+import it.polimi.ingsw.model.board.ItemTile;
 import it.polimi.ingsw.model.board.ItemTileCategory;
 import it.polimi.ingsw.model.player.BookShelf;
 
@@ -62,8 +63,31 @@ public class CommonGoalCard10 extends CommonGoalCard implements CheckCommonGoalC
     }
 
     public void print(){
-        System.out.print("TWO ROWS WITH DIFFERENT TILES. Make 2 lines each formed by 5 different types of tiles." +
-                "One line can show the same or a different combination of the other line. --> You can still get" + getPoints() + "POINTS\n");
+        System.out.print("TWO ROWS WITH DIFFERENT TILES.\n\n");
+
+        BookShelf example= new BookShelf();
+        ItemTile green =new ItemTile("CATS");
+        ItemTile white =new ItemTile("BOOKS");
+        ItemTile yellow =new ItemTile("GAMES");
+        ItemTile blue =new ItemTile("FRAMES");
+        ItemTile cyan =new ItemTile("TROPHIES");
+        ItemTile pink =new ItemTile("PLANTS");
+        example.setTile(5,0, pink);
+        example.setTile(5,1, white);
+        example.setTile(5,2, yellow);
+        example.setTile(5,3, green);
+        example.setTile(5,4, blue);
+        example.setTile(2,0, cyan);
+        example.setTile(2,1, blue);
+        example.setTile(2,2, white);
+        example.setTile(2,3, yellow);
+        example.setTile(2,4, green);
+
+        example.printCGC();
+
+        System.out.print("\nDESCRIPTION: Two lines each formed by 5 different types of tiles." +
+                "One line can show the same or a different combination of the other line.\n");
+        System.out.print("POINTS:" + getPoints() + "\n\n");
     }
 }
 

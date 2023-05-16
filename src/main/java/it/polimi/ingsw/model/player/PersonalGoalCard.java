@@ -197,14 +197,14 @@ public class PersonalGoalCard {
             System.out.print("\u001b[48;2;140;68;28m   \u001B[0m");
         System.out.print("\n");
         for(int i=0; i<MAX_Row; i++){
-            System.out.print("\u001b[48;2;140;68;28m   \u001B[0m");
+            System.out.print("  \u001b[48;2;140;68;28m \u001B[0m");
             for(int j=0; j<MAX_Column; j++) {
                 if (temp[i][j] == null)
                     System.out.print("   ");
                 else
                     System.out.print(temp[i][j]);
                 if (j == MAX_Column - 1){
-                    System.out.print("\u001b[48;2;140;68;28m   \u001B[0m");
+                    System.out.print("\u001b[48;2;140;68;28m \u001B[0m  ");
                     System.out.print("\n");
                 }
             }

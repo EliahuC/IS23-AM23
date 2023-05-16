@@ -1,23 +1,17 @@
-package it.polimi.ingsw.view.GUI;
+package it.polimi.ingsw.view.gui;
 
 import it.polimi.ingsw.Network.Client.ConnectionClient;
-import it.polimi.ingsw.Network.Client.RMI.ClientConnectionRMI;
-import it.polimi.ingsw.Network.Client.TCP.ClientConnectionTCP;
 import it.polimi.ingsw.Settings;
 
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import java.io.IOException;
 import java.net.Socket;
-import java.util.concurrent.TimeUnit;
 
 public class GUIMain extends Application{
     Stage window;

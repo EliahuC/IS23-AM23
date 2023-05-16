@@ -68,7 +68,32 @@ public class CommonGoalCard1 extends CommonGoalCard implements CheckCommonGoalCa
     }
 
     public void print(){
-        System.out.print("SIX GROUPS FORMED OF TWO TILES. Make 6 separated groups each containing 2 tiles of the same type." +
-                " The tiles of one group can be different from those of another group. --> You can still get" + getPoints() + "POINTS\n");
+        System.out.print("SIX GROUPS FORMED OF TWO TILES.\n\n");
+
+        BookShelf example= new BookShelf();
+        ItemTile green =new ItemTile("CATS");
+        ItemTile white =new ItemTile("BOOKS");
+        ItemTile yellow =new ItemTile("GAMES");
+        ItemTile blue =new ItemTile("FRAMES");
+        ItemTile cyan =new ItemTile("TROPHIES");
+        ItemTile pink =new ItemTile("PLANTS");
+        example.setTile(5,0, blue);
+        example.setTile(4,0, blue);
+        example.setTile(3,1, blue);
+        example.setTile(3,2, blue);
+        example.setTile(5,2, cyan);
+        example.setTile(5,3, cyan);
+        example.setTile(3,4, green);
+        example.setTile(2,4, green);
+        example.setTile(0,2, yellow);
+        example.setTile(0,3, yellow);
+        example.setTile(0,0, white);
+        example.setTile(1,0, white);
+
+        example.printCGC();
+
+        System.out.print("\nDESCRIPTION: Six groups each containing at least 2 tiles of the same type.\n" +
+                "The tiles of one group can be different from those of another group.\n");
+        System.out.print("POINTS:" + getPoints() + "\n\n");
     }
 }

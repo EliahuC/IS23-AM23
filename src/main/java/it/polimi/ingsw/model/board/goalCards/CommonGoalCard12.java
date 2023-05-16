@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model.board.goalCards;
 
 import it.polimi.ingsw.Launcher;
+import it.polimi.ingsw.model.board.ItemTile;
 import it.polimi.ingsw.model.player.BookShelf;
 
 /**
@@ -76,8 +77,36 @@ public class CommonGoalCard12 extends CommonGoalCard implements CheckCommonGoalC
     }
 
     public void print(){
-        System.out.print("STAIRCASE OF TILES. Insert 5 columns of increasing or decreasing height." +
-                "Starting from the first column on the left or on the right, each next column\n" +
-                "must be made of exactly one more tile. Tiles can be of any type. --> You can still get" + getPoints() + "POINTS\n");
+        System.out.print("STAIRCASE OF TILES.\n\n");
+
+        BookShelf example= new BookShelf();
+        ItemTile green =new ItemTile("CATS");
+        ItemTile white =new ItemTile("BOOKS");
+        ItemTile yellow =new ItemTile("GAMES");
+        ItemTile blue =new ItemTile("FRAMES");
+        ItemTile cyan =new ItemTile("TROPHIES");
+        ItemTile pink =new ItemTile("PLANTS");
+        example.setTile(5,0, yellow);
+        example.setTile(5,1, yellow);
+        example.setTile(5,2, yellow);
+        example.setTile(5,3, yellow);
+        example.setTile(5,4, yellow);
+        example.setTile(4,0, yellow);
+        example.setTile(4,1, yellow);
+        example.setTile(4,2, yellow);
+        example.setTile(4,3, yellow);
+        example.setTile(3,0, yellow);
+        example.setTile(3,1, yellow);
+        example.setTile(3,2, yellow);
+        example.setTile(2,0, yellow);
+        example.setTile(2,1, yellow);
+        example.setTile(1,0, yellow);
+
+        example.printCGC();
+
+        System.out.print("\nDESCRIPTION: Five columns of increasing or decreasing height.\n" +
+                "Starting from the first column on the left or on the right, each next column must be made\n" +
+                "of exactly one more tile. Tiles can be of any type.\n");
+        System.out.print("POINTS:" + getPoints() + "\n\n");
     }
 }

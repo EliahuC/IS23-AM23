@@ -51,14 +51,13 @@ public class LobbyHandler {
                 connectionClient.sendMessage((ClientMessage) message);
             } else
                 break;
-        }*/
+        }
 
-        System.out.print("Hi" + connectionClient.getPlayerName() + "! Let's wait for other players to begin the game...\n" +
+        /*System.out.print("Hi" + connectionClient.getPlayerName() + "! Let's wait for other players to begin the game...\n" +
                 "If you want to exit from the game, please use the command: /EXIT\n");
-        /*command = input.nextLine();
-        message = moveSerializer.serializeInput(command);
+        command = input.nextLine();
+        message = MoveSerializer.serializeInput(command);
         connectionClient.sendMessage(message);*/
-        //}
 
         /*while(true) {
             try {
