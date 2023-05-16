@@ -534,4 +534,70 @@ public class GameControllerTest extends TestCase {
         ValidMoveMessage valid= new ValidMoveMessage();
         assertEquals(valid,Controller.readMessage(m));
     }
+    public void testReadMessage_ELEVENTH(){
+        Player p1 = new Player("Alice");
+        Player p2 = new Player("Bob");
+        Player p3 = new Player("Carlos");
+        Player p4 = new Player("Diego");
+        ArrayList<Player> Players = new ArrayList<>();
+        Players.add(p1);
+        Players.add(p2);
+        Players.add(p3);
+        Players.add(p4);
+        p1.setListener(new VirtualView(new ServerConnectionTCP(null)));
+        p2.setListener(new VirtualView(new ServerConnectionTCP(null)));
+        p3.setListener(new VirtualView(new ServerConnectionTCP(null)));
+        p4.setListener(new VirtualView(new ServerConnectionTCP(null)));
+        GameController Controller = new GameController(Players);
+        Controller.startGame();
+        Controller.getCoordinates().add(0);
+        Controller.getCoordinates().add(4);
+        Controller.getCoordinates().add(0);
+        Controller.getCoordinates().add(3);
+        ArrayList<Integer> E = new ArrayList<>();
+        E.add(1);
+        E.add(2);
+        Move_SelectOrder M = new Move_SelectOrder();
+        M.setOrder(E);
+        Controller.setColumn(3);
+        ItemTile i = Controller.getGame().getLivingRoom().getBoardTile(0,4).getTile();
+        ItemTile it = Controller.getGame().getLivingRoom().getBoardTile(0,3).getTile();
+        ClientMessage m = new ClientMessage(Message.MessageCategory.ORDER,M,Controller.getGame().getPlayers().get(0).getNickName());
+        Controller.readMessage(m);
+        assertEquals(i,Controller.getGame().getPlayers().get(0).getPlayerBookshelf().getTile(5,3));
+        assertEquals(it,Controller.getGame().getPlayers().get(0).getPlayerBookshelf().getTile(4,3));
+    }
+    public void testReadMessage_TWELFTH(){
+        Player p1 = new Player("Alice");
+        Player p2 = new Player("Bob");
+        Player p3 = new Player("Carlos");
+        Player p4 = new Player("Diego");
+        ArrayList<Player> Players = new ArrayList<>();
+        Players.add(p1);
+        Players.add(p2);
+        Players.add(p3);
+        Players.add(p4);
+        p1.setListener(new VirtualView(new ServerConnectionTCP(null)));
+        p2.setListener(new VirtualView(new ServerConnectionTCP(null)));
+        p3.setListener(new VirtualView(new ServerConnectionTCP(null)));
+        p4.setListener(new VirtualView(new ServerConnectionTCP(null)));
+        GameController Controller = new GameController(Players);
+        Controller.startGame();
+        Controller.getCoordinates().add(0);
+        Controller.getCoordinates().add(4);
+        Controller.getCoordinates().add(0);
+        Controller.getCoordinates().add(3);
+        ArrayList<Integer> E = new ArrayList<>();
+        E.add(2);
+        E.add(1);
+        Move_SelectOrder M = new Move_SelectOrder();
+        M.setOrder(E);
+        Controller.setColumn(3);
+        ItemTile i = Controller.getGame().getLivingRoom().getBoardTile(0,4).getTile();
+        ItemTile it = Controller.getGame().getLivingRoom().getBoardTile(0,3).getTile();
+        ClientMessage m = new ClientMessage(Message.MessageCategory.ORDER,M,Controller.getGame().getPlayers().get(0).getNickName());
+        Controller.readMessage(m);
+        assertEquals(it,Controller.getGame().getPlayers().get(0).getPlayerBookshelf().getTile(5,3));
+        assertEquals(i,Controller.getGame().getPlayers().get(0).getPlayerBookshelf().getTile(4,3));
+    }
 }
