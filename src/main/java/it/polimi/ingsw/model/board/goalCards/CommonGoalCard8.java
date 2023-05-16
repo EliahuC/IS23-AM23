@@ -18,6 +18,10 @@ public class CommonGoalCard8 extends CommonGoalCard implements CheckCommonGoalCa
     public CommonGoalCard8(Launcher L) {
         this.L = L;
     }
+    /**
+     *@param bs Player's bookshelf
+     * The method below checks each bookshelf's row, until four rows comply with the specifics
+     */
 
     @Override
     public void checkGoal(BookShelf bs) {
@@ -33,7 +37,11 @@ public class CommonGoalCard8 extends CommonGoalCard implements CheckCommonGoalCa
         if (counter>=numRowsToAchieve)
             increaseNumCompleted();
     }
-
+    /**
+     *@param bs,a,cat Player's bookshelf, row index and HashSet in order to count the number of index a
+     *                row categories
+     * The method below count the categories of the row with index a
+     */
 
     public int CategoriesAllowed(BookShelf bs, int a, HashSet<ItemTileCategory> cat){
         for(int j=0; j< BookShelf.getMAX_Column() && cat.size()<=numDifferentCategoriesAllowed; j++){

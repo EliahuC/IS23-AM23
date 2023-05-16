@@ -19,6 +19,10 @@ public class CommonGoalCard5 extends CommonGoalCard implements CheckCommonGoalCa
         this.L = L;
 
     }
+    /**
+     *@param bs Player's bookshelf
+     * The method below checks each bookshelf's column, until three columns comply with the specifics
+     */
     @Override
     public void checkGoal(BookShelf bs) {
         int counter = 0;
@@ -37,7 +41,11 @@ public class CommonGoalCard5 extends CommonGoalCard implements CheckCommonGoalCa
     public HashSet<ItemTileCategory> getCat() {
         return cat;
     }
-
+    /**
+     *@param bs,a,cat Player's bookshelf, column index and HashSet in order to count the number of index a
+     *                column categories
+     * The method below count the categories of the column with index a
+     */
     public int CategoriesAllowed(BookShelf bs, int a, HashSet<ItemTileCategory> cat) {
         for (int i = 0; i < BookShelf.getMAX_Row() && cat.size() <= numDifferentCategoriesAllowed; i++) {
             if(bs.getTile(i,a)==null) {

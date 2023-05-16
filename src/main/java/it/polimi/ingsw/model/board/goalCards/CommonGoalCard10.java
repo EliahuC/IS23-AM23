@@ -20,6 +20,10 @@ public class CommonGoalCard10 extends CommonGoalCard implements CheckCommonGoalC
     public CommonGoalCard10(Launcher L) {
         this.L = L;
     }
+    /**
+     *@param bs Player's bookshelf
+     * The method below checks each bookshelf's row, until two rows comply with the specifics
+     */
     @Override
     public void checkGoal(BookShelf bs) {
         int counter=0;
@@ -34,7 +38,11 @@ public class CommonGoalCard10 extends CommonGoalCard implements CheckCommonGoalC
         if (counter>=numRowsToAchieve)
             increaseNumCompleted();
     }
-
+    /**
+     *@param bs,a,cat Player's bookshelf, row index and HashSet in order to count the number of index a
+     *                row categories
+     * The method below checks if in the row with index a there are not two itemtiles with the same category
+     */
     public boolean SameCategory(BookShelf bs,int a, HashSet<ItemTileCategory> category){
         for(int j=1;j< BookShelf.getMAX_Column();j++) {
             if (bs.getTile(a, j) == null)

@@ -13,6 +13,10 @@ public class CommonGoalCard11 extends CommonGoalCard implements CheckCommonGoalC
     public CommonGoalCard11(Launcher L) {
         this.L = L;
     }
+    /**
+     *@param bs Player's bookshelf
+     * The method below checks if there is a X scheme of same category itemtiles in the bookshelf
+     */
     @Override
     public void checkGoal(BookShelf bs) {
         boolean flag=false;
@@ -32,6 +36,11 @@ public class CommonGoalCard11 extends CommonGoalCard implements CheckCommonGoalC
         if(flag)
             increaseNumCompleted();
     }
+    /**
+     *@param bs,k,l Player's bookshelf, furthermore itemtile column and row indexes
+     * The method below checks if itemtiles with coordinates (k,l),(k,l+2),(k+1,l+1),(k+2,l),(k+2,l+2) create an X,
+     *              complying the specifics
+     */
     private boolean X(BookShelf bs, int k, int l) {
         if (NoItemsNull(bs, k, l)) {
             if ((IsEqualCategory(bs.getTile(k, l), bs.getTile(k, l + 2))) && (IsEqualCategory(bs.getTile(k, l), bs.getTile(k + 1, l + 1)))
@@ -40,11 +49,17 @@ public class CommonGoalCard11 extends CommonGoalCard implements CheckCommonGoalC
             else return false;
         } else return false;
     }
-
+    /**
+     *@param i,tile Two itemtiles
+     * The method below checks if the input parameters have the same category
+     */
     private boolean IsEqualCategory(ItemTile i, ItemTile tile){
         return i.getCategory()==tile.getCategory();
     }
-
+    /**
+     *@param bs,k,l Players'bookshelf, furthermore itemtile column and row indexes
+     * The method below checks if the itemtiles with coordinates (k,l+2),(k+2,l),(k+1,l+1),(k+2,l+2) are not null
+     */
     private boolean NoItemsNull(BookShelf bs, int k, int l){
         if((bs.getTile(k,l+2)!=null) && (bs.getTile(k+1,l+1)!=null) &&
                 (bs.getTile(k+2,l)!=null) && (bs.getTile(k+2,l+2) != null))

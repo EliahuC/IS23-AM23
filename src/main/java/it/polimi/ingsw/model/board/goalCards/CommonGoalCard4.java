@@ -613,7 +613,7 @@ public class CommonGoalCard4 extends CommonGoalCard implements CheckCommonGoalCa
     }
     /**
      * @author Giovanni Di Lorenzo
-     * @param bs,k,l   Players'bookshelf and two itemtile coordinates
+     * @param bs,k,l   Players'bookshelf, furthermore itemtile column and row indexes
      * This method checks if the itemtiles with coordinates (k,l),(k+1,l),(k,l+1),(k+1,l+1) are not null
      */
     private boolean NoItemsNull(BookShelf bs,int k, int l){

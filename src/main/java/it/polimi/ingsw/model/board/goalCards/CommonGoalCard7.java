@@ -19,6 +19,10 @@ public class CommonGoalCard7 extends CommonGoalCard implements CheckCommonGoalCa
     public void checkGoal(BookShelf bs) {
        if (checkRtoL(bs)|| checkLtoR(bs)) increaseNumCompleted();
     }
+    /**
+     * @param bs Player's bookshelf
+     * The method below checks if there is, at least, one diagonal of same category itemtiles from left to right
+     */
     private boolean checkLtoR(BookShelf bs) {
         //diagonale da (0,0) o (1,0)
         boolean start1 = false, start2 = false;
@@ -42,7 +46,10 @@ public class CommonGoalCard7 extends CommonGoalCard implements CheckCommonGoalCa
             return Counter1 == 4 || Counter2 == 4;
         } else return false;
     }
-
+    /**
+     * @param bs Player's bookshelf
+     * The method below checks if there is, at least, one diagonal of same category itemtiles from right to left
+     */
     private boolean checkRtoL(BookShelf bs) {
         //diagonale da (0,4) o (1,4)
         boolean start3 = false, start4 = false;
