@@ -183,8 +183,12 @@ public class ServerConnectionTCP implements ServerConnection{
                 lobby.logoutFromLobby(namePlayer);
             }
             default:
-                if(lobby!=null)
+                if(lobby!=null){
                     sendMessage((ServerMessage) lobby.receiveMessage(message),namePlayer);
+                    return;
+                }
+
+
         }
     }
 

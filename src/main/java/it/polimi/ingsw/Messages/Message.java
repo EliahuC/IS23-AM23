@@ -16,6 +16,7 @@ public abstract class Message {
     }
     public enum MessageCategory{
         PINGTOSERVER,
+        CURRPLAYING,
         PINGFROMSERVER,
         COORDINATES,
         COLUMN,

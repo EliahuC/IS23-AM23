@@ -71,9 +71,11 @@ public class GameController {
                  order.addAll(m.getMessageMove().getMove());
                  if (!checkOrder() || !checkNumbers())
                      return sendErrorMessage();
-                 GameSavings savings=playMove();
-                 message.setSavings(savings);
              }
+         }
+         if((order.size()!=0)&&(coordinates.size()!=0)&&(column<0||column>4)){
+             GameSavings savings=playMove();
+             message.setSavings(savings);
          }
          return message;
      }
