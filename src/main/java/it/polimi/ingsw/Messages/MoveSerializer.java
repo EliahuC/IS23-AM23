@@ -21,13 +21,13 @@ public class MoveSerializer implements Printer {
     }
 
     private static Message convertCommandToMove(String string) {
-        String[] tokens = string.toUpperCase().split(" ");
+        String[] tokens = string.split(" ");
         return convertCommandToMove(tokens);
     }
 
 
     private static Message convertCommandToMove(String[] Command) {
-      switch (checkCommand(Command[0])){
+      switch (checkCommand(Command[0].toUpperCase())){
           case CREATE_LOBBY -> {
               if((Integer.parseInt(Command[1])<5)||(Integer.parseInt(Command[1])>1)){
                   return new LobbyCreationMessage(null,Integer.parseInt(Command[1]));

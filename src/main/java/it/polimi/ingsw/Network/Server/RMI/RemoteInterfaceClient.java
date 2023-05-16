@@ -11,8 +11,7 @@ public interface RemoteInterfaceClient extends Remote {
     void sendMessage(ClientMessage message)throws RemoteException;
 
     void receiveMessage(String msg) throws RemoteException;
-    void login(String username, ClientConnectionRMI client) throws RemoteException;
-    void disconnectMe() throws RemoteException;
+
 
     boolean getPing() throws RemoteException;
 }

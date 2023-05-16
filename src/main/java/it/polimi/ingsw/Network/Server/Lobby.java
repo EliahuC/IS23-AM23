@@ -170,7 +170,7 @@ public class Lobby {
     }
     public synchronized void sendMessageToAllTheLobby(ServerMessage message){
         for(ServerConnection s:connections){
-            s.sendMessage(message);
+            s.sendMessage(message,s.getNamePlayer());
         }
     }
     public ArrayList<Player> getDisconnectedPlayers(){

@@ -61,8 +61,9 @@ public class ClientConnectionRMI extends ConnectionClient implements RemoteInter
 
 //Ricevo il messagio
     public void receiveMessage(String message) {
+        System.out.println(message);
         ServerMessage serverMessage= (ServerMessage) MoveDeserializer.deserializeOutput(message);
-        System.out.println(serverMessage);
+
         if (serverMessage!= null && serverMessage.getCategory() != Message.MessageCategory.PINGFROMSERVER) {
             if (GUIisActive) {
                 //GUIEvent.recieveMessage(serverMessage);
@@ -73,15 +74,6 @@ public class ClientConnectionRMI extends ConnectionClient implements RemoteInter
 
     }
 
-    @Override
-    public void login(String username, ClientConnectionRMI client) throws RemoteException {
-
-    }
-
-    @Override
-    public void disconnectMe() throws RemoteException {
-
-    }
 
     //Metodo che manda messaggio al server
     public void sendMessage(ClientMessage message){

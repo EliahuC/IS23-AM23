@@ -48,6 +48,7 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
     }
 
     private void messageParser(ClientMessage message, RemoteInterfaceClient client){
+        namePlayer=message.getNickname();
         switch (message.getCategory()) {
             case PINGTOSERVER: {
                 message.dumpPingMessage();
@@ -61,7 +62,7 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
                 Server.connectedPlayers.add(message.getNickname());
                 Server.rmiConnections.put(message.getNickname(), client);
                 namePlayer=message.getNickname();
-                sendMessage(new ValidNicknameMessage());
+                sendMessage(new ValidNicknameMessage(),namePlayer);
                 break;
             }
             case CREATE_LOBBY: {
@@ -114,13 +115,17 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
             }
             default: {
                 if (lobby != null) {
-                    sendMessage((ServerMessage) lobby.receiveMessage(message));
+                    sendMessage((ServerMessage) lobby.receiveMessage(message),namePlayer);
                 }
             }
         }
     }
 
 
+    @Override
+    public String getNamePlayer() {
+        return namePlayer;
+    }
 
     public void sendMessage(ServerMessage message, String username) {
         Gson gson=new Gson();
@@ -133,25 +138,12 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
 
     }
 
-    @Override
-    public void sendMessage(ServerMessage serverMessage) {
-    }
 
     @Override
     public void receiveMessage(String s) {
 
     }
 
-    @Override
-    public void login(String username, ClientConnectionRMI client) throws RemoteException {
-       rmiConnection=new RMIConnection(client);
-
-    }
-
-    @Override
-    public void disconnectMe() throws RemoteException {
-
-    }
     /**
      * @author Eliahu Cohen
      * @param message received from the client
@@ -160,7 +152,7 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
     private void alreadyLoggedNickName(ClientMessage message) {
         ErrorMessage errorMessage=new ErrorMessage();
         errorMessage.setReturnMessage("nickname already used");
-        sendMessage(errorMessage);
+        sendMessage(errorMessage,namePlayer);
     }
     /**
      * @author Eliahu Cohen
@@ -170,7 +162,7 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
     private void gameAlreadyStarted() {
         ErrorMessage errorMessage = new ErrorMessage();
         errorMessage.setReturnMessage("Game already started,you can't logout since the game is finished");
-        sendMessage(errorMessage);
+        sendMessage(errorMessage,namePlayer);
 
     }
 
@@ -182,7 +174,7 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
 
         ErrorMessage errorMessage = new ErrorMessage();
         errorMessage.setReturnMessage("the Lobby is full");
-        sendMessage(errorMessage);
+        sendMessage(errorMessage,namePlayer);
 
     }
     /**
@@ -214,7 +206,7 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
         errorMessage.setReturnMessage("There is no available lobby, create a new one using the command:\n" +
                 "/CREATE_LOBBY <your nickname> <number of players>\n" +
                 "Remember that the number of players can only be 2, 3 or 4!");
-        sendMessage(errorMessage);
+        sendMessage(errorMessage,namePlayer);
 
     }
     /**
@@ -237,12 +229,12 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
         if (lobby.getJoinedUsers().contains(message.getNickname())) {
             ErrorMessage errorMessage=new ErrorMessage();
             errorMessage.setReturnMessage("You are already part of a lobby,please log out if you want to create a new lobby.");
-            sendMessage(errorMessage);
+            sendMessage(errorMessage,namePlayer);
             return;
         }
         ErrorMessage errorMessage=new ErrorMessage();
         errorMessage.setReturnMessage("Lobby already present, please join that lobby");
-        sendMessage(errorMessage);
+        sendMessage(errorMessage, namePlayer);
 
     }
     /**

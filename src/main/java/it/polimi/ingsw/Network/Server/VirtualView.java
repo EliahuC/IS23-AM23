@@ -25,7 +25,7 @@ public class VirtualView implements PropertyChangeListener {
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         ServerMessage serverMessage=messageParser(evt);
-      clientConnection.sendMessage(serverMessage);
+      clientConnection.sendMessage(serverMessage, clientConnection.getNamePlayer());
     }
 
     private ServerMessage messageParser(PropertyChangeEvent evt) {

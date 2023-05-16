@@ -10,8 +10,7 @@ import java.rmi.RemoteException;
 public interface RemoteInterface extends Remote {
 
      void receiveMessage(String msg, RemoteInterfaceClient client) throws RemoteException;
-    void login(String username, ClientConnectionRMI client) throws RemoteException;
-    void disconnectMe() throws RemoteException;
+
 
     boolean getPing() throws RemoteException;
 }

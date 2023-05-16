@@ -64,7 +64,7 @@ public class ServerConnectionTCP implements ServerConnection,Runnable {
     public void sendPing(int pingCount) {
         ServerMessage m=new PingFromServer(pingCount);
 
-        sendMessage(m);
+        sendMessage(m,namePlayer);
 
     }
 
@@ -86,7 +86,7 @@ public class ServerConnectionTCP implements ServerConnection,Runnable {
      * @param message to send to the client
      * method to send to the client a message using Json
      */
-    public void sendMessage(ServerMessage message){
+    public void sendMessage(ServerMessage message,String namePlayer){
         Gson gson =new Gson();
         String m=gson.toJson(message);
         //    output.reset();
@@ -133,7 +133,7 @@ public class ServerConnectionTCP implements ServerConnection,Runnable {
                 }
                 Server.connectedPlayers.add(message.getNickname());
                 namePlayer=message.getNickname();
-                sendMessage(new ValidNicknameMessage());
+                sendMessage(new ValidNicknameMessage(),namePlayer);
                 break;
             }
             case CREATE_LOBBY: {
@@ -187,7 +187,7 @@ public class ServerConnectionTCP implements ServerConnection,Runnable {
             }
             default:
                 if(lobby!=null)
-                    sendMessage((ServerMessage) lobby.receiveMessage(message));
+                    sendMessage((ServerMessage) lobby.receiveMessage(message),namePlayer);
         }
     }
 
@@ -199,7 +199,7 @@ public class ServerConnectionTCP implements ServerConnection,Runnable {
     private void alreadyLoggedNickName(ClientMessage message) {
             ErrorMessage errorMessage=new ErrorMessage();
             errorMessage.setReturnMessage("nickname already used");
-            sendMessage(errorMessage);
+            sendMessage(errorMessage,namePlayer);
     }
 
     /**
@@ -209,7 +209,7 @@ public class ServerConnectionTCP implements ServerConnection,Runnable {
     private void gameAlreadyStarted() {
             ErrorMessage errorMessage = new ErrorMessage();
             errorMessage.setReturnMessage("Game already started,you can't logout since the game is finished");
-            sendMessage(errorMessage);
+            sendMessage(errorMessage,namePlayer);
 
     }
 
@@ -221,7 +221,7 @@ public class ServerConnectionTCP implements ServerConnection,Runnable {
 
             ErrorMessage errorMessage = new ErrorMessage();
             errorMessage.setReturnMessage("the Lobby is full");
-            sendMessage(errorMessage);
+            sendMessage(errorMessage,namePlayer);
 
         }
 
@@ -255,7 +255,7 @@ public class ServerConnectionTCP implements ServerConnection,Runnable {
             errorMessage.setReturnMessage("There is no available lobby, create a new one using the command:\n" +
                     "/CREATE_LOBBY <your nickname> <number of players>\n" +
                     "Remember that the number of players can only be 2, 3 or 4!");
-            sendMessage(errorMessage);
+            sendMessage(errorMessage,namePlayer);
 
     }
 
@@ -281,12 +281,12 @@ public class ServerConnectionTCP implements ServerConnection,Runnable {
             if (lobby.getJoinedUsers().contains(message.getNickname())) {
                 ErrorMessage errorMessage=new ErrorMessage();
                 errorMessage.setReturnMessage("You are already part of a lobby,please log out if you want to create a new lobby.");
-                sendMessage(errorMessage);
+                sendMessage(errorMessage,namePlayer);
                 return;
             }
             ErrorMessage errorMessage=new ErrorMessage();
             errorMessage.setReturnMessage("Lobby already present, please join that lobby");
-            sendMessage(errorMessage);
+            sendMessage(errorMessage,namePlayer);
 
     }
 
