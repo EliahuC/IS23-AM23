@@ -11,21 +11,40 @@ import it.polimi.ingsw.Printer;
 
 import java.util.ArrayList;
 
+/**
+ * @author Eliahu Cohen
+ * Class to serialize an input string from the client
+ */
 public class MoveSerializer implements Printer {
 
 
-
+    /**
+     * @author Eliahu Cohen
+     * @param s input/command from the client
+     * @return the message that have to send due to the command received
+     */
     public static Message serializeInput(String s){
 
         return convertCommandToMove(s);
     }
 
+    /**
+     * @author Eliahu Cohen
+     * @param string input/command from the client
+     * @return the message that have to send due to the command received
+     * Method that splits the input in various strings
+     */
     private static Message convertCommandToMove(String string) {
         String[] tokens = string.split(" ");
         return convertCommandToMove(tokens);
     }
 
-
+    /**
+     * @author Eliahu Cohen
+     * @param Command input split in parts
+     * @return the message that have to send due to the command received
+     * Method that genetate the message based on the
+     */
     private static Message convertCommandToMove(String[] Command) {
       switch (checkCommand(Command[0].toUpperCase())){
           case CREATE_LOBBY -> {
@@ -98,6 +117,10 @@ public class MoveSerializer implements Printer {
       return null;
     }
 
+    /**
+     * @author Eliahu Cohen
+     * @return an error message and print the CommandList
+     */
     private static Message invalidCommand() {
        ErrorMessage e=new ErrorMessage();
        e.setReturnMessage("The command isn't valid" +
@@ -105,11 +128,12 @@ public class MoveSerializer implements Printer {
        return e;
     }
 
-    private void commandList() {
-        System.out.println(CLICommandList.getCommands());
-    }
 
-
+    /**
+     * @author Eliahu Cohen
+     * @param s first part of the command that implicates what message the class have to generate
+     * @return the MoveCategory associated to the command
+     */
     private static MoveCategory checkCommand(String s){
         switch(s){
             case "/START" -> {

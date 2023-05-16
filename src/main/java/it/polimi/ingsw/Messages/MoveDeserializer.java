@@ -6,8 +6,16 @@ import com.google.gson.JsonParser;
 import it.polimi.ingsw.Messages.ClientToServer.*;
 import it.polimi.ingsw.Messages.ServerToClient.*;
 
+/**
+ * @author Eliahu Cohen
+ * Class that deserialize the gson message received
+ */
 public class MoveDeserializer {
-
+    /**
+     * @author Eliahu Cohen
+     * @param s message received
+     * @return message deserialized or null if is an invalid string
+     */
    public static Message deserializeOutput(String s){
         JsonObject o=new JsonParser().parse(s).getAsJsonObject();
         String category=o.get("messageCategory").getAsString();
