@@ -44,7 +44,7 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
      * @param message received from client
      * @param client connection to save.
      */
-    public void receiveMessage(String message, RemoteInterfaceClient client) {
+    public synchronized void receiveMessage(String message, RemoteInterfaceClient client) {
         ClientMessage m= (ClientMessage) MoveDeserializer.deserializeOutput(message);
         if (m != null) {
             messageParser(m, client);
@@ -143,7 +143,7 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
      * @param username of the client that have to receive the message
      * Method used to send messages to the clients
      */
-    public void sendMessage(ServerMessage message, String username) {
+    public synchronized void sendMessage(ServerMessage message, String username) {
         Gson gson=new Gson();
         String s=gson.toJson(message);
         try {

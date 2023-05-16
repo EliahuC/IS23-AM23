@@ -17,7 +17,7 @@ public class ControllerCoordinator {
     private Boolean startedGame=false;
 
     private  GameController gameController=null;
-    //EndGameController endGameController=new EndGameController(gameController.endGame());
+
     private final ArrayList<Player> connectedPlayers;
 
     public ControllerCoordinator() {
@@ -45,10 +45,6 @@ public class ControllerCoordinator {
         return gameController;
     }
 
-    /*
-    public EndGameController getEndGameController() {
-        return endGameController;
-    }*/
 
     public ArrayList<Player> getConnectedPlayers() {
         return connectedPlayers;
