@@ -7,8 +7,8 @@ public class CLICommandList {
 
     public static ArrayList<String> getCommands() {
         ArrayList<String> commands= new ArrayList<>();
-        commands.add("/create nickname numPlayers (numPlayers can only be 2/3/4)");
-        commands.add("/enter nickname");
+        commands.add("/create numPlayers (numPlayers can only be 2/3/4)");
+        commands.add("/enter ");
         commands.add("/exit");
         commands.add("/start");
         commands.add("/select x1 y1 x2 y2 x3 y3");

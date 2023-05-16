@@ -110,6 +110,9 @@ public class MoveSerializer implements Printer {
           case CLOSE -> {
               return new CloseMessage();
           }
+          case NICKNAME -> {
+              return new NickNameMessage(Command[1]);
+          }
           case INVALID_COMMAND -> {
              return invalidCommand();
           }
@@ -160,6 +163,9 @@ public class MoveSerializer implements Printer {
             case "/CLOSE"->{
                 return MoveCategory.CLOSE;
             }
+            case"/NICKNAME"->{
+                return MoveCategory.NICKNAME;
+            }
             default -> {
                 return MoveCategory.INVALID_COMMAND;
             }
@@ -174,6 +180,7 @@ public class MoveSerializer implements Printer {
         EXIT_LOBBY,
         START_GAME,
         SELECT_TILES,
+        NICKNAME,
         SELECT_COLUMN,
         SELECT_ORDER,
         INVALID_COMMAND,
