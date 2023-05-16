@@ -7,6 +7,8 @@ import it.polimi.ingsw.Messages.ClientToServer.PossibleMoves.Move_SelectTiles;
 import it.polimi.ingsw.Messages.Message;
 import it.polimi.ingsw.Messages.ServerToClient.ErrorMessage;
 import it.polimi.ingsw.Messages.ServerToClient.ValidMoveMessage;
+import it.polimi.ingsw.Network.Server.TCP.ServerConnectionTCP;
+import it.polimi.ingsw.Network.Server.VirtualView;
 import it.polimi.ingsw.model.board.ItemTile;
 import it.polimi.ingsw.model.player.PersonalGoalCard;
 import it.polimi.ingsw.model.player.Player;
@@ -25,6 +27,8 @@ public class GameControllerTest extends TestCase {
         ArrayList<Player> Players = new ArrayList<>();
         Players.add(p1);
         Players.add(p2);
+        p1.setListener(new VirtualView(new ServerConnectionTCP(null)));
+        p2.setListener(new VirtualView(new ServerConnectionTCP(null)));
         GameController GC = new GameController(Players);
         GC.startGame();
         assertTrue(GC.isStartedGame());
@@ -36,6 +40,8 @@ public class GameControllerTest extends TestCase {
         ArrayList<Player> Players = new ArrayList<>();
         Players.add(p1);
         Players.add(p2);
+        p1.setListener(new VirtualView(new ServerConnectionTCP(null)));
+        p2.setListener(new VirtualView(new ServerConnectionTCP(null)));
         GameController GC = new GameController(Players);
         GC.startGame();
         assertTrue(GC.getGame().getPlayers().get(0).isFirstPlayerSeat());
@@ -46,6 +52,8 @@ public class GameControllerTest extends TestCase {
         ArrayList<Player> Players = new ArrayList<>();
         Players.add(p1);
         Players.add(p2);
+        p1.setListener(new VirtualView(new ServerConnectionTCP(null)));
+        p2.setListener(new VirtualView(new ServerConnectionTCP(null)));
         GameController GC = new GameController(Players);
         GC.startGame();
         assertFalse(GC.getGame().getPlayers().get(1).isFirstPlayerSeat());
@@ -56,6 +64,8 @@ public class GameControllerTest extends TestCase {
         ArrayList<Player> Players = new ArrayList<>();
         Players.add(p);
         Players.add(p2);
+        p.setListener(new VirtualView(new ServerConnectionTCP(null)));
+        p2.setListener(new VirtualView(new ServerConnectionTCP(null)));
         GameController GC = new GameController(Players);
         GC.startGame();
         p.getPlayerBookshelf().setTile(1, 1, new ItemTile("PLANTS"));
@@ -129,6 +139,8 @@ public class GameControllerTest extends TestCase {
         ArrayList<Player> Players= new ArrayList<>();
         Players.add(p);
         Players.add(p2);
+        p.setListener(new VirtualView(new ServerConnectionTCP(null)));
+        p2.setListener(new VirtualView(new ServerConnectionTCP(null)));
         GameController GC = new GameController(Players);
         GC.startGame();
         p.getPlayerBookshelf().setTile(1, 1, new ItemTile("PLANTS"));
@@ -230,6 +242,10 @@ public class GameControllerTest extends TestCase {
         Players.add(p2);
         Players.add(p3);
         Players.add(p4);
+        p1.setListener(new VirtualView(new ServerConnectionTCP(null)));
+        p2.setListener(new VirtualView(new ServerConnectionTCP(null)));
+        p3.setListener(new VirtualView(new ServerConnectionTCP(null)));
+        p4.setListener(new VirtualView(new ServerConnectionTCP(null)));
         GameController Controller = new GameController(Players);
         Controller.startGame();
         Controller.getCoordinates().add(3);
@@ -255,6 +271,10 @@ public class GameControllerTest extends TestCase {
         Players.add(p2);
         Players.add(p3);
         Players.add(p4);
+        p1.setListener(new VirtualView(new ServerConnectionTCP(null)));
+        p2.setListener(new VirtualView(new ServerConnectionTCP(null)));
+        p3.setListener(new VirtualView(new ServerConnectionTCP(null)));
+        p4.setListener(new VirtualView(new ServerConnectionTCP(null)));
         GameController Controller = new GameController(Players);
         Controller.startGame();
         Move_SelectTiles M = new Move_SelectTiles();
@@ -274,6 +294,10 @@ public class GameControllerTest extends TestCase {
         Players.add(p2);
         Players.add(p3);
         Players.add(p4);
+        p1.setListener(new VirtualView(new ServerConnectionTCP(null)));
+        p2.setListener(new VirtualView(new ServerConnectionTCP(null)));
+        p3.setListener(new VirtualView(new ServerConnectionTCP(null)));
+        p4.setListener(new VirtualView(new ServerConnectionTCP(null)));
         GameController Controller = new GameController(Players);
         Controller.startGame();
         Move_SelectTiles M = new Move_SelectTiles();
@@ -293,6 +317,10 @@ public class GameControllerTest extends TestCase {
         Players.add(p2);
         Players.add(p3);
         Players.add(p4);
+        p1.setListener(new VirtualView(new ServerConnectionTCP(null)));
+        p2.setListener(new VirtualView(new ServerConnectionTCP(null)));
+        p3.setListener(new VirtualView(new ServerConnectionTCP(null)));
+        p4.setListener(new VirtualView(new ServerConnectionTCP(null)));
         GameController Controller = new GameController(Players);
         Controller.startGame();
         Move_SelectTiles M = new Move_SelectTiles();
@@ -312,6 +340,10 @@ public class GameControllerTest extends TestCase {
         Players.add(p2);
         Players.add(p3);
         Players.add(p4);
+        p1.setListener(new VirtualView(new ServerConnectionTCP(null)));
+        p2.setListener(new VirtualView(new ServerConnectionTCP(null)));
+        p3.setListener(new VirtualView(new ServerConnectionTCP(null)));
+        p4.setListener(new VirtualView(new ServerConnectionTCP(null)));
         GameController Controller = new GameController(Players);
         Controller.startGame();
         ArrayList<Integer> E = new ArrayList<>();
@@ -336,6 +368,10 @@ public class GameControllerTest extends TestCase {
         Players.add(p2);
         Players.add(p3);
         Players.add(p4);
+        p1.setListener(new VirtualView(new ServerConnectionTCP(null)));
+        p2.setListener(new VirtualView(new ServerConnectionTCP(null)));
+        p3.setListener(new VirtualView(new ServerConnectionTCP(null)));
+        p4.setListener(new VirtualView(new ServerConnectionTCP(null)));
         GameController Controller = new GameController(Players);
         Controller.startGame();
         ArrayList<Integer> E = new ArrayList<>();
@@ -359,6 +395,10 @@ public class GameControllerTest extends TestCase {
         Players.add(p2);
         Players.add(p3);
         Players.add(p4);
+        p1.setListener(new VirtualView(new ServerConnectionTCP(null)));
+        p2.setListener(new VirtualView(new ServerConnectionTCP(null)));
+        p3.setListener(new VirtualView(new ServerConnectionTCP(null)));
+        p4.setListener(new VirtualView(new ServerConnectionTCP(null)));
         GameController Controller = new GameController(Players);
         Controller.startGame();
         Controller.getGame().getPlayers().get(0).getPlayerBookshelf().setTile(5, 0, new ItemTile());
@@ -387,6 +427,10 @@ public class GameControllerTest extends TestCase {
         Players.add(p2);
         Players.add(p3);
         Players.add(p4);
+        p1.setListener(new VirtualView(new ServerConnectionTCP(null)));
+        p2.setListener(new VirtualView(new ServerConnectionTCP(null)));
+        p3.setListener(new VirtualView(new ServerConnectionTCP(null)));
+        p4.setListener(new VirtualView(new ServerConnectionTCP(null)));
         GameController Controller = new GameController(Players);
         Controller.startGame();
         Controller.getCoordinates().add(0);
@@ -409,6 +453,10 @@ public class GameControllerTest extends TestCase {
         Players.add(p2);
         Players.add(p3);
         Players.add(p4);
+        p1.setListener(new VirtualView(new ServerConnectionTCP(null)));
+        p2.setListener(new VirtualView(new ServerConnectionTCP(null)));
+        p3.setListener(new VirtualView(new ServerConnectionTCP(null)));
+        p4.setListener(new VirtualView(new ServerConnectionTCP(null)));
         GameController Controller = new GameController(Players);
         Controller.startGame();
         Controller.getCoordinates().add(0);
@@ -435,6 +483,10 @@ public class GameControllerTest extends TestCase {
         Players.add(p2);
         Players.add(p3);
         Players.add(p4);
+        p1.setListener(new VirtualView(new ServerConnectionTCP(null)));
+        p2.setListener(new VirtualView(new ServerConnectionTCP(null)));
+        p3.setListener(new VirtualView(new ServerConnectionTCP(null)));
+        p4.setListener(new VirtualView(new ServerConnectionTCP(null)));
         GameController Controller = new GameController(Players);
         Controller.startGame();
         Controller.getCoordinates().add(0);
@@ -452,7 +504,7 @@ public class GameControllerTest extends TestCase {
         error.setReturnMessage("The move you made isn't a valid move");
         assertEquals(error,Controller.readMessage(m));
     }
-    /*public void testReadMessage_TENTH(){
+    public void testReadMessage_TENTH(){
         Player p1 = new Player("Alice");
         Player p2 = new Player("Bob");
         Player p3 = new Player("Carlos");
@@ -462,6 +514,10 @@ public class GameControllerTest extends TestCase {
         Players.add(p2);
         Players.add(p3);
         Players.add(p4);
+        p1.setListener(new VirtualView(new ServerConnectionTCP(null)));
+        p2.setListener(new VirtualView(new ServerConnectionTCP(null)));
+        p3.setListener(new VirtualView(new ServerConnectionTCP(null)));
+        p4.setListener(new VirtualView(new ServerConnectionTCP(null)));
         GameController Controller = new GameController(Players);
         Controller.startGame();
         Controller.getCoordinates().add(0);
@@ -477,5 +533,5 @@ public class GameControllerTest extends TestCase {
         ClientMessage m = new ClientMessage(Message.MessageCategory.ORDER,M,Controller.getGame().getPlayers().get(0).getNickName());
         ValidMoveMessage valid= new ValidMoveMessage();
         assertEquals(valid,Controller.readMessage(m));
-    }*/
+    }
 }
