@@ -18,7 +18,8 @@ public class CommonGoalCard1 extends CommonGoalCard implements CheckCommonGoalCa
 
     /**
      * @author Giovanni Di Lorenzo
-     * @param bs bookshelf of the player to check the goal
+     * @param bs Player's bookshelf
+     * this method checks if a player achieved the CommonGoalCard1 goal visiting the entire BookShelf
      */
     @Override
     //Six groups of 2 adjacent tiles.

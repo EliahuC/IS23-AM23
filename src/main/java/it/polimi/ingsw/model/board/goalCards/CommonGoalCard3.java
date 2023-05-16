@@ -19,6 +19,7 @@ public class CommonGoalCard3 extends CommonGoalCard implements CheckCommonGoalCa
     /**
      * @author Giovanni Di Lorenzo
      * @param bs bookshelf of the player to check the goal
+     *this method checks if a player achieved the CommonGoalCard3 goal visiting the entire BookShelf
      */
     @Override
     public void checkGoal(BookShelf bs) {
@@ -66,6 +67,7 @@ public class CommonGoalCard3 extends CommonGoalCard implements CheckCommonGoalCa
     }
 
     public void print(){
-        System.out.print("TILES ON THE CORNER. Insert 4 tiles of the same type in the four corners of the bookshelf. --> You can still get" + getPoints() + "POINTS\n");
+        System.out.print("FOUR GROUPS FORMED OF FOUR TILES. Make 4 separated groups each containing 4 tiles of the same type." +
+                " The tiles of one group can be different from those of another group. --> You can still get" + getPoints() + "POINTS\n");
     }
 }
