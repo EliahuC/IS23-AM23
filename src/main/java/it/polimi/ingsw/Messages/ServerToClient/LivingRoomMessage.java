@@ -6,7 +6,7 @@ import static it.polimi.ingsw.model.board.LivingRoom.MAX_Column;
 import static it.polimi.ingsw.model.board.LivingRoom.MAX_Row;
 
 public class LivingRoomMessage extends ServerMessage{
-    private  BoardToken[][] Board = new BoardToken[MAX_Row][MAX_Column];
+    private  BoardToken[][] Board ;
 
     public LivingRoomMessage(BoardToken[][] Board) {
         super(MessageCategory.LIVINGROOM);

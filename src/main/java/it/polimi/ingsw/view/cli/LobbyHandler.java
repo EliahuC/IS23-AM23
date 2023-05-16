@@ -13,11 +13,11 @@ import java.util.concurrent.TimeUnit;
 
 public class LobbyHandler {
     private ConnectionClient connectionClient;
-    private MoveSerializer moveSerializer;
+
 
     public LobbyHandler(ConnectionClient connectionClient) {
         this.connectionClient = connectionClient;
-        moveSerializer = new MoveSerializer();
+
     }
 
     public void start() {
@@ -36,7 +36,7 @@ public class LobbyHandler {
                 break;
             System.out.print("Please, use the correct commands.\n");
         }
-        Message message = moveSerializer.serializeInput(command);
+        Message message = MoveSerializer.serializeInput(command);
         connectionClient.sendMessage((ClientMessage) message);
         /*while(true) {
             try {

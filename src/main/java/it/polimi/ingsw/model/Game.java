@@ -404,8 +404,16 @@ public class Game  {
      * method that increase the value of the currPlaying variable checking if the game is finished
      */
     private synchronized void increaseCurrPlaying() {
+        PropertyChangeEvent evt = new PropertyChangeEvent(
+                this,
+                "NEW_TURN",
+                this.currPlaying,
+                currPlaying);
         if(currPlaying==gameNumPlayers && !finishedGame) currPlaying=1;
         else if(currPlaying<gameNumPlayers && !finishedGame) currPlaying++;
+        for(PropertyChangeListener l:listeners){
+            l.propertyChange(evt);
+        }
     }
 
     public synchronized String getCurrPlaying(){

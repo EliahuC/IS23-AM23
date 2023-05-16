@@ -9,6 +9,8 @@ import it.polimi.ingsw.Messages.ServerToClient.ServerMessage;
 import it.polimi.ingsw.Network.Client.ConnectionClient;
 import it.polimi.ingsw.Network.Server.RMI.RemoteInterface;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
@@ -20,6 +22,7 @@ import java.util.concurrent.TimeUnit;
  * RMI Connection of the client
  */
 public class ClientConnectionRMI extends ConnectionClient implements RemoteInterfaceClient {
+    PropertyChangeListener listener;
     private static RemoteInterface stub;
     private final String playerName;
     private boolean clientIsActive;
@@ -80,11 +83,16 @@ public class ClientConnectionRMI extends ConnectionClient implements RemoteInter
      */
     public void receiveMessage(String message) {
         System.out.println(message);
-        ServerMessage serverMessage= (ServerMessage) MoveDeserializer.deserializeOutput(message);
+        ServerMessage serverMessage=null;
+        PropertyChangeEvent evt= new PropertyChangeEvent(
+                this,
+                "MESSAGE RECEIVED",
+                null,
+                serverMessage);
+
+        serverMessage= (ServerMessage) MoveDeserializer.deserializeOutput(message);
         if (serverMessage!= null && serverMessage.getCategory() != Message.MessageCategory.PINGFROMSERVER) {
-            if (GUIisActive) {
-                //GUIEvent.recieveMessage(serverMessage);
-            } else; //CLIEvent.recieveMessage(serverMessage);
+           listener.propertyChange(evt);
         }
 
     }
@@ -146,5 +154,12 @@ public class ClientConnectionRMI extends ConnectionClient implements RemoteInter
 
     public void setGUIisActive(boolean GUIisActive) {
         this.GUIisActive = GUIisActive;
+    }
+    public PropertyChangeListener getListener() {
+        return listener;
+    }
+
+    public void setListener(PropertyChangeListener listener) {
+        this.listener = listener;
     }
 }

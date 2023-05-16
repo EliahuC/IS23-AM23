@@ -3,6 +3,7 @@ package it.polimi.ingsw.Network.Client;
 import it.polimi.ingsw.Messages.ClientToServer.ClientMessage;
 import it.polimi.ingsw.Messages.ServerToClient.ServerMessage;
 
+import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -12,6 +13,7 @@ import java.rmi.server.UnicastRemoteObject;
  * Abstract class extended from RMI and TCP client
  */
 public abstract class ConnectionClient extends UnicastRemoteObject implements Runnable {
+
     public ConnectionClient() throws RemoteException {
         super();
     }
@@ -23,4 +25,12 @@ public abstract class ConnectionClient extends UnicastRemoteObject implements Ru
     public String getPlayerName() {
         return null;
     };
+    public PropertyChangeListener getListener() {
+
+        return null;
+    }
+
+    public void setListener(PropertyChangeListener listener) {
+
+    }
 }

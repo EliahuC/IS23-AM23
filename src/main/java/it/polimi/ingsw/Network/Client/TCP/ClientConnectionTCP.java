@@ -10,6 +10,8 @@ import it.polimi.ingsw.Messages.ServerToClient.ServerMessage;
 import it.polimi.ingsw.Network.Client.ConnectionClient;
 
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
@@ -17,7 +19,7 @@ import java.rmi.RemoteException;
 import java.util.Scanner;
 
 public class ClientConnectionTCP extends ConnectionClient {
-
+    PropertyChangeListener listener;
     private final Socket socket;
     private String IPAddress;
     private boolean clientIsActive;
@@ -71,12 +73,18 @@ public class ClientConnectionTCP extends ConnectionClient {
     }
 @Override
         public void receiveMessage(String s) {
-            ServerMessage serverMessage= (ServerMessage) MoveDeserializer.deserializeOutput(s);
+            ServerMessage serverMessage=null;
+            PropertyChangeEvent evt= new PropertyChangeEvent(
+                    this,
+                    "MESSAGE RECEIVED",
+                    null,
+                    serverMessage);
+
+
+            serverMessage= (ServerMessage) MoveDeserializer.deserializeOutput(s);
             try{
                 if (serverMessage!= null && serverMessage.getCategory() != Message.MessageCategory.PINGFROMSERVER) {
-                    if (GUIisActive) {
-                //GUIEvent.recieveMessage(serverMessage);
-                        } else; //CLIEvent.recieveMessage(serverMessage);
+                    listener.propertyChange(evt);
         } else if(serverMessage!= null && serverMessage.getCategory()== Message.MessageCategory.PINGFROMSERVER){
             //System.out.println("Ping arrived")
                     sendPing();
@@ -128,4 +136,11 @@ public class ClientConnectionTCP extends ConnectionClient {
         this.GUIisActive = GUIisActive;
     }
 
+    public PropertyChangeListener getListener() {
+        return listener;
+    }
+
+    public void setListener(PropertyChangeListener listener) {
+        this.listener = listener;
+    }
 }
