@@ -22,12 +22,23 @@ public class VirtualView implements PropertyChangeListener {
         this.clientConnection = connection;
     }
 
+
+    /**
+     * @author Eliahu Cohen
+     * @param evt A PropertyChangeEvent object describing the event source
+     *          and the property that has changed.
+     */
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         ServerMessage serverMessage=messageParser(evt);
       clientConnection.sendMessage(serverMessage, clientConnection.getNamePlayer());
     }
 
+    /**
+     * @author Eliahu Cohen
+     * @param evt received from the game
+     * @return Server message that will be sent to client
+     */
     private ServerMessage messageParser(PropertyChangeEvent evt) {
        ServerMessage serverMessage;
         switch (evt.getPropertyName()){

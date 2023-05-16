@@ -24,6 +24,10 @@ public class TCPServerMain extends Server implements Runnable {
         this.port = port;
     }
 
+    /**
+     * @author Eliahu Cohen
+     * Method to start the server
+     */
     public void run() {
 
         try {
@@ -58,7 +62,10 @@ public class TCPServerMain extends Server implements Runnable {
     }
 
 
-
+    /**
+     * @author Eliahu Cohen
+     * @param args to pass to the main.
+     */
     public static void main(String[] args) {
 
         int port = TCPParams.PORT;

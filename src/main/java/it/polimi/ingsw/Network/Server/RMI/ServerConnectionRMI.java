@@ -8,6 +8,7 @@ import it.polimi.ingsw.Messages.ServerToClient.ErrorMessage;
 import it.polimi.ingsw.Messages.ServerToClient.ServerMessage;
 import it.polimi.ingsw.Messages.ServerToClient.ValidNicknameMessage;
 import it.polimi.ingsw.Network.Client.RMI.ClientConnectionRMI;
+import it.polimi.ingsw.Network.Client.RMI.RemoteInterfaceClient;
 import it.polimi.ingsw.Network.Server.Server;
 import it.polimi.ingsw.Network.Server.ServerConnection;
 import it.polimi.ingsw.Network.Server.DisconnectionHandler;
@@ -23,8 +24,7 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
-public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteInterface, ServerConnection,Runnable {
-    private RMIConnection rmiConnection;
+public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteInterface, ServerConnection {
     private Lobby lobby;
     private static ClientConnectionRMI skeleton;
     private boolean serverIsActive;
@@ -39,7 +39,11 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
         super();
     }
 
-    //Metodo che riceve il messaggio da client
+    /**
+     * @author Eliahu Cohen
+     * @param message received from client
+     * @param client connection to save.
+     */
     public void receiveMessage(String message, RemoteInterfaceClient client) {
         ClientMessage m= (ClientMessage) MoveDeserializer.deserializeOutput(message);
         if (m != null) {
@@ -47,6 +51,12 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
         }
     }
 
+    /**
+     * @author Eliahu Cohen
+     * @param message received from client
+     * @param client connection
+     * Method that response to the message received with an action on the server
+     */
     private void messageParser(ClientMessage message, RemoteInterfaceClient client){
         namePlayer=message.getNickname();
         switch (message.getCategory()) {
@@ -127,6 +137,12 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
         return namePlayer;
     }
 
+    /**
+     * @author Eliahu Cohen
+     * @param message to send to the client
+     * @param username of the client that have to receive the message
+     * Method used to send messages to the clients
+     */
     public void sendMessage(ServerMessage message, String username) {
         Gson gson=new Gson();
         String s=gson.toJson(message);
@@ -139,10 +155,7 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
     }
 
 
-    @Override
-    public void receiveMessage(String s) {
 
-    }
 
     /**
      * @author Eliahu Cohen
@@ -250,6 +263,11 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
         this.virtualView=virtualView;
     }
 
+    /**
+     * @author Eliahu Cohen
+     * @throws InterruptedException
+     * Method used to send a ping to the client
+     */
     public void sendPing() throws InterruptedException {
         boolean pingIsOk=false;
         pingIsOk=skeleton.getPing();
@@ -259,15 +277,23 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
             return;
         }
         System.out.println("Connection crushed");
-        //closeConnection();
-        //notifyDisconnection();
     }
 
+    /**
+     * @author Eliahu Cohen
+     * @return true to notify the client the ping-pong is still on
+     */
     public boolean getPing() {
         return true;
 
     }
 
+    /**
+     * @author Eliahu Cohen
+     * Method to start the connection with the client and
+     * Start the ping exchange with the client
+     *
+     */
     public void run(){
         try {
             skeleton = (ClientConnectionRMI) Naming.lookup("rmi://localhost:"+22011+"/RMIServer");
@@ -295,4 +321,5 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
         });
         ping.start();
     }
+
 }

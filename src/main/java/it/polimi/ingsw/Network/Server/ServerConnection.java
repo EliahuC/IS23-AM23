@@ -6,7 +6,7 @@ import it.polimi.ingsw.Messages.ServerToClient.ServerMessage;
  * @author Eliahu Cohen
  * interface that will be implemented from RMI connection and TCP connection
  */
-public interface ServerConnection  {
+public interface ServerConnection extends Runnable {
     String getNamePlayer();
 
      static void removeVoidLobby(Lobby lobby) {
@@ -14,6 +14,6 @@ public interface ServerConnection  {
     }
     void sendMessage(ServerMessage serverMessage,String nickname);
 
-     void receiveMessage(String s);
+
 
 }

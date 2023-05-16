@@ -23,7 +23,7 @@ import java.util.concurrent.TimeUnit;
  * @author Eliahu Cohen
  * class that handles the tcp connection between the server and the client
  */
-public class ServerConnectionTCP implements ServerConnection,Runnable {
+public class ServerConnectionTCP implements ServerConnection{
     private final Socket clientSocket;
     private Thread ping;
     private boolean serverIsActive;
@@ -47,11 +47,6 @@ public class ServerConnectionTCP implements ServerConnection,Runnable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        /*try {
-            clientSocket.setSoTimeout(3600);
-        } catch (SocketException e) {
-            e.printStackTrace();
-        }*/
 
     }
 
@@ -84,6 +79,7 @@ public class ServerConnectionTCP implements ServerConnection,Runnable {
     /**
      * @author Eliahu Cohen
      * @param message to send to the client
+     * @param namePlayer name of the player that have to receive the message
      * method to send to the client a message using Json
      */
     public void sendMessage(ServerMessage message,String namePlayer){
@@ -97,6 +93,7 @@ public class ServerConnectionTCP implements ServerConnection,Runnable {
 
     /**
      * @author Eliahu Cohen
+     * Method to handle the received message from the client
      */
     public void receiveMessage(String s) {
 
@@ -303,9 +300,7 @@ public class ServerConnectionTCP implements ServerConnection,Runnable {
     private boolean checkLobbySpace() {
         return lobby.getJoinedUsers().size()<=4;
     }
-  /*  private void asyncSendMessage(ServerMessage m){
-        new Thread(()->sendMessage(m)).start();
-    }*/
+
 
 
     public String getNamePlayer() {

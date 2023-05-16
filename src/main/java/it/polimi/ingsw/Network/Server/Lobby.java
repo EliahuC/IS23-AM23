@@ -168,6 +168,12 @@ public class Lobby {
     public synchronized ArrayList<ServerConnection> getConnections() {
         return connections;
     }
+
+    /**
+     * @author Eliahu Cohen
+     * @param message to send.
+     * send a message to all the lobby
+     */
     public synchronized void sendMessageToAllTheLobby(ServerMessage message){
         for(ServerConnection s:connections){
             s.sendMessage(message,s.getNamePlayer());

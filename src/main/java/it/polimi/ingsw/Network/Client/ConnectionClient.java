@@ -7,6 +7,10 @@ import java.io.IOException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
+/**
+ * @author Eliahu Cohen
+ * Abstract class extended from RMI and TCP client
+ */
 public abstract class ConnectionClient extends UnicastRemoteObject implements Runnable {
     public ConnectionClient() throws RemoteException {
         super();

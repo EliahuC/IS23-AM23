@@ -2,7 +2,7 @@ package it.polimi.ingsw.Network.Server;
 
 import it.polimi.ingsw.Network.Server.RMI.RMIServerMain;
 import it.polimi.ingsw.Network.Server.RMI.RMIparams;
-import it.polimi.ingsw.Network.Server.RMI.RemoteInterfaceClient;
+import it.polimi.ingsw.Network.Client.RMI.RemoteInterfaceClient;
 import it.polimi.ingsw.Network.Server.TCP.TCPParams;
 import it.polimi.ingsw.Network.Server.TCP.TCPServerMain;
 import it.polimi.ingsw.Printer;
@@ -16,9 +16,7 @@ import java.util.HashMap;
  */
 public class Server implements Printer {
     public static Integer idLobbies = 0;
-
-
-     public static final ArrayList<Lobby> lobbies=new ArrayList<>();
+    public static final ArrayList<Lobby> lobbies=new ArrayList<>();
     public static final ArrayList<Lobby> startedLobbies=new ArrayList<>();
     public static final ArrayList<String> connectedPlayers=new ArrayList<>();
     public static final HashMap<String, RemoteInterfaceClient> rmiConnections = new HashMap<>();
