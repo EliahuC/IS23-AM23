@@ -7,34 +7,38 @@ import it.polimi.ingsw.Messages.Message;
 import it.polimi.ingsw.Messages.MoveDeserializer;
 import it.polimi.ingsw.Messages.ServerToClient.ServerMessage;
 import it.polimi.ingsw.Network.Client.ConnectionClient;
-import it.polimi.ingsw.Network.Server.RMI.ServerConnectionRMI;
+import it.polimi.ingsw.Network.Server.RMI.RemoteInterface;
+import it.polimi.ingsw.Network.Server.RMI.RemoteInterfaceClient;
 
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
-import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.concurrent.TimeUnit;
 
-public class ClientConnectionRMI extends ConnectionClient implements Remote {
-    private static ServerConnectionRMI stub;
+public class ClientConnectionRMI extends ConnectionClient implements RemoteInterfaceClient {
+    private static RemoteInterface stub;
     private final String playerName;
     private boolean clientIsActive;
     private boolean GUIisActive;
     private Thread ping;
-    public ClientConnectionRMI(String nickname) {
+    public ClientConnectionRMI(String nickname) throws RemoteException {
+        super();
         this.playerName=nickname;
         this.clientIsActive =true;
+        try{
+            stub =(RemoteInterface) Naming.lookup("rmi://localhost:"+22011+"/RMIServer");
+
+        } catch (MalformedURLException | NotBoundException | RemoteException e) {
+            throw new RuntimeException(e);
+        }
         sendMessage(new NickNameMessage(playerName));
     }
 
     @Override
     public void run() {
-        try{
-            stub =(ServerConnectionRMI) Naming.lookup("rmi://localhost:"+22011+"/RMIServer");
-        } catch (MalformedURLException | NotBoundException | RemoteException e) {
-            throw new RuntimeException(e);
-        }
+
+
         ping = new Thread(() -> {
             while (clientIsActive) {
                 try {
@@ -58,6 +62,7 @@ public class ClientConnectionRMI extends ConnectionClient implements Remote {
 //Ricevo il messagio
     public void receiveMessage(String message) {
         ServerMessage serverMessage= (ServerMessage) MoveDeserializer.deserializeOutput(message);
+        System.out.println(serverMessage);
         if (serverMessage!= null && serverMessage.getCategory() != Message.MessageCategory.PINGFROMSERVER) {
             if (GUIisActive) {
                 //GUIEvent.recieveMessage(serverMessage);
@@ -68,12 +73,26 @@ public class ClientConnectionRMI extends ConnectionClient implements Remote {
 
     }
 
-//Metodo che manda messaggio al server
+    @Override
+    public void login(String username, ClientConnectionRMI client) throws RemoteException {
+
+    }
+
+    @Override
+    public void disconnectMe() throws RemoteException {
+
+    }
+
+    //Metodo che manda messaggio al server
     public void sendMessage(ClientMessage message){
         message.setNickname(playerName);
         Gson gson=new Gson();
         String m=gson.toJson(message);
-        stub.receiveMessage(m);
+        try {
+            stub.receiveMessage(m, this);
+        } catch (RemoteException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
@@ -88,7 +107,11 @@ public class ClientConnectionRMI extends ConnectionClient implements Remote {
     }
     public void sendPing() throws InterruptedException {
         boolean pingIsOk=false;
-        pingIsOk=stub.getPing();
+        try {
+            pingIsOk=stub.getPing();
+        } catch (RemoteException e) {
+            throw new RuntimeException(e);
+        }
         TimeUnit.SECONDS.sleep(3);
         if(pingIsOk){
             System.out.println("ping arrived");

@@ -13,6 +13,7 @@ import it.polimi.ingsw.Network.Client.ConnectionClient;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.rmi.RemoteException;
 import java.util.Scanner;
 
 public class ClientConnectionTCP extends ConnectionClient {
@@ -31,7 +32,8 @@ public class ClientConnectionTCP extends ConnectionClient {
     private Boolean GUIisActive=false;
     private final Gson gson=new Gson();
 
-    public ClientConnectionTCP(Socket socket,String nickname) {
+    public ClientConnectionTCP(Socket socket,String nickname) throws RemoteException {
+        super();
         this.playerName=nickname;
         this.clientIsActive =true;
         this.socket = socket;

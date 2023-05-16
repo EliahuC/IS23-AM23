@@ -23,7 +23,7 @@ public class Player {
     private boolean lastRound;
 
 
-    PropertyChangeListener listener;
+    transient PropertyChangeListener listener;
 
     /**
      * @author Eliahu Cohen

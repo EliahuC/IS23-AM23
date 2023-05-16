@@ -19,14 +19,14 @@ import java.util.Random;
 public class LivingRoom {
     public static final int MAX_Row=9;
     public static final int MAX_Column=9;
-    ArrayList<PropertyChangeListener> listeners=new ArrayList<>();
+    transient ArrayList<PropertyChangeListener> listeners=new ArrayList<>();
 
     private BoardToken[][] Board = new BoardToken[MAX_Row][MAX_Column];
-    private final Launcher L;
+    private transient final Launcher L;
     private final Bag bag;
-    private final GameChecker gameChecker;
+    private transient final GameChecker gameChecker;
 
-    private final ArrayList<CommonGoalCard> CommonGoalCard = new ArrayList<>();
+    private transient final ArrayList<CommonGoalCard> CommonGoalCard = new ArrayList<>();
     private CommonGoalCard commonGoalCard1;
     private CommonGoalCard commonGoalCard2;
 

@@ -44,6 +44,7 @@ public class RMIServerMain extends Server implements Loggable,Runnable {
 
     @Override
     public void showMessage(String s) {
+        System.out.println(s);
 
     }
 
@@ -58,14 +59,12 @@ public class RMIServerMain extends Server implements Loggable,Runnable {
         try {
             Registry registry = LocateRegistry.createRegistry(PORT);
             showMessage("Server is ready!!");
-            while(true){
-                ServerConnectionRMI rmiHandler = new ServerConnectionRMI();
-                Naming.rebind("rmi://localhost:"+22011+"/RMIServer",rmiHandler);
-                showMessage("Client successfully connected");
-                VirtualView virtualView=new VirtualView(rmiHandler);
-                virtualViews.add(virtualView);
-                rmiHandler.addVirtualView(virtualView);
-            }
+            ServerConnectionRMI rmiHandler = new ServerConnectionRMI();
+            Naming.rebind("rmi://localhost:"+22011+"/RMIServer",rmiHandler);
+            //showMessage("Client successfully connected");
+            VirtualView virtualView=new VirtualView(rmiHandler);
+            virtualViews.add(virtualView);
+            rmiHandler.addVirtualView(virtualView);
         } catch (IOException e) {
             e.printStackTrace();
         }

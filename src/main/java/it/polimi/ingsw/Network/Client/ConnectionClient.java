@@ -4,8 +4,14 @@ import it.polimi.ingsw.Messages.ClientToServer.ClientMessage;
 import it.polimi.ingsw.Messages.ServerToClient.ServerMessage;
 
 import java.io.IOException;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 
-public abstract class ConnectionClient implements Runnable {
+public abstract class ConnectionClient extends UnicastRemoteObject implements Runnable {
+    public ConnectionClient() throws RemoteException {
+        super();
+    }
+
     public void sendMessage(ClientMessage message){};
 
     public void receiveMessage(String s){};

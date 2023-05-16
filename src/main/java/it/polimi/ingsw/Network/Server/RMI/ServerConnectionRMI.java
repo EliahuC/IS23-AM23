@@ -40,15 +40,14 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
     }
 
     //Metodo che riceve il messaggio da client
-    public void receiveMessage(String message) {
+    public void receiveMessage(String message, RemoteInterfaceClient client) {
         ClientMessage m= (ClientMessage) MoveDeserializer.deserializeOutput(message);
-
         if (m != null) {
-            messageParser(m);
+            messageParser(m, client);
         }
     }
 
-    private void messageParser(ClientMessage message){
+    private void messageParser(ClientMessage message, RemoteInterfaceClient client){
         switch (message.getCategory()) {
             case PINGTOSERVER: {
                 message.dumpPingMessage();
@@ -60,6 +59,7 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
                     break;
                 }
                 Server.connectedPlayers.add(message.getNickname());
+                Server.rmiConnections.put(message.getNickname(), client);
                 namePlayer=message.getNickname();
                 sendMessage(new ValidNicknameMessage());
                 break;
@@ -121,11 +121,24 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
     }
 
 
-    @Override
-    public void sendMessage(ServerMessage message) {
+
+    public void sendMessage(ServerMessage message, String username) {
         Gson gson=new Gson();
         String s=gson.toJson(message);
-        skeleton.receiveMessage(s);
+        try {
+            Server.rmiConnections.get(username).receiveMessage(s);
+        } catch (RemoteException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    @Override
+    public void sendMessage(ServerMessage serverMessage) {
+    }
+
+    @Override
+    public void receiveMessage(String s) {
 
     }
 

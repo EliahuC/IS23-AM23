@@ -2,11 +2,13 @@ package it.polimi.ingsw.Network.Server;
 
 import it.polimi.ingsw.Network.Server.RMI.RMIServerMain;
 import it.polimi.ingsw.Network.Server.RMI.RMIparams;
+import it.polimi.ingsw.Network.Server.RMI.RemoteInterfaceClient;
 import it.polimi.ingsw.Network.Server.TCP.TCPParams;
 import it.polimi.ingsw.Network.Server.TCP.TCPServerMain;
 import it.polimi.ingsw.Printer;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * @author Eliahu Cohen
@@ -19,6 +21,7 @@ public class Server implements Printer {
      public static final ArrayList<Lobby> lobbies=new ArrayList<>();
     public static final ArrayList<Lobby> startedLobbies=new ArrayList<>();
     public static final ArrayList<String> connectedPlayers=new ArrayList<>();
+    public static final HashMap<String, RemoteInterfaceClient> rmiConnections = new HashMap<>();
     public static void main(String args[]){
 
         TCPServerMain tcpServerMain =new TCPServerMain(TCPParams.PORT);

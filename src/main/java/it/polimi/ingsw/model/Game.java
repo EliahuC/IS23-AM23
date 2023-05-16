@@ -22,15 +22,15 @@ import java.util.stream.Collectors;
 public class Game  {
     private final LivingRoom livingRoom;
     private final ArrayList<Player> Players;
-    private final ArrayList<Player> disconnectedPlayers;
+    private transient final ArrayList<Player> disconnectedPlayers;
 
     private int currPlaying;
     private final Integer gameNumPlayers;
 
-    private final GameChecker gameChecker;
+    private transient final GameChecker gameChecker;
     private boolean startedGame=false;
-    private final ArrayList<VirtualView> listeners ;
-    private final Timer turnTimer=new Timer();
+    private transient final ArrayList<VirtualView> listeners ;
+    private transient final Timer turnTimer=new Timer();
 
     private boolean finishedGame=false;
 
