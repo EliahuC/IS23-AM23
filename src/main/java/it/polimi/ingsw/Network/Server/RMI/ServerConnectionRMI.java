@@ -87,6 +87,7 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
                 disconnectionHandler = new DisconnectionHandler(lobby);
                 lobby.addUser(this, namePlayer, virtualView);
                 Server.lobbies.add(lobby);
+                break;
             }
             case ENTER_LOBBY: {
                 if(namePlayer==null)break;
