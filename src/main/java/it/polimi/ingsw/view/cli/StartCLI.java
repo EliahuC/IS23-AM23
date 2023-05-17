@@ -27,18 +27,18 @@ public class StartCLI {
 
     public void startClient(){
         //stampare schermata iniziale
-        System.out.print("INSERT YOUR NICKNAME:");
-        while(true){
+        System.out.print("INSERT YOUR NICKNAME: ");
+        do{
             Scanner input = new Scanner(System.in);
             nickname= input.nextLine();
 
-            System.out.print("INSERT IP ADDRESS:");
+            System.out.print("INSERT IP ADDRESS (press ENTER for default address): ");
             serverAddr = input.nextLine();
-            System.out.print("INSERT PORT NUMBER:");
+            System.out.print("INSERT PORT NUMBER: ");
             String portNumber = input.nextLine();
             portNum = Integer.parseInt(portNumber);
 
-            System.out.print("Do you want to use a TCP or RMI connection?");
+            System.out.print("Do you want to use a TCP or RMI connection? ");
             String connectionType = input.nextLine();
             switch (connectionType.toUpperCase()) {
                 case "TCP":
@@ -52,7 +52,10 @@ public class StartCLI {
                     } catch (IOException e) {
                         System.out.print("\033[H\033[2J");
                         System.out.flush();
-                        System.out.println("Please, insert again a CORRECT address.\n");
+                        System.out.println("Please, insert a CORRECT address.\n");
+                        System.out.print("\033[H\033[2J");
+                        System.out.flush();
+                        System.out.print("INSERT YOUR NICKNAME: ");
                     }
                     try{
                         TimeUnit.SECONDS.sleep(3);
@@ -70,22 +73,31 @@ public class StartCLI {
                     } catch (RemoteException e){
                         System.out.print("\033[H\033[2J");
                         System.out.flush();
-                        System.out.println("Please, insert again a CORRECT address.\n");
+                        System.out.println("Please, insert a CORRECT address.\n");
+                        System.out.print("\033[H\033[2J");
+                        System.out.flush();
+                        System.out.print("INSERT YOUR NICKNAME: ");
                     }
                 default:
-                    System.out.println("Please, insert again a CORRECT address.\n");
+                    System.out.print("\033[H\033[2J");
+                    System.out.flush();
+                    System.out.println("Please, insert a CORRECT address.\n");
+                    System.out.print("\033[H\033[2J");
+                    System.out.flush();
+                    System.out.print("INSERT YOUR NICKNAME: ");
                     break;
             }
             try{
-                TimeUnit.SECONDS.sleep(3);
+                TimeUnit.MILLISECONDS.sleep(500);
             }catch (InterruptedException iE){
                 iE.printStackTrace();
             }
-            if(connectionClient!=null && response!=null && response.getCategory()==Message.MessageCategory.VALID_NICKNAME)
-                break;
-            else if(response!=null && response.getCategory()!=Message.MessageCategory.WARNING)
-                System.out.println(response.getReturnMessage());
-        }
-        new LobbyHandler(connectionClient).start();
+            if(response!=null && response.getCategory()==Message.MessageCategory.WARNING) {
+                System.out.print(response.getReturnMessage());
+                response=null;
+            }
+        }while(response==null || (response.getCategory()!=Message.MessageCategory.VALID_NICKNAME && response!=null));
+        if(connectionClient!=null)
+            new LobbyHandler(connectionClient, receiver).start();
     }
 }

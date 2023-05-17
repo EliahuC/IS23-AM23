@@ -17,10 +17,11 @@ public class LobbyHandler {
     private ServerMessage response;
 
 
-    public LobbyHandler(ConnectionClient connectionClient) {
+    public LobbyHandler(ConnectionClient connectionClient, CLIEvent receiver) {
         this.connectionClient = connectionClient;
-        receiver=new CLIEvent(this);
-        connectionClient.setListener(receiver);
+        this.receiver=receiver;
+        //connectionClient.setListener(receiver);
+        this.receiver.setLobbyHandler(this);
     }
 
     public void setResponse(ServerMessage response){
@@ -41,15 +42,20 @@ public class LobbyHandler {
                     "/ENTER \n");
 
             command = input.nextLine();
-            if(Objects.equals(command.split(" ")[0].toUpperCase(), "/CREATE") || Objects.equals(command.split(" ")[0].toUpperCase(), "/ENTER"))
+            if((Objects.equals(command.split(" ")[0].toUpperCase(), "/CREATE") && command.split(" ")[1]!=null) || Objects.equals(command.split(" ")[0].toUpperCase(), "/ENTER"))
                 break;
-            System.out.print("Please, use the correct commands.\n");
+            System.out.print("The used command is NOT valid. Please, retry again.\n");
+            try{
+                TimeUnit.MILLISECONDS.sleep(1200);
+            }catch (InterruptedException iE){
+                iE.printStackTrace();
+            }
         }
         Message message = MoveSerializer.serializeInput(command);
         connectionClient.sendMessage((ClientMessage) message);
         while(true) {
             try{
-                TimeUnit.SECONDS.sleep(1);
+                TimeUnit.MILLISECONDS.sleep(500);
             }catch (InterruptedException iE){
                 iE.printStackTrace();
             }

@@ -11,41 +11,33 @@ public class CLIEvent implements PropertyChangeListener {
     private StartCLI startCLI;
     private LobbyHandler lobbyHandler;
     private GameHandler gameHandler;
-    public CLIEvent(LobbyHandler lobbyHandler){
-        this.lobbyHandler=lobbyHandler;
-    }
 
     public CLIEvent(StartCLI startCLI){
         this.startCLI=startCLI;
     }
 
-    public CLIEvent(LobbyHandler lobbyHandler, GameHandler gameHandler){
-        this.gameHandler=gameHandler;
-    }
-
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         ServerMessage serverMessage=(ServerMessage) evt.getNewValue();
-        switch(serverMessage.messageCategory){
-            case WARNING:
-                forwardMessage(serverMessage);
-        }
+        forwardMessage(serverMessage);
     }
 
     private void forwardMessage(ServerMessage response){
         if(lobbyHandler!=null) {
             lobbyHandler.setResponse(response);
-            return;
+            //return;
         }
         if(startCLI!=null){
             startCLI.setResponse(response);
-            return;
+            //return;
         }
         if (gameHandler != null) {
             //gameHandler.setResponse(response);
-            return;
+            //return;
         }
-        System.out.println("no handler available");
+    }
 
+    public void setLobbyHandler(LobbyHandler lobbyHandler){
+        this.lobbyHandler=lobbyHandler;
     }
 }

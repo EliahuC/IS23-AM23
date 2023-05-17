@@ -203,7 +203,7 @@ public class ServerConnectionTCP implements ServerConnection{
      */
     private void alreadyLoggedNickName(ClientMessage message) {
             ErrorMessage errorMessage=new ErrorMessage();
-            errorMessage.setReturnMessage("nickname already used");
+            errorMessage.setReturnMessage("Your nickname is already used.\nINSERT A NEW NICKNAME: ");
             sendMessage(errorMessage,message.getNickname());
     }
 
@@ -213,7 +213,7 @@ public class ServerConnectionTCP implements ServerConnection{
      */
     private void gameAlreadyStarted() {
             ErrorMessage errorMessage = new ErrorMessage();
-            errorMessage.setReturnMessage("Game already started,you can't logout since the game is finished");
+            errorMessage.setReturnMessage("Game already started, you can't logout until the game is finished.");
             sendMessage(errorMessage,namePlayer);
 
     }
@@ -225,7 +225,7 @@ public class ServerConnectionTCP implements ServerConnection{
     private void lobbyIsFull() {
 
             ErrorMessage errorMessage = new ErrorMessage();
-            errorMessage.setReturnMessage("the Lobby is full");
+            errorMessage.setReturnMessage("This lobby is full! Try to enter into another lobby or create a new one, yourself.");
             sendMessage(errorMessage,namePlayer);
 
         }
@@ -285,7 +285,7 @@ public class ServerConnectionTCP implements ServerConnection{
     private void alreadyExistentLobby(ClientMessage message){
             if (lobby!= null && lobby.getJoinedUsers().contains(message.getNickname())) {
                 ErrorMessage errorMessage=new ErrorMessage();
-                errorMessage.setReturnMessage("You are already part of a lobby,please log out if you want to create a new lobby.");
+                errorMessage.setReturnMessage("If you want to create a new one, exit from the lobby you are already in, first.");
                 sendMessage(errorMessage,namePlayer);
                 return;
             }
