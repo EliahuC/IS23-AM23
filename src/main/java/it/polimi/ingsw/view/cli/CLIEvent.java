@@ -23,7 +23,7 @@ public class CLIEvent implements PropertyChangeListener {
         switch(serverMessage.messageCategory){
             case WARNING:
                 forwardMessage(serverMessage);
-                System.out.print("I'M WORKING");
+                System.out.println("I'M WORKING");
         }
     }
 

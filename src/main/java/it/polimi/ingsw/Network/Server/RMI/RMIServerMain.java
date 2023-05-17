@@ -53,7 +53,7 @@ public class RMIServerMain extends Server implements Runnable {
 
         try {
             Registry registry = LocateRegistry.createRegistry(PORT);
-            showMessage("Server is ready!!");
+            showMessage("RMIServer is ready!!");
             ServerConnectionRMI rmiHandler = new ServerConnectionRMI();
             Naming.rebind("rmi://localhost:"+22011+"/RMIServer",rmiHandler);
             //showMessage("Client successfully connected");

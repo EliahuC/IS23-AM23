@@ -61,7 +61,7 @@ public class LobbyHandler {
             } else if (response!=null) {
                 break;
             }
-            System.out.print("LOOP");
+            System.out.println("LOOP");
         }
 
         System.out.print("Hi" + connectionClient.getPlayerName() + "! Let's wait for other players to begin the game...\n" +

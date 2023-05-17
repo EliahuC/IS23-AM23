@@ -203,7 +203,7 @@ public class ServerConnectionTCP implements ServerConnection{
     private void alreadyLoggedNickName(ClientMessage message) {
             ErrorMessage errorMessage=new ErrorMessage();
             errorMessage.setReturnMessage("nickname already used");
-            sendMessage(errorMessage,namePlayer);
+            sendMessage(errorMessage,message.getNickname());
     }
 
     /**
@@ -336,16 +336,16 @@ public class ServerConnectionTCP implements ServerConnection{
 
         });
         ping.start();
-
-        while(serverIsActive){
-           try{
-               String s= input.nextLine();
-               receiveMessage( s);
+        try{
+        while(serverIsActive) {
+            String s = input.nextLine();
+            receiveMessage(s);
+        }
            }catch (Exception e){
                closeClientConnection();
            }
 
-        }
+
 
     }
 
