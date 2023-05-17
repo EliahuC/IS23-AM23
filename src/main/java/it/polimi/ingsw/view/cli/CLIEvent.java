@@ -7,10 +7,16 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 public class CLIEvent implements PropertyChangeListener {
+
+    private StartCLI startCLI;
     private LobbyHandler lobbyHandler;
     private GameHandler gameHandler;
     public CLIEvent(LobbyHandler lobbyHandler){
         this.lobbyHandler=lobbyHandler;
+    }
+
+    public CLIEvent(StartCLI startCLI){
+        this.startCLI=startCLI;
     }
 
     public CLIEvent(LobbyHandler lobbyHandler, GameHandler gameHandler){
@@ -23,12 +29,13 @@ public class CLIEvent implements PropertyChangeListener {
         switch(serverMessage.messageCategory){
             case WARNING:
                 forwardMessage(serverMessage);
-                System.out.println("I'M WORKING");
         }
     }
 
     private void forwardMessage(ServerMessage response){
         if(lobbyHandler!=null)
             lobbyHandler.setResponse(response);
+        if(startCLI!=null)
+            startCLI.setResponse(response);
     }
 }

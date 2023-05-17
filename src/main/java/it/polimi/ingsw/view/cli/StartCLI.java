@@ -1,5 +1,7 @@
 package it.polimi.ingsw.view.cli;
 
+import it.polimi.ingsw.Messages.Message;
+import it.polimi.ingsw.Messages.ServerToClient.ServerMessage;
 import it.polimi.ingsw.Network.Client.ConnectionClient;
 import it.polimi.ingsw.Network.Client.RMI.ClientConnectionRMI;
 import it.polimi.ingsw.Network.Client.TCP.ClientConnectionTCP;
@@ -17,12 +19,17 @@ public class StartCLI {
     private int portNum;
     private Socket socket;
     private ConnectionClient connectionClient;
+    private ServerMessage response;
+    private CLIEvent receiver;
+    public void setResponse(ServerMessage response){
+        this.response=response;
+    }
 
     public void startClient(){
         //stampare schermata iniziale
+        System.out.print("INSERT YOUR NICKNAME:");
         while(true){
             Scanner input = new Scanner(System.in);
-            System.out.print("INSERT YOUR NICKNAME:");
             nickname= input.nextLine();
 
             System.out.print("INSERT IP ADDRESS:");
@@ -39,6 +46,8 @@ public class StartCLI {
                         socket = new Socket(serverAddr, portNum);
                         connectionClient = new ClientConnectionTCP(socket, nickname);
                         new Thread(connectionClient).start();
+                        receiver=new CLIEvent(this);
+                        connectionClient.setListener(receiver);
                         break;
                     } catch (IOException e) {
                         System.out.print("\033[H\033[2J");
@@ -55,6 +64,8 @@ public class StartCLI {
                     try {
                         connectionClient = new ClientConnectionRMI(nickname);
                         new Thread(connectionClient).start();
+                        receiver=new CLIEvent(this);
+                        connectionClient.setListener(receiver);
                         break;
                     } catch (RemoteException e){
                         System.out.print("\033[H\033[2J");
@@ -65,8 +76,15 @@ public class StartCLI {
                     System.out.println("Please, insert again a CORRECT address.\n");
                     break;
             }
-            if(connectionClient!=null)
+            try{
+                TimeUnit.SECONDS.sleep(3);
+            }catch (InterruptedException iE){
+                iE.printStackTrace();
+            }
+            if(connectionClient!=null && response!=null && response.getCategory()==Message.MessageCategory.VALID_NICKNAME)
                 break;
+            else if(response!=null && response.getCategory()!=Message.MessageCategory.WARNING)
+                System.out.println(response.getReturnMessage());
         }
         new LobbyHandler(connectionClient).start();
     }

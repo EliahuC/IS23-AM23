@@ -49,7 +49,7 @@ public class LobbyHandler {
         connectionClient.sendMessage((ClientMessage) message);
         while(true) {
             try{
-                TimeUnit.SECONDS.sleep(3);
+                TimeUnit.SECONDS.sleep(1);
             }catch (InterruptedException iE){
                 iE.printStackTrace();
             }
@@ -61,7 +61,6 @@ public class LobbyHandler {
             } else if (response!=null) {
                 break;
             }
-            System.out.println("LOOP");
         }
 
         System.out.print("Hi" + connectionClient.getPlayerName() + "! Let's wait for other players to begin the game...\n" +
