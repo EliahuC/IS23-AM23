@@ -6,6 +6,7 @@ import it.polimi.ingsw.Network.Client.TCP.ClientConnectionTCP;
 
 import java.io.IOException;
 import java.net.Socket;
+import java.rmi.RemoteException;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
@@ -17,17 +18,11 @@ public class StartCLI {
     private Socket socket;
     private ConnectionClient connectionClient;
 
-    public StartCLI(/*String serverAddr, int portNum, Socket socket*/) {
-        /*this.serverAddr = serverAddr;
-        this.portNum = portNum;
-        this.socket = socket;*/
-    }
-
     public void startClient(){
         //stampare schermata iniziale
         while(true){
-            System.out.print("INSERT YOUR NICKNAME:");
             Scanner input = new Scanner(System.in);
+            System.out.print("INSERT YOUR NICKNAME:");
             nickname= input.nextLine();
 
             System.out.print("INSERT IP ADDRESS:");
@@ -42,7 +37,7 @@ public class StartCLI {
                 case "TCP":
                     try {
                         socket = new Socket(serverAddr, portNum);
-                        connectionClient = new ClientConnectionTCP(socket,nickname);
+                        connectionClient = new ClientConnectionTCP(socket, nickname);
                         new Thread(connectionClient).start();
                         break;
                     } catch (IOException e) {
@@ -56,11 +51,19 @@ public class StartCLI {
                         iE.printStackTrace();
                     }
                     break;
-                /*case "RMI":
-                    connectionClient = new ClientConnectionRMI(nickname);
-                    new Thread(connectionClient).start();*/
-                default: System.out.println("Please, insert again a CORRECT address.\n");
-                break;
+                case "RMI":
+                    try {
+                        connectionClient = new ClientConnectionRMI(nickname);
+                        new Thread(connectionClient).start();
+                        break;
+                    } catch (RemoteException e){
+                        System.out.print("\033[H\033[2J");
+                        System.out.flush();
+                        System.out.println("Please, insert again a CORRECT address.\n");
+                    }
+                default:
+                    System.out.println("Please, insert again a CORRECT address.\n");
+                    break;
             }
             if(connectionClient!=null)
                 break;

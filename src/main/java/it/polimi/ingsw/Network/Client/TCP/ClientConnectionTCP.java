@@ -83,7 +83,7 @@ public class ClientConnectionTCP extends ConnectionClient {
 
             serverMessage= (ServerMessage) MoveDeserializer.deserializeOutput(s);
             try{
-                if (serverMessage!= null && serverMessage.getCategory() != Message.MessageCategory.PINGFROMSERVER) {
+                if (listener != null && serverMessage!= null && serverMessage.getCategory() != Message.MessageCategory.PINGFROMSERVER) {
                     listener.propertyChange(evt);
         } else if(serverMessage!= null && serverMessage.getCategory()== Message.MessageCategory.PINGFROMSERVER){
             //System.out.println("Ping arrived")

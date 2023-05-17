@@ -282,7 +282,7 @@ public class ServerConnectionTCP implements ServerConnection{
      * Method that sends an error message because the client is already into a lobby
      */
     private void alreadyExistentLobby(ClientMessage message){
-            if (lobby.getJoinedUsers().contains(message.getNickname())) {
+            if (lobby!= null && lobby.getJoinedUsers().contains(message.getNickname())) {
                 ErrorMessage errorMessage=new ErrorMessage();
                 errorMessage.setReturnMessage("You are already part of a lobby,please log out if you want to create a new lobby.");
                 sendMessage(errorMessage,namePlayer);
