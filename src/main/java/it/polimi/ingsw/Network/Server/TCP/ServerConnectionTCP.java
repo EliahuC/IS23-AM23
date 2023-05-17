@@ -338,9 +338,24 @@ public class ServerConnectionTCP implements ServerConnection{
         ping.start();
 
         while(serverIsActive){
-            String s= input.nextLine();
-            receiveMessage( s);
+           try{
+               String s= input.nextLine();
+               receiveMessage( s);
+           }catch (Exception e){
+               closeClientConnection();
+           }
 
+        }
+
+    }
+
+    private void closeClientConnection() {
+        System.out.println(namePlayer+" disconnected from the server");
+        Server.connectedPlayers.remove(namePlayer);
+        try {
+            clientSocket.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
     }

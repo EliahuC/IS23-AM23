@@ -20,6 +20,7 @@ public class LobbyHandler {
     public LobbyHandler(ConnectionClient connectionClient) {
         this.connectionClient = connectionClient;
         receiver=new CLIEvent(this);
+        connectionClient.setListener(receiver);
     }
 
     public void setResponse(ServerMessage response){
@@ -53,7 +54,7 @@ public class LobbyHandler {
                 iE.printStackTrace();
             }
             if(response!=null && response.getCategory()==Message.MessageCategory.WARNING){
-                System.out.print(response.getReturnMessage());
+                System.out.println(response.getReturnMessage());
                 command = input.nextLine();
                 message = MoveSerializer.serializeInput(command);
                 connectionClient.sendMessage((ClientMessage) message);

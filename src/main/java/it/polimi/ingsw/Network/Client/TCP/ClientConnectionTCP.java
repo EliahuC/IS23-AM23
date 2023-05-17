@@ -74,14 +74,12 @@ public class ClientConnectionTCP extends ConnectionClient {
 @Override
         public void receiveMessage(String s) {
             ServerMessage serverMessage=null;
-            PropertyChangeEvent evt= new PropertyChangeEvent(
-                    this,
-                    "MESSAGE RECEIVED",
-                    null,
-                    serverMessage);
-
-
             serverMessage= (ServerMessage) MoveDeserializer.deserializeOutput(s);
+            PropertyChangeEvent evt= new PropertyChangeEvent(
+            this,
+            "MESSAGE RECEIVED",
+            null,
+            serverMessage);
             try{
                 if (listener != null && serverMessage!= null && serverMessage.getCategory() != Message.MessageCategory.PINGFROMSERVER) {
                     listener.propertyChange(evt);
