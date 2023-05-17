@@ -33,9 +33,19 @@ public class CLIEvent implements PropertyChangeListener {
     }
 
     private void forwardMessage(ServerMessage response){
-        if(lobbyHandler!=null)
+        if(lobbyHandler!=null) {
             lobbyHandler.setResponse(response);
-        if(startCLI!=null)
+            return;
+        }
+        if(startCLI!=null){
             startCLI.setResponse(response);
+            return;
+        }
+        if (gameHandler != null) {
+            //gameHandler.setResponse(response);
+            return;
+        }
+        System.out.println("no handler available");
+
     }
 }
