@@ -35,9 +35,10 @@ public class ClientConnectionRMI extends ConnectionClient implements RemoteInter
      * @throws RemoteException if the connection couldn't start
      * Constructor to start the RMI connection and set the playerNick
      */
-    public ClientConnectionRMI(String nickname) throws RemoteException {
+    public ClientConnectionRMI(String nickname,PropertyChangeListener listener) throws RemoteException {
         super();
         this.playerName=nickname;
+        this.listener=listener;
         this.clientIsActive =true;
         try{
             stub =(RemoteInterface) Naming.lookup("rmi://localhost:"+22011+"/RMIServer");
@@ -82,15 +83,15 @@ public class ClientConnectionRMI extends ConnectionClient implements RemoteInter
      * Method that receive a message from the server and pass it to GUI/CLI handlers
      */
     public void receiveMessage(String message) {
-        System.out.println(message);
         ServerMessage serverMessage=null;
+        serverMessage= (ServerMessage) MoveDeserializer.deserializeOutput(message);
         PropertyChangeEvent evt= new PropertyChangeEvent(
                 this,
                 "MESSAGE RECEIVED",
                 null,
                 serverMessage);
 
-        serverMessage= (ServerMessage) MoveDeserializer.deserializeOutput(message);
+
         if (serverMessage!= null && serverMessage.getCategory() != Message.MessageCategory.PINGFROMSERVER) {
            listener.propertyChange(evt);
         }

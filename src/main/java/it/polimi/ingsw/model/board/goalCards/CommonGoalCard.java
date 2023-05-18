@@ -7,7 +7,7 @@ import it.polimi.ingsw.model.player.BookShelf;
  * @author Eliahu Cohen
  * abstract class that the specific goal card will implement
  */
-public abstract class CommonGoalCard {
+public class CommonGoalCard {
     private int numCompleted = 0;
     private transient final Launcher L = new Launcher();
 
@@ -62,7 +62,10 @@ public abstract class CommonGoalCard {
         }
         return points;
     }
-    public abstract void checkGoal (BookShelf bs);
+
+    public void checkGoal(BookShelf bs) {
+
+    }
 
     /**
      * @author Eliahu Cohen

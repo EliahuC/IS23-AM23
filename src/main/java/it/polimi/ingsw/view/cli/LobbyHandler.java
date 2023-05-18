@@ -43,7 +43,7 @@ public class LobbyHandler {
                     "/ENTER \n");
 
             command = input.nextLine();
-            if((Objects.equals(command.split(" ")[0].toUpperCase(), "/CREATE") && command.split(" ")[1]!=null) || Objects.equals(command.split(" ")[0].toUpperCase(), "/ENTER"))
+            if((Objects.equals(command.split(" ")[0].toUpperCase(), "/CREATE")) || Objects.equals(command.split(" ")[0].toUpperCase(), "/ENTER"))
                 break;
             System.out.print("The used command is NOT valid. Please, retry again.\n");
             try{

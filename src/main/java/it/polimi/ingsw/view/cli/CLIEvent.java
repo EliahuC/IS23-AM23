@@ -6,10 +6,14 @@ import javax.swing.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+/**
+ * @author Eliahu cohen and Simone Controguerra
+ * Listener class that pass the received messages from ClientConnection to the CLI
+ */
 public class CLIEvent implements PropertyChangeListener {
-    private Boolean inStartCLI;
-    private Boolean inLobbyHandler;
-    private Boolean inGameHandler;
+    private Boolean inStartCLI=false;
+    private Boolean inLobbyHandler=false;
+    private Boolean inGameHandler=false;
 
     private StartCLI startCLI;
     private LobbyHandler lobbyHandler;
