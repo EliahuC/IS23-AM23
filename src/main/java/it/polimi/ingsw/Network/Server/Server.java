@@ -20,7 +20,7 @@ public class Server implements Printer {
     public static final ArrayList<Lobby> startedLobbies=new ArrayList<>();
     public static final ArrayList<String> connectedPlayers=new ArrayList<>();
     public static final HashMap<String, RemoteInterfaceClient> rmiConnections = new HashMap<>();
-    public static void main(String args[]){
+    public static void main(String[] args){
 
         TCPServerMain tcpServerMain =new TCPServerMain(TCPParams.PORT);
         RMIServerMain rmiServerMain=new RMIServerMain(RMIparams.PORT);

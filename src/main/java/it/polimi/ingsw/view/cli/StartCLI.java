@@ -45,10 +45,10 @@ public class StartCLI {
                     try {
                         socket = new Socket(serverAddr, portNum);
                         connectionClient = new ClientConnectionTCP(socket, nickname);
-                        new Thread(connectionClient).start();
                         receiver=new CLIEvent(this);
                         receiver.setInStartCLI(true);
                         connectionClient.setListener(receiver);
+                        new Thread(connectionClient).start();
                         break;
                     } catch (IOException e) {
                         System.out.print("\033[H\033[2J");
@@ -66,10 +66,11 @@ public class StartCLI {
                     break;
                 case "RMI":
                     try {
-                        connectionClient = new ClientConnectionRMI(nickname);
-                        new Thread(connectionClient).start();
+
                         receiver=new CLIEvent(this);
-                        connectionClient.setListener(receiver);
+                        receiver.setInStartCLI(true);
+                        connectionClient = new ClientConnectionRMI(nickname,receiver);
+                        new Thread(connectionClient).start();
                         break;
                     } catch (RemoteException e){
                         System.out.print("\033[H\033[2J");

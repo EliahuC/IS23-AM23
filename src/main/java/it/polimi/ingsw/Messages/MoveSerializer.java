@@ -48,7 +48,7 @@ public class MoveSerializer implements Printer {
     private static Message convertCommandToMove(String[] Command) {
       switch (checkCommand(Command[0].toUpperCase())){
           case CREATE_LOBBY -> {
-              if(Command[1]==null){
+              if(Command.length<2){
                   invalidCommand();
                   break;
               }

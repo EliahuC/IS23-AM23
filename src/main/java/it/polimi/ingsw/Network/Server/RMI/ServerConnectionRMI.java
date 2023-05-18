@@ -100,7 +100,7 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
                         break;
                     }
                     //player already in the lobby
-                    if (lobby.getJoinedUsers().contains(message.getNickname())) {
+                    if (lobby!=null&&lobby.getJoinedUsers().contains(message.getNickname())) {
                         alreadyExistentLobby(message);
                         break;
                     }
@@ -288,15 +288,17 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
      * @throws InterruptedException
      * Method used to send a ping to the client
      */
-    public void sendPing() throws InterruptedException {
-        boolean pingIsOk=false;
-        pingIsOk=skeleton.getPing();
-        TimeUnit.SECONDS.sleep(3);
-        if(pingIsOk){
-            System.out.println("ping arrived");
-            return;
+    public void sendPing() throws InterruptedException, RemoteException {
+        for (String s : Server.rmiConnections.keySet()) {
+            boolean pingIsOk = false;
+            pingIsOk = Server.rmiConnections.get(s).getPing();
+            TimeUnit.SECONDS.sleep(3);
+            if (pingIsOk) {
+                System.out.println("ping arrived");
+                return;
+            }
+            System.out.println("Connection crushed");
         }
-        System.out.println("Connection crushed");
     }
 
     /**
@@ -315,23 +317,19 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
      *
      */
     public void run(){
-        try {
-            skeleton = (ClientConnectionRMI) Naming.lookup("rmi://localhost:"+22011+"/RMIServer");
-        } catch (NotBoundException | MalformedURLException | RemoteException e) {
-            throw new RuntimeException(e);
-        }
+
         serverIsActive=true;
         ping = new Thread(() -> {
             while (serverIsActive) {
                 try {
                     //Metto a dormire thread per 5 secondi
-                    TimeUnit.SECONDS.sleep(5);
+                    TimeUnit.SECONDS.sleep(15);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
                 try {
                     sendPing();
-                } catch (InterruptedException e) {
+                } catch (InterruptedException | RemoteException e) {
                     throw new RuntimeException(e);
                 }
 
