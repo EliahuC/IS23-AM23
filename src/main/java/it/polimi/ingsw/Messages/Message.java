@@ -2,6 +2,10 @@ package it.polimi.ingsw.Messages;
 
 import java.util.Objects;
 
+/**
+ * @author Eliahu Cohen
+ * abstract class that represent the concept of message
+ */
 public abstract class Message {
 
     public MessageCategory messageCategory;
@@ -14,6 +18,11 @@ public abstract class Message {
         this.messageCategory = messageCategory;
         this.nickname=n;
     }
+
+    /**
+     * @author Eliahu Cohen
+     * enum that indicates the type of the message
+     */
     public enum MessageCategory{
         PINGTOSERVER,
         CURRPLAYING,

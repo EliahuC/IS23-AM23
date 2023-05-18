@@ -3,6 +3,10 @@ package it.polimi.ingsw.Messages.ServerToClient;
 import it.polimi.ingsw.model.player.BookShelf;
 import it.polimi.ingsw.model.player.Player;
 
+/**
+ * @author Eliahu Cohen
+ * Message that indicate the success of the move
+ */
 public class SuccessMessage extends ServerMessage{
     private final Player player;
     public SuccessMessage(Player player) {

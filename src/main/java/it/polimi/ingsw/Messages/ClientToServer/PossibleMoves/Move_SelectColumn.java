@@ -2,6 +2,10 @@ package it.polimi.ingsw.Messages.ClientToServer.PossibleMoves;
 
 import java.util.ArrayList;
 
+/**
+ * @author Eliahu Cohen
+ * Move to select the column where to put the tiles
+ */
 public class Move_SelectColumn extends Move {
     private Integer YBookshelf=null;
 

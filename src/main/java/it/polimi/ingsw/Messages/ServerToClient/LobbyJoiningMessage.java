@@ -1,5 +1,9 @@
 package it.polimi.ingsw.Messages.ServerToClient;
 
+/**
+ * @author Eliahu Cohen
+ * Message that returns the id of lobby the player just joined
+ */
 public class LobbyJoiningMessage extends ServerMessage{
     private final Integer idLobby;
     public LobbyJoiningMessage(Integer idLobby) {

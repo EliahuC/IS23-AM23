@@ -1,5 +1,9 @@
 package it.polimi.ingsw.Messages.ServerToClient;
 
+/**
+ * @author Eliahu Cohen
+ * Message that represent the ping from the server to the client
+ */
 public class PingFromServer extends ServerMessage{
 
     public PingFromServer(int pingCount) {
