@@ -20,7 +20,8 @@ public class LobbyHandler {
     public LobbyHandler(ConnectionClient connectionClient, CLIEvent receiver) {
         this.connectionClient = connectionClient;
         this.receiver=receiver;
-        //connectionClient.setListener(receiver);
+        this.receiver.setInLobbyHandler(true);
+        connectionClient.setListener(receiver);
         this.receiver.setLobbyHandler(this);
     }
 
@@ -87,6 +88,7 @@ public class LobbyHandler {
         }catch (InterruptedException iE){
             iE.printStackTrace();
         }
-        //new GameHandler(connectionClient).start();
+        receiver.setInLobbyHandler(false);
+        //new GameHandler(connectionClient, receiver).start();
     }
 }

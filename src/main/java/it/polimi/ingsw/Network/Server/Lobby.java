@@ -202,4 +202,8 @@ public class Lobby {
     public void setFullLobby(Boolean fullLobby) {
         this.fullLobby = fullLobby;
     }
+
+    public Integer getIdLobby() {
+        return idLobby;
+    }
 }

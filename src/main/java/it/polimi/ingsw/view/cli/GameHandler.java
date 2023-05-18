@@ -12,10 +12,12 @@ import java.util.Scanner;
 
 public class GameHandler {
     private ConnectionClient connectionClient;
+private CLIEvent receiver;
 
-
-    public GameHandler(ConnectionClient connectionClient) {
+    public GameHandler(ConnectionClient connectionClient,CLIEvent receiver) {
         this.connectionClient = connectionClient;
+        this.receiver=receiver;
+        receiver.setInGameHandler(true);
     }
 
     /*public void start(){
@@ -140,5 +142,6 @@ public class GameHandler {
             break;
             //System.out.print("The chosen column is too full. Please, choose another one.\n");
         }
+
     }*/
 }

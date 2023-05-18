@@ -7,6 +7,9 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 public class CLIEvent implements PropertyChangeListener {
+    private Boolean inStartCLI;
+    private Boolean inLobbyHandler;
+    private Boolean inGameHandler;
 
     private StartCLI startCLI;
     private LobbyHandler lobbyHandler;
@@ -23,18 +26,42 @@ public class CLIEvent implements PropertyChangeListener {
     }
 
     private void forwardMessage(ServerMessage response){
-        if(lobbyHandler!=null) {
+        if(inLobbyHandler) {
             lobbyHandler.setResponse(response);
-            //return;
+            return;
         }
-        if(startCLI!=null){
+        if(inStartCLI){
             startCLI.setResponse(response);
-            //return;
+            return;
         }
-        if (gameHandler != null) {
+        if (inGameHandler) {
             //gameHandler.setResponse(response);
-            //return;
+            return;
         }
+    }
+
+    public Boolean getInStartCLI() {
+        return inStartCLI;
+    }
+
+    public void setInStartCLI(Boolean inStartCLI) {
+        this.inStartCLI = inStartCLI;
+    }
+
+    public Boolean getInLobbyHandler() {
+        return inLobbyHandler;
+    }
+
+    public void setInLobbyHandler(Boolean inLobbyHandler) {
+        this.inLobbyHandler = inLobbyHandler;
+    }
+
+    public Boolean getInGameHandler() {
+        return inGameHandler;
+    }
+
+    public void setInGameHandler(Boolean inGameHandler) {
+        this.inGameHandler = inGameHandler;
     }
 
     public void setLobbyHandler(LobbyHandler lobbyHandler){

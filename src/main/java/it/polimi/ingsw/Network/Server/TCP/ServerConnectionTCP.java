@@ -5,10 +5,7 @@ import com.google.gson.JsonSyntaxException;
 import it.polimi.ingsw.Messages.ClientToServer.ClientMessage;
 import it.polimi.ingsw.Messages.ClientToServer.LobbyCreationMessage;
 import it.polimi.ingsw.Messages.MoveDeserializer;
-import it.polimi.ingsw.Messages.ServerToClient.ErrorMessage;
-import it.polimi.ingsw.Messages.ServerToClient.PingFromServer;
-import it.polimi.ingsw.Messages.ServerToClient.ServerMessage;
-import it.polimi.ingsw.Messages.ServerToClient.ValidNicknameMessage;
+import it.polimi.ingsw.Messages.ServerToClient.*;
 import it.polimi.ingsw.Network.Server.*;
 import it.polimi.ingsw.model.player.Player;
 
@@ -146,6 +143,7 @@ public class ServerConnectionTCP implements ServerConnection{
                 disconnectionHandler = new DisconnectionHandler(lobby);
                 lobby.addUser(this, namePlayer, virtualView);
                 Server.lobbies.add(lobby);
+                sendMessage(new LobbyJoiningMessage(lobby.getIdLobby()),namePlayer);
                 break;
             }
             case ENTER_LOBBY: {
@@ -175,6 +173,7 @@ public class ServerConnectionTCP implements ServerConnection{
 
                 lobby.addUser(this, message.getNickname(), virtualView);
                 checkCompletedLobby();
+                sendMessage(new LobbyJoiningMessage(lobby.getIdLobby()),namePlayer);
                 break;
             }
 

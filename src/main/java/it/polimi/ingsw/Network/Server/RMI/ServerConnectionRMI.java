@@ -5,6 +5,7 @@ import it.polimi.ingsw.Messages.ClientToServer.ClientMessage;
 import it.polimi.ingsw.Messages.ClientToServer.LobbyCreationMessage;
 import it.polimi.ingsw.Messages.MoveDeserializer;
 import it.polimi.ingsw.Messages.ServerToClient.ErrorMessage;
+import it.polimi.ingsw.Messages.ServerToClient.LobbyJoiningMessage;
 import it.polimi.ingsw.Messages.ServerToClient.ServerMessage;
 import it.polimi.ingsw.Messages.ServerToClient.ValidNicknameMessage;
 import it.polimi.ingsw.Network.Client.RMI.ClientConnectionRMI;
@@ -87,6 +88,7 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
                 disconnectionHandler = new DisconnectionHandler(lobby);
                 lobby.addUser(this, namePlayer, virtualView);
                 Server.lobbies.add(lobby);
+                sendMessage(new LobbyJoiningMessage(lobby.getIdLobby()),namePlayer);
                 break;
             }
             case ENTER_LOBBY: {
@@ -116,6 +118,7 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
 
                 lobby.addUser(this, message.getNickname(), virtualView);
                 checkCompletedLobby();
+                sendMessage(new LobbyJoiningMessage(lobby.getIdLobby()),namePlayer);
                 break;
             }
 

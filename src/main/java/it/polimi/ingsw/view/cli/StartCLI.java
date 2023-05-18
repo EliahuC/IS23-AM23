@@ -47,6 +47,7 @@ public class StartCLI {
                         connectionClient = new ClientConnectionTCP(socket, nickname);
                         new Thread(connectionClient).start();
                         receiver=new CLIEvent(this);
+                        receiver.setInStartCLI(true);
                         connectionClient.setListener(receiver);
                         break;
                     } catch (IOException e) {
@@ -97,7 +98,11 @@ public class StartCLI {
                 response=null;
             }
         }while(response==null || (response.getCategory()!=Message.MessageCategory.VALID_NICKNAME && response!=null));
-        if(connectionClient!=null)
+        if(connectionClient!=null){
+            receiver.setInStartCLI(false);
             new LobbyHandler(connectionClient, receiver).start();
+
+        }
+
     }
 }
