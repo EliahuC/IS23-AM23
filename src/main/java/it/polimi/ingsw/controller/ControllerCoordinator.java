@@ -76,4 +76,8 @@ public class ControllerCoordinator {
         }
       return player;
     }
+
+    public Boolean getStartedGame() {
+        return startedGame;
+    }
 }
