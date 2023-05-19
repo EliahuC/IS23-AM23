@@ -257,7 +257,7 @@ public class ServerConnectionTCP implements ServerConnection{
 
             ErrorMessage errorMessage =new ErrorMessage();
             errorMessage.setReturnMessage("There is no available lobby, create a new one using the command:\n" +
-                    "/CREATE_LOBBY <your nickname> <number of players>\n" +
+                    "/CREATE <number of players>\n" +
                     "Remember that the number of players can only be 2, 3 or 4!");
             sendMessage(errorMessage,namePlayer);
 

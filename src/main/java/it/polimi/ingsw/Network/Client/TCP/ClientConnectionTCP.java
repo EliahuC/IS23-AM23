@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.rmi.RemoteException;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class ClientConnectionTCP extends ConnectionClient {
@@ -66,8 +67,12 @@ public class ClientConnectionTCP extends ConnectionClient {
 
         //Scrivo reazione view all'evento
         while(clientIsActive){
-            String s = input.nextLine();
-            receiveMessage(s);
+            try {
+                String s = input.nextLine();
+                receiveMessage(s);
+            } catch (NoSuchElementException e) {
+                continue;
+            }
         }
 
     }
