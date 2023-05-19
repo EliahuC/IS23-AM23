@@ -39,7 +39,7 @@ public class LobbyHandler {
             System.out.flush();
             System.out.print("Do you want to look for a lobby to join or do you prefer to make a new one?\n" +
                     "Please use the following commands:\n" +
-                    "/CREATE  <number of players> (Remember that the number of players can only be 2, 3 or 4!)\n" +
+                    "/CREATE <number of players> (Remember that the number of players can only be 2, 3 or 4!)\n" +
                     "/ENTER \n");
 
             command = input.nextLine();
@@ -56,7 +56,7 @@ public class LobbyHandler {
         connectionClient.sendMessage((ClientMessage) message);
         while(true) {
             try{
-                TimeUnit.MILLISECONDS.sleep(500);
+                TimeUnit.MILLISECONDS.sleep(200);
             }catch (InterruptedException iE){
                 iE.printStackTrace();
             }
@@ -70,14 +70,19 @@ public class LobbyHandler {
             }
         }
 
-        System.out.print("Hi" + connectionClient.getPlayerName() + "! Let's wait for other players to begin the game...\n" +
+        System.out.print("Hi " + connectionClient.getPlayerName() + "! Let's wait for other players to begin the game...\n" +
                 "If you want to exit from the game, please use the command: /EXIT\n");
-        command = input.nextLine();
-        message = MoveSerializer.serializeInput(command);
+        //command = input.nextLine();
+        //message = MoveSerializer.serializeInput(command);
         connectionClient.sendMessage((ClientMessage) message);
-
+        response=null;
+        try{
+            TimeUnit.MILLISECONDS.sleep(500);
+        }catch (InterruptedException iE){
+            iE.printStackTrace();
+        }
         while(true) {
-            if(response!=null && response.getCategory()==Message.MessageCategory.RETURN_MESSAGE){
+            if(response!=null && response.getCategory()==Message.MessageCategory.STARTING_GAME_MESSAGE){
                 System.out.print(response.getReturnMessage());
                 break;
             }

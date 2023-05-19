@@ -155,6 +155,7 @@ public class ServerConnectionTCP implements ServerConnection{
                         break;
                     }
                     //player already in the lobby
+                    lobby = Server.lobbies.get(0);
                     if (lobby.getJoinedUsers().contains(message.getNickname())) {
                         alreadyExistentLobby(message);
                         break;
