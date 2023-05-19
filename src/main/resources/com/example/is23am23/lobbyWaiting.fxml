@@ -23,6 +23,7 @@
             <font>
                 <Font size="20.0" />
             </font></Label>
-        <Button layoutX="254.0" layoutY="302.0" mnemonicParsing="false" onAction="#switchToMenu" prefHeight="32.0" prefWidth="100.0" text="Return to Menu" />
+        <Button layoutX="254.0" layoutY="302.0" mnemonicParsing="false" onAction="#switchToGame" prefHeight="32.0" prefWidth="100.0" text="Return to Menu" />
+      <Button layoutX="490.0" layoutY="259.0" mnemonicParsing="false" onAction="#switchToGame" text="game" />
     </children>
 </AnchorPane>
