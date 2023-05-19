@@ -75,6 +75,9 @@ public class MoveDeserializer {
            case "VALID_NICKNAME" -> {
                return gson.fromJson(s, ValidNicknameMessage.class);
            }
+           case "RETURN_MESSAGE"->{
+               return gson.fromJson(s, LobbyJoiningMessage.class);
+           }
        }
         return null;
     }
