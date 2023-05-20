@@ -2,59 +2,86 @@ package it.polimi.ingsw.view.cli;
 
 import it.polimi.ingsw.Messages.ClientToServer.ClientMessage;
 import it.polimi.ingsw.Messages.Message;
+import it.polimi.ingsw.Messages.ServerToClient.LivingRoomMessage;
 import it.polimi.ingsw.Messages.ServerToClient.ServerMessage;
 import it.polimi.ingsw.Network.Client.ConnectionClient;
 import it.polimi.ingsw.Messages.MoveSerializer;
+import it.polimi.ingsw.model.Game;
+import it.polimi.ingsw.model.player.Player;
 
 import java.io.IOException;
 import java.util.Objects;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 public class GameHandler {
     private ConnectionClient connectionClient;
-private CLIEvent receiver;
+    private CLIEvent receiver;
+    private ServerMessage response;
+    private Game source;
 
-    public GameHandler(ConnectionClient connectionClient,CLIEvent receiver) {
+    public GameHandler(ConnectionClient connectionClient, CLIEvent receiver) {
         this.connectionClient = connectionClient;
         this.receiver=receiver;
-        receiver.setInGameHandler(true);
+        this.receiver.setInGameHandler(true);
+        connectionClient.setListener(receiver);
+        this.receiver.setGameHandler(this);
     }
 
-    /*public void start(){
-        ServerMessage serverMessage;
+    public void setResponse(ServerMessage response){
+        this.response=response;
+    }
+
+    public void start(){
         while(true){
             showBoard();
             showBookshelfOrder();
             showBookshelfColumn();
-            try {
-                serverMessage = connectionClient.receiveMessage();
-            }catch (IOException | ClassNotFoundException e){
-                continue;
+            try{
+                TimeUnit.MILLISECONDS.sleep(200);
+            }catch (InterruptedException iE){
+                iE.printStackTrace();
             }
-            if(serverMessage.getCategory()==Message.MessageCategory.END_GAME_MESSAGE)
+            if(response!=null && response.getCategory()==Message.MessageCategory.END_GAME_MESSAGE)
                 break;
             waiting();
         }
         showEnd();
-    //}
+    }
 
     private void waiting(){
-        //while(non è il tuo turno) //Il player è associato alla classe?
+        //while(non è il tuo turno) //Esiste un messaggio che permette di capire chi sta giocando in questo momento?
             System.out.print("It's not your turn, yet. Wait for other players to finish their turn.\n\n");
-            System.out.print("CURRENT PLAYING:"+"");
-            System.out.print("Next playing:"+"");
+            System.out.print("CURRENT PLAYING:"+"\n");
+            System.out.print("Next playing:"+"\n");
+            System.out.print("Next playing:"+"\u001b[189;174;41m\n");
         //}
+        try{
+            TimeUnit.MILLISECONDS.sleep(200);
+        }catch (InterruptedException iE){
+            iE.printStackTrace();
+        }
+        if(response!=null && response.getCategory()==Message.MessageCategory.LAST_TURN_MESSAGE)
+            System.out.print(response.getReturnMessage());
     }
 
     private void showBoard(){
-        ServerMessage serverMessage = new ServerMessage(Message.MessageCategory.PINGFROMSERVER);
-        try {
-            serverMessage = connectionClient.receiveMessage();
-        }catch (IOException | ClassNotFoundException e){};
-
+        try{
+            TimeUnit.MILLISECONDS.sleep(200);
+        }catch (InterruptedException iE){
+            iE.printStackTrace();
+        }
         System.out.print("LIVING BOARD\n");
-        //printer della board
-        if(serverMessage.getCategory()==Message.MessageCategory.LIVINGROOM)
+        /*if(response!=null && response.getCategory()==Message.MessageCategory.LIVINGROOM){ //serve un messaggio che mandi una LivingRoom a ogni inizio turno
+            LivingRoomMessage temp=(LivingRoomMessage) response;
+            temp.getBoard().print(); //il messaggio LIVINGROOM deve ritornare una LivingRoom, non una BoardToken[][]!
+        }*/ //STAMPA DELLA BOARD
+        try{
+            TimeUnit.MILLISECONDS.sleep(200);
+        }catch (InterruptedException iE){
+            iE.printStackTrace();
+        }
+        if(response!=null && response.getCategory()==Message.MessageCategory.LIVINGROOM)
             System.out.print("THE BOARD HAS BEEN RESTORED!\n\n");
         System.out.print("If you want to see the description of your personal or common goal cards, use the command /GOALS\n" +
                 "You can only choose one, two or three adjacent tiles that are in the same column or in the same row. You can only choose tiles on the border.\n\n");
@@ -69,14 +96,15 @@ private CLIEvent receiver;
             }
             Message message = MoveSerializer.serializeInput(command);
             connectionClient.sendMessage((ClientMessage) message);
-            try {
-                serverMessage = connectionClient.receiveMessage();
-            }catch (IOException | ClassNotFoundException e){
-                continue;
+            try{
+                TimeUnit.MILLISECONDS.sleep(200);
+            }catch (InterruptedException iE){
+                iE.printStackTrace();
             }
-            if(serverMessage.getCategory()==Message.MessageCategory.RETURN_MESSAGE)
+            if(response!=null && response.getCategory()==Message.MessageCategory.RETURN_MESSAGE) //Messaggio che conferma la corretta scelta delle tessere
                 break;
-            System.out.print("Your move is not valid. Please, pick again and correctly your tiles.\n");
+            System.out.print("Your move is not valid. Please, pick again and correctly your tiles.\n" +
+                    "[You can still see your goal cards, using the command /GOALS\n");
         }
     }
 
@@ -84,19 +112,25 @@ private CLIEvent receiver;
         Scanner input = new Scanner(System.in);
         String command;
         //printer carte obiettivo
+        System.out.print("YOUR PERSONAL GOAL CARD\n");
+        Player temp= (Player) source.getPlayers().stream().filter(player -> Objects.equals(player.getNickName(), connectionClient.getPlayerName()));
+        temp.getPersonalGoalCard().print();
+        System.out.print("COMMON GOAL CARDS\n");
+        System.out.print("(1): ");
+        source.getLivingRoom().getCommonGoalCard1().print();
+        System.out.print("(2): ");
+        source.getLivingRoom().getCommonGoalCard2().print();
         System.out.print("[If you want to come back to the previous screen, use the command /BACK]\n");
         while (true){
             command = input.nextLine();
             if(Objects.equals(command.toUpperCase(), "/BACK"))
                 break;
+            System.out.print("Please, use the /BACK command correctly.\n");
         }
-        switch (scenario){
-            case "Living Board": showBoard();
-            break;
-            case "BookshelfOrder": showBookshelfOrder();
-            break;
-            case "BookshelfColumn": //showBookshelfColumn();
-            break;
+        switch (scenario) {
+            case "Living Board" -> showBoard();
+            case "BookshelfOrder" -> showBookshelfOrder();
+            case "BookshelfColumn" -> showBookshelfColumn();
         }
 
     }
@@ -108,11 +142,13 @@ private CLIEvent receiver;
     private void showBookshelfOrder(){
         Scanner input = new Scanner(System.in);
         System.out.print("YOUR BOOKSHELF\n");
-        //printer libreria
+        Player temp= (Player) source.getPlayers().stream().filter(player -> Objects.equals(player.getNickName(), connectionClient.getPlayerName()));
+        temp.getPlayerBookshelf().print();
         System.out.print("Now, choose the order for the tiles to be inserted into your bookshelf using the command /ORDER t1 t2 t3\n" +
                 "Consider that during the selection of the tiles from the board, you respectively wrote the two coordinates first for the tile t1, then for the tile t2, finally for the tile t3.\n" +
                 "For example: if you wrote down the coordinates for t1, t2, t3 and you want to insert first the tile t2, then t3 and finally t1 into your bookshelf, the correct use for the command is /ORDER t2 t3 t1\n\n" +
                 "[If you want to see the description of your personal or common goal cards, use the command /GOALS\n]");
+        //Per una comprensione migliore, sarebbe preferibile visualizzare le tre tessere selezionate ma non some recuperarne il riferimento
         while(true){
             String command = input.nextLine();
             if(Objects.equals(command.toUpperCase(), "/GOALS")){
@@ -120,9 +156,14 @@ private CLIEvent receiver;
             }
             Message message = MoveSerializer.serializeInput(command);
             connectionClient.sendMessage((ClientMessage) message);
-            //if(il comando è stato scritto correttamente) Non so se esiste il controllo on server
-            break;
-            //System.out.print("You didn't choose the order appropriately. Please, retry.\n");
+            try{
+                TimeUnit.MILLISECONDS.sleep(200);
+            }catch (InterruptedException iE){
+                iE.printStackTrace();
+            }
+            if(response!=null && response.getCategory()==Message.MessageCategory.RETURN_MESSAGE) //Messaggio che conferma la corretta scelta dell'ordine delle tessere (ovvero se ho scelto prima x tessere, ne ho ordinate x)
+                break;
+            System.out.print("You didn't choose the order appropriately. Please, retry.\n");
         }
     }
 
@@ -138,10 +179,15 @@ private CLIEvent receiver;
             }
             Message message = MoveSerializer.serializeInput(command);
             connectionClient.sendMessage((ClientMessage) message);
-            //if(la colonna scelta non è piena) Non so se sia compreso in un messaggio.
-            break;
-            //System.out.print("The chosen column is too full. Please, choose another one.\n");
+            try{
+                TimeUnit.MILLISECONDS.sleep(200);
+            }catch (InterruptedException iE){
+                iE.printStackTrace();
+            }
+            if(response!=null && response.getCategory()==Message.MessageCategory.RETURN_MESSAGE) //Messaggio che conferma il corretto inserimento delle tessere nella libreria
+                break;
+            System.out.print("The chosen column is too full. Please, choose another one.\n");
         }
 
-    }*/
+    }
 }

@@ -89,6 +89,6 @@ public class LobbyHandler {
         }
         System.out.print(response.getReturnMessage());
         receiver.setInLobbyHandler(false);
-        //new GameHandler(connectionClient, receiver).start();
+        new GameHandler(connectionClient, receiver).start();
     }
 }

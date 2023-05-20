@@ -39,36 +39,23 @@ public class CLIEvent implements PropertyChangeListener {
             return;
         }
         if (inGameHandler) {
-            //gameHandler.setResponse(response);
+            gameHandler.setResponse(response);
             return;
         }
     }
-
-    public Boolean getInStartCLI() {
-        return inStartCLI;
+    public void setLobbyHandler(LobbyHandler lobbyHandler){
+        this.lobbyHandler=lobbyHandler;
     }
-
+    public void setGameHandler(GameHandler gameHandlerHandler){
+        this.gameHandler=gameHandler;
+    }
     public void setInStartCLI(Boolean inStartCLI) {
         this.inStartCLI = inStartCLI;
     }
-
-    public Boolean getInLobbyHandler() {
-        return inLobbyHandler;
-    }
-
     public void setInLobbyHandler(Boolean inLobbyHandler) {
         this.inLobbyHandler = inLobbyHandler;
     }
-
-    public Boolean getInGameHandler() {
-        return inGameHandler;
-    }
-
     public void setInGameHandler(Boolean inGameHandler) {
         this.inGameHandler = inGameHandler;
-    }
-
-    public void setLobbyHandler(LobbyHandler lobbyHandler){
-        this.lobbyHandler=lobbyHandler;
     }
 }
