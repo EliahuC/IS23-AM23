@@ -1,7 +1,6 @@
 package it.polimi.ingsw.view.gui;
 
 import it.polimi.ingsw.Network.Client.ConnectionClient;
-import it.polimi.ingsw.Settings;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
