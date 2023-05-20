@@ -14,7 +14,7 @@
         <Image url="@background.jpg" />
       </image>
     </ImageView>
-    <Button layoutX="390.0" layoutY="251.0" mnemonicParsing="false" onAction="#switchToLobbyWaiting" prefHeight="35.0" prefWidth="50.0" text="TCP" />
+    <Button id="TCPButton" layoutX="390.0" layoutY="251.0" mnemonicParsing="false" onAction="#switchToLobbyWaiting" prefHeight="35.0" prefWidth="50.0" text="TCP" />
     <Button layoutX="465.0" layoutY="251.0" mnemonicParsing="false" onAction="#switchToLobbyWaiting" prefHeight="35.0" prefWidth="50.0" text="RMI" />
     <ImageView fitHeight="125.0" fitWidth="375.0" layoutX="115.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
       <image>
