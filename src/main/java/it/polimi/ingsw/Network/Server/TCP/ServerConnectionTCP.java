@@ -164,8 +164,6 @@ public class ServerConnectionTCP implements ServerConnection{
                 //player try to reconnect
                 reconnectedPlayer(message);
 
-
-                lobby = Server.lobbies.get(0);
                 disconnectionHandler = new DisconnectionHandler(lobby);
                 if (!checkLobbySpace()){
                     lobbyIsFull();

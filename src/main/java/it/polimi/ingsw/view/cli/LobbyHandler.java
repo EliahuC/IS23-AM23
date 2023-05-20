@@ -62,37 +62,32 @@ public class LobbyHandler {
             }
             if(response!=null && response.getCategory()==Message.MessageCategory.WARNING){
                 System.out.println(response.getReturnMessage());
-                command = input.nextLine();
-                message = MoveSerializer.serializeInput(command);
-                connectionClient.sendMessage((ClientMessage) message);
-            } else if (response!=null) {
+                while(true) {
+                    command = input.nextLine();
+                    message = MoveSerializer.serializeInput(command);
+                    if((Objects.equals(command.split(" ")[0].toUpperCase(), "/CREATE"))){
+                        connectionClient.sendMessage((ClientMessage) message);
+                        break;
+                    }else
+                        System.out.print("The used command is NOT valid. Please, retry again.\n");
+                }
+            } else if (response!=null && response.getCategory()==Message.MessageCategory.RETURN_MESSAGE) {
                 break;
             }
         }
-
         System.out.print("Hi " + connectionClient.getPlayerName() + "! Let's wait for other players to begin the game...\n" +
                 "If you want to exit from the game, please use the command: /EXIT\n");
-        //command = input.nextLine();
-        //message = MoveSerializer.serializeInput(command);
-        connectionClient.sendMessage((ClientMessage) message);
-        response=null;
-        try{
-            TimeUnit.MILLISECONDS.sleep(500);
-        }catch (InterruptedException iE){
-            iE.printStackTrace();
+        while(response == null || response.getCategory() != Message.MessageCategory.STARTING_GAME_MESSAGE){
+            /*command = input.nextLine();
+            message = MoveSerializer.serializeInput(command);
+            connectionClient.sendMessage((ClientMessage) message);
+            try{
+                TimeUnit.MILLISECONDS.sleep(200);
+            }catch (InterruptedException iE){
+                iE.printStackTrace();
+            }*/
         }
-        while(true) {
-            if(response!=null && response.getCategory()==Message.MessageCategory.STARTING_GAME_MESSAGE){
-                System.out.print(response.getReturnMessage());
-                break;
-            }
-        }
-
-        try{
-            TimeUnit.SECONDS.sleep(3);
-        }catch (InterruptedException iE){
-            iE.printStackTrace();
-        }
+        System.out.print(response.getReturnMessage());
         receiver.setInLobbyHandler(false);
         //new GameHandler(connectionClient, receiver).start();
     }
