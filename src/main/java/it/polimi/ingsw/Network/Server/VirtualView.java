@@ -48,6 +48,8 @@ public class VirtualView implements PropertyChangeListener {
             case "GAME_STARTED"->serverMessage=new GameIsStartingMessage((Game) evt.getNewValue());
             case "NEW_TURN"-> serverMessage=new CurrPlayingMessage((Integer) evt.getNewValue());
             case "GAME_CRASHED"-> serverMessage=new CrashedLobbyMessage((String) evt.getNewValue());
+            case "COMMON COMPLETED"->serverMessage=new CommonCompletedMessage((String) evt.getNewValue());
+            case "SCORE"->serverMessage=new ScoreMessage((Integer) evt.getNewValue());
             default -> serverMessage= new ErrorMessage();
         }
         return serverMessage;

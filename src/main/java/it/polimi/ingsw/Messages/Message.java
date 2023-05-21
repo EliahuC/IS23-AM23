@@ -46,6 +46,8 @@ public abstract class Message {
         VALID_NICKNAME,
         CLOSE,
         CRASHED,
+        COMMONGOAL,
+        SCORE,
         WARNING;
 
 

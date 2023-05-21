@@ -395,7 +395,17 @@ public class Game implements Serializable {
     private void checkCGC(){
         if(!Players.get(currPlaying-1).getPlayerBookshelf().isCommonGoalCard1Completed()||
                 !Players.get(currPlaying-1).getPlayerBookshelf().isCommonGoalCard2Completed()){
+            Integer score=Players.get(currPlaying-1).getScore();
             Players.get(currPlaying-1).setScore(livingRoom.checkCG(Players.get(currPlaying-1).getPlayerBookshelf()));
+            if(score.equals(Players.get(currPlaying-1).getScore())){
+                String s="PLAYER "+Players.get(currPlaying-1).getNickName()+" COMPLETED A COMMON GOAL CARD";
+                PropertyChangeEvent evt= new PropertyChangeEvent(
+                        this,
+                        "COMMON COMPLETED",
+                        null,
+                        s);
+                Players.get(currPlaying-1).getListener().propertyChange(evt);
+            }
         }
     }
 

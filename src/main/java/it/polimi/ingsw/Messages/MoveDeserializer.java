@@ -81,6 +81,15 @@ public class MoveDeserializer {
            case "CRASHED"->{
                return gson.fromJson(s, CrashedLobbyMessage.class);
            }
+           case "CURRPLAYING"->{
+               return gson.fromJson(s, CurrPlayingMessage.class);
+           }
+           case "COMMONGOAL"->{
+               return gson.fromJson(s, CommonCompletedMessage.class);
+           }
+           case "SCORE"-> {
+               return gson.fromJson(s, ScoreMessage.class);
+           }
        }
         return null;
     }
