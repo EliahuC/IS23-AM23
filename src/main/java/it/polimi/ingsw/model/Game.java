@@ -78,14 +78,14 @@ public class Game implements Serializable {
             p.setPersonalGoalCard(new PersonalGoalCard());
         }
         turnTimer(turnTimer);
-        PropertyChangeEvent evt = new PropertyChangeEvent(
+      /*  PropertyChangeEvent evt = new PropertyChangeEvent(
                 this,
                 "GAME_STARTED",
                 null,
                 this);
         for(PropertyChangeListener l:listeners){
             l.propertyChange(evt);
-        }
+        }*/
     }
 
     /**

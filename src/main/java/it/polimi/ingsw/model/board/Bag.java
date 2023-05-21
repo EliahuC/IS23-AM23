@@ -13,9 +13,9 @@ import java.util.Random;
 public class Bag implements Serializable {
     private int NumCats;
     private int NumBooks;
-    private int NumPlants;
-    private int NumGames;
-    private int NumFrames;
+    private  int NumPlants;
+    private  int NumGames;
+    private  int NumFrames;
     private int NumTrophies;
 
     private final ArrayList<ItemTile> Tiles = new ArrayList<>();

@@ -48,6 +48,7 @@ public abstract class Message {
         CRASHED,
         COMMONGOAL,
         SCORE,
+        PLAYER,
         WARNING;
 
 

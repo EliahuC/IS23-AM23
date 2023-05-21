@@ -24,7 +24,7 @@ public class LivingRoom implements Serializable {
 
     private BoardToken[][] Board = new BoardToken[MAX_Row][MAX_Column];
     private transient final Launcher L;
-    private final Bag bag;
+    private  final Bag bag;
     private transient final GameChecker gameChecker;
 
     private transient final ArrayList<CommonGoalCard> CommonGoalCard = new ArrayList<>();

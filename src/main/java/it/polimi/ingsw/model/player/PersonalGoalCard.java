@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.player;
 
+import com.google.gson.Gson;
 import it.polimi.ingsw.model.board.ItemTile;
 
 import java.io.Serializable;
@@ -14,9 +15,9 @@ import java.util.HashMap;
 
 public class PersonalGoalCard implements Serializable {
     private Integer completed;
+    private final HashMap<PGCKey, ItemTile> Goal;
     private Integer points;
     private transient final Integer NumeroCarta;
-    private final HashMap<PGCKey, ItemTile> Goal;
     private static final int MAX_Row =6;
     private static final int MAX_Column =5;
 
@@ -234,5 +235,8 @@ public class PersonalGoalCard implements Serializable {
     public Integer getNumeroCarta() {
         return NumeroCarta;
     }
-
+    public String toJson() {
+        Gson gson = new Gson();
+        return gson.toJson(this);
+    }
 }

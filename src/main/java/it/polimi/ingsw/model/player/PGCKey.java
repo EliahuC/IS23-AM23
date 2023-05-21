@@ -7,8 +7,8 @@ import java.io.Serializable;
  * Class that represent the key for the HashMap of the Personal Goal cards
  */
 public class PGCKey implements Serializable {
-    private final int x;
-    private final int y;
+    private  int x;
+    private  int y;
 
 
     public PGCKey(int row, int column) {
@@ -26,4 +26,11 @@ public class PGCKey implements Serializable {
         return y;
     }
 
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
 }
