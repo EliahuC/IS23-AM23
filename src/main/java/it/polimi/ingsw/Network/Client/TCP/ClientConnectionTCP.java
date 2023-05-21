@@ -79,6 +79,7 @@ public class ClientConnectionTCP extends ConnectionClient {
 @Override
         public void receiveMessage(String s) {
             ServerMessage serverMessage=null;
+
             serverMessage= (ServerMessage) MoveDeserializer.deserializeOutput(s);
             PropertyChangeEvent evt= new PropertyChangeEvent(
             this,

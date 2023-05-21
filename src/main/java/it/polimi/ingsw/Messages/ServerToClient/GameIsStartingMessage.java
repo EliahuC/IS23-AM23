@@ -12,11 +12,11 @@ import java.util.ArrayList;
  * Message that returns that the game is starting
  */
 public class GameIsStartingMessage extends ServerMessage{
-    private final LivingRoom livingRoom;
-    private final CommonGoalCard commonGoalCard1;
-    private final CommonGoalCard commonGoalCard2;
-    private final ArrayList<Player> players;
-    private final String currPlaying;
+    private LivingRoom livingRoom;
+    private  CommonGoalCard commonGoalCard1;
+    private  CommonGoalCard commonGoalCard2;
+    private  ArrayList<Player> players;
+    private  String currPlaying;
 
     public GameIsStartingMessage(Game game) {
         super(MessageCategory.STARTING_GAME_MESSAGE);
@@ -46,5 +46,25 @@ public class GameIsStartingMessage extends ServerMessage{
 
     public String getCurrPlaying() {
         return currPlaying;
+    }
+
+    public void setLivingRoom(LivingRoom livingRoom) {
+        this.livingRoom = livingRoom;
+    }
+
+    public void setCurrPlaying(String currPlaying) {
+        this.currPlaying = currPlaying;
+    }
+
+    public void setPlayers(ArrayList<Player> players) {
+        this.players = players;
+    }
+
+    public void setCommonGoalCard2(CommonGoalCard commonGoalCard2) {
+        this.commonGoalCard2 = commonGoalCard2;
+    }
+
+    public void setCommonGoalCard1(CommonGoalCard commonGoalCard1) {
+        this.commonGoalCard1 = commonGoalCard1;
     }
 }

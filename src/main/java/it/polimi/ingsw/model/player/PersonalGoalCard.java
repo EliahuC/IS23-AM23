@@ -26,7 +26,7 @@ public class PersonalGoalCard implements Serializable {
      * @param x is the number of the personal goal card that I want to generate
      * Constructor that generate a specific personal goal card based
      */
-    public PersonalGoalCard(int x) {
+    public  PersonalGoalCard(int x) {
         this.NumeroCarta = x;
         Goal=new HashMap<>();
         switch (NumeroCarta) {
@@ -234,4 +234,5 @@ public class PersonalGoalCard implements Serializable {
     public Integer getNumeroCarta() {
         return NumeroCarta;
     }
+
 }
