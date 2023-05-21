@@ -48,7 +48,8 @@ public class CLIEvent implements PropertyChangeListener {
                 case END_GAME_MESSAGE:
                     EndGameMessage temp_endGameMessage = (EndGameMessage) serverMessage;
                     gameHandler.setWinner(temp_endGameMessage.getWinner().getNickName());
-            }}
+            }
+        }
     }
 
     private void forwardMessage(ServerMessage response){

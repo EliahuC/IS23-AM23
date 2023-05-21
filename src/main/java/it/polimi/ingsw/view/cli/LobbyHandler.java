@@ -75,18 +75,32 @@ public class LobbyHandler {
                 break;
             }
         }
-        System.out.print("Hi " + connectionClient.getPlayerName() + "! Let's wait for other players to begin the game...\n" +
-                "If you want to exit from the game, please use the command: /EXIT\n");
-        while(response == null || response.getCategory() != Message.MessageCategory.STARTING_GAME_MESSAGE){
-            /*command = input.nextLine();
-            message = MoveSerializer.serializeInput(command);
-            connectionClient.sendMessage((ClientMessage) message);
+        do{
+            System.out.print("Hi " + connectionClient.getPlayerName() + "! Let's wait for other players to begin the game.\n");
             try{
-                TimeUnit.MILLISECONDS.sleep(200);
+                TimeUnit.MILLISECONDS.sleep(500);
             }catch (InterruptedException iE){
                 iE.printStackTrace();
-            }*/
-        }
+            }
+            System.out.print("\033[H\033[2J");
+            System.out.flush();
+            System.out.print("Hi " + connectionClient.getPlayerName() + "! Let's wait for other players to begin the game .\n");
+            try{
+                TimeUnit.MILLISECONDS.sleep(500);
+            }catch (InterruptedException iE){
+                iE.printStackTrace();
+            }
+            System.out.print("\033[H\033[2J");
+            System.out.flush();
+            System.out.print("Hi " + connectionClient.getPlayerName() + "! Let's wait for other players to begin the game  .\n");
+            try{
+                TimeUnit.MILLISECONDS.sleep(500);
+            }catch (InterruptedException iE){
+                iE.printStackTrace();
+            }
+            System.out.print("\033[H\033[2J");
+            System.out.flush();
+        }while(response == null || response.getCategory() != Message.MessageCategory.STARTING_GAME_MESSAGE);
         System.out.print(response.getReturnMessage());
         receiver.setInLobbyHandler(false);
         new GameHandler(connectionClient, receiver).start();

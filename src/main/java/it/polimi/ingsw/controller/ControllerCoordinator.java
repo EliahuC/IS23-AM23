@@ -82,6 +82,7 @@ public class ControllerCoordinator {
     }
 
     public void endgame() {
-        gameController.terminateGame();
+        if(gameController!=null)
+            gameController.terminateGame();
     }
 }
