@@ -6,13 +6,14 @@ import it.polimi.ingsw.model.board.ItemTile;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * @author Eliahu Cohen,Giovanni di Lorenzo and Simone Controguerra
  */
 
-public class Player {
+public class Player implements Serializable {
 
     private final String NickName;
     private int score ;

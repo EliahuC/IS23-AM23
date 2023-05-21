@@ -8,6 +8,7 @@ import it.polimi.ingsw.model.player.BookShelf;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -16,7 +17,7 @@ import java.util.Random;
  * class that rapresent the game board
  */
 
-public class LivingRoom {
+public class LivingRoom implements Serializable {
     public static final int MAX_Row=9;
     public static final int MAX_Column=9;
     transient ArrayList<PropertyChangeListener> listeners=new ArrayList<>();

@@ -2,6 +2,7 @@ package it.polimi.ingsw.model.board;
 
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 /**
@@ -9,7 +10,7 @@ import java.util.Random;
  * Method that rapresent the bag that contains the tiles
  */
 
-public class Bag {
+public class Bag implements Serializable {
     private int NumCats;
     private int NumBooks;
     private int NumPlants;

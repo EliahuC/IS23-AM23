@@ -53,6 +53,9 @@ public class VirtualView implements PropertyChangeListener {
         }
         return serverMessage;
     }
+    public String getName(){
+        return clientConnection.getNamePlayer();
+    }
 
     //TODO Reazione viwe messaggi
 

@@ -10,6 +10,7 @@ import it.polimi.ingsw.model.player.Player;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.Serializable;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -19,20 +20,20 @@ import java.util.stream.Collectors;
  */
 
 
-public class Game  {
+public class Game implements Serializable {
     private final LivingRoom livingRoom;
     private final ArrayList<Player> Players;
     private transient final ArrayList<Player> disconnectedPlayers;
 
-    private int currPlaying;
-    private final Integer gameNumPlayers;
+    private Integer currPlaying;
+    private transient final Integer gameNumPlayers;
 
     private transient final GameChecker gameChecker;
-    private boolean startedGame=false;
+    private transient boolean startedGame=false;
     private transient final ArrayList<VirtualView> listeners ;
     private transient final Timer turnTimer=new Timer();
 
-    private boolean finishedGame=false;
+    private transient boolean finishedGame=false;
 
 
 
@@ -66,12 +67,6 @@ public class Game  {
      * Method that sets what he needs and starts the game
      */
     public synchronized void startGame(){
-        PropertyChangeEvent evt = new PropertyChangeEvent(
-                this,
-                "GAME_STARTED",
-                null,
-                this);
-
         livingRoom.start(Players.size());
         this.startedGame=true;
         ArrayList<Player> mixedPlayers;
@@ -83,6 +78,11 @@ public class Game  {
             p.setPersonalGoalCard(new PersonalGoalCard());
         }
         turnTimer(turnTimer);
+        PropertyChangeEvent evt = new PropertyChangeEvent(
+                this,
+                "GAME_STARTED",
+                null,
+                this);
         for(PropertyChangeListener l:listeners){
             l.propertyChange(evt);
         }
@@ -404,13 +404,13 @@ public class Game  {
      * method that increase the value of the currPlaying variable checking if the game is finished
      */
     private synchronized void increaseCurrPlaying() {
+        if(currPlaying==gameNumPlayers && !finishedGame) currPlaying=1;
+        else if(currPlaying<gameNumPlayers && !finishedGame) currPlaying++;
         PropertyChangeEvent evt = new PropertyChangeEvent(
                 this,
                 "NEW_TURN",
                 this.currPlaying,
                 currPlaying);
-        if(currPlaying==gameNumPlayers && !finishedGame) currPlaying=1;
-        else if(currPlaying<gameNumPlayers && !finishedGame) currPlaying++;
         for(PropertyChangeListener l:listeners){
             l.propertyChange(evt);
         }
