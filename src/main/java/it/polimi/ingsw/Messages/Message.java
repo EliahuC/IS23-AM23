@@ -49,6 +49,7 @@ public abstract class Message {
         COMMONGOAL,
         SCORE,
         PLAYER,
+        UPDATE_STATE,
         WARNING;
 
 
