@@ -78,8 +78,8 @@ public class MoveDeserializer {
            case "RETURN_MESSAGE"->{
                return gson.fromJson(s, LobbyJoiningMessage.class);
            }
-           case "CRUSHED"->{
-               return gson.fromJson(s, CrushedLobbyMessage.class);
+           case "CRASHED"->{
+               return gson.fromJson(s, CrashedLobbyMessage.class);
            }
        }
         return null;

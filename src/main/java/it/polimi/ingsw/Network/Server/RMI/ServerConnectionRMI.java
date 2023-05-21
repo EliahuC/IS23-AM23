@@ -297,7 +297,7 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
                 System.out.println("ping arrived");
                 return;
             }
-            System.out.println("Connection crushed");
+            System.out.println("Connection crashed");
             closeConnection(s);
 
         }

@@ -458,9 +458,9 @@ public class Game implements Serializable {
         if(finishedGame){
             PropertyChangeEvent evt = new PropertyChangeEvent(
                     this,
-                    "GAME_CRUSHED",
+                    "GAME_CRASHED",
                     null,
-                    "Someone Crushed");
+                    "Someone crashed");
             for(PropertyChangeListener l:listeners){
                 l.propertyChange(evt);
             }

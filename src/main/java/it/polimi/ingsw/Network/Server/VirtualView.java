@@ -1,7 +1,6 @@
 package it.polimi.ingsw.Network.Server;
 
 import it.polimi.ingsw.Messages.ServerToClient.*;
-import it.polimi.ingsw.Network.Server.ServerConnection;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.board.BoardToken;
 import it.polimi.ingsw.model.player.BookShelf;
@@ -48,7 +47,7 @@ public class VirtualView implements PropertyChangeListener {
             case "GAME_ENDED"->serverMessage =new EndGameMessage((Player) evt.getNewValue());
             case "GAME_STARTED"->serverMessage=new GameIsStartingMessage((Game) evt.getNewValue());
             case "NEW_TURN"-> serverMessage=new CurrPlayingMessage((Integer) evt.getNewValue());
-            case "GAME_CRUSHED"-> serverMessage=new CrushedLobbyMessage((String) evt.getNewValue());
+            case "GAME_CRASHED"-> serverMessage=new CrashedLobbyMessage((String) evt.getNewValue());
             default -> serverMessage= new ErrorMessage();
         }
         return serverMessage;
