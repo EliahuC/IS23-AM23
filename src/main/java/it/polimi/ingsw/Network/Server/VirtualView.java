@@ -39,20 +39,39 @@ public class VirtualView implements PropertyChangeListener {
      * @return Server message that will be sent to client
      */
     private ServerMessage messageParser(PropertyChangeEvent evt) {
-       ServerMessage serverMessage;
+
         switch (evt.getPropertyName()){
-            case "LAST_TURN"-> serverMessage=new LastTurnMessage();
-            case "BOOKSHELF_CHANGED"-> serverMessage=new BookshelfMessage((BookShelf)evt.getNewValue());
-            case "BOARD_CHANGED"-> serverMessage=new LivingRoomMessage((BoardToken[][]) evt.getNewValue());
-            case "GAME_ENDED"->serverMessage =new EndGameMessage((Player) evt.getNewValue());
-            case "GAME_STARTED"->serverMessage=new GameIsStartingMessage((Game) evt.getNewValue());
-            case "NEW_TURN"-> serverMessage=new CurrPlayingMessage((Integer) evt.getNewValue());
-            case "GAME_CRASHED"-> serverMessage=new CrashedLobbyMessage((String) evt.getNewValue());
-            case "COMMON COMPLETED"->serverMessage=new CommonCompletedMessage((String) evt.getNewValue());
-            case "SCORE"->serverMessage=new ScoreMessage((Integer) evt.getNewValue());
-            default -> serverMessage= new ErrorMessage();
+            case "LAST_TURN"-> {
+                return new LastTurnMessage();
+            }
+            case "BOOKSHELF_CHANGED"-> {
+                return new BookshelfMessage((BookShelf)evt.getNewValue());
+            }
+            case "BOARD_CHANGED"-> {
+                return new LivingRoomMessage((BoardToken[][]) evt.getNewValue());
+            }
+            case "GAME_ENDED"->{
+                return new EndGameMessage((Player) evt.getNewValue());
+            }
+            case "GAME_STARTED"->{
+                return new GameIsStartingMessage((Game) evt.getNewValue());
+            }
+            case "NEW_TURN"-> {
+                return new CurrPlayingMessage((Integer) evt.getNewValue());
+            }
+            case "GAME_CRASHED"-> {
+                return new CrashedLobbyMessage((String) evt.getNewValue());
+            }
+            case "COMMON COMPLETED"->{
+                return new CommonCompletedMessage((String) evt.getNewValue());
+            }
+            case "SCORE"->{
+                return new ScoreMessage((Integer) evt.getNewValue());
+            }
+            default ->{
+                return new ErrorMessage();
+            }
         }
-        return serverMessage;
     }
     public String getName(){
         return clientConnection.getNamePlayer();
