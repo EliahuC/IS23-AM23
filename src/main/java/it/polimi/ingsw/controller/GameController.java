@@ -173,4 +173,8 @@ public class GameController {
     public ArrayList<Player> getPlayers() {
         return players;
     }
+    public void terminateGame(){
+        game.setFinishedGame(true);
+        game.terminateGame();
+    }
 }

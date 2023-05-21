@@ -80,4 +80,8 @@ public class ControllerCoordinator {
     public Boolean getStartedGame() {
         return startedGame;
     }
+
+    public void endgame() {
+        gameController.terminateGame();
+    }
 }

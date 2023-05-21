@@ -206,4 +206,8 @@ public class Lobby {
     public Integer getIdLobby() {
         return idLobby;
     }
+
+    public void endGame() {
+        controllerCoordinator.endgame();
+    }
 }

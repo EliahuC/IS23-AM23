@@ -45,7 +45,9 @@ public abstract class Message {
         NICKNAME,
         VALID_NICKNAME,
         CLOSE,
+        CRUSHED,
         WARNING;
+
 
     }
 

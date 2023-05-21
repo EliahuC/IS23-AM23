@@ -298,9 +298,28 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
                 return;
             }
             System.out.println("Connection crushed");
+            closeConnection(s);
+
         }
     }
 
+    private void closeConnection(String s) {
+        for (Lobby l : Server.lobbies) {
+            if(l.getJoinedUsers().contains(s)){
+                lobby=l;
+                lobby.endGame();
+                return;
+            }
+        }
+        for (Lobby l : Server.startedLobbies) {
+            if(l.getJoinedUsers().contains(s)){
+                lobby=l;
+                lobby.endGame();
+                return;
+            }
+        }
+
+    }
     /**
      * @author Eliahu Cohen
      * @return true to notify the client the ping-pong is still on

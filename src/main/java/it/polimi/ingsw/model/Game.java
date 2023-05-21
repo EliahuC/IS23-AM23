@@ -198,7 +198,7 @@ public class Game  {
                     this,
                     "GAME_ENDED",
                     null,
-                    whoWins());
+                    endGame());
             for(PropertyChangeListener l:listeners){
                 l.propertyChange(evt);
             }
@@ -449,6 +449,22 @@ public class Game  {
             };
             timer = new Timer();
             timer.schedule(timerTask,120000);
+    }
+
+    public void setFinishedGame(boolean finishedGame) {
+        this.finishedGame = finishedGame;
+    }
+    public void terminateGame(){
+        if(finishedGame){
+            PropertyChangeEvent evt = new PropertyChangeEvent(
+                    this,
+                    "GAME_CRUSHED",
+                    null,
+                    "Someone Crushed");
+            for(PropertyChangeListener l:listeners){
+                l.propertyChange(evt);
+            }
+        }
     }
 }
 
