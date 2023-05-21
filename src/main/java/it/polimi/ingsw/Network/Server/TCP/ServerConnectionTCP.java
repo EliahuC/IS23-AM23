@@ -349,7 +349,8 @@ public class ServerConnectionTCP implements ServerConnection{
     }
 
     private void closeClientConnection() {
-        lobby.endGame();
+        if (lobby!=null)
+            lobby.endGame();
         System.out.println(namePlayer+" disconnected from the server");
         Server.connectedPlayers.remove(namePlayer);
         try {

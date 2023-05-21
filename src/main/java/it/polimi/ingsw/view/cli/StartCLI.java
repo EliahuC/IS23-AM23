@@ -7,6 +7,7 @@ import it.polimi.ingsw.Network.Client.RMI.ClientConnectionRMI;
 import it.polimi.ingsw.Network.Client.TCP.ClientConnectionTCP;
 
 import java.io.IOException;
+import java.net.ConnectException;
 import java.net.Socket;
 import java.rmi.RemoteException;
 import java.util.Scanner;
@@ -66,7 +67,6 @@ public class StartCLI {
                     break;
                 case "RMI":
                     try {
-
                         receiver=new CLIEvent(this);
                         receiver.setInStartCLI(true);
                         connectionClient = new ClientConnectionRMI(nickname,receiver);
@@ -102,7 +102,6 @@ public class StartCLI {
         if(connectionClient!=null){
             receiver.setInStartCLI(false);
             new LobbyHandler(connectionClient, receiver).start();
-
         }
 
     }

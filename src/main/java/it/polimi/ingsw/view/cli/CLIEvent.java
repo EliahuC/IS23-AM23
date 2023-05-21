@@ -29,6 +29,7 @@ public class CLIEvent implements PropertyChangeListener {
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         ServerMessage serverMessage=(ServerMessage) evt.getNewValue();
+        forwardMessage(serverMessage);
         if(gameHandler!=null){
             switch (serverMessage.getCategory()) {
                 case STARTING_GAME_MESSAGE:
@@ -47,7 +48,6 @@ public class CLIEvent implements PropertyChangeListener {
                 case END_GAME_MESSAGE:
                     EndGameMessage temp_endGameMessage = (EndGameMessage) serverMessage;
                     gameHandler.setWinner(temp_endGameMessage.getWinner().getNickName());
-                default: forwardMessage(serverMessage);
             }}
     }
 
