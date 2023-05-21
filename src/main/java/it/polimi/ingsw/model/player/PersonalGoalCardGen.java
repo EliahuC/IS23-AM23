@@ -2,6 +2,7 @@ package it.polimi.ingsw.model.player;
 
 import it.polimi.ingsw.model.board.ItemTile;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
@@ -10,7 +11,7 @@ import java.util.Random;
  * @author Eliahu Cohen
  * Generator of the personal goal cards based on singleton pattern
  */
-public class PersonalGoalCardGen {
+public class PersonalGoalCardGen implements Serializable {
     private static PersonalGoalCardGen generator=null;
     private static final ArrayList<HashMap<PGCKey, ItemTile>> Goals = new ArrayList<>();
 
