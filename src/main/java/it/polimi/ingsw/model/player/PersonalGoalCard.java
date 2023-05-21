@@ -2,6 +2,7 @@ package it.polimi.ingsw.model.player;
 
 import it.polimi.ingsw.model.board.ItemTile;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
 /**
@@ -11,10 +12,10 @@ import java.util.HashMap;
  * The key of the map is the coordinates (x,y) in the bookshelf of the Item Tile that may be in that position.
  */
 
-public class PersonalGoalCard {
-    private int completed;
-    private int points;
-    private final Integer NumeroCarta;
+public class PersonalGoalCard implements Serializable {
+    private Integer completed;
+    private Integer points;
+    private transient final Integer NumeroCarta;
     private final HashMap<PGCKey, ItemTile> Goal;
     private static final int MAX_Row =6;
     private static final int MAX_Column =5;
@@ -212,5 +213,25 @@ public class PersonalGoalCard {
         for(int i=0; i<=MAX_Row;i++)
             System.out.print("\u001b[48;2;140;68;28m   \u001B[0m");
         System.out.print("\n");
+    }
+
+    public Integer getCompleted() {
+        return completed;
+    }
+
+    public void setCompleted(Integer completed) {
+        this.completed = completed;
+    }
+
+    public Integer getPoints() {
+        return points;
+    }
+
+    public void setPoints(Integer points) {
+        this.points = points;
+    }
+
+    public Integer getNumeroCarta() {
+        return NumeroCarta;
     }
 }

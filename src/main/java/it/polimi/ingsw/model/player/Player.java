@@ -150,7 +150,9 @@ public class Player implements Serializable {
         this.personalGoalCard = personalGoalCard;
     }
 
-
+    public boolean isNowPlaying() {
+        return nowPlaying;
+    }
 }
 
 

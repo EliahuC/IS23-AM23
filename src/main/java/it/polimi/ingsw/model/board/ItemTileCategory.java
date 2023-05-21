@@ -1,6 +1,8 @@
 package it.polimi.ingsw.model.board;
 
-public enum ItemTileCategory {
+import java.io.Serializable;
+
+public enum ItemTileCategory implements Serializable {
         CATS,
         BOOKS,
         GAMES,

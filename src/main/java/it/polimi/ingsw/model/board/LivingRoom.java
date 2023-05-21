@@ -346,4 +346,12 @@ public class LivingRoom implements Serializable {
         for(int j=0; j<MAX_Column;j++)
             System.out.print("["+j+"]");
     }
+
+    public void setCommonGoalCard1(it.polimi.ingsw.model.board.goalCards.CommonGoalCard commonGoalCard1) {
+        this.commonGoalCard1 = commonGoalCard1;
+    }
+
+    public void setCommonGoalCard2(it.polimi.ingsw.model.board.goalCards.CommonGoalCard commonGoalCard2) {
+        this.commonGoalCard2 = commonGoalCard2;
+    }
 }

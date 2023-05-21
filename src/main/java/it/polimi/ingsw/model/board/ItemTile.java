@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model.board;
 
 
+import java.io.Serializable;
 import java.util.Random;
 
 /**
@@ -8,7 +9,7 @@ import java.util.Random;
  * class that rapresent the item tile
  */
 
-public class ItemTile {
+public class ItemTile implements Serializable {
 
 
     private ItemTileCategory category=null ;
