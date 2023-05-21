@@ -68,6 +68,9 @@ public class VirtualView implements PropertyChangeListener {
             case "SCORE"->{
                 return new ScoreMessage((Integer) evt.getNewValue());
             }
+            case "UPDATE_STATE"->{
+                return new UpdateStateMessage((Game) evt.getNewValue());
+            }
             default ->{
                 return new ErrorMessage();
             }

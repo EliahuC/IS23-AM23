@@ -1,10 +1,13 @@
 package it.polimi.ingsw.view.cli;
 
-import it.polimi.ingsw.Messages.ServerToClient.ServerMessage;
+import it.polimi.ingsw.Messages.Message;
+import it.polimi.ingsw.Messages.ServerToClient.*;
+import it.polimi.ingsw.model.player.BookShelf;
 
 import javax.swing.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.Objects;
 
 /**
  * @author Eliahu cohen and Simone Controguerra
@@ -26,7 +29,26 @@ public class CLIEvent implements PropertyChangeListener {
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         ServerMessage serverMessage=(ServerMessage) evt.getNewValue();
-        forwardMessage(serverMessage);
+        if(gameHandler!=null){
+            switch (serverMessage.getCategory()) {
+                case STARTING_GAME_MESSAGE:
+                    GameIsStartingMessage temp_startingGameMessage= (GameIsStartingMessage) serverMessage;
+                    gameHandler.setLivingRoom(temp_startingGameMessage.getLivingRoom());
+                    gameHandler.setPlayers(temp_startingGameMessage.getPlayers());
+                    gameHandler.setPlayer(temp_startingGameMessage.getPlayers().stream().filter(player -> Objects.equals(player.getNickName(), gameHandler.getConnectionClient().getPlayerName())).findFirst().orElseThrow(() -> new IllegalArgumentException("Player not found")));
+                case UPDATE_STATE:
+                    UpdateStateMessage temp_updateStateMessage=(UpdateStateMessage) serverMessage;
+                    gameHandler.setLivingRoom(temp_updateStateMessage.getGame().getLivingRoom());
+                    gameHandler.setPlayers(temp_updateStateMessage.getGame().getPlayers());
+                    gameHandler.setPlayer(temp_updateStateMessage.getGame().getPlayers().stream().filter(player -> Objects.equals(player.getNickName(), gameHandler.getConnectionClient().getPlayerName())).findFirst().orElseThrow(() -> new IllegalArgumentException("Player not found")));
+                case CURRPLAYING:
+                    CurrPlayingMessage temp_currPlayingMessage=(CurrPlayingMessage) serverMessage;
+                    gameHandler.setCurrPlaying(temp_currPlayingMessage.getCurrPlaying());
+                case END_GAME_MESSAGE:
+                    EndGameMessage temp_endGameMessage = (EndGameMessage) serverMessage;
+                    gameHandler.setWinner(temp_endGameMessage.getWinner().getNickName());
+                default: forwardMessage(serverMessage);
+            }}
     }
 
     private void forwardMessage(ServerMessage response){

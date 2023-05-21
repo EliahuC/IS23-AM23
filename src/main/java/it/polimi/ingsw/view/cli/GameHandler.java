@@ -7,18 +7,31 @@ import it.polimi.ingsw.Messages.ServerToClient.ServerMessage;
 import it.polimi.ingsw.Network.Client.ConnectionClient;
 import it.polimi.ingsw.Messages.MoveSerializer;
 import it.polimi.ingsw.model.Game;
+import it.polimi.ingsw.model.board.ItemTile;
+import it.polimi.ingsw.model.board.LivingRoom;
+import it.polimi.ingsw.model.player.BookShelf;
 import it.polimi.ingsw.model.player.Player;
 
 import java.io.IOException;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 public class GameHandler {
     private ConnectionClient connectionClient;
     private CLIEvent receiver;
     private ServerMessage response;
-    private Game source;
+    private LivingRoom livingRoom;
+    private Player player;
+    private List<Player> players;
+    private List<ItemTile> tiles;
+    private int currPlaying;
+    private static final String RESET = "\u001B[0m";
+    private static final String FIRST = "\u001b[189;174;41m";
+    private String winner;
 
     public GameHandler(ConnectionClient connectionClient, CLIEvent receiver) {
         this.connectionClient = connectionClient;
@@ -30,6 +43,30 @@ public class GameHandler {
 
     public void setResponse(ServerMessage response){
         this.response=response;
+    }
+
+    public void setLivingRoom(LivingRoom livingRoom) {
+        this.livingRoom = livingRoom;
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
+    public void setPlayers(List<Player> players) {
+        this.players = players;
+    }
+
+    public ConnectionClient getConnectionClient() {
+        return connectionClient;
+    }
+
+    public void setCurrPlaying(int currPlaying) {
+        this.currPlaying = currPlaying;
+    }
+
+    public void setWinner(String winner) {
+        this.winner = winner;
     }
 
     public void start(){
@@ -50,49 +87,49 @@ public class GameHandler {
     }
 
     private void waiting(){
-        //while(non è il tuo turno) //Esiste un messaggio che permette di capire chi sta giocando in questo momento?
+        while(!player.getNowPlaying()){
             System.out.print("It's not your turn, yet. Wait for other players to finish their turn.\n\n");
-            System.out.print("CURRENT PLAYING:"+"\n");
-            System.out.print("Next playing:"+"\n");
-            System.out.print("Next playing:"+"\u001b[189;174;41m\n");
-        //}
-        try{
-            TimeUnit.MILLISECONDS.sleep(200);
-        }catch (InterruptedException iE){
-            iE.printStackTrace();
+            System.out.print("CURRENT PLAYING: ");
+            if(players.get(currPlaying-1).isFirstPlayerSeat())
+                System.out.print(FIRST+players.get(currPlaying-1).getNickName()+RESET+"\n");
+            else
+                System.out.print(players.get(currPlaying-1).getNickName()+"\n");
+            try{
+                TimeUnit.MILLISECONDS.sleep(200);
+            }catch (InterruptedException iE){
+                iE.printStackTrace();
+            }
+            if(response!=null && response.getCategory()==Message.MessageCategory.LAST_TURN_MESSAGE)
+                System.out.print(response.getReturnMessage());
         }
-        if(response!=null && response.getCategory()==Message.MessageCategory.LAST_TURN_MESSAGE)
-            System.out.print(response.getReturnMessage());
     }
 
     private void showBoard(){
-        try{
-            TimeUnit.MILLISECONDS.sleep(200);
-        }catch (InterruptedException iE){
-            iE.printStackTrace();
-        }
         System.out.print("LIVING BOARD\n");
-        /*if(response!=null && response.getCategory()==Message.MessageCategory.LIVINGROOM){ //serve un messaggio che mandi una LivingRoom a ogni inizio turno
-            LivingRoomMessage temp=(LivingRoomMessage) response;
-            temp.getBoard().print(); //il messaggio LIVINGROOM deve ritornare una LivingRoom, non una BoardToken[][]!
-        }*/ //STAMPA DELLA BOARD
+        livingRoom.print();
         try{
             TimeUnit.MILLISECONDS.sleep(200);
         }catch (InterruptedException iE){
             iE.printStackTrace();
         }
-        if(response!=null && response.getCategory()==Message.MessageCategory.LIVINGROOM)
-            System.out.print("THE BOARD HAS BEEN RESTORED!\n\n");
-        System.out.print("If you want to see the description of your personal or common goal cards, use the command /GOALS\n" +
-                "You can only choose one, two or three adjacent tiles that are in the same column or in the same row. You can only choose tiles on the border.\n\n");
-        System.out.print("It's time for you to make your move and pick the tiles you want to insert into your library. You can pick one, two or three tiles.\n" +
-                "Assure to respect the rules of the game and the capability of your bookshelf!\n" +
-                "Use the command /SELECT <row of tile one> <column of tile one> <row of tile two> <column of tile two> <row of tile three> <column of tile three>\n");
+        System.out.print("PICK YOUR TILES! You can choose one, two or three tiles: use the command /SELECT\n" +
+                "writing respectively the row's coordinate and the column's coordinate.\n" +
+                "You must know that you can only pick adjacent tiles that are in the same row or in the same column,\n" +
+                "plus you can only choose external tiles!\n\n" +
+                "For example, to pick the two tiles in 8,5 and in 8,4, the right command is:\n" +
+                "/SELECT 8 5 8 4\n\n" +
+                "[Use the command /BOOKSHELF to see your personal bookshelf.]\n" +
+                "[Use the command /GOALS to see the description of your personal or common goal cards.]\n");
         Scanner input = new Scanner(System.in);
         while (true){
             String command = input.nextLine();
             if(Objects.equals(command.toUpperCase(), "/GOALS")){
                 showGoals("Living Board");
+                break;
+            }
+            if(Objects.equals(command.toUpperCase(), "/BOOKSHELF")){
+                showBookshelf();
+                break;
             }
             Message message = MoveSerializer.serializeInput(command);
             connectionClient.sendMessage((ClientMessage) message);
@@ -101,25 +138,26 @@ public class GameHandler {
             }catch (InterruptedException iE){
                 iE.printStackTrace();
             }
-            if(response!=null && response.getCategory()==Message.MessageCategory.RETURN_MESSAGE) //Messaggio che conferma la corretta scelta delle tessere
+            if(response!=null && response.getCategory()==Message.MessageCategory.VALID_MESSAGE){
+                for(int i=1; command.split(" ")[i]!=null; i+=2)
+                    tiles.add(livingRoom.getBoardTile(i,i+1).getTile());
                 break;
+            }
             System.out.print("Your move is not valid. Please, pick again and correctly your tiles.\n" +
-                    "[You can still see your goal cards, using the command /GOALS\n");
+                    "[You can still see your goal cards, using the command /GOALS, or your personal bookshelf using /BOOKSHELF]\n");
         }
     }
 
     private void showGoals(String scenario){
         Scanner input = new Scanner(System.in);
         String command;
-        //printer carte obiettivo
         System.out.print("YOUR PERSONAL GOAL CARD\n");
-        Player temp= (Player) source.getPlayers().stream().filter(player -> Objects.equals(player.getNickName(), connectionClient.getPlayerName()));
-        temp.getPersonalGoalCard().print();
+        player.getPersonalGoalCard().print();
         System.out.print("COMMON GOAL CARDS\n");
         System.out.print("(1): ");
-        source.getLivingRoom().getCommonGoalCard1().print();
+        livingRoom.getCommonGoalCard1().print();
         System.out.print("(2): ");
-        source.getLivingRoom().getCommonGoalCard2().print();
+        livingRoom.getCommonGoalCard2().print();
         System.out.print("[If you want to come back to the previous screen, use the command /BACK]\n");
         while (true){
             command = input.nextLine();
@@ -136,23 +174,30 @@ public class GameHandler {
     }
 
     private void showEnd(){
-        System.out.print("THE WINNER IS: "+"");
+        System.out.print("THE WINNER IS: " + winner + "\n");
+        List<Player> ranking = players.stream().sorted(Comparator.comparingInt(Player::getScore)).toList();
+        for(Player p : ranking){
+            if(p.getNickName()!=winner){
+                System.out.print(p.getNickName() + ": "+ p.getScore() + "points\n");
+            }
+        }
     }
 
     private void showBookshelfOrder(){
         Scanner input = new Scanner(System.in);
         System.out.print("YOUR BOOKSHELF\n");
-        Player temp= (Player) source.getPlayers().stream().filter(player -> Objects.equals(player.getNickName(), connectionClient.getPlayerName()));
-        temp.getPlayerBookshelf().print();
-        System.out.print("Now, choose the order for the tiles to be inserted into your bookshelf using the command /ORDER t1 t2 t3\n" +
-                "Consider that during the selection of the tiles from the board, you respectively wrote the two coordinates first for the tile t1, then for the tile t2, finally for the tile t3.\n" +
-                "For example: if you wrote down the coordinates for t1, t2, t3 and you want to insert first the tile t2, then t3 and finally t1 into your bookshelf, the correct use for the command is /ORDER t2 t3 t1\n\n" +
-                "[If you want to see the description of your personal or common goal cards, use the command /GOALS\n]");
-        //Per una comprensione migliore, sarebbe preferibile visualizzare le tre tessere selezionate ma non some recuperarne il riferimento
+        player.getPlayerBookshelf().print();
+        System.out.print("ORDER YOUR TILES! The tiles you picked before from the board are shown above.\n" +
+                "Use the command /ORDER to choose in which order you want to insert the tiles in your bookshelf.\n\n" +
+                "For example: if you have three tiles to order, you could write: /ORDER 2 1 3 or /ORDER 3 2 1\n" +
+                "(If you have just one picked tile, just type: /ORDER 1\n\n" +
+                "[Use the command /GOALS to see the description of your personal or common goal cards.]\n");
+        printSelection();
         while(true){
             String command = input.nextLine();
             if(Objects.equals(command.toUpperCase(), "/GOALS")){
                 showGoals("BookshelfOrder");
+                break;
             }
             Message message = MoveSerializer.serializeInput(command);
             connectionClient.sendMessage((ClientMessage) message);
@@ -161,7 +206,7 @@ public class GameHandler {
             }catch (InterruptedException iE){
                 iE.printStackTrace();
             }
-            if(response!=null && response.getCategory()==Message.MessageCategory.RETURN_MESSAGE) //Messaggio che conferma la corretta scelta dell'ordine delle tessere (ovvero se ho scelto prima x tessere, ne ho ordinate x)
+            if(response!=null && response.getCategory()==Message.MessageCategory.VALID_MESSAGE)
                 break;
             System.out.print("You didn't choose the order appropriately. Please, retry.\n");
         }
@@ -169,13 +214,17 @@ public class GameHandler {
 
    private void showBookshelfColumn(){
         Scanner input = new Scanner(System.in);
-        System.out.print("Now, it's time to choose the column where you want to insert the picked tiles using the command /COLUMN <column>\n" +
-                "<column> value can be 0 (the first column on the left), 1, 2, 3 or 4 (the first column on the right).\n\n" +
-                "[If you want to see the description of your personal or common goal cards, use the command /GOALS\n]");
+       System.out.print("YOUR BOOKSHELF\n");
+       player.getPlayerBookshelf().print();
+        System.out.print("CHOOSE THE COLUMN! Choose where you want to inserted the picked and order tiles,\n" +
+                "using the command /COLUMN and the coordinate of the column.\n" +
+                "For example: if you want to insert the tiles in the second column, you should write /COLUMN 1\n\n" +
+                "[Use the command /GOALS to see the description of your personal or common goal cards.]\n");
         while(true){
             String command = input.nextLine();
             if(Objects.equals(command.toUpperCase(), "/GOALS")){
                 showGoals("BookshelfColumn");
+                break;
             }
             Message message = MoveSerializer.serializeInput(command);
             connectionClient.sendMessage((ClientMessage) message);
@@ -184,10 +233,33 @@ public class GameHandler {
             }catch (InterruptedException iE){
                 iE.printStackTrace();
             }
-            if(response!=null && response.getCategory()==Message.MessageCategory.RETURN_MESSAGE) //Messaggio che conferma il corretto inserimento delle tessere nella libreria
+            if(response!=null && response.getCategory()==Message.MessageCategory.VALID_MESSAGE)
                 break;
             System.out.print("The chosen column is too full. Please, choose another one.\n");
         }
+    }
 
+    private void showBookshelf(){
+        Scanner input = new Scanner(System.in);
+        String command;
+        System.out.print("YOUR BOOKSHELF\n\n");
+        player.getPlayerBookshelf().print();
+        System.out.print("[If you want to come back to the previous screen, use the command /BACK]\n");
+        while (true){
+            command = input.nextLine();
+            if(Objects.equals(command.toUpperCase(), "/BACK"))
+                break;
+            System.out.print("Please, use the /BACK command correctly.\n");
+        }
+       showBoard();
+    }
+
+    private void printSelection(){
+        for(int i=0; tiles.get(i)!=null; i++)
+            System.out.print(tiles.get(i).getColor() + "   ");
+        System.out.print("\n");
+        for(int i=0; tiles.get(i)!=null; i++)
+            System.out.print("(" + i+1 + ")   ");
+        System.out.print("\n");
     }
 }

@@ -12,6 +12,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.Serializable;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 /**
@@ -421,6 +422,19 @@ public class Game implements Serializable {
                 "NEW_TURN",
                 this.currPlaying,
                 currPlaying);
+        for(PropertyChangeListener l:listeners){
+            l.propertyChange(evt);
+        }
+        try{
+            TimeUnit.MILLISECONDS.sleep(500);
+        }catch (InterruptedException iE){
+            iE.printStackTrace();
+        }
+        evt = new PropertyChangeEvent(
+                this,
+                "UPDATE_STATE",
+                this,
+                this);
         for(PropertyChangeListener l:listeners){
             l.propertyChange(evt);
         }

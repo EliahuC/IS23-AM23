@@ -10,4 +10,8 @@ public class CurrPlayingMessage extends ServerMessage{
         super(MessageCategory.CURRPLAYING);
          this.currPlaying=currPlaying;
     }
+
+    public Integer getCurrPlaying() {
+        return currPlaying;
+    }
 }

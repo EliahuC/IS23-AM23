@@ -12,4 +12,7 @@ public class EndGameMessage extends ServerMessage {
         super(MessageCategory.END_GAME_MESSAGE);
         this.winner=player;
     }
+    public Player getWinner() {
+        return winner;
+    }
 }
