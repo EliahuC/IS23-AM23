@@ -48,7 +48,8 @@ public abstract class Message {
         CRASHED,
         COMMONGOAL,
         SCORE,
-        WARNING;
+        WARNING,
+        UPDATE_STATE;
 
 
     }

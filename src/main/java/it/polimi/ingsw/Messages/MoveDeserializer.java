@@ -90,6 +90,9 @@ public class MoveDeserializer {
            case "SCORE"-> {
                return gson.fromJson(s, ScoreMessage.class);
            }
+           case "UPDATE_STATE" -> {
+               return gson.fromJson(s, UpdateStateMessage.class);
+           }
        }
         return null;
     }
