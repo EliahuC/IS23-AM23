@@ -75,14 +75,15 @@ public class LobbyHandler {
                 break;
             }
         }
+        System.out.println("Hi " + connectionClient.getPlayerName() + "! Let's wait for other players to begin the game.");
         do{
-            System.out.print("Hi " + connectionClient.getPlayerName() + "! Let's wait for other players to begin the game.\n");
+
             try{
                 TimeUnit.MILLISECONDS.sleep(500);
             }catch (InterruptedException iE){
                 iE.printStackTrace();
             }
-            System.out.print("\033[H\033[2J");
+          /*  System.out.print("\033[H\033[2J");
             System.out.flush();
             System.out.print("Hi " + connectionClient.getPlayerName() + "! Let's wait for other players to begin the game .\n");
             try{
@@ -99,9 +100,9 @@ public class LobbyHandler {
                 iE.printStackTrace();
             }
             System.out.print("\033[H\033[2J");
-            System.out.flush();
+            System.out.flush();*/
         }while(response == null || response.getCategory() != Message.MessageCategory.STARTING_GAME_MESSAGE);
-        System.out.print(response.getReturnMessage());
+        System.out.println(response.getReturnMessage());
         receiver.setInLobbyHandler(false);
         new GameHandler(connectionClient, receiver).start();
     }

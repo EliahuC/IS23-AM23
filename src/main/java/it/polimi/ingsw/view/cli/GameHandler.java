@@ -88,8 +88,8 @@ public class GameHandler {
 
     private void waiting(){
         while(!player.getNowPlaying()){
-            System.out.print("It's not your turn, yet. Wait for other players to finish their turn.\n\n");
-            System.out.print("CURRENT PLAYING: ");
+            System.out.println("It's not your turn, yet. Wait for other players to finish their turn.");
+            System.out.println("CURRENT PLAYING: ");
             if(players.get(currPlaying-1).isFirstPlayerSeat())
                 System.out.print(FIRST+players.get(currPlaying-1).getNickName()+RESET+"\n");
             else
@@ -105,21 +105,21 @@ public class GameHandler {
     }
 
     private void showBoard(){
-        System.out.print("LIVING BOARD\n");
+        System.out.println("LIVING BOARD");
         livingRoom.print();
         try{
             TimeUnit.MILLISECONDS.sleep(200);
         }catch (InterruptedException iE){
             iE.printStackTrace();
         }
-        System.out.print("PICK YOUR TILES! You can choose one, two or three tiles: use the command /SELECT\n" +
+        System.out.println("PICK YOUR TILES! You can choose one, two or three tiles: use the command /SELECT\n" +
                 "writing respectively the row's coordinate and the column's coordinate.\n" +
                 "You must know that you can only pick adjacent tiles that are in the same row or in the same column,\n" +
                 "plus you can only choose external tiles!\n\n" +
                 "For example, to pick the two tiles in 8,5 and in 8,4, the right command is:\n" +
                 "/SELECT 8 5 8 4\n\n" +
                 "[Use the command /BOOKSHELF to see your personal bookshelf.]\n" +
-                "[Use the command /GOALS to see the description of your personal or common goal cards.]\n");
+                "[Use the command /GOALS to see the description of your personal or common goal cards.]");
         Scanner input = new Scanner(System.in);
         while (true){
             String command = input.nextLine();
@@ -143,8 +143,8 @@ public class GameHandler {
                     tiles.add(livingRoom.getBoardTile(i,i+1).getTile());
                 break;
             }
-            System.out.print("Your move is not valid. Please, pick again and correctly your tiles.\n" +
-                    "[You can still see your goal cards, using the command /GOALS, or your personal bookshelf using /BOOKSHELF]\n");
+            System.out.println("Your move is not valid. Please, pick again and correctly your tiles.\n" +
+                    "[You can still see your goal cards, using the command /GOALS, or your personal bookshelf using /BOOKSHELF]");
         }
     }
 

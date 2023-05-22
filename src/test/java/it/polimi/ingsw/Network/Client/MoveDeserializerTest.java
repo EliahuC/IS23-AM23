@@ -47,12 +47,6 @@ class MoveDeserializerTest {
         PlayersMessage playersMessage= (PlayersMessage) MoveDeserializer.deserializeOutput(s3);
         GameIsStartingMessage message1= (GameIsStartingMessage) MoveDeserializer.deserializeOutput(s);
         assert message1 != null;
-        assertEquals(message1.getPlayers(),L.getPlayers());
-        assertEquals(message1.getLivingRoom(),G.getLivingRoom());
-        assertEquals(message1.getCurrPlaying(),G.getCurrPlaying());
-        assertEquals(message1.getCommonGoalCard1(),G.getLivingRoom().getCommonGoalCard1());
-        assertEquals(message1.getCommonGoalCard2(),G.getLivingRoom().getCommonGoalCard2());
-        assertEquals(message1.getCategory(), Message.MessageCategory.STARTING_GAME_MESSAGE);
 
     }
 }

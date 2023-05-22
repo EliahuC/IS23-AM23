@@ -15,9 +15,9 @@ import java.util.HashMap;
 
 public class PersonalGoalCard implements Serializable {
     private Integer completed;
-    private final HashMap<Pair, ItemTile> Goal;
+    private transient final HashMap<Pair, ItemTile> Goal;
     private Integer points;
-    private transient final Integer NumeroCarta;
+    private  final Integer NumeroCarta;
     private static final int MAX_Row =6;
     private static final int MAX_Column =5;
 
@@ -139,10 +139,11 @@ public class PersonalGoalCard implements Serializable {
      */
     public PersonalGoalCard(){
         PersonalGoalCardGen istanza= PersonalGoalCardGen.getInstance();
-        Goal=new HashMap<>(istanza.GetGoal());
+        PGCkey card=istanza.GetGoal();
+        Goal=new HashMap<>(card.getGoal());
         this.completed = 0;
         this.points=0;
-        this.NumeroCarta=null;
+        this.NumeroCarta=card.getId();
     }
 
     public PersonalGoalCard(HashMap<Pair, ItemTile> goal, Integer numeroCarta) {
