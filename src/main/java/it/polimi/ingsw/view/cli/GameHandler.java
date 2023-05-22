@@ -29,8 +29,9 @@ public class GameHandler {
     private List<Player> players;
     private List<ItemTile> tiles;
     private int currPlaying;
+    private String currentPlayer;
     private static final String RESET = "\u001B[0m";
-    private static final String FIRST = "\u001b[189;174;41m";
+    private static final String FIRST = "\u001b[38;2;189;174;41m";
     private String winner;
 
     public GameHandler(ConnectionClient connectionClient, CLIEvent receiver) {
@@ -65,35 +66,57 @@ public class GameHandler {
         this.currPlaying = currPlaying;
     }
 
+    public void setCurrentPlayer(String currentPlayer) {
+        this.currentPlayer = currentPlayer;
+    }
+
     public void setWinner(String winner) {
         this.winner = winner;
     }
 
     public void start(){
         while(true){
-            showBoard();
-            showBookshelfOrder();
-            showBookshelfColumn();
-            try{
-                TimeUnit.MILLISECONDS.sleep(200);
-            }catch (InterruptedException iE){
-                iE.printStackTrace();
-            }
-            if(response!=null && response.getCategory()==Message.MessageCategory.END_GAME_MESSAGE)
-                break;
-            waiting();
+            if(player.getNickName()==currentPlayer || player.getNickName()==players.get(currPlaying).getNickName()) {
+                showBoard();
+                showBookshelfOrder();
+                showBookshelfColumn();
+                try {
+                    TimeUnit.MILLISECONDS.sleep(200);
+                } catch (InterruptedException iE) {
+                    iE.printStackTrace();
+                }
+                if (response != null && response.getCategory() == Message.MessageCategory.END_GAME_MESSAGE)
+                    break;
+                waiting();
+            }else
+                waiting();
         }
         showEnd();
     }
 
     private void waiting(){
+        System.out.print("It's not your turn, yet. Wait for other players to finish their turn.\n\n");
+        System.out.print("CURRENT PLAYING: ");
+        if(players.get(currPlaying).isFirstPlayerSeat())
+            System.out.print(FIRST+players.get(currPlaying).getNickName()+RESET+"\n");
+        else
+            System.out.print(players.get(currPlaying).getNickName()+"\n");
+        try{
+            TimeUnit.MILLISECONDS.sleep(200);
+        }catch (InterruptedException iE){
+            iE.printStackTrace();
+        }
+        if(response!=null && response.getCategory()==Message.MessageCategory.LAST_TURN_MESSAGE)
+            System.out.print(response.getReturnMessage());
         while(!player.getNowPlaying()){
-            System.out.println("It's not your turn, yet. Wait for other players to finish their turn.");
-            System.out.println("CURRENT PLAYING: ");
-            if(players.get(currPlaying-1).isFirstPlayerSeat())
-                System.out.print(FIRST+players.get(currPlaying-1).getNickName()+RESET+"\n");
+            /*System.out.print("\033[H\033[2J");
+            System.out.flush();
+            System.out.print("It's not your turn, yet. Wait for other players to finish their turn.\n\n");
+            System.out.print("CURRENT PLAYING: ");
+            if(players.get(currPlaying).isFirstPlayerSeat())
+                System.out.print(FIRST+players.get(currPlaying).getNickName()+RESET+"\n");
             else
-                System.out.print(players.get(currPlaying-1).getNickName()+"\n");
+                System.out.print(players.get(currPlaying).getNickName()+"\n");
             try{
                 TimeUnit.MILLISECONDS.sleep(200);
             }catch (InterruptedException iE){
@@ -101,25 +124,30 @@ public class GameHandler {
             }
             if(response!=null && response.getCategory()==Message.MessageCategory.LAST_TURN_MESSAGE)
                 System.out.print(response.getReturnMessage());
+            try{
+                TimeUnit.SECONDS.sleep(1);
+            }catch (InterruptedException iE){
+                iE.printStackTrace();
+            }*/
         }
     }
 
     private void showBoard(){
-        System.out.println("LIVING BOARD");
+        System.out.print("LIVING BOARD\n");
         livingRoom.print();
         try{
             TimeUnit.MILLISECONDS.sleep(200);
         }catch (InterruptedException iE){
             iE.printStackTrace();
         }
-        System.out.println("PICK YOUR TILES! You can choose one, two or three tiles: use the command /SELECT\n" +
+        System.out.print("\n\nPICK YOUR TILES! You can choose one, two or three tiles: use the command /SELECT\n" +
                 "writing respectively the row's coordinate and the column's coordinate.\n" +
                 "You must know that you can only pick adjacent tiles that are in the same row or in the same column,\n" +
                 "plus you can only choose external tiles!\n\n" +
                 "For example, to pick the two tiles in 8,5 and in 8,4, the right command is:\n" +
                 "/SELECT 8 5 8 4\n\n" +
                 "[Use the command /BOOKSHELF to see your personal bookshelf.]\n" +
-                "[Use the command /GOALS to see the description of your personal or common goal cards.]");
+                "[Use the command /GOALS to see the description of your personal or common goal cards.]\n");
         Scanner input = new Scanner(System.in);
         while (true){
             String command = input.nextLine();
@@ -143,22 +171,22 @@ public class GameHandler {
                     tiles.add(livingRoom.getBoardTile(i,i+1).getTile());
                 break;
             }
-            System.out.println("Your move is not valid. Please, pick again and correctly your tiles.\n" +
-                    "[You can still see your goal cards, using the command /GOALS, or your personal bookshelf using /BOOKSHELF]");
+            System.out.print("Your move is not valid. Please, pick again and correctly your tiles.\n" +
+                    "[You can still see your goal cards, using the command /GOALS, or your personal bookshelf using /BOOKSHELF]\n");
         }
     }
 
     private void showGoals(String scenario){
         Scanner input = new Scanner(System.in);
         String command;
-        System.out.print("YOUR PERSONAL GOAL CARD\n");
+        System.out.print("YOUR PERSONAL GOAL CARD\n\n");
         player.getPersonalGoalCard().print();
-        System.out.print("COMMON GOAL CARDS\n");
+        System.out.print("\nCOMMON GOAL CARDS\n\n");
         System.out.print("(1): ");
         livingRoom.getCommonGoalCard1().print();
-        System.out.print("(2): ");
+        System.out.print("\n(2): ");
         livingRoom.getCommonGoalCard2().print();
-        System.out.print("[If you want to come back to the previous screen, use the command /BACK]\n");
+        System.out.print("\n\n[If you want to come back to the previous screen, use the command /BACK]\n");
         while (true){
             command = input.nextLine();
             if(Objects.equals(command.toUpperCase(), "/BACK"))
@@ -244,7 +272,7 @@ public class GameHandler {
         String command;
         System.out.print("YOUR BOOKSHELF\n\n");
         player.getPlayerBookshelf().print();
-        System.out.print("[If you want to come back to the previous screen, use the command /BACK]\n");
+        System.out.print("\n\n[If you want to come back to the previous screen, use the command /BACK]\n");
         while (true){
             command = input.nextLine();
             if(Objects.equals(command.toUpperCase(), "/BACK"))

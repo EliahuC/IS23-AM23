@@ -37,39 +37,43 @@ public class CLIEvent implements PropertyChangeListener {
                     gameHandler.setLivingRoom(temp_startingGameMessage.getLivingRoom());
                     gameHandler.setPlayers(temp_startingGameMessage.getPlayers());
                     gameHandler.setPlayer(temp_startingGameMessage.getPlayers().stream().filter(player -> Objects.equals(player.getNickName(), gameHandler.getConnectionClient().getPlayerName())).findFirst().orElseThrow(() -> new IllegalArgumentException("Player not found")));
+                    gameHandler.setCurrentPlayer(temp_startingGameMessage.getCurrPlaying());
+                    break;
                 case UPDATE_STATE:
                     UpdateStateMessage temp_updateStateMessage=(UpdateStateMessage) serverMessage;
                     gameHandler.setLivingRoom(temp_updateStateMessage.getGame().getLivingRoom());
                     gameHandler.setPlayers(temp_updateStateMessage.getGame().getPlayers());
                     gameHandler.setPlayer(temp_updateStateMessage.getGame().getPlayers().stream().filter(player -> Objects.equals(player.getNickName(), gameHandler.getConnectionClient().getPlayerName())).findFirst().orElseThrow(() -> new IllegalArgumentException("Player not found")));
+                    break;
                 case CURRPLAYING:
                     CurrPlayingMessage temp_currPlayingMessage=(CurrPlayingMessage) serverMessage;
                     gameHandler.setCurrPlaying(temp_currPlayingMessage.getCurrPlaying());
+                    break;
                 case END_GAME_MESSAGE:
                     EndGameMessage temp_endGameMessage = (EndGameMessage) serverMessage;
                     gameHandler.setWinner(temp_endGameMessage.getWinner().getNickName());
+                    break;
             }
         }
     }
 
     private void forwardMessage(ServerMessage response){
-        if(inLobbyHandler) {
-            lobbyHandler.setResponse(response);
-            return;
-        }
         if(inStartCLI){
             startCLI.setResponse(response);
             return;
         }
+        if(inLobbyHandler) {
+            lobbyHandler.setResponse(response);
+            return;
+        }
         if (inGameHandler) {
             gameHandler.setResponse(response);
-            return;
         }
     }
     public void setLobbyHandler(LobbyHandler lobbyHandler){
         this.lobbyHandler=lobbyHandler;
     }
-    public void setGameHandler(GameHandler gameHandlerHandler){
+    public void setGameHandler(GameHandler gameHandler){
         this.gameHandler=gameHandler;
     }
     public void setInStartCLI(Boolean inStartCLI) {

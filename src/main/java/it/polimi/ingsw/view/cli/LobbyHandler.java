@@ -30,10 +30,18 @@ public class LobbyHandler {
     }
 
     public void start() {
+        GameHandler gameHandler= new GameHandler(connectionClient, receiver);
+        receiver.setGameHandler(gameHandler);
         String command;
         Scanner input = new Scanner(System.in);
         ServerMessage serverMessage;
-
+        /*System.out.print("\n" +
+                "    __  ___          _____  __           __ ____ _     \n" +
+                "   /  |/  /__  __   / ___/ / /_   ___   / // __/(_)___ \n" +
+                "  / /|_/ // / / /   \\__ \\ / __ \\ / _ \\ / // /_ / // _ \\\n" +
+                " / /  / // /_/ /   ___/ // / / //  __// // __// //  __/\n" +
+                "/_/  /_/ \\__, /   /____//_/ /_/ \\___//_//_/  /_/ \\___/ \n" +
+                "        /____/                                         \n\n\n\n");*/
         while(true) {
             System.out.print("\033[H\033[2J");
             System.out.flush();
@@ -75,15 +83,20 @@ public class LobbyHandler {
                 break;
             }
         }
-        System.out.println("Hi " + connectionClient.getPlayerName() + "! Let's wait for other players to begin the game.");
+        System.out.print("Hi " + connectionClient.getPlayerName() + "! Let's wait for other players to begin the game.\n");
         do{
-
+            try{
+                TimeUnit.MILLISECONDS.sleep(200);
+            }catch (InterruptedException iE){
+                iE.printStackTrace();
+            }
+            /*System.out.print("Hi " + connectionClient.getPlayerName() + "! Let's wait for other players to begin the game.\n");
             try{
                 TimeUnit.MILLISECONDS.sleep(500);
             }catch (InterruptedException iE){
                 iE.printStackTrace();
             }
-          /*  System.out.print("\033[H\033[2J");
+            System.out.print("\033[H\033[2J");
             System.out.flush();
             System.out.print("Hi " + connectionClient.getPlayerName() + "! Let's wait for other players to begin the game .\n");
             try{
@@ -102,8 +115,9 @@ public class LobbyHandler {
             System.out.print("\033[H\033[2J");
             System.out.flush();*/
         }while(response == null || response.getCategory() != Message.MessageCategory.STARTING_GAME_MESSAGE);
-        System.out.println(response.getReturnMessage());
+        //System.out.print(response.getReturnMessage());
         receiver.setInLobbyHandler(false);
-        new GameHandler(connectionClient, receiver).start();
+        receiver.setInGameHandler(true);
+        gameHandler.start();
     }
 }

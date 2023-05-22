@@ -27,7 +27,20 @@ public class StartCLI {
     }
 
     public void startClient(){
-        //stampare schermata iniziale
+        /*System.out.print("\n" +
+                "    __  ___          _____  __           __ ____ _     \n" +
+                "   /  |/  /__  __   / ___/ / /_   ___   / // __/(_)___ \n" +
+                "  / /|_/ // / / /   \\__ \\ / __ \\ / _ \\ / // /_ / // _ \\\n" +
+                " / /  / // /_/ /   ___/ // / / //  __// // __// //  __/\n" +
+                "/_/  /_/ \\__, /   /____//_/ /_/ \\___//_//_/  /_/ \\___/ \n" +
+                "        /____/                                         \n\n\n\n");
+        try{
+            TimeUnit.SECONDS.sleep(2);
+        }catch (InterruptedException iE){
+            iE.printStackTrace();
+        }
+        System.out.print("\033[H\033[2J");
+        System.out.flush();*/
         System.out.print("INSERT YOUR NICKNAME: ");
         do{
             Scanner input = new Scanner(System.in);
