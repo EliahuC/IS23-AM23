@@ -8,14 +8,11 @@ import it.polimi.ingsw.Messages.ServerToClient.*;
 import it.polimi.ingsw.Network.Server.TCP.ServerConnectionTCP;
 import it.polimi.ingsw.Network.Server.VirtualView;
 import it.polimi.ingsw.model.Game;
-import it.polimi.ingsw.model.player.PGCKey;
+import it.polimi.ingsw.model.player.Pair;
 import it.polimi.ingsw.model.player.Player;
 import org.junit.jupiter.api.Test;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -41,10 +38,10 @@ class MoveDeserializerTest {
         String s1=gson.toJson(message2);
         String s2=gson.toJson(message3);
         String s3=gson.toJson(message4);
-        PGCKey key=new PGCKey(2,1);
+        Pair key=new Pair(2,1);
         String s4=gson.toJson(key);
-        System.out.println(s);
-        PGCKey key1=gson.fromJson(s4,PGCKey.class);
+        System.out.println(s3);
+        Pair key1=gson.fromJson(s4, Pair.class);
         BookshelfMessage bookshelfMessage= (BookshelfMessage) MoveDeserializer.deserializeOutput(s1);
         LivingRoomMessage livingRoomMessage= (LivingRoomMessage) MoveDeserializer.deserializeOutput(s2);
         PlayersMessage playersMessage= (PlayersMessage) MoveDeserializer.deserializeOutput(s3);

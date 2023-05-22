@@ -15,7 +15,7 @@ import java.util.HashMap;
 
 public class PersonalGoalCard implements Serializable {
     private Integer completed;
-    private final HashMap<PGCKey, ItemTile> Goal;
+    private final HashMap<Pair, ItemTile> Goal;
     private Integer points;
     private transient final Integer NumeroCarta;
     private static final int MAX_Row =6;
@@ -32,100 +32,100 @@ public class PersonalGoalCard implements Serializable {
         Goal=new HashMap<>();
         switch (NumeroCarta) {
             case 1 -> {
-                Goal.put(new PGCKey(0, 0), new ItemTile("PLANTS"));
-                Goal.put(new PGCKey(0, 2), new ItemTile("FRAMES"));
-                Goal.put(new PGCKey(1, 4), new ItemTile("CATS"));
-                Goal.put(new PGCKey(2, 3), new ItemTile("BOOKS"));
-                Goal.put(new PGCKey(3, 1), new ItemTile("GAMES"));
-                Goal.put(new PGCKey(5, 2), new ItemTile("TROPHIES"));
+                Goal.put(new Pair(0, 0), new ItemTile("PLANTS"));
+                Goal.put(new Pair(0, 2), new ItemTile("FRAMES"));
+                Goal.put(new Pair(1, 4), new ItemTile("CATS"));
+                Goal.put(new Pair(2, 3), new ItemTile("BOOKS"));
+                Goal.put(new Pair(3, 1), new ItemTile("GAMES"));
+                Goal.put(new Pair(5, 2), new ItemTile("TROPHIES"));
             }
             case 2 -> {
-                Goal.put(new PGCKey(1, 1), new ItemTile("PLANTS"));
-                Goal.put(new PGCKey(5, 4), new ItemTile("FRAMES"));
-                Goal.put(new PGCKey(2, 0), new ItemTile("CATS"));
-                Goal.put(new PGCKey(3, 4), new ItemTile("BOOKS"));
-                Goal.put(new PGCKey(2, 2), new ItemTile("GAMES"));
-                Goal.put(new PGCKey(4, 3), new ItemTile("TROPHIES"));
+                Goal.put(new Pair(1, 1), new ItemTile("PLANTS"));
+                Goal.put(new Pair(5, 4), new ItemTile("FRAMES"));
+                Goal.put(new Pair(2, 0), new ItemTile("CATS"));
+                Goal.put(new Pair(3, 4), new ItemTile("BOOKS"));
+                Goal.put(new Pair(2, 2), new ItemTile("GAMES"));
+                Goal.put(new Pair(4, 3), new ItemTile("TROPHIES"));
             }
             case 3 -> {
-                Goal.put(new PGCKey(2, 2), new ItemTile("PLANTS"));
-                Goal.put(new PGCKey(1, 0), new ItemTile("FRAMES"));
-                Goal.put(new PGCKey(3, 1), new ItemTile("CATS"));
-                Goal.put(new PGCKey(5, 0), new ItemTile("BOOKS"));
-                Goal.put(new PGCKey(1, 3), new ItemTile("GAMES"));
-                Goal.put(new PGCKey(3, 4), new ItemTile("TROPHIES"));
+                Goal.put(new Pair(2, 2), new ItemTile("PLANTS"));
+                Goal.put(new Pair(1, 0), new ItemTile("FRAMES"));
+                Goal.put(new Pair(3, 1), new ItemTile("CATS"));
+                Goal.put(new Pair(5, 0), new ItemTile("BOOKS"));
+                Goal.put(new Pair(1, 3), new ItemTile("GAMES"));
+                Goal.put(new Pair(3, 4), new ItemTile("TROPHIES"));
             }
             case 4 -> {
-                Goal.put(new PGCKey(3, 3), new ItemTile("PLANTS"));
-                Goal.put(new PGCKey(2, 2), new ItemTile("FRAMES"));
-                Goal.put(new PGCKey(4, 2), new ItemTile("CATS"));
-                Goal.put(new PGCKey(4, 1), new ItemTile("BOOKS"));
-                Goal.put(new PGCKey(0, 4), new ItemTile("GAMES"));
-                Goal.put(new PGCKey(2, 0), new ItemTile("TROPHIES"));
+                Goal.put(new Pair(3, 3), new ItemTile("PLANTS"));
+                Goal.put(new Pair(2, 2), new ItemTile("FRAMES"));
+                Goal.put(new Pair(4, 2), new ItemTile("CATS"));
+                Goal.put(new Pair(4, 1), new ItemTile("BOOKS"));
+                Goal.put(new Pair(0, 4), new ItemTile("GAMES"));
+                Goal.put(new Pair(2, 0), new ItemTile("TROPHIES"));
             }
             case 5 -> {
-                Goal.put(new PGCKey(4, 4), new ItemTile("PLANTS"));
-                Goal.put(new PGCKey(3, 1), new ItemTile("FRAMES"));
-                Goal.put(new PGCKey(5, 3), new ItemTile("CATS"));
-                Goal.put(new PGCKey(3, 2), new ItemTile("BOOKS"));
-                Goal.put(new PGCKey(5, 0), new ItemTile("GAMES"));
-                Goal.put(new PGCKey(1, 1), new ItemTile("TROPHIES"));
+                Goal.put(new Pair(4, 4), new ItemTile("PLANTS"));
+                Goal.put(new Pair(3, 1), new ItemTile("FRAMES"));
+                Goal.put(new Pair(5, 3), new ItemTile("CATS"));
+                Goal.put(new Pair(3, 2), new ItemTile("BOOKS"));
+                Goal.put(new Pair(5, 0), new ItemTile("GAMES"));
+                Goal.put(new Pair(1, 1), new ItemTile("TROPHIES"));
             }
             case 6 -> {
-                Goal.put(new PGCKey(5, 0), new ItemTile("PLANTS"));
-                Goal.put(new PGCKey(4, 3), new ItemTile("FRAMES"));
-                Goal.put(new PGCKey(0, 4), new ItemTile("CATS"));
-                Goal.put(new PGCKey(2, 3), new ItemTile("BOOKS"));
-                Goal.put(new PGCKey(4, 1), new ItemTile("GAMES"));
-                Goal.put(new PGCKey(5, 2), new ItemTile("TROPHIES"));
+                Goal.put(new Pair(5, 0), new ItemTile("PLANTS"));
+                Goal.put(new Pair(4, 3), new ItemTile("FRAMES"));
+                Goal.put(new Pair(0, 4), new ItemTile("CATS"));
+                Goal.put(new Pair(2, 3), new ItemTile("BOOKS"));
+                Goal.put(new Pair(4, 1), new ItemTile("GAMES"));
+                Goal.put(new Pair(5, 2), new ItemTile("TROPHIES"));
             }
             case 7 -> {
-                Goal.put(new PGCKey(2, 1), new ItemTile("PLANTS"));
-                Goal.put(new PGCKey(1, 4), new ItemTile("FRAMES"));
-                Goal.put(new PGCKey(0, 0), new ItemTile("CATS"));
-                Goal.put(new PGCKey(5, 2), new ItemTile("BOOKS"));
-                Goal.put(new PGCKey(4, 4), new ItemTile("GAMES"));
-                Goal.put(new PGCKey(3, 0), new ItemTile("TROPHIES"));
+                Goal.put(new Pair(2, 1), new ItemTile("PLANTS"));
+                Goal.put(new Pair(1, 4), new ItemTile("FRAMES"));
+                Goal.put(new Pair(0, 0), new ItemTile("CATS"));
+                Goal.put(new Pair(5, 2), new ItemTile("BOOKS"));
+                Goal.put(new Pair(4, 4), new ItemTile("GAMES"));
+                Goal.put(new Pair(3, 0), new ItemTile("TROPHIES"));
             }
             case 8 -> {
-                Goal.put(new PGCKey(3, 0), new ItemTile("PLANTS"));
-                Goal.put(new PGCKey(0, 4), new ItemTile("FRAMES"));
-                Goal.put(new PGCKey(1, 1), new ItemTile("CATS"));
-                Goal.put(new PGCKey(4, 3), new ItemTile("BOOKS"));
-                Goal.put(new PGCKey(5, 3), new ItemTile("GAMES"));
-                Goal.put(new PGCKey(2, 2), new ItemTile("TROPHIES"));
+                Goal.put(new Pair(3, 0), new ItemTile("PLANTS"));
+                Goal.put(new Pair(0, 4), new ItemTile("FRAMES"));
+                Goal.put(new Pair(1, 1), new ItemTile("CATS"));
+                Goal.put(new Pair(4, 3), new ItemTile("BOOKS"));
+                Goal.put(new Pair(5, 3), new ItemTile("GAMES"));
+                Goal.put(new Pair(2, 2), new ItemTile("TROPHIES"));
             }
             case 9 -> {
-                Goal.put(new PGCKey(4, 4), new ItemTile("PLANTS"));
-                Goal.put(new PGCKey(5, 0), new ItemTile("FRAMES"));
-                Goal.put(new PGCKey(2, 2), new ItemTile("CATS"));
-                Goal.put(new PGCKey(3, 4), new ItemTile("BOOKS"));
-                Goal.put(new PGCKey(0, 2), new ItemTile("GAMES"));
-                Goal.put(new PGCKey(4, 1), new ItemTile("TROPHIES"));
+                Goal.put(new Pair(4, 4), new ItemTile("PLANTS"));
+                Goal.put(new Pair(5, 0), new ItemTile("FRAMES"));
+                Goal.put(new Pair(2, 2), new ItemTile("CATS"));
+                Goal.put(new Pair(3, 4), new ItemTile("BOOKS"));
+                Goal.put(new Pair(0, 2), new ItemTile("GAMES"));
+                Goal.put(new Pair(4, 1), new ItemTile("TROPHIES"));
             }
             case 10 -> {
-                Goal.put(new PGCKey(5, 3), new ItemTile("PLANTS"));
-                Goal.put(new PGCKey(4, 1), new ItemTile("FRAMES"));
-                Goal.put(new PGCKey(3, 3), new ItemTile("CATS"));
-                Goal.put(new PGCKey(2, 0), new ItemTile("BOOKS"));
-                Goal.put(new PGCKey(1, 1), new ItemTile("GAMES"));
-                Goal.put(new PGCKey(0, 4), new ItemTile("TROPHIES"));
+                Goal.put(new Pair(5, 3), new ItemTile("PLANTS"));
+                Goal.put(new Pair(4, 1), new ItemTile("FRAMES"));
+                Goal.put(new Pair(3, 3), new ItemTile("CATS"));
+                Goal.put(new Pair(2, 0), new ItemTile("BOOKS"));
+                Goal.put(new Pair(1, 1), new ItemTile("GAMES"));
+                Goal.put(new Pair(0, 4), new ItemTile("TROPHIES"));
             }
             case 11 -> {
-                Goal.put(new PGCKey(0, 2), new ItemTile("PLANTS"));
-                Goal.put(new PGCKey(3, 2), new ItemTile("FRAMES"));
-                Goal.put(new PGCKey(4, 4), new ItemTile("CATS"));
-                Goal.put(new PGCKey(1, 1), new ItemTile("BOOKS"));
-                Goal.put(new PGCKey(2, 0), new ItemTile("GAMES"));
-                Goal.put(new PGCKey(5, 3), new ItemTile("TROPHIES"));
+                Goal.put(new Pair(0, 2), new ItemTile("PLANTS"));
+                Goal.put(new Pair(3, 2), new ItemTile("FRAMES"));
+                Goal.put(new Pair(4, 4), new ItemTile("CATS"));
+                Goal.put(new Pair(1, 1), new ItemTile("BOOKS"));
+                Goal.put(new Pair(2, 0), new ItemTile("GAMES"));
+                Goal.put(new Pair(5, 3), new ItemTile("TROPHIES"));
             }
             case 12 -> {
-                Goal.put(new PGCKey(1, 1), new ItemTile("PLANTS"));
-                Goal.put(new PGCKey(2, 2), new ItemTile("FRAMES"));
-                Goal.put(new PGCKey(5, 0), new ItemTile("CATS"));
-                Goal.put(new PGCKey(0, 2), new ItemTile("BOOKS"));
-                Goal.put(new PGCKey(4, 4), new ItemTile("GAMES"));
-                Goal.put(new PGCKey(3, 3), new ItemTile("TROPHIES"));
+                Goal.put(new Pair(1, 1), new ItemTile("PLANTS"));
+                Goal.put(new Pair(2, 2), new ItemTile("FRAMES"));
+                Goal.put(new Pair(5, 0), new ItemTile("CATS"));
+                Goal.put(new Pair(0, 2), new ItemTile("BOOKS"));
+                Goal.put(new Pair(4, 4), new ItemTile("GAMES"));
+                Goal.put(new Pair(3, 3), new ItemTile("TROPHIES"));
             }
         }
         this.completed = 0;
@@ -145,13 +145,18 @@ public class PersonalGoalCard implements Serializable {
         this.NumeroCarta=null;
     }
 
+    public PersonalGoalCard(HashMap<Pair, ItemTile> goal, Integer numeroCarta) {
+        Goal = goal;
+        NumeroCarta = numeroCarta;
+    }
+
     /**
      * @author Eliahu Cohen
      * @param playerBS palyer bookshelf
      * @return the points that the player gained with the personal goal card
      */
     public int CheckGoal(BookShelf playerBS) {
-        for (PGCKey key : Goal.keySet()) {
+        for (Pair key : Goal.keySet()) {
             if (playerBS.getTile(key.getX(), key.getY()).getCategory() == Goal.get(key).getCategory()) {
                 completed++;
             }
@@ -177,14 +182,14 @@ public class PersonalGoalCard implements Serializable {
         return points;
     }
 
-    public HashMap<PGCKey, ItemTile> getGoal() {
+    public HashMap<Pair, ItemTile> getGoal() {
         return Goal;
     }
 
 
-    public boolean equals(HashMap<PGCKey, ItemTile> mappa) {
+    public boolean equals(HashMap<Pair, ItemTile> mappa) {
         int counter=0;
-      for(PGCKey k: mappa.keySet()){
+      for(Pair k: mappa.keySet()){
           if(this.Goal.keySet().contains(k) && this.Goal.get(k)==mappa.get(k))counter++;
       }
       return counter==6;
@@ -192,7 +197,7 @@ public class PersonalGoalCard implements Serializable {
 
     public void print(){
         String[][] temp= new String[6][5];
-        for(PGCKey k: Goal.keySet())
+        for(Pair k: Goal.keySet())
             temp[k.getX()][k.getY()] = Goal.get(k).getColor();
 
         for(int i=0; i<=MAX_Row;i++)

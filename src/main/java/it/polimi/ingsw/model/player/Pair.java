@@ -6,12 +6,12 @@ import java.io.Serializable;
  * @author Eliahu Cohen
  * Class that represent the key for the HashMap of the Personal Goal cards
  */
-public class PGCKey implements Serializable {
+public class Pair implements Serializable {
     private  int x;
     private  int y;
 
 
-    public PGCKey(int row, int column) {
+    public Pair(int row, int column) {
 
         this.x =row;
         this.y=column;

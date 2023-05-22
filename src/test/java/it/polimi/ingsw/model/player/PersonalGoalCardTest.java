@@ -1025,7 +1025,7 @@ public class PersonalGoalCardTest extends TestCase {
         }
         int j=0;
         while(j == counter) {
-            HashMap<PGCKey, ItemTile> goal = new HashMap<>(confronto.get(0).getGoal());
+            HashMap<Pair, ItemTile> goal = new HashMap<>(confronto.get(0).getGoal());
             for (int i=0;i<12 && lista.get(i)!=null;i++) {
                 if (lista.get(i).equals(goal)) {
                     counter++;
