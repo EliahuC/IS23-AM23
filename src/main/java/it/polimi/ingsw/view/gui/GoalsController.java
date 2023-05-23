@@ -45,13 +45,82 @@ public class GoalsController {
     public void displayPoints{
 
     }
+*/
+    public void displayPersonalGoal(){
+        //Viene salvato l'indice della personal card
+        int personalCard = 1;
 
-    public void displayPersonalGoal{
+        switch (personalCard) {
+            case 1:
+            {
+                Image image = new Image(getClass().getResourceAsStream("PersonalGoalCards.jpg"));
+                displayImage(personalGoal, image);
+            }
+            case 2:
+            {
+                Image image = new Image(getClass().getResourceAsStream("PersonalGoalCards2.jpg"));
+                displayImage(personalGoal, image);
+            }
+            case 3:
+            {
+                Image image = new Image(getClass().getResourceAsStream("PersonalGoalCards3.jpg"));
+                displayImage(personalGoal, image);
+            }
+            case 4:
+            {
+                Image image = new Image(getClass().getResourceAsStream("PersonalGoalCards4.jpg"));
+                displayImage(personalGoal, image);
+            }
+            case 5:
+            {
+                Image image = new Image(getClass().getResourceAsStream("PersonalGoalCards5.jpg"));
+                displayImage(personalGoal, image);
+            }
+            case 6:
+            {
+                Image image = new Image(getClass().getResourceAsStream("PersonalGoalCards6.jpg"));
+                displayImage(personalGoal, image);
+            }
+            case 7:
+            {
+                Image image = new Image(getClass().getResourceAsStream("PersonalGoalCards7.jpg"));
+                displayImage(personalGoal, image);
+            }
+            case 8:
+            {
+                Image image = new Image(getClass().getResourceAsStream("PersonalGoalCards8.jpg"));
+                displayImage(personalGoal, image);
+            }
+            case 9:
+            {
+                Image image = new Image(getClass().getResourceAsStream("PersonalGoalCards9.jpg"));
+                displayImage(personalGoal, image);
+            }
+            case 10:
+            {
+                Image image = new Image(getClass().getResourceAsStream("PersonalGoalCards10.jpg"));
+                displayImage(personalGoal, image);
+            }
+            case 11:
+            {
+                Image image = new Image(getClass().getResourceAsStream("PersonalGoalCards11.jpg"));
+                displayImage(commonGoal1, image);
+            }
+            case 12:
+            {
+                Image image = new Image(getClass().getResourceAsStream("PersonalGoalCards12.jpg"));
+                displayImage(personalGoal, image);
+            }
+            default: System.out.println("è colpa di eliahu");
+
+        }
+
+
 
 
 
     }
-*/
+
     public void displayCommonGoal() {
 
         //Viene salvato l'indice della common card
