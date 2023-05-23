@@ -215,7 +215,7 @@ public class Game implements Serializable {
      */
     public boolean checkLegalMove(ArrayList<Integer> coordinates, int size){
         ArrayList<Integer> commands = new ArrayList<>(coordinates);
-        if(commands.size()>2) {
+        if(commands.size()>1) {
             commands = sortTiles(commands);
             if (!checkNumber(size)) return false;
         }

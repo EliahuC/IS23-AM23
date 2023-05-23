@@ -69,14 +69,14 @@ public class Lobby {
      * Method that react to the client move
      */
     public synchronized Message receiveMessage(ClientMessage message){
-        for(Player p:getDisconnectedPlayers()) {
+        /*for(Player p:getDisconnectedPlayers()) {
             if(p.getNickName().equals(message.getNickname()))
             {
                 ErrorMessage errorMessage= new ErrorMessage();
                 errorMessage.setReturnMessage("The player is disconnected from the game, please log in first.");
                 return errorMessage;
             }
-        }
+        }*/
         if(message.getCategory()== Message.MessageCategory.START_GAME){
             if(joinedUsers.size()!=1){
                 startGameLobby();

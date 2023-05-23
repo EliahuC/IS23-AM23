@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import it.polimi.ingsw.Messages.ClientToServer.*;
+import it.polimi.ingsw.Messages.ClientToServer.PossibleMoves.Move_SelectTiles;
 import it.polimi.ingsw.Messages.ServerToClient.*;
 
 /**
@@ -25,7 +26,10 @@ public class MoveDeserializer {
                return gson.fromJson(s, PingFromServer.class);
            }
            case "COORDINATES" -> {
-               return gson.fromJson(s, CoordinatesMessage.class);
+               Move_SelectTiles move=gson.fromJson(o.get("move").getAsJsonObject(), Move_SelectTiles.class);
+               CoordinatesMessage message=gson.fromJson(s, CoordinatesMessage.class);
+               message.setMove(move);
+               return message;
            }
            case "COLUMN" -> {
                return gson.fromJson(s, ColumnMessage.class);
