@@ -22,7 +22,7 @@
         </ImageView>
         <Button layoutX="160.0" layoutY="248.0" mnemonicParsing="false" onAction="#goToLobbyWaiting" prefHeight="32.0" prefWidth="100.0" text="Join a lobby" />
         <Button layoutX="327.0" layoutY="248.0" mnemonicParsing="false" onAction="#goToLobbyWaiting" prefHeight="32.0" prefWidth="126.0" text="Create a new game" />
-        <ChoiceBox fx:id="PlayerNumber" layoutX="453.0" layoutY="248.0" prefHeight="32.0" prefWidth="47.0" />
+        <ChoiceBox fx:id="playerNumber" layoutX="453.0" layoutY="248.0" prefHeight="32.0" prefWidth="47.0" />
       <Button alignment="CENTER" layoutX="253.0" layoutY="319.0" mnemonicParsing="false" onAction="#returnToMenu" text="Return to Menu" />
       <Label fx:id="nameDisplay" alignment="CENTER" layoutX="-2.0" layoutY="179.0" prefHeight="30.0" prefWidth="605.0" text="Welcome!">
          <font>
