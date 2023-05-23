@@ -9,11 +9,11 @@ import java.util.List;
 
 public class CommonGoalCard1 extends CommonGoalCard implements CheckCommonGoalCard {
     private final List<ItemTile> validGroups = new ArrayList<>();
-    private transient final Launcher L;
+    private final Launcher launcher;
     private final static int Goal = 6;
 
     public CommonGoalCard1(Launcher L) {
-        this.L = L;
+        this.launcher = L;
     }
 
     /**
@@ -66,7 +66,7 @@ public class CommonGoalCard1 extends CommonGoalCard implements CheckCommonGoalCa
         if(count>=Goal)
             increaseNumCompleted();
     }
-
+    @Override
     public void print(){
         System.out.print("SIX GROUPS FORMED OF TWO TILES.\n\n");
 

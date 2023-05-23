@@ -14,10 +14,10 @@ public class CommonGoalCard8 extends CommonGoalCard implements CheckCommonGoalCa
     private final static int numRowsToAchieve=4;
     private static final int numDifferentCategoriesAllowed=3;
     private final HashSet<ItemTileCategory> cat = new HashSet<>(); //I use a hashset to track the categories in each row
-    private transient final Launcher L;                                               //of the bookshelf;
+    private final Launcher launcher;                                               //of the bookshelf;
 
     public CommonGoalCard8(Launcher L) {
-        this.L = L;
+        this.launcher = L;
     }
     /**
      *@param bs Player's bookshelf
@@ -56,7 +56,7 @@ public class CommonGoalCard8 extends CommonGoalCard implements CheckCommonGoalCa
     public HashSet<ItemTileCategory> getCat(){
         return cat;
     }
-
+    @Override
     public void print(){
         System.out.print("FOUR FULL ROWS.\n\n");
 

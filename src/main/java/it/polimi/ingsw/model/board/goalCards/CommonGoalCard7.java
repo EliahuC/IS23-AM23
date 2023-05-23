@@ -9,10 +9,10 @@ import it.polimi.ingsw.model.player.BookShelf;
  */
 
 public class CommonGoalCard7 extends CommonGoalCard implements CheckCommonGoalCard {
-    private transient final Launcher L;
+    private final Launcher launcher;
 
     public CommonGoalCard7(Launcher L){
-        this.L = L;
+        this.launcher = L;
     }
 
     @Override
@@ -73,7 +73,7 @@ public class CommonGoalCard7 extends CommonGoalCard implements CheckCommonGoalCa
             return Counter1 == 4 || Counter2 == 4;
         } else return false;
     }
-
+    @Override
     public void print(){
         System.out.print("DIAGONAL TILES.\n\n");
 

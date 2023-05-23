@@ -8,10 +8,10 @@ import it.polimi.ingsw.model.player.BookShelf;
  * @author Giovanni Di Lorenzo
  */
 public class CommonGoalCard11 extends CommonGoalCard implements CheckCommonGoalCard {
-    private transient final Launcher L;
+    private final Launcher launcher;
 
     public CommonGoalCard11(Launcher L) {
-        this.L = L;
+        this.launcher = L;
     }
     /**
      *@param bs Player's bookshelf
@@ -66,7 +66,7 @@ public class CommonGoalCard11 extends CommonGoalCard implements CheckCommonGoalC
             return true;
         else return false;
     }
-
+    @Override
     public void print(){
         System.out.print("CROSS TILES.\n\n");
 

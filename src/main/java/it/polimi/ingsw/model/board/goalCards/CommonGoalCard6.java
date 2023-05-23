@@ -5,10 +5,10 @@
     import it.polimi.ingsw.model.player.BookShelf;
 
     public class CommonGoalCard6 extends CommonGoalCard implements CheckCommonGoalCard {
-        private transient final Launcher L;
+        private final Launcher launcher;
 
         public CommonGoalCard6(Launcher L){
-            this.L = L;
+            this.launcher = L;
         }
 
         /**
@@ -35,7 +35,7 @@
 
 
         }
-
+        @Override
         public void print(){
             System.out.print("EIGHT SAME TILES.\n\n");
 

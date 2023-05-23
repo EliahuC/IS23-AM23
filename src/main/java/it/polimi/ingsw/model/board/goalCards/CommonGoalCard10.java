@@ -16,10 +16,10 @@ public class CommonGoalCard10 extends CommonGoalCard implements CheckCommonGoalC
     private final static int numRowsToAchieve=2;
     private final HashSet<ItemTileCategory> cat = new HashSet<>(); //I use an arrayList to track the categories in each row
     //of the bookshelf
-    private transient final Launcher L;
+    private final Launcher launcher;
 
     public CommonGoalCard10(Launcher L) {
-        this.L = L;
+        this.launcher = L;
     }
     /**
      *@param bs Player's bookshelf
@@ -61,7 +61,7 @@ public class CommonGoalCard10 extends CommonGoalCard implements CheckCommonGoalC
     public HashSet<ItemTileCategory> getCat(){
         return cat;
     }
-
+    @Override
     public void print(){
         System.out.print("TWO ROWS WITH DIFFERENT TILES.\n\n");
 
