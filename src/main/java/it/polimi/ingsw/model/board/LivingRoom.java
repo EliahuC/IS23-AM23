@@ -27,9 +27,11 @@ public class LivingRoom implements Serializable {
     private  final Bag bag;
     private transient final GameChecker gameChecker;
 
-    private transient final ArrayList<CommonGoalCard> CommonGoalCard = new ArrayList<>();
-    private CommonGoalCard commonGoalCard1;
-    private CommonGoalCard commonGoalCard2;
+    private transient final ArrayList<CommonGoalCard> commonGoalCards = new ArrayList<>();
+    private transient CommonGoalCard commonGoalCard1;
+    private transient CommonGoalCard commonGoalCard2;
+    private Integer idCGC1;
+    private Integer idCGC2;
 
     public LivingRoom(Launcher L) {
         this.L = L;
@@ -152,18 +154,18 @@ public class LivingRoom implements Serializable {
      * method that create the 12 common goal cards
      */
     private void SetCommonGoalCard(){
-        CommonGoalCard.add(new CommonGoalCard1(L));
-        CommonGoalCard.add(new CommonGoalCard2(L));
-        CommonGoalCard.add(new CommonGoalCard3(L));
-        CommonGoalCard.add(new CommonGoalCard4(L));
-        CommonGoalCard.add(new CommonGoalCard5(L));
-        CommonGoalCard.add(new CommonGoalCard6(L));
-        CommonGoalCard.add(new CommonGoalCard7(L));
-        CommonGoalCard.add(new CommonGoalCard8(L));
-        CommonGoalCard.add(new CommonGoalCard9(L));
-        CommonGoalCard.add(new CommonGoalCard10(L));
-        CommonGoalCard.add(new CommonGoalCard11(L));
-        CommonGoalCard.add(new CommonGoalCard12(L));
+        commonGoalCards.add(new CommonGoalCard1(L));
+        commonGoalCards.add(new CommonGoalCard2(L));
+        commonGoalCards.add(new CommonGoalCard3(L));
+        commonGoalCards.add(new CommonGoalCard4(L));
+        commonGoalCards.add(new CommonGoalCard5(L));
+        commonGoalCards.add(new CommonGoalCard6(L));
+        commonGoalCards.add(new CommonGoalCard7(L));
+        commonGoalCards.add(new CommonGoalCard8(L));
+        commonGoalCards.add(new CommonGoalCard9(L));
+        commonGoalCards.add(new CommonGoalCard10(L));
+        commonGoalCards.add(new CommonGoalCard11(L));
+        commonGoalCards.add(new CommonGoalCard12(L));
 
     }
 
@@ -178,10 +180,10 @@ public class LivingRoom implements Serializable {
                 putTile(i, j);
             }
         }
-        int randIndex = new Random().nextInt(CommonGoalCard.size());
-        commonGoalCard1 = CommonGoalCard.remove(randIndex);
-        randIndex = new Random().nextInt(CommonGoalCard.size());
-        commonGoalCard2 = CommonGoalCard.remove(randIndex);
+        int randIndex = new Random().nextInt(commonGoalCards.size());
+        commonGoalCard1 = commonGoalCards.remove(randIndex);
+        randIndex = new Random().nextInt(commonGoalCards.size());
+        commonGoalCard2 = commonGoalCards.remove(randIndex);
     }
 
     /**

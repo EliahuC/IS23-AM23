@@ -28,6 +28,7 @@ public class GameTest extends TestCase {
             p2.setListener(new VirtualView(new ServerConnectionTCP(null)));
             Game G = new Game(L,L.getPlayers());
             G.startGame();
+            G.getLivingRoom().getCommonGoalCard1().print();
             assertTrue(G.isStartedGame());
         }
         public void testStartGameG_SECOND(){        //PLAYER IN FIRST POSITION IN L.getPlayers (after calling startGame()

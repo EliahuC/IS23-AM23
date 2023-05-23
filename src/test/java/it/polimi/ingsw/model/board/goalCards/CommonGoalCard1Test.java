@@ -44,6 +44,7 @@ public class CommonGoalCard1Test extends TestCase {
         bs27.setTile(4, 4, new ItemTile("CATS"));
         bs27.setTile(5, 4, new ItemTile("PLANTS"));
         c41.checkGoal(bs27);
+        c41.print();
         assertEquals(0, c41.getNumCompleted());
     }
     public void testCheckGoalCardCGC1_SECOND(){
