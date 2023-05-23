@@ -50,5 +50,13 @@ public class MenuController {
         stage.setScene(scene);
         stage.show();
     }
+    /*
+    public boolean isTCPOn{
 
+    }
+
+    public boolean isRMIOn{
+
+    }
+*/
 }

@@ -28,5 +28,15 @@
             </image>
         </ImageView>
         <Button layoutX="235.0" layoutY="21.0" mnemonicParsing="false" onAction="#goToLivingroom" text="Back to Livingroom" />
+      <ImageView fitHeight="54.0" fitWidth="55.0" layoutX="438.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true" rotate="-98.5">
+         <image>
+            <Image url="@scoring_back_EMPTY.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="54.0" fitWidth="55.0" layoutX="438.0" layoutY="247.0" pickOnBounds="true" preserveRatio="true" rotate="-98.5">
+         <image>
+            <Image url="@scoring_back_EMPTY.jpg" />
+         </image>
+      </ImageView>
     </children>
 </AnchorPane>
