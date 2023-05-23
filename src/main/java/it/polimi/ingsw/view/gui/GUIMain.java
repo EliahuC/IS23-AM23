@@ -5,6 +5,7 @@ import it.polimi.ingsw.Network.Client.ConnectionClient;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import java.io.IOException;

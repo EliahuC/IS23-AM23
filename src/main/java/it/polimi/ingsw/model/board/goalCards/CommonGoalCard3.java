@@ -9,11 +9,11 @@ import java.util.List;
 
 public class CommonGoalCard3 extends CommonGoalCard implements CheckCommonGoalCard {
     private final List<ItemTile> validGroups = new ArrayList<>();
-    private transient final Launcher L;
+    private final Launcher launcher;
     private final static int Goal = 4;
 
     public CommonGoalCard3(Launcher L){
-        this.L = L;
+        this.launcher = L;
     }
 
     /**
@@ -65,7 +65,7 @@ public class CommonGoalCard3 extends CommonGoalCard implements CheckCommonGoalCa
         if(count>=Goal)
             increaseNumCompleted();
     }
-
+    @Override
     public void print(){
         System.out.print("TILES ON THE CORNER.\n\n");
 

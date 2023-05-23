@@ -1,15 +1,18 @@
 package it.polimi.ingsw.view.gui;
 
+import  it.polimi.ingsw.model.board.goalCards.CommonGoalCard;
+import  it.polimi.ingsw.model.board.LivingRoom;
+
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-
-import javax.swing.text.html.ImageView;
-import java.awt.*;
 import java.io.IOException;
 
 public class GoalsController {
@@ -38,19 +41,131 @@ public class GoalsController {
         stage.setScene(scene);
         stage.show();
     }
-    /*
+/*
     public void displayPoints{
-        //Reinserire gli id delle immagini
-    }
-
-    public void diplayPersonalGoal{
-        //Reinserire gli id delle immagini
 
     }
 
-    public void displayCommonGoal{
-        //Reinserire gli id delle immagini
+    public void displayPersonalGoal{
+
+
 
     }
-    */
+*/
+    public void displayCommonGoal() {
+
+        //Viene salvato l'indice della common card
+        int card1 = 1;
+        int card2 = 2;
+
+        switch (card1) {
+            case 1: {
+                Image image = new Image(getClass().getResourceAsStream("1.jpg"));
+                displayImage(commonGoal1, image);
+            }
+            case 2: {
+                Image image = new Image(getClass().getResourceAsStream("2.jpg"));
+                displayImage(commonGoal1, image);
+            }
+            case 3: {
+                Image image = new Image(getClass().getResourceAsStream("3.jpg"));
+                displayImage(commonGoal1, image);
+            }
+            case 4: {
+                Image image = new Image(getClass().getResourceAsStream("4.jpg"));
+                displayImage(commonGoal1, image);
+            }
+            case 5: {
+                Image image = new Image(getClass().getResourceAsStream("5.jpg"));
+                displayImage(commonGoal1, image);
+            }
+            case 6: {
+                Image image = new Image(getClass().getResourceAsStream("6.jpg"));
+                displayImage(commonGoal1, image);
+            }
+            case 7: {
+                Image image = new Image(getClass().getResourceAsStream("7.jpg"));
+                displayImage(commonGoal1, image);
+            }
+            case 8: {
+                Image image = new Image(getClass().getResourceAsStream("8.jpg"));
+                displayImage(commonGoal1, image);
+            }
+            case 9: {
+                Image image = new Image(getClass().getResourceAsStream("9.jpg"));
+                displayImage(commonGoal1, image);
+            }
+            case 10: {
+                Image image = new Image(getClass().getResourceAsStream("10.jpg"));
+                displayImage(commonGoal1, image);
+            }
+            case 11: {
+                Image image = new Image(getClass().getResourceAsStream("11.jpg"));
+                displayImage(commonGoal1, image);
+            }
+            case 12: {
+                Image image = new Image(getClass().getResourceAsStream("12.jpg"));
+                displayImage(commonGoal1, image);
+            }
+            default: System.out.println("è colpa di eliahu");
+
+        }
+
+        switch (card2) {
+            case 1: {
+                Image image = new Image(getClass().getResourceAsStream("1.jpg"));
+                displayImage(commonGoal2, image);
+            }
+            case 2: {
+                Image image = new Image(getClass().getResourceAsStream("2.jpg"));
+                displayImage(commonGoal2, image);
+            }
+            case 3: {
+                Image image = new Image(getClass().getResourceAsStream("3.jpg"));
+                displayImage(commonGoal2, image);
+            }
+            case 4: {
+                Image image = new Image(getClass().getResourceAsStream("4.jpg"));
+                displayImage(commonGoal2, image);
+            }
+            case 5: {
+                Image image = new Image(getClass().getResourceAsStream("5.jpg"));
+                displayImage(commonGoal2, image);
+            }
+            case 6: {
+                Image image = new Image(getClass().getResourceAsStream("6.jpg"));
+                displayImage(commonGoal2, image);
+            }
+            case 7: {
+                Image image = new Image(getClass().getResourceAsStream("7.jpg"));
+                displayImage(commonGoal2, image);
+            }
+            case 8: {
+                Image image = new Image(getClass().getResourceAsStream("8.jpg"));
+                displayImage(commonGoal2, image);
+            }
+            case 9: {
+                Image image = new Image(getClass().getResourceAsStream("9.jpg"));
+                displayImage(commonGoal2, image);
+            }
+            case 10: {
+                Image image = new Image(getClass().getResourceAsStream("10.jpg"));
+                displayImage(commonGoal2, image);
+            }
+            case 11: {
+                Image image = new Image(getClass().getResourceAsStream("11.jpg"));
+                displayImage(commonGoal2, image);
+            }
+            case 12: {
+                Image image = new Image(getClass().getResourceAsStream("12.jpg"));
+                displayImage(commonGoal2, image);
+            }
+            default: System.out.println("è colpa di eliahu");
+
+        }
+    }
+
+    public void displayImage(ImageView commonGoal1,Image image){
+        commonGoal1.setImage(image);
+    }
 }

@@ -340,8 +340,12 @@ public class ServerConnectionTCP implements ServerConnection{
         ping.start();
         try{
         while(serverIsActive) {
-            String s = input.nextLine();
-            receiveMessage(s);
+            try {
+                String s = input.nextLine();
+                receiveMessage(s);
+            }catch (NoSuchElementException e){
+                continue;
+            }
         }
            }catch (IllegalStateException e){
                closeClientConnection();

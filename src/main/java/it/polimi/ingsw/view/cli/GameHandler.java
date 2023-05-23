@@ -76,7 +76,7 @@ public class GameHandler {
 
     public void start(){
         while(true){
-            if(player.getNickName()==currentPlayer || player.getNickName()==players.get(currPlaying).getNickName()) {
+            if(/*player.getNickName()==currentPlayer || */player.getNickName()==players.get(currPlaying).getNickName()) {
                 showBoard();
                 showBookshelfOrder();
                 showBookshelfColumn();
@@ -240,10 +240,10 @@ public class GameHandler {
         }
     }
 
-   private void showBookshelfColumn(){
+    private void showBookshelfColumn(){
         Scanner input = new Scanner(System.in);
-       System.out.print("YOUR BOOKSHELF\n");
-       player.getPlayerBookshelf().print();
+        System.out.print("YOUR BOOKSHELF\n");
+        player.getPlayerBookshelf().print();
         System.out.print("CHOOSE THE COLUMN! Choose where you want to inserted the picked and order tiles,\n" +
                 "using the command /COLUMN and the coordinate of the column.\n" +
                 "For example: if you want to insert the tiles in the second column, you should write /COLUMN 1\n\n" +
@@ -265,6 +265,7 @@ public class GameHandler {
                 break;
             System.out.print("The chosen column is too full. Please, choose another one.\n");
         }
+        tiles.clear();
     }
 
     private void showBookshelf(){

@@ -9,10 +9,10 @@ import it.polimi.ingsw.model.player.BookShelf;
  */
 
 public class CommonGoalCard12 extends CommonGoalCard implements CheckCommonGoalCard {
-    private transient final Launcher L;
+    private final Launcher launcher;
 
     public CommonGoalCard12(Launcher L) {
-        this.L = L;
+        this.launcher = L;
     }
 
     @Override
@@ -75,7 +75,7 @@ public class CommonGoalCard12 extends CommonGoalCard implements CheckCommonGoalC
         }
         return counter;
     }
-
+    @Override
     public void print(){
         System.out.print("STAIRCASE OF TILES.\n\n");
 

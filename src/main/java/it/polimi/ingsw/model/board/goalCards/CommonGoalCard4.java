@@ -19,9 +19,9 @@ public class CommonGoalCard4 extends CommonGoalCard implements CheckCommonGoalCa
     private int counterFrames = 0;
     private int counterGames = 0;
     private int counterBooks = 0;
-    private transient final Launcher L;
+    private final Launcher launcher;
     public CommonGoalCard4(Launcher L){
-        this.L = L;
+        this.launcher = L;
     }
 
     public int getCounterCats() {
@@ -622,7 +622,7 @@ public class CommonGoalCard4 extends CommonGoalCard implements CheckCommonGoalCa
             return true;
         else return false;
     }
-
+    @Override
     public void print(){
         System.out.print("TWO SQUARES.\n\n");
 

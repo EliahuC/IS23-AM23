@@ -14,10 +14,10 @@ public class CommonGoalCard5 extends CommonGoalCard implements CheckCommonGoalCa
     private final static int numColumnsToAchieve = 3;
     private final static int numDifferentCategoriesAllowed = 3;
     private final HashSet<ItemTileCategory> cat = new HashSet<>(); //I use an hashset to track the categories in each column
-    private transient final Launcher L;                                       //of the bookshelf
+    private final Launcher launcher;                                       //of the bookshelf
 
     public CommonGoalCard5(Launcher L){
-        this.L = L;
+        this.launcher = L;
 
     }
     /**
@@ -55,7 +55,7 @@ public class CommonGoalCard5 extends CommonGoalCard implements CheckCommonGoalCa
         }
         return cat.size();
     }
-
+    @Override
     public void print(){
         System.out.print("THREE FULL COLUMNS.\n\n");
 

@@ -5,9 +5,9 @@ import it.polimi.ingsw.model.board.ItemTile;
 import it.polimi.ingsw.model.player.BookShelf;
 
 public class CommonGoalCard2 extends CommonGoalCard implements CheckCommonGoalCard {
-    private transient final Launcher L;
+    private final Launcher launcher;
     public CommonGoalCard2(Launcher L){
-        this.L = L;
+        this.launcher = L;
     }
 
     /**
@@ -36,6 +36,7 @@ public class CommonGoalCard2 extends CommonGoalCard implements CheckCommonGoalCa
         else return false;
     }
 
+    @Override
     public void print(){
         System.out.print("FOUR GROUPS FORMED OF FOUR TILES.\n\n");
 
