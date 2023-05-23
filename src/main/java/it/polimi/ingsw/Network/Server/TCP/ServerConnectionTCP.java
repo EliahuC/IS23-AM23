@@ -12,6 +12,7 @@ import it.polimi.ingsw.model.player.Player;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
@@ -118,6 +119,7 @@ public class ServerConnectionTCP implements ServerConnection{
         switch (message.getCategory()) {
             case CLOSE:{
                 closeConnection();
+                break;
             }
             case PINGTOSERVER: {
                 message.dumpPingMessage();
@@ -187,7 +189,6 @@ public class ServerConnectionTCP implements ServerConnection{
             default:
                 if(lobby!=null){
                     sendMessage((ServerMessage) lobby.receiveMessage(message),namePlayer);
-                    return;
                 }
 
 
@@ -342,7 +343,7 @@ public class ServerConnectionTCP implements ServerConnection{
             String s = input.nextLine();
             receiveMessage(s);
         }
-           }catch (Exception e){
+           }catch (IllegalStateException e){
                closeClientConnection();
            }
 
