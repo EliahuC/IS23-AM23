@@ -14,10 +14,7 @@ import it.polimi.ingsw.model.player.BookShelf;
 import it.polimi.ingsw.model.player.Player;
 
 import java.io.IOException;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Objects;
-import java.util.Scanner;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
@@ -27,8 +24,8 @@ public class GameHandler {
     private ServerMessage response;
     private LivingRoom livingRoom;
     private Player player;
-    private List<Player> players;
-    private List<ItemTile> tiles;
+    private ArrayList<Player> players;
+    private ArrayList<ItemTile> tiles=new ArrayList<>();
     private int currPlaying;
     private String currentPlayer;
     private static final String RESET = "\u001B[0m";
@@ -97,7 +94,7 @@ public class GameHandler {
         this.player = player;
     }
 
-    public void setPlayers(List<Player> players) {
+    public void setPlayers(ArrayList<Player> players) {
         this.players = players;
     }
 
@@ -175,12 +172,12 @@ public class GameHandler {
         }
     }
 
-    private void showBoard(){
+    private void showBoard() {
         System.out.print("LIVING BOARD\n");
         livingRoom.print();
-        try{
+        try {
             TimeUnit.MILLISECONDS.sleep(200);
-        }catch (InterruptedException iE){
+        } catch (InterruptedException iE) {
             iE.printStackTrace();
         }
         System.out.print("\n\nPICK YOUR TILES! You can choose one, two or three tiles: use the command /SELECT\n" +
@@ -192,33 +189,39 @@ public class GameHandler {
                 "[Use the command /BOOKSHELF to see your personal bookshelf.]\n" +
                 "[Use the command /GOALS to see the description of your personal or common goal cards.]\n");
         Scanner input = new Scanner(System.in);
-        while (true){
+        while (true) {
             String command = input.nextLine();
-            if(Objects.equals(command.toUpperCase(), "/GOALS")){
+            if (Objects.equals(command.toUpperCase(), "/GOALS")) {
                 showGoals("Living Board");
                 break;
             }
-            if(Objects.equals(command.toUpperCase(), "/BOOKSHELF")){
+            if (Objects.equals(command.toUpperCase(), "/BOOKSHELF")) {
                 showBookshelf();
                 break;
             }
             ClientMessage message = (ClientMessage) MoveSerializer.serializeInput(command);
             connectionClient.sendMessage((ClientMessage) message);
-            try{
+            try {
                 TimeUnit.MILLISECONDS.sleep(200);
-            }catch (InterruptedException iE){
+            } catch (InterruptedException iE) {
                 iE.printStackTrace();
             }
-            if(response!=null && response.getCategory()==Message.MessageCategory.VALID_MESSAGE){
-                for(int i=1; command.split(" ")[i]!=null; i+=2)
-                    tiles.add(livingRoom.getBoardTile(i,i+1).getTile());
+            if (response != null && response.getCategory() == Message.MessageCategory.VALID_MESSAGE) {
+                int i = 0;
+                while (command.split(" ")[i] != null) {
+                    tiles.add(livingRoom.getBoardTile(i, i + 1).getTile());
+                    i = i + 2;
+
+                }
                 break;
             }
-            System.out.print("Your move is not valid. Please, pick again and correctly your tiles.\n" +
-                    "[You can still see your goal cards, using the command /GOALS, or your personal bookshelf using /BOOKSHELF]\n");
+                System.out.print("Your move is not valid. Please, pick again and correctly your tiles.\n" +
+                        "[You can still see your goal cards, using the command /GOALS, or your personal bookshelf using /BOOKSHELF]\n");
+
+
+
         }
     }
-
     private void showGoals(String scenario){
         Scanner input = new Scanner(System.in);
         String command;

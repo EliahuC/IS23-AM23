@@ -84,9 +84,9 @@ public class Lobby {
             }
             return new ErrorMessage();
         }
-        ValidMoveMessage returnMessage= (ValidMoveMessage) controllerCoordinator.setMessage(message);
+        ServerMessage returnMessage= (ServerMessage) controllerCoordinator.setMessage(message);
         if(returnMessage.getCategory()== Message.MessageCategory.VALID_MESSAGE){
-            saveGame(returnMessage);
+            saveGame((ValidMoveMessage) returnMessage);
         }
         if(returnMessage.getCategory()== Message.MessageCategory.END_GAME_MESSAGE){
             deleteFile();
