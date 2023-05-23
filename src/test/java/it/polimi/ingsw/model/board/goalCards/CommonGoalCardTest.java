@@ -1,6 +1,5 @@
 package it.polimi.ingsw.model.board.goalCards;
 
-import it.polimi.ingsw.Launcher;
 import junit.framework.TestCase;
 
 /**
@@ -10,14 +9,14 @@ public class CommonGoalCardTest
         extends TestCase {
 
     public void testIncreaseNumCompleted1() {
-        CommonGoalCard c1 = new CommonGoalCard9(new Launcher());
+        CommonGoalCard c1 = new CommonGoalCard9(2);
         c1.initNumCompleted();
         c1.increaseNumCompleted();
         assertEquals(1, c1.getNumCompleted());
     }
 
     public void testIncreaseNumCompleted2() {
-        CommonGoalCard c2 = new CommonGoalCard8(new Launcher());
+        CommonGoalCard c2 = new CommonGoalCard8(2);
         c2.initNumCompleted();
         c2.increaseNumCompleted();
         c2.increaseNumCompleted();
@@ -25,7 +24,7 @@ public class CommonGoalCardTest
     }
 
     public void testIncreaseNumCompleted3() {
-        CommonGoalCard c3 = new CommonGoalCard7(new Launcher());
+        CommonGoalCard c3 = new CommonGoalCard7(3);
         c3.initNumCompleted();
         c3.increaseNumCompleted();
         c3.increaseNumCompleted();
@@ -34,7 +33,7 @@ public class CommonGoalCardTest
     }
 
     public void testIncreaseNumCompleted4() {
-        CommonGoalCard c4 = new CommonGoalCard8(new Launcher());
+        CommonGoalCard c4 = new CommonGoalCard8(4);
         c4.initNumCompleted();
         c4.increaseNumCompleted();
         c4.increaseNumCompleted();
@@ -44,7 +43,7 @@ public class CommonGoalCardTest
     }
 
     public void testIncreaseNumCompleted5() {
-        CommonGoalCard c5 = new CommonGoalCard9(new Launcher());
+        CommonGoalCard c5 = new CommonGoalCard9(4);
         c5.initNumCompleted();
         c5.increaseNumCompleted();
         c5.increaseNumCompleted();
@@ -55,47 +54,37 @@ public class CommonGoalCardTest
     }
 
     public void testGetPoints1(){
-        Launcher L = new Launcher();
-        CommonGoalCard c6 = new CommonGoalCard9(L);
+        CommonGoalCard c6 = new CommonGoalCard9(2);
         c6.initNumCompleted();
-        c6.getLauncher().setNumPlayers(2);
         c6.increaseNumCompleted();
         assertEquals(8,c6.getPoints());
     }
     public void testGetPoints2(){
-        Launcher L = new Launcher();
-        CommonGoalCard c7 = new CommonGoalCard9(L);
+        CommonGoalCard c7 = new CommonGoalCard9(2);
         c7.initNumCompleted();
-        c7.getLauncher().setNumPlayers(2);
         c7.increaseNumCompleted();
         c7.increaseNumCompleted();
         assertEquals(4,c7.getPoints());
     }
 
     public void testGetPoints3(){
-        Launcher L = new Launcher();
-        CommonGoalCard c8 = new CommonGoalCard9(L);
+        CommonGoalCard c8 = new CommonGoalCard9(3);
         c8.initNumCompleted();
-        c8.getLauncher().setNumPlayers(3);
         c8.increaseNumCompleted();
         assertEquals(8,c8.getPoints());
     }
 
     public void testGetPoints4(){
-        Launcher L = new Launcher();
-        CommonGoalCard c9 = new CommonGoalCard9(L);
+        CommonGoalCard c9 = new CommonGoalCard9(3);
         c9.initNumCompleted();
-        c9.getLauncher().setNumPlayers(3);
         c9.increaseNumCompleted();
         c9.increaseNumCompleted();
         assertEquals(6,c9.getPoints());
     }
 
     public void testGetPoints5(){
-        Launcher L = new Launcher();
-        CommonGoalCard c10 = new CommonGoalCard9(L);
+        CommonGoalCard c10 = new CommonGoalCard9(3);
         c10.initNumCompleted();
-        c10.getLauncher().setNumPlayers(3);
         c10.increaseNumCompleted();
         c10.increaseNumCompleted();
         c10.increaseNumCompleted();
@@ -103,29 +92,23 @@ public class CommonGoalCardTest
     }
 
     public void testGetPoints6(){
-        Launcher L = new Launcher();
-        CommonGoalCard c11 = new CommonGoalCard9(L);
+        CommonGoalCard c11 = new CommonGoalCard9(4);
         c11.initNumCompleted();
-        c11.getLauncher().setNumPlayers(4);
         c11.increaseNumCompleted();
         assertEquals(8,c11.getPoints());
     }
 
     public void testGetPoints7(){
-        Launcher L = new Launcher();
-        CommonGoalCard c12 = new CommonGoalCard9(L);
+        CommonGoalCard c12 = new CommonGoalCard9(4);
         c12.initNumCompleted();
-        c12.getLauncher().setNumPlayers(4);
         c12.increaseNumCompleted();
         c12.increaseNumCompleted();
         assertEquals(6,c12.getPoints());
     }
 
     public void testGetPoints8(){
-        Launcher L = new Launcher();
-        CommonGoalCard c13 = new CommonGoalCard9(L);
+        CommonGoalCard c13 = new CommonGoalCard9(4);
         c13.initNumCompleted();
-        c13.getLauncher().setNumPlayers(4);
         c13.increaseNumCompleted();
         c13.increaseNumCompleted();
         c13.increaseNumCompleted();
@@ -133,10 +116,8 @@ public class CommonGoalCardTest
     }
 
     public void testGetPoints9(){
-        Launcher L = new Launcher();
-        CommonGoalCard c14 = new CommonGoalCard9(L);
+        CommonGoalCard c14 = new CommonGoalCard9(4);
         c14.initNumCompleted();
-        c14.getLauncher().setNumPlayers(4);
         c14.increaseNumCompleted();
         c14.increaseNumCompleted();
         c14.increaseNumCompleted();

@@ -1,16 +1,16 @@
 package it.polimi.ingsw.model.board.goalCards;
 
-import it.polimi.ingsw.Launcher;
+
 import it.polimi.ingsw.model.board.ItemTile;
 import it.polimi.ingsw.model.player.BookShelf;
 import junit.framework.TestCase;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 public class CommonGoalCard1Test extends TestCase {
 
     public void testCheckGoalCardCGC1_FIRST(){
-        CommonGoalCard c41 = new CommonGoalCard1(new Launcher());
+        CommonGoalCard c41 = new CommonGoalCard1(2);
         c41.initNumCompleted();
         BookShelf bs27 = new BookShelf();
         bs27.setTile(0, 0, new ItemTile("PLANTS"));
@@ -48,7 +48,7 @@ public class CommonGoalCard1Test extends TestCase {
         assertEquals(0, c41.getNumCompleted());
     }
     public void testCheckGoalCardCGC1_SECOND(){
-        CommonGoalCard c42 = new CommonGoalCard1(new Launcher());
+        CommonGoalCard c42 = new CommonGoalCard1(2);
         c42.initNumCompleted();
         BookShelf bs28 = new BookShelf();
         bs28.setTile(0, 0, new ItemTile("PLANTS"));
@@ -85,7 +85,7 @@ public class CommonGoalCard1Test extends TestCase {
         assertEquals(1, c42.getNumCompleted());
     }
     public void testCheckGoalCardCGC1_THIRD(){
-        CommonGoalCard c43 = new CommonGoalCard1(new Launcher());
+        CommonGoalCard c43 = new CommonGoalCard1(2);
         c43.initNumCompleted();
         BookShelf bs29 = new BookShelf();
         bs29.setTile(0, 0, new ItemTile("BOOKS"));
@@ -122,7 +122,7 @@ public class CommonGoalCard1Test extends TestCase {
         assertEquals(1, c43.getNumCompleted());
     }
     public void testCheckGoalCardCGC1_FOURTH() {
-        CommonGoalCard c43 = new CommonGoalCard1(new Launcher());
+        CommonGoalCard c43 = new CommonGoalCard1(2);
         c43.initNumCompleted();
         BookShelf bs29 = new BookShelf();
         bs29.setTile(0, 0, new ItemTile("BOOKS"));
@@ -145,7 +145,7 @@ public class CommonGoalCard1Test extends TestCase {
         assertEquals(1, c43.getNumCompleted());
     }
     public void testCheckGoalCardCGC1_FIFTH() {
-        CommonGoalCard c43 = new CommonGoalCard1(new Launcher());
+        CommonGoalCard c43 = new CommonGoalCard1(2);
         c43.initNumCompleted();
         BookShelf bs29 = new BookShelf();
         bs29.setTile(0, 0, new ItemTile("BOOKS"));

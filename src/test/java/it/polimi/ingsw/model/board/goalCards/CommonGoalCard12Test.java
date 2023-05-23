@@ -1,17 +1,15 @@
 package it.polimi.ingsw.model.board.goalCards;
 
-import it.polimi.ingsw.Launcher;
 import it.polimi.ingsw.model.board.ItemTile;
 import it.polimi.ingsw.model.player.BookShelf;
 import junit.framework.TestCase;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class CommonGoalCard12Test extends TestCase {
 
     public void testcheckRtoL(){
-        CommonGoalCard c12=new CommonGoalCard12(new Launcher());
+        CommonGoalCard c12=new CommonGoalCard12(2);
         c12.initNumCompleted();
         BookShelf bs= new BookShelf();
         bs.setTile(5,0,new ItemTile());
@@ -35,7 +33,7 @@ public class CommonGoalCard12Test extends TestCase {
     }
 
     public void testcheckLtoR(){
-        CommonGoalCard c12=new CommonGoalCard12(new Launcher());
+        CommonGoalCard c12=new CommonGoalCard12(2);
         c12.initNumCompleted();
         BookShelf bs= new BookShelf();
         bs.setTile(5,4,new ItemTile());
@@ -58,7 +56,7 @@ public class CommonGoalCard12Test extends TestCase {
     }
 
     public void testFullShelf(){
-        CommonGoalCard c12=new CommonGoalCard12(new Launcher());
+        CommonGoalCard c12=new CommonGoalCard12(2);
         c12.initNumCompleted();
         BookShelf bs= new BookShelf();
         for(int i=0; i<BookShelf.getMAX_Row();i++){
@@ -70,7 +68,7 @@ public class CommonGoalCard12Test extends TestCase {
         assertNotEquals(1,c12.getNumCompleted());
     }
     public void testCheckGoalCardCGC12() {
-        CommonGoalCard c12 = new CommonGoalCard12(new Launcher());
+        CommonGoalCard c12 = new CommonGoalCard12(2);
         c12.initNumCompleted();
         BookShelf bs = new BookShelf();
         bs.setTile(5, 4, new ItemTile());
@@ -97,7 +95,7 @@ public class CommonGoalCard12Test extends TestCase {
     }
 
     public void testCheckGoalCardCGC12_SECOND() {
-        CommonGoalCard c12 = new CommonGoalCard12(new Launcher());
+        CommonGoalCard c12 = new CommonGoalCard12(2);
         c12.initNumCompleted();
         BookShelf bs = new BookShelf();
         bs.setTile(5, 4, new ItemTile());
@@ -125,7 +123,7 @@ public class CommonGoalCard12Test extends TestCase {
     }
 
     public void testCheckGoalCardCGC12_THIRD() {
-        CommonGoalCard c12 = new CommonGoalCard12(new Launcher());
+        CommonGoalCard c12 = new CommonGoalCard12(2);
         c12.initNumCompleted();
         BookShelf bs = new BookShelf();
         bs.setTile(5, 0, new ItemTile());

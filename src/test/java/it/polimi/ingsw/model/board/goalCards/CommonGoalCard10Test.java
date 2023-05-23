@@ -1,6 +1,5 @@
 package it.polimi.ingsw.model.board.goalCards;
 
-import it.polimi.ingsw.Launcher;
 import it.polimi.ingsw.model.board.ItemTile;
 import it.polimi.ingsw.model.player.BookShelf;
 import junit.framework.TestCase;
@@ -13,7 +12,7 @@ public class CommonGoalCard10Test
 
     public void testSameCategoryCGC10_FIRST(){  ////test for SameCategory method,in order to trace if in a bookshelf's column
                                                         //are there any tiles with the same category
-        CommonGoalCard10 c24 = new CommonGoalCard10(new Launcher());
+        CommonGoalCard10 c24 = new CommonGoalCard10(2);
         c24.initNumCompleted();
         BookShelf bs17 = new BookShelf();
         bs17.setTile(0,0,new ItemTile("PLANTS"));
@@ -26,7 +25,7 @@ public class CommonGoalCard10Test
     }
 
     public void testSameCategoryCGC10_SECOND(){
-        CommonGoalCard10 c25 = new CommonGoalCard10(new Launcher());
+        CommonGoalCard10 c25 = new CommonGoalCard10(2);
         c25.initNumCompleted();
         BookShelf bs18 = new BookShelf();
         bs18.setTile(0,0,new ItemTile("PLANTS"));
@@ -39,7 +38,7 @@ public class CommonGoalCard10Test
     }
 
     public void testCheckGoalCardCGC10_FIRST(){
-        CommonGoalCard c26 = new CommonGoalCard10(new Launcher());
+        CommonGoalCard c26 = new CommonGoalCard10(2);
         c26.initNumCompleted();
         BookShelf bs19 = new BookShelf();
         bs19.setTile(0,0,new ItemTile("PLANTS"));
@@ -78,7 +77,7 @@ public class CommonGoalCard10Test
     }
 
     public void testCheckGoalCardCGC10_SECOND() {
-        CommonGoalCard c27 = new CommonGoalCard10(new Launcher());
+        CommonGoalCard c27 = new CommonGoalCard10(2);
         c27.initNumCompleted();
         BookShelf bs20 = new BookShelf();
         bs20.setTile(0,0,new ItemTile("PLANTS"));
@@ -115,7 +114,7 @@ public class CommonGoalCard10Test
         assertEquals(0, c27.getNumCompleted());
     }
     public void testCheckGoalCardCGC10_THIRD() {
-        CommonGoalCard c27 = new CommonGoalCard10(new Launcher());
+        CommonGoalCard c27 = new CommonGoalCard10(2);
         c27.initNumCompleted();
         BookShelf bs19 = new BookShelf();
         bs19.setTile(5, 0, new ItemTile("GAMES"));
