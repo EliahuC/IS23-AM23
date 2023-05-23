@@ -65,7 +65,7 @@ public class MoveSerializer implements Printer {
               return new LobbyEntranceMessage();
           }
           case START_GAME -> {
-              Message m=new StartGameMessage("Player");
+              ClientMessage m=new StartGameMessage("Player");
               return m;
           }
           case SELECT_TILES -> {
@@ -83,7 +83,7 @@ public class MoveSerializer implements Printer {
               }
               Move_SelectTiles move=new Move_SelectTiles();
               move.setCoordinates(coordinates);
-              Message m=new CoordinatesMessage(move);
+              ClientMessage m=new CoordinatesMessage(move);
               return m;
           }
           case SELECT_COLUMN -> {
@@ -93,7 +93,7 @@ public class MoveSerializer implements Printer {
               }
               Move_SelectColumn move =new Move_SelectColumn();
               move.setYBookshelf(Integer.parseInt(Command[1]));
-              Message m=new ColumnMessage(move);
+              ClientMessage m=new ColumnMessage(move);
               return m;
           }
           case SELECT_ORDER -> {
@@ -108,7 +108,7 @@ public class MoveSerializer implements Printer {
               }
               Move_SelectOrder move=new Move_SelectOrder();
               move.setOrder(order);
-              Message m=new OrderMessage(move);
+              ClientMessage m=new OrderMessage(move);
               return m;
           }
           case CLOSE -> {

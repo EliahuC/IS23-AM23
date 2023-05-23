@@ -4,18 +4,15 @@ import it.polimi.ingsw.Messages.ClientToServer.PossibleMoves.Move;
 import it.polimi.ingsw.Messages.Message;
 
 public class ClientMessage extends Message {
-    public final Move m;
+    public final Move move;
     public ClientMessage(MessageCategory messageCategory,Move move, String nickname) {
         super(messageCategory,nickname);
-        this.m=move;
+        this.move =move;
     }
 
-    public Move getM() {
-        return m;
-    }
 
     public Move getMessageMove() {
-        return m;
+        return move;
 
     }
 }

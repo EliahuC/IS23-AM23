@@ -4,6 +4,8 @@ import com.google.gson.Gson;
 import it.polimi.ingsw.GameSavings;
 import it.polimi.ingsw.Launcher;
 import it.polimi.ingsw.Messages.ClientToServer.ClientMessage;
+import it.polimi.ingsw.Messages.ClientToServer.CoordinatesMessage;
+import it.polimi.ingsw.Messages.ClientToServer.PossibleMoves.Move_SelectTiles;
 import it.polimi.ingsw.Messages.Message;
 import it.polimi.ingsw.Messages.ServerToClient.ErrorMessage;
 import it.polimi.ingsw.Messages.ServerToClient.ValidMoveMessage;
@@ -57,7 +59,8 @@ public class GameController {
              return sendErrorMessage("It's not your turn");
          switch (m.getCategory()) {
              case COORDINATES -> {
-                 coordinates.addAll(m.getMessageMove().getMove());
+                 CoordinatesMessage coordinatesMessage=(CoordinatesMessage) m;
+                 coordinates.addAll(coordinatesMessage.getMessageMove().getMove());
                  if (!game.checkLegalMove(coordinates, coordinates.size() / 2)) {
                      return sendErrorMessage();
                  }

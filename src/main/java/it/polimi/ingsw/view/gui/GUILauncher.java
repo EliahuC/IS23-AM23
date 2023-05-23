@@ -20,7 +20,7 @@ public class GUILauncher {
     private Socket socket;
     private ConnectionClient connectionClient;
     private ServerMessage response;
-    private GUIEvent receiver;
+    //private GUIEvent receiver;
     public void setResponse(ServerMessage response){
         this.response=response;
     }
@@ -44,9 +44,9 @@ public class GUILauncher {
                     try {
                         socket = new Socket(serverAddr, portNum);
                         connectionClient = new ClientConnectionTCP(socket, nickname);
-                        receiver=new GUIEvent(this);
-                        receiver.setInStartCLI(true);
-                        connectionClient.setListener(receiver);
+                        //receiver=new GUIEvent(this);
+                       // receiver.setInStartCLI(true);
+                        //connectionClient.setListener(receiver);
                         new Thread(connectionClient).start();
                         break;
                     } catch (IOException e) {
@@ -65,12 +65,12 @@ public class GUILauncher {
                     break;
                 case "RMI":
                     try {
-                        receiver=new GUIEvent(this);
-                        receiver.setInStartCLI(true);
-                        connectionClient = new ClientConnectionRMI(nickname,receiver);
+                       // receiver=new GUIEvent(this);
+                       // receiver.setInStartCLI(true);
+                        //connectionClient = new ClientConnectionRMI(nickname,receiver);
                         new Thread(connectionClient).start();
                         break;
-                    } catch (RemoteException e){
+                    } catch (/*Remote*/Exception e){
                         System.out.print("\033[H\033[2J");
                         System.out.flush();
                         System.out.println("Please, insert a CORRECT address.\n");
@@ -98,7 +98,7 @@ public class GUILauncher {
             }
         }while(response==null || (response.getCategory()!=Message.MessageCategory.VALID_NICKNAME && response!=null));
         if(connectionClient!=null){
-            receiver.setInStartCLI(false);
+            //receiver.setInStartCLI(false);
             new LobbyWaitingController().start();
         }
 

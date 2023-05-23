@@ -23,7 +23,7 @@ import java.util.concurrent.TimeUnit;
 
 public class LobbyWaitingController {
     private ConnectionClient connectionClient;
-    private GUIEvent receiver;
+    //private GUIEvent receiver;
     private ServerMessage response;
     private Boolean lock=true;
     private Stage stage;
@@ -45,7 +45,7 @@ public class LobbyWaitingController {
 
     public void start() {
         GameControllerGUI gamecontrollerGUI = new GameControllerGUI();
-        receiver.setGamecontrollerGUI(gamecontrollerGUI);
+        //receiver.setGamecontrollerGUI(gamecontrollerGUI);
         String command;
         Scanner input = new Scanner(System.in);
         ServerMessage serverMessage;
@@ -95,8 +95,8 @@ public class LobbyWaitingController {
                 }
             } else if (response != null && (response.getCategory() == Message.MessageCategory.RETURN_MESSAGE||response.getCategory() == Message.MessageCategory.STARTING_GAME_MESSAGE)) {
                 if (response.getCategory() == Message.MessageCategory.STARTING_GAME_MESSAGE) {
-                    receiver.setInLobbyWaiting(false);
-                    receiver.setInGameControllerGUI(true);
+                    //receiver.setInLobbyWaiting(false);
+                   // receiver.setInGameControllerGUI(true);
                     gamecontrollerGUI.start();
                     lock=false;
                     break;
@@ -139,8 +139,8 @@ public class LobbyWaitingController {
             System.out.flush();*/
             } while (response == null || response.getCategory() != Message.MessageCategory.STARTING_GAME_MESSAGE);
             //System.out.print(response.getReturnMessage());
-            receiver.setInLobbyWaiting(false);
-            receiver.setInGameControllerGUI(true);
+            //receiver.setInLobbyWaiting(false);
+           // receiver.setInGameControllerGUI(true);
             gamecontrollerGUI.start();
         }
     }
