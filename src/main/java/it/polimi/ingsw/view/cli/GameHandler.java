@@ -24,8 +24,8 @@ public class GameHandler {
     private ServerMessage response;
     private LivingRoom livingRoom;
     private Player player;
-    private ArrayList<Player> players;
-    private ArrayList<ItemTile> tiles=new ArrayList<>();
+    private List<Player> players;
+    private ArrayList<ItemTile> tiles = new ArrayList<>();
     private int currPlaying;
     private String currentPlayer;
     private static final String RESET = "\u001B[0m";
@@ -94,7 +94,7 @@ public class GameHandler {
         this.player = player;
     }
 
-    public void setPlayers(ArrayList<Player> players) {
+    public void setPlayers(List<Player> players) {
         this.players = players;
     }
 
@@ -172,12 +172,12 @@ public class GameHandler {
         }
     }
 
-    private void showBoard() {
+    private void showBoard(){
         System.out.print("LIVING BOARD\n");
         livingRoom.print();
-        try {
+        try{
             TimeUnit.MILLISECONDS.sleep(200);
-        } catch (InterruptedException iE) {
+        }catch (InterruptedException iE){
             iE.printStackTrace();
         }
         System.out.print("\n\nPICK YOUR TILES! You can choose one, two or three tiles: use the command /SELECT\n" +
@@ -189,39 +189,33 @@ public class GameHandler {
                 "[Use the command /BOOKSHELF to see your personal bookshelf.]\n" +
                 "[Use the command /GOALS to see the description of your personal or common goal cards.]\n");
         Scanner input = new Scanner(System.in);
-        while (true) {
+        while (true){
             String command = input.nextLine();
-            if (Objects.equals(command.toUpperCase(), "/GOALS")) {
+            if(Objects.equals(command.toUpperCase(), "/GOALS")){
                 showGoals("Living Board");
                 break;
             }
-            if (Objects.equals(command.toUpperCase(), "/BOOKSHELF")) {
+            if(Objects.equals(command.toUpperCase(), "/BOOKSHELF")){
                 showBookshelf();
                 break;
             }
             ClientMessage message = (ClientMessage) MoveSerializer.serializeInput(command);
             connectionClient.sendMessage((ClientMessage) message);
-            try {
+            try{
                 TimeUnit.MILLISECONDS.sleep(200);
-            } catch (InterruptedException iE) {
+            }catch (InterruptedException iE){
                 iE.printStackTrace();
             }
-            if (response != null && response.getCategory() == Message.MessageCategory.VALID_MESSAGE) {
-                int i = 0;
-                while (command.split(" ")[i] != null) {
-                    tiles.add(livingRoom.getBoardTile(i, i + 1).getTile());
-                    i = i + 2;
-
-                }
+            if(response!=null && response.getCategory()==Message.MessageCategory.VALID_MESSAGE){
+                for(int i=1; i<Arrays.stream(command.split(" ")).count(); i+=2)
+                    tiles.add(livingRoom.getBoardTile(Integer.parseInt(command.split(" ")[i]), Integer.parseInt(command.split(" ")[i+1])).getTile());
                 break;
             }
-                System.out.print("Your move is not valid. Please, pick again and correctly your tiles.\n" +
-                        "[You can still see your goal cards, using the command /GOALS, or your personal bookshelf using /BOOKSHELF]\n");
-
-
-
+            System.out.print("Your move is not valid. Please, pick again and correctly your tiles.\n" +
+                    "[You can still see your goal cards, using the command /GOALS, or your personal bookshelf using /BOOKSHELF]\n");
         }
     }
+
     private void showGoals(String scenario){
         Scanner input = new Scanner(System.in);
         String command;
@@ -259,13 +253,13 @@ public class GameHandler {
 
     private void showBookshelfOrder(){
         Scanner input = new Scanner(System.in);
-        System.out.print("YOUR BOOKSHELF\n");
+        System.out.print("YOUR BOOKSHELF\n\n");
         player.getPlayerBookshelf().print();
-        System.out.print("ORDER YOUR TILES! The tiles you picked before from the board are shown above.\n" +
+        System.out.print("\n\nORDER YOUR TILES! The tiles you picked before from the board are shown above.\n" +
                 "Use the command /ORDER to choose in which order you want to insert the tiles in your bookshelf.\n\n" +
                 "For example: if you have three tiles to order, you could write: /ORDER 2 1 3 or /ORDER 3 2 1\n" +
                 "(If you have just one picked tile, just type: /ORDER 1\n\n" +
-                "[Use the command /GOALS to see the description of your personal or common goal cards.]\n");
+                "[Use the command /GOALS to see the description of your personal or common goal cards.]\n\n");
         printSelection();
         while(true){
             String command = input.nextLine();
@@ -288,9 +282,9 @@ public class GameHandler {
 
     private void showBookshelfColumn(){
         Scanner input = new Scanner(System.in);
-        System.out.print("YOUR BOOKSHELF\n");
+        System.out.print("YOUR BOOKSHELF\n\n");
         player.getPlayerBookshelf().print();
-        System.out.print("CHOOSE THE COLUMN! Choose where you want to inserted the picked and order tiles,\n" +
+        System.out.print("\n\nCHOOSE THE COLUMN! Choose where you want to inserted the picked and order tiles,\n" +
                 "using the command /COLUMN and the coordinate of the column.\n" +
                 "For example: if you want to insert the tiles in the second column, you should write /COLUMN 1\n\n" +
                 "[Use the command /GOALS to see the description of your personal or common goal cards.]\n");
@@ -330,11 +324,10 @@ public class GameHandler {
     }
 
     private void printSelection(){
-        for(int i=0; tiles.get(i)!=null; i++)
-            System.out.print(tiles.get(i).getColor() + "   ");
+        for (ItemTile tile : tiles) System.out.print(tile.getColor() + "   ");
         System.out.print("\n");
-        for(int i=0; tiles.get(i)!=null; i++)
-            System.out.print("(" + i+1 + ")   ");
+        for(int i=0; i< tiles.size(); i++)
+            System.out.print("(" + (i+1) + ")   ");
         System.out.print("\n");
     }
 }

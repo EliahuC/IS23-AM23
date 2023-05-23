@@ -361,6 +361,8 @@ public class GameCheckerTest extends TestCase {
         assertTrue(gc3.isLegalAction(board3.getBoardTile(5,1),board3.getBoardTile(5,2)));
 
         board2.start(2);
+        assertTrue(gc2.isLegalAction(board2.getBoardTile(1,3),board2.getBoardTile(1,4)));
+        assertFalse(gc2.isLegalAction(board2.getBoardTile(3,1),board2.getBoardTile(4,1)));
         assertTrue(gc2.isLegalAction(board2.getBoardTile(7,4),board2.getBoardTile(7,5)));
         board2.getBoardTile(7,4).freeTile();
         board2.getBoardTile(7,5).freeTile();
@@ -436,6 +438,7 @@ public class GameCheckerTest extends TestCase {
         assertTrue(gc3.isLegalAction(board3.getBoardTile(5,5),board3.getBoardTile(6,5),board3.getBoardTile(7,5)));
 
         board2.start(2);
+
         assertFalse(gc2.isLegalAction(board2.getBoardTile(6,3),board2.getBoardTile(6,4),board2.getBoardTile(6,5)));
         board2.getBoardTile(7,4).freeTile();
         board2.getBoardTile(7,5).freeTile();
