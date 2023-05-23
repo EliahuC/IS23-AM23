@@ -19,14 +19,14 @@ public class MenuController {
     private Scene scene;
     private Parent root;
 
-    public void switchToScene2(ActionEvent event) throws IOException {
+    public void goTCP(ActionEvent event) throws IOException {
 
         String nickname = textField.getText();
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("lobby.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("lobbyChoice.fxml"));
         root = loader.load();
 
-        LobbyWaitingController lobbyController = loader.getController();
+        LobbyChoiceController lobbyController = loader.getController();
         lobbyController.displayNickname(nickname);
 
         stage = (Stage)((Node) event.getSource()).getScene().getWindow();
@@ -34,4 +34,21 @@ public class MenuController {
         stage.setScene(scene);
         stage.show();
     }
+
+    public void goRMI(ActionEvent event) throws IOException {
+
+        String nickname = textField.getText();
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("lobbyChoice.fxml"));
+        root = loader.load();
+
+        LobbyChoiceController lobbyController = loader.getController();
+        lobbyController.displayNickname(nickname);
+
+        stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
 }

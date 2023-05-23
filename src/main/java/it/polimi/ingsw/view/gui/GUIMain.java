@@ -11,11 +11,7 @@ import java.io.IOException;
 import java.net.Socket;
 
 public class GUIMain extends Application{
-   /* private String serverName;
-    private int portNum;
-    private Socket socket;
-    private ConnectionClient connectionClient;
-    */
+
     public void start(Stage stage) throws IOException {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("menu.fxml"));

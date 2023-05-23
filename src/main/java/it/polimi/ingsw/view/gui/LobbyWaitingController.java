@@ -13,16 +13,9 @@ import java.io.IOException;
 
 public class LobbyWaitingController {
 
-    @FXML
-    Label nameDisplay;
-
     private Stage stage;
     private Scene scene;
     private Parent root;
-
-    public void displayNickname(String nickname){
-        nameDisplay.setText("Welcome " + nickname + "!");
-    }
 
     public void returnToMenu(ActionEvent event) throws IOException {
 
