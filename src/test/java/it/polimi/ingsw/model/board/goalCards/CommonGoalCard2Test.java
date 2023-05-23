@@ -1,6 +1,5 @@
 package it.polimi.ingsw.model.board.goalCards;
 
-import it.polimi.ingsw.Launcher;
 import it.polimi.ingsw.model.board.ItemTile;
 import it.polimi.ingsw.model.player.BookShelf;
 import junit.framework.TestCase;
@@ -12,7 +11,7 @@ public class CommonGoalCard2Test
         extends TestCase
 {
     public void testCheckGoalCardCGC2_FIRST() {
-        CommonGoalCard c6 = new CommonGoalCard2(new Launcher());
+        CommonGoalCard c6 = new CommonGoalCard2(2);
         c6.initNumCompleted();
         BookShelf bs = new BookShelf();
         bs.setTile(0,0,new ItemTile("CATS"));
@@ -24,7 +23,7 @@ public class CommonGoalCard2Test
     }
 
     public void testCheckGoalCardCGC2_SECOND() {
-        CommonGoalCard c7 = new CommonGoalCard2(new Launcher());
+        CommonGoalCard c7 = new CommonGoalCard2(2);
         c7.initNumCompleted();
         BookShelf bs = new BookShelf();
         bs.setTile(0,0,new ItemTile("CATS"));
@@ -35,7 +34,7 @@ public class CommonGoalCard2Test
         assertEquals(0, c7.getNumCompleted());
     }
     public void testCheckGoalCardCGC2_THIRD() {
-        CommonGoalCard c7 = new CommonGoalCard2(new Launcher());
+        CommonGoalCard c7 = new CommonGoalCard2(2);
         c7.initNumCompleted();
         BookShelf bs = new BookShelf();
         bs.setTile(0, 0, new ItemTile("CATS"));

@@ -1,53 +1,37 @@
 package it.polimi.ingsw.model.board.goalCards;
 
-import it.polimi.ingsw.Launcher;
-import it.polimi.ingsw.model.Game;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
 
 class CommonGoalCardPrintTest {
 
     @Test
     void print() {
-        Launcher l = new Launcher();
-        l.setNumPlayers(4);
         CommonGoalCard card;
-        /*new CommonGoalCard1(l).print();
-        new CommonGoalCard2(l).print();
-        new CommonGoalCard3(l).print();
-        new CommonGoalCard4(l).print();
-        new CommonGoalCard5(l).print();
-        new CommonGoalCard6(l).print();
-        new CommonGoalCard7(l).print();
-        new CommonGoalCard8(l).print();
-        new CommonGoalCard9(l).print();
-        new CommonGoalCard10(l).print();
-        new CommonGoalCard11(l).print();
-        new CommonGoalCard12(l).print();*/
-        card = new CommonGoalCard1(l);
+        card = new CommonGoalCard1(4);
         card.print();
-        card = new CommonGoalCard2(l);
+        card = new CommonGoalCard2(4);
         card.print();
-        card = new CommonGoalCard3(l);
+        card = new CommonGoalCard3(4);
         card.print();
-        card = new CommonGoalCard4(l);
+        card = new CommonGoalCard4(4);
         card.print();
-        card = new CommonGoalCard5(l);
+        card = new CommonGoalCard5(4);
         card.print();
-        card = new CommonGoalCard6(l);
+        card = new CommonGoalCard6(4);
         card.print();
-        card = new CommonGoalCard7(l);
+        card = new CommonGoalCard7(4);
         card.print();
-        card = new CommonGoalCard8(l);
+        card = new CommonGoalCard8(4);
         card.print();
-        card = new CommonGoalCard9(l);
+        card = new CommonGoalCard9(4);
         card.print();
-        card = new CommonGoalCard10(l);
+        card = new CommonGoalCard10(4);
         card.print();
-        card = new CommonGoalCard11(l);
+        card = new CommonGoalCard11(4);
         card.print();
-        card = new CommonGoalCard12(l);
+        card = new CommonGoalCard12(4);
         card.print();
     }
 }

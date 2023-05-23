@@ -1,13 +1,12 @@
 package it.polimi.ingsw.model.board.goalCards;
 
-import it.polimi.ingsw.Launcher;
 import it.polimi.ingsw.model.board.ItemTile;
 import it.polimi.ingsw.model.player.BookShelf;
 import junit.framework.TestCase;
 
 public class CommonGoalCard6Test extends TestCase {
     public void testCheckGoalCardCGC6_FIRST() {
-        CommonGoalCard c33 = new CommonGoalCard6(new Launcher());
+        CommonGoalCard c33 = new CommonGoalCard6(2);
         c33.initNumCompleted();
         BookShelf bs26 = new BookShelf();
         bs26.setTile(0, 0, new ItemTile("CATS"));
@@ -45,7 +44,7 @@ public class CommonGoalCard6Test extends TestCase {
     }
 
     public void testCheckGoalCardCGC6_SECOND() {
-        CommonGoalCard c34 = new CommonGoalCard6(new Launcher());
+        CommonGoalCard c34 = new CommonGoalCard6(2);
         c34.initNumCompleted();
         BookShelf bs27 = new BookShelf();
         bs27.setTile(0, 0, new ItemTile("CATS"));
@@ -82,7 +81,7 @@ public class CommonGoalCard6Test extends TestCase {
         assertEquals(0, c34.getNumCompleted());
     }
     public void testCheckGoalCardCGC6_THIRD() {
-        CommonGoalCard c34 = new CommonGoalCard6(new Launcher());
+        CommonGoalCard c34 = new CommonGoalCard6(2);
         c34.initNumCompleted();
         BookShelf bs27 = new BookShelf();
         bs27.setTile(0, 0, new ItemTile("CATS"));
@@ -100,7 +99,7 @@ public class CommonGoalCard6Test extends TestCase {
     }
 
     public void testCheckGoalCardCGC6_FOURTH() {
-        CommonGoalCard c34 = new CommonGoalCard6(new Launcher());
+        CommonGoalCard c34 = new CommonGoalCard6(2);
         c34.initNumCompleted();
         BookShelf bs27 = new BookShelf();
         bs27.setTile(0, 0, new ItemTile("CATS"));
@@ -118,7 +117,7 @@ public class CommonGoalCard6Test extends TestCase {
     }
 
     public void testCheckGoalCardCGC6_FIFTH() {
-        CommonGoalCard c34 = new CommonGoalCard6(new Launcher());
+        CommonGoalCard c34 = new CommonGoalCard6(2);
         c34.initNumCompleted();
         BookShelf bs27 = new BookShelf();
         bs27.setTile(0, 0, new ItemTile("CATS"));

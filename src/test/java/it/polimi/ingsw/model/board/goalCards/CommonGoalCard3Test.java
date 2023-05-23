@@ -1,16 +1,15 @@
 package it.polimi.ingsw.model.board.goalCards;
 
-import it.polimi.ingsw.Launcher;
 import it.polimi.ingsw.model.board.ItemTile;
 import it.polimi.ingsw.model.player.BookShelf;
 import junit.framework.TestCase;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 public class CommonGoalCard3Test extends TestCase {
 
     public void testCheckGoalCardCGC3_FIRST() {
-        CommonGoalCard c44 = new CommonGoalCard3(new Launcher());
+        CommonGoalCard c44 = new CommonGoalCard3(2);
         c44.initNumCompleted();
         BookShelf bs30 = new BookShelf();
         bs30.setTile(0, 0, new ItemTile("BOOKS"));
@@ -47,7 +46,7 @@ public class CommonGoalCard3Test extends TestCase {
         assertEquals(1, c44.getNumCompleted());
     }
     public void testCheckGoalCardCGC3_SECOND() {
-        CommonGoalCard c45 = new CommonGoalCard3(new Launcher());
+        CommonGoalCard c45 = new CommonGoalCard3(2);
         c45.initNumCompleted();
         BookShelf bs31 = new BookShelf();
         bs31.setTile(0, 0, new ItemTile("BOOKS"));
@@ -84,7 +83,7 @@ public class CommonGoalCard3Test extends TestCase {
         assertEquals(1, c45.getNumCompleted());
     }
     public void testCheckGoalCardCGC3_THIRD() {                 //MORE THAN FOUR GROUPS
-        CommonGoalCard c46 = new CommonGoalCard3(new Launcher());
+        CommonGoalCard c46 = new CommonGoalCard3(2);
         c46.initNumCompleted();
         BookShelf bs32 = new BookShelf();
         bs32.setTile(0, 0, new ItemTile("BOOKS"));
@@ -121,7 +120,7 @@ public class CommonGoalCard3Test extends TestCase {
         assertEquals(1, c46.getNumCompleted());
     }
     public void testCheckGoalCardCGC3_FOURTH() {
-        CommonGoalCard c47 = new CommonGoalCard3(new Launcher());
+        CommonGoalCard c47 = new CommonGoalCard3(2);
         c47.initNumCompleted();
         BookShelf bs33 = new BookShelf();
         bs33.setTile(0, 0, new ItemTile("BOOKS"));
@@ -158,7 +157,7 @@ public class CommonGoalCard3Test extends TestCase {
         assertEquals(0, c47.getNumCompleted());
     }
     public void testCheckGoalCardCGC3_FIFTH() {
-        CommonGoalCard c47 = new CommonGoalCard3(new Launcher());
+        CommonGoalCard c47 = new CommonGoalCard3(2);
         c47.initNumCompleted();
         BookShelf bs33 = new BookShelf();
         bs33.setTile(0, 0, new ItemTile("BOOKS"));
@@ -195,7 +194,7 @@ public class CommonGoalCard3Test extends TestCase {
         assertEquals(1, c47.getNumCompleted());
     }
     public void testCheckGoalCardCGC3_SIXTH() {
-        CommonGoalCard c47 = new CommonGoalCard3(new Launcher());
+        CommonGoalCard c47 = new CommonGoalCard3(2);
         c47.initNumCompleted();
         BookShelf bs33 = new BookShelf();
         bs33.setTile(0, 0, new ItemTile("FRAMES"));
@@ -219,7 +218,7 @@ public class CommonGoalCard3Test extends TestCase {
         assertEquals(1, c47.getNumCompleted());
     }
     public void testCheckGoalCardCGC3_SEVENTH() {
-        CommonGoalCard c47 = new CommonGoalCard3(new Launcher());
+        CommonGoalCard c47 = new CommonGoalCard3(2);
         c47.initNumCompleted();
         BookShelf bs33 = new BookShelf();
         bs33.setTile(0, 0, new ItemTile("FRAMES"));
@@ -243,7 +242,7 @@ public class CommonGoalCard3Test extends TestCase {
         assertEquals(0, c47.getNumCompleted());
     }
     public void testCheckGoalCardCGC3_EIGHTH() {
-        CommonGoalCard c47 = new CommonGoalCard3(new Launcher());
+        CommonGoalCard c47 = new CommonGoalCard3(2);
         c47.initNumCompleted();
         BookShelf bs33 = new BookShelf();
         bs33.setTile(0, 0, new ItemTile("FRAMES"));

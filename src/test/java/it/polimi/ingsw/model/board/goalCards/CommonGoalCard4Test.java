@@ -1,6 +1,5 @@
 package it.polimi.ingsw.model.board.goalCards;
 
-import it.polimi.ingsw.Launcher;
 import it.polimi.ingsw.model.board.ItemTile;
 import it.polimi.ingsw.model.player.BookShelf;
 import junit.framework.TestCase;
@@ -8,7 +7,7 @@ import junit.framework.TestCase;
 public class CommonGoalCard4Test extends TestCase {
 
     public void testCheckGoalCardCGC4_FIRST(){          //LEFT SIDE SQUARES
-        CommonGoalCard c33 = new CommonGoalCard4(new Launcher());
+        CommonGoalCard c33 = new CommonGoalCard4(2);
         c33.initNumCompleted();
         BookShelf bs26 = new BookShelf();
         bs26.setTile(0, 0, new ItemTile("PLANTS"));
@@ -45,7 +44,7 @@ public class CommonGoalCard4Test extends TestCase {
         assertEquals(1, c33.getNumCompleted());
     }
     public void testCheckGoalCardCGC4_SECOND(){             //RIGHT SIDE SQUARES
-        CommonGoalCard c34 = new CommonGoalCard4(new Launcher());
+        CommonGoalCard c34 = new CommonGoalCard4(2);
         c34.initNumCompleted();
         BookShelf bs27 = new BookShelf();
         bs27.setTile(0, 0, new ItemTile("PLANTS"));
@@ -82,7 +81,7 @@ public class CommonGoalCard4Test extends TestCase {
         assertEquals(1, c34.getNumCompleted());
     }
     public void testCheckGoalCardCGC4_THIRD(){          //UPPER LEFT SQUARE AND LOWER RIGHT SQUARE
-        CommonGoalCard c35 = new CommonGoalCard4(new Launcher());
+        CommonGoalCard c35 = new CommonGoalCard4(2);
         c35.initNumCompleted();
         BookShelf bs26 = new BookShelf();
         bs26.setTile(0, 0, new ItemTile("CATS"));
@@ -119,7 +118,7 @@ public class CommonGoalCard4Test extends TestCase {
         assertEquals(1, c35.getNumCompleted());
     }
     public void testCheckGoalCardCGC4_FOURTH(){     //UPPER RIGHT SQUARE AND LOWER LEFT SQUARE
-        CommonGoalCard c36 = new CommonGoalCard4(new Launcher());
+        CommonGoalCard c36 = new CommonGoalCard4(2);
         c36.initNumCompleted();
         BookShelf bs27 = new BookShelf();
         bs27.setTile(0, 0, new ItemTile("PLANTS"));
@@ -156,7 +155,7 @@ public class CommonGoalCard4Test extends TestCase {
         assertEquals(1, c36.getNumCompleted());
     }
     public void testCheckGoalCardCGC4_FIFTH(){              //TWO SQUARES IN THE MIDDLE LEFT SIDE AND MIDDLE RIGHT SIDE
-        CommonGoalCard c37 = new CommonGoalCard4(new Launcher());
+        CommonGoalCard c37 = new CommonGoalCard4(2);
         c37.initNumCompleted();
         BookShelf bs26 = new BookShelf();
         bs26.setTile(0, 0, new ItemTile("PLANTS"));
@@ -193,7 +192,7 @@ public class CommonGoalCard4Test extends TestCase {
         assertEquals(1, c37.getNumCompleted());
     }
     public void testCheckGoalCardCGC4_SIXTH(){              //TWO GENERAL SQUARES
-        CommonGoalCard c38 = new CommonGoalCard4(new Launcher());
+        CommonGoalCard c38 = new CommonGoalCard4(2);
         c38.initNumCompleted();
         BookShelf bs26 = new BookShelf();
         bs26.setTile(0, 0, new ItemTile("PLANTS"));
@@ -230,7 +229,7 @@ public class CommonGoalCard4Test extends TestCase {
         assertEquals(1, c38.getNumCompleted());
     }
     public void testCheckGoalCardCGC4_SEVENTH(){              //NO SQUARES
-        CommonGoalCard c39 = new CommonGoalCard4(new Launcher());
+        CommonGoalCard c39 = new CommonGoalCard4(2);
         c39.initNumCompleted();
         BookShelf bs26 = new BookShelf();
         bs26.setTile(0, 0, new ItemTile("PLANTS"));
@@ -268,7 +267,7 @@ public class CommonGoalCard4Test extends TestCase {
     }
     public void testCheckGoalCardCGC4_EIGHTH(){              //RECTANGLE 3 x 2, IT IS NOT CONSIDERED AS TWO SEPARATED
                                                                 //SQUARES 2 X 2
-        CommonGoalCard c40 = new CommonGoalCard4(new Launcher());
+        CommonGoalCard c40 = new CommonGoalCard4(2);
         c40.initNumCompleted();
         BookShelf bs26 = new BookShelf();
         bs26.setTile(0, 0, new ItemTile("PLANTS"));
@@ -306,7 +305,7 @@ public class CommonGoalCard4Test extends TestCase {
     }
     public void testCheckGoalCardCGC4_NINTH(){          //MORE THAN TWO SQUARES CASE, EXACTLY FOUR SQUARES (UPPER LEFT,
                                                                 //UPPER RIGHT, LOWER LEFT, LOWER RIGHT
-        CommonGoalCard c44 = new CommonGoalCard4(new Launcher());
+        CommonGoalCard c44 = new CommonGoalCard4(2);
         c44.initNumCompleted();
         BookShelf bs26 = new BookShelf();
         bs26.setTile(0, 0, new ItemTile("PLANTS"));
@@ -343,7 +342,7 @@ public class CommonGoalCard4Test extends TestCase {
         assertEquals(1, c44.getNumCompleted());
     }
     public void testCheckGoalCardCGC4_TENTH() {
-        CommonGoalCard c44 = new CommonGoalCard4(new Launcher());
+        CommonGoalCard c44 = new CommonGoalCard4(2);
         c44.initNumCompleted();
         BookShelf bs26 = new BookShelf();
         bs26.setTile(4, 0, new ItemTile("PLANTS"));
@@ -358,7 +357,7 @@ public class CommonGoalCard4Test extends TestCase {
         assertEquals(1, c44.getNumCompleted());
     }
     public void testCheckGoalCardCGC4_ELEVENTH() {
-        CommonGoalCard c44 = new CommonGoalCard4(new Launcher());
+        CommonGoalCard c44 = new CommonGoalCard4(2);
         c44.initNumCompleted();
         BookShelf bs26 = new BookShelf();
         bs26.setTile(4, 0, new ItemTile("PLANTS"));
