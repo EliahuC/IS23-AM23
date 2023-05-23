@@ -27,7 +27,7 @@ public class LivingRoom implements Serializable {
     private  final Bag bag;
     private transient final GameChecker gameChecker;
 
-    private transient final ArrayList<CommonGoalCard> commonGoalCards = new ArrayList<>();
+    private transient final ArrayList<CGCKey> commonGoalCards = new ArrayList<>();
     private transient CommonGoalCard commonGoalCard1;
     private transient CommonGoalCard commonGoalCard2;
     private Integer idCGC1;
@@ -154,18 +154,19 @@ public class LivingRoom implements Serializable {
      * method that create the 12 common goal cards
      */
     private void SetCommonGoalCard(){
-        commonGoalCards.add(new CommonGoalCard1(L));
-        commonGoalCards.add(new CommonGoalCard2(L));
-        commonGoalCards.add(new CommonGoalCard3(L));
-        commonGoalCards.add(new CommonGoalCard4(L));
-        commonGoalCards.add(new CommonGoalCard5(L));
-        commonGoalCards.add(new CommonGoalCard6(L));
-        commonGoalCards.add(new CommonGoalCard7(L));
-        commonGoalCards.add(new CommonGoalCard8(L));
-        commonGoalCards.add(new CommonGoalCard9(L));
-        commonGoalCards.add(new CommonGoalCard10(L));
-        commonGoalCards.add(new CommonGoalCard11(L));
-        commonGoalCards.add(new CommonGoalCard12(L));
+
+        commonGoalCards.add(new CGCKey(new CommonGoalCard1(L.getNumPlayers()),1));
+        commonGoalCards.add(new CGCKey(new CommonGoalCard2(L.getNumPlayers()),2));
+        commonGoalCards.add(new CGCKey(new CommonGoalCard3(L.getNumPlayers()),3));
+        commonGoalCards.add(new CGCKey(new CommonGoalCard4(L.getNumPlayers()),4));
+        commonGoalCards.add(new CGCKey(new CommonGoalCard5(L.getNumPlayers()),5));
+        commonGoalCards.add(new CGCKey(new CommonGoalCard6(L.getNumPlayers()),6));
+        commonGoalCards.add(new CGCKey(new CommonGoalCard7(L.getNumPlayers()),7));
+        commonGoalCards.add(new CGCKey(new CommonGoalCard8(L.getNumPlayers()),8));
+        commonGoalCards.add(new CGCKey(new CommonGoalCard9(L.getNumPlayers()),9));
+        commonGoalCards.add(new CGCKey(new CommonGoalCard10(L.getNumPlayers()),10));
+        commonGoalCards.add(new CGCKey(new CommonGoalCard11(L.getNumPlayers()),11));
+        commonGoalCards.add(new CGCKey(new CommonGoalCard12(L.getNumPlayers()),12));
 
     }
 
@@ -181,9 +182,13 @@ public class LivingRoom implements Serializable {
             }
         }
         int randIndex = new Random().nextInt(commonGoalCards.size());
-        commonGoalCard1 = commonGoalCards.remove(randIndex);
+        CGCKey key=commonGoalCards.remove(randIndex);
+        commonGoalCard1 =key.getCommonGoalCard();
+        idCGC1=key.getId();
         randIndex = new Random().nextInt(commonGoalCards.size());
-        commonGoalCard2 = commonGoalCards.remove(randIndex);
+        key=commonGoalCards.remove(randIndex);
+        commonGoalCard2 = key.getCommonGoalCard();
+        idCGC2=key.getId();
     }
 
     /**
@@ -355,5 +360,21 @@ public class LivingRoom implements Serializable {
 
     public void setCommonGoalCard2(it.polimi.ingsw.model.board.goalCards.CommonGoalCard commonGoalCard2) {
         this.commonGoalCard2 = commonGoalCard2;
+    }
+
+    public Integer getIdCGC1() {
+        return idCGC1;
+    }
+
+    public void setIdCGC1(Integer idCGC1) {
+        this.idCGC1 = idCGC1;
+    }
+
+    public Integer getIdCGC2() {
+        return idCGC2;
+    }
+
+    public void setIdCGC2(Integer idCGC2) {
+        this.idCGC2 = idCGC2;
     }
 }

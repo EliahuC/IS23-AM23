@@ -34,8 +34,8 @@ public class CLIEvent implements PropertyChangeListener {
             switch (serverMessage.getCategory()) {
                 case STARTING_GAME_MESSAGE:
                     GameIsStartingMessage temp_startingGameMessage= (GameIsStartingMessage) serverMessage;
-                    gameHandler.setLivingRoom(temp_startingGameMessage.getLivingRoom());
                     gameHandler.setPlayers(temp_startingGameMessage.getPlayers());
+                    gameHandler.setLivingRoom(temp_startingGameMessage.getLivingRoom());
                     gameHandler.setPlayer(temp_startingGameMessage.getPlayers().stream().filter(player -> Objects.equals(player.getNickName(), gameHandler.getConnectionClient().getPlayerName())).findFirst().orElseThrow(() -> new IllegalArgumentException("Player not found")));
                     gameHandler.setCurrentPlayer(temp_startingGameMessage.getCurrPlaying());
                     break;

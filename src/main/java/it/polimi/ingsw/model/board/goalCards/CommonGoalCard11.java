@@ -8,10 +8,12 @@ import it.polimi.ingsw.model.player.BookShelf;
  * @author Giovanni Di Lorenzo
  */
 public class CommonGoalCard11 extends CommonGoalCard implements CheckCommonGoalCard {
-    private final Launcher launcher;
 
-    public CommonGoalCard11(Launcher L) {
-        this.launcher = L;
+
+
+
+    public CommonGoalCard11(Integer I){
+        super(I);
     }
     /**
      *@param bs Player's bookshelf

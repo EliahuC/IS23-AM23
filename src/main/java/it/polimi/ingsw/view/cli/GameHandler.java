@@ -9,6 +9,7 @@ import it.polimi.ingsw.Messages.MoveSerializer;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.board.ItemTile;
 import it.polimi.ingsw.model.board.LivingRoom;
+import it.polimi.ingsw.model.board.goalCards.*;
 import it.polimi.ingsw.model.player.BookShelf;
 import it.polimi.ingsw.model.player.Player;
 
@@ -33,6 +34,8 @@ public class GameHandler {
     private static final String RESET = "\u001B[0m";
     private static final String FIRST = "\u001b[38;2;189;174;41m";
     private String winner;
+    private CommonGoalCard commonGoalCard1;
+    private CommonGoalCard commonGoalCard2;
 
     public GameHandler(ConnectionClient connectionClient, CLIEvent receiver) {
         this.connectionClient = connectionClient;
@@ -48,6 +51,46 @@ public class GameHandler {
 
     public void setLivingRoom(LivingRoom livingRoom) {
         this.livingRoom = livingRoom;
+        createCommonGoalCard1(livingRoom.getIdCGC1());
+        createCommonGoalCard2(livingRoom.getIdCGC2());
+    }
+
+    private void createCommonGoalCard2(Integer idCGC2) {
+        switch (idCGC2){
+            case 1->this.commonGoalCard2=new CommonGoalCard1(players.size());
+            case 2->this.commonGoalCard2=new CommonGoalCard2(players.size());
+            case 3->this.commonGoalCard2=new CommonGoalCard3(players.size());
+            case 4->this.commonGoalCard2=new CommonGoalCard4(players.size());
+            case 5->this.commonGoalCard2=new CommonGoalCard5(players.size());
+            case 6->this.commonGoalCard2=new CommonGoalCard6(players.size());
+            case 7->this.commonGoalCard2=new CommonGoalCard7(players.size());
+            case 8->this.commonGoalCard2=new CommonGoalCard8(players.size());
+            case 9->this.commonGoalCard2=new CommonGoalCard9(players.size());
+            case 10->this.commonGoalCard2=new CommonGoalCard10(players.size());
+            case 11->this.commonGoalCard2=new CommonGoalCard11(players.size());
+            case 12->this.commonGoalCard2=new CommonGoalCard12(players.size());
+
+
+        }
+    }
+
+    private void createCommonGoalCard1(Integer idCGC1) {
+        switch (idCGC1){
+            case 1->this.commonGoalCard1=new CommonGoalCard1(players.size());
+            case 2->this.commonGoalCard1=new CommonGoalCard2(players.size());
+            case 3->this.commonGoalCard1=new CommonGoalCard3(players.size());
+            case 4->this.commonGoalCard1=new CommonGoalCard4(players.size());
+            case 5->this.commonGoalCard1=new CommonGoalCard5(players.size());
+            case 6->this.commonGoalCard1=new CommonGoalCard6(players.size());
+            case 7->this.commonGoalCard1=new CommonGoalCard7(players.size());
+            case 8->this.commonGoalCard1=new CommonGoalCard8(players.size());
+            case 9->this.commonGoalCard1=new CommonGoalCard9(players.size());
+            case 10->this.commonGoalCard1=new CommonGoalCard10(players.size());
+            case 11->this.commonGoalCard1=new CommonGoalCard11(players.size());
+            case 12->this.commonGoalCard1=new CommonGoalCard12(players.size());
+
+
+        }
     }
 
     public void setPlayer(Player player) {
@@ -183,9 +226,9 @@ public class GameHandler {
         player.getPersonalGoalCard().print();
         System.out.print("\nCOMMON GOAL CARDS\n\n");
         System.out.print("(1): ");
-        livingRoom.getCommonGoalCard1().print();
+        commonGoalCard1.print();
         System.out.print("\n(2): ");
-        livingRoom.getCommonGoalCard2().print();
+        commonGoalCard2.print();
         System.out.print("\n\n[If you want to come back to the previous screen, use the command /BACK]\n");
         while (true){
             command = input.nextLine();

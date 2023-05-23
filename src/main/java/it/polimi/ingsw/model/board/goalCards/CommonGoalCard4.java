@@ -1,6 +1,5 @@
 package it.polimi.ingsw.model.board.goalCards;
 
-import it.polimi.ingsw.Launcher;
 import it.polimi.ingsw.model.board.ItemTile;
 import it.polimi.ingsw.model.player.BookShelf;
 
@@ -19,9 +18,9 @@ public class CommonGoalCard4 extends CommonGoalCard implements CheckCommonGoalCa
     private int counterFrames = 0;
     private int counterGames = 0;
     private int counterBooks = 0;
-    private final Launcher launcher;
-    public CommonGoalCard4(Launcher L){
-        this.launcher = L;
+
+    public CommonGoalCard4(Integer I){
+        super(I);
     }
 
     public int getCounterCats() {

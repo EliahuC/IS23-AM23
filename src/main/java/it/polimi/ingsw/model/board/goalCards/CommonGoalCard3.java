@@ -1,6 +1,5 @@
 package it.polimi.ingsw.model.board.goalCards;
 
-import it.polimi.ingsw.Launcher;
 import it.polimi.ingsw.model.board.ItemTile;
 import it.polimi.ingsw.model.player.BookShelf;
 
@@ -9,11 +8,11 @@ import java.util.List;
 
 public class CommonGoalCard3 extends CommonGoalCard implements CheckCommonGoalCard {
     private final List<ItemTile> validGroups = new ArrayList<>();
-    private final Launcher launcher;
+
     private final static int Goal = 4;
 
-    public CommonGoalCard3(Launcher L){
-        this.launcher = L;
+    public CommonGoalCard3(Integer I){
+        super(I);
     }
 
     /**

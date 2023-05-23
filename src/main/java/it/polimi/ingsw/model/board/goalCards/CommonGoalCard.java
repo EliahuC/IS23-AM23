@@ -1,6 +1,5 @@
 package it.polimi.ingsw.model.board.goalCards;
 
-import it.polimi.ingsw.Launcher;
 import it.polimi.ingsw.model.player.BookShelf;
 
 /**
@@ -9,7 +8,10 @@ import it.polimi.ingsw.model.player.BookShelf;
  */
 public class CommonGoalCard {
     private int numCompleted = 0;
-    private final Launcher L = new Launcher();
+    private int numPlayersCGC;
+    public CommonGoalCard(Integer I){
+        this.numPlayersCGC =I;
+    }
 
     /**
      * @author Eliahu Cohen
@@ -34,7 +36,7 @@ public class CommonGoalCard {
      */
     public int getPoints() {
         int points = 0;
-        switch (L.getNumPlayers()) {
+        switch (numPlayersCGC) {
             case 2: {
                 switch (numCompleted) {
                     case 1 -> points = 8;
@@ -79,9 +81,7 @@ public class CommonGoalCard {
      * @author Eliahu Cohen
      * @return Launcher
      */
-    public Launcher getLauncher(){
-        return L;
-    }
+
 
     public void print(){}
 }

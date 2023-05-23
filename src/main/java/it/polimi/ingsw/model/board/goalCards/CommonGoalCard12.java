@@ -1,6 +1,5 @@
 package it.polimi.ingsw.model.board.goalCards;
 
-import it.polimi.ingsw.Launcher;
 import it.polimi.ingsw.model.board.ItemTile;
 import it.polimi.ingsw.model.player.BookShelf;
 
@@ -9,10 +8,10 @@ import it.polimi.ingsw.model.player.BookShelf;
  */
 
 public class CommonGoalCard12 extends CommonGoalCard implements CheckCommonGoalCard {
-    private final Launcher launcher;
 
-    public CommonGoalCard12(Launcher L) {
-        this.launcher = L;
+
+    public CommonGoalCard12(Integer I){
+        super(I);
     }
 
     @Override

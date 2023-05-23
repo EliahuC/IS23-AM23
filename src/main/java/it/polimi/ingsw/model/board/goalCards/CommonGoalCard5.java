@@ -1,6 +1,5 @@
 package it.polimi.ingsw.model.board.goalCards;
 
-import it.polimi.ingsw.Launcher;
 import it.polimi.ingsw.model.board.ItemTile;
 import it.polimi.ingsw.model.board.ItemTileCategory;
 import it.polimi.ingsw.model.player.BookShelf;
@@ -14,10 +13,10 @@ public class CommonGoalCard5 extends CommonGoalCard implements CheckCommonGoalCa
     private final static int numColumnsToAchieve = 3;
     private final static int numDifferentCategoriesAllowed = 3;
     private final HashSet<ItemTileCategory> cat = new HashSet<>(); //I use an hashset to track the categories in each column
-    private final Launcher launcher;                                       //of the bookshelf
+                                      //of the bookshelf
 
-    public CommonGoalCard5(Launcher L){
-        this.launcher = L;
+    public CommonGoalCard5(Integer I){
+        super(I);
 
     }
     /**
