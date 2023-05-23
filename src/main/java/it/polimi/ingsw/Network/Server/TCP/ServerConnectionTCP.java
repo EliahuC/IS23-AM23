@@ -171,8 +171,8 @@ public class ServerConnectionTCP implements ServerConnection{
                 }
 
                 lobby.addUser(this, message.getNickname(), virtualView);
-                checkCompletedLobby();
-                sendMessage(new LobbyJoiningMessage(lobby.getIdLobby()),namePlayer);
+                if(!checkCompletedLobby())
+                    sendMessage(new LobbyJoiningMessage(lobby.getIdLobby()),namePlayer);
                 break;
             }
 
@@ -267,12 +267,14 @@ public class ServerConnectionTCP implements ServerConnection{
      * @author Eliahu Cohen
      * method that checks if the lobby is now full
      */
-    private void checkCompletedLobby() {
+    private boolean checkCompletedLobby() {
         if(lobby.getNumPlayersLobby()==lobby.getJoinedUsers().size()){
             Server.startedLobbies.add(lobby);
             Server.lobbies.remove(lobby);
             lobby.startGameLobby();
+            return true;
         }
+        return false;
     }
 
     /**

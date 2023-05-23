@@ -15,7 +15,7 @@ import java.util.ArrayList;
  */
 public class RMIServerMain extends Server implements Runnable {
     private static int PORT = 22011;
-    private final ArrayList<VirtualView> virtualViews=new ArrayList<>();
+
 
     /**
      * @author Eliahu Cohen
@@ -57,9 +57,7 @@ public class RMIServerMain extends Server implements Runnable {
             ServerConnectionRMI rmiHandler = new ServerConnectionRMI();
             Naming.rebind("rmi://localhost:"+22011+"/RMIServer",rmiHandler);
             //showMessage("Client successfully connected");
-            VirtualView virtualView=new VirtualView(rmiHandler);
-            virtualViews.add(virtualView);
-            rmiHandler.addVirtualView(virtualView);
+
         } catch (IOException e) {
             e.printStackTrace();
         }

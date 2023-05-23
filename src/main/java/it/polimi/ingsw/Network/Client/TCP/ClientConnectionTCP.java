@@ -18,6 +18,7 @@ import java.net.Socket;
 import java.rmi.RemoteException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 public class ClientConnectionTCP extends ConnectionClient {
     PropertyChangeListener listener;

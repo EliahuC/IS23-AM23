@@ -91,7 +91,6 @@ public class ClientConnectionRMI extends ConnectionClient implements RemoteInter
                 null,
                 serverMessage);
 
-
         if (serverMessage!= null && serverMessage.getCategory() != Message.MessageCategory.PINGFROMSERVER) {
            listener.propertyChange(evt);
         }

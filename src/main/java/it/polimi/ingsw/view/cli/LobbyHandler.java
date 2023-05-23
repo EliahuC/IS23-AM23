@@ -15,6 +15,7 @@ public class LobbyHandler {
     private ConnectionClient connectionClient;
     private CLIEvent receiver;
     private ServerMessage response;
+    private Boolean lock=true;
 
 
     public LobbyHandler(ConnectionClient connectionClient, CLIEvent receiver) {
@@ -30,7 +31,7 @@ public class LobbyHandler {
     }
 
     public void start() {
-        GameHandler gameHandler= new GameHandler(connectionClient, receiver);
+        GameHandler gameHandler = new GameHandler(connectionClient, receiver);
         receiver.setGameHandler(gameHandler);
         String command;
         Scanner input = new Scanner(System.in);
@@ -42,7 +43,7 @@ public class LobbyHandler {
                 " / /  / // /_/ /   ___/ // / / //  __// // __// //  __/\n" +
                 "/_/  /_/ \\__, /   /____//_/ /_/ \\___//_//_/  /_/ \\___/ \n" +
                 "        /____/                                         \n\n\n\n");*/
-        while(true) {
+        while (true) {
             System.out.print("\033[H\033[2J");
             System.out.flush();
             System.out.print("Do you want to look for a lobby to join or do you prefer to make a new one?\n" +
@@ -51,45 +52,54 @@ public class LobbyHandler {
                     "/ENTER \n");
 
             command = input.nextLine();
-            if((Objects.equals(command.split(" ")[0].toUpperCase(), "/CREATE")) || Objects.equals(command.split(" ")[0].toUpperCase(), "/ENTER"))
+            if ((Objects.equals(command.split(" ")[0].toUpperCase(), "/CREATE")) || Objects.equals(command.split(" ")[0].toUpperCase(), "/ENTER"))
                 break;
             System.out.print("The used command is NOT valid. Please, retry again.\n");
-            try{
+            try {
                 TimeUnit.MILLISECONDS.sleep(1200);
-            }catch (InterruptedException iE){
+            } catch (InterruptedException iE) {
                 iE.printStackTrace();
             }
         }
         Message message = MoveSerializer.serializeInput(command);
         connectionClient.sendMessage((ClientMessage) message);
-        while(true) {
-            try{
+        while (true) {
+            try {
                 TimeUnit.MILLISECONDS.sleep(200);
-            }catch (InterruptedException iE){
+            } catch (InterruptedException iE) {
                 iE.printStackTrace();
             }
-            if(response!=null && response.getCategory()==Message.MessageCategory.WARNING){
+            if (response != null && response.getCategory() == Message.MessageCategory.WARNING) {
                 System.out.println(response.getReturnMessage());
-                while(true) {
+                while (true) {
                     command = input.nextLine();
                     message = MoveSerializer.serializeInput(command);
-                    if((Objects.equals(command.split(" ")[0].toUpperCase(), "/CREATE"))){
+                    if ((Objects.equals(command.split(" ")[0].toUpperCase(), "/CREATE"))) {
                         connectionClient.sendMessage((ClientMessage) message);
                         break;
-                    }else
-                        System.out.print("The used command is NOT valid. Please, retry again.\n");
+                    } else
+                        System.out.println("The used command is NOT valid. Please, retry again.");
                 }
-            } else if (response!=null && response.getCategory()==Message.MessageCategory.RETURN_MESSAGE) {
-                break;
+            } else if (response != null && (response.getCategory() == Message.MessageCategory.RETURN_MESSAGE||response.getCategory() == Message.MessageCategory.STARTING_GAME_MESSAGE)) {
+                if (response.getCategory() == Message.MessageCategory.STARTING_GAME_MESSAGE) {
+                    receiver.setInLobbyHandler(false);
+                    receiver.setInGameHandler(true);
+                    gameHandler.start();
+                    lock=false;
+                    break;
+                }
+                else
+                    break;
             }
         }
-        System.out.print("Hi " + connectionClient.getPlayerName() + "! Let's wait for other players to begin the game.\n");
-        do{
-            try{
-                TimeUnit.MILLISECONDS.sleep(200);
-            }catch (InterruptedException iE){
-                iE.printStackTrace();
-            }
+        System.out.println("Hi " + connectionClient.getPlayerName() + "! Let's wait for other players to begin the game.");
+        if(lock){
+            do {
+                try {
+                    TimeUnit.MILLISECONDS.sleep(200);
+                } catch (InterruptedException iE) {
+                    iE.printStackTrace();
+                }
             /*System.out.print("Hi " + connectionClient.getPlayerName() + "! Let's wait for other players to begin the game.\n");
             try{
                 TimeUnit.MILLISECONDS.sleep(500);
@@ -114,10 +124,12 @@ public class LobbyHandler {
             }
             System.out.print("\033[H\033[2J");
             System.out.flush();*/
-        }while(response == null || response.getCategory() != Message.MessageCategory.STARTING_GAME_MESSAGE);
-        //System.out.print(response.getReturnMessage());
-        receiver.setInLobbyHandler(false);
-        receiver.setInGameHandler(true);
-        gameHandler.start();
+            } while (response == null || response.getCategory() != Message.MessageCategory.STARTING_GAME_MESSAGE);
+            //System.out.print(response.getReturnMessage());
+            receiver.setInLobbyHandler(false);
+            receiver.setInGameHandler(true);
+            gameHandler.start();
+        }
     }
-}
+    }
+

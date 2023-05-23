@@ -159,7 +159,7 @@ public class GameHandler {
                 showBookshelf();
                 break;
             }
-            Message message = MoveSerializer.serializeInput(command);
+            ClientMessage message = (ClientMessage) MoveSerializer.serializeInput(command);
             connectionClient.sendMessage((ClientMessage) message);
             try{
                 TimeUnit.MILLISECONDS.sleep(200);

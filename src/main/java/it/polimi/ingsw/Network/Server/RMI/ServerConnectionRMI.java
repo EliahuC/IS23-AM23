@@ -22,6 +22,7 @@ import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
@@ -32,7 +33,7 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
 
     private String namePlayer=null;
     private DisconnectionHandler disconnectionHandler;
-    private VirtualView virtualView;
+    private final ArrayList<VirtualView> virtualViews=new ArrayList<>();
     private boolean pingIsArrived =false;
     private Thread ping;
 
@@ -86,6 +87,8 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
                 lobby = new Lobby(((LobbyCreationMessage) message).getNumPlayers(), Server.idLobbies);
                 Server.idLobbies++;
                 disconnectionHandler = new DisconnectionHandler(lobby);
+                VirtualView virtualView=new VirtualView(this);
+                virtualViews.add(virtualView);
                 lobby.addUser(this, namePlayer, virtualView);
                 Server.lobbies.add(lobby);
                 sendMessage(new LobbyJoiningMessage(lobby.getIdLobby()),namePlayer);
@@ -115,7 +118,8 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
                     lobbyIsFull();
                     break;
                 }
-
+                VirtualView virtualView=new VirtualView(this);
+                virtualViews.add(virtualView);
                 lobby.addUser(this, message.getNickname(), virtualView);
                 checkCompletedLobby();
                 sendMessage(new LobbyJoiningMessage(lobby.getIdLobby()),namePlayer);
@@ -279,9 +283,7 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
     }
 
 
-    public void addVirtualView(VirtualView virtualView){
-        this.virtualView=virtualView;
-    }
+
 
     /**
      * @author Eliahu Cohen
