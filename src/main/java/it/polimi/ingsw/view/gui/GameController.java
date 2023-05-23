@@ -34,4 +34,14 @@ public class GameController {
         stage.setScene(scene);
         stage.show();
     }
+    /*
+    public void displayLivingroom{
+
+    }
+
+    public void displayBookshelf{
+
+
+    }
+    */
 }
