@@ -209,7 +209,7 @@ public class GameHandler {
 
                 if (response != null && response.getCategory() == Message.MessageCategory.VALID_MESSAGE) {
                     int i = 0;
-                    while (command.split(" ")[i] != null) {
+                    while ((i<command.split(" ").length)&&(command.split(" ")[i] != null)){
                         tiles.add(livingRoom.getBoardTile(i, i + 1).getTile());
                         i = i + 2;
 
