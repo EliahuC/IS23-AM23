@@ -1,6 +1,7 @@
 package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.Messages.ClientToServer.ClientMessage;
+import it.polimi.ingsw.Messages.ClientToServer.CoordinatesMessage;
 import it.polimi.ingsw.Messages.ClientToServer.PossibleMoves.Move_SelectColumn;
 import it.polimi.ingsw.Messages.ClientToServer.PossibleMoves.Move_SelectOrder;
 import it.polimi.ingsw.Messages.ClientToServer.PossibleMoves.Move_SelectTiles;
@@ -353,7 +354,8 @@ public class GameControllerTest extends TestCase {
         E.add(3);
         Move_SelectTiles M = new Move_SelectTiles();
         M.setCoordinates(E);
-        ClientMessage m = new ClientMessage(Message.MessageCategory.COORDINATES,M,Controller.getGame().getPlayers().get(0).getNickName());
+        ClientMessage m = new CoordinatesMessage(M);
+        m.setNickname(Controller.getGame().getPlayers().get(0).getNickName());
         Message error= new ErrorMessage();
         error.setReturnMessage("The move you made isn't a valid move");
         assertEquals(error,Controller.readMessage(m));
@@ -381,7 +383,8 @@ public class GameControllerTest extends TestCase {
         E.add(3);
         Move_SelectTiles M = new Move_SelectTiles();
         M.setCoordinates(E);
-        ClientMessage m = new ClientMessage(Message.MessageCategory.COORDINATES,M,Controller.getGame().getPlayers().get(0).getNickName());
+        ClientMessage m = new CoordinatesMessage(M);
+        m.setNickname(Controller.getGame().getPlayers().get(0).getNickName());
         ValidMoveMessage valid= new ValidMoveMessage();
         assertEquals(valid,Controller.readMessage(m));
     }
