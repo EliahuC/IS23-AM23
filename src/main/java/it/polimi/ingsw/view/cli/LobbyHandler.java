@@ -15,6 +15,7 @@ public class LobbyHandler {
     private ConnectionClient connectionClient;
     private CLIEvent receiver;
     private ServerMessage response;
+    private Boolean lock=true;
 
 
     public LobbyHandler(ConnectionClient connectionClient, CLIEvent receiver) {
@@ -80,16 +81,26 @@ public class LobbyHandler {
                         System.out.print("The used command is NOT valid. Please, retry again.\n");
                 }
             } else if (response!=null && (response.getCategory()==Message.MessageCategory.RETURN_MESSAGE || response.getCategory() == Message.MessageCategory.STARTING_GAME_MESSAGE)) {
-                break;
+                if (response.getCategory() == Message.MessageCategory.STARTING_GAME_MESSAGE) {
+                    receiver.setInLobbyHandler(false);
+                    receiver.setInGameHandler(true);
+                    gameHandler.start();
+                    lock=false;
+                    break;
+                }
+                else
+                    break;
             }
         }
-        System.out.print("Hi " + connectionClient.getPlayerName() + "! Let's wait for other players to begin the game.\n");
+            System.out.print("Hi " + connectionClient.getPlayerName() + "! Let's wait for other players to begin the game.\n");
+        if(lock){
         while(response == null || response.getCategory() != Message.MessageCategory.STARTING_GAME_MESSAGE){
-            try{
-                TimeUnit.MILLISECONDS.sleep(200);
-            }catch (InterruptedException iE){
-                iE.printStackTrace();
-            }
+
+                    try {
+                        TimeUnit.MILLISECONDS.sleep(200);
+                    } catch (InterruptedException iE) {
+                        iE.printStackTrace();
+                    }
             /*System.out.print("Hi " + connectionClient.getPlayerName() + "! Let's wait for other players to begin the game.\n");
             try{
                 TimeUnit.MILLISECONDS.sleep(500);
@@ -114,7 +125,8 @@ public class LobbyHandler {
             }
             System.out.print("\033[H\033[2J");
             System.out.flush();*/
-        }
+        }}
+
         //System.out.print(response.getReturnMessage());
         receiver.setInLobbyHandler(false);
         receiver.setInGameHandler(true);

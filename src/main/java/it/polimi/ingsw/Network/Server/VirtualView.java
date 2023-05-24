@@ -16,9 +16,10 @@ import java.beans.PropertyChangeListener;
 
 public class VirtualView implements PropertyChangeListener {
     private final ServerConnection clientConnection;
-
-    public VirtualView(ServerConnection connection) {
+private  String nickName;
+    public VirtualView(ServerConnection connection,String name) {
         this.clientConnection = connection;
+        this.nickName=name;
     }
 
 
@@ -30,7 +31,7 @@ public class VirtualView implements PropertyChangeListener {
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         ServerMessage serverMessage=messageParser(evt);
-      clientConnection.sendMessage(serverMessage, clientConnection.getNamePlayer());
+      clientConnection.sendMessage(serverMessage, nickName);
     }
 
     /**
@@ -80,6 +81,11 @@ public class VirtualView implements PropertyChangeListener {
         return clientConnection.getNamePlayer();
     }
 
-    //TODO Reazione viwe messaggi
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
 
+    public String getNickName() {
+        return nickName;
+    }
 }

@@ -299,6 +299,7 @@ public class ServerConnectionTCP implements ServerConnection{
 
     public void addVirtualView(VirtualView virtualView){
         this.virtualView=virtualView;
+        virtualView.setNickName(namePlayer);
     }
 
 

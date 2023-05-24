@@ -45,7 +45,7 @@ public class TCPServerMain extends Server implements Runnable {
                 showMessage("Client TCP successfully connected");
                 ServerConnectionTCP serverConnectionTCP = new ServerConnectionTCP(clientSocket);
                 new Thread(serverConnectionTCP).start();
-                VirtualView virtualView=new VirtualView(serverConnectionTCP);
+                VirtualView virtualView=new VirtualView(serverConnectionTCP,null);
                 virtualViews.add(virtualView);
                 serverConnectionTCP.addVirtualView(virtualView);
             } catch (IOException e) {

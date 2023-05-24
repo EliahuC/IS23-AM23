@@ -28,7 +28,7 @@ import java.util.concurrent.TimeUnit;
 
 public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteInterface, ServerConnection {
     private Lobby lobby;
-    private static ClientConnectionRMI skeleton;
+
     private boolean serverIsActive;
 
     private String namePlayer=null;
@@ -77,6 +77,7 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
                 Server.rmiConnections.put(message.getNickname(), client);
                 namePlayer=message.getNickname();
                 sendMessage(new ValidNicknameMessage(),namePlayer);
+                System.out.println("ClientRMI connected");
                 break;
             }
             case CREATE_LOBBY: {
@@ -87,7 +88,7 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
                 lobby = new Lobby(((LobbyCreationMessage) message).getNumPlayers(), Server.idLobbies);
                 Server.idLobbies++;
                 disconnectionHandler = new DisconnectionHandler(lobby);
-                VirtualView virtualView=new VirtualView(this);
+                VirtualView virtualView=new VirtualView(this,namePlayer);
                 virtualViews.add(virtualView);
                 lobby.addUser(this, namePlayer, virtualView);
                 Server.lobbies.add(lobby);
@@ -118,7 +119,7 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
                     lobbyIsFull();
                     break;
                 }
-                VirtualView virtualView=new VirtualView(this);
+                VirtualView virtualView=new VirtualView(this,namePlayer);
                 virtualViews.add(virtualView);
                 lobby.addUser(this, message.getNickname(), virtualView);
                 checkCompletedLobby();
@@ -167,7 +168,7 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
      * @param username of the client that have to receive the message
      * Method used to send messages to the clients
      */
-    public synchronized void sendMessage(ServerMessage message, String username) {
+    public  void sendMessage(ServerMessage message, String username) {
         Gson gson=new Gson();
         String s=gson.toJson(message);
         try {
