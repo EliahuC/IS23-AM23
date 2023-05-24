@@ -267,7 +267,7 @@ public class GameHandler {
                 showGoals("BookshelfOrder");
                 break;
             }
-            Message message = MoveSerializer.serializeInput(command);
+            ClientMessage message = (ClientMessage) MoveSerializer.serializeInput(command);
             connectionClient.sendMessage((ClientMessage) message);
             try{
                 TimeUnit.MILLISECONDS.sleep(200);
@@ -294,7 +294,7 @@ public class GameHandler {
                 showGoals("BookshelfColumn");
                 break;
             }
-            Message message = MoveSerializer.serializeInput(command);
+            ClientMessage message = (ClientMessage) MoveSerializer.serializeInput(command);
             connectionClient.sendMessage((ClientMessage) message);
             try{
                 TimeUnit.MILLISECONDS.sleep(200);

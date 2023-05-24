@@ -14,7 +14,7 @@ public class ItemTile implements Serializable {
 
     private ItemTileCategory category=null ;
     private String color;
-    public  static final String RESET = "\u001B[0m";
+    public static final String RESET = "\u001B[0m";
     public static final String GREEN = "\u001b[48;2;145;165;65m";
     public static final String WHITE = "\u001b[48;2;236;225;189m";
     public static final String YELLOW = "\u001b[48;2;223;169;59m";

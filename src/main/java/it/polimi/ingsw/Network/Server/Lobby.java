@@ -154,7 +154,7 @@ public class Lobby implements Serializable {
      * Method that sets the saves of the game
      */
     private void setSavesOfTheLobby() {
-        String fileName="Lobby"+ idLobby +".json";
+        String fileName="/Lobby"+ idLobby +".json";
         saveFilePath=saveFilePath+fileName;
         myObj=new File(saveFilePath);
     }
