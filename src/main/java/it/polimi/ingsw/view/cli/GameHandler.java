@@ -206,10 +206,14 @@ public class GameHandler {
             }catch (InterruptedException iE){
                 iE.printStackTrace();
             }
-            if(response!=null && response.getCategory()==Message.MessageCategory.VALID_MESSAGE){
-                for(int i=1; i<Arrays.stream(command.split(" ")).count(); i+=2)
-                    tiles.add(livingRoom.getBoardTile(Integer.parseInt(command.split(" ")[i]), Integer.parseInt(command.split(" ")[i+1])).getTile());
-                break;
+
+                if (response != null && response.getCategory() == Message.MessageCategory.VALID_MESSAGE) {
+                    int i = 0;
+                    while (command.split(" ")[i] != null) {
+                        tiles.add(livingRoom.getBoardTile(i, i + 1).getTile());
+                        i = i + 2;
+
+                    }
             }
             System.out.print("Your move is not valid. Please, pick again and correctly your tiles.\n" +
                     "[You can still see your goal cards, using the command /GOALS, or your personal bookshelf using /BOOKSHELF]\n");
