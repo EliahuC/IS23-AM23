@@ -4,6 +4,8 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import it.polimi.ingsw.Messages.ClientToServer.*;
+import it.polimi.ingsw.Messages.ClientToServer.PossibleMoves.Move_SelectColumn;
+import it.polimi.ingsw.Messages.ClientToServer.PossibleMoves.Move_SelectOrder;
 import it.polimi.ingsw.Messages.ClientToServer.PossibleMoves.Move_SelectTiles;
 import it.polimi.ingsw.Messages.ServerToClient.*;
 
@@ -32,10 +34,16 @@ public class MoveDeserializer {
                return message;
            }
            case "COLUMN" -> {
-               return gson.fromJson(s, ColumnMessage.class);
+               Move_SelectColumn move=gson.fromJson(o.get("move").getAsJsonObject(), Move_SelectColumn.class);
+               ColumnMessage message=gson.fromJson(s, ColumnMessage.class);
+               message.setMove(move);
+               return message;
            }
            case "ORDER" -> {
-               return gson.fromJson(s, OrderMessage.class);
+               Move_SelectOrder move=gson.fromJson(o.get("move").getAsJsonObject(), Move_SelectOrder.class);
+               OrderMessage message=gson.fromJson(s, OrderMessage.class);
+               message.setMove(move);
+               return message;
            }
            case "BOOKSHELF" -> {
                return gson.fromJson(s, BookshelfMessage.class);

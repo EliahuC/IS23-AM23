@@ -12,8 +12,7 @@ import it.polimi.ingsw.Savings;
 import it.polimi.ingsw.controller.ControllerCoordinator;
 import it.polimi.ingsw.model.player.Player;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -22,15 +21,15 @@ import java.util.ArrayList;
  * @author Eliahu Cohen
  * Lobby concept class
  */
-public class Lobby {
-
+public class Lobby implements Serializable {
+    private transient File myObj;
     private final Integer NumPlayersLobby;
-    private final ArrayList<ServerConnection> connections;
-    private final ControllerCoordinator controllerCoordinator;
+    private transient final ArrayList<ServerConnection> connections;
+    private transient final ControllerCoordinator controllerCoordinator;
     private final ArrayList<String> joinedUsers;
     private Boolean startedGame=false;
     private Boolean fullLobby=false;
-    private String saveFilePath="c/Program Files (x86)/GitHub/IS23-AM23/SavedGames/";
+    private  transient String saveFilePath="Savings";
     private final Integer idLobby;
     public Lobby(Integer numPlayersLobby,Integer ID){
         this.NumPlayersLobby=numPlayersLobby;
@@ -38,6 +37,7 @@ public class Lobby {
         connections=new ArrayList<>();
         this.joinedUsers=new ArrayList<>();
         this.controllerCoordinator=new ControllerCoordinator();
+        setSavesOfTheLobby();
     }
 
     /**
@@ -119,7 +119,9 @@ public class Lobby {
         try{
             Savings savings=new Savings(this);
             savings.saveGame(returnMessage.getSavings());
-            Files.writeString(Path.of("./" +saveFilePath) ,gson.toJson(savings) );
+            String save =gson.toJson(savings);
+            FileWriter writer=new FileWriter(myObj,false);
+            writer.write(save);
             System.out.println("The game is saved");
         }catch (IOException e){
             throw new RuntimeException(e);
@@ -143,7 +145,7 @@ public class Lobby {
     public synchronized void startGameLobby(){
         startedGame=true;
         controllerCoordinator.startGame();
-        setSavesOfTheLobby();
+
 
     }
 
@@ -152,9 +154,9 @@ public class Lobby {
      * Method that sets the saves of the game
      */
     private void setSavesOfTheLobby() {
-        String fileName="Lobby"+String.valueOf(idLobby)+".txt";
+        String fileName="Lobby"+ idLobby +".json";
         saveFilePath=saveFilePath+fileName;
-        File myObj=new File(saveFilePath);
+        myObj=new File(saveFilePath);
     }
 
     public synchronized Boolean getStartedGame() {

@@ -130,9 +130,10 @@ public class Game implements Serializable {
      */
     private GameSavings setGameSavings() {
         GameSavings savings=new GameSavings(Players);
+        savings.setLivingRoom(livingRoom);
         savings.setFinishedGame(finishedGame);
-        savings.setCommonGoalCard1(livingRoom.getCommonGoalCard1());
-        savings.setCommonGoalCard2(livingRoom.getCommonGoalCard2());
+        savings.setCommonGoalCard1(livingRoom.getIdCGC1());
+        savings.setCommonGoalCard2(livingRoom.getIdCGC2());
         savings.setStartedGame(startedGame);
         savings.setCurrPlaying(currPlaying);
         savings.setNumPlayers(gameNumPlayers);
@@ -428,7 +429,7 @@ public class Game implements Serializable {
         PropertyChangeEvent evt = new PropertyChangeEvent(
                 this,
                 "UPDATE_STATE",
-                this,
+                null,
                 this);
         for(PropertyChangeListener l:listeners){
             l.propertyChange(evt);

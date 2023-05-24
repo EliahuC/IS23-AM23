@@ -15,8 +15,8 @@ public class GameSavings {
     private Integer numPlayers;
     private final ArrayList<Player> players;
     private LivingRoom livingRoom=null;
-    private CommonGoalCard commonGoalCard1=null;
-    private CommonGoalCard commonGoalCard2=null;
+    private Integer commonGoalCard1;
+    private Integer commonGoalCard2=null;
     private Integer currPlaying=null;
 
     private boolean startedGame=false;
@@ -44,19 +44,19 @@ public class GameSavings {
         this.livingRoom = livingRoom;
     }
 
-    public CommonGoalCard getCommonGoalCard1() {
+    public Integer getCommonGoalCard1() {
         return commonGoalCard1;
     }
 
-    public void setCommonGoalCard1(CommonGoalCard commonGoalCard1) {
+    public void setCommonGoalCard1(Integer commonGoalCard1) {
         this.commonGoalCard1 = commonGoalCard1;
     }
 
-    public CommonGoalCard getCommonGoalCard2() {
+    public Integer getCommonGoalCard2() {
         return commonGoalCard2;
     }
 
-    public void setCommonGoalCard2(CommonGoalCard commonGoalCard2) {
+    public void setCommonGoalCard2(Integer commonGoalCard2) {
         this.commonGoalCard2 = commonGoalCard2;
     }
 

@@ -26,7 +26,7 @@ public class GameController {
      private final Gson gson = new Gson();
      private final ArrayList<Integer> coordinates=new ArrayList<>();
      private final ArrayList<Integer> order=new ArrayList<>();
-     private Integer column;
+     private Integer column=-1;
      private final ArrayList<Player> players =new ArrayList<>();
      private boolean startedGame=false;
      public GameController(ArrayList<Player> players){

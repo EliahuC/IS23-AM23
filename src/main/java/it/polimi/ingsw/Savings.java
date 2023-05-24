@@ -2,11 +2,13 @@ package it.polimi.ingsw;
 
 import it.polimi.ingsw.Network.Server.Lobby;
 
+import java.io.Serializable;
+
 /**
  * @author Eliahu Cohen
  * Class that rapresent the savings of a particular lobby
  */
-public class Savings {
+public class Savings implements Serializable {
     private Integer savingNumber;
     private final Lobby lobby;
     private GameSavings gameSavings=null;
