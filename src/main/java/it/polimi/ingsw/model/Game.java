@@ -417,20 +417,15 @@ public class Game implements Serializable {
     private synchronized void increaseCurrPlaying() {
         if(currPlaying==gameNumPlayers && !finishedGame) currPlaying=1;
         else if(currPlaying<gameNumPlayers && !finishedGame) currPlaying++;
-        PropertyChangeEvent evt = new PropertyChangeEvent(
+        /*PropertyChangeEvent evt = new PropertyChangeEvent(
                 this,
                 "NEW_TURN",
                 this.currPlaying,
                 currPlaying);
         for(PropertyChangeListener l:listeners){
             l.propertyChange(evt);
-        }
-        try{
-            TimeUnit.MILLISECONDS.sleep(500);
-        }catch (InterruptedException iE){
-            iE.printStackTrace();
-        }
-        evt = new PropertyChangeEvent(
+        }*/
+        PropertyChangeEvent evt = new PropertyChangeEvent(
                 this,
                 "UPDATE_STATE",
                 this,
@@ -442,6 +437,10 @@ public class Game implements Serializable {
 
     public synchronized String getCurrPlaying(){
         return Players.get(currPlaying-1).getNickName();
+    }
+
+    public Integer getWhoIsPlaying(){
+        return currPlaying;
     }
 
     public ArrayList<Player> getDisconnectedPlayers() {
@@ -490,6 +489,8 @@ public class Game implements Serializable {
             }
         }
     }
+
+
 }
 
 
