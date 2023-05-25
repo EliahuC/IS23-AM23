@@ -15,6 +15,7 @@ import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -28,6 +29,7 @@ public class ClientConnectionRMI extends ConnectionClient implements RemoteInter
     private boolean clientIsActive;
     private boolean GUIisActive;
     private Thread ping;
+    private ArrayList<ServerMessage> queue=new ArrayList<>();
 
     /**
      * @author Eliahu Cohen
@@ -71,11 +73,23 @@ public class ClientConnectionRMI extends ConnectionClient implements RemoteInter
                     throw new RuntimeException(e);
                 }
 
-
-            }
+            }});
+            ping.start();
+            Thread receiver= new Thread(()->{
+                while (clientIsActive) {
+                    try {
+                        TimeUnit.MILLISECONDS.sleep(200);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    passToListener();
+                }
         });
+            receiver.start();
+        }
 
-    }
+
+
 
     /**
      * @author Eliahu Cohen
@@ -83,19 +97,26 @@ public class ClientConnectionRMI extends ConnectionClient implements RemoteInter
      * Method that receive a message from the server and pass it to GUI/CLI handlers
      */
     public void receiveMessage(String message) {
-        ServerMessage serverMessage=null;
-        serverMessage= (ServerMessage) MoveDeserializer.deserializeOutput(message);
-        PropertyChangeEvent evt= new PropertyChangeEvent(
-                this,
-                "MESSAGE RECEIVED",
-                null,
-                serverMessage);
-
-        if (serverMessage!= null && serverMessage.getCategory() != Message.MessageCategory.PINGFROMSERVER) {
-           listener.propertyChange(evt);
+        synchronized (queue){
+            queue.add((ServerMessage) MoveDeserializer.deserializeOutput(message));
+            queue.notifyAll();
         }
-
     }
+
+    private void passToListener(){
+       synchronized (queue){
+           if(queue.size()!=0){
+               ServerMessage serverMessage=queue.remove(0);
+               PropertyChangeEvent evt= new PropertyChangeEvent(
+                       this,
+                       "MESSAGE RECEIVED",
+                       null,
+                       serverMessage);
+               listener.propertyChange(evt);
+               }
+           }
+       }
+
 
 
     /**
@@ -142,7 +163,7 @@ public class ClientConnectionRMI extends ConnectionClient implements RemoteInter
         }
         TimeUnit.SECONDS.sleep(3);
         if(pingIsOk){
-            System.out.println("ping arrived");
+            //System.out.println("ping arrived");
             return;
         }
         System.out.println("connection crushed");

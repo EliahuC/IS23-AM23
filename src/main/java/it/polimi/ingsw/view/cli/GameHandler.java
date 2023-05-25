@@ -116,7 +116,7 @@ public class GameHandler {
 
     public void start(){
         while(true){
-            if(player.getNickName()==players.get(currPlaying-1).getNickName()) {
+            if(player.getNickName().equals(players.get(currPlaying-1).getNickName())) {
                 showBoard();
                 showBookshelfOrder();
                 showBookshelfColumn();

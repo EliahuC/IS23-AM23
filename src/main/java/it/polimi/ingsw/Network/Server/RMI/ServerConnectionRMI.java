@@ -291,11 +291,15 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
      * @throws InterruptedException
      * Method used to send a ping to the client
      */
-    public void sendPing() throws InterruptedException, RemoteException {
+    public void sendPing() throws RemoteException {
         for (String s : Server.rmiConnections.keySet()) {
             boolean pingIsOk = false;
             pingIsOk = Server.rmiConnections.get(s).getPing();
-            TimeUnit.SECONDS.sleep(3);
+            try {
+                TimeUnit.SECONDS.sleep(3);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
             if (pingIsOk) {
                 System.out.println("ping arrived");
                 return;
@@ -351,7 +355,7 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
                 }
                 try {
                     sendPing();
-                } catch (InterruptedException | RemoteException e) {
+                } catch (RemoteException e) {
                     throw new RuntimeException(e);
                 }
 

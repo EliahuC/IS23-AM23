@@ -29,7 +29,6 @@ public class CLIEvent implements PropertyChangeListener {
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         ServerMessage serverMessage=(ServerMessage) evt.getNewValue();
-        forwardMessage(serverMessage);
         if(gameHandler!=null){
             switch (serverMessage.getCategory()) {
                 case STARTING_GAME_MESSAGE:
@@ -56,6 +55,7 @@ public class CLIEvent implements PropertyChangeListener {
                     break;
             }
         }
+        forwardMessage(serverMessage);
     }
 
     private void forwardMessage(ServerMessage response){
