@@ -330,7 +330,7 @@ public class ServerConnectionTCP implements ServerConnection{
                     //Metto a dormire thread per 15 secondi
                     TimeUnit.SECONDS.sleep(5);
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                   ping.interrupt();
                 }
                 sendPing(pingCount);
                 pingCount++;
@@ -344,7 +344,7 @@ public class ServerConnectionTCP implements ServerConnection{
             String s = input.nextLine();
             receiveMessage(s);
         }
-           }catch (IllegalStateException e){
+           }catch (NoSuchElementException | IllegalStateException e){
                closeClientConnection();
            }
 
