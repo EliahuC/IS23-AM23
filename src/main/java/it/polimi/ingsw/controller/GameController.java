@@ -180,4 +180,11 @@ public class GameController {
         game.setFinishedGame(true);
         game.terminateGame();
     }
+
+    public void setGame(GameSavings gameSavings) {
+        game.setLivingRoom(gameSavings.getLivingRoom());
+        game.setPlayers(gameSavings.getPlayers());
+        game.setStartedGame(true);
+        game.setCurrPlaying(gameSavings.getCurrPlaying());
+    }
 }

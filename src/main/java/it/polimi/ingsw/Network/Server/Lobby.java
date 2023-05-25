@@ -1,6 +1,7 @@
 package it.polimi.ingsw.Network.Server;
 
 import com.google.gson.Gson;
+import it.polimi.ingsw.GameSavings;
 import it.polimi.ingsw.Messages.ClientToServer.ClientMessage;
 import it.polimi.ingsw.Messages.Message;
 import it.polimi.ingsw.Messages.ServerToClient.ErrorMessage;
@@ -10,6 +11,7 @@ import it.polimi.ingsw.Messages.ServerToClient.ValidMoveMessage;
 import it.polimi.ingsw.Network.Server.TCP.ServerConnectionTCP;
 import it.polimi.ingsw.Savings;
 import it.polimi.ingsw.controller.ControllerCoordinator;
+import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.player.Player;
 
 import java.io.*;
@@ -211,5 +213,9 @@ public class Lobby implements Serializable {
 
     public void endGame() {
         controllerCoordinator.endgame();
+    }
+
+    public void reloadGame(GameSavings gameSavings) {
+        controllerCoordinator.setGame(gameSavings);
     }
 }

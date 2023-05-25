@@ -22,12 +22,12 @@ import java.util.stream.Collectors;
 
 
 public class Game implements Serializable {
-    private final LivingRoom livingRoom;
-    private final ArrayList<Player> Players;
+    private LivingRoom livingRoom;
+    private ArrayList<Player> Players;
     private transient final ArrayList<Player> disconnectedPlayers;
 
     private Integer currPlaying;
-    private transient final Integer gameNumPlayers;
+    private transient  Integer gameNumPlayers;
 
     private transient final GameChecker gameChecker;
     private transient boolean startedGame=false;
@@ -491,7 +491,25 @@ public class Game implements Serializable {
         }
     }
 
+    public void setLivingRoom(LivingRoom livingRoom) {
+        this.livingRoom = livingRoom;
+    }
 
+    public void setPlayers(ArrayList<Player> players) {
+        Players = players;
+    }
+
+    public void setGameNumPlayers(Integer gameNumPlayers) {
+        this.gameNumPlayers = gameNumPlayers;
+    }
+
+    public void setStartedGame(boolean startedGame) {
+        this.startedGame = startedGame;
+    }
+
+    public void setCurrPlaying(Integer currPlaying) {
+        this.currPlaying = currPlaying;
+    }
 }
 
 

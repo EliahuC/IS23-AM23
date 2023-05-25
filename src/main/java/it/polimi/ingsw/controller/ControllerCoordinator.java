@@ -1,5 +1,6 @@
 package it.polimi.ingsw.controller;
 
+import it.polimi.ingsw.GameSavings;
 import it.polimi.ingsw.Messages.ClientToServer.ClientMessage;
 import it.polimi.ingsw.Messages.Message;
 import it.polimi.ingsw.Messages.ServerToClient.ErrorMessage;
@@ -84,5 +85,9 @@ public class ControllerCoordinator {
     public void endgame() {
         if(gameController!=null)
             gameController.terminateGame();
+    }
+
+    public void setGame(GameSavings gameSavings) {
+        gameController.setGame(gameSavings);
     }
 }
