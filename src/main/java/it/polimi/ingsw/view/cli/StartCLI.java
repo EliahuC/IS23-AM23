@@ -109,7 +109,7 @@ public class StartCLI {
                     break;
             }
             try{
-                TimeUnit.MILLISECONDS.sleep(50);
+                TimeUnit.MILLISECONDS.sleep(500);
             }catch (InterruptedException iE){
                 iE.printStackTrace();
             }
