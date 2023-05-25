@@ -625,7 +625,7 @@ public class CommonGoalCard4 extends CommonGoalCard implements CheckCommonGoalCa
     public void print(){
         System.out.print("TWO SQUARES.\n\n");
 
-        BookShelf example= new BookShelf();
+        /*BookShelf example= new BookShelf();
         ItemTile green =new ItemTile("CATS");
         ItemTile white =new ItemTile("BOOKS");
         ItemTile yellow =new ItemTile("GAMES");
@@ -641,7 +641,7 @@ public class CommonGoalCard4 extends CommonGoalCard implements CheckCommonGoalCa
         example.setTile(0,3, blue);
         example.setTile(0,4, blue);
 
-        example.printCGC();
+        example.printCGC();*/
 
         System.out.print("\nDESCRIPTION: Two groups each containing 4 tiles of the same type in a 2x2 square.\n" +
                 "The tiles of one square can be different from those of the other square.\n");

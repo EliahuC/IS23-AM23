@@ -60,7 +60,7 @@ public class CommonGoalCard8 extends CommonGoalCard implements CheckCommonGoalCa
     public void print(){
         System.out.print("FOUR FULL ROWS.\n\n");
 
-        BookShelf example= new BookShelf();
+        /*BookShelf example= new BookShelf();
         ItemTile green =new ItemTile("CATS");
         ItemTile white =new ItemTile("BOOKS");
         ItemTile yellow =new ItemTile("GAMES");
@@ -88,7 +88,7 @@ public class CommonGoalCard8 extends CommonGoalCard implements CheckCommonGoalCa
         example.setTile(0,3, cyan);
         example.setTile(0,4, cyan);
 
-        example.printCGC();
+        example.printCGC();*/
 
         System.out.print("\nDESCRIPTION: Four lines each formed by 5 tiles of maximum three different types.\n" +
                 "One line can show the same or a different combination of another line.\n");

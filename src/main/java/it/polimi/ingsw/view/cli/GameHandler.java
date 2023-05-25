@@ -2,21 +2,19 @@ package it.polimi.ingsw.view.cli;
 
 import it.polimi.ingsw.Messages.ClientToServer.ClientMessage;
 import it.polimi.ingsw.Messages.Message;
-import it.polimi.ingsw.Messages.ServerToClient.LivingRoomMessage;
 import it.polimi.ingsw.Messages.ServerToClient.ServerMessage;
 import it.polimi.ingsw.Network.Client.ConnectionClient;
 import it.polimi.ingsw.Messages.MoveSerializer;
-import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.board.ItemTile;
 import it.polimi.ingsw.model.board.LivingRoom;
 import it.polimi.ingsw.model.board.goalCards.*;
 import it.polimi.ingsw.model.player.BookShelf;
+import it.polimi.ingsw.model.player.Pair;
+import it.polimi.ingsw.model.player.PersonalGoalCard;
 import it.polimi.ingsw.model.player.Player;
 
-import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
 
 public class GameHandler {
     private ConnectionClient connectionClient;
@@ -24,12 +22,23 @@ public class GameHandler {
     private ServerMessage response;
     private LivingRoom livingRoom;
     private Player player;
+    private Integer seed;
+    private BookShelf personalGoalCard=new BookShelf();
     private ArrayList<Player> players;
     private ArrayList<ItemTile> tiles = new ArrayList<>();
     private int currPlaying=1;
     private String currentPlayer;
     private static final String RESET = "\u001B[0m";
-    private static final String FIRST = "\u001b[38;2;189;174;41m";
+    private static final String CHAIR = "\u001b[38;2;189;174;41m";
+    private static final String GREEN = "\u001b[48;2;145;165;65m";
+    private static final String WHITE = "\u001b[48;2;236;225;189m";
+    private static final String YELLOW = "\u001b[48;2;223;169;59m";
+    private static final String BLUE = "\u001b[48;2;0;104;146m";
+    private static final String CYAN = "\u001b[48;2;106;183;183m";
+    private static final String PINK = "\u001b[48;2;198;77;124m";
+    public static final int LivingRoomSize=9;
+    private static final int shelfRows = 6;
+    private static final int shelfCols = 5;
     private String winner;
     private CommonGoalCard commonGoalCard1;
     private CommonGoalCard commonGoalCard2;
@@ -115,6 +124,7 @@ public class GameHandler {
     }
 
     public void start(){
+        buildPersonalGoaldCard();
         while(true){
             if(player.getNickName().equals(players.get(currPlaying-1).getNickName())) {
                 showBoard();
@@ -135,10 +145,15 @@ public class GameHandler {
     }
 
     private void waiting(){
+        try {
+            TimeUnit.MILLISECONDS.sleep(200);
+        } catch (InterruptedException iE) {
+            iE.printStackTrace();
+        }
         System.out.println("It's not your turn, yet. Wait for other players to finish their turn.\n");
         System.out.print("CURRENT PLAYING: ");
         if(players.get(currPlaying-1).isFirstPlayerSeat())
-            System.out.println(FIRST+players.get(currPlaying-1).getNickName()+RESET);
+            System.out.println(CHAIR +players.get(currPlaying-1).getNickName()+RESET);
         else
             System.out.println(players.get(currPlaying-1).getNickName());
         try{
@@ -147,8 +162,8 @@ public class GameHandler {
             iE.printStackTrace();
         }
         if(response!=null && response.getCategory()==Message.MessageCategory.LAST_TURN_MESSAGE)
-            System.out.print(response.getReturnMessage());
-        while(player.getNickName()!=players.get(currPlaying-1).getNickName()){
+            System.out.println(response.getReturnMessage());
+        while(!Objects.equals(player.getNickName(), players.get(currPlaying - 1).getNickName())){
             /*System.out.print("\033[H\033[2J");
             System.out.flush();
             System.out.print("It's not your turn, yet. Wait for other players to finish their turn.\n\n");
@@ -169,12 +184,17 @@ public class GameHandler {
             }catch (InterruptedException iE){
                 iE.printStackTrace();
             }*/
+            try{
+                TimeUnit.MILLISECONDS.sleep(200);
+            }catch (InterruptedException iE){
+                iE.printStackTrace();
+            }
         }
     }
 
     private void showBoard(){
         System.out.println("LIVING BOARD");
-        livingRoom.print();
+        printBoard();
         try{
             TimeUnit.MILLISECONDS.sleep(200);
         }catch (InterruptedException iE){
@@ -220,7 +240,7 @@ public class GameHandler {
         Scanner input = new Scanner(System.in);
         String command;
         System.out.println("YOUR PERSONAL GOAL CARD\n");
-        player.getPersonalGoalCard().print();
+        printPersonalGoalCard();
         System.out.println("\nCOMMON GOAL CARDS\n");
         System.out.print("(1): ");
         commonGoalCard1.print();
@@ -254,7 +274,7 @@ public class GameHandler {
     private void showBookshelfOrder(){
         Scanner input = new Scanner(System.in);
         System.out.println("YOUR BOOKSHELF\n");
-        player.getPlayerBookshelf().print();
+        printBookshelf();
         System.out.print("\n\nORDER YOUR TILES! The tiles you picked before from the board are shown above.\n" +
                 "Use the command /ORDER to choose in which order you want to insert the tiles in your bookshelf.\n\n" +
                 "For example: if you have three tiles to order, you could write: /ORDER 2 1 3 or /ORDER 3 2 1\n" +
@@ -283,7 +303,7 @@ public class GameHandler {
     private void showBookshelfColumn(){
         Scanner input = new Scanner(System.in);
         System.out.println("YOUR BOOKSHELF\n");
-        player.getPlayerBookshelf().print();
+        printBookshelf();
         System.out.print("\n\nCHOOSE THE COLUMN! Choose where you want to inserted the picked and order tiles,\n" +
                 "using the command /COLUMN and the coordinate of the column.\n" +
                 "For example: if you want to insert the tiles in the second column, you should write /COLUMN 1\n\n" +
@@ -301,25 +321,25 @@ public class GameHandler {
             }catch (InterruptedException iE){
                 iE.printStackTrace();
             }
-            if(response!=null && response.getCategory()==Message.MessageCategory.VALID_MESSAGE)
+            if(response!=null && (response.getCategory()==Message.MessageCategory.VALID_MESSAGE || response.getCategory()==Message.MessageCategory.UPDATE_STATE))
                 break;
             System.out.println("The chosen column is too full. Please, choose another one.");
         }
         tiles.clear();
-        while(response!=null && response.getCategory()!=Message.MessageCategory.UPDATE_STATE){
+        /*while(response!=null && response.getCategory()!=Message.MessageCategory.UPDATE_STATE){
             try{
                 TimeUnit.MILLISECONDS.sleep(200);
             }catch (InterruptedException iE){
                 iE.printStackTrace();
             }
-        }
+        }*/
     }
 
     private void showBookshelf(){
         Scanner input = new Scanner(System.in);
         String command;
         System.out.println("YOUR BOOKSHELF\n");
-        player.getPlayerBookshelf().print();
+        printBookshelf();
         System.out.println("\n\n[If you want to come back to the previous screen, use the command /BACK]");
         while (true){
             command = input.nextLine();
@@ -331,10 +351,166 @@ public class GameHandler {
     }
 
     private void printSelection(){
-        for (ItemTile tile : tiles) System.out.print(tile.getColor() + "   ");
+        for (ItemTile tile : tiles){
+            switch (tile.getCategory()){
+                case CATS:
+                    System.out.print(GREEN + "   " + RESET + "   ");
+                    break;
+                case FRAMES:
+                    System.out.print(BLUE + "   " + RESET + "   ");
+                    break;
+                case BOOKS:
+                    System.out.print(WHITE + "   " + RESET + "   ");
+                    break;
+                case GAMES:
+                    System.out.print(YELLOW + "   " + RESET + "   ");
+                    break;
+                case PLANTS:
+                    System.out.print(PINK + "   " + RESET + "   ");
+                    break;
+                case TROPHIES:
+                    System.out.print(CYAN + "   " + RESET + "   ");
+                    break;
+            }
+        }
         System.out.print("\n");
         for(int i=0; i< tiles.size(); i++)
             System.out.print("(" + (i+1) + ")   ");
         System.out.print("\n");
+    }
+
+    private void printBoard(){
+        for (int i=0; i<LivingRoomSize;i++){
+            for(int j=0; j<LivingRoomSize; j++){
+                if(livingRoom.getBoardTile(i,j).getTile()!=null){
+                    switch (livingRoom.getBoardTile(i,j).getTile().getCategory()){
+                        case CATS:
+                            System.out.print(GREEN + "   " + RESET);
+                            break;
+                        case FRAMES:
+                            System.out.print(BLUE + "   " + RESET);
+                            break;
+                        case BOOKS:
+                            System.out.print(WHITE + "   " + RESET);
+                            break;
+                        case GAMES:
+                            System.out.print(YELLOW + "   " + RESET);
+                            break;
+                        case PLANTS:
+                            System.out.print(PINK + "   " + RESET);
+                            break;
+                        case TROPHIES:
+                            System.out.print(CYAN + "   " + RESET);
+                            break;
+                    }
+                }else
+                    System.out.print("   ");
+                if(j==LivingRoomSize-1)
+                    System.out.print("  ["+i+"]\n");
+            }
+        }
+        for(int j=0; j<LivingRoomSize;j++)
+            System.out.print("["+j+"]");
+    }
+
+    private void printBookshelf(){
+        for(int i=0; i<=shelfRows;i++)
+            System.out.print("\u001b[48;2;140;68;28m   \u001B[0m");
+        System.out.print("\n");
+        for(int i=0; i<shelfRows; i++){
+            System.out.print("  \u001b[48;2;140;68;28m \u001B[0m");
+            for(int j=0; j<shelfCols; j++){
+                if(player.getPlayerBookshelf().getTile(i,j)==null)
+                    System.out.print("   ");
+                else{
+                    switch (player.getPlayerBookshelf().getTile(i,j).getCategory()){
+                        case CATS:
+                            System.out.print(GREEN + "   " + RESET);
+                            break;
+                        case FRAMES:
+                            System.out.print(BLUE + "   " + RESET);
+                            break;
+                        case BOOKS:
+                            System.out.print(WHITE + "   " + RESET);
+                            break;
+                        case GAMES:
+                            System.out.print(YELLOW + "   " + RESET);
+                            break;
+                        case PLANTS:
+                            System.out.print(PINK + "   " + RESET);
+                            break;
+                        case TROPHIES:
+                            System.out.print(CYAN + "   " + RESET);
+                            break;
+                    }
+                }
+                if(j==shelfCols-1) {
+                    System.out.print("\u001b[48;2;140;68;28m \u001B[0m ");
+                    System.out.print("  [" + i + "]\n");
+                }
+            }
+        }
+        for(int i=0; i<=shelfRows;i++)
+            System.out.print("\u001b[48;2;140;68;28m   \u001B[0m");
+        System.out.print("\n");
+        System.out.print("   ");
+        for(int j=0; j<shelfCols;j++)
+            System.out.print("["+j+"]");
+    }
+
+    private void printPersonalGoalCard(){
+        for(int i=0; i<=shelfRows;i++)
+            System.out.print("\u001b[48;2;140;68;28m   \u001B[0m");
+        System.out.print("\n");
+        for(int i=0; i<shelfRows; i++){
+            System.out.print("  \u001b[48;2;140;68;28m \u001B[0m");
+            for(int j=0; j<shelfCols; j++){
+                if(personalGoalCard.getTile(i,j)==null)
+                    System.out.print("   ");
+                else{
+                    switch (personalGoalCard.getTile(i,j).getCategory()){
+                        case CATS:
+                            System.out.print(GREEN + "   " + RESET);
+                            break;
+                        case FRAMES:
+                            System.out.print(BLUE + "   " + RESET);
+                            break;
+                        case BOOKS:
+                            System.out.print(WHITE + "   " + RESET);
+                            break;
+                        case GAMES:
+                            System.out.print(YELLOW + "   " + RESET);
+                            break;
+                        case PLANTS:
+                            System.out.print(PINK + "   " + RESET);
+                            break;
+                        case TROPHIES:
+                            System.out.print(CYAN + "   " + RESET);
+                            break;
+                    }
+                }
+                if(j==shelfCols-1) {
+                    System.out.print("\u001b[48;2;140;68;28m \u001B[0m \n");
+                }
+            }
+        }
+        for(int i=0; i<=shelfRows;i++)
+            System.out.print("\u001b[48;2;140;68;28m   \u001B[0m");
+        System.out.print("\n");
+        System.out.print("   ");
+    }
+
+    public void buildPersonalGoaldCard(){
+        PersonalGoalCard stamp = new PersonalGoalCard(seed);
+        for(Pair k: stamp.getGoal().keySet())
+           personalGoalCard.setTile(k.getX(),k.getY(),stamp.getGoal().get(k));
+    }
+
+    public void setSeed (Integer seed){
+        this.seed=seed;
+    }
+
+    public Player getPlayer() {
+        return player;
     }
 }

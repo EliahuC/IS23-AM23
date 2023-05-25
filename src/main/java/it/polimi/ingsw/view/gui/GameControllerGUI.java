@@ -139,7 +139,7 @@ public class GameControllerGUI {
     }
     private void displayBoard(){
         System.out.print("LIVING BOARD\n");
-        livingRoom.print();
+        //livingRoom.print();
         try{
             TimeUnit.MILLISECONDS.sleep(200);
         }catch (InterruptedException iE){
@@ -185,7 +185,6 @@ public class GameControllerGUI {
         Scanner input = new Scanner(System.in);
         String command;
         System.out.print("YOUR PERSONAL GOAL CARD\n\n");
-        player.getPersonalGoalCard().print();
         System.out.print("\nCOMMON GOAL CARDS\n\n");
         System.out.print("(1): ");
         livingRoom.getCommonGoalCard1().print();
@@ -219,7 +218,7 @@ public class GameControllerGUI {
     private void displayBookshelfOrder(){
         Scanner input = new Scanner(System.in);
         System.out.print("YOUR BOOKSHELF\n");
-        player.getPlayerBookshelf().print();
+        //player.getPlayerBookshelf().print();
         System.out.print("ORDER YOUR TILES! The tiles you picked before from the board are shown above.\n" +
                 "Use the command /ORDER to choose in which order you want to insert the tiles in your bookshelf.\n\n" +
                 "For example: if you have three tiles to order, you could write: /ORDER 2 1 3 or /ORDER 3 2 1\n" +
@@ -248,7 +247,7 @@ public class GameControllerGUI {
     private void displayBookshelfColumn(){
         Scanner input = new Scanner(System.in);
         System.out.print("YOUR BOOKSHELF\n");
-        player.getPlayerBookshelf().print();
+        //player.getPlayerBookshelf().print();
         System.out.print("CHOOSE THE COLUMN! Choose where you want to inserted the picked and order tiles,\n" +
                 "using the command /COLUMN and the coordinate of the column.\n" +
                 "For example: if you want to insert the tiles in the second column, you should write /COLUMN 1\n\n" +
@@ -276,7 +275,7 @@ public class GameControllerGUI {
         Scanner input = new Scanner(System.in);
         String command;
         System.out.print("YOUR BOOKSHELF\n\n");
-        player.getPlayerBookshelf().print();
+        //player.getPlayerBookshelf().print();
         System.out.print("\n\n[If you want to come back to the previous screen, use the command /BACK]\n");
         while (true){
             command = input.nextLine();
@@ -289,7 +288,7 @@ public class GameControllerGUI {
 
     private void printSelection(){
         for(int i=0; tiles.get(i)!=null; i++)
-            System.out.print(tiles.get(i).getColor() + "   ");
+            //System.out.print(tiles.get(i).getColor() + "   ");
         System.out.print("\n");
         for(int i=0; tiles.get(i)!=null; i++)
             System.out.print("(" + i+1 + ")   ");

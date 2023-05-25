@@ -78,7 +78,7 @@ public class CommonGoalCard12 extends CommonGoalCard implements CheckCommonGoalC
     public void print(){
         System.out.print("STAIRCASE OF TILES.\n\n");
 
-        BookShelf example= new BookShelf();
+        /*BookShelf example= new BookShelf();
         ItemTile green =new ItemTile("CATS");
         ItemTile white =new ItemTile("BOOKS");
         ItemTile yellow =new ItemTile("GAMES");
@@ -101,7 +101,7 @@ public class CommonGoalCard12 extends CommonGoalCard implements CheckCommonGoalC
         example.setTile(2,1, yellow);
         example.setTile(1,0, yellow);
 
-        example.printCGC();
+        example.printCGC();*/
 
         System.out.print("\nDESCRIPTION: Five columns of increasing or decreasing height.\n" +
                 "Starting from the first column on the left or on the right, each next column must be made\n" +

@@ -72,7 +72,7 @@ public class CommonGoalCard11 extends CommonGoalCard implements CheckCommonGoalC
     public void print(){
         System.out.print("CROSS TILES.\n\n");
 
-        BookShelf example= new BookShelf();
+        /*BookShelf example= new BookShelf();
         ItemTile green =new ItemTile("CATS");
         ItemTile white =new ItemTile("BOOKS");
         ItemTile yellow =new ItemTile("GAMES");
@@ -85,7 +85,7 @@ public class CommonGoalCard11 extends CommonGoalCard implements CheckCommonGoalC
         example.setTile(2,1, white);
         example.setTile(2,3, white);
 
-        example.printCGC();
+        example.printCGC();*/
 
         System.out.print("\nDESCRIPTION: Five tiles of the same type forming an X.\n");
         System.out.print("POINTS:" + getPoints() + "\n\n");

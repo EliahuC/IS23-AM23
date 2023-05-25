@@ -66,7 +66,7 @@ public class CommonGoalCard9 extends CommonGoalCard implements CheckCommonGoalCa
     public void print(){
         System.out.print("TWO COLUMNS WITH DIFFERENT TILES.\n\n");
 
-        BookShelf example= new BookShelf();
+        /*BookShelf example= new BookShelf();
         ItemTile green =new ItemTile("CATS");
         ItemTile white =new ItemTile("BOOKS");
         ItemTile yellow =new ItemTile("GAMES");
@@ -86,7 +86,7 @@ public class CommonGoalCard9 extends CommonGoalCard implements CheckCommonGoalCa
         example.setTile(1,4, pink);
         example.setTile(0,4, cyan);
 
-        example.printCGC();
+        example.printCGC();*/
 
         System.out.print("\nDESCRIPTION: Two columns each formed by 6 different types of tiles.\n");
         System.out.print("POINTS:" + getPoints() + "\n\n");

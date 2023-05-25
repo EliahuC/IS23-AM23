@@ -20,18 +20,6 @@ public class LivingRoomMessage extends ServerMessage{
     public BoardToken[][] getBoard() {
         return Board;
     }
-
-    public void print(){
-        for (int i=0; i<MAX_Row;i++){
-            for(int j=0; j<MAX_Column; j++){
-                getBoardTile(i,j).print();
-                if(j==MAX_Column-1)
-                    System.out.print("  ["+i+"]\n");
-            }
-        }
-        for(int j=0; j<MAX_Column;j++)
-            System.out.print("["+j+"]");
-    }
     private BoardToken getBoardTile(int i, int j){
         return Board[i][j];
     }

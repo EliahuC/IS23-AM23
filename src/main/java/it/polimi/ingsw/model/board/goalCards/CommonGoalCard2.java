@@ -39,7 +39,7 @@ public class CommonGoalCard2 extends CommonGoalCard implements CheckCommonGoalCa
     public void print(){
         System.out.print("FOUR GROUPS FORMED OF FOUR TILES.\n\n");
 
-        BookShelf example= new BookShelf();
+        /*BookShelf example= new BookShelf();
         ItemTile green =new ItemTile("CATS");
         ItemTile white =new ItemTile("BOOKS");
         ItemTile yellow =new ItemTile("GAMES");
@@ -63,7 +63,7 @@ public class CommonGoalCard2 extends CommonGoalCard implements CheckCommonGoalCa
         example.setTile(4,3, white);
         example.setTile(3,3, white);
 
-        example.printCGC();
+        example.printCGC();*/
 
         System.out.print("\nDESCRIPTION: Four groups each containing at least 4 tiles of the same type.\n" +
                 "The tiles of one group can be different from those of another group.\n");

@@ -38,7 +38,7 @@
         public void print(){
             System.out.print("EIGHT SAME TILES.\n\n");
 
-            BookShelf example= new BookShelf();
+            /*BookShelf example= new BookShelf();
             ItemTile green =new ItemTile("CATS");
             ItemTile white =new ItemTile("BOOKS");
             ItemTile yellow =new ItemTile("GAMES");
@@ -54,7 +54,7 @@
             example.setTile(1,1, green);
             example.setTile(1,3, green);
 
-            example.printCGC();
+            example.printCGC();*/
 
             System.out.print("\nDESCRIPTION: Eight tiles of the same type.\n" +
                     "There’s no restriction about the position of these tiles.\n");

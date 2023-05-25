@@ -76,7 +76,7 @@ public class CommonGoalCard7 extends CommonGoalCard implements CheckCommonGoalCa
     public void print(){
         System.out.print("DIAGONAL TILES.\n\n");
 
-        BookShelf example= new BookShelf();
+        /*BookShelf example= new BookShelf();
         ItemTile green =new ItemTile("CATS");
         ItemTile white =new ItemTile("BOOKS");
         ItemTile yellow =new ItemTile("GAMES");
@@ -89,7 +89,7 @@ public class CommonGoalCard7 extends CommonGoalCard implements CheckCommonGoalCa
         example.setTile(2,1, pink);
         example.setTile(1,0, pink);
 
-        example.printCGC();
+        example.printCGC();*/
 
         System.out.print("\nDESCRIPTION: Five tiles of the same type forming a diagonal.\n");
         System.out.print("POINTS:" + getPoints() + "\n\n");

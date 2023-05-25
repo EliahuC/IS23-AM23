@@ -196,32 +196,6 @@ public class PersonalGoalCard implements Serializable {
       return counter==6;
     }
 
-    public void print(){
-        String[][] temp= new String[6][5];
-        for(Pair k: Goal.keySet())
-            temp[k.getX()][k.getY()] = Goal.get(k).getColor();
-
-        for(int i=0; i<=MAX_Row;i++)
-            System.out.print("\u001b[48;2;140;68;28m   \u001B[0m");
-        System.out.print("\n");
-        for(int i=0; i<MAX_Row; i++){
-            System.out.print("  \u001b[48;2;140;68;28m \u001B[0m");
-            for(int j=0; j<MAX_Column; j++) {
-                if (temp[i][j] == null)
-                    System.out.print("   ");
-                else
-                    System.out.print(temp[i][j]);
-                if (j == MAX_Column - 1){
-                    System.out.print("\u001b[48;2;140;68;28m \u001B[0m  ");
-                    System.out.print("\n");
-                }
-            }
-        }
-        for(int i=0; i<=MAX_Row;i++)
-            System.out.print("\u001b[48;2;140;68;28m   \u001B[0m");
-        System.out.print("\n");
-    }
-
     public Integer getCompleted() {
         return completed;
     }
