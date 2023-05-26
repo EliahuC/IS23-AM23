@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.gui.GameController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.gui.GameControllerGUI">
     <children>
         <ImageView fitHeight="400.0" fitWidth="610.0" layoutX="-4.0" pickOnBounds="true">
             <image>
@@ -27,7 +27,7 @@
         </ImageView>
         <Button layoutX="64.0" layoutY="13.0" mnemonicParsing="false" text="Next Player" />
         <Button layoutX="237.0" layoutY="14.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="64.0" text="Me" />
-        <Button layoutX="326.0" layoutY="15.0" mnemonicParsing="false" onAction="#goToGoals" prefHeight="26.0" prefWidth="52.0" text="Goals" />
+        <Button layoutX="326.0" layoutY="15.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="52.0" text="Goals" />
         <Button layoutX="515.0" layoutY="15.0" mnemonicParsing="false" onAction="#returnToMenu" text="Quit" />
       <GridPane gridLinesVisible="true" layoutX="384.0" layoutY="66.0" prefHeight="31.0" prefWidth="78.0">
         <columnConstraints>
