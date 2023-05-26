@@ -39,15 +39,7 @@ public class GameControllerGUI {
     private String currentPlayer;
     private String winner;
 
-    public void returnToMenu(ActionEvent event) throws IOException {
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("menu.fxml"));
-        root = loader.load();
-        stage = (Stage)((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
 
 
     /*
@@ -60,6 +52,17 @@ public class GameControllerGUI {
 
     }
     */
+
+    public void goToGoals(ActionEvent event) throws IOException {
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("goals.fxml"));
+        root = loader.load();
+        stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
     public void setResponse(ServerMessage response){
         this.response=response;
     }
