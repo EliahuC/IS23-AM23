@@ -11,10 +11,13 @@ import it.polimi.ingsw.model.player.BookShelf;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.view.cli.CLIEvent;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -40,28 +43,163 @@ public class GameControllerGUI {
     private String currentPlayer;
     private String winner;
 
+    @FXML
+    ImageView shelf_0_0;
+    @FXML
+    ImageView shelf_0_1;
+    @FXML
+    ImageView shelf_0_2;
+    @FXML
+    ImageView shelf_0_3;
+    @FXML
+    ImageView shelf_0_4;
+    @FXML
+    ImageView shelf_1_0;
+    @FXML
+    ImageView shelf_1_1;
+    @FXML
+    ImageView shelf_1_2;
+    @FXML
+    ImageView shelf_1_3;
+    @FXML
+    ImageView shelf_1_4;
+    @FXML
+    ImageView shelf_2_0;
+    @FXML
+    ImageView shelf_2_1;
+    @FXML
+    ImageView shelf_2_2;
+    @FXML
+    ImageView shelf_2_3;
+    @FXML
+    ImageView shelf_2_4;
+    @FXML
+    ImageView shelf_3_0;
+    @FXML
+    ImageView shelf_3_1;
+    @FXML
+    ImageView shelf_3_2;
+    @FXML
+    ImageView shelf_3_3;
+    @FXML
+    ImageView shelf_3_4;
+    @FXML
+    ImageView shelf_4_0;
+    @FXML
+    ImageView shelf_4_1;
+    @FXML
+    ImageView shelf_4_2;
+    @FXML
+    ImageView shelf_4_3;
+    @FXML
+    ImageView shelf_4_4;
+    @FXML
+    ImageView shelf_5_0;
+    @FXML
+    ImageView shelf_5_1;
+    @FXML
+    ImageView shelf_5_2;
+    @FXML
+    ImageView shelf_5_3;
+    @FXML
+    ImageView shelf_5_4;
 
-    /*
-    public void displayLivingroom{
 
-    }
-*/
-    /*
+
+   // public void displayLivingroom(){}
+
     public void displayBookshelf(){
-
         BookShelf shelf = player.getPlayerBookshelf();
-        for(int i=0; i<6; ++)
+        for(int i=0; i<6; i++)
         {
             for(int  j=0; j<5; j++)
             {
                 ItemTile tile = shelf.getTile(i,j);
                 switch(tile.getCategory())
                 {
-                    case TROPHIES: {}
+                    case TROPHIES: {
+                        if(i==0 && j == 0)
+                        {
+                            Image image = new Image(getClass().getResourceAsStream("Trofei.png"));
+                            displayImage(shelf_0_0, image);
+                        }
+                        else if(i==0 && j == 1)
+                        {
+                            Image image = new Image(getClass().getResourceAsStream("Trofei.png"));
+                            displayImage(shelf_0_1, image);
+                        }
+                        else if(i==0 && j == 2)
+                        {
+                            Image image = new Image(getClass().getResourceAsStream("Trofei.png"));
+                            displayImage(shelf_0_2, image);
+                        }
+                         else if(i==0 && j == 3)
+                        {
+                            Image image = new Image(getClass().getResourceAsStream("Trofei.png"));
+                            displayImage(shelf_0_3, image);
+                        }
+                        else if(i==0 && j == 4)
+                        {
+                            Image image = new Image(getClass().getResourceAsStream("Trofei.png"));
+                            displayImage(shelf_0_4, image);
+                        }
+                    }
                     break;
-                    case PLANTS: {}
+                    case PLANTS: {
+                        if(i==1 && j == 0)
+                        {
+                            Image image = new Image(getClass().getResourceAsStream("Piante.png"));
+                            displayImage(shelf_1_0, image);
+                        }
+                        else if(i==1 && j == 1)
+                        {
+                            Image image = new Image(getClass().getResourceAsStream("Piante.png"));
+                            displayImage(shelf_1_1, image);
+                        }
+                        else if(i==1 && j == 2)
+                        {
+                            Image image = new Image(getClass().getResourceAsStream("Piante.png"));
+                            displayImage(shelf_1_2, image);
+                        }
+                        else if(i==1 && j == 3)
+                        {
+                            Image image = new Image(getClass().getResourceAsStream("Piante.png"));
+                            displayImage(shelf_1_3, image);
+                        }
+                        else if(i==1 && j == 4)
+                        {
+                            Image image = new Image(getClass().getResourceAsStream("Piante.png"));
+                            displayImage(shelf_1_4, image);
+                        }
+                    }
                     break;
-                    case FRAMES: {}
+                    case FRAMES: {
+                        if(i==2 && j == 0)
+                        {
+                            Image image = new Image(getClass().getResourceAsStream("Cornici.png"));
+                            displayImage(shelf_2_0, image);
+                        }
+                        else if(i==2 && j == 1)
+                        {
+                            Image image = new Image(getClass().getResourceAsStream("Cornici.png"));
+                            displayImage(shelf_2_1, image);
+                        }
+                        else if(i==2 && j == 2)
+                        {
+                            Image image = new Image(getClass().getResourceAsStream("Cornici.png"));
+                            displayImage(shelf_2_2, image);
+                        }
+                        else if(i==2 && j == 3)
+                        {
+                            Image image = new Image(getClass().getResourceAsStream("Cornici.png"));
+                            displayImage(shelf_2_3, image);
+                        }
+                        else if(i==2 && j == 4)
+                        {
+                            Image image = new Image(getClass().getResourceAsStream("Cornici.png"));
+                            displayImage(shelf_2_4, image);
+                        }
+                    }
                     break;
                     case BOOKS: {}
                     break;
@@ -73,18 +211,20 @@ public class GameControllerGUI {
             }
         }
     }
-    */
+
+    public void displayImage(ImageView commonGoal1, Image image){
+        commonGoal1.setImage(image);
+    }
 
     public void goToGoals(ActionEvent event) throws IOException {
-
         FXMLLoader loader = new FXMLLoader(getClass().getResource("goals.fxml"));
         root = loader.load();
-        stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-    }
 
+    }
     public void returnToMenu(ActionEvent event) throws IOException {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("menu.fxml"));
@@ -298,7 +438,7 @@ public class GameControllerGUI {
         }
     }
 
-    private void displayBookshelf(){
+    /*private void displayBookshelf(){
         Scanner input = new Scanner(System.in);
         String command;
         System.out.print("YOUR BOOKSHELF\n\n");
@@ -311,7 +451,7 @@ public class GameControllerGUI {
             System.out.print("Please, use the /BACK command correctly.\n");
         }
         displayBoard();
-    }
+    }*/
 
     private void printSelection(){
         for(int i=0; tiles.get(i)!=null; i++)
