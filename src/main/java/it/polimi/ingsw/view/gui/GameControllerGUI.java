@@ -7,6 +7,7 @@ import it.polimi.ingsw.Messages.ServerToClient.ServerMessage;
 import it.polimi.ingsw.Network.Client.ConnectionClient;
 import it.polimi.ingsw.model.board.ItemTile;
 import it.polimi.ingsw.model.board.LivingRoom;
+import it.polimi.ingsw.model.player.BookShelf;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.view.cli.CLIEvent;
 import javafx.event.ActionEvent;
@@ -40,22 +41,26 @@ public class GameControllerGUI {
     private String winner;
 
 
-
-
     /*
     public void displayLivingroom{
 
     }
+*/
 
-    public void displayBookshelf{
-
-
-    }
-    */
 
     public void goToGoals(ActionEvent event) throws IOException {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("goals.fxml"));
+        root = loader.load();
+        stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void returnToMenu(ActionEvent event) throws IOException {
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("menu.fxml"));
         root = loader.load();
         stage = (Stage)((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
