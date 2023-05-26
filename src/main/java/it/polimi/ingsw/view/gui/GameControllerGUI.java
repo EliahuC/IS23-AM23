@@ -201,11 +201,89 @@ public class GameControllerGUI {
                         }
                     }
                     break;
-                    case BOOKS: {}
+                    case BOOKS: {
+                        if(i==3 && j == 0)
+                        {
+                            Image image = new Image(getClass().getResourceAsStream("Libri.png"));
+                            displayImage(shelf_3_0, image);
+                        }
+                        else if(i==3 && j == 1)
+                        {
+                            Image image = new Image(getClass().getResourceAsStream("Libri.png"));
+                            displayImage(shelf_3_1, image);
+                        }
+                        else if(i==3 && j == 2)
+                        {
+                            Image image = new Image(getClass().getResourceAsStream("Libri.png"));
+                            displayImage(shelf_3_2, image);
+                        }
+                        else if(i==3 && j == 3)
+                        {
+                            Image image = new Image(getClass().getResourceAsStream("Libri.png"));
+                            displayImage(shelf_3_3, image);
+                        }
+                        else if(i==3 && j == 4)
+                        {
+                            Image image = new Image(getClass().getResourceAsStream("Libri.png"));
+                            displayImage(shelf_3_4, image);
+                        }
+                    }
                     break;
-                    case CATS: {}
+                    case CATS: {
+                        if(i==4 && j == 0)
+                        {
+                            Image image = new Image(getClass().getResourceAsStream("Gatti.png"));
+                            displayImage(shelf_4_0, image);
+                        }
+                        else if(i==4 && j == 1)
+                        {
+                            Image image = new Image(getClass().getResourceAsStream("Gatti.png"));
+                            displayImage(shelf_4_1, image);
+                        }
+                        else if(i==4 && j == 2)
+                        {
+                            Image image = new Image(getClass().getResourceAsStream("Gatti.png"));
+                            displayImage(shelf_4_2, image);
+                        }
+                        else if(i==4 && j == 3)
+                        {
+                            Image image = new Image(getClass().getResourceAsStream("Gatti.png"));
+                            displayImage(shelf_4_3, image);
+                        }
+                        else if(i==4 && j == 4)
+                        {
+                            Image image = new Image(getClass().getResourceAsStream("Gatti.png"));
+                            displayImage(shelf_4_4, image);
+                        }
+                    }
                     break;
-                    case GAMES: {}
+                    case GAMES: {
+                        if(i==5 && j == 0)
+                        {
+                            Image image = new Image(getClass().getResourceAsStream("Giochi.png"));
+                            displayImage(shelf_5_0, image);
+                        }
+                        else if(i==5 && j == 1)
+                        {
+                            Image image = new Image(getClass().getResourceAsStream("Giochi.png"));
+                            displayImage(shelf_5_1, image);
+                        }
+                        else if(i==5 && j == 2)
+                        {
+                            Image image = new Image(getClass().getResourceAsStream("Giochi.png"));
+                            displayImage(shelf_5_2, image);
+                        }
+                        else if(i==5 && j == 3)
+                        {
+                            Image image = new Image(getClass().getResourceAsStream("Giochi.png"));
+                            displayImage(shelf_5_3, image);
+                        }
+                        else if(i==5 && j == 4)
+                        {
+                            Image image = new Image(getClass().getResourceAsStream("Giochi.png"));
+                            displayImage(shelf_5_4, image);
+                        }
+                    }
                     break;
                 }
             }
