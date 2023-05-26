@@ -8,10 +8,8 @@ import it.polimi.ingsw.Messages.ClientToServer.PossibleMoves.Move_SelectTiles;
 import it.polimi.ingsw.Messages.Message;
 import it.polimi.ingsw.Messages.ServerToClient.ErrorMessage;
 import it.polimi.ingsw.Messages.ServerToClient.ValidMoveMessage;
-import it.polimi.ingsw.Network.Server.TCP.ServerConnectionTCP;
 import it.polimi.ingsw.Network.Server.VirtualView;
 import it.polimi.ingsw.model.board.ItemTile;
-import it.polimi.ingsw.model.player.Player;
 import junit.framework.TestCase;
 
 import java.util.ArrayList;
@@ -26,59 +24,59 @@ public class ControllerCoordinatorTest extends TestCase {
 
     public void testJoinPlayers_SECOND() {
         ControllerCoordinator controllerCoordinator = new ControllerCoordinator();
-        controllerCoordinator.joinPlayer("Bob", new VirtualView(new ServerConnectionTCP(null)));
+        controllerCoordinator.joinPlayer("Bob", new VirtualView(null,"Bob"));
         assertEquals(1, controllerCoordinator.getConnectedPlayers().size());
     }
 
     public void testJoinPlayers_THIRD() {
         ControllerCoordinator controllerCoordinator = new ControllerCoordinator();
-        controllerCoordinator.joinPlayer("Bob", new VirtualView(new ServerConnectionTCP(null)));
-        controllerCoordinator.joinPlayer("Alice", new VirtualView(new ServerConnectionTCP(null)));
+        controllerCoordinator.joinPlayer("Bob", new VirtualView(null,"Bob"));
+        controllerCoordinator.joinPlayer("Alice", new VirtualView(null,"Alice"));
         assertEquals(2, controllerCoordinator.getConnectedPlayers().size());
     }
 
     public void testJoinPlayers_FOURTH() {
         ControllerCoordinator controllerCoordinator = new ControllerCoordinator();
-        controllerCoordinator.joinPlayer("Bob", new VirtualView(new ServerConnectionTCP(null)));
-        controllerCoordinator.joinPlayer("Alice", new VirtualView(new ServerConnectionTCP(null)));
-        controllerCoordinator.joinPlayer("Alice", new VirtualView(new ServerConnectionTCP(null)));
+        controllerCoordinator.joinPlayer("Bob", new VirtualView(null,"Bob"));
+        controllerCoordinator.joinPlayer("Alice", new VirtualView(null,"Alice"));
+        controllerCoordinator.joinPlayer("Alice", new VirtualView(null,"Alice"));
         assertEquals(2, controllerCoordinator.getConnectedPlayers().size());
     }
 
     public void testJoinPlayers_FIFTH() {
         ControllerCoordinator controllerCoordinator = new ControllerCoordinator();
-        controllerCoordinator.joinPlayer("Bob", new VirtualView(new ServerConnectionTCP(null)));
-        controllerCoordinator.joinPlayer("Alice", new VirtualView(new ServerConnectionTCP(null)));
-        controllerCoordinator.joinPlayer("Stefano", new VirtualView(new ServerConnectionTCP(null)));
+        controllerCoordinator.joinPlayer("Bob", new VirtualView(null,"Bob"));
+        controllerCoordinator.joinPlayer("Alice", new VirtualView(null,"Alice"));
+        controllerCoordinator.joinPlayer("Stefano", new VirtualView(null,"Stefano"));
         assertEquals(3, controllerCoordinator.getConnectedPlayers().size());
     }
 
     public void testJoinPlayers_SIXTH() {
         ControllerCoordinator controllerCoordinator = new ControllerCoordinator();
-        controllerCoordinator.joinPlayer("Bob", new VirtualView(new ServerConnectionTCP(null)));
-        controllerCoordinator.joinPlayer("Alice", new VirtualView(new ServerConnectionTCP(null)));
-        controllerCoordinator.joinPlayer("Stefano", new VirtualView(new ServerConnectionTCP(null)));
-        controllerCoordinator.joinPlayer("Stefaniel", new VirtualView(new ServerConnectionTCP(null)));
+        controllerCoordinator.joinPlayer("Bob", new VirtualView(null,"Bob"));
+        controllerCoordinator.joinPlayer("Alice", new VirtualView(null,"Alice"));
+        controllerCoordinator.joinPlayer("Stefano", new VirtualView(null,"Stefano"));
+        controllerCoordinator.joinPlayer("Stefaniel", new VirtualView(null,"Stefaniel"));
         assertEquals(4, controllerCoordinator.getConnectedPlayers().size());
     }
 
     public void testJoinPlayers_SEVENTH() {
         ControllerCoordinator controllerCoordinator = new ControllerCoordinator();
-        controllerCoordinator.joinPlayer("Bob", new VirtualView(new ServerConnectionTCP(null)));
-        controllerCoordinator.joinPlayer("Alice", new VirtualView(new ServerConnectionTCP(null)));
-        controllerCoordinator.joinPlayer("Stefano", new VirtualView(new ServerConnectionTCP(null)));
-        controllerCoordinator.joinPlayer("Stefaniel", new VirtualView(new ServerConnectionTCP(null)));
-        controllerCoordinator.joinPlayer("Marco", new VirtualView(new ServerConnectionTCP(null)));
-        controllerCoordinator.joinPlayer("Diego", new VirtualView(new ServerConnectionTCP(null)));
+        controllerCoordinator.joinPlayer("Bob", new VirtualView(null,"Bob"));
+        controllerCoordinator.joinPlayer("Alice", new VirtualView(null,"Alice"));
+        controllerCoordinator.joinPlayer("Stefano", new VirtualView(null,"Stefano"));
+        controllerCoordinator.joinPlayer("Stefaniel", new VirtualView(null,"Stefaniel"));
+        controllerCoordinator.joinPlayer("Marco", new VirtualView(null,"Marco"));
+        controllerCoordinator.joinPlayer("Diego", new VirtualView(null,"Diego"));
         assertEquals(6, controllerCoordinator.getConnectedPlayers().size());
     }
 
     public void testStartGame_FIRST() {
         ControllerCoordinator controllerCoordinator = new ControllerCoordinator();
-        controllerCoordinator.joinPlayer("Bob", new VirtualView(new ServerConnectionTCP(null)));
-        controllerCoordinator.joinPlayer("Alice", new VirtualView(new ServerConnectionTCP(null)));
-        controllerCoordinator.joinPlayer("Stefano", new VirtualView(new ServerConnectionTCP(null)));
-        controllerCoordinator.joinPlayer("Stefaniel", new VirtualView(new ServerConnectionTCP(null)));
+        controllerCoordinator.joinPlayer("Bob", new VirtualView(null,"Bob"));
+        controllerCoordinator.joinPlayer("Alice", new VirtualView(null,"Alice"));
+        controllerCoordinator.joinPlayer("Stefano", new VirtualView(null,"Stefano"));
+        controllerCoordinator.joinPlayer("Stefaniel", new VirtualView(null,"Stefaniel"));
         controllerCoordinator.startGame();
         assertTrue(controllerCoordinator.getStartedGame());
         assertTrue(controllerCoordinator.getGameController().isStartedGame());
@@ -87,20 +85,20 @@ public class ControllerCoordinatorTest extends TestCase {
 
     public void testStartGame_SECOND() {
         ControllerCoordinator controllerCoordinator = new ControllerCoordinator();
-        controllerCoordinator.joinPlayer("Bob", new VirtualView(new ServerConnectionTCP(null)));
-        controllerCoordinator.joinPlayer("Alice", new VirtualView(new ServerConnectionTCP(null)));
-        controllerCoordinator.joinPlayer("Stefano", new VirtualView(new ServerConnectionTCP(null)));
-        controllerCoordinator.joinPlayer("Stefaniel", new VirtualView(new ServerConnectionTCP(null)));
+        controllerCoordinator.joinPlayer("Bob", new VirtualView(null,"Bob"));
+        controllerCoordinator.joinPlayer("Alice", new VirtualView(null,"Alice"));
+        controllerCoordinator.joinPlayer("Stefano", new VirtualView(null,"Stefano"));
+        controllerCoordinator.joinPlayer("Stefaniel", new VirtualView(null,"Stefaniel"));
         controllerCoordinator.startGame();
         assertTrue(controllerCoordinator.getGameController().getGame().getPlayers().get(0).isFirstPlayerSeat());
     }
 
     public void testStartGame_THIRD() {
         ControllerCoordinator controllerCoordinator = new ControllerCoordinator();
-        controllerCoordinator.joinPlayer("Bob", new VirtualView(new ServerConnectionTCP(null)));
-        controllerCoordinator.joinPlayer("Alice", new VirtualView(new ServerConnectionTCP(null)));
-        controllerCoordinator.joinPlayer("Stefano", new VirtualView(new ServerConnectionTCP(null)));
-        controllerCoordinator.joinPlayer("Stefaniel", new VirtualView(new ServerConnectionTCP(null)));
+        controllerCoordinator.joinPlayer("Bob", new VirtualView(null,"Bob"));
+        controllerCoordinator.joinPlayer("Alice", new VirtualView(null,"Alice"));
+        controllerCoordinator.joinPlayer("Stefano", new VirtualView(null,"Stefano"));
+        controllerCoordinator.joinPlayer("Stefaniel", new VirtualView(null,"Stefaniel"));
         controllerCoordinator.startGame();
         assertFalse(controllerCoordinator.getGameController().getGame().getPlayers().get(1).isFirstPlayerSeat());
         assertFalse(controllerCoordinator.getGameController().getGame().getPlayers().get(2).isFirstPlayerSeat());
@@ -109,13 +107,13 @@ public class ControllerCoordinatorTest extends TestCase {
 
     public void testSetMessage_FIRST() {
         ControllerCoordinator controllerCoordinator = new ControllerCoordinator();
-        controllerCoordinator.joinPlayer("Bob", new VirtualView(new ServerConnectionTCP(null)));
-        controllerCoordinator.joinPlayer("Alice", new VirtualView(new ServerConnectionTCP(null)));
-        controllerCoordinator.joinPlayer("Stefano", new VirtualView(new ServerConnectionTCP(null)));
-        controllerCoordinator.joinPlayer("Stefaniel", new VirtualView(new ServerConnectionTCP(null)));
+        controllerCoordinator.joinPlayer("Bob", new VirtualView(null,"Bob"));
+        controllerCoordinator.joinPlayer("Alice", new VirtualView(null,"Alice"));
+        controllerCoordinator.joinPlayer("Stefano", new VirtualView(null,"Stefano"));
+        controllerCoordinator.joinPlayer("Stefaniel", new VirtualView(null,"Stefaniel"));
         controllerCoordinator.startGame();
         Move_SelectTiles M = new Move_SelectTiles();
-        M.setCoordinates(new ArrayList<Integer>());
+        M.setCoordinates(new ArrayList<>());
         ClientMessage m = new ClientMessage(Message.MessageCategory.COORDINATES, M, controllerCoordinator.getGameController()
                 .getGame().getPlayers().get(1).getNickName());
         Message error = new ErrorMessage();
@@ -125,13 +123,13 @@ public class ControllerCoordinatorTest extends TestCase {
 
     public void testSetMessage_SECOND() {
         ControllerCoordinator controllerCoordinator = new ControllerCoordinator();
-        controllerCoordinator.joinPlayer("Bob", new VirtualView(new ServerConnectionTCP(null)));
-        controllerCoordinator.joinPlayer("Alice", new VirtualView(new ServerConnectionTCP(null)));
-        controllerCoordinator.joinPlayer("Stefano", new VirtualView(new ServerConnectionTCP(null)));
-        controllerCoordinator.joinPlayer("Stefaniel", new VirtualView(new ServerConnectionTCP(null)));
+        controllerCoordinator.joinPlayer("Bob", new VirtualView(null,"Bob"));
+        controllerCoordinator.joinPlayer("Alice", new VirtualView(null,"Alice"));
+        controllerCoordinator.joinPlayer("Stefano", new VirtualView(null,"Stefano"));
+        controllerCoordinator.joinPlayer("Stefaniel", new VirtualView(null,"Stefaniel"));
         controllerCoordinator.startGame();
         Move_SelectTiles M = new Move_SelectTiles();
-        M.setCoordinates(new ArrayList<Integer>());
+        M.setCoordinates(new ArrayList<>());
         ClientMessage m = new ClientMessage(Message.MessageCategory.COLUMN, M, controllerCoordinator.getGameController()
                 .getGame().getPlayers().get(1).getNickName());
         Message error = new ErrorMessage();
@@ -141,13 +139,13 @@ public class ControllerCoordinatorTest extends TestCase {
 
     public void testSetMessage_THIRD() {
         ControllerCoordinator controllerCoordinator = new ControllerCoordinator();
-        controllerCoordinator.joinPlayer("Bob", new VirtualView(new ServerConnectionTCP(null)));
-        controllerCoordinator.joinPlayer("Alice", new VirtualView(new ServerConnectionTCP(null)));
-        controllerCoordinator.joinPlayer("Stefano", new VirtualView(new ServerConnectionTCP(null)));
-        controllerCoordinator.joinPlayer("Stefaniel", new VirtualView(new ServerConnectionTCP(null)));
+        controllerCoordinator.joinPlayer("Bob", new VirtualView(null,"Bob"));
+        controllerCoordinator.joinPlayer("Alice", new VirtualView(null,"Alice"));
+        controllerCoordinator.joinPlayer("Stefano", new VirtualView(null,"Stefano"));
+        controllerCoordinator.joinPlayer("Stefaniel", new VirtualView(null,"Stefaniel"));
         controllerCoordinator.startGame();
         Move_SelectTiles M = new Move_SelectTiles();
-        M.setCoordinates(new ArrayList<Integer>());
+        M.setCoordinates(new ArrayList<>());
         ClientMessage m = new ClientMessage(Message.MessageCategory.ORDER, M, controllerCoordinator.getGameController()
                 .getGame().getPlayers().get(1).getNickName());
         Message error = new ErrorMessage();
@@ -157,10 +155,10 @@ public class ControllerCoordinatorTest extends TestCase {
 
     public void testSetMessage_FOURTH() {
         ControllerCoordinator controllerCoordinator = new ControllerCoordinator();
-        controllerCoordinator.joinPlayer("Bob", new VirtualView(new ServerConnectionTCP(null)));
-        controllerCoordinator.joinPlayer("Alice", new VirtualView(new ServerConnectionTCP(null)));
-        controllerCoordinator.joinPlayer("Stefano", new VirtualView(new ServerConnectionTCP(null)));
-        controllerCoordinator.joinPlayer("Stefaniel", new VirtualView(new ServerConnectionTCP(null)));
+        controllerCoordinator.joinPlayer("Bob", new VirtualView(null,"Bob"));
+        controllerCoordinator.joinPlayer("Alice", new VirtualView(null,"Alice"));
+        controllerCoordinator.joinPlayer("Stefano", new VirtualView(null,"Stefano"));
+        controllerCoordinator.joinPlayer("Stefaniel", new VirtualView(null,"Stefaniel"));
         controllerCoordinator.startGame();
         ArrayList<Integer> E = new ArrayList<>();
         E.add(3);
@@ -178,10 +176,10 @@ public class ControllerCoordinatorTest extends TestCase {
 
     public void testSetMessage_FIFTH() {
         ControllerCoordinator controllerCoordinator = new ControllerCoordinator();
-        controllerCoordinator.joinPlayer("Bob", new VirtualView(new ServerConnectionTCP(null)));
-        controllerCoordinator.joinPlayer("Alice", new VirtualView(new ServerConnectionTCP(null)));
-        controllerCoordinator.joinPlayer("Stefano", new VirtualView(new ServerConnectionTCP(null)));
-        controllerCoordinator.joinPlayer("Stefaniel", new VirtualView(new ServerConnectionTCP(null)));
+        controllerCoordinator.joinPlayer("Bob", new VirtualView(null,"Bob"));
+        controllerCoordinator.joinPlayer("Alice", new VirtualView(null,"Alice"));
+        controllerCoordinator.joinPlayer("Stefano", new VirtualView(null,"Stefano"));
+        controllerCoordinator.joinPlayer("Stefaniel", new VirtualView(null,"Stefaniel"));
         controllerCoordinator.startGame();
         ArrayList<Integer> E = new ArrayList<>();
         E.add(0);
@@ -198,10 +196,10 @@ public class ControllerCoordinatorTest extends TestCase {
 
     public void testSetMessage_SIXTH() {
         ControllerCoordinator controllerCoordinator = new ControllerCoordinator();
-        controllerCoordinator.joinPlayer("Bob", new VirtualView(new ServerConnectionTCP(null)));
-        controllerCoordinator.joinPlayer("Alice", new VirtualView(new ServerConnectionTCP(null)));
-        controllerCoordinator.joinPlayer("Stefano", new VirtualView(new ServerConnectionTCP(null)));
-        controllerCoordinator.joinPlayer("Stefaniel", new VirtualView(new ServerConnectionTCP(null)));
+        controllerCoordinator.joinPlayer("Bob", new VirtualView(null,"Bob"));
+        controllerCoordinator.joinPlayer("Alice", new VirtualView(null,"Alice"));
+        controllerCoordinator.joinPlayer("Stefano", new VirtualView(null,"Stefano"));
+        controllerCoordinator.joinPlayer("Stefaniel", new VirtualView(null,"Stefaniel"));
         controllerCoordinator.startGame();
         controllerCoordinator.getGameController().getGame().getPlayers().get(0).getPlayerBookshelf().setTile(5, 0, new ItemTile());
         controllerCoordinator.getGameController().getGame().getPlayers().get(0).getPlayerBookshelf().setTile(4, 0, new ItemTile());
@@ -223,10 +221,10 @@ public class ControllerCoordinatorTest extends TestCase {
 
     public void testSetMessage_SEVENTH() {
         ControllerCoordinator controllerCoordinator = new ControllerCoordinator();
-        controllerCoordinator.joinPlayer("Bob", new VirtualView(new ServerConnectionTCP(null)));
-        controllerCoordinator.joinPlayer("Alice", new VirtualView(new ServerConnectionTCP(null)));
-        controllerCoordinator.joinPlayer("Stefano", new VirtualView(new ServerConnectionTCP(null)));
-        controllerCoordinator.joinPlayer("Stefaniel", new VirtualView(new ServerConnectionTCP(null)));
+        controllerCoordinator.joinPlayer("Bob", new VirtualView(null,"Bob"));
+        controllerCoordinator.joinPlayer("Alice", new VirtualView(null,"Alice"));
+        controllerCoordinator.joinPlayer("Stefano", new VirtualView(null,"Stefano"));
+        controllerCoordinator.joinPlayer("Stefaniel", new VirtualView(null,"Stefaniel"));
         controllerCoordinator.startGame();
         controllerCoordinator.getGameController().getCoordinates().add(0);
         controllerCoordinator.getGameController().getCoordinates().add(4);
@@ -242,10 +240,10 @@ public class ControllerCoordinatorTest extends TestCase {
 
     public void testSetMessage_EIGHTH() {
         ControllerCoordinator controllerCoordinator = new ControllerCoordinator();
-        controllerCoordinator.joinPlayer("Bob", new VirtualView(new ServerConnectionTCP(null)));
-        controllerCoordinator.joinPlayer("Alice", new VirtualView(new ServerConnectionTCP(null)));
-        controllerCoordinator.joinPlayer("Stefano", new VirtualView(new ServerConnectionTCP(null)));
-        controllerCoordinator.joinPlayer("Stefaniel", new VirtualView(new ServerConnectionTCP(null)));
+        controllerCoordinator.joinPlayer("Bob", new VirtualView(null,"Bob"));
+        controllerCoordinator.joinPlayer("Alice", new VirtualView(null,"Alice"));
+        controllerCoordinator.joinPlayer("Stefano", new VirtualView(null,"Stefano"));
+        controllerCoordinator.joinPlayer("Stefaniel", new VirtualView(null,"Stefaniel"));
         controllerCoordinator.startGame();
         controllerCoordinator.getGameController().getCoordinates().add(0);
         controllerCoordinator.getGameController().getCoordinates().add(4);
@@ -265,10 +263,10 @@ public class ControllerCoordinatorTest extends TestCase {
 
     public void testSetMessage_NINTH() {
         ControllerCoordinator controllerCoordinator = new ControllerCoordinator();
-        controllerCoordinator.joinPlayer("Bob", new VirtualView(new ServerConnectionTCP(null)));
-        controllerCoordinator.joinPlayer("Alice", new VirtualView(new ServerConnectionTCP(null)));
-        controllerCoordinator.joinPlayer("Stefano", new VirtualView(new ServerConnectionTCP(null)));
-        controllerCoordinator.joinPlayer("Stefaniel", new VirtualView(new ServerConnectionTCP(null)));
+        controllerCoordinator.joinPlayer("Bob", new VirtualView(null,"Bob"));
+        controllerCoordinator.joinPlayer("Alice", new VirtualView(null,"Alice"));
+        controllerCoordinator.joinPlayer("Stefano", new VirtualView(null,"Stefano"));
+        controllerCoordinator.joinPlayer("Stefaniel", new VirtualView(null,"Stefaniel"));
         controllerCoordinator.startGame();
         controllerCoordinator.getGameController() .getCoordinates().add(0);
         controllerCoordinator.getGameController().getCoordinates().add(4);
@@ -287,10 +285,10 @@ public class ControllerCoordinatorTest extends TestCase {
     }
     public void testSetMessage_TENTH() {
         ControllerCoordinator controllerCoordinator = new ControllerCoordinator();
-        controllerCoordinator.joinPlayer("Bob", new VirtualView(new ServerConnectionTCP(null)));
-        controllerCoordinator.joinPlayer("Alice", new VirtualView(new ServerConnectionTCP(null)));
-        controllerCoordinator.joinPlayer("Stefano", new VirtualView(new ServerConnectionTCP(null)));
-        controllerCoordinator.joinPlayer("Stefaniel", new VirtualView(new ServerConnectionTCP(null)));
+        controllerCoordinator.joinPlayer("Bob", new VirtualView(null,"Bob"));
+        controllerCoordinator.joinPlayer("Alice", new VirtualView(null,"Alice"));
+        controllerCoordinator.joinPlayer("Stefano", new VirtualView(null,"Stefano"));
+        controllerCoordinator.joinPlayer("Stefaniel", new VirtualView(null,"Stefaniel"));
         controllerCoordinator.startGame();
         controllerCoordinator.getGameController() .getCoordinates().add(0);
         controllerCoordinator.getGameController() .getCoordinates().add(4);
@@ -308,10 +306,10 @@ public class ControllerCoordinatorTest extends TestCase {
     }
     public void testSetMessage_ELEVENTH() {
         ControllerCoordinator controllerCoordinator = new ControllerCoordinator();
-        controllerCoordinator.joinPlayer("Bob", new VirtualView(new ServerConnectionTCP(null)));
-        controllerCoordinator.joinPlayer("Alice", new VirtualView(new ServerConnectionTCP(null)));
-        controllerCoordinator.joinPlayer("Stefano", new VirtualView(new ServerConnectionTCP(null)));
-        controllerCoordinator.joinPlayer("Stefaniel", new VirtualView(new ServerConnectionTCP(null)));
+        controllerCoordinator.joinPlayer("Bob", new VirtualView(null,"Bob"));
+        controllerCoordinator.joinPlayer("Alice", new VirtualView(null,"Alice"));
+        controllerCoordinator.joinPlayer("Stefano", new VirtualView(null,"Stefano"));
+        controllerCoordinator.joinPlayer("Stefaniel", new VirtualView(null,"Stefaniel"));
         controllerCoordinator.startGame();
         controllerCoordinator.getGameController().getCoordinates().add(0);
         controllerCoordinator.getGameController().getCoordinates().add(4);
@@ -333,10 +331,10 @@ public class ControllerCoordinatorTest extends TestCase {
     }
     public void testSetMessage_TWELFTH() {
         ControllerCoordinator controllerCoordinator = new ControllerCoordinator();
-        controllerCoordinator.joinPlayer("Bob", new VirtualView(new ServerConnectionTCP(null)));
-        controllerCoordinator.joinPlayer("Alice", new VirtualView(new ServerConnectionTCP(null)));
-        controllerCoordinator.joinPlayer("Stefano", new VirtualView(new ServerConnectionTCP(null)));
-        controllerCoordinator.joinPlayer("Stefaniel", new VirtualView(new ServerConnectionTCP(null)));
+        controllerCoordinator.joinPlayer("Bob", new VirtualView(null,"Bob"));
+        controllerCoordinator.joinPlayer("Alice", new VirtualView(null,"Alice"));
+        controllerCoordinator.joinPlayer("Stefano", new VirtualView(null,"Stefano"));
+        controllerCoordinator.joinPlayer("Stefaniel", new VirtualView(null,"Stefaniel"));
         controllerCoordinator.startGame();
         controllerCoordinator.getGameController().getCoordinates().add(0);
         controllerCoordinator.getGameController().getCoordinates().add(4);

@@ -31,6 +31,7 @@ private  String nickName;
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         ServerMessage serverMessage=messageParser(evt);
+        if(clientConnection!=null)
       clientConnection.sendMessage(serverMessage, nickName);
     }
 
