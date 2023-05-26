@@ -46,7 +46,34 @@ public class GameControllerGUI {
 
     }
 */
+    /*
+    public void displayBookshelf(){
 
+        BookShelf shelf = player.getPlayerBookshelf();
+        for(int i=0; i<6; ++)
+        {
+            for(int  j=0; j<5; j++)
+            {
+                ItemTile tile = shelf.getTile(i,j);
+                switch(tile.getCategory())
+                {
+                    case TROPHIES: {}
+                    break;
+                    case PLANTS: {}
+                    break;
+                    case FRAMES: {}
+                    break;
+                    case BOOKS: {}
+                    break;
+                    case CATS: {}
+                    break;
+                    case GAMES: {}
+                    break;
+                }
+            }
+        }
+    }
+    */
 
     public void goToGoals(ActionEvent event) throws IOException {
 
