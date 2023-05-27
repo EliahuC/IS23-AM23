@@ -22,8 +22,6 @@ public class MenuController {
     Button exitButton;
     AnchorPane scenePane;
 
-
-
     private Stage stage;
     private Scene scene;
     private Parent root;

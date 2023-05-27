@@ -36,6 +36,10 @@ public class GoalsController {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("game.fxml"));
         root = loader.load();
+        GameControllerGUI gameControllerGUI = loader.getController();
+        gameControllerGUI.displayBookshelf();
+        gameControllerGUI.displayContainer();
+        gameControllerGUI.displayLivingroom();
         stage = (Stage)((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);

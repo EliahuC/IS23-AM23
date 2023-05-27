@@ -206,7 +206,6 @@ public class GameControllerGUI {
         //Viene passata la livingroom(DA INSERIRE)
         LivingRoom livingroom;
 
-        //DA COMPLETARE
         for(int i=0; i<9; i++)
         {
             for(int  j=0; j<9; j++)
@@ -575,8 +574,13 @@ public class GameControllerGUI {
     }
 
     public void goToGoals(ActionEvent event) throws IOException {
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("goals.fxml"));
         root = loader.load();
+        GoalsController goalsController = loader.getController();
+        goalsController.displayPersonalGoal();
+        goalsController.displayCommonGoal();
+        goalsController.displayPoints();
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
@@ -682,7 +686,7 @@ public class GameControllerGUI {
         while (true){
             String command = input.nextLine();
             if(Objects.equals(command.toUpperCase(), "/GOALS")){
-                displayGoals("Living Board");
+                //displayGoals("Living Board");
                 break;
             }
             if(Objects.equals(command.toUpperCase(), "/BOOKSHELF")){
@@ -704,30 +708,6 @@ public class GameControllerGUI {
             System.out.print("Your move is not valid. Please, pick again and correctly your tiles.\n" +
                     "[You can still see your goal cards, using the command /GOALS, or your personal bookshelf using /BOOKSHELF]\n");
         }
-    }
-
-    private void displayGoals(String scenario){
-        Scanner input = new Scanner(System.in);
-        String command;
-        System.out.print("YOUR PERSONAL GOAL CARD\n\n");
-        System.out.print("\nCOMMON GOAL CARDS\n\n");
-        System.out.print("(1): ");
-        livingRoom.getCommonGoalCard1().print();
-        System.out.print("\n(2): ");
-        livingRoom.getCommonGoalCard2().print();
-        System.out.print("\n\n[If you want to come back to the previous screen, use the command /BACK]\n");
-        while (true){
-            command = input.nextLine();
-            if(Objects.equals(command.toUpperCase(), "/BACK"))
-                break;
-            System.out.print("Please, use the /BACK command correctly.\n");
-        }
-        switch (scenario) {
-            case "Living Board" -> displayBoard();
-            case "BookshelfOrder" -> displayBookshelfOrder();
-            case "BookshelfColumn" -> displayBookshelfColumn();
-        }
-
     }
 
     private void displayEnd(){
@@ -753,7 +733,7 @@ public class GameControllerGUI {
         while(true){
             String command = input.nextLine();
             if(Objects.equals(command.toUpperCase(), "/GOALS")){
-                displayGoals("BookshelfOrder");
+                //displayGoals("BookshelfOrder");
                 break;
             }
             Message message = MoveSerializer.serializeInput(command);
@@ -780,7 +760,7 @@ public class GameControllerGUI {
         while(true){
             String command = input.nextLine();
             if(Objects.equals(command.toUpperCase(), "/GOALS")){
-                displayGoals("BookshelfColumn");
+                //displayGoals("BookshelfColumn");
                 break;
             }
             Message message = MoveSerializer.serializeInput(command);
