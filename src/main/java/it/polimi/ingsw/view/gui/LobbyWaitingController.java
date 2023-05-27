@@ -23,7 +23,7 @@ import java.util.concurrent.TimeUnit;
 
 public class LobbyWaitingController {
     private ConnectionClient connectionClient;
-    //private GUIEvent receiver;
+    private GUIEvent receiver;
     private ServerMessage response;
     private Boolean lock=true;
     private Stage stage;
@@ -39,13 +39,20 @@ public class LobbyWaitingController {
         stage.setScene(scene);
         stage.show();
     }
+    public LobbyWaitingController(ConnectionClient connectionClient, GUIEvent receiver) {
+        this.connectionClient = connectionClient;
+        this.receiver=receiver;
+        this.receiver.setInLobbyWaiting(true);
+        connectionClient.setListener(receiver);
+        this.receiver.setLobbywaitingcontroller(this);
+    }
     public void setResponse(ServerMessage response){
         this.response=response;
     }
 
     public void start() {
         GameControllerGUI gamecontrollerGUI = new GameControllerGUI();
-        //receiver.setGamecontrollerGUI(gamecontrollerGUI);
+        receiver.setGamecontrollerGUI(gamecontrollerGUI);
         String command;
         Scanner input = new Scanner(System.in);
         ServerMessage serverMessage;
@@ -57,8 +64,6 @@ public class LobbyWaitingController {
                 "/_/  /_/ \\__, /   /____//_/ /_/ \\___//_//_/  /_/ \\___/ \n" +
                 "        /____/                                         \n\n\n\n");*/
         while (true) {
-            System.out.print("\033[H\033[2J");
-            System.out.flush();
             System.out.print("Do you want to look for a lobby to join or do you prefer to make a new one?\n" +
                     "Please use the following commands:\n" +
                     "/CREATE <number of players> (Remember that the number of players can only be 2, 3 or 4!)\n" +
@@ -95,8 +100,8 @@ public class LobbyWaitingController {
                 }
             } else if (response != null && (response.getCategory() == Message.MessageCategory.RETURN_MESSAGE||response.getCategory() == Message.MessageCategory.STARTING_GAME_MESSAGE)) {
                 if (response.getCategory() == Message.MessageCategory.STARTING_GAME_MESSAGE) {
-                    //receiver.setInLobbyWaiting(false);
-                   // receiver.setInGameControllerGUI(true);
+                    receiver.setInLobbyWaiting(false);
+                    receiver.setInGameControllerGUI(true);
                     gamecontrollerGUI.start();
                     lock=false;
                     break;
@@ -113,34 +118,10 @@ public class LobbyWaitingController {
                 } catch (InterruptedException iE) {
                     iE.printStackTrace();
                 }
-            /*System.out.print("Hi " + connectionClient.getPlayerName() + "! Let's wait for other players to begin the game.\n");
-            try{
-                TimeUnit.MILLISECONDS.sleep(500);
-            }catch (InterruptedException iE){
-                iE.printStackTrace();
-            }
-            System.out.print("\033[H\033[2J");
-            System.out.flush();
-            System.out.print("Hi " + connectionClient.getPlayerName() + "! Let's wait for other players to begin the game .\n");
-            try{
-                TimeUnit.MILLISECONDS.sleep(500);
-            }catch (InterruptedException iE){
-                iE.printStackTrace();
-            }
-            System.out.print("\033[H\033[2J");
-            System.out.flush();
-            System.out.print("Hi " + connectionClient.getPlayerName() + "! Let's wait for other players to begin the game  .\n");
-            try{
-                TimeUnit.MILLISECONDS.sleep(500);
-            }catch (InterruptedException iE){
-                iE.printStackTrace();
-            }
-            System.out.print("\033[H\033[2J");
-            System.out.flush();*/
             } while (response == null || response.getCategory() != Message.MessageCategory.STARTING_GAME_MESSAGE);
-            //System.out.print(response.getReturnMessage());
-            //receiver.setInLobbyWaiting(false);
-           // receiver.setInGameControllerGUI(true);
+            System.out.print(response.getReturnMessage());
+            receiver.setInLobbyWaiting(false);
+            receiver.setInGameControllerGUI(true);
             gamecontrollerGUI.start();
         }
     }
