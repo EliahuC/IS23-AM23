@@ -205,6 +205,195 @@ public class GameControllerGUI {
     public void displayLivingroom(){
         //Viene passata la livingroom(DA INSERIRE)
         LivingRoom livingroom;
+
+        //DA COMPLETARE
+        for(int i=0; i<9; i++)
+        {
+            for(int  j=0; j<9; j++)
+            {
+                ItemTile tile = null;
+                if(i==0 && j == 3)
+                {
+                    displayImage(livingroom_0_3, chooseCategoryImage(tile));
+                }
+                else if(i==0 && j == 4)
+                {
+                    displayImage(livingroom_0_4, chooseCategoryImage(tile));
+                }
+                else if(i==1 && j == 3)
+                {
+                    displayImage(livingroom_1_3, chooseCategoryImage(tile));
+                }
+                else if(i==1 && j == 4)
+                {
+                    displayImage(livingroom_1_4, chooseCategoryImage(tile));
+                }
+                else if(i==1 && j == 5)
+                {
+                    displayImage(livingroom_1_5, chooseCategoryImage(tile));
+                }
+                else if(i==2 && j == 2)
+                {
+                    displayImage(livingroom_2_2, chooseCategoryImage(tile));
+                }
+                else if(i==2 && j == 3)
+                {
+                    displayImage(livingroom_2_3, chooseCategoryImage(tile));
+                }
+                else if(i==2 && j == 4)
+                {
+                    displayImage(livingroom_2_4, chooseCategoryImage(tile));
+                }
+                else if(i==2 && j == 5)
+                {
+                    displayImage(livingroom_2_5, chooseCategoryImage(tile));
+                }
+                else if(i==2 && j == 6)
+                {
+                    displayImage(livingroom_2_6, chooseCategoryImage(tile));
+                }
+                else if(i==3 && j == 1)
+                {
+                    displayImage(livingroom_3_1, chooseCategoryImage(tile));
+                }
+                else if(i==3 && j == 2)
+                {
+                    displayImage(livingroom_3_2, chooseCategoryImage(tile));
+                }
+                else if(i==3 && j == 3)
+                {
+                    displayImage(livingroom_3_3, chooseCategoryImage(tile));
+                }
+                else if(i==3 && j == 4)
+                {
+                    displayImage(livingroom_3_4, chooseCategoryImage(tile));
+                }
+                else if(i==3 && j == 5)
+                {
+                    displayImage(livingroom_3_5, chooseCategoryImage(tile));
+                }
+                else if(i==3 && j == 6)
+                {
+                    displayImage(livingroom_3_6, chooseCategoryImage(tile));
+                }
+                else if(i==3 && j == 7)
+                {
+                    displayImage(livingroom_3_7, chooseCategoryImage(tile));
+                }
+                else if(i==3 && j == 8)
+                {
+                    displayImage(livingroom_3_8, chooseCategoryImage(tile));
+                }
+                else if(i==4 && j == 0)
+                {
+                    displayImage(livingroom_4_0, chooseCategoryImage(tile));
+                }
+                else if(i==4 && j == 1)
+                {
+                    displayImage(livingroom_4_1, chooseCategoryImage(tile));
+                }
+                else if(i==4 && j == 2)
+                {
+                    displayImage(livingroom_4_2, chooseCategoryImage(tile));
+                }
+                else if(i==4 && j == 3)
+                {
+                    displayImage(livingroom_4_3, chooseCategoryImage(tile));
+                }
+                else if(i==4 && j == 4)
+                {
+                    displayImage(livingroom_4_4, chooseCategoryImage(tile));
+                }
+                else if(i==4 && j == 5)
+                {
+                    displayImage(livingroom_4_5, chooseCategoryImage(tile));
+                }
+                else if(i==4 && j == 6)
+                {
+                    displayImage(livingroom_4_6, chooseCategoryImage(tile));
+                }
+                else if(i==4 && j == 7)
+                {
+                    displayImage(livingroom_4_7, chooseCategoryImage(tile));
+                }
+                else if(i==4 && j == 8)
+                {
+                    displayImage(livingroom_4_8, chooseCategoryImage(tile));
+                }
+                else if(i==5 && j == 0)
+                {
+                    displayImage(livingroom_5_0, chooseCategoryImage(tile));
+                }
+                else if(i==5 && j == 1)
+                {
+                    displayImage(livingroom_5_1, chooseCategoryImage(tile));
+                }
+                else if(i==5 && j == 2)
+                {
+                    displayImage(livingroom_5_2, chooseCategoryImage(tile));
+                }
+                else if(i==5 && j == 3)
+                {
+                    displayImage(livingroom_5_3, chooseCategoryImage(tile));
+                }
+                else if(i==5 && j == 4)
+                {
+                    displayImage(livingroom_5_4, chooseCategoryImage(tile));
+                }
+                else if(i==5 && j == 5)
+                {
+                    displayImage(livingroom_5_5, chooseCategoryImage(tile));
+                }
+                else if(i==5 && j == 6)
+                {
+                    displayImage(livingroom_5_6, chooseCategoryImage(tile));
+                }
+                else if(i==5 && j == 7)
+                {
+                    displayImage(livingroom_5_7, chooseCategoryImage(tile));
+                }
+                else if(i==6 && j == 2)
+                {
+                    displayImage(livingroom_6_2, chooseCategoryImage(tile));
+                }
+                else if(i==6 && j == 3)
+                {
+                    displayImage(livingroom_6_3, chooseCategoryImage(tile));
+                }
+                else if(i==6 && j == 4)
+                {
+                    displayImage(livingroom_6_4, chooseCategoryImage(tile));
+                }
+                else if(i==6 && j == 5)
+                {
+                    displayImage(livingroom_6_5, chooseCategoryImage(tile));
+                }
+                else if(i==6 && j == 6)
+                {
+                    displayImage(livingroom_6_6, chooseCategoryImage(tile));
+                }
+                else if(i==7 && j == 3)
+                {
+                    displayImage(livingroom_7_3, chooseCategoryImage(tile));
+                }
+                else if(i==7 && j == 4)
+                {
+                    displayImage(livingroom_7_4, chooseCategoryImage(tile));
+                }
+                else if(i==7 && j == 5)
+                {
+                    displayImage(livingroom_7_5, chooseCategoryImage(tile));
+                }
+                else if(i==8 && j == 4)
+                {
+                    displayImage(livingroom_8_4, chooseCategoryImage(tile));
+                }
+                else if(i==8 && j == 5)
+                {
+                    displayImage(livingroom_8_5, chooseCategoryImage(tile));
+                }
+            }
+        }
     }
 
     public void displayBookshelf(){
