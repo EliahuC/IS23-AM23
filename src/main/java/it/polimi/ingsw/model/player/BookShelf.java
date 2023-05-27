@@ -202,6 +202,7 @@ public class BookShelf {
     public int getPoints(){
         return points;
     }
+
     public static int getMAX_Row(){ return MAX_Row;
     }
 

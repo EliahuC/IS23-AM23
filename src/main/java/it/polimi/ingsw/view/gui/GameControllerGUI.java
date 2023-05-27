@@ -5,6 +5,7 @@ import it.polimi.ingsw.Messages.Message;
 import it.polimi.ingsw.Messages.MoveSerializer;
 import it.polimi.ingsw.Messages.ServerToClient.ServerMessage;
 import it.polimi.ingsw.Network.Client.ConnectionClient;
+import it.polimi.ingsw.model.board.BoardToken;
 import it.polimi.ingsw.model.board.ItemTile;
 import it.polimi.ingsw.model.board.LivingRoom;
 import it.polimi.ingsw.model.player.BookShelf;
@@ -201,18 +202,15 @@ public class GameControllerGUI {
     ImageView container3;
 
 
-
-
-
-
-
-
-
-
-   // public void displayLivingroom(){}
+    public void displayLivingroom(){
+        //Viene passata la livingroom(DA INSERIRE)
+        LivingRoom livingroom;
+    }
 
     public void displayBookshelf(){
         BookShelf shelf = player.getPlayerBookshelf();
+        //DA SISTEMARE
+
         for(int i=0; i<6; i++)
         {
             for(int  j=0; j<5; j++)
@@ -391,6 +389,9 @@ public class GameControllerGUI {
                 }
             }
         }
+    }
+    public void displayContainer(){
+
     }
 
     public void displayImage(ImageView commonGoal1, Image image){

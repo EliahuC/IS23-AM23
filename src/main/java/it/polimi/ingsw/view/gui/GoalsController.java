@@ -44,7 +44,7 @@ public class GoalsController {
 
     public void displayPoints(){
 
-        //Inserire il numero di giocatori della lobby e passare il parametro per n° volte goalcard completata
+        //Inserire il numero di giocatori della lobby, passare il parametro per n° volte goalcard completata(DA INSERIRE)
         int numPlayers = 2;
         int numCompleted = 2;
 
@@ -230,7 +230,7 @@ public class GoalsController {
     }
 
     public void displayPersonalGoal(){
-        //Viene salvato l'indice della personal card
+        //Viene salvato l'indice della personal card(DA INSERIRE)
         int personalCard = 1;
 
         switch (personalCard) {
@@ -314,7 +314,7 @@ public class GoalsController {
 
     public void displayCommonGoal() {
 
-        //Viene salvato l'indice della common card
+        //Viene salvato l'indice della common card(DA INSERIRE)
         int card1 = 1;
         int card2 = 2;
 
