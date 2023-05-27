@@ -103,6 +103,109 @@ public class GameControllerGUI {
     ImageView shelf_5_3;
     @FXML
     ImageView shelf_5_4;
+    @FXML
+    ImageView livingroom_0_3;
+    @FXML
+    ImageView livingroom_0_4;
+    @FXML
+    ImageView livingroom_1_3;
+    @FXML
+    ImageView livingroom_1_4;
+    @FXML
+    ImageView livingroom_1_5;
+    @FXML
+    ImageView livingroom_2_2;
+    @FXML
+    ImageView livingroom_2_3;
+    @FXML
+    ImageView livingroom_2_4;
+    @FXML
+    ImageView livingroom_2_5;
+    @FXML
+    ImageView livingroom_2_6;
+    @FXML
+    ImageView livingroom_3_1;
+    @FXML
+    ImageView livingroom_3_2;
+    @FXML
+    ImageView livingroom_3_3;
+    @FXML
+    ImageView livingroom_3_4;
+    @FXML
+    ImageView livingroom_3_5;
+    @FXML
+    ImageView livingroom_3_6;
+    @FXML
+    ImageView livingroom_3_7;
+    @FXML
+    ImageView livingroom_3_8;
+    @FXML
+    ImageView livingroom_4_0;
+    @FXML
+    ImageView livingroom_4_1;
+    @FXML
+    ImageView livingroom_4_2;
+    @FXML
+    ImageView livingroom_4_3;
+    @FXML
+    ImageView livingroom_4_4;
+    @FXML
+    ImageView livingroom_4_5;
+    @FXML
+    ImageView livingroom_4_6;
+    @FXML
+    ImageView livingroom_4_7;
+    @FXML
+    ImageView livingroom_4_8;
+    @FXML
+    ImageView livingroom_5_0;
+    @FXML
+    ImageView livingroom_5_1;
+    @FXML
+    ImageView livingroom_5_2;
+    @FXML
+    ImageView livingroom_5_3;
+    @FXML
+    ImageView livingroom_5_4;
+    @FXML
+    ImageView livingroom_5_5;
+    @FXML
+    ImageView livingroom_5_6;
+    @FXML
+    ImageView livingroom_5_7;
+    @FXML
+    ImageView livingroom_6_2;
+    @FXML
+    ImageView livingroom_6_3;
+    @FXML
+    ImageView livingroom_6_4;
+    @FXML
+    ImageView livingroom_6_5;
+    @FXML
+    ImageView livingroom_6_6;
+    @FXML
+    ImageView livingroom_7_3;
+    @FXML
+    ImageView livingroom_7_4;
+    @FXML
+    ImageView livingroom_7_5;
+    @FXML
+    ImageView livingroom_8_4;
+    @FXML
+    ImageView livingroom_8_5;
+    @FXML
+    ImageView container1;
+    @FXML
+    ImageView container2;
+    @FXML
+    ImageView container3;
+
+
+
+
+
+
+
 
 
 
