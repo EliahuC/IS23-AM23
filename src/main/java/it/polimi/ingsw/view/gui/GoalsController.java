@@ -240,73 +240,73 @@ public class GoalsController {
         switch (personalCard) {
             case 1:
             {
-                Image image = new Image(getClass().getResourceAsStream("PersonalGoalCards.jpg"));
+                Image image = new Image(getClass().getResourceAsStream("Personal_Goals.png"));
                 displayImage(personalGoal, image);
                 break;
             }
             case 2:
             {
-                Image image = new Image(getClass().getResourceAsStream("PersonalGoalCards2.jpg"));
+                Image image = new Image(getClass().getResourceAsStream("Personal_Goals2.png"));
                 displayImage(personalGoal, image);
                 break;
             }
             case 3:
             {
-                Image image = new Image(getClass().getResourceAsStream("PersonalGoalCards3.jpg"));
+                Image image = new Image(getClass().getResourceAsStream("Personal_Goals3.png"));
                 displayImage(personalGoal, image);
                 break;
             }
             case 4:
             {
-                Image image = new Image(getClass().getResourceAsStream("PersonalGoalCards4.jpg"));
+                Image image = new Image(getClass().getResourceAsStream("Personal_Goals4.png"));
                 displayImage(personalGoal, image);
                 break;
             }
             case 5:
             {
-                Image image = new Image(getClass().getResourceAsStream("PersonalGoalCards5.jpg"));
+                Image image = new Image(getClass().getResourceAsStream("Personal_Goals5.png"));
                 displayImage(personalGoal, image);
                 break;
             }
             case 6:
             {
-                Image image = new Image(getClass().getResourceAsStream("PersonalGoalCards6.jpg"));
+                Image image = new Image(getClass().getResourceAsStream("Personal_Goals6.png"));
                 displayImage(personalGoal, image);
                 break;
             }
             case 7:
             {
-                Image image = new Image(getClass().getResourceAsStream("PersonalGoalCards7.jpg"));
+                Image image = new Image(getClass().getResourceAsStream("Personal_Goals7.png"));
                 displayImage(personalGoal, image);
                 break;
             }
             case 8:
             {
-                Image image = new Image(getClass().getResourceAsStream("PersonalGoalCards8.jpg"));
+                Image image = new Image(getClass().getResourceAsStream("Personal_Goals8.png"));
                 displayImage(personalGoal, image);
                 break;
             }
             case 9:
             {
-                Image image = new Image(getClass().getResourceAsStream("PersonalGoalCards9.jpg"));
+                Image image = new Image(getClass().getResourceAsStream("Personal_Goals9.png"));
                 displayImage(personalGoal, image);
                 break;
             }
             case 10:
             {
-                Image image = new Image(getClass().getResourceAsStream("PersonalGoalCards10.jpg"));
+                Image image = new Image(getClass().getResourceAsStream("Personal_Goals10.png"));
                 displayImage(personalGoal, image);
                 break;
             }
             case 11:
             {
-                Image image = new Image(getClass().getResourceAsStream("PersonalGoalCards11.jpg"));
+                Image image = new Image(getClass().getResourceAsStream("Personal_Goals11.png"));
                 displayImage(commonGoal1, image);
                 break;
             }
             case 12:
             {
-                Image image = new Image(getClass().getResourceAsStream("PersonalGoalCards12.jpg"));
+                Image image = new Image(getClass().getResourceAsStream("Personal_Goals12.png.jpg"));
                 displayImage(personalGoal, image);
                 break;
             }
@@ -448,9 +448,6 @@ public class GoalsController {
                 displayImage(commonGoal2, image);
                 break;
             }
-            default: System.out.println("è colpa di eliahu");
-                break;
-
         }
     }
 

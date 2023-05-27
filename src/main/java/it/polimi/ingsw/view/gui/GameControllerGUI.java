@@ -210,6 +210,7 @@ public class GameControllerGUI {
         {
             for(int  j=0; j<9; j++)
             {
+                //Viene settata la tile della livingroom(DA INSERIRE)
                 ItemTile tile = null;
                 if(i==0 && j == 3)
                 {
