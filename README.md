@@ -6,10 +6,10 @@ This year the final goal of the project is to develop a digital version of the b
 ## Credits
 
 The members of the group are:  
-Andrea Bricchi (andrea2.bricchi@mail.polimi.it)  
-Eliahu Cohen (eliahuitamar.cohen@mail.polimi.it)  
-Simone Controguerra (simone.controguerra@mail.polimi.it)  
-Giovanni Di Lorenzo (giovanni.dilorenzo@mail.polimi.it)
+[Andrea Bricchi](https://github.com/andrebricchi) (andrea2.bricchi@mail.polimi.it)  
+[Eliahu Cohen](https://github.com/EliahuC) (eliahuitamar.cohen@mail.polimi.it)  
+[Simone Controguerra](https://github.com/simocigi) (simone.controguerra@mail.polimi.it)  
+[Giovanni Di Lorenzo](https://github.com/GiovanniDiLorenzo) (giovanni.dilorenzo@mail.polimi.it)
 
 ## Development State
 
@@ -20,8 +20,8 @@ Giovanni Di Lorenzo (giovanni.dilorenzo@mail.polimi.it)
 |TUI   	|🟡   	|80%   	|    	|
 |GUI   	|🔴   	|0%   	|    	|
 |TCP   	|🟡   	|99%   	|    	|
-|RMI   	|🟡   	|70%   	|   	|
+|RMI   	|🟡   	|99%   	|   	|
 |Resilience to disconnections   	|🔴   	|0%   	|   	|
-|Persistency   	|🟡   	|70%   	|   	|
+|Persistency   	|🟡   	|85%   	|   	|
 |Chat   	|🔴   	|0%   	|   	|
-|Multiple games   	|🟡   	|70%   	|   	|
+|Multiple games   	|🟡   	|85%   	|   	|
