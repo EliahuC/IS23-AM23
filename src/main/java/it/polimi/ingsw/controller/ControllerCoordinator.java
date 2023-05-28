@@ -88,6 +88,9 @@ public class ControllerCoordinator {
     }
 
     public void setGame(GameSavings gameSavings) {
+        connectedPlayers.clear();
+        connectedPlayers.addAll(gameSavings.getPlayers());
+        gameController=new GameController(gameSavings.getPlayers());
         gameController.setGame(gameSavings);
     }
 }

@@ -41,14 +41,17 @@ public class Server implements Printer {
         Gson gson=new Gson();
         Savings savings;
         try{
+            int i=0;
             while (true){
-                int i=0;
+
                 String path="Savings"+"/Lobby"+i+".json";
                 reader= Files.newBufferedReader(Paths.get(path));
                 savings=gson.fromJson(reader, Savings.class);
                 Lobby lobby=savings.getLobby();
+                lobby.getJoinedUsers().clear();
                 lobby.reloadGame(savings.getGameSavings());
                 startedLobbies.add(lobby);
+                i++;
             }
         } catch (IOException e) {
             System.out.println("Savings completely loaded");

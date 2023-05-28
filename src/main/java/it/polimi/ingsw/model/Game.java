@@ -12,7 +12,6 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.Serializable;
 import java.util.*;
-import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 /**
@@ -29,7 +28,7 @@ public class Game implements Serializable {
     private Integer currPlaying;
     private transient  Integer gameNumPlayers;
 
-    private transient final GameChecker gameChecker;
+    private transient GameChecker gameChecker;
     private transient boolean startedGame=false;
     private transient final ArrayList<VirtualView> listeners ;
     private transient final Timer turnTimer=new Timer();
@@ -48,7 +47,13 @@ public class Game implements Serializable {
         this.currPlaying=1;
         this.gameNumPlayers= lobby.size();
     }
-
+   public Game(ArrayList<Player> lobby){
+       this.Players=lobby;
+       this.listeners = new ArrayList<>();
+       this.disconnectedPlayers=new ArrayList<>();
+       this.currPlaying=1;
+       this.gameNumPlayers= lobby.size();
+   }
     /**
      * @author Eliahu Cohen
      * method that sets to the livingroom all his listeners

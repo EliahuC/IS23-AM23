@@ -6,17 +6,12 @@ import it.polimi.ingsw.Messages.ClientToServer.ClientMessage;
 import it.polimi.ingsw.Messages.Message;
 import it.polimi.ingsw.Messages.ServerToClient.ErrorMessage;
 import it.polimi.ingsw.Messages.ServerToClient.ServerMessage;
-import it.polimi.ingsw.Messages.ServerToClient.GameIsStartingMessage;
 import it.polimi.ingsw.Messages.ServerToClient.ValidMoveMessage;
-import it.polimi.ingsw.Network.Server.TCP.ServerConnectionTCP;
 import it.polimi.ingsw.Savings;
 import it.polimi.ingsw.controller.ControllerCoordinator;
-import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.player.Player;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
 
 /**
@@ -26,8 +21,8 @@ import java.util.ArrayList;
 public class Lobby implements Serializable {
     private transient File myObj;
     private final Integer NumPlayersLobby;
-    private transient final ArrayList<ServerConnection> connections;
-    private transient final ControllerCoordinator controllerCoordinator;
+    private transient ArrayList<ServerConnection> connections;
+    private transient ControllerCoordinator controllerCoordinator;
     private final ArrayList<String> joinedUsers;
     private Boolean startedGame=false;
     private Boolean fullLobby=false;
@@ -122,11 +117,12 @@ public class Lobby implements Serializable {
             Savings savings=new Savings(this);
             savings.saveGame(returnMessage.getSavings());
             String save =gson.toJson(savings);
-            FileWriter writer=new FileWriter(myObj,false);
-            writer.write(save);
+            try (FileWriter writer = new FileWriter(myObj, false)) {
+                writer.write(save);
+            }
             System.out.println("The game is saved");
         }catch (IOException e){
-            throw new RuntimeException(e);
+            System.out.println("There is a problem with the savings");
         }
     }
 
@@ -216,6 +212,11 @@ public class Lobby implements Serializable {
     }
 
     public void reloadGame(GameSavings gameSavings) {
+        controllerCoordinator=new ControllerCoordinator();
+        connections=new ArrayList<>();
+        setSavesOfTheLobby();
         controllerCoordinator.setGame(gameSavings);
     }
+
+
 }

@@ -35,8 +35,14 @@ public class GameController {
          launcher.addPlayers(players);
          launcher.setNumPlayers(players.size());
          this.game =new Game(launcher, this.players);
+     }
 
-
+     public GameController(GameSavings savings){
+         this.launcher=new Launcher();
+         this.players.addAll(savings.getPlayers());
+         launcher.addPlayers(players);
+         launcher.setNumPlayers(players.size());
+         this.game =new Game(this.players);
      }
 
     /**

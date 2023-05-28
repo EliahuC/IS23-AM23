@@ -151,6 +151,19 @@ public class ServerConnectionTCP implements ServerConnection{
             case ENTER_LOBBY: {
                 if(namePlayer==null)break;
                 synchronized (Server.lobbies) {
+                    //reconnected player
+                    synchronized (Server.startedLobbies){
+                        for(Lobby l:Server.startedLobbies){
+                            if(l.getPlayer(namePlayer)!=null){
+                                l.getPlayer(namePlayer).setListener(virtualView);
+                                lobby=l;
+                                if(!checkCompletedLobby())
+                                    sendMessage(new LobbyJoiningMessage(lobby.getIdLobby()),namePlayer);
+                            }
+                            break;
+                        }
+                        if(lobby!=null)break;
+                    }
                     //zero lobby
                     if (Server.lobbies.size()==0){
                         noLobbyInServer(message);
