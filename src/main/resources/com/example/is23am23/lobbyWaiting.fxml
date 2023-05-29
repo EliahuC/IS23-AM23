@@ -19,10 +19,15 @@
                 <Image url="@title.png" />
             </image>
         </ImageView>
-        <Label alignment="CENTER" layoutX="2.0" layoutY="202.0" prefHeight="30.0" prefWidth="598.0" text="Waiting for players...">
+        <Label alignment="CENTER" layoutX="4.0" layoutY="214.0" prefHeight="30.0" prefWidth="598.0" text="Waiting for players...">
             <font>
                 <Font size="20.0" />
             </font></Label>
         <Button layoutX="254.0" layoutY="302.0" mnemonicParsing="false" onAction="#returnToMenu" prefHeight="32.0" prefWidth="100.0" text="Return to Menu" />
+      <Label fx:id="yourNickname" alignment="CENTER" layoutY="175.0" prefHeight="17.0" prefWidth="605.0" text="Label" textAlignment="CENTER">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
     </children>
 </AnchorPane>

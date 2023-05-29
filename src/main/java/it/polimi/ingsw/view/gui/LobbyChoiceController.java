@@ -34,6 +34,7 @@ public class LobbyChoiceController implements Initializable {
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+
     }
 
     public void returnToMenu(ActionEvent event) throws IOException {
@@ -44,6 +45,7 @@ public class LobbyChoiceController implements Initializable {
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+
     }
 
     public void displayNickname(String nickname){
