@@ -365,4 +365,8 @@ public class LivingRoom implements Serializable {
     public void setIdCGC2(Integer idCGC2) {
         this.idCGC2 = idCGC2;
     }
+
+    public void setBoard(BoardToken[][] board) {
+        Board = board;
+    }
 }

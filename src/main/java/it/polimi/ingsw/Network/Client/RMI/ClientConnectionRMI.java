@@ -159,7 +159,8 @@ public class ClientConnectionRMI extends ConnectionClient implements RemoteInter
         try {
             pingIsOk=stub.getPing();
         } catch (RemoteException e) {
-            throw new RuntimeException(e);
+            closeClientConnection();
+            ping.interrupt();
         }
         TimeUnit.SECONDS.sleep(3);
         if(pingIsOk){
@@ -167,6 +168,9 @@ public class ClientConnectionRMI extends ConnectionClient implements RemoteInter
             return;
         }
         System.out.println("connection crushed");
+    }
+
+    private void closeClientConnection() {
     }
 
     public boolean isGUIisActive() {

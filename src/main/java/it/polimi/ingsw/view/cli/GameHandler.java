@@ -5,6 +5,7 @@ import it.polimi.ingsw.Messages.Message;
 import it.polimi.ingsw.Messages.ServerToClient.ServerMessage;
 import it.polimi.ingsw.Network.Client.ConnectionClient;
 import it.polimi.ingsw.Messages.MoveSerializer;
+import it.polimi.ingsw.model.board.BoardToken;
 import it.polimi.ingsw.model.board.ItemTile;
 import it.polimi.ingsw.model.board.LivingRoom;
 import it.polimi.ingsw.model.board.goalCards.*;
@@ -59,6 +60,9 @@ public class GameHandler {
         this.livingRoom = livingRoom;
         createCommonGoalCard1(livingRoom.getIdCGC1());
         createCommonGoalCard2(livingRoom.getIdCGC2());
+    }
+    public void setBoard(BoardToken[][] board){
+        this.livingRoom.setBoard(board);
     }
 
     private void createCommonGoalCard2(Integer idCGC2) {
@@ -137,6 +141,7 @@ public class GameHandler {
                 }
                 if (response != null && response.getCategory() == Message.MessageCategory.END_GAME_MESSAGE)
                     break;
+                System.out.println("Your turn is finished");
                 waiting();
             }else
                 waiting();
@@ -308,14 +313,18 @@ public class GameHandler {
                 "using the command /COLUMN and the coordinate of the column.\n" +
                 "For example: if you want to insert the tiles in the second column, you should write /COLUMN 1\n\n" +
                 "[Use the command /GOALS to see the description of your personal or common goal cards.]\n");
+        String command = input.nextLine();
         while(true){
-            String command = input.nextLine();
-            if(Objects.equals(command.toUpperCase(), "/GOALS")){
+
+            if(command!=null&&Objects.equals(command.toUpperCase(), "/GOALS")){
                 showGoals("BookshelfColumn");
                 break;
             }
-            ClientMessage message = (ClientMessage) MoveSerializer.serializeInput(command);
-            connectionClient.sendMessage((ClientMessage) message);
+            if(command!=null){
+                ClientMessage message = (ClientMessage) MoveSerializer.serializeInput(command);
+                connectionClient.sendMessage((ClientMessage) message);
+            }
+            command=null;
             try{
                 TimeUnit.MILLISECONDS.sleep(200);
             }catch (InterruptedException iE){
@@ -323,7 +332,12 @@ public class GameHandler {
             }
             if(response!=null && (response.getCategory()==Message.MessageCategory.VALID_MESSAGE || response.getCategory()==Message.MessageCategory.UPDATE_STATE))
                 break;
-            System.out.println("The chosen column is too full. Please, choose another one.");
+
+            if(response!=null&&response.getCategory()== Message.MessageCategory.WARNING){
+                command = input.nextLine();
+                System.out.println("The chosen column is too full. Please, choose another one.");
+            }
+
         }
         tiles.clear();
         /*while(response!=null && response.getCategory()!=Message.MessageCategory.UPDATE_STATE){

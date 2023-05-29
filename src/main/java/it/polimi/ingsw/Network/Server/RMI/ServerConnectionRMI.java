@@ -98,13 +98,28 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
             case ENTER_LOBBY: {
                 if(namePlayer==null)break;
                 synchronized (Server.lobbies) {
+                    //reconnected player
+                    synchronized (Server.startedLobbies){
+                        for(Lobby l:Server.startedLobbies){
+                            if(l.getPlayer(namePlayer)!=null){
+                                VirtualView virtualView=new VirtualView(this,namePlayer);
+                                l.getPlayer(namePlayer).setListener(virtualView);
+                                lobby=l;
+                                if(!checkCompletedLobby())
+                                    sendMessage(new LobbyJoiningMessage(lobby.getIdLobby()),namePlayer);
+                            }
+                            break;
+                        }
+                        if(lobby!=null)break;
+                    }
                     //zero lobby
                     if (Server.lobbies.size()==0){
                         noLobbyInServer(message);
                         break;
                     }
                     //player already in the lobby
-                    if (lobby!=null&&lobby.getJoinedUsers().contains(message.getNickname())) {
+                    lobby = Server.lobbies.get(0);
+                    if (lobby.getJoinedUsers().contains(message.getNickname())) {
                         alreadyExistentLobby(message);
                         break;
                     }
@@ -251,12 +266,14 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
      * @author Eliahu Cohen
      * method that checks if the lobby is now full
      */
-    private void checkCompletedLobby() {
+    private boolean checkCompletedLobby() {
         if(lobby.getNumPlayersLobby()==lobby.getJoinedUsers().size()){
             Server.startedLobbies.add(lobby);
             Server.lobbies.remove(lobby);
             lobby.startGameLobby();
+            return true;
         }
+        return false;
     }
     /**
      * @author Eliahu Cohen
@@ -291,10 +308,14 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
      * @throws InterruptedException
      * Method used to send a ping to the client
      */
-    public void sendPing() throws RemoteException {
+    public void sendPing() {
         for (String s : Server.rmiConnections.keySet()) {
             boolean pingIsOk = false;
-            pingIsOk = Server.rmiConnections.get(s).getPing();
+            try {
+                pingIsOk = Server.rmiConnections.get(s).getPing();
+            } catch (RemoteException e) {
+                closeConnection(s);
+            }
             try {
                 TimeUnit.SECONDS.sleep(3);
             } catch (InterruptedException e) {
@@ -353,11 +374,7 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                try {
-                    sendPing();
-                } catch (RemoteException e) {
-                    throw new RuntimeException(e);
-                }
+                sendPing();
 
 
             }

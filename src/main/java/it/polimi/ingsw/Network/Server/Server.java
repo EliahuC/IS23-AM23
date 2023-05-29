@@ -51,6 +51,7 @@ public class Server implements Printer {
                 lobby.getJoinedUsers().clear();
                 lobby.reloadGame(savings.getGameSavings());
                 startedLobbies.add(lobby);
+                idLobbies++;
                 i++;
             }
         } catch (IOException e) {

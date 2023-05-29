@@ -82,10 +82,11 @@ public class GameController {
                      return sendErrorMessage();
              }
          }
+         if(column!=null){
          if((order.size()!=0)&&(coordinates.size()!=0)&&(column>=0&&column<=4)){
              GameSavings savings=playMove();
              message.setSavings(savings);
-         }
+         }}
          return message;
      }
 
