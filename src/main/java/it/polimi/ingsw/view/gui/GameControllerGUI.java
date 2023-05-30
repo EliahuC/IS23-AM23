@@ -1,10 +1,12 @@
 package it.polimi.ingsw.view.gui;
 
+import it.polimi.ingsw.Launcher;
 import it.polimi.ingsw.Messages.ClientToServer.ClientMessage;
 import it.polimi.ingsw.Messages.Message;
 import it.polimi.ingsw.Messages.MoveSerializer;
 import it.polimi.ingsw.Messages.ServerToClient.ServerMessage;
 import it.polimi.ingsw.Network.Client.ConnectionClient;
+import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.board.BoardToken;
 import it.polimi.ingsw.model.board.ItemTile;
 import it.polimi.ingsw.model.board.LivingRoom;
@@ -22,10 +24,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Objects;
-import java.util.Scanner;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 public class GameControllerGUI {
@@ -202,16 +201,17 @@ public class GameControllerGUI {
     ImageView container3;
 
 
-    public void displayLivingroom(){
+    public void displayLivingroom(ArrayList<Player> lobby){
         //Viene passata la livingroom(DA INSERIRE)
-        LivingRoom livingroom;
+        Game game = new Game(new Launcher(), new ArrayList<>());
+        LivingRoom livingroom = game.getLivingRoom();
 
         for(int i=0; i<9; i++)
         {
             for(int  j=0; j<9; j++)
             {
                 //Viene settata la tile della livingroom(DA INSERIRE)
-                ItemTile tile = null;
+                ItemTile tile = livingroom.getBoardTile(i,j).getTile();
                 if(i==0 && j == 3)
                 {
                     displayImage(livingroom_0_3, chooseCategoryImage(tile));
