@@ -4,6 +4,7 @@ import  it.polimi.ingsw.model.board.goalCards.CommonGoalCard;
 import  it.polimi.ingsw.model.board.LivingRoom;
 
 
+import it.polimi.ingsw.model.player.Player;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -31,6 +32,9 @@ public class GoalsController {
     private Stage stage;
     private Scene scene;
     private Parent root;
+
+    private LivingRoom livingRoom;
+    private Player player;
 
     public void goToLivingroom(ActionEvent event) throws IOException {
 
@@ -235,7 +239,7 @@ public class GoalsController {
 
     public void displayPersonalGoal(){
         //Viene salvato l'indice della personal card(DA INSERIRE)
-        int personalCard = 1;
+        int personalCard = player.getPersonalGoalCard().getNumeroCarta();
 
         switch (personalCard) {
             case 1:
@@ -319,8 +323,8 @@ public class GoalsController {
     public void displayCommonGoal() {
 
         //Viene salvato l'indice della common card(DA INSERIRE)
-        int card1 = 1;
-        int card2 = 2;
+        int card1 = livingRoom.getIdCGC1();
+        int card2 = livingRoom.getIdCGC2();
 
         switch (card1) {
             case 1: {
