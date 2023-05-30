@@ -18,7 +18,7 @@ public class GUIMain extends Application{
     
     public void start(Stage stage) throws IOException {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("menu.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("src/main/resources/com/example/is23am23/menu.fxml"));
             Scene mainMenu = new Scene(root);
             String css = this.getClass().getResource("application.css").toExternalForm();
             mainMenu.getStylesheets().add(css);

@@ -1,5 +1,6 @@
 package it.polimi.ingsw.view.gui;
 
+import it.polimi.ingsw.model.player.Player;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import java.net.URL;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class LobbyChoiceController implements Initializable {
@@ -54,5 +56,15 @@ public class LobbyChoiceController implements Initializable {
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //playerNumber.getItems().addAll(number);
+        //int numPlayers =
+        //setPlayersCounter(numPlayers);
     }
+    /*public void setPlayersCounter(int playersCounter) {
+        PlayersCounter = playersCounter;
+    }*/
+/*
+    public ArrayList<Player> getPlayers(){
+        return playerList;
+    }*/
+
 }

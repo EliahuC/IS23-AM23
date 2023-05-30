@@ -59,78 +59,12 @@ public class LobbyWaitingController {
     public void start() {
         GameControllerGUI gamecontrollerGUI = new GameControllerGUI();
         receiver.setGamecontrollerGUI(gamecontrollerGUI);
-        String command;
-        Scanner input = new Scanner(System.in);
         ServerMessage serverMessage;
-        while (true) {
-            //AL POSTO DI QUESTA PRINT SI POSSONO METTERE DUE BOTTONI : "NEW GAME" E "JOIN IN A GAME"
-            System.out.print("Do you want to look for a lobby to join or do you prefer to make a new one?\n" +
-                    "Please use the following commands:\n" +
-                   "/CREATE <number of players> (Remember that the number of players can only be 2, 3 or 4!)\n" +
-                    "/ENTER \n");
 
-             command = input.nextLine();  //al posto di questa riga
-            // bisogna dire che quando fa un click in un bottone cambia qualcosa
-                //per esempio, se il player clicca su new game poi deve scegliere il numero dei giocatori
-            //e il numero dei giocatori scritto dal player andrà a settare il valore di PlayersCounter
-             if ((Objects.equals(command.split(" ")[0].toUpperCase(), "/CREATE")) || Objects.equals(command.split(" ")[0].toUpperCase(), "/ENTER"))
-                break;
-            System.out.print("The used command is NOT valid. Please, retry again.\n");
-            try {
-                TimeUnit.MILLISECONDS.sleep(1200);
-            } catch (InterruptedException iE) {
-                iE.printStackTrace();
-            }
-        }
-        Message message = MoveSerializer.serializeInput(command);
-        connectionClient.sendMessage((ClientMessage) message);
-        while (true) {
-            try {
-                TimeUnit.MILLISECONDS.sleep(200);
-            } catch (InterruptedException iE) {
-                iE.printStackTrace();
-            }
-            if (response != null && response.getCategory() == Message.MessageCategory.WARNING) {
-                System.out.println(response.getReturnMessage());
-                while (true) {
-                    command = input.nextLine();
-                    message = MoveSerializer.serializeInput(command);
-                    if ((Objects.equals(command.split(" ")[0].toUpperCase(), "/CREATE"))) {
-                        connectionClient.sendMessage((ClientMessage) message);
-                        break;
-                    } else
-                        System.out.println("The used command is NOT valid. Please, retry again.");
-                }
-            } else if (response != null && (response.getCategory() == Message.MessageCategory.RETURN_MESSAGE||response.getCategory() == Message.MessageCategory.STARTING_GAME_MESSAGE)) {
-                if (response.getCategory() == Message.MessageCategory.STARTING_GAME_MESSAGE) {
-                    receiver.setInLobbyWaiting(false);
-                    receiver.setInGameControllerGUI(true);
-                    gamecontrollerGUI.start();
-                    lock=false;
-                    break;
-                }
-                else
-                    break;
-            }
-        }
-        //al posto di questa print, far comparire un messaggio a video
-        System.out.println("Hi " + connectionClient.getPlayerName() + "! Let's wait for other players to begin the game.");
-        if(lock){
-            do {
-                try {
-                    TimeUnit.MILLISECONDS.sleep(200);
-                } catch (InterruptedException iE) {
-                    iE.printStackTrace();
-                }
-            } while (response == null || response.getCategory() != Message.MessageCategory.STARTING_GAME_MESSAGE);
-            System.out.print(response.getReturnMessage());
-            receiver.setInLobbyWaiting(false);
-            receiver.setInGameControllerGUI(true);
-            gamecontrollerGUI.start();
-        }
+
+
+
+
     }
 
-    public void setPlayersCounter(int playersCounter) {
-        PlayersCounter = playersCounter;
-    }
 }
