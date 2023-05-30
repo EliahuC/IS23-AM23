@@ -40,6 +40,8 @@ public class MenuController {
     private String nickname;
     private ConnectionClient connectionClient;
     private GUIEvent receiver;
+    public void goTCP(ActionEvent event) throws IOException {}
+    public void goRMI(ActionEvent event) throws IOException {}
 /*
     public void goTCP(ActionEvent event) throws IOException {
 
