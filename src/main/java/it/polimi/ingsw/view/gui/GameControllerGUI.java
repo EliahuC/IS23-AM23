@@ -6,6 +6,7 @@ import it.polimi.ingsw.Messages.Message;
 import it.polimi.ingsw.Messages.MoveSerializer;
 import it.polimi.ingsw.Messages.ServerToClient.ServerMessage;
 import it.polimi.ingsw.Network.Client.ConnectionClient;
+import it.polimi.ingsw.controller.GameController;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.board.BoardToken;
 import it.polimi.ingsw.model.board.ItemTile;
@@ -200,17 +201,19 @@ public class GameControllerGUI {
     @FXML
     ImageView container3;
 
+    private Game game;
 
-    public void displayLivingroom(ArrayList<Player> lobby){
-        //Viene passata la livingroom(DA INSERIRE)
-        Game game = new Game(new Launcher(), new ArrayList<>());
+    public void setGame(Game game){
+        this.game = game;
+    }
+    public void displayLivingroom(){
+
         LivingRoom livingroom = game.getLivingRoom();
 
         for(int i=0; i<9; i++)
         {
             for(int  j=0; j<9; j++)
             {
-                //Viene settata la tile della livingroom(DA INSERIRE)
                 ItemTile tile = livingroom.getBoardTile(i,j).getTile();
                 if(i==0 && j == 3)
                 {
@@ -629,7 +632,7 @@ public class GameControllerGUI {
     public void setWinner(String winner) {
         this.winner = winner;
     }
-
+/*
     public void start(){
         while(true){
             if(player.getNickName()==currentPlayer || player.getNickName()==players.get(currPlaying).getNickName()) {
@@ -648,7 +651,7 @@ public class GameControllerGUI {
                 waiting();
         }
         displayEnd();
-    }
+    }*/
 
     private void waiting(){
         System.out.print("It's not your turn, yet. Wait for other players to finish their turn.\n\n");

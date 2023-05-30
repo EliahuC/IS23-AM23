@@ -7,6 +7,7 @@ import it.polimi.ingsw.model.board.ItemTile;
 import it.polimi.ingsw.model.board.LivingRoom;
 import it.polimi.ingsw.model.player.PersonalGoalCard;
 import it.polimi.ingsw.model.player.Player;
+import it.polimi.ingsw.view.gui.GameControllerGUI;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -34,7 +35,7 @@ public class Game implements Serializable {
     private transient final Timer turnTimer=new Timer();
 
     private transient boolean finishedGame=false;
-
+    private GameControllerGUI gameControllerGUI;
 
 
     public Game(Launcher L,ArrayList<Player> lobby){
@@ -92,6 +93,7 @@ public class Game implements Serializable {
         for(PropertyChangeListener l:listeners){
             l.propertyChange(evt);
         }
+        setGameForGUI(this);
     }
 
     /**
@@ -515,7 +517,14 @@ public class Game implements Serializable {
     public void setCurrPlaying(Integer currPlaying) {
         this.currPlaying = currPlaying;
     }
+
+    public void setGameForGUI(Game game){
+        gameControllerGUI = new GameControllerGUI();
+        gameControllerGUI.setGame(game);
+    }
+
 }
+
 
 
 
