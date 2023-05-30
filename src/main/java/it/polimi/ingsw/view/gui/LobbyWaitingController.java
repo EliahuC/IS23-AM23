@@ -105,7 +105,7 @@ public class LobbyWaitingController {
                 if (response.getCategory() == Message.MessageCategory.STARTING_GAME_MESSAGE) {
                     receiver.setInLobbyWaiting(false);
                     receiver.setInGameControllerGUI(true);
-                    gamecontrollerGUI.start();
+                    //gamecontrollerGUI.start();
                     lock=false;
                     break;
                 }
@@ -126,7 +126,7 @@ public class LobbyWaitingController {
             System.out.print(response.getReturnMessage());
             receiver.setInLobbyWaiting(false);
             receiver.setInGameControllerGUI(true);
-            gamecontrollerGUI.start();
+            //gamecontrollerGUI.start();
         }
     }
 
