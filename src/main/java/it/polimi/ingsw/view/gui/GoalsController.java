@@ -42,7 +42,7 @@ public class GoalsController {
 
     public void goToLivingroom(ActionEvent event) throws IOException {
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("game.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("src/main/resources/com/example/is23am23/game.fxml"));
         root = loader.load();
         GameControllerGUI gameControllerGUI = loader.getController();
         gameControllerGUI.displayBookshelf();

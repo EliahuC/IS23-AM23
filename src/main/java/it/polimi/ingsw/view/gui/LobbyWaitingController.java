@@ -22,8 +22,8 @@ import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 public class LobbyWaitingController {
-    private final ConnectionClient connectionClient;
-    private final GUIEvent receiver;
+    //private final ConnectionClient connectionClient;
+    //private final GUIEvent receiver;
     private ServerMessage response;
     private Boolean lock=true;
     private Stage stage;
@@ -35,7 +35,7 @@ public class LobbyWaitingController {
 
     public void returnToMenu(ActionEvent event) throws IOException {
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("menu.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("src/main/resources/com/example/is23am23/menu.fxml"));
         root = loader.load();
         button_NewGame = new Button("New game");
         button_JoinGame = new Button("Join in a game");
@@ -45,6 +45,7 @@ public class LobbyWaitingController {
         stage.setScene(scene);
         stage.show();
     }
+    /*
     public LobbyWaitingController(ConnectionClient connectionClient, GUIEvent receiver) {
         this.connectionClient = connectionClient;
         this.receiver=receiver;
@@ -60,11 +61,6 @@ public class LobbyWaitingController {
         GameControllerGUI gamecontrollerGUI = new GameControllerGUI();
         receiver.setGamecontrollerGUI(gamecontrollerGUI);
         ServerMessage serverMessage;
-
-
-
-
-
     }
-
+*/
 }
