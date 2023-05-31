@@ -100,6 +100,7 @@ public class MenuController {
             LobbyChoiceController lobbyController = loader.getController();
             lobbyController.displayNickname(nickname);
 
+
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
@@ -119,4 +120,9 @@ public class MenuController {
             stage.close();
         }
     }*/
+
+    public String getNickname(){
+
+        return nickname;
+    }
 }
