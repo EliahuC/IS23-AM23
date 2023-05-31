@@ -32,6 +32,7 @@ public class ControllerCoordinator {
      * adding a player to the current game
      */
     public void joinPlayer(String s, VirtualView view) {
+
         for (Player p: connectedPlayers){
             if (Objects.equals(p.getNickName(), s)) {
                 return;

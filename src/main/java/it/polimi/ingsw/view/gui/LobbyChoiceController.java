@@ -20,7 +20,7 @@ public class LobbyChoiceController implements Initializable {
     @FXML
     Label nameDisplay;
     @FXML
-    ChoiceBox <Integer> playerNumber;
+    ChoiceBox<Integer> playerNumber;
 
     String number[] = {"2", "3", "4"};
 
@@ -30,9 +30,9 @@ public class LobbyChoiceController implements Initializable {
 
     public void goToLobbyWaiting(ActionEvent event) throws IOException {
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("lobbyWaiting.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("src/main/resources/com/example/is23am23/lobbyWaiting.fxml"));
         root = loader.load();
-        stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
@@ -41,16 +41,16 @@ public class LobbyChoiceController implements Initializable {
 
     public void returnToMenu(ActionEvent event) throws IOException {
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("menu.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("src/main/resources/com/example/is23am23/menu.fxml"));
         root = loader.load();
-        stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
 
     }
 
-    public void displayNickname(String nickname){
+    public void displayNickname(String nickname) {
         nameDisplay.setText("Welcome " + nickname + "!");
     }
 
@@ -59,12 +59,15 @@ public class LobbyChoiceController implements Initializable {
         //int numPlayers =
         //setPlayersCounter(numPlayers);
     }
-    /*public void setPlayersCounter(int playersCounter) {
-        PlayersCounter = playersCounter;
-    }*/
 /*
-    public ArrayList<Player> getPlayers(){
+    public void setPlayersCounter(int playersCounter) {
+        PlayersCounter = playersCounter;
+    }
+
+    public ArrayList<Player> getPlayers() {
         return playerList;
     }*/
 
 }
+
+
