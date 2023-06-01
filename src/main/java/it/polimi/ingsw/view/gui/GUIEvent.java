@@ -56,7 +56,7 @@ public class GUIEvent implements PropertyChangeListener {
             return;
         }
         if(inLobbyWaiting) {
-            lobbywaitingcontroller.setResponse(response);
+           // lobbywaitingcontroller.setResponse(response);
             return;
         }
         if (inGameControllerGUI) {
