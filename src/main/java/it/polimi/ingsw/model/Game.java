@@ -35,7 +35,7 @@ public class Game implements Serializable {
     private transient final Timer turnTimer=new Timer();
 
     private transient boolean finishedGame=false;
-    private GameControllerGUI gameControllerGUI;
+    private transient GameControllerGUI gameControllerGUI;
 
 
     public Game(Launcher L,ArrayList<Player> lobby){

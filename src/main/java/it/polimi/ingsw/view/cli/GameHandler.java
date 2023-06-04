@@ -225,7 +225,7 @@ public class GameHandler {
                 break;
             }
             ClientMessage message = (ClientMessage) MoveSerializer.serializeInput(command);
-            connectionClient.sendMessage((ClientMessage) message);
+            connectionClient.sendMessage(message);
             try{
                 TimeUnit.MILLISECONDS.sleep(200);
             }catch (InterruptedException iE){

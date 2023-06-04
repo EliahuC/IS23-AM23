@@ -68,6 +68,7 @@ public class GameController {
                  CoordinatesMessage coordinatesMessage=(CoordinatesMessage) m;
                  coordinates.addAll(coordinatesMessage.getMessageMove().getMove());
                  if (!game.checkLegalMove(coordinates, coordinates.size() / 2)) {
+                     coordinates.clear();
                      return sendErrorMessage();
                  }
              }
