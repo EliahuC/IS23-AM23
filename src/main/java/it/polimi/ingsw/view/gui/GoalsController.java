@@ -1,11 +1,9 @@
 package it.polimi.ingsw.view.gui;
 
-import it.polimi.ingsw.controller.GameController;
 import  it.polimi.ingsw.model.board.goalCards.CommonGoalCard;
 import  it.polimi.ingsw.model.board.LivingRoom;
 
 
-import it.polimi.ingsw.model.player.Player;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,7 +14,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class GoalsController {
 
@@ -35,14 +32,9 @@ public class GoalsController {
     private Scene scene;
     private Parent root;
 
-    private LivingRoom livingRoom;
-    private MenuController menuController;
-    private ArrayList<Player> playersList;
-
-
     public void goToLivingroom(ActionEvent event) throws IOException {
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("src/main/resources/com/example/is23am23/game.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("game.fxml"));
         root = loader.load();
         GameControllerGUI gameControllerGUI = loader.getController();
         gameControllerGUI.displayBookshelf();
@@ -57,14 +49,13 @@ public class GoalsController {
     public void displayPoints(){
 
         //Inserire il numero di giocatori della lobby, passare il parametro per n° volte goalcard completata(DA INSERIRE)
-        int numPlayers = playersList.size();
-        int numCompleted1 = livingRoom.getCommonGoalCard1().getNumCompleted();
-        int numCompleted2 = livingRoom.getCommonGoalCard2().getNumCompleted();
+        int numPlayers = 2;
+        int numCompleted = 2;
 
         // score common goal card 1
         switch (numPlayers) {
             case 2: {
-                switch (numCompleted1) {
+                switch (numCompleted) {
                     case 0:
                     {
                         Image image = new Image(getClass().getResourceAsStream("scoring_8.jpg"));
@@ -87,7 +78,7 @@ public class GoalsController {
                 break;
             }
             case 3: {
-                switch (numCompleted1) {
+                switch (numCompleted) {
                     case 0:
                     {
                         Image image = new Image(getClass().getResourceAsStream("scoring_8.jpg"));
@@ -116,7 +107,7 @@ public class GoalsController {
                 break;
             }
             case 4: {
-                switch (numCompleted1) {
+                switch (numCompleted) {
                     case 0:
                     {
                         Image image = new Image(getClass().getResourceAsStream("scoring_8.jpg"));
@@ -154,7 +145,7 @@ public class GoalsController {
         // score common goal card 2
         switch (numPlayers) {
             case 2: {
-                switch (numCompleted2) {
+                switch (numCompleted) {
                     case 0:
                     {
                         Image image = new Image(getClass().getResourceAsStream("scoring_8.jpg"));
@@ -177,7 +168,7 @@ public class GoalsController {
                 break;
             }
             case 3: {
-                switch (numCompleted2) {
+                switch (numCompleted) {
                     case 0:
                     {
                         Image image = new Image(getClass().getResourceAsStream("scoring_8.jpg"));
@@ -206,7 +197,7 @@ public class GoalsController {
                 break;
             }
             case 4: {
-                switch (numCompleted2) {
+                switch (numCompleted) {
                     case 0:
                     {
                         Image image = new Image(getClass().getResourceAsStream("scoring_8.jpg"));
@@ -242,91 +233,94 @@ public class GoalsController {
         }
     }
 
-    public void setPlayersList(ArrayList<Player> list){
-
-        playersList = list;
-
-    }
-
     public void displayPersonalGoal(){
+        //Viene salvato l'indice della personal card(DA INSERIRE)
+        int personalCard = 1;
 
-        for (Player player:  playersList) {
-            if((player.getNickName().equals(menuController.getNickname()))){
-
-                int personalCard = player.getPersonalGoalCard().getNumeroCarta();
-                switch (personalCard) {
-                    case 1: {
-                        Image image = new Image(getClass().getResourceAsStream("Personal_Goals.png"));
-                        displayImage(personalGoal, image);
-                        break;
-                    }
-                    case 2: {
-                        Image image = new Image(getClass().getResourceAsStream("Personal_Goals2.png"));
-                        displayImage(personalGoal, image);
-                        break;
-                    }
-                    case 3: {
-                        Image image = new Image(getClass().getResourceAsStream("Personal_Goals3.png"));
-                        displayImage(personalGoal, image);
-                        break;
-                    }
-                    case 4: {
-                        Image image = new Image(getClass().getResourceAsStream("Personal_Goals4.png"));
-                        displayImage(personalGoal, image);
-                        break;
-                    }
-                    case 5: {
-                        Image image = new Image(getClass().getResourceAsStream("Personal_Goals5.png"));
-                        displayImage(personalGoal, image);
-                        break;
-                    }
-                    case 6: {
-                        Image image = new Image(getClass().getResourceAsStream("Personal_Goals6.png"));
-                        displayImage(personalGoal, image);
-                        break;
-                    }
-                    case 7: {
-                        Image image = new Image(getClass().getResourceAsStream("Personal_Goals7.png"));
-                        displayImage(personalGoal, image);
-                        break;
-                    }
-                    case 8: {
-                        Image image = new Image(getClass().getResourceAsStream("Personal_Goals8.png"));
-                        displayImage(personalGoal, image);
-                        break;
-                    }
-                    case 9: {
-                        Image image = new Image(getClass().getResourceAsStream("Personal_Goals9.png"));
-                        displayImage(personalGoal, image);
-                        break;
-                    }
-                    case 10: {
-                        Image image = new Image(getClass().getResourceAsStream("Personal_Goals10.png"));
-                        displayImage(personalGoal, image);
-                        break;
-                    }
-                    case 11: {
-                        Image image = new Image(getClass().getResourceAsStream("Personal_Goals11.png"));
-                        displayImage(commonGoal1, image);
-                        break;
-                    }
-                    case 12: {
-                        Image image = new Image(getClass().getResourceAsStream("Personal_Goals12.png.jpg"));
-                        displayImage(personalGoal, image);
-                        break;
-                    }
-                    default:
-                        System.out.println("è colpa di eliahu");
-                        break;
-                }
+        switch (personalCard) {
+            case 1:
+            {
+                Image image = new Image(getClass().getResourceAsStream("Personal_Goals.png"));
+                displayImage(personalGoal, image);
+                break;
             }
+            case 2:
+            {
+                Image image = new Image(getClass().getResourceAsStream("Personal_Goals2.png"));
+                displayImage(personalGoal, image);
+                break;
+            }
+            case 3:
+            {
+                Image image = new Image(getClass().getResourceAsStream("Personal_Goals3.png"));
+                displayImage(personalGoal, image);
+                break;
+            }
+            case 4:
+            {
+                Image image = new Image(getClass().getResourceAsStream("Personal_Goals4.png"));
+                displayImage(personalGoal, image);
+                break;
+            }
+            case 5:
+            {
+                Image image = new Image(getClass().getResourceAsStream("Personal_Goals5.png"));
+                displayImage(personalGoal, image);
+                break;
+            }
+            case 6:
+            {
+                Image image = new Image(getClass().getResourceAsStream("Personal_Goals6.png"));
+                displayImage(personalGoal, image);
+                break;
+            }
+            case 7:
+            {
+                Image image = new Image(getClass().getResourceAsStream("Personal_Goals7.png"));
+                displayImage(personalGoal, image);
+                break;
+            }
+            case 8:
+            {
+                Image image = new Image(getClass().getResourceAsStream("Personal_Goals8.png"));
+                displayImage(personalGoal, image);
+                break;
+            }
+            case 9:
+            {
+                Image image = new Image(getClass().getResourceAsStream("Personal_Goals9.png"));
+                displayImage(personalGoal, image);
+                break;
+            }
+            case 10:
+            {
+                Image image = new Image(getClass().getResourceAsStream("Personal_Goals10.png"));
+                displayImage(personalGoal, image);
+                break;
+            }
+            case 11:
+            {
+                Image image = new Image(getClass().getResourceAsStream("Personal_Goals11.png"));
+                displayImage(commonGoal1, image);
+                break;
+            }
+            case 12:
+            {
+                Image image = new Image(getClass().getResourceAsStream("Personal_Goals12.png.jpg"));
+                displayImage(personalGoal, image);
+                break;
+            }
+            default: System.out.println("è colpa di eliahu");
+                break;
         }
+
     }
 
     public void displayCommonGoal() {
 
-        int card1 = livingRoom.getIdCGC1();
-        int card2 = livingRoom.getIdCGC2();
+        //Viene salvato l'indice della common card(DA INSERIRE)
+        int card1 = 1;
+        int card2 = 2;
 
         switch (card1) {
             case 1: {
@@ -459,9 +453,5 @@ public class GoalsController {
 
     public void displayImage(ImageView commonGoal1,Image image){
         commonGoal1.setImage(image);
-    }
-
-    public void setLivingroom(LivingRoom livingRoom){
-        this.livingRoom = livingRoom;
     }
 }

@@ -11,7 +11,6 @@ import it.polimi.ingsw.Messages.ServerToClient.ErrorMessage;
 import it.polimi.ingsw.Messages.ServerToClient.ValidMoveMessage;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.player.Player;
-import it.polimi.ingsw.view.gui.GoalsController;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -30,13 +29,10 @@ public class GameController {
      private Integer column=-1;
      private final ArrayList<Player> players =new ArrayList<>();
      private boolean startedGame=false;
-     private GoalsController goalsController;
      public GameController(ArrayList<Player> players){
          this.launcher=new Launcher();
          this.players.addAll(players);
-         goalsController = new GoalsController();
          launcher.addPlayers(players);
-         setPlayersForGUI();
          launcher.setNumPlayers(players.size());
          this.game =new Game(launcher, this.players);
      }
@@ -197,11 +193,5 @@ public class GameController {
         game.setPlayers(gameSavings.getPlayers());
         game.setStartedGame(true);
         game.setCurrPlaying(gameSavings.getCurrPlaying());
-    }
-
-    public void setPlayersForGUI(){
-
-        goalsController.setPlayersList(this.getPlayers());
-
     }
 }

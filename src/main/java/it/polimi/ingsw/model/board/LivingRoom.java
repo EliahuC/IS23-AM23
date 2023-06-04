@@ -5,7 +5,6 @@ import it.polimi.ingsw.Network.Server.VirtualView;
 import it.polimi.ingsw.model.GameChecker;
 import it.polimi.ingsw.model.board.goalCards.*;
 import it.polimi.ingsw.model.player.BookShelf;
-import it.polimi.ingsw.view.gui.GoalsController;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -33,12 +32,9 @@ public class LivingRoom implements Serializable {
     private transient CommonGoalCard commonGoalCard2;
     private Integer idCGC1;
     private Integer idCGC2;
-    private GoalsController goalsController;
-
 
     public LivingRoom(Launcher L) {
         this.L = L;
-        goalsController = new GoalsController();
         this.bag = new Bag();
         this.gameChecker =new GameChecker(L);
         buildTiles();
@@ -193,7 +189,6 @@ public class LivingRoom implements Serializable {
         key=commonGoalCards.remove(randIndex);
         commonGoalCard2 = key.getCommonGoalCard();
         idCGC2=key.getId();
-        setLivingroomForGUI();
     }
 
     /**
@@ -347,11 +342,11 @@ public class LivingRoom implements Serializable {
         return gameChecker;
     }
 
-    public void setCommonGoalCard1(it.polimi.ingsw.model.board.goalCards.CommonGoalCard commonGoalCard1) {
+    public void setCommonGoalCard1(CommonGoalCard commonGoalCard1) {
         this.commonGoalCard1 = commonGoalCard1;
     }
 
-    public void setCommonGoalCard2(it.polimi.ingsw.model.board.goalCards.CommonGoalCard commonGoalCard2) {
+    public void setCommonGoalCard2(CommonGoalCard commonGoalCard2) {
         this.commonGoalCard2 = commonGoalCard2;
     }
 
@@ -373,9 +368,5 @@ public class LivingRoom implements Serializable {
 
     public void setBoard(BoardToken[][] board) {
         Board = board;
-    }
-
-    public void setLivingroomForGUI(){
-        goalsController.setLivingroom(this);
     }
 }

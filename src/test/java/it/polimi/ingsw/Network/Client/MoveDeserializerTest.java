@@ -26,8 +26,8 @@ class MoveDeserializerTest {
         Launcher L = new Launcher();
         L.addPlayer(p1);
         L.addPlayer(p2);
-        p1.setListener(new VirtualView(new ServerConnectionTCP(null)));
-        p2.setListener(new VirtualView(new ServerConnectionTCP(null)));
+        p1.setListener(new VirtualView(new ServerConnectionTCP(null),null));
+        p2.setListener(new VirtualView(new ServerConnectionTCP(null),null));
         Game G = new Game(L,L.getPlayers());
         G.startGame();
         GameIsStartingMessage message=new GameIsStartingMessage(G);

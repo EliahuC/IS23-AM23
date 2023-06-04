@@ -1,4 +1,4 @@
-/*package it.polimi.ingsw.view.gui;
+package it.polimi.ingsw.view.gui;/*package it.polimi.ingsw.view.gui;
 
 import it.polimi.ingsw.Messages.ServerToClient.ServerMessage;
 import it.polimi.ingsw.Network.Client.ConnectionClient;

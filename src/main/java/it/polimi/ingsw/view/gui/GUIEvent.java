@@ -52,11 +52,11 @@ public class GUIEvent implements PropertyChangeListener {
 
     private void forwardMessage(ServerMessage response){
         if(inStartGUI){
-            //GUIlauncher.setResponse(response);
+            GUIlauncher.setResponse(response);
             return;
         }
         if(inLobbyWaiting) {
-           // lobbywaitingcontroller.setResponse(response);
+            lobbywaitingcontroller.setResponse(response);
             return;
         }
         if (inGameControllerGUI) {
