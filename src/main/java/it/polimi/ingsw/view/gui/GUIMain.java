@@ -1,7 +1,5 @@
 package it.polimi.ingsw.view.gui;
 
-import it.polimi.ingsw.Network.Client.ConnectionClient;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,10 +9,8 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
-
 import java.io.File;
 import java.io.IOException;
-import java.net.Socket;
 import java.net.URL;
 
 public class GUIMain extends Application{

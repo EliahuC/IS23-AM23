@@ -16,7 +16,9 @@ import javafx.stage.Stage;
 import javafx.application.Application;
 import javafx.scene.control.Button;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.Objects;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
@@ -35,16 +37,19 @@ public class LobbyWaitingController {
 
     public void returnToMenu(ActionEvent event) throws IOException {
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("menu.fxml"));
-        root = loader.load();
+        File file = new File("src/main/resources/com/example/is23am23/menu.fxml");
+        URL url = file.toURI().toURL();
+        FXMLLoader loader = new FXMLLoader(url);
+        Parent root = loader.load();
+
         button_NewGame = new Button("New game");
         button_JoinGame = new Button("Join in a game");
         stage = (Stage)((Node) event.getSource()).getScene().getWindow();
-        //bisogna aggiungere i bottoni alla scena
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
+
     public LobbyWaitingController(ConnectionClient connectionClient, GUIEvent receiver) {
         this.connectionClient = connectionClient;
         this.receiver=receiver;
@@ -52,6 +57,7 @@ public class LobbyWaitingController {
         connectionClient.setListener(receiver);
         this.receiver.setLobbywaitingcontroller(this);
     }
+
     public void setResponse(ServerMessage response){
         this.response=response;
     }

@@ -25,7 +25,6 @@ public class LobbyChoiceController implements Initializable {
 
     private Stage stage;
     private Scene scene;
-    private Parent root;
 
     public void goToLobbyWaiting(ActionEvent event) throws IOException {
 

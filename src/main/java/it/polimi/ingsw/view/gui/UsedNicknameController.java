@@ -9,7 +9,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 
 public class UsedNicknameController {
 
@@ -21,8 +23,12 @@ public class UsedNicknameController {
     private Parent root;
 
     public void returnToMenu(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("menu.fxml"));
-        root = loader.load();
+
+        File file = new File("src/main/resources/com/example/is23am23/menu.fxml");
+        URL url = file.toURI().toURL();
+        FXMLLoader loader = new FXMLLoader(url);
+        Parent root = loader.load();
+
         stage = (Stage)((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
@@ -33,8 +39,10 @@ public class UsedNicknameController {
 
         String nickname = name.getText();
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("lobbyWaiting.fxml"));
-        root = loader.load();
+        File file = new File("src/main/resources/com/example/is23am23/lobbyWaiting.fxml");
+        URL url = file.toURI().toURL();
+        FXMLLoader loader = new FXMLLoader(url);
+        Parent root = loader.load();
 
         LobbyChoiceController lobbyController = loader.getController();
         lobbyController.displayNickname(nickname);
