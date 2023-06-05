@@ -35,7 +35,7 @@ public class Game implements Serializable {
     private transient final Timer turnTimer=new Timer();
 
     private transient boolean finishedGame=false;
-    private transient GameControllerGUI gameControllerGUI;
+
 
 
     public Game(Launcher L,ArrayList<Player> lobby){
@@ -93,7 +93,7 @@ public class Game implements Serializable {
         for(PropertyChangeListener l:listeners){
             l.propertyChange(evt);
         }
-        setGameForGUI(this);
+
     }
 
     /**
@@ -518,10 +518,7 @@ public class Game implements Serializable {
         this.currPlaying = currPlaying;
     }
 
-    public void setGameForGUI(Game game){
-        gameControllerGUI = new GameControllerGUI();
-        gameControllerGUI.setGame(game);
-    }
+
 
 }
 
