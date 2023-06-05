@@ -40,14 +40,11 @@ public class MenuController {
     private String nickname;
     private ConnectionClient connectionClient;
     private GUIEvent receiver;
-    /*
-    public void goTCP(ActionEvent event) throws IOException {}
-    public void goRMI(ActionEvent event) throws IOException {}
-
+/*
     public void goTCP(ActionEvent event) throws IOException {
 
         nickname = textField.getText();
-        if(TCPOn()) {
+        if (TCPOn()) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("lobbyChoice.fxml"));
             root = loader.load();
 
@@ -61,45 +58,42 @@ public class MenuController {
         }
     }
 
-    public boolean TCPOn(){
+    public boolean TCPOn() {
 
-                    try {
-                        serverAddr = Settings.SERVER_NAME;
-                        portNum = Settings.PORT;
-                        socket = new Socket(serverAddr, portNum);
-                        connectionClient = new ClientConnectionTCP(socket, nickname);
-                        receiver=new GUIEvent(this);
-                        receiver.setInStartGUI(true);
-                        connectionClient.setListener(receiver);
-                        new Thread(connectionClient).start();
-                        return true;
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        return false;
-                    }
+        try {
+            serverAddr = Settings.SERVER_NAME;
+            portNum = Settings.PORT;
+            socket = new Socket(serverAddr, portNum);
+            connectionClient = new ClientConnectionTCP(socket, nickname);
+            receiver = new GUIEvent(this);
+            receiver.setInStartGUI(true);
+            connectionClient.setListener(receiver);
+            new Thread(connectionClient).start();
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
-     public boolean RMIOn(){
-            try {
-                receiver = new GUIEvent(this);
-                receiver.setInStartGUI(true);
-                connectionClient = new ClientConnectionRMI(nickname, receiver);
+    public boolean RMIOn() {
+        try {
+            receiver = new GUIEvent(this);
+            receiver.setInStartGUI(true);
+            connectionClient = new ClientConnectionRMI(nickname, receiver);
 
-                    new Thread(connectionClient).start();
-                    return true;
-                } catch(IOException e){
-                    e.printStackTrace();
-                    return false;
-                }
-            }
-
-
+            new Thread(connectionClient).start();
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
-      public void goRMI(ActionEvent event) throws IOException {
+    public void goRMI(ActionEvent event) throws IOException {
 
         String nickname = textField.getText();
-        if(RMIOn()) {
+        if (RMIOn()) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("lobbyChoice.fxml"));
             root = loader.load();
 
@@ -111,6 +105,7 @@ public class MenuController {
             stage.setScene(scene);
             stage.show();
         }
+    }
 
     public void exit(){
 
@@ -123,7 +118,6 @@ public class MenuController {
             stage = (Stage)scenePane.getScene().getWindow();
             stage.close();
         }
-    }
-*/
+    }*/
 }
 
