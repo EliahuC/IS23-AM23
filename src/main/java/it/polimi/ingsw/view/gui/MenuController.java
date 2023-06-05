@@ -30,14 +30,13 @@ import java.util.concurrent.TimeUnit;
 public class MenuController {
 
     @FXML
-    TextField textField;
+    private TextField textField;
     @FXML
-    Button exitButton;
-    AnchorPane scenePane;
+    private Button exitButton;
+    private AnchorPane scenePane;
 
     private Stage stage;
     private Scene scene;
-    private Parent root;
     private String serverAddr;
     private int portNum;
     private Socket socket;

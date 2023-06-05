@@ -31,8 +31,8 @@ public class GUIMain extends Application{
             FXMLLoader loader = new FXMLLoader(url);
             Parent root = loader.load();
             Scene mainMenu = new Scene(root);
-         //   String css = this.getClass().getResource("application.css").toExternalForm();
-           // mainMenu.getStylesheets().add(css);
+            //String css = this.getClass().getResource("application.css").toExternalForm();
+            //mainMenu.getStylesheets().add(css);
             stage.setTitle("My Shelfie");
             stage.setScene(mainMenu);
             stage.show();

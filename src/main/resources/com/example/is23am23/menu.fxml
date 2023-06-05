@@ -22,7 +22,7 @@
         <Image url="@title.png" />
       </image>
     </ImageView>
-    <Button fx:id="exitButton" layoutX="275.0" layoutY="335.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="50.0" text="Exit" />
+    <Button fx:id="exitButton" layoutX="275.0" layoutY="335.0" mnemonicParsing="false" onAction="#exit" prefHeight="35.0" prefWidth="50.0" text="Exit" />
     <TextField fx:id="textField" alignment="CENTER" layoutX="75.0" layoutY="255.0" promptText="Insert your nickname" />
     <Label alignment="CENTER" layoutX="286.0" layoutY="200.0" prefHeight="25.0" prefWidth="309.0" text="Choose your preferred connection method">
          <font>
