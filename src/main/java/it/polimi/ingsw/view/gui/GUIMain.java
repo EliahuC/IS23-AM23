@@ -31,8 +31,8 @@ public class GUIMain extends Application{
             stage.setTitle("My Shelfie");
             stage.setScene(mainMenu);
             stage.show();
-            //Image icon = new Image("little_icon.jpg");
-            //stage.getIcons().add(icon);
+            Image icon = new Image("com/example/is23am23/little_icon.png");
+            stage.getIcons().add(icon);
             //stage.setFullScreen(true);
 
           /*  stage.setOnCloseRequest(event ->{

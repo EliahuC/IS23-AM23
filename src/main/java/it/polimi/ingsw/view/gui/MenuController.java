@@ -40,9 +40,10 @@ public class MenuController {
     private String nickname;
     private ConnectionClient connectionClient;
     private GUIEvent receiver;
+    /*
     public void goTCP(ActionEvent event) throws IOException {}
     public void goRMI(ActionEvent event) throws IOException {}
-/*
+
     public void goTCP(ActionEvent event) throws IOException {
 
         nickname = textField.getText();
@@ -92,21 +93,7 @@ public class MenuController {
                 }
             }
 
-    public void goRMI(ActionEvent event) throws IOException {
 
-        String nickname = textField.getText();
-        if(RMIOn()) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("lobbyChoice.fxml"));
-            root = loader.load();
-
-            LobbyChoiceController lobbyController = loader.getController();
-            lobbyController.displayNickname(nickname);
-
-            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        }
     }
 
     public void exit(){
@@ -120,5 +107,7 @@ public class MenuController {
             stage = (Stage)scenePane.getScene().getWindow();
             stage.close();
         }
-    }*/
+    }
+*/
 }
+
