@@ -24,7 +24,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
@@ -579,8 +581,11 @@ public class GameControllerGUI {
 
     public void goToGoals(ActionEvent event) throws IOException {
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("src/main/resources/com/example/is23am23/goals.fxml"));
-        root = loader.load();
+        File file = new File("src/main/resources/com/example/is23am23/goals.fxml");
+        URL url = file.toURI().toURL();
+        FXMLLoader loader = new FXMLLoader(url);
+        Parent root = loader.load();
+
         GoalsController goalsController = loader.getController();
         goalsController.displayPersonalGoal();
         goalsController.displayCommonGoal();
@@ -593,8 +598,11 @@ public class GameControllerGUI {
     }
     public void returnToMenu(ActionEvent event) throws IOException {
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("src/main/resources/com/example/is23am23/menu.fxml"));
-        root = loader.load();
+        File file = new File("src/main/resources/com/example/is23am23/menu.fxml");
+        URL url = file.toURI().toURL();
+        FXMLLoader loader = new FXMLLoader(url);
+        Parent root = loader.load();
+
         stage = (Stage)((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);

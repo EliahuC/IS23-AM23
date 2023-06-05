@@ -18,8 +18,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
+
+import java.io.File;
 import java.io.IOException;
 import java.net.Socket;
+import java.net.URL;
 import java.rmi.RemoteException;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
@@ -49,8 +52,10 @@ public class MenuController {
 
         nickname = textField.getText();
         if (TCPOn()) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("src/main/resources/com/example/is23am23/LobbyChoice.fxml"));
-            root = loader.load();
+            File file = new File("src/main/resources/com/example/is23am23/lobbyChoice.fxml");
+            URL url = file.toURI().toURL();
+            FXMLLoader loader = new FXMLLoader(url);
+            Parent root = loader.load();
 
             LobbyChoiceController lobbyController = loader.getController();
             lobbyController.displayNickname(nickname);
@@ -98,8 +103,10 @@ public class MenuController {
 
         String nickname = textField.getText();
         if (RMIOn()) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("src/main/resources/com/example/is23am23/LobbyChoice.fxml"));
-            root = loader.load();
+            File file = new File("src/main/resources/com/example/is23am23/lobbyChoice.fxml");
+            URL url = file.toURI().toURL();
+            FXMLLoader loader = new FXMLLoader(url);
+            Parent root = loader.load();
 
             LobbyChoiceController lobbyController = loader.getController();
             lobbyController.displayNickname(nickname);

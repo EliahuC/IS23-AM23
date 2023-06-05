@@ -14,7 +14,10 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+
+import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 
 public class GoalsController {
 
@@ -37,8 +40,11 @@ public class GoalsController {
 
     public void goToLivingroom(ActionEvent event) throws IOException {
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("src/main/resources/com/example/is23am23/game.fxml"));
-        root = loader.load();
+        File file = new File("src/main/resources/com/example/is23am23/game.fxml");
+        URL url = file.toURI().toURL();
+        FXMLLoader loader = new FXMLLoader(url);
+        Parent root = loader.load();
+
         GameControllerGUI gameControllerGUI = loader.getController();
         gameControllerGUI.displayBookshelf();
         gameControllerGUI.displayContainer();
@@ -51,10 +57,9 @@ public class GoalsController {
 
     public void displayPoints(){
 
-
         int numPlayers = gameControllerGUI.getPlayersList().size();
-        int numCompleted1 = 2;
-        int numCompleted2 = 2;
+        int numCompleted1 = gameControllerGUI.getLivingRoom().getCommonGoalCard1().getNumCompleted();
+        int numCompleted2 = gameControllerGUI.getLivingRoom().getCommonGoalCard2().getNumCompleted();
 
         // score common goal card 1
         switch (numPlayers) {
@@ -238,7 +243,7 @@ public class GoalsController {
     }
 
     public void displayPersonalGoal(){
-        //Viene salvato l'indice della personal card(DA INSERIRE)
+
         int personalCard = gameControllerGUI.getPlayer().getPersonalGoalCard().getNumeroCarta();
 
         switch (personalCard) {
