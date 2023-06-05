@@ -96,6 +96,22 @@ public class MenuController {
 
     }
 
+      public void goRMI(ActionEvent event) throws IOException {
+
+        String nickname = textField.getText();
+        if(RMIOn()) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("lobbyChoice.fxml"));
+            root = loader.load();
+
+            LobbyChoiceController lobbyController = loader.getController();
+            lobbyController.displayNickname(nickname);
+
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        }
+
     public void exit(){
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
