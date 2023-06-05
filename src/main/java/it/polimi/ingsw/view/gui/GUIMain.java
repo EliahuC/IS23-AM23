@@ -18,13 +18,18 @@ import java.net.Socket;
 import java.net.URL;
 
 public class GUIMain extends Application{
-    
+
+    private Stage stage;
+    private Scene scene;
+    private Parent root;
+    AnchorPane scenePane;
+
     public void start(Stage stage) throws IOException {
         try {
-            File file=new File("src/main/resources/com/example/is23am23/menu.fxml");
-            URL url=file.toURI().toURL();
+            File file = new File("src/main/resources/com/example/is23am23/menu.fxml");
+            URL url = file.toURI().toURL();
             FXMLLoader loader = new FXMLLoader(url);
-            Parent root=loader.load();
+            Parent root = loader.load();
             Scene mainMenu = new Scene(root);
          //   String css = this.getClass().getResource("application.css").toExternalForm();
            // mainMenu.getStylesheets().add(css);
@@ -48,9 +53,7 @@ public class GUIMain extends Application{
         launch(args);
     }
 
-    /*public void exit(){
-
-        Stage stage;
+    public void exit(){
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Exit the game");
@@ -58,9 +61,9 @@ public class GUIMain extends Application{
         alert.setContentText("Are you sure?");
 
         if(alert.showAndWait().get() == ButtonType.OK){
-            stage = (Stage)main.getScene().getWindow();
+            stage = (Stage)scenePane.getScene().getWindow();
             stage.close();
         }
-    }*/
+    }
 }
 

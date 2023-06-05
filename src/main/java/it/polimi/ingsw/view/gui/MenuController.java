@@ -1,6 +1,7 @@
 package it.polimi.ingsw.view.gui;
 
 import it.polimi.ingsw.Messages.Message;
+import it.polimi.ingsw.Messages.ServerToClient.ServerMessage;
 import it.polimi.ingsw.Network.Client.ConnectionClient;
 import it.polimi.ingsw.Network.Client.RMI.ClientConnectionRMI;
 import it.polimi.ingsw.Settings;
@@ -40,12 +41,15 @@ public class MenuController {
     private String nickname;
     private ConnectionClient connectionClient;
     private GUIEvent receiver;
-/*
+    private ServerMessage response;
+
+
+
     public void goTCP(ActionEvent event) throws IOException {
 
         nickname = textField.getText();
         if (TCPOn()) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("lobbyChoice.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("src/main/resources/com/example/is23am23/LobbyChoice.fxml"));
             root = loader.load();
 
             LobbyChoiceController lobbyController = loader.getController();
@@ -94,7 +98,7 @@ public class MenuController {
 
         String nickname = textField.getText();
         if (RMIOn()) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("lobbyChoice.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("src/main/resources/com/example/is23am23/LobbyChoice.fxml"));
             root = loader.load();
 
             LobbyChoiceController lobbyController = loader.getController();
@@ -118,6 +122,10 @@ public class MenuController {
             stage = (Stage)scenePane.getScene().getWindow();
             stage.close();
         }
-    }*/
+    }
+
+    public void setResponse(ServerMessage response) {
+        this.response = response;
+    }
 }
 

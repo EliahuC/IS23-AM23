@@ -11,12 +11,12 @@ public class GUIEvent implements PropertyChangeListener {
     private Boolean inLobbyWaiting =false;
     private Boolean inGameControllerGUI =false;
 
-    private final GUILauncher GUIlauncher;
+    private final MenuController menuController;
     private LobbyWaitingController lobbywaitingcontroller;
     private GameControllerGUI gamecontrollerGUI;
 
-    public GUIEvent(GUILauncher GUIlauncher){
-        this.GUIlauncher=GUIlauncher;
+    public GUIEvent(MenuController menuController){
+        this.menuController= menuController;
     }
 
     @Override
@@ -52,7 +52,7 @@ public class GUIEvent implements PropertyChangeListener {
 
     private void forwardMessage(ServerMessage response){
         if(inStartGUI){
-            GUIlauncher.setResponse(response);
+            menuController.setResponse(response);
             return;
         }
         if(inLobbyWaiting) {

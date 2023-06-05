@@ -579,7 +579,7 @@ public class GameControllerGUI {
 
     public void goToGoals(ActionEvent event) throws IOException {
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("goals.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("src/main/resources/com/example/is23am23/goals.fxml"));
         root = loader.load();
         GoalsController goalsController = loader.getController();
         goalsController.displayPersonalGoal();
@@ -593,7 +593,7 @@ public class GameControllerGUI {
     }
     public void returnToMenu(ActionEvent event) throws IOException {
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("menu.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("src/main/resources/com/example/is23am23/menu.fxml"));
         root = loader.load();
         stage = (Stage)((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -670,6 +670,20 @@ public class GameControllerGUI {
         while(!player.getNowPlaying()){
         }
     }
+    public LivingRoom getLivingRoom(){
+
+        return livingRoom;
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public List<Player> getPlayersList(){
+        return players;
+
+    }
+
     private void displayBoard(){
         System.out.print("LIVING BOARD\n");
         //livingRoom.print();

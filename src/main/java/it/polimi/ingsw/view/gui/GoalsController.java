@@ -1,5 +1,6 @@
 package it.polimi.ingsw.view.gui;
 
+import it.polimi.ingsw.model.Game;
 import  it.polimi.ingsw.model.board.goalCards.CommonGoalCard;
 import  it.polimi.ingsw.model.board.LivingRoom;
 
@@ -31,10 +32,12 @@ public class GoalsController {
     private Stage stage;
     private Scene scene;
     private Parent root;
+    private LivingRoom livingRoom;
+    private GameControllerGUI gameControllerGUI;
 
     public void goToLivingroom(ActionEvent event) throws IOException {
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("game.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("src/main/resources/com/example/is23am23/game.fxml"));
         root = loader.load();
         GameControllerGUI gameControllerGUI = loader.getController();
         gameControllerGUI.displayBookshelf();
@@ -48,14 +51,15 @@ public class GoalsController {
 
     public void displayPoints(){
 
-        //Inserire il numero di giocatori della lobby, passare il parametro per n° volte goalcard completata(DA INSERIRE)
-        int numPlayers = 2;
-        int numCompleted = 2;
+
+        int numPlayers = gameControllerGUI.getPlayersList().size();
+        int numCompleted1 = 2;
+        int numCompleted2 = 2;
 
         // score common goal card 1
         switch (numPlayers) {
             case 2: {
-                switch (numCompleted) {
+                switch (numCompleted1) {
                     case 0:
                     {
                         Image image = new Image(getClass().getResourceAsStream("scoring_8.jpg"));
@@ -78,7 +82,7 @@ public class GoalsController {
                 break;
             }
             case 3: {
-                switch (numCompleted) {
+                switch (numCompleted1) {
                     case 0:
                     {
                         Image image = new Image(getClass().getResourceAsStream("scoring_8.jpg"));
@@ -107,7 +111,7 @@ public class GoalsController {
                 break;
             }
             case 4: {
-                switch (numCompleted) {
+                switch (numCompleted1) {
                     case 0:
                     {
                         Image image = new Image(getClass().getResourceAsStream("scoring_8.jpg"));
@@ -145,7 +149,7 @@ public class GoalsController {
         // score common goal card 2
         switch (numPlayers) {
             case 2: {
-                switch (numCompleted) {
+                switch (numCompleted2) {
                     case 0:
                     {
                         Image image = new Image(getClass().getResourceAsStream("scoring_8.jpg"));
@@ -168,7 +172,7 @@ public class GoalsController {
                 break;
             }
             case 3: {
-                switch (numCompleted) {
+                switch (numCompleted2) {
                     case 0:
                     {
                         Image image = new Image(getClass().getResourceAsStream("scoring_8.jpg"));
@@ -197,7 +201,7 @@ public class GoalsController {
                 break;
             }
             case 4: {
-                switch (numCompleted) {
+                switch (numCompleted2) {
                     case 0:
                     {
                         Image image = new Image(getClass().getResourceAsStream("scoring_8.jpg"));
@@ -235,7 +239,7 @@ public class GoalsController {
 
     public void displayPersonalGoal(){
         //Viene salvato l'indice della personal card(DA INSERIRE)
-        int personalCard = 1;
+        int personalCard = gameControllerGUI.getPlayer().getPersonalGoalCard().getNumeroCarta();
 
         switch (personalCard) {
             case 1:
@@ -318,9 +322,8 @@ public class GoalsController {
 
     public void displayCommonGoal() {
 
-        //Viene salvato l'indice della common card(DA INSERIRE)
-        int card1 = 1;
-        int card2 = 2;
+        int card1 = gameControllerGUI.getLivingRoom().getIdCGC1();
+        int card2 = gameControllerGUI.getLivingRoom().getIdCGC2();
 
         switch (card1) {
             case 1: {
