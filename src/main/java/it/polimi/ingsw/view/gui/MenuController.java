@@ -71,7 +71,7 @@ public class MenuController {
         try {
             serverAddr = Settings.SERVER_NAME;
             portNum = Settings.PORT;
-            socket = new Socket(serverAddr, portNum);
+            socket = new Socket("127.0.0.1", portNum);
             connectionClient = new ClientConnectionTCP(socket, nickname);
             receiver = new GUIEvent(this);
             receiver.setInStartGUI(true);
@@ -89,7 +89,6 @@ public class MenuController {
             receiver = new GUIEvent(this);
             receiver.setInStartGUI(true);
             connectionClient = new ClientConnectionRMI(nickname, receiver);
-
             new Thread(connectionClient).start();
             return true;
         } catch (IOException e) {

@@ -319,15 +319,9 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
             try {
                 TimeUnit.SECONDS.sleep(3);
             } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+                System.out.println(s+ " connection crashed");
+                closeConnection(s);
             }
-            if (pingIsOk) {
-                System.out.println("ping arrived");
-                return;
-            }
-            System.out.println("Connection crashed");
-            closeConnection(s);
-
         }
     }
 
