@@ -404,10 +404,14 @@ public class Game implements Serializable {
     private void checkCGC(){
         if(!Players.get(currPlaying-1).getPlayerBookshelf().isCommonGoalCard1Completed()||
                 !Players.get(currPlaying-1).getPlayerBookshelf().isCommonGoalCard2Completed()){
-            Integer score=Players.get(currPlaying-1).getScore();
+            int completed;
+            completed=checkAlreadyCompleted();
+            int score=Players.get(currPlaying-1).getScore();
             Players.get(currPlaying-1).setScore(livingRoom.checkCG(Players.get(currPlaying-1).getPlayerBookshelf()));
-            if(score.equals(Players.get(currPlaying-1).getScore())){
-                String s="PLAYER "+Players.get(currPlaying-1).getNickName()+" COMPLETED A COMMON GOAL CARD";
+            if(score<(Players.get(currPlaying-1).getScore())){
+                if(completed==1) completed=2;
+                else completed=1;
+                String s="PLAYER "+Players.get(currPlaying-1).getNickName()+" COMPLETED THE COMMON GOAL CARD "+completed ;
                 PropertyChangeEvent evt= new PropertyChangeEvent(
                         this,
                         "COMMON COMPLETED",
@@ -415,7 +419,16 @@ public class Game implements Serializable {
                         s);
                 Players.get(currPlaying-1).getListener().propertyChange(evt);
             }
+            else{
+                Players.get(currPlaying-1).setScore(score);
+            }
         }
+    }
+
+    private int checkAlreadyCompleted() {
+        if(Players.get(currPlaying-1).getPlayerBookshelf().isCommonGoalCard1Completed())return 1;
+
+        return 2;
     }
 
     /**
@@ -423,16 +436,9 @@ public class Game implements Serializable {
      * method that increase the value of the currPlaying variable checking if the game is finished
      */
     private synchronized void increaseCurrPlaying() {
-        if(currPlaying==gameNumPlayers && !finishedGame) currPlaying=1;
+        if(Objects.equals(currPlaying, gameNumPlayers) && !finishedGame) currPlaying=1;
         else if(currPlaying<gameNumPlayers && !finishedGame) currPlaying++;
-        /*PropertyChangeEvent evt = new PropertyChangeEvent(
-                this,
-                "NEW_TURN",
-                this.currPlaying,
-                currPlaying);
-        for(PropertyChangeListener l:listeners){
-            l.propertyChange(evt);
-        }*/
+
         PropertyChangeEvent evt = new PropertyChangeEvent(
                 this,
                 "UPDATE_STATE",
