@@ -197,12 +197,12 @@ public class GameHandler {
         }
     }
 
-    private void showBoard(){
+    private void showBoard() {
         System.out.println("LIVING BOARD");
         printBoard();
-        try{
+        try {
             TimeUnit.MILLISECONDS.sleep(200);
-        }catch (InterruptedException iE){
+        } catch (InterruptedException iE) {
             iE.printStackTrace();
         }
         System.out.print("\n\nPICK YOUR TILES! You can choose one, two or three tiles: use the command /SELECT\n" +
@@ -214,33 +214,39 @@ public class GameHandler {
                 "[Use the command /BOOKSHELF to see your personal bookshelf.]\n" +
                 "[Use the command /GOALS to see the description of your personal or common goal cards.]\n");
         Scanner input = new Scanner(System.in);
-        while (true){
-            String command = input.nextLine();
-            if(Objects.equals(command.toUpperCase(), "/GOALS")){
+        String command = input.nextLine();
+        while (true) {
+            if (command!=null&&Objects.equals(command.toUpperCase(), "/GOALS")) {
                 showGoals("Living Board");
                 break;
             }
-            if(Objects.equals(command.toUpperCase(), "/BOOKSHELF")){
+            if (command!=null&&Objects.equals(command.toUpperCase(), "/BOOKSHELF")) {
                 showBookshelf();
                 break;
             }
-            ClientMessage message = (ClientMessage) MoveSerializer.serializeInput(command);
-            connectionClient.sendMessage(message);
-            try{
+            if(command!=null){
+                ClientMessage message = (ClientMessage) MoveSerializer.serializeInput(command);
+                connectionClient.sendMessage((ClientMessage) message);
+            }
+
+            try {
                 TimeUnit.MILLISECONDS.sleep(200);
-            }catch (InterruptedException iE){
+            } catch (InterruptedException iE) {
                 iE.printStackTrace();
             }
-            if(response!=null && response.getCategory()==Message.MessageCategory.VALID_MESSAGE){
-                for(int i=1; i<Arrays.stream(command.split(" ")).count(); i+=2)
-                    tiles.add(livingRoom.getBoardTile(Integer.parseInt(command.split(" ")[i]), Integer.parseInt(command.split(" ")[i+1])).getTile());
+            if (response != null && response.getCategory() == Message.MessageCategory.VALID_MESSAGE) {
+                for (int i = 1; i < Arrays.stream(command.split(" ")).count(); i += 2)
+                    tiles.add(livingRoom.getBoardTile(Integer.parseInt(command.split(" ")[i]), Integer.parseInt(command.split(" ")[i + 1])).getTile());
                 break;
             }
-            System.out.print("Your move is not valid. Please, pick again and correctly your tiles.\n" +
-                    "[You can still see your goal cards, using the command /GOALS, or your personal bookshelf using /BOOKSHELF]\n");
+            command=null;
+            if (response != null && response.getCategory() == Message.MessageCategory.WARNING) {
+                command = input.nextLine();
+                System.out.print("Your move is not valid. Please, pick again and correctly your tiles.\n" +
+                        "[You can still see your goal cards, using the command /GOALS, or your personal bookshelf using /BOOKSHELF]\n");
+            }
         }
     }
-
     private void showGoals(String scenario){
         Scanner input = new Scanner(System.in);
         String command;
@@ -270,13 +276,13 @@ public class GameHandler {
         System.out.println("THE WINNER IS: " + winner);
         List<Player> ranking = players.stream().sorted(Comparator.comparingInt(Player::getScore)).toList();
         for(Player p : ranking){
-            if(p.getNickName()!=winner){
+            if(!Objects.equals(p.getNickName(), winner)){
                 System.out.println(p.getNickName() + ": "+ p.getScore() + "points");
             }
         }
     }
 
-    private void showBookshelfOrder(){
+    private void showBookshelfOrder() {
         Scanner input = new Scanner(System.in);
         System.out.println("YOUR BOOKSHELF\n");
         printBookshelf();
@@ -286,25 +292,32 @@ public class GameHandler {
                 "(If you have just one picked tile, just type: /ORDER 1\n\n" +
                 "[Use the command /GOALS to see the description of your personal or common goal cards.]\n\n");
         printSelection();
-        while(true){
-            String command = input.nextLine();
-            if(Objects.equals(command.toUpperCase(), "/GOALS")){
-                showGoals("BookshelfOrder");
+        String command = input.nextLine();
+        while (true) {
+
+            if(command!=null&&Objects.equals(command.toUpperCase(), "/GOALS")){
+                showGoals("BookshelfColumn");
                 break;
             }
-            ClientMessage message = (ClientMessage) MoveSerializer.serializeInput(command);
-            connectionClient.sendMessage((ClientMessage) message);
-            try{
+            if(command!=null){
+                ClientMessage message = (ClientMessage) MoveSerializer.serializeInput(command);
+                connectionClient.sendMessage((ClientMessage) message);
+            }
+            command=null;
+            try {
                 TimeUnit.MILLISECONDS.sleep(200);
-            }catch (InterruptedException iE){
+            } catch (InterruptedException iE) {
                 iE.printStackTrace();
             }
-            if(response!=null && response.getCategory()==Message.MessageCategory.VALID_MESSAGE)
+            if (response != null && response.getCategory() == Message.MessageCategory.VALID_MESSAGE)
                 break;
-            System.out.println("You didn't choose the order appropriately. Please, retry.");
+
+            if (response != null && response.getCategory() == Message.MessageCategory.WARNING) {
+                command = input.nextLine();
+                System.out.println("You didn't choose the order appropriately. Please, retry.");
+            }
         }
     }
-
     private void showBookshelfColumn(){
         Scanner input = new Scanner(System.in);
         System.out.println("YOUR BOOKSHELF\n");
