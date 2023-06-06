@@ -61,9 +61,11 @@ public class CLIEvent implements PropertyChangeListener {
                 case LIVINGROOM:{
                     LivingRoomMessage newServerMessage=(LivingRoomMessage) serverMessage;
                     gameHandler.setBoard(newServerMessage.getBoard());
+                    break;
                 }
                 case WARNING: {
                     System.out.println(serverMessage.getReturnMessage());
+                    break;
                 }
             }
         }
