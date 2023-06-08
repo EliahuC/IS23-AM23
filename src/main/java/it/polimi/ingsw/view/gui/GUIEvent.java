@@ -31,12 +31,14 @@ public class GUIEvent implements PropertyChangeListener {
                     gamecontrollerGUI.setPlayers(temp_startingGameMessage.getPlayers());
                     gamecontrollerGUI.setPlayer(temp_startingGameMessage.getPlayers().stream().filter(player -> Objects.equals(player.getNickName(), gamecontrollerGUI.getConnectionClient().getPlayerName())).findFirst().orElseThrow(() -> new IllegalArgumentException("Player not found")));
                     gamecontrollerGUI.setCurrentPlayer(temp_startingGameMessage.getCurrPlaying());
+                    gamecontrollerGUI.setSeed(gamecontrollerGUI.getPlayer().getPersonalGoalCard().getNumeroCarta());
                     break;
                 case UPDATE_STATE:
                     UpdateStateMessage temp_updateStateMessage=(UpdateStateMessage) serverMessage;
                     gamecontrollerGUI.setLivingRoom(temp_updateStateMessage.getGame().getLivingRoom());
                     gamecontrollerGUI.setPlayers(temp_updateStateMessage.getGame().getPlayers());
                     gamecontrollerGUI.setPlayer(temp_updateStateMessage.getGame().getPlayers().stream().filter(player -> Objects.equals(player.getNickName(), gamecontrollerGUI.getConnectionClient().getPlayerName())).findFirst().orElseThrow(() -> new IllegalArgumentException("Player not found")));
+                    gamecontrollerGUI.setCurrPlaying(temp_updateStateMessage.getGame().getWhoIsPlaying());
                     break;
                 case CURRPLAYING:
                     CurrPlayingMessage temp_currPlayingMessage=(CurrPlayingMessage) serverMessage;
@@ -63,7 +65,7 @@ public class GUIEvent implements PropertyChangeListener {
             gamecontrollerGUI.setResponse(response);
         }
     }
-    public void setLobbywaitingcontroller(LobbyWaitingController lobbywaitingcontroller){
+    public void setLobbyWaitingcontroller(LobbyWaitingController lobbywaitingcontroller){
         this.lobbywaitingcontroller=lobbywaitingcontroller;
     }
     public void setGamecontrollerGUI(GameControllerGUI gamecontrollerGUI){

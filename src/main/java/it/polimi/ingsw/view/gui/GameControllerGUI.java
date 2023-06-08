@@ -45,6 +45,7 @@ public class GameControllerGUI {
     private int currPlaying;
     private String currentPlayer;
     private String winner;
+    private Integer seed;
 
     @FXML
     ImageView shelf_0_0;
@@ -824,5 +825,8 @@ public class GameControllerGUI {
         for(int i=0; tiles.get(i)!=null; i++)
             System.out.print("(" + i+1 + ")   ");
         System.out.print("\n");
+    }
+    public void setSeed (Integer seed){
+        this.seed=seed;
     }
 }
