@@ -6,7 +6,9 @@ import it.polimi.ingsw.model.board.ItemTile;
 import it.polimi.ingsw.model.player.BookShelf;
 import it.polimi.ingsw.model.player.Player;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author Simone Controguerra
@@ -124,9 +126,9 @@ public class GameChecker {
         return lastRound;
     }
 
-    public void checkRound(Player p){
+    /*public void checkRound(Player p){
         isYourTurn = p.getNowPlaying();
-    }
+    }*/
 
     public boolean GetIsYourTurn() {
         return isYourTurn;
@@ -168,21 +170,20 @@ public class GameChecker {
     }
 
     private boolean isExternal (BoardToken t) {
-        if(boardBoxIsValid(t)){
-            return checkSides(t);
-        }
+        if(boardBoxIsValid(t))
+            return checkFreeSides(t);
         return false;
     }
 
     private boolean isExternal (BoardToken t1, BoardToken t2){
         if(boardBoxIsValid(t1) && boardBoxIsValid(t2))
-            return checkSides(t1, t2);
+            return checkFreeSides(t1) && checkFreeSides(t2);
         return false;
     }
 
     private boolean isExternal (BoardToken t1, BoardToken t2, BoardToken t3){
         if(boardBoxIsValid(t1) && boardBoxIsValid(t2) && boardBoxIsValid(t3))
-            return checkSides(t1, t2, t3);
+            return checkFreeSides(t1) && checkFreeSides(t2) && checkFreeSides(t3);
         return false;
     }
 
@@ -307,7 +308,7 @@ public class GameChecker {
         return boardTileLeft(t) || boardTileRight(t) || boardTileLower(t) || boardTileUpper(t);
     }
 
-    private boolean checkSides(BoardToken t){
+    /*private boolean checkSides(BoardToken t){
         return verticalCheck(t) && horizontalCheck(t);
     }
 
@@ -325,7 +326,7 @@ public class GameChecker {
         if(sameRow(t1,t2))
             return horizontalCheck(t1,t2,t3);
         return false;
-    }
+    }*/
 
     private boolean verticalCheck(BoardToken t){
         if (!boardTileUpper(t) && !boardTileLower(t)){
@@ -466,5 +467,30 @@ public class GameChecker {
             if(b.getTile(row,column)==null)counter++;
         }
         return counter >= numberOfTiles;
+    }
+
+    private boolean checkFreeSides(BoardToken t){
+        int freeSides = 0;
+        if(!boardTileUpper(t)){
+            if(t.getBoard()[t.getRow()-1][t.getCol()].getTile()==null)
+                freeSides++;
+        }else
+            freeSides++;
+        if(!boardTileLower(t)){
+            if(t.getBoard()[t.getRow()+1][t.getCol()].getTile()==null)
+                freeSides++;
+        }else
+            freeSides++;
+        if(!boardTileLeft(t)){
+            if(t.getBoard()[t.getRow()][t.getCol()-1].getTile()==null)
+                freeSides++;
+        }else
+            freeSides++;
+        if(!boardTileRight(t)){
+            if(t.getBoard()[t.getRow()][t.getCol()+1].getTile()==null)
+                freeSides++;
+        }else
+            freeSides++;
+        return freeSides >= 1;
     }
 }
