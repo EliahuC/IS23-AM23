@@ -55,7 +55,7 @@ public class LobbyWaitingController {
         this.receiver=receiver;
         this.receiver.setInLobbyWaiting(true);
         connectionClient.setListener(receiver);
-        this.receiver.setLobbywaitingcontroller(this);
+       // this.receiver.setLobbywaitingcontroller(this);
     }
 
     public void setResponse(ServerMessage response){

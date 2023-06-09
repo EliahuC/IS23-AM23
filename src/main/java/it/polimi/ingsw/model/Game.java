@@ -32,7 +32,7 @@ public class Game implements Serializable {
     private transient GameChecker gameChecker;
     private transient boolean startedGame=false;
     private transient final ArrayList<VirtualView> listeners ;
-    private transient final Timer turnTimer=new Timer();
+  //  private transient final Timer turnTimer=new Timer();
 
     private transient boolean finishedGame=false;
 
@@ -84,7 +84,7 @@ public class Game implements Serializable {
         for(Player p:Players){
             p.setPersonalGoalCard(new PersonalGoalCard());
         }
-        turnTimer(turnTimer);
+     // turnTimer(turnTimer);
         PropertyChangeEvent evt = new PropertyChangeEvent(
                 this,
                 "GAME_STARTED",
@@ -122,9 +122,9 @@ public class Game implements Serializable {
         if(!finishedGame) {
               placeTiles(commands, column,order);
               checkCGC();
-              turnTimer.cancel();
+            //  turnTimer.cancel();
               increaseCurrPlaying();
-             turnTimer(turnTimer);
+             //turnTimer(turnTimer);
               if (gameChecker.isRestorable(livingRoom.getBoard())) livingRoom.restore();
               return setGameSavings();
           }
@@ -477,7 +477,7 @@ public class Game implements Serializable {
      * @author Eliahu Cohen
      * method that increase currPlaying every 2 minutes
      */
-    private void turnTimer(Timer timer)  {
+  /*  private void turnTimer(Timer timer)  {
             TimerTask timerTask=new TimerTask() {
                 @Override
                 public void run() {
@@ -486,7 +486,7 @@ public class Game implements Serializable {
             };
             timer = new Timer();
             timer.schedule(timerTask,120000);
-    }
+    }*/
 
     public void setFinishedGame(boolean finishedGame) {
         this.finishedGame = finishedGame;
