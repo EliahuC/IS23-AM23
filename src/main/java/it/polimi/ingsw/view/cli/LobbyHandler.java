@@ -73,8 +73,8 @@ public class LobbyHandler {
                 System.out.println(response.getReturnMessage());
                 while(true) {
                     command = input.nextLine();
-                    message = MoveSerializer.serializeInput(command);
                     if((Objects.equals(command.split(" ")[0].toUpperCase(), "/CREATE"))){
+                        message = MoveSerializer.serializeInput(command);
                         connectionClient.sendMessage((ClientMessage) message);
                         break;
                     }else

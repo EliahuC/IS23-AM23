@@ -63,10 +63,6 @@ public class CLIEvent implements PropertyChangeListener {
                     gameHandler.setBoard(newServerMessage.getBoard());
                     break;
                 }
-                case WARNING: {
-                    System.out.println(serverMessage.getReturnMessage());
-                    break;
-                }
             }
         }
         forwardMessage(serverMessage);

@@ -126,7 +126,7 @@ public class GameHandler {
     }
 
     public void start(){
-        buildPersonalGoaldCard();
+        buildPersonalGoalCard();
         while(true){
             if(player.getNickName().equals(players.get(currPlaying-1).getNickName())) {
                 showBoard();
@@ -212,8 +212,9 @@ public class GameHandler {
                 "[Use the command /BOOKSHELF to see your personal bookshelf.]\n" +
                 "[Use the command /GOALS to see the description of your personal or common goal cards.]\n");
         Scanner input = new Scanner(System.in);
-        String command = input.nextLine();
+        String command;
         while (true) {
+            command = input.nextLine();
             if (command!=null&&Objects.equals(command.toUpperCase(), "/GOALS")) {
                 showGoals("Living Board");
                 break;
@@ -222,9 +223,13 @@ public class GameHandler {
                 showBookshelf();
                 break;
             }
+            while(command!=null && !Objects.equals(command.toUpperCase().split(" ")[0], "/SELECT")) {
+                System.out.println("Please, use the command /SELECT");
+                command = input.nextLine();
+            }
             if(command!=null){
                 ClientMessage message = (ClientMessage) MoveSerializer.serializeInput(command);
-                connectionClient.sendMessage((ClientMessage) message);
+                connectionClient.sendMessage(message);
             }
 
             try {
@@ -239,7 +244,6 @@ public class GameHandler {
             }
             command=null;
             if (response != null && response.getCategory() == Message.MessageCategory.WARNING) {
-                command = input.nextLine();
                 System.out.print("Your move is not valid. Please, pick again and correctly your tiles.\n" +
                         "[You can still see your goal cards, using the command /GOALS, or your personal bookshelf using /BOOKSHELF]\n");
             }
@@ -290,16 +294,20 @@ public class GameHandler {
                 "(If you have just one picked tile, just type: /ORDER 1\n\n" +
                 "[Use the command /GOALS to see the description of your personal or common goal cards.]\n\n");
         printSelection();
-        String command = input.nextLine();
+        String command;
         while (true) {
-
+            command = input.nextLine();
             if(command!=null&&Objects.equals(command.toUpperCase(), "/GOALS")){
                 showGoals("BookshelfColumn");
                 break;
             }
+            while(command!=null && !Objects.equals(command.toUpperCase().split(" ")[0], "/ORDER")) {
+                System.out.println("Please, use the command /ORDER");
+                command = input.nextLine();
+            }
             if(command!=null){
                 ClientMessage message = (ClientMessage) MoveSerializer.serializeInput(command);
-                connectionClient.sendMessage((ClientMessage) message);
+                connectionClient.sendMessage(message);
             }
             command=null;
             try {
@@ -311,7 +319,6 @@ public class GameHandler {
                 break;
 
             if (response != null && response.getCategory() == Message.MessageCategory.WARNING) {
-                command = input.nextLine();
                 System.out.println("You didn't choose the order appropriately. Please, retry.");
             }
         }
@@ -324,16 +331,20 @@ public class GameHandler {
                 "using the command /COLUMN and the coordinate of the column.\n" +
                 "For example: if you want to insert the tiles in the second column, you should write /COLUMN 1\n\n" +
                 "[Use the command /GOALS to see the description of your personal or common goal cards.]\n");
-        String command = input.nextLine();
+        String command;
         while(true){
-
+            command = input.nextLine();
             if(command!=null&&Objects.equals(command.toUpperCase(), "/GOALS")){
                 showGoals("BookshelfColumn");
                 break;
             }
+            while(command!=null && !Objects.equals(command.toUpperCase().split(" ")[0], "/COLUMN")) {
+                System.out.println("Please, use the command /COLUMN");
+                command = input.nextLine();
+            }
             if(command!=null){
                 ClientMessage message = (ClientMessage) MoveSerializer.serializeInput(command);
-                connectionClient.sendMessage((ClientMessage) message);
+                connectionClient.sendMessage(message);
             }
             command=null;
             try{
@@ -345,7 +356,6 @@ public class GameHandler {
                 break;
 
             if(response!=null&&response.getCategory()== Message.MessageCategory.WARNING){
-                command = input.nextLine();
                 System.out.println("The chosen column is too full. Please, choose another one.");
             }
 
@@ -377,13 +387,15 @@ public class GameHandler {
 
     private void printSelection(){
         for (ItemTile tile : tiles){
-            switch (tile.getCategory()) {
-                case CATS -> System.out.print(GREEN + "   " + RESET + "   ");
-                case FRAMES -> System.out.print(BLUE + "   " + RESET + "   ");
-                case BOOKS -> System.out.print(WHITE + "   " + RESET + "   ");
-                case GAMES -> System.out.print(YELLOW + "   " + RESET + "   ");
-                case PLANTS -> System.out.print(PINK + "   " + RESET + "   ");
-                case TROPHIES -> System.out.print(CYAN + "   " + RESET + "   ");
+            if(tile!=null) {
+                switch (tile.getCategory()) {
+                    case CATS -> System.out.print(GREEN + "   " + RESET + "   ");
+                    case FRAMES -> System.out.print(BLUE + "   " + RESET + "   ");
+                    case BOOKS -> System.out.print(WHITE + "   " + RESET + "   ");
+                    case GAMES -> System.out.print(YELLOW + "   " + RESET + "   ");
+                    case PLANTS -> System.out.print(PINK + "   " + RESET + "   ");
+                    case TROPHIES -> System.out.print(CYAN + "   " + RESET + "   ");
+                }
             }
         }
         System.out.print("\n");
@@ -477,7 +489,7 @@ public class GameHandler {
         System.out.print("   ");
     }
 
-    public void buildPersonalGoaldCard(){
+    public void buildPersonalGoalCard(){
         PersonalGoalCard stamp = new PersonalGoalCard(seed);
         for(Pair k: stamp.getGoal().keySet())
            personalGoalCard.setTile(k.getX(),k.getY(),stamp.getGoal().get(k));

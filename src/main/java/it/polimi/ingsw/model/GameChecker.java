@@ -304,9 +304,9 @@ public class GameChecker {
         return t.getRow() != 0 && t.getRow() != boardWidth-1 && t.getCol() != 0 && t.getCol() != boardWidth-1;
     }
 
-    private boolean isInBorderlinePosition(BoardToken t){
+    /*private boolean isInBorderlinePosition(BoardToken t){
         return boardTileLeft(t) || boardTileRight(t) || boardTileLower(t) || boardTileUpper(t);
-    }
+    }*/
 
     /*private boolean checkSides(BoardToken t){
         return verticalCheck(t) && horizontalCheck(t);
@@ -328,7 +328,7 @@ public class GameChecker {
         return false;
     }*/
 
-    private boolean verticalCheck(BoardToken t){
+    /*private boolean verticalCheck(BoardToken t){
         if (!boardTileUpper(t) && !boardTileLower(t)){
             if(!boardBoxIsEmpty(t.getBoard()[t.getRow()-1][t.getCol()])){
                 if(boardBoxIsEmpty(t.getBoard()[t.getRow()+1][t.getCol()]))
@@ -409,10 +409,10 @@ public class GameChecker {
                     return true;
             }
         }
-        /*if(!boardTileLeft(t1) && !boardTileLeft(t2) && !boardTileLeft(t3) && !boardTileRight(t1) && !boardTileRight(t2) && !boardTileRight(t3)) {
+        *//*if(!boardTileLeft(t1) && !boardTileLeft(t2) && !boardTileLeft(t3) && !boardTileRight(t1) && !boardTileRight(t2) && !boardTileRight(t3)) {
             if ((boardBoxIsEmpty(t1.getBoard()[t1.getRow()][t1.getCol() - 1]) && boardBoxIsEmpty(t1.getBoard()[t1.getRow()][t1.getCol() + 1])) || (boardBoxIsEmpty(t2.getBoard()[t2.getRow()][t2.getCol() - 1]) && boardBoxIsEmpty(t2.getBoard()[t2.getRow()][t2.getCol() + 1]))  || (boardBoxIsEmpty(t3.getBoard()[t3.getRow()][t3.getCol() - 1]) && boardBoxIsEmpty(t3.getBoard()[t3.getRow()][t3.getCol() + 1])))
                 return true;
-        }*/
+        }*//*
         if(boardTileLower(t3)){
             if (horizontalSidesAreFree(t1, t2, t3)) return true;
         }
@@ -420,9 +420,9 @@ public class GameChecker {
             if (horizontalSidesAreFree(t1, t2, t3)) return true;
         }
         return false;
-    }
+    }*/
 
-    private boolean horizontalSidesAreFree(BoardToken t1, BoardToken t2, BoardToken t3) {
+    /*private boolean horizontalSidesAreFree(BoardToken t1, BoardToken t2, BoardToken t3) {
         if((boardBoxIsEmpty(t1.getBoard()[t1.getRow()][t1.getCol()-1]) && boardBoxIsEmpty(t2.getBoard()[t2.getRow()][t2.getCol()-1]) && boardBoxIsEmpty(t3.getBoard()[t3.getRow()][t3.getCol()-1])) || (boardBoxIsEmpty(t1.getBoard()[t1.getRow()][t1.getCol()+1]) && boardBoxIsEmpty(t2.getBoard()[t2.getRow()][t2.getCol()+1]) && boardBoxIsEmpty(t3.getBoard()[t3.getRow()][t3.getCol()+1])))
             return true;
         return false;
@@ -435,10 +435,10 @@ public class GameChecker {
                     return true;
             }
         }
-        /*if(!boardTileUpper(t1) && !boardTileUpper(t2) && !boardTileUpper(t3) && !boardTileLower(t1) && !boardTileLower(t2) && !boardTileLower(t3)) {
+        *//*if(!boardTileUpper(t1) && !boardTileUpper(t2) && !boardTileUpper(t3) && !boardTileLower(t1) && !boardTileLower(t2) && !boardTileLower(t3)) {
             if ((boardBoxIsEmpty(t1.getBoard()[t1.getRow() - 1][t1.getCol()]) && boardBoxIsEmpty(t1.getBoard()[t1.getRow() + 1][t1.getCol()])) || (boardBoxIsEmpty(t2.getBoard()[t2.getRow() - 1][t2.getCol()]) && boardBoxIsEmpty(t2.getBoard()[t2.getRow() + 1][t2.getCol()])) || (boardBoxIsEmpty(t3.getBoard()[t3.getRow() - 1][t3.getCol()]) && boardBoxIsEmpty(t3.getBoard()[t3.getRow() + 1][t3.getCol()])))
                 return true;
-        }*/
+        }*//*
         if(boardTileRight(t3)){
             if (verticalSidesAreFree(t1, t2, t3)) return true;
         }
@@ -446,13 +446,13 @@ public class GameChecker {
             if (verticalSidesAreFree(t1, t2, t3)) return true;
         }
         return false;
-    }
+    }*/
 
-    private boolean verticalSidesAreFree(BoardToken t1, BoardToken t2, BoardToken t3) {
+    /*private boolean verticalSidesAreFree(BoardToken t1, BoardToken t2, BoardToken t3) {
         if((boardBoxIsEmpty(t1.getBoard()[t1.getRow()-1][t1.getCol()]) && boardBoxIsEmpty(t2.getBoard()[t2.getRow()-1][t2.getCol()]) && boardBoxIsEmpty(t3.getBoard()[t3.getRow()-1][t3.getCol()])) || (boardBoxIsEmpty(t1.getBoard()[t1.getRow()+1][t1.getCol()]) && boardBoxIsEmpty(t2.getBoard()[t2.getRow()+1][t2.getCol()]) && boardBoxIsEmpty(t3.getBoard()[t3.getRow()+1][t3.getCol()])))
             return true;
         return false;
-    }
+    }*/
 
     /**
      * @author Eliahu Cohen
