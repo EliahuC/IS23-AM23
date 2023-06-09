@@ -18,15 +18,14 @@ import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 public class GameHandler {
-    private ConnectionClient connectionClient;
-    private CLIEvent receiver;
+    private final ConnectionClient connectionClient;
     private ServerMessage response;
     private LivingRoom livingRoom;
     private Player player;
     private Integer seed;
-    private BookShelf personalGoalCard=new BookShelf();
+    private final BookShelf personalGoalCard=new BookShelf();
     private ArrayList<Player> players;
-    private ArrayList<ItemTile> tiles = new ArrayList<>();
+    private final ArrayList<ItemTile> tiles = new ArrayList<>();
     private int currPlaying=1;
     private String currentPlayer;
     private static final String RESET = "\u001B[0m";
@@ -46,10 +45,9 @@ public class GameHandler {
 
     public GameHandler(ConnectionClient connectionClient, CLIEvent receiver) {
         this.connectionClient = connectionClient;
-        this.receiver=receiver;
-        this.receiver.setInGameHandler(true);
+        receiver.setInGameHandler(true);
         connectionClient.setListener(receiver);
-        this.receiver.setGameHandler(this);
+        receiver.setGameHandler(this);
     }
 
     public void setResponse(ServerMessage response){
@@ -379,25 +377,13 @@ public class GameHandler {
 
     private void printSelection(){
         for (ItemTile tile : tiles){
-            switch (tile.getCategory()){
-                case CATS:
-                    System.out.print(GREEN + "   " + RESET + "   ");
-                    break;
-                case FRAMES:
-                    System.out.print(BLUE + "   " + RESET + "   ");
-                    break;
-                case BOOKS:
-                    System.out.print(WHITE + "   " + RESET + "   ");
-                    break;
-                case GAMES:
-                    System.out.print(YELLOW + "   " + RESET + "   ");
-                    break;
-                case PLANTS:
-                    System.out.print(PINK + "   " + RESET + "   ");
-                    break;
-                case TROPHIES:
-                    System.out.print(CYAN + "   " + RESET + "   ");
-                    break;
+            switch (tile.getCategory()) {
+                case CATS -> System.out.print(GREEN + "   " + RESET + "   ");
+                case FRAMES -> System.out.print(BLUE + "   " + RESET + "   ");
+                case BOOKS -> System.out.print(WHITE + "   " + RESET + "   ");
+                case GAMES -> System.out.print(YELLOW + "   " + RESET + "   ");
+                case PLANTS -> System.out.print(PINK + "   " + RESET + "   ");
+                case TROPHIES -> System.out.print(CYAN + "   " + RESET + "   ");
             }
         }
         System.out.print("\n");
@@ -410,25 +396,13 @@ public class GameHandler {
         for (int i=0; i<LivingRoomSize;i++){
             for(int j=0; j<LivingRoomSize; j++){
                 if(livingRoom.getBoardTile(i,j).getTile()!=null){
-                    switch (livingRoom.getBoardTile(i,j).getTile().getCategory()){
-                        case CATS:
-                            System.out.print(GREEN + "   " + RESET);
-                            break;
-                        case FRAMES:
-                            System.out.print(BLUE + "   " + RESET);
-                            break;
-                        case BOOKS:
-                            System.out.print(WHITE + "   " + RESET);
-                            break;
-                        case GAMES:
-                            System.out.print(YELLOW + "   " + RESET);
-                            break;
-                        case PLANTS:
-                            System.out.print(PINK + "   " + RESET);
-                            break;
-                        case TROPHIES:
-                            System.out.print(CYAN + "   " + RESET);
-                            break;
+                    switch (livingRoom.getBoardTile(i, j).getTile().getCategory()) {
+                        case CATS -> System.out.print(GREEN + "   " + RESET);
+                        case FRAMES -> System.out.print(BLUE + "   " + RESET);
+                        case BOOKS -> System.out.print(WHITE + "   " + RESET);
+                        case GAMES -> System.out.print(YELLOW + "   " + RESET);
+                        case PLANTS -> System.out.print(PINK + "   " + RESET);
+                        case TROPHIES -> System.out.print(CYAN + "   " + RESET);
                     }
                 }else
                     System.out.print("   ");
@@ -450,25 +424,13 @@ public class GameHandler {
                 if(player.getPlayerBookshelf().getTile(i,j)==null)
                     System.out.print("   ");
                 else{
-                    switch (player.getPlayerBookshelf().getTile(i,j).getCategory()){
-                        case CATS:
-                            System.out.print(GREEN + "   " + RESET);
-                            break;
-                        case FRAMES:
-                            System.out.print(BLUE + "   " + RESET);
-                            break;
-                        case BOOKS:
-                            System.out.print(WHITE + "   " + RESET);
-                            break;
-                        case GAMES:
-                            System.out.print(YELLOW + "   " + RESET);
-                            break;
-                        case PLANTS:
-                            System.out.print(PINK + "   " + RESET);
-                            break;
-                        case TROPHIES:
-                            System.out.print(CYAN + "   " + RESET);
-                            break;
+                    switch (player.getPlayerBookshelf().getTile(i, j).getCategory()) {
+                        case CATS -> System.out.print(GREEN + "   " + RESET);
+                        case FRAMES -> System.out.print(BLUE + "   " + RESET);
+                        case BOOKS -> System.out.print(WHITE + "   " + RESET);
+                        case GAMES -> System.out.print(YELLOW + "   " + RESET);
+                        case PLANTS -> System.out.print(PINK + "   " + RESET);
+                        case TROPHIES -> System.out.print(CYAN + "   " + RESET);
                     }
                 }
                 if(j==shelfCols-1) {
@@ -495,25 +457,13 @@ public class GameHandler {
                 if(personalGoalCard.getTile(i,j)==null)
                     System.out.print("   ");
                 else{
-                    switch (personalGoalCard.getTile(i,j).getCategory()){
-                        case CATS:
-                            System.out.print(GREEN + "   " + RESET);
-                            break;
-                        case FRAMES:
-                            System.out.print(BLUE + "   " + RESET);
-                            break;
-                        case BOOKS:
-                            System.out.print(WHITE + "   " + RESET);
-                            break;
-                        case GAMES:
-                            System.out.print(YELLOW + "   " + RESET);
-                            break;
-                        case PLANTS:
-                            System.out.print(PINK + "   " + RESET);
-                            break;
-                        case TROPHIES:
-                            System.out.print(CYAN + "   " + RESET);
-                            break;
+                    switch (personalGoalCard.getTile(i, j).getCategory()) {
+                        case CATS -> System.out.print(GREEN + "   " + RESET);
+                        case FRAMES -> System.out.print(BLUE + "   " + RESET);
+                        case BOOKS -> System.out.print(WHITE + "   " + RESET);
+                        case GAMES -> System.out.print(YELLOW + "   " + RESET);
+                        case PLANTS -> System.out.print(PINK + "   " + RESET);
+                        case TROPHIES -> System.out.print(CYAN + "   " + RESET);
                     }
                 }
                 if(j==shelfCols-1) {

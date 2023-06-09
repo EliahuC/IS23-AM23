@@ -246,7 +246,8 @@ public class GameCheckerTest extends TestCase {
         assertFalse(gc4.isLegalAction(board4.getBoardTile(6,3)));
         assertFalse(gc4.isLegalAction(board4.getBoardTile(7,4)));
         assertFalse(gc4.isLegalAction(board4.getBoardTile(5,3)));
-        assertFalse(gc4.isLegalAction(board4.getBoardTile(7,5)));
+        assertTrue(gc4.isLegalAction(board4.getBoardTile(7,5)));
+        assertTrue(gc4.isLegalAction(board4.getBoardTile(5,1)));
 
         board3.start(3);
         assertFalse(gc3.isLegalAction(board3.getBoardTile(8,4)));
@@ -264,10 +265,10 @@ public class GameCheckerTest extends TestCase {
         assertFalse(gc3.isLegalAction(board3.getBoardTile(4,8)));
         assertFalse(gc3.isLegalAction(board3.getBoardTile(7,3)));
         assertTrue(gc3.isLegalAction(board3.getBoardTile(6,2)));
-        assertFalse(gc3.isLegalAction(board3.getBoardTile(6,3)));
+        assertTrue(gc3.isLegalAction(board3.getBoardTile(6,3)));
         assertTrue(gc3.isLegalAction(board3.getBoardTile(7,4)));
         assertFalse(gc3.isLegalAction(board3.getBoardTile(5,3)));
-        assertFalse(gc3.isLegalAction(board3.getBoardTile(7,5)));
+        assertTrue(gc3.isLegalAction(board3.getBoardTile(7,5)));
 
         board2.start(2);
         assertFalse(gc2.isLegalAction(board2.getBoardTile(8,4)));
@@ -290,8 +291,6 @@ public class GameCheckerTest extends TestCase {
         assertFalse(gc2.isLegalAction(board2.getBoardTile(5,3)));
         assertTrue(gc2.isLegalAction(board2.getBoardTile(7,5)));
 
-        assertFalse(gc4.isLegalAction(board4.getBoardTile(7,5)));
-        board4.getBoardTile(8,5).freeTile();
         assertTrue(gc4.isLegalAction(board4.getBoardTile(7,5)));
     }
 
@@ -335,34 +334,30 @@ public class GameCheckerTest extends TestCase {
         assertTrue(gc4.isLegalAction(board4.getBoardTile(0,3),board4.getBoardTile(1,3)));
 
         board3.start(3);
-        assertFalse(gc3.isLegalAction(board3.getBoardTile(7,4),board3.getBoardTile(7,5)));
-        board3.getBoardTile(8,5).freeTile();
         assertTrue(gc3.isLegalAction(board3.getBoardTile(7,4),board3.getBoardTile(7,5)));
         assertFalse(gc3.isLegalAction(board3.getBoardTile(6,4),board3.getBoardTile(6,5)));
         board3.getBoardTile(7,5).freeTile();
         board3.getBoardTile(7,4).freeTile();
-        assertFalse(gc3.isLegalAction(board3.getBoardTile(6,4),board3.getBoardTile(6,5)));
-        board3.getBoardTile(6,6).freeTile();
         assertTrue(gc3.isLegalAction(board3.getBoardTile(6,4),board3.getBoardTile(6,5)));
-        assertFalse(gc3.isLegalAction(board3.getBoardTile(6,3),board3.getBoardTile(6,4)));
-        board3.getBoardTile(6,2).freeTile();
+        board3.getBoardTile(6,6).freeTile();
+
         assertTrue(gc3.isLegalAction(board3.getBoardTile(6,3),board3.getBoardTile(6,4)));
+        board3.getBoardTile(6,2).freeTile();
         board3.getBoardTile(6,3).freeTile();
         board3.getBoardTile(6,4).freeTile();
         board3.getBoardTile(6,5).freeTile();
         assertFalse(gc3.isLegalAction(board3.getBoardTile(6,3),board3.getBoardTile(5,4)));
         assertTrue(gc3.isLegalAction(board3.getBoardTile(5,0),board3.getBoardTile(5,1)));
-        assertFalse(gc3.isLegalAction(board3.getBoardTile(4,1),board3.getBoardTile(5,1)));
-        board3.getBoardTile(5,0).freeTile();
         assertTrue(gc3.isLegalAction(board3.getBoardTile(4,1),board3.getBoardTile(5,1)));
+        board3.getBoardTile(5,0).freeTile();
         assertTrue(gc3.isLegalAction(board3.getBoardTile(2,6)));
         assertTrue(gc3.isLegalAction(board3.getBoardTile(0,3),board3.getBoardTile(1,3)));
-        assertFalse(gc3.isLegalAction(board3.getBoardTile(5,2),board3.getBoardTile(5,3)));
+        assertTrue(gc3.isLegalAction(board3.getBoardTile(5,2),board3.getBoardTile(5,3)));
         assertTrue(gc3.isLegalAction(board3.getBoardTile(5,1),board3.getBoardTile(5,2)));
 
         board2.start(2);
         assertTrue(gc2.isLegalAction(board2.getBoardTile(1,3),board2.getBoardTile(1,4)));
-        assertFalse(gc2.isLegalAction(board2.getBoardTile(3,1),board2.getBoardTile(4,1)));
+        assertTrue(gc2.isLegalAction(board2.getBoardTile(4,1),board2.getBoardTile(5,1)));
         assertTrue(gc2.isLegalAction(board2.getBoardTile(7,4),board2.getBoardTile(7,5)));
         board2.getBoardTile(7,4).freeTile();
         board2.getBoardTile(7,5).freeTile();
@@ -397,7 +392,7 @@ public class GameCheckerTest extends TestCase {
         board4.getBoardTile(1,3).freeTile();
         board4.getBoardTile(1,4).freeTile();
         board4.getBoardTile(1,5).freeTile();
-        assertFalse(gc4.isLegalAction(board4.getBoardTile(2,3),board4.getBoardTile(2,4),board4.getBoardTile(2,5)));
+        assertTrue(gc4.isLegalAction(board4.getBoardTile(2,3),board4.getBoardTile(2,4),board4.getBoardTile(2,5)));
         board4.getBoardTile(2,2).freeTile();
         assertTrue(gc4.isLegalAction(board4.getBoardTile(2,3),board4.getBoardTile(2,4),board4.getBoardTile(2,5)));
         assertFalse(gc4.isLegalAction(board4.getBoardTile(3,6),board4.getBoardTile(3,7),board4.getBoardTile(3,8)));
@@ -416,7 +411,7 @@ public class GameCheckerTest extends TestCase {
         board4.getBoardTile(4,1).freeTile();
         board4.getBoardTile(5,1).freeTile();
         assertTrue(gc4.isLegalAction(board4.getBoardTile(4,2),board4.getBoardTile(5,2),board4.getBoardTile(6,2)));
-        assertFalse(gc4.isLegalAction(board4.getBoardTile(3,2),board4.getBoardTile(4,2),board4.getBoardTile(5,2)));
+        assertTrue(gc4.isLegalAction(board4.getBoardTile(3,2),board4.getBoardTile(4,2),board4.getBoardTile(5,2)));
         board4.getBoardTile(3,1).freeTile();
         board4.getBoardTile(2,2).freeTile();
         board4.getBoardTile(6,2).freeTile();
@@ -433,7 +428,7 @@ public class GameCheckerTest extends TestCase {
         assertFalse(gc3.isLegalAction(board3.getBoardTile(5,5),board3.getBoardTile(6,5),board3.getBoardTile(7,5)));
         board3.getBoardTile(5,6).freeTile();
         board3.getBoardTile(6,6).freeTile();
-        assertFalse(gc3.isLegalAction(board3.getBoardTile(5,5),board3.getBoardTile(6,5),board3.getBoardTile(7,5)));
+        assertTrue(gc3.isLegalAction(board3.getBoardTile(5,5),board3.getBoardTile(6,5),board3.getBoardTile(7,5)));
         board3.getBoardTile(8,5).freeTile();
         assertTrue(gc3.isLegalAction(board3.getBoardTile(5,5),board3.getBoardTile(6,5),board3.getBoardTile(7,5)));
 

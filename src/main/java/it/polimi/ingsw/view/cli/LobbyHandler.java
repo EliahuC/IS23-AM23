@@ -6,14 +6,14 @@ import it.polimi.ingsw.Messages.ServerToClient.ServerMessage;
 import it.polimi.ingsw.Network.Client.ConnectionClient;
 import it.polimi.ingsw.Messages.MoveSerializer;
 
-import java.io.IOException;
+
 import java.util.Objects;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 public class LobbyHandler {
-    private ConnectionClient connectionClient;
-    private CLIEvent receiver;
+    private final ConnectionClient connectionClient;
+    private final CLIEvent receiver;
     private ServerMessage response;
     private Boolean lock=true;
 
@@ -35,7 +35,7 @@ public class LobbyHandler {
         receiver.setGameHandler(gameHandler);
         String command;
         Scanner input = new Scanner(System.in);
-        ServerMessage serverMessage;
+
         /*System.out.print("\n" +
                 "    __  ___          _____  __           __ ____ _     \n" +
                 "   /  |/  /__  __   / ___/ / /_   ___   / // __/(_)___ \n" +
