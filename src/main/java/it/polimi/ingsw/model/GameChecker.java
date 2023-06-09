@@ -39,6 +39,10 @@ public class GameChecker {
 
 
     public boolean isRestorable(BoardToken[][] board) {
+        if(boardIsEmpty(board)){
+            restorable=true;
+            return true;
+        }
         for (int i = 0; i < boardWidth; i++){
             for (int j = 0; j < boardWidth; j++){
                 if (!boardBoxIsEmpty(board[i][j]) && boardBoxIsValid(board[i][j])){
@@ -51,6 +55,17 @@ public class GameChecker {
         }
         restorable = false;
         return false;
+    }
+
+    private boolean boardIsEmpty(BoardToken[][] board){
+        int counter = 0;
+        for (int i = 0; i < boardWidth; i++){
+            for (int j = 0; j < boardWidth; j++) {
+                if(boardBoxIsEmpty(board[i][j]))
+                    counter++;
+            }
+        }
+        return counter == 81;
     }
 
     public boolean getRestorable(){

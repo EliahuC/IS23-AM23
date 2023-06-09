@@ -22,6 +22,7 @@ public class StartCLI {
     private ConnectionClient connectionClient;
     private ServerMessage response;
     private CLIEvent receiver;
+    private final static String CLS = "\033[H\033[2J";
     public void setResponse(ServerMessage response){
         this.response=response;
     }

@@ -36,6 +36,8 @@ public class GameHandler {
     private static final String BLUE = "\u001b[48;2;0;104;146m";
     private static final String CYAN = "\u001b[48;2;106;183;183m";
     private static final String PINK = "\u001b[48;2;198;77;124m";
+
+    private final static String CLS = "\033[H\033[2J";
     public static final int LivingRoomSize=9;
     private static final int shelfRows = 6;
     private static final int shelfCols = 5;
@@ -139,7 +141,7 @@ public class GameHandler {
                 }
                 if (response != null && response.getCategory() == Message.MessageCategory.END_GAME_MESSAGE)
                     break;
-                System.out.println("Your turn is finished");
+                //System.out.println("Your turn is finished");
                 waiting();
             }else
                 waiting();
@@ -188,7 +190,7 @@ public class GameHandler {
                 iE.printStackTrace();
             }*/
             try{
-                TimeUnit.MILLISECONDS.sleep(200);
+                TimeUnit.MILLISECONDS.sleep(500);
             }catch (InterruptedException iE){
                 iE.printStackTrace();
             }
@@ -213,6 +215,7 @@ public class GameHandler {
                 "[Use the command /GOALS to see the description of your personal or common goal cards.]\n");
         Scanner input = new Scanner(System.in);
         String command;
+        response=null;
         while (true) {
             command = input.nextLine();
             if (command!=null&&Objects.equals(command.toUpperCase(), "/GOALS")) {
@@ -229,7 +232,11 @@ public class GameHandler {
             }
             if(command!=null){
                 ClientMessage message = (ClientMessage) MoveSerializer.serializeInput(command);
-                connectionClient.sendMessage(message);
+                if(message.getMessageCategory()!=Message.MessageCategory.WARNING)
+                    connectionClient.sendMessage(message);
+                else
+                    System.out.print("Your move is not valid. Please, pick again and correctly your tiles.\n" +
+                            "[You can still see your goal cards, using the command /GOALS, or your personal bookshelf using /BOOKSHELF]\n");
             }
 
             try {
@@ -242,7 +249,6 @@ public class GameHandler {
                     tiles.add(livingRoom.getBoardTile(Integer.parseInt(command.split(" ")[i]), Integer.parseInt(command.split(" ")[i + 1])).getTile());
                 break;
             }
-            command=null;
             if (response != null && response.getCategory() == Message.MessageCategory.WARNING) {
                 System.out.print("Your move is not valid. Please, pick again and correctly your tiles.\n" +
                         "[You can still see your goal cards, using the command /GOALS, or your personal bookshelf using /BOOKSHELF]\n");
@@ -295,10 +301,11 @@ public class GameHandler {
                 "[Use the command /GOALS to see the description of your personal or common goal cards.]\n\n");
         printSelection();
         String command;
+        response=null;
         while (true) {
             command = input.nextLine();
             if(command!=null&&Objects.equals(command.toUpperCase(), "/GOALS")){
-                showGoals("BookshelfColumn");
+                showGoals("BookshelfOrder");
                 break;
             }
             while(command!=null && !Objects.equals(command.toUpperCase().split(" ")[0], "/ORDER")) {
@@ -307,9 +314,11 @@ public class GameHandler {
             }
             if(command!=null){
                 ClientMessage message = (ClientMessage) MoveSerializer.serializeInput(command);
-                connectionClient.sendMessage(message);
+                if(message.getMessageCategory()!=Message.MessageCategory.WARNING)
+                    connectionClient.sendMessage(message);
+                else
+                    System.out.println("You didn't choose the order appropriately. Please, retry.");
             }
-            command=null;
             try {
                 TimeUnit.MILLISECONDS.sleep(200);
             } catch (InterruptedException iE) {
@@ -332,6 +341,7 @@ public class GameHandler {
                 "For example: if you want to insert the tiles in the second column, you should write /COLUMN 1\n\n" +
                 "[Use the command /GOALS to see the description of your personal or common goal cards.]\n");
         String command;
+        response=null;
         while(true){
             command = input.nextLine();
             if(command!=null&&Objects.equals(command.toUpperCase(), "/GOALS")){
@@ -344,9 +354,11 @@ public class GameHandler {
             }
             if(command!=null){
                 ClientMessage message = (ClientMessage) MoveSerializer.serializeInput(command);
-                connectionClient.sendMessage(message);
+                if(message.getMessageCategory()!=Message.MessageCategory.WARNING)
+                    connectionClient.sendMessage(message);
+                else
+                    System.out.println("Choose correctly the column: you must select 0, 1, 2, 3 or 4!");
             }
-            command=null;
             try{
                 TimeUnit.MILLISECONDS.sleep(200);
             }catch (InterruptedException iE){

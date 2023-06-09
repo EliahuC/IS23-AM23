@@ -129,7 +129,7 @@ public class MoveSerializer implements Printer {
      * @return an error message and print the CommandList
      */
     private static Message invalidCommand() {
-       ErrorMessage e=new ErrorMessage();
+       ClientErrorMessage e=new ClientErrorMessage();
        e.setReturnMessage("The command isn't valid" +
                           "Command List: "+ CLICommandList.getCommands());
        return e;

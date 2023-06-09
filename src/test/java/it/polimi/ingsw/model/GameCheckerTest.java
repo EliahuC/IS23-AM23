@@ -15,6 +15,8 @@ public class GameCheckerTest extends TestCase {
         GameChecker gc = new GameChecker(l);
         Bag bag = new Bag();
         LivingRoom board = new LivingRoom(l);
+        //At the moment, board is empty. So the board must be restored!
+        assertTrue(gc.isRestorable(board.getBoard()));
         //At the moment, there's only one tile on the board. So the board must be restored!
         board.putTile(4,4);
         assertTrue(gc.isRestorable(board.getBoard()));

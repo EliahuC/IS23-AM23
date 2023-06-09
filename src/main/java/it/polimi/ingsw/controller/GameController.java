@@ -78,6 +78,7 @@ public class GameController {
                      return sendErrorMessage();
              }
              case ORDER -> {
+                 order.clear();
                  order.addAll(m.getMessageMove().getMove());
                  if (!checkOrder() || !checkNumbers())
                      return sendErrorMessage();

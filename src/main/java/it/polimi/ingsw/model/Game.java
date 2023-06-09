@@ -125,7 +125,17 @@ public class Game implements Serializable {
             //  turnTimer.cancel();
               increaseCurrPlaying();
              //turnTimer(turnTimer);
-              if (gameChecker.isRestorable(livingRoom.getBoard())) livingRoom.restore();
+              if (gameChecker.isRestorable(livingRoom.getBoard())){
+                  livingRoom.restore();
+                  PropertyChangeEvent evt = new PropertyChangeEvent(
+                          this,
+                          "BOARD_CHANGED",
+                          null,
+                          livingRoom.getBoard());
+                  for(PropertyChangeListener l:listeners){
+                      l.propertyChange(evt);
+                  }
+              }
               return setGameSavings();
           }
           return null;
