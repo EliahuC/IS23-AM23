@@ -57,7 +57,7 @@ public class MenuController {
             Parent root = loader.load();
             LobbyChoiceController lobbyController = loader.getController();
             lobbyController.displayNickname(nickname);
-            lobbyController.setConnectionClient(connectionClient);
+            lobbyController.setConnection(connectionClient);
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
@@ -107,7 +107,7 @@ public class MenuController {
 
             LobbyChoiceController lobbyController = loader.getController();
             lobbyController.displayNickname(nickname);
-            lobbyController.setConnectionClient(connectionClient);
+            lobbyController.setConnection(connectionClient);
 
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
