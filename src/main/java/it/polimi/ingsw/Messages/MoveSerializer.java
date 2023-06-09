@@ -6,7 +6,7 @@ import it.polimi.ingsw.Messages.ClientToServer.PossibleMoves.Move_SelectColumn;
 import it.polimi.ingsw.Messages.ClientToServer.PossibleMoves.Move_SelectOrder;
 import it.polimi.ingsw.Messages.ClientToServer.PossibleMoves.Move_SelectTiles;
 import it.polimi.ingsw.Messages.ServerToClient.ErrorMessage;
-import it.polimi.ingsw.Messages.ServerToClient.GameIsStartingMessage;
+
 import it.polimi.ingsw.Printer;
 
 import java.util.ArrayList;

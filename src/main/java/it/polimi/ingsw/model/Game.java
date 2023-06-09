@@ -7,7 +7,7 @@ import it.polimi.ingsw.model.board.ItemTile;
 import it.polimi.ingsw.model.board.LivingRoom;
 import it.polimi.ingsw.model.player.PersonalGoalCard;
 import it.polimi.ingsw.model.player.Player;
-import it.polimi.ingsw.view.gui.GameControllerGUI;
+
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -65,9 +65,9 @@ public class Game implements Serializable {
         }
         livingRoom.setListeners(listeners);
     }
-    public void setDisconnectedPlayers(Player p){
+   /* public void setDisconnectedPlayers(Player p){
         disconnectedPlayers.add(p);
-    }
+    }*/
 
     /**
      * @author Eliahu Cohen
@@ -152,7 +152,7 @@ public class Game implements Serializable {
      * @return the player with the highest score
      */
     public synchronized Optional<Player> endGame(){
-        Optional<Player> P = Optional.empty();
+        Optional<Player> P;
          for (Player p : Players){
              p.endGamePoints();
          }
@@ -228,26 +228,23 @@ public class Game implements Serializable {
             if (!checkNumber(size)) return false;
         }
         switch (size) {
-            case 1: {
-                if(gameChecker.isLegalAction(livingRoom.getBoardTile(commands.get(0),commands.get(1))))
+            case 1 -> {
+                if (gameChecker.isLegalAction(livingRoom.getBoardTile(commands.get(0), commands.get(1))))
                     return true;
-                break;
 
 
             }
-            case 2:  {
-                if(gameChecker.isLegalAction(livingRoom.getBoardTile(commands.get(0),commands.get(1)),
-                        livingRoom.getBoardTile(commands.get(2),commands.get(3))))
+            case 2 -> {
+                if (gameChecker.isLegalAction(livingRoom.getBoardTile(commands.get(0), commands.get(1)),
+                        livingRoom.getBoardTile(commands.get(2), commands.get(3))))
                     return true;
-                break;
 
             }
-            case 3:{
-                if(gameChecker.isLegalAction(livingRoom.getBoardTile(commands.get(0),commands.get(1)),
-                        livingRoom.getBoardTile(commands.get(2),commands.get(3)),
-                        livingRoom.getBoardTile(commands.get(4),commands.get(5))))
+            case 3 -> {
+                if (gameChecker.isLegalAction(livingRoom.getBoardTile(commands.get(0), commands.get(1)),
+                        livingRoom.getBoardTile(commands.get(2), commands.get(3)),
+                        livingRoom.getBoardTile(commands.get(4), commands.get(5))))
                     return true;
-                break;
             }
         }
         return false;
@@ -260,27 +257,23 @@ public class Game implements Serializable {
      */
     private ArrayList<Integer> sortTiles(ArrayList<Integer> commands) {
         ArrayList<Integer> temporaryCommands=new ArrayList<>();
-        switch(commands.size()) {
-            case 4 : {
+        switch (commands.size()) {
+            case 4 -> {
                 //tiles on the same row
-                if(Objects.equals(commands.get(0), commands.get(2)))
-                    sortRow(commands,temporaryCommands);
+                if (Objects.equals(commands.get(0), commands.get(2)))
+                    sortRow(commands, temporaryCommands);
                     //tiles on the same column
-                else if(Objects.equals(commands.get(1), commands.get(3)))
-                    sortColumn(commands,temporaryCommands);
-                break;
+                else if (Objects.equals(commands.get(1), commands.get(3)))
+                    sortColumn(commands, temporaryCommands);
             }
-
-            case 6 : {
+            case 6 -> {
                 //tiles on the same row
-                if((Objects.equals(commands.get(0), commands.get(2))) && (Objects.equals(commands.get(2), commands.get(4))))
-                    sortRow(commands,temporaryCommands);
+                if ((Objects.equals(commands.get(0), commands.get(2))) && (Objects.equals(commands.get(2), commands.get(4))))
+                    sortRow(commands, temporaryCommands);
                     //tiles on the same column
-                else if((Objects.equals(commands.get(1), commands.get(3)))&& Objects.equals(commands.get(3), commands.get(5)))
-                    sortColumn(commands,temporaryCommands);
-                break;
+                else if ((Objects.equals(commands.get(1), commands.get(3))) && Objects.equals(commands.get(3), commands.get(5)))
+                    sortColumn(commands, temporaryCommands);
             }
-
         }
       return temporaryCommands;
     }
@@ -293,7 +286,7 @@ public class Game implements Serializable {
      */
     private void sortColumn(ArrayList<Integer> commands, ArrayList<Integer> temporaryCommands) {
         ArrayList<Integer> y=new ArrayList<>();
-        Integer size=commands.size();
+        int size=commands.size();
         Integer support=commands.get(1);
         y.add(commands.get(0));
         if(size>2) y.add(commands.get(2));
@@ -319,7 +312,7 @@ public class Game implements Serializable {
      */
     private void sortRow(ArrayList<Integer> commands, ArrayList<Integer> temporaryCommands) {
         ArrayList<Integer> x=new ArrayList<>();
-        Integer size=commands.size();
+        int size=commands.size();
         Integer support=commands.get(0);
         x.add(commands.get(1));
         if(size>2)x.add(commands.get(3));
@@ -512,10 +505,10 @@ public class Game implements Serializable {
         Players = players;
     }
 
-    public void setGameNumPlayers(Integer gameNumPlayers) {
+   /* public void setGameNumPlayers(Integer gameNumPlayers) {
         this.gameNumPlayers = gameNumPlayers;
     }
-
+*/
     public void setStartedGame(boolean startedGame) {
         this.startedGame = startedGame;
     }
