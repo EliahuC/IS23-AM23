@@ -55,10 +55,9 @@ public class MenuController {
             URL url = file.toURI().toURL();
             FXMLLoader loader = new FXMLLoader(url);
             Parent root = loader.load();
-
             LobbyChoiceController lobbyController = loader.getController();
             lobbyController.displayNickname(nickname);
-
+            lobbyController.setConnectionClient(connectionClient);
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
@@ -108,11 +107,13 @@ public class MenuController {
 
             LobbyChoiceController lobbyController = loader.getController();
             lobbyController.displayNickname(nickname);
+            lobbyController.setConnectionClient(connectionClient);
 
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
+
         }
     }
 
@@ -126,6 +127,11 @@ public class MenuController {
         if(alert.showAndWait().get() == ButtonType.OK){
             stage = (Stage)scenePane.getScene().getWindow();
             stage.close();
+            try {
+                socket.close();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 

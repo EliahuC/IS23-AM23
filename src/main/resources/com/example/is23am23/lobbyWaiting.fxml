@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.gui.LobbyWaitingController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.gui.LobbyWaitingController">
     <children>
         <ImageView fx:id="" fitHeight="405.0" fitWidth="605.0" layoutY="-1.0" pickOnBounds="true">
             <image>
@@ -24,7 +24,7 @@
                 <Font size="20.0" />
             </font></Label>
         <Button layoutX="254.0" layoutY="302.0" mnemonicParsing="false" onAction="#returnToMenu" prefHeight="32.0" prefWidth="100.0" text="Return to Menu" />
-      <Label fx:id="yourNickname" alignment="CENTER" layoutY="175.0" prefHeight="17.0" prefWidth="605.0" text="Label" textAlignment="CENTER">
+      <Label fx:id="nameDisplay" alignment="CENTER" layoutY="175.0" prefHeight="17.0" prefWidth="605.0" text="Label" textAlignment="CENTER">
          <font>
             <Font size="20.0" />
          </font>

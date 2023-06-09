@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.gui.LobbyChoiceController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.gui.LobbyChoiceController">
     <children>
         <ImageView fx:id="" fitHeight="405.0" fitWidth="605.0" layoutY="-1.0" pickOnBounds="true">
             <image>
@@ -20,8 +20,8 @@
                 <Image url="@title.png" />
             </image>
         </ImageView>
-        <Button layoutX="160.0" layoutY="248.0" mnemonicParsing="false" onAction="#goToLobbyWaiting" prefHeight="32.0" prefWidth="100.0" text="Join a lobby" />
-        <Button layoutX="327.0" layoutY="248.0" mnemonicParsing="false" onAction="#goToLobbyWaiting" prefHeight="32.0" prefWidth="126.0" text="Create a new game" />
+        <Button layoutX="160.0" layoutY="248.0" mnemonicParsing="false" onAction="#joinLobby" prefHeight="32.0" prefWidth="100.0" text="Join a lobby" />
+        <Button layoutX="327.0" layoutY="248.0" mnemonicParsing="false" onAction="#createLobby" prefHeight="32.0" prefWidth="126.0" text="Create a new game" />
         <ChoiceBox fx:id="playerNumber" layoutX="453.0" layoutY="248.0" prefHeight="32.0" prefWidth="47.0" />
       <Button alignment="CENTER" layoutX="253.0" layoutY="319.0" mnemonicParsing="false" onAction="#returnToMenu" text="Return to Menu" />
       <Label fx:id="nameDisplay" alignment="CENTER" layoutX="-2.0" layoutY="179.0" prefHeight="30.0" prefWidth="605.0" text="Welcome!">
