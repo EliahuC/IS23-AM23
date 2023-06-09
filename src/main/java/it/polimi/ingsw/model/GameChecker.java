@@ -43,18 +43,17 @@ public class GameChecker {
             restorable=true;
             return true;
         }
+        restorable=true;
         for (int i = 0; i < boardWidth; i++){
             for (int j = 0; j < boardWidth; j++){
                 if (!boardBoxIsEmpty(board[i][j]) && boardBoxIsValid(board[i][j])){
-                    if (hasNotAdjacentTiles(board[i][j])) {
-                        restorable = true;
-                        return true;
+                    if (!hasNotAdjacentTiles(board[i][j])) {
+                        restorable = false;
                     }
                 }
             }
         }
-        restorable = false;
-        return false;
+        return restorable;
     }
 
     private boolean boardIsEmpty(BoardToken[][] board){
@@ -65,7 +64,7 @@ public class GameChecker {
                     counter++;
             }
         }
-        return counter == 81;
+        return counter == boardWidth * boardWidth;
     }
 
     public boolean getRestorable(){
