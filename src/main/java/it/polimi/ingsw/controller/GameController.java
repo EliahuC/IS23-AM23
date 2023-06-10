@@ -151,7 +151,7 @@ public class GameController {
      * @author Eliahu Cohen
      * @return the player that wins the game
      */
-    public synchronized Optional<Player> endGame() {
+    public synchronized Player endGame() {
         return game.endGame();
     }
 

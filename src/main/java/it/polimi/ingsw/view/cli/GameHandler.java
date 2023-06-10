@@ -131,6 +131,13 @@ public class GameHandler {
         buildPersonalGoalCard();
         while(true){
             if(player.getNickName().equals(players.get(currPlaying-1).getNickName())) {
+                try {
+                    TimeUnit.MILLISECONDS.sleep(600);
+                } catch (InterruptedException iE) {
+                    iE.printStackTrace();
+                }
+                if(response!=null && response.getCategory()==Message.MessageCategory.END_GAME_MESSAGE)
+                    break;
                 showBoard();
                 showBookshelfOrder();
                 showBookshelfColumn();
@@ -143,8 +150,18 @@ public class GameHandler {
                     break;
                 //System.out.println("Your turn is finished");
                 waiting();
-            }else
+            }else {
+                try {
+                    TimeUnit.MILLISECONDS.sleep(200);
+                } catch (InterruptedException iE) {
+                    iE.printStackTrace();
+                }
+                if (response != null && response.getCategory() == Message.MessageCategory.END_GAME_MESSAGE)
+                    break;
                 waiting();
+                if (response != null && response.getCategory() == Message.MessageCategory.END_GAME_MESSAGE)
+                    break;
+            }
         }
         showEnd();
     }
@@ -169,6 +186,8 @@ public class GameHandler {
         if(response!=null && response.getCategory()==Message.MessageCategory.LAST_TURN_MESSAGE)
             System.out.println(response.getReturnMessage());
         while(!Objects.equals(player.getNickName(), players.get(currPlaying - 1).getNickName())){
+            if(response!=null && response.getCategory()==Message.MessageCategory.END_GAME_MESSAGE)
+                break;
             /*System.out.print("\033[H\033[2J");
             System.out.flush();
             System.out.print("It's not your turn, yet. Wait for other players to finish their turn.\n\n");
@@ -235,7 +254,7 @@ public class GameHandler {
                 if(message.getMessageCategory()!=Message.MessageCategory.WARNING)
                     connectionClient.sendMessage(message);
                 else
-                    System.out.print("Your move is not valid. Please, pick again and correctly your tiles.\n" +
+                    System.out.print("Your move is not valid. Please, pick again and correctly your tiles checking their legality and your bookshelf's capability.\n" +
                             "[You can still see your goal cards, using the command /GOALS, or your personal bookshelf using /BOOKSHELF]\n");
             }
 
@@ -250,7 +269,7 @@ public class GameHandler {
                 break;
             }
             if (response != null && response.getCategory() == Message.MessageCategory.WARNING) {
-                System.out.print("Your move is not valid. Please, pick again and correctly your tiles.\n" +
+                System.out.print("Your move is not valid. Please, pick again and correctly your tiles checking their legality and your bookshelf's capability.\n" +
                         "[You can still see your goal cards, using the command /GOALS, or your personal bookshelf using /BOOKSHELF]\n");
             }
         }
@@ -281,13 +300,20 @@ public class GameHandler {
     }
 
     private void showEnd(){
-        System.out.println("THE WINNER IS: " + winner);
+        int win = 0;
         List<Player> ranking = players.stream().sorted(Comparator.comparingInt(Player::getScore)).toList();
         for(Player p : ranking){
-            if(!Objects.equals(p.getNickName(), winner)){
-                System.out.println(p.getNickName() + ": "+ p.getScore() + "points");
+            if(Objects.equals(p.getNickName(), winner)){
+                win = p.getScore();
             }
         }
+        System.out.println("THE WINNER IS: " + winner + " (" + win + " points)");
+        for(Player p : ranking){
+            if(!Objects.equals(p.getNickName(), winner)){
+                System.out.println(p.getNickName() + ": "+ p.getScore() + " points");
+            }
+        }
+        System.out.println("\n\nClose the window to play again!");
     }
 
     private void showBookshelfOrder() {
@@ -380,6 +406,13 @@ public class GameHandler {
                 iE.printStackTrace();
             }
         }*/
+        try {
+            TimeUnit.MILLISECONDS.sleep(400);
+        } catch (InterruptedException iE) {
+            iE.printStackTrace();
+        }
+        if (response != null && response.getCategory() == Message.MessageCategory.END_GAME_MESSAGE)
+            showEnd();
     }
 
     private void showBookshelf(){
@@ -457,10 +490,8 @@ public class GameHandler {
                         case TROPHIES -> System.out.print(CYAN + "   " + RESET);
                     }
                 }
-                if(j==shelfCols-1) {
-                    System.out.print("\u001b[48;2;140;68;28m \u001B[0m ");
-                    System.out.print("  [" + i + "]\n");
-                }
+                if(j==shelfCols-1)
+                    System.out.print("\u001b[48;2;140;68;28m \u001B[0m \n");
             }
         }
         for(int i=0; i<=shelfRows;i++)

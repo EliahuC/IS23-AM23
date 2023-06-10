@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  * @author Simone Controguerra
- * Class that checks all the legal/illegal moves pf the game
+ * Class that checks all the legal/illegal moves of the game
  */
 public class GameChecker {
 
@@ -37,7 +37,11 @@ public class GameChecker {
         this.numPlayers= L.getNumPlayers();
     }
 
-
+    /**
+     * @author Simone Controguerra
+     * @param board is the Living Room's board
+     * @return true if the board needs to be restored, according to game's rules
+     */
     public boolean isRestorable(BoardToken[][] board) {
         if(boardIsEmpty(board)){
             restorable=true;
@@ -56,6 +60,11 @@ public class GameChecker {
         return restorable;
     }
 
+    /**
+     * @author Simone Controguerra
+     * @param board is the living room's board
+     * @return true if the board is currently empty, with no tiles on it
+     */
     private boolean boardIsEmpty(BoardToken[][] board){
         int counter = 0;
         for (int i = 0; i < boardWidth; i++){
@@ -71,6 +80,10 @@ public class GameChecker {
         return restorable;
     }
 
+    /**
+     * @author Simone Controguerra
+     * @param bs is the player's bookshelf
+     */
     public void checkColumnCapability(BookShelf bs){
         if (fourthRowIsFull(bs)){
             if (fifthRowIsFull(bs)){
@@ -79,6 +92,11 @@ public class GameChecker {
         }
     }
 
+    /**
+     * @author Simone Controguerra
+     * @param bs is the player's bookshelf
+     * @return the maximum number the player can pick from the board, according to their bookshelf's capability
+     */
     public int getMaxPickableTiles(BookShelf bs){
         return Arrays.stream(bs.getMaxPickableTiles()).max().getAsInt();
     }
@@ -87,11 +105,22 @@ public class GameChecker {
         return maxPickableTiles;
     }
 
+    /**
+     * @author Simone Controguerra
+     * @param t1 is the board's space hosting the tile chosen by the player
+     * @return true if the tile is in a legal position on the board
+     */
     public boolean isLegalAction(BoardToken t1){
         legalSelection = isExternal(t1);
         return legalSelection;
     }
 
+    /**
+     * @author Simone Controguerra
+     * @param t1 is the board's space hosting the tile chosen by the player
+     * @param t2 is the board's space hosting the tile chosen by the player
+     * @return true if the tiles are in a legal position on the board
+     */
     public boolean isLegalAction(BoardToken t1, BoardToken t2){
         if (boardBoxIsValid(t1) && boardBoxIsValid(t2)){
             //Checking if tiles are adjacent and in the same column.
@@ -110,6 +139,13 @@ public class GameChecker {
         return false;
     }
 
+    /**
+     * @author Simone Controguerra
+     * @param t1 is the board's space hosting the tile chosen by the player
+     * @param t2 is the board's space hosting the tile chosen by the player
+     * @param t3 is the board's space hosting the tile chosen by the player
+     * @return true if the tiles are in a legal position on the board
+     */
     public boolean isLegalAction(BoardToken t1, BoardToken t2, BoardToken t3){
         if (boardBoxIsValid(t1) && boardBoxIsValid(t2) && boardBoxIsValid(t3)){
             //Checking if tiles are adjacent and in the same column.
@@ -132,6 +168,10 @@ public class GameChecker {
         return legalSelection;
     }
 
+    /**
+     * @author Simone Controguerra
+     * @param bs is the player's bookshelf
+     */
     public void isBookShelfFull(BookShelf bs) {
         lastRound = sixthRowIsFull(bs);
     }
@@ -148,6 +188,11 @@ public class GameChecker {
         return isYourTurn;
     }
 
+    /**
+     * @author Simone Controguerra
+     * @param t is the board's space hosting the tile chosen by the player
+     * @return true if the tile has no adjacent tiles on the board
+     */
     private boolean hasNotAdjacentTiles(BoardToken t){
         //Tile is on the left side.
         if (boardTileLeft(t)){
@@ -183,24 +228,48 @@ public class GameChecker {
         return false;
     }
 
+    /**
+     * @author Simone Controguerra
+     * @param t is the board's space hosting the tile chosen by the player
+     * @return true if the tile is in an external position on the board
+     */
     private boolean isExternal (BoardToken t) {
         if(boardBoxIsValid(t))
             return checkFreeSides(t);
         return false;
     }
 
+    /**
+     * @author Simone Controguerra
+     * @param t1 is the board's space hosting the tile chosen by the player
+     * @param t2 is the board's space hosting the tile chosen by the player
+     * @return true if the tiles are in an external position on the board
+     */
     private boolean isExternal (BoardToken t1, BoardToken t2){
         if(boardBoxIsValid(t1) && boardBoxIsValid(t2))
             return checkFreeSides(t1) && checkFreeSides(t2);
         return false;
     }
 
+
+    /**
+     * @author Simone Controguerra
+     * @param t1 is the board's space hosting the tile chosen by the player
+     * @param t2 is the board's space hosting the tile chosen by the player
+     * @param t3 is the board's space hosting the tile chosen by the player
+     * @return true if the tiles are in an external position on the board
+     */
     private boolean isExternal (BoardToken t1, BoardToken t2, BoardToken t3){
         if(boardBoxIsValid(t1) && boardBoxIsValid(t2) && boardBoxIsValid(t3))
             return checkFreeSides(t1) && checkFreeSides(t2) && checkFreeSides(t3);
         return false;
     }
 
+    /**
+     * @author Simone Controguerra
+     * @param t is the board's space hosting the tile chosen by the player
+     * @return true if the tile is in a legit position on the board, according to empty spaces and number of players
+     */
     private boolean boardBoxIsValid(BoardToken t){
         BoardToken.boardTokenCategory category = t.getCategory();
         if(category == BoardToken.boardTokenCategory.NORMAL || (category == BoardToken.boardTokenCategory.THREE && numPlayers >= 3) || (category == BoardToken.boardTokenCategory.FOUR && numPlayers == 4))
@@ -208,10 +277,20 @@ public class GameChecker {
         return false;
     }
 
+    /**
+     * @author Simone Controguerra
+     * @param t is the board's space hosting the tile chosen by the player
+     * @return true if there's no tile in that living room's space
+     */
     private boolean boardBoxIsEmpty(BoardToken t){
         return t.getTile() == null;
     }
 
+    /**
+     * @author Simone Controguerra
+     * @param t is a bookshelf's space which can host a tile
+     * @return true if there's no tile in that bookshelf's space
+     */
     private boolean shelfBoxIsEmpty(ItemTile t){
         return t == null;
     }
@@ -224,6 +303,11 @@ public class GameChecker {
         }
     }*/
 
+    /**
+     * @author Simone Controguerra
+     * @param bs is the player's bookshelf
+     * @return true if the first four rows of the bookshelf are full
+     */
     private boolean fourthRowIsFull(BookShelf bs) {
         boolean notYetFull = false;
         for (int i = 0; i < shelfCols; i++) {
@@ -238,6 +322,11 @@ public class GameChecker {
         return true;
     }
 
+    /**
+     * @author Simone Controguerra
+     * @param bs is the player's bookshelf
+     * @return true if the first five rows of the bookshelf are full
+     */
     private boolean fifthRowIsFull(BookShelf bs) {
         boolean notYetFull = false;
         for (int i = 0; i < shelfCols; i++) {
@@ -251,7 +340,11 @@ public class GameChecker {
         }
         return true;
     }
-
+    /**
+     * @author Simone Controguerra
+     * @param bs is the player's bookshelf
+     * @return true if the bookshelf is completely full
+     */
     private boolean sixthRowIsFull(BookShelf bs) {
         boolean notYetFull = false;
         for (int i = 0; i < shelfCols; i++) {
@@ -266,54 +359,131 @@ public class GameChecker {
         return true;
     }
 
+    /**
+     * @author Simone Controguerra
+     * @param t1 is the board's space hosting the tile chosen by the player
+     * @param t2 is the board's space hosting the tile chosen by the player
+     * @return true if the tiles are in the same column on the board
+     */
     private boolean sameColumn(BoardToken t1, BoardToken t2){
         return t1.getCol() == t2.getCol();
     }
 
+    /**
+     * @author Simone Controguerra
+     * @param t1 is the board's space hosting the tile chosen by the player
+     * @param t2 is the board's space hosting the tile chosen by the player
+     * @param t3 is the board's space hosting the tile chosen by the player
+     * @return true if the tiles are in the same column on the board
+     */
     private boolean sameColumn(BoardToken t1, BoardToken t2, BoardToken t3){
         return t1.getCol() == t2.getCol() && t1.getCol() == t3.getCol();
     }
 
+    /**
+     * @author Simone Controguerra
+     * @param t1 is the board's space hosting the tile chosen by the player
+     * @param t2 is the board's space hosting the tile chosen by the player
+     * @return true if the tiles are in the same row on the board
+     */
     private boolean sameRow(BoardToken t1, BoardToken t2){
         return t1.getRow() == t2.getRow();
     }
 
+    /**
+     * @author Simone Controguerra
+     * @param t1 is the board's space hosting the tile chosen by the player
+     * @param t2 is the board's space hosting the tile chosen by the player
+     * @param t3 is the board's space hosting the tile chosen by the player
+     * @return true if the tiles are in the same row on the board
+     */
     private boolean sameRow(BoardToken t1, BoardToken t2, BoardToken t3){
         return t1.getRow() == t2.getRow() && t1.getRow() == t3.getRow();
     }
 
+    /**
+     * @author Simone Controguerra
+     * @param t1 is the board's space hosting the tile chosen by the player
+     * @param t2 is the board's space hosting the tile chosen by the player
+     * @return true if the tiles are adjacent in a vertical way
+     */
     private boolean verticallyAdjacent(BoardToken t1, BoardToken t2){
         return t1.getRow() == t2.getRow() - 1;
     }
 
+    /**
+     * @author Simone Controguerra
+     * @param t1 is the board's space hosting the tile chosen by the player
+     * @param t2 is the board's space hosting the tile chosen by the player
+     * @param t3 is the board's space hosting the tile chosen by the player
+     * @return true if the tiles are adjacent in a vertical way
+     */
     private boolean verticallyAdjacent(BoardToken t1, BoardToken t2, BoardToken t3){
         return t1.getRow() == t2.getRow() - 1 && t1.getRow() == t3.getRow() - 2;
     }
 
+    /**
+     * @author Simone Controguerra
+     * @param t1 is the board's space hosting the tile chosen by the player
+     * @param t2 is the board's space hosting the tile chosen by the player
+     * @return true if the tiles are adjacent in a horizontal way
+     */
     private boolean horizontallyAdjacent(BoardToken t1, BoardToken t2){
         return t1.getCol() == t2.getCol() - 1;
     }
 
+    /**
+     * @author Simone Controguerra
+     * @param t1 is the board's space hosting the tile chosen by the player
+     * @param t2 is the board's space hosting the tile chosen by the player
+     * @param t3 is the board's space hosting the tile chosen by the player
+     * @return true if the tiles are adjacent in a horizontal way
+     */
     private boolean horizontallyAdjacent(BoardToken t1, BoardToken t2, BoardToken t3){
         return t1.getCol() == t2.getCol() - 1 && t1.getCol() == t3.getCol() - 2;
     }
 
+    /**
+     * @author Simone Controguerra
+     * @param t is the board's space hosting the tile chosen by the player
+     * @return true if the tile is on the upper side corner of the board
+     */
     private boolean boardTileUpper(BoardToken t){
         return t.getRow() == 0;
     }
 
+    /**
+     * @author Simone Controguerra
+     * @param t is the board's space hosting the tile chosen by the player
+     * @return true if the tile is on the lower side corner of the board
+     */
     private boolean boardTileLower(BoardToken t){
         return t.getRow() == boardWidth-1;
     }
 
+    /**
+     * @author Simone Controguerra
+     * @param t is the board's space hosting the tile chosen by the player
+     * @return true if the tile is on the left side corner of the board
+     */
     private boolean boardTileLeft(BoardToken t){
         return t.getCol() == 0;
     }
 
+    /**
+     * @author Simone Controguerra
+     * @param t is the board's space hosting the tile chosen by the player
+     * @return true if the tile is on the right side corner of the board
+     */
     private boolean boardTileRight(BoardToken t){
         return t.getCol() == boardWidth-1;
     }
 
+    /**
+     * @author Simone Controguerra
+     * @param t is the board's space hosting the tile chosen by the player
+     * @return true if the tile is in any side position on the board
+     */
     private boolean boardTileNoBorderline(BoardToken t){
         return t.getRow() != 0 && t.getRow() != boardWidth-1 && t.getCol() != 0 && t.getCol() != boardWidth-1;
     }
@@ -483,6 +653,11 @@ public class GameChecker {
         return counter >= numberOfTiles;
     }
 
+    /**
+     * @author Simone Controguerra
+     * @param t is the board's space hosting the tile chosen by the player
+     * @return true if the tile has at least one free side on the board
+     */
     private boolean checkFreeSides(BoardToken t){
         int freeSides = 0;
         if(!boardTileUpper(t)){

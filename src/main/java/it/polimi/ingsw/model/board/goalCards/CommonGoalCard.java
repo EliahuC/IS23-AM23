@@ -82,7 +82,9 @@ public class CommonGoalCard {
      * @return Launcher
      */
 
-
+    /**
+     * @author Simone Controguerra
+     */
     public void print(){}
 }
 

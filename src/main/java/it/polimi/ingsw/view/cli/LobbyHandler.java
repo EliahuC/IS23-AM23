@@ -94,7 +94,7 @@ public class LobbyHandler {
                     receiver.setInGameHandler(true);
                     gameHandler.start();
                     lock=false;
-                    break;
+                    return;
                 }
                 else
                     break;

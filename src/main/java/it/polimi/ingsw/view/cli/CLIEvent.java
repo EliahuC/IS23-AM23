@@ -56,6 +56,7 @@ public class CLIEvent implements PropertyChangeListener {
                 case END_GAME_MESSAGE:{
                     EndGameMessage temp_endGameMessage = (EndGameMessage) serverMessage;
                     gameHandler.setWinner(temp_endGameMessage.getWinner().getNickName());
+                    System.out.println("FINE PARTITA");
                     break;
                 }
                 case LIVINGROOM:{

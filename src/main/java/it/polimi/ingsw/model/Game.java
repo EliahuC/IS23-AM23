@@ -161,8 +161,8 @@ public class Game implements Serializable {
      * @author Eliahu Cohen
      * @return the player with the highest score
      */
-    public synchronized Optional<Player> endGame(){
-        Optional<Player> P;
+    public synchronized Player endGame(){
+        Player P;
          for (Player p : Players){
              p.endGamePoints();
          }
@@ -211,7 +211,7 @@ public class Game implements Serializable {
      */
     private synchronized void isLastTurn() {
         for(Player p:Players)p.setLastRound(true);
-        if(currPlaying==4){
+        if(Objects.equals(currPlaying, gameNumPlayers)){
             finishedGame=true;
             PropertyChangeEvent evt = new PropertyChangeEvent(
                     this,
@@ -362,24 +362,25 @@ public class Game implements Serializable {
      * @return true if there is enough space in the bookshelf for the tiles the player want to extract
      */
     private boolean checkNumber(int numOfTiles){
+        gameChecker.checkColumnCapability(Players.get(currPlaying-1).getPlayerBookshelf());
         return gameChecker.getMaxPickableTiles(Players.get(currPlaying - 1).getPlayerBookshelf()) >= numOfTiles;
     }
 
 
     /**
-     * @author Eliahu Cohen
      * @return the player with the highest score
      * The method checks with a functional method who is the player with the highest score.
      * if there is a draw the player will be selected manually
+     * @author Eliahu Cohen
      */
-    private synchronized Optional<Player> whoWins(){
-        Optional<Player> P=   Players.stream().reduce((P1,P2) ->P1.getScore()>P2.getScore()? P1 : P2);
+    private synchronized Player whoWins(){
+        Optional<Player> P=Players.stream().reduce((P1,P2) ->P1.getScore()>P2.getScore()? P1 : P2);
         if(P.isEmpty()) {
             //System.out.println("2 Players with the same score");
              P= Optional.ofNullable(checkManually());
 
         }
-        return P;
+        return P.get();
     }
 
     /**
@@ -441,13 +442,12 @@ public class Game implements Serializable {
     private synchronized void increaseCurrPlaying() {
         if(Objects.equals(currPlaying, gameNumPlayers) && !finishedGame) currPlaying=1;
         else if(currPlaying<gameNumPlayers && !finishedGame) currPlaying++;
-
         PropertyChangeEvent evt = new PropertyChangeEvent(
                 this,
                 "UPDATE_STATE",
                 null,
                 this);
-        for(PropertyChangeListener l:listeners){
+        for (PropertyChangeListener l : listeners) {
             l.propertyChange(evt);
         }
     }
