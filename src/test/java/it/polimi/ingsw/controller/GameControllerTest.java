@@ -131,7 +131,7 @@ public class GameControllerTest extends TestCase {
         p2.setPersonalGoalCard(new PersonalGoalCard(12));
         p.setPersonalGoalCard(new PersonalGoalCard(2));
         Optional<Player> player = Optional.ofNullable(p2);
-        assertEquals(player, GC.endGame());
+        assertEquals(player.get(), GC.endGame());
     }
     public void testEndgameGC_SECOND() {
         Player p = new Player("Alice");
@@ -207,7 +207,7 @@ public class GameControllerTest extends TestCase {
         p2.setPersonalGoalCard(new PersonalGoalCard(12));
         p.setPersonalGoalCard(new PersonalGoalCard(2));
         Optional<Player> player = Optional.ofNullable(GC.getGame().getPlayers().get(1));
-        assertEquals(player, GC.endGame());
+        assertEquals(player.get(), GC.endGame());
     }
     /*METODO COMMENTATO PERCHE IMPLEMENTATA PERSISTENZA
     public void testPlayMoveGC_FIRST(){
