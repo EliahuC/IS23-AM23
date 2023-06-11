@@ -40,6 +40,12 @@ public class CLIEvent implements PropertyChangeListener {
                     gameHandler.setSeed(gameHandler.getPlayer().getPersonalGoalCard().getNumeroCarta());
                     break;
                 }
+                case END_GAME_MESSAGE:{
+                    EndGameMessage temp_endGameMessage = (EndGameMessage) serverMessage;
+                    gameHandler.setWinner(temp_endGameMessage.getWinner().getNickName());
+                    gameHandler.setEndgame(true);
+                    break;
+                }
                 case UPDATE_STATE:{
                     UpdateStateMessage temp_updateStateMessage=(UpdateStateMessage) serverMessage;
                     gameHandler.setLivingRoom(temp_updateStateMessage.getGame().getLivingRoom());
@@ -51,12 +57,6 @@ public class CLIEvent implements PropertyChangeListener {
                 case CURRPLAYING:{
                     CurrPlayingMessage temp_currPlayingMessage=(CurrPlayingMessage) serverMessage;
                     gameHandler.setCurrPlaying(temp_currPlayingMessage.getCurrPlaying());
-                    break;
-                }
-                case END_GAME_MESSAGE:{
-                    EndGameMessage temp_endGameMessage = (EndGameMessage) serverMessage;
-                    gameHandler.setWinner(temp_endGameMessage.getWinner().getNickName());
-                    System.out.println("FINE PARTITA");
                     break;
                 }
                 case LIVINGROOM:{

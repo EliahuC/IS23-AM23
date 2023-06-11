@@ -158,7 +158,7 @@ public class PersonalGoalCard implements Serializable {
      */
     public int CheckGoal(BookShelf playerBS) {
         for (Pair key : Goal.keySet()) {
-            if (playerBS.getTile(key.getX(), key.getY()).getCategory() == Goal.get(key).getCategory()) {
+            if (playerBS.getTile(key.getX(), key.getY())!=null && playerBS.getTile(key.getX(), key.getY()).getCategory() == Goal.get(key).getCategory()) {
                 completed++;
             }
 

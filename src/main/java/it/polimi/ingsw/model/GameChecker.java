@@ -111,7 +111,7 @@ public class GameChecker {
      * @return true if the tile is in a legal position on the board
      */
     public boolean isLegalAction(BoardToken t1){
-        legalSelection = isExternal(t1);
+        legalSelection = isExternal(t1) && !boardBoxIsEmpty(t1);
         return legalSelection;
     }
 
@@ -122,7 +122,7 @@ public class GameChecker {
      * @return true if the tiles are in a legal position on the board
      */
     public boolean isLegalAction(BoardToken t1, BoardToken t2){
-        if (boardBoxIsValid(t1) && boardBoxIsValid(t2)){
+        if (boardBoxIsValid(t1) && boardBoxIsValid(t2) && !boardBoxIsEmpty(t1) && !boardBoxIsEmpty(t2)){
             //Checking if tiles are adjacent and in the same column.
             if (sameColumn(t1, t2) && verticallyAdjacent(t1, t2) && isExternal(t1, t2)) {
                 legalSelection = true;
@@ -147,7 +147,7 @@ public class GameChecker {
      * @return true if the tiles are in a legal position on the board
      */
     public boolean isLegalAction(BoardToken t1, BoardToken t2, BoardToken t3){
-        if (boardBoxIsValid(t1) && boardBoxIsValid(t2) && boardBoxIsValid(t3)){
+        if (boardBoxIsValid(t1) && boardBoxIsValid(t2) && boardBoxIsValid(t3) && !boardBoxIsEmpty(t1) && !boardBoxIsEmpty(t2) && !boardBoxIsEmpty(t3)){
             //Checking if tiles are adjacent and in the same column.
             if (sameColumn(t1, t2, t3) && verticallyAdjacent(t1, t2, t3) && isExternal(t1, t2, t3)) {
                 legalSelection = true;

@@ -44,6 +44,7 @@ public class GameHandler {
     private String winner;
     private CommonGoalCard commonGoalCard1;
     private CommonGoalCard commonGoalCard2;
+    private boolean endgame;
 
     public GameHandler(ConnectionClient connectionClient, CLIEvent receiver) {
         this.connectionClient = connectionClient;
@@ -127,40 +128,25 @@ public class GameHandler {
         this.winner = winner;
     }
 
+    public void setEndgame(boolean endgame) {
+        this.endgame = endgame;
+    }
+
     public void start(){
         buildPersonalGoalCard();
         while(true){
+            if(endgame)
+                break;
             if(player.getNickName().equals(players.get(currPlaying-1).getNickName())) {
-                try {
-                    TimeUnit.MILLISECONDS.sleep(600);
-                } catch (InterruptedException iE) {
-                    iE.printStackTrace();
-                }
-                if(response!=null && response.getCategory()==Message.MessageCategory.END_GAME_MESSAGE)
-                    break;
                 showBoard();
                 showBookshelfOrder();
                 showBookshelfColumn();
-                try {
-                    TimeUnit.MILLISECONDS.sleep(200);
-                } catch (InterruptedException iE) {
-                    iE.printStackTrace();
-                }
-                if (response != null && response.getCategory() == Message.MessageCategory.END_GAME_MESSAGE)
+                if(endgame)
                     break;
                 //System.out.println("Your turn is finished");
                 waiting();
             }else {
-                try {
-                    TimeUnit.MILLISECONDS.sleep(200);
-                } catch (InterruptedException iE) {
-                    iE.printStackTrace();
-                }
-                if (response != null && response.getCategory() == Message.MessageCategory.END_GAME_MESSAGE)
-                    break;
                 waiting();
-                if (response != null && response.getCategory() == Message.MessageCategory.END_GAME_MESSAGE)
-                    break;
             }
         }
         showEnd();
@@ -183,10 +169,8 @@ public class GameHandler {
         }catch (InterruptedException iE){
             iE.printStackTrace();
         }
-        if(response!=null && response.getCategory()==Message.MessageCategory.LAST_TURN_MESSAGE)
-            System.out.println(response.getReturnMessage());
         while(!Objects.equals(player.getNickName(), players.get(currPlaying - 1).getNickName())){
-            if(response!=null && response.getCategory()==Message.MessageCategory.END_GAME_MESSAGE)
+            if(endgame)
                 break;
             /*System.out.print("\033[H\033[2J");
             System.out.flush();
@@ -209,7 +193,7 @@ public class GameHandler {
                 iE.printStackTrace();
             }*/
             try{
-                TimeUnit.MILLISECONDS.sleep(500);
+                TimeUnit.MILLISECONDS.sleep(200);
             }catch (InterruptedException iE){
                 iE.printStackTrace();
             }
@@ -235,11 +219,12 @@ public class GameHandler {
         Scanner input = new Scanner(System.in);
         String command;
         response=null;
+        select:
         while (true) {
             command = input.nextLine();
             if (command!=null&&Objects.equals(command.toUpperCase(), "/GOALS")) {
                 showGoals("Living Board");
-                break;
+                break ;
             }
             if (command!=null&&Objects.equals(command.toUpperCase(), "/BOOKSHELF")) {
                 showBookshelf();
@@ -248,6 +233,14 @@ public class GameHandler {
             while(command!=null && !Objects.equals(command.toUpperCase().split(" ")[0], "/SELECT")) {
                 System.out.println("Please, use the command /SELECT");
                 command = input.nextLine();
+                if (command!=null&&Objects.equals(command.toUpperCase(), "/GOALS")) {
+                    showGoals("Living Board");
+                    break select;
+                }
+                if (command!=null&&Objects.equals(command.toUpperCase(), "/BOOKSHELF")) {
+                    showBookshelf();
+                    break select;
+                }
             }
             if(command!=null){
                 ClientMessage message = (ClientMessage) MoveSerializer.serializeInput(command);
@@ -328,6 +321,7 @@ public class GameHandler {
         printSelection();
         String command;
         response=null;
+        order:
         while (true) {
             command = input.nextLine();
             if(command!=null&&Objects.equals(command.toUpperCase(), "/GOALS")){
@@ -337,6 +331,10 @@ public class GameHandler {
             while(command!=null && !Objects.equals(command.toUpperCase().split(" ")[0], "/ORDER")) {
                 System.out.println("Please, use the command /ORDER");
                 command = input.nextLine();
+                if(command!=null&&Objects.equals(command.toUpperCase(), "/GOALS")){
+                    showGoals("BookshelfOrder");
+                    break order;
+                }
             }
             if(command!=null){
                 ClientMessage message = (ClientMessage) MoveSerializer.serializeInput(command);
@@ -368,6 +366,7 @@ public class GameHandler {
                 "[Use the command /GOALS to see the description of your personal or common goal cards.]\n");
         String command;
         response=null;
+        column:
         while(true){
             command = input.nextLine();
             if(command!=null&&Objects.equals(command.toUpperCase(), "/GOALS")){
@@ -377,6 +376,11 @@ public class GameHandler {
             while(command!=null && !Objects.equals(command.toUpperCase().split(" ")[0], "/COLUMN")) {
                 System.out.println("Please, use the command /COLUMN");
                 command = input.nextLine();
+                if(command!=null&&Objects.equals(command.toUpperCase(), "/GOALS")){
+                    showGoals("BookshelfColumn");
+                    command=null;
+                    break column;
+                }
             }
             if(command!=null){
                 ClientMessage message = (ClientMessage) MoveSerializer.serializeInput(command);
@@ -406,13 +410,6 @@ public class GameHandler {
                 iE.printStackTrace();
             }
         }*/
-        try {
-            TimeUnit.MILLISECONDS.sleep(400);
-        } catch (InterruptedException iE) {
-            iE.printStackTrace();
-        }
-        if (response != null && response.getCategory() == Message.MessageCategory.END_GAME_MESSAGE)
-            showEnd();
     }
 
     private void showBookshelf(){
