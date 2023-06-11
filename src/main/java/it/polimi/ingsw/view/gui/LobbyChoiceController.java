@@ -46,7 +46,7 @@ public class LobbyChoiceController implements Initializable {
         command = "/ENTER";
         Message message = MoveSerializer.serializeInput(command);
         connectionClient.sendMessage((ClientMessage) message);
-        if (checkavailablelobby()) { //QUESTO METODO CONTROLLA SE CI SONO LOBBY DISPONIBILI
+        if (checklobbies()) { //QUESTO METODO CONTROLLA SE CI SONO LOBBY DISPONIBILI
             File file = new File("src/main/resources/com/example/is23am23/lobbyWaiting.fxml");
             URL url = file.toURI().toURL();
             FXMLLoader loader = new FXMLLoader(url);
@@ -66,30 +66,28 @@ public class LobbyChoiceController implements Initializable {
     }
 
     public void createLobby(ActionEvent event) throws IOException {
-        while (playerNumber.getValue() == null) {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);          //CHIEDERE AD ANDRE
-            alert.setTitle("Mandatory field");
-            alert.setHeaderText("You have to choose the number of players in order to create a new game");
+        lobby_size = playerNumber.getValue();
+        if (lobby_size != null) {
+            switch (lobby_size) {
+                case "2" -> setPlayersCounter(2);
+                case "3" -> setPlayersCounter(3);
+                case "4" -> setPlayersCounter(4);
+            }
+            //lobby_size = Integer.toString(getPlayersCounter());
+            command = "/CREATE " + lobby_size;
+            Message message = MoveSerializer.serializeInput(command);
+            connectionClient.sendMessage((ClientMessage) message);
+            File file = new File("src/main/resources/com/example/is23am23/lobbyWaiting.fxml");
+            URL url = file.toURI().toURL();
+            FXMLLoader loader = new FXMLLoader(url);
+            Parent root = loader.load();
+            LobbyWaitingController lobbyWaitingController = loader.getController();
+            lobbyWaitingController.displayNickname(nickname);
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
         }
-        switch (playerNumber.getValue()) {
-            case "2" -> setPlayersCounter(2);
-            case "3" -> setPlayersCounter(3);
-            case "4" -> setPlayersCounter(4);
-        }
-        lobby_size = Integer.toString(getPlayersCounter());
-        command = "/CREATE " + lobby_size;
-        Message message = MoveSerializer.serializeInput(command);
-        connectionClient.sendMessage((ClientMessage) message);
-        File file = new File("src/main/resources/com/example/is23am23/lobbyWaiting.fxml");
-        URL url = file.toURI().toURL();
-        FXMLLoader loader = new FXMLLoader(url);
-        Parent root = loader.load();
-        LobbyWaitingController lobbyWaitingController = loader.getController();
-        lobbyWaitingController.displayNickname(nickname);
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
     }
 
     public void returnToMenu(ActionEvent event) throws IOException {
@@ -121,7 +119,7 @@ public class LobbyChoiceController implements Initializable {
         return PlayersCounter;
     }
 
-    private boolean checkavailablelobby() {
+    private boolean checklobbies() {
         if (response != null && response.getCategory() == Message.MessageCategory.WARNING) {
             return false;
         } else return true;

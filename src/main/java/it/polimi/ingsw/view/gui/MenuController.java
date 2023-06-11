@@ -50,22 +50,24 @@ public class MenuController {
     public void goTCP(ActionEvent event) throws IOException {
 
         nickname = textField.getText();
-        if (TCPOn()) {
-            File file = new File("src/main/resources/com/example/is23am23/lobbyChoice.fxml");
-            URL url = file.toURI().toURL();
-            FXMLLoader loader = new FXMLLoader(url);
-            Parent root = loader.load();
-            LobbyChoiceController lobbyController = loader.getController();
-            lobbyController.displayNickname(nickname);
-            lobbyController.setConnectionClient(connectionClient);
-            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
+        if (!nickname.isEmpty()) {
+            if (TCPon()) {
+                File file = new File("src/main/resources/com/example/is23am23/lobbyChoice.fxml");
+                URL url = file.toURI().toURL();
+                FXMLLoader loader = new FXMLLoader(url);
+                Parent root = loader.load();
+                LobbyChoiceController lobbyController = loader.getController();
+                lobbyController.displayNickname(nickname);
+                lobbyController.setConnection(connectionClient);
+                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                scene = new Scene(root);
+                stage.setScene(scene);
+                stage.show();
+            }
         }
     }
 
-    public boolean TCPOn() {
+    public boolean TCPon() {
 
         try {
             serverAddr = Settings.SERVER_NAME;
@@ -83,7 +85,7 @@ public class MenuController {
         }
     }
 
-    public boolean RMIOn() {
+    public boolean RMIon() {
         try {
             receiver = new GUIEvent(this);
             receiver.setInStartGUI(true);
@@ -99,33 +101,34 @@ public class MenuController {
     public void goRMI(ActionEvent event) throws IOException {
 
         String nickname = textField.getText();
-        if (RMIOn()) {
-            File file = new File("src/main/resources/com/example/is23am23/lobbyChoice.fxml");
-            URL url = file.toURI().toURL();
-            FXMLLoader loader = new FXMLLoader(url);
-            Parent root = loader.load();
+        if (!nickname.isEmpty()) {
+            if (RMIon()) {
+                File file = new File("src/main/resources/com/example/is23am23/lobbyChoice.fxml");
+                URL url = file.toURI().toURL();
+                FXMLLoader loader = new FXMLLoader(url);
+                Parent root = loader.load();
 
-            LobbyChoiceController lobbyController = loader.getController();
-            lobbyController.displayNickname(nickname);
-            lobbyController.setConnectionClient(connectionClient);
+                LobbyChoiceController lobbyController = loader.getController();
+                lobbyController.displayNickname(nickname);
+                lobbyController.setConnection(connectionClient);
 
-            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
+                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                scene = new Scene(root);
+                stage.setScene(scene);
+                stage.show();
 
+            }
         }
     }
-
-    public void exit(){
+    public void exit() {
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Exit the game");
         alert.setHeaderText("You are about to exit the game");
         alert.setContentText("Are you sure?");
 
-        if(alert.showAndWait().get() == ButtonType.OK){
-            stage = (Stage)scenePane.getScene().getWindow();
+        if (alert.showAndWait().get() == ButtonType.OK) {
+            stage = (Stage) scenePane.getScene().getWindow();
             stage.close();
             try {
                 socket.close();
