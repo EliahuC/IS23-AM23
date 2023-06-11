@@ -264,15 +264,16 @@ public class ServerConnectionTCP implements ServerConnection{
     /**
      * @author Eliahu Cohen
      * @param message received from the client
-     * Method that responce to a entrance message but without any lobby
+     * Method that responce to an entrance message but without any lobby
      */
     private void noLobbyInServer(ClientMessage message) {
 
             ErrorMessage errorMessage =new ErrorMessage();
-            errorMessage.setReturnMessage("There is no available lobby, create a new one using the command:\n" +
-                    "/CREATE <number of players>\n" +
-                    "Remember that the number of players can only be 2, 3 or 4!");
-            sendMessage(errorMessage,namePlayer);
+            errorMessage.setReturnMessage("""
+                    There is no available lobby, create a new one using the command:
+                    /CREATE <number of players>
+                    Remember that the number of players can only be 2, 3 or 4!""");
+            sendMessage(errorMessage,message.getNickname());
 
     }
 

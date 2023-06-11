@@ -1,5 +1,6 @@
 package it.polimi.ingsw.view.gui;
 
+import it.polimi.ingsw.view.View;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,11 +14,8 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
-public class GUIMain extends Application{
+public class GUIMain extends Application implements View {
 
-    private Stage stage;
-    private Scene scene;
-    private Parent root;
     AnchorPane scenePane;
 
     public void start(Stage stage) throws IOException {
@@ -57,9 +55,13 @@ public class GUIMain extends Application{
         alert.setContentText("Are you sure?");
 
         if(alert.showAndWait().get() == ButtonType.OK){
-            stage = (Stage)scenePane.getScene().getWindow();
+            Stage stage = (Stage) scenePane.getScene().getWindow();
             stage.close();
         }
+    }
+
+    @Override
+    public void run() {
     }
 }
 

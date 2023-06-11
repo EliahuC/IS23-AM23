@@ -3,6 +3,7 @@ package it.polimi.ingsw.Network.Client;
 import it.polimi.ingsw.Printer;
 import it.polimi.ingsw.view.*;
 import it.polimi.ingsw.view.cli.CLI;
+import it.polimi.ingsw.view.gui.GUIMain;
 
 import java.io.IOException;
 
@@ -12,7 +13,7 @@ import java.io.IOException;
  */
 public class ClientMain implements Printer {
     private static View view;
-    private static ConnectionClient connectionClient;
+
 
 
 
@@ -32,7 +33,7 @@ public class ClientMain implements Printer {
         temporaryStorage=temporaryStorage.toUpperCase();
         switch (temporaryStorage) {
             case "--CLI" -> view = new CLI();
-           // case "--GUI" -> view = new GUI();
+            case "--GUI" -> view = new GUIMain();
             default -> System.out.println("View command isn't valid");
         }
 

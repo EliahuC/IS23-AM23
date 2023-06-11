@@ -5,7 +5,7 @@ import it.polimi.ingsw.Messages.ClientToServer.*;
 import it.polimi.ingsw.Messages.ClientToServer.PossibleMoves.Move_SelectColumn;
 import it.polimi.ingsw.Messages.ClientToServer.PossibleMoves.Move_SelectOrder;
 import it.polimi.ingsw.Messages.ClientToServer.PossibleMoves.Move_SelectTiles;
-import it.polimi.ingsw.Messages.ServerToClient.ErrorMessage;
+
 
 import it.polimi.ingsw.Printer;
 
@@ -58,16 +58,10 @@ public class MoveSerializer implements Printer {
               else
                   return invalidCommand();
           }
-          case EXIT_LOBBY ->{
-              return new LobbyLogoutMessage();
-          }
           case ENTER_LOBBY -> {
               return new LobbyEntranceMessage();
           }
-          case START_GAME -> {
-              ClientMessage m=new StartGameMessage("Player");
-              return m;
-          }
+
           case SELECT_TILES -> {
               ArrayList<Integer> coordinates=new ArrayList<>();
               for(int i=1;i<Command.length;i++){
@@ -111,9 +105,6 @@ public class MoveSerializer implements Printer {
               ClientMessage m=new OrderMessage(move);
               return m;
           }
-          case CLOSE -> {
-              return new CloseMessage();
-          }
           case NICKNAME -> {
               return new NickNameMessage(Command[1]);
           }
@@ -143,17 +134,11 @@ public class MoveSerializer implements Printer {
      */
     private static MoveCategory checkCommand(String s){
         switch(s){
-            case "/START" -> {
-                return MoveCategory.START_GAME;
-            }
             case "/CREATE" -> {
                 return MoveCategory.CREATE_LOBBY;
             }
             case "/ENTER"-> {
                 return MoveCategory.ENTER_LOBBY;
-            }
-            case "EXIT"->{
-                return MoveCategory.EXIT_LOBBY;
             }
             case "/SELECT"-> {
                 return MoveCategory.SELECT_TILES;
@@ -163,9 +148,6 @@ public class MoveSerializer implements Printer {
             }
             case "/ORDER"->{
                 return MoveCategory.SELECT_ORDER;
-            }
-            case "/CLOSE"->{
-                return MoveCategory.CLOSE;
             }
             case"/NICKNAME"->{
                 return MoveCategory.NICKNAME;
@@ -179,10 +161,7 @@ public class MoveSerializer implements Printer {
 
     public enum MoveCategory{
         CREATE_LOBBY,
-        CLOSE,
         ENTER_LOBBY,
-        EXIT_LOBBY,
-        START_GAME,
         SELECT_TILES,
         NICKNAME,
         SELECT_COLUMN,

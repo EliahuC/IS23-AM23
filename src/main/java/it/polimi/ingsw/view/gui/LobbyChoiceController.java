@@ -77,7 +77,7 @@ public class LobbyChoiceController implements Initializable {
             case "4" -> setPlayersCounter(4);
         }
         lobby_size = Integer.toString(getPlayersCounter());
-        command = "/CREATE" + lobby_size;
+        command = "/CREATE " + lobby_size;
         Message message = MoveSerializer.serializeInput(command);
         connectionClient.sendMessage((ClientMessage) message);
         File file = new File("src/main/resources/com/example/is23am23/lobbyWaiting.fxml");

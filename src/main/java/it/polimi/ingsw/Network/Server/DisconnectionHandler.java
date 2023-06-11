@@ -1,6 +1,5 @@
 package it.polimi.ingsw.Network.Server;
 
-import it.polimi.ingsw.Network.Server.Lobby;
 import it.polimi.ingsw.Printer;
 import it.polimi.ingsw.model.player.Player;
 
@@ -33,7 +32,7 @@ public class DisconnectionHandler implements Printer {
 
     /**
      * @author Eliahu Cohen
-     * @param playerName
+     * @param playerName name player
      * @return true if the player is trying to reconnect
      */
     public synchronized boolean checkReconnection(String playerName){

@@ -1,20 +1,20 @@
 package it.polimi.ingsw.Network.Server.RMI;
 
 import it.polimi.ingsw.Network.Server.Server;
-import it.polimi.ingsw.Network.Server.VirtualView;
+
 
 import java.io.IOException;
 import java.rmi.Naming;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
-import java.util.ArrayList;
+
 
 /**
  * @author Eliahu Cohen
  * RMI Server
  */
 public class RMIServerMain extends Server implements Runnable {
-    private static int PORT = 22011;
+    private static int port = 22011;
 
 
     /**
@@ -23,7 +23,7 @@ public class RMIServerMain extends Server implements Runnable {
      * Main of the server
      */
     public static void main(String[] args) {
-        int port = RMIparams.PORT;
+         port = RMIparams.PORT;
         if (args.length > 0) {
             port = Integer.parseInt(args[0]);
         }
@@ -33,15 +33,8 @@ public class RMIServerMain extends Server implements Runnable {
     }
 
 
-
-    @Override
-    public void showMessage(String s) {
-        System.out.println(s);
-
-    }
-
     public RMIServerMain(int port) {
-        PORT = port;
+        RMIServerMain.port = port;
     }
 
     /**

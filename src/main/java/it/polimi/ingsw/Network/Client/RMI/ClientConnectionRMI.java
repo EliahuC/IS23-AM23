@@ -3,7 +3,7 @@ package it.polimi.ingsw.Network.Client.RMI;
 import com.google.gson.Gson;
 import it.polimi.ingsw.Messages.ClientToServer.ClientMessage;
 import it.polimi.ingsw.Messages.ClientToServer.NickNameMessage;
-import it.polimi.ingsw.Messages.Message;
+
 import it.polimi.ingsw.Messages.MoveDeserializer;
 import it.polimi.ingsw.Messages.ServerToClient.ServerMessage;
 import it.polimi.ingsw.Network.Client.ConnectionClient;
@@ -27,9 +27,9 @@ public class ClientConnectionRMI extends ConnectionClient implements RemoteInter
     private static RemoteInterface stub;
     private final String playerName;
     private boolean clientIsActive;
-    private boolean GUIisActive;
+
     private Thread ping;
-    private ArrayList<ServerMessage> queue=new ArrayList<>();
+    private final ArrayList<ServerMessage> queue=new ArrayList<>();
 
     /**
      * @author Eliahu Cohen
@@ -46,7 +46,7 @@ public class ClientConnectionRMI extends ConnectionClient implements RemoteInter
             stub =(RemoteInterface) Naming.lookup("rmi://localhost:"+22011+"/RMIServer");
 
         } catch (MalformedURLException | NotBoundException | RemoteException e) {
-            throw new RuntimeException(e);
+            System.out.println("you couldn't establish the connection");
         }
         sendMessage(new NickNameMessage(playerName));
     }
@@ -65,12 +65,14 @@ public class ClientConnectionRMI extends ConnectionClient implements RemoteInter
                     //Metto a dormire thread per 5 secondi
                     TimeUnit.SECONDS.sleep(5);
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    clientIsActive=false;
+                    System.out.println("Timer crushed");
                 }
                 try {
                     sendPing();
                 } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
+                    clientIsActive=false;
+                    System.out.println("Your connection crushed");
                 }
 
             }});
@@ -80,7 +82,8 @@ public class ClientConnectionRMI extends ConnectionClient implements RemoteInter
                     try {
                         TimeUnit.MILLISECONDS.sleep(200);
                     } catch (InterruptedException e) {
-                        e.printStackTrace();
+                        clientIsActive=false;
+                        System.out.println("Timer crushed");
                     }
                     passToListener();
                 }
@@ -173,13 +176,9 @@ public class ClientConnectionRMI extends ConnectionClient implements RemoteInter
     private void closeClientConnection() {
     }
 
-    public boolean isGUIisActive() {
-        return GUIisActive;
-    }
 
-    public void setGUIisActive(boolean GUIisActive) {
-        this.GUIisActive = GUIisActive;
-    }
+
+
     public PropertyChangeListener getListener() {
         return listener;
     }

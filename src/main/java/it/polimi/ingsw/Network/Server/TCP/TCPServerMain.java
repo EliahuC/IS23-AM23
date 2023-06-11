@@ -39,7 +39,7 @@ public class TCPServerMain extends Server implements Runnable {
 
         //Client Connection
         while(true){
-            Socket clientSocket = null;
+            Socket clientSocket ;
             try {
                 clientSocket = serverSocket.accept();
                 showMessage("Client TCP successfully connected");
@@ -52,13 +52,6 @@ public class TCPServerMain extends Server implements Runnable {
                 e.printStackTrace();
             }
         }
-    }
-
-
-
-    @Override
-    public void showMessage(String s) {
-        System.out.println(s);
     }
 
 

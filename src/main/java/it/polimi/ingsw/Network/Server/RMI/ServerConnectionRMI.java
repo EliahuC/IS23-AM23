@@ -8,7 +8,7 @@ import it.polimi.ingsw.Messages.ServerToClient.ErrorMessage;
 import it.polimi.ingsw.Messages.ServerToClient.LobbyJoiningMessage;
 import it.polimi.ingsw.Messages.ServerToClient.ServerMessage;
 import it.polimi.ingsw.Messages.ServerToClient.ValidNicknameMessage;
-import it.polimi.ingsw.Network.Client.RMI.ClientConnectionRMI;
+
 import it.polimi.ingsw.Network.Client.RMI.RemoteInterfaceClient;
 import it.polimi.ingsw.Network.Server.Server;
 import it.polimi.ingsw.Network.Server.ServerConnection;
@@ -17,9 +17,7 @@ import it.polimi.ingsw.Network.Server.Lobby;
 import it.polimi.ingsw.Network.Server.VirtualView;
 import it.polimi.ingsw.model.player.Player;
 
-import java.net.MalformedURLException;
-import java.rmi.Naming;
-import java.rmi.NotBoundException;
+
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
@@ -34,8 +32,6 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
     private String namePlayer=null;
     private DisconnectionHandler disconnectionHandler;
     private final ArrayList<VirtualView> virtualViews=new ArrayList<>();
-    private boolean pingIsArrived =false;
-    private Thread ping;
 
     public ServerConnectionRMI() throws RemoteException {
         super();
@@ -205,7 +201,7 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
     private void alreadyLoggedNickName(ClientMessage message) {
         ErrorMessage errorMessage=new ErrorMessage();
         errorMessage.setReturnMessage("nickname already used");
-        sendMessage(errorMessage,namePlayer);
+        sendMessage(errorMessage,message.getNickname());
     }
     /**
      * @author Eliahu Cohen
@@ -256,10 +252,11 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
     private void noLobbyInServer(ClientMessage message) {
 
         ErrorMessage errorMessage =new ErrorMessage();
-        errorMessage.setReturnMessage("There is no available lobby, create a new one using the command:\n" +
-                "/CREATE_LOBBY <your nickname> <number of players>\n" +
-                "Remember that the number of players can only be 2, 3 or 4!");
-        sendMessage(errorMessage,namePlayer);
+        errorMessage.setReturnMessage("""
+                There is no available lobby, create a new one using the command:
+                /CREATE_LOBBY <your nickname> <number of players>
+                Remember that the number of players can only be 2, 3 or 4!""");
+        sendMessage(errorMessage,message.getNickname());
 
     }
     /**
@@ -305,7 +302,7 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
 
     /**
      * @author Eliahu Cohen
-     * @throws InterruptedException
+     * @throws Exception caused from problem with the connection
      * Method used to send a ping to the client
      */
     public void sendPing() {
@@ -360,7 +357,8 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
     public void run(){
 
         serverIsActive=true;
-        ping = new Thread(() -> {
+        //Metto a dormire thread per 5 secondi
+        Thread ping = new Thread(() -> {
             while (serverIsActive) {
                 try {
                     //Metto a dormire thread per 5 secondi

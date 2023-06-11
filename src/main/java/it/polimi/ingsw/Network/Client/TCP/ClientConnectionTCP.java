@@ -18,22 +18,21 @@ import java.net.Socket;
 import java.rmi.RemoteException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
-import java.util.concurrent.TimeUnit;
+
 
 public class ClientConnectionTCP extends ConnectionClient {
     PropertyChangeListener listener;
     private final Socket socket;
-    private String IPAddress;
+
     private boolean clientIsActive;
 
     public String getPlayerName() {
         return playerName;
     }
 
-    private String playerName;
+    private final String playerName;
     private Scanner input;
     private PrintWriter output;
-    private Boolean GUIisActive=false;
     private final Gson gson=new Gson();
 
     public ClientConnectionTCP(Socket socket,String nickname) throws RemoteException {
@@ -45,23 +44,16 @@ public class ClientConnectionTCP extends ConnectionClient {
             this.output = new PrintWriter(socket.getOutputStream());
             this.input = new Scanner(socket.getInputStream());
         } catch (IOException e) {
-            e.printStackTrace();
+            closeConnection();
         }
         sendMessage(new NickNameMessage(playerName));
 
     }
 
-    public String getAddress() {
-        return IPAddress;
-    }
 
-    public void setPlayerName(String playerName) {
-        this.playerName = playerName;
-    }
 
-    public void setAddress(String address) {
-        this.IPAddress = address;
-    }
+
+
 
     @Override
     public void run() {
@@ -71,16 +63,16 @@ public class ClientConnectionTCP extends ConnectionClient {
             try {
                 String s = input.nextLine();
                 receiveMessage(s);
-            } catch (NoSuchElementException e) {
-                continue;
+            } catch (NoSuchElementException ignored) {
+
             }
         }
 
     }
 @Override
         public void receiveMessage(String s) {
-            ServerMessage serverMessage=null;
-            //System.out.println(s);
+            ServerMessage serverMessage;
+
             serverMessage= (ServerMessage) MoveDeserializer.deserializeOutput(s);
             PropertyChangeEvent evt= new PropertyChangeEvent(
             this,
@@ -95,22 +87,17 @@ public class ClientConnectionTCP extends ConnectionClient {
                     sendPing();
                 }
         } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+            closeConnection();
         }
         }
 
-    private void notifyDisconnection() {
-        if(GUIisActive){
-            //GUIEvent.alertDisconnection();
-        }
-        //CLIEvent.alertDisconnection();
-    }
+
 
     public void closeConnection(){
         try{
             socket.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Problem closing the connection");
         }
         clientIsActive = false;
     }
@@ -125,21 +112,11 @@ public class ClientConnectionTCP extends ConnectionClient {
 
     private void sendPing() throws InterruptedException {
         PingToServer ping=new PingToServer(playerName);
-        //TimeUnit.SECONDS.sleep(5);
         sendMessage(ping);
     }
 
-    private void asyncSendPing(PingToServer ping) {
-        new Thread(()-> sendMessage(ping)).start();
-    }
 
-    public Boolean getGUIisActive() {
-        return GUIisActive;
-    }
 
-    public void setGUIisActive(Boolean GUIisActive) {
-        this.GUIisActive = GUIisActive;
-    }
 
     public PropertyChangeListener getListener() {
         return listener;
