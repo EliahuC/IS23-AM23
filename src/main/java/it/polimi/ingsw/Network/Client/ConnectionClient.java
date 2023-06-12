@@ -29,6 +29,7 @@ public abstract class ConnectionClient extends UnicastRemoteObject implements Ru
 
         return null;
     }
+    public void closeConnection(){}
 
     public void setListener(PropertyChangeListener listener) {
 
