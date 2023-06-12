@@ -394,7 +394,7 @@ public class GameHandler {
             }catch (InterruptedException iE){
                 iE.printStackTrace();
             }
-            if(response!=null && (response.getCategory()==Message.MessageCategory.VALID_MESSAGE || response.getCategory()==Message.MessageCategory.UPDATE_STATE))
+            if(response!=null && (response.getCategory()!= Message.MessageCategory.WARNING))
                 break;
 
             if(response!=null&&response.getCategory()== Message.MessageCategory.WARNING){

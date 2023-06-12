@@ -13,8 +13,10 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
+import java.rmi.NoSuchObjectException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
@@ -174,6 +176,14 @@ public class ClientConnectionRMI extends ConnectionClient implements RemoteInter
     }
 
     public void closeConnection() {
+        try {
+            UnicastRemoteObject.unexportObject(stub , true);
+            clientIsActive=false;
+            System.out.println("connection closed");
+        } catch (NoSuchObjectException e) {
+            System.out.println("There isn't any connection to close");
+        }
+
     }
 
 
