@@ -17,7 +17,7 @@ public class Player implements Serializable {
 
     private final String NickName;
     private int score ;
-    private boolean firstPlayerSeat;
+    private boolean firstPlayerSeat=false;
     private final BookShelf playerBookshelf;
     private PersonalGoalCard personalGoalCard;
     private final boolean nowPlaying;
@@ -39,8 +39,7 @@ public class Player implements Serializable {
         this.nowPlaying = false;
         this.lastRound = false;
         this.winner=false;
-
-
+        this.firstPlayerSeat=false;
     }
 
 

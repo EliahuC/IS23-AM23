@@ -81,6 +81,10 @@ public class Game implements Serializable {
         Players.clear();
         Players.addAll(mixedPlayers);
         Players.get(0).setFirstPlayerSeat(true);
+        for(int i = 1; i < Players.size(); i++){
+            Players.get(i).setFirstPlayerSeat(false);
+            Players.get(i).setLastRound(false);
+        }
         for(Player p:Players){
             p.setPersonalGoalCard(new PersonalGoalCard());
         }
@@ -190,8 +194,9 @@ public class Game implements Serializable {
         temporaryStorage=sortMyTiles(temporaryStorage,order);
         Players.get(currPlaying-1).insertToken(temporaryStorage,column);
         gameChecker.isBookShelfFull(Players.get(currPlaying-1).getPlayerBookshelf());
-        if (gameChecker.getLastRound())isLastTurn();
-
+        if (gameChecker.getLastRound()) {
+            isLastTurn();
+        }
     }
 
     /**
@@ -213,8 +218,7 @@ public class Game implements Serializable {
      * Method that checks if the game is finished and sets the last turn boolean to all the players
      */
     private synchronized void isLastTurn() {
-        for(Player p:Players)p.setLastRound(true);
-        if(Objects.equals(currPlaying, gameNumPlayers)){
+        if(currPlaying == Players.size()){
             finishedGame=true;
             PropertyChangeEvent evt = new PropertyChangeEvent(
                     this,
@@ -445,13 +449,15 @@ public class Game implements Serializable {
     private synchronized void increaseCurrPlaying() {
         if(Objects.equals(currPlaying, gameNumPlayers) && !finishedGame) currPlaying=1;
         else if(currPlaying<gameNumPlayers && !finishedGame) currPlaying++;
-        PropertyChangeEvent evt = new PropertyChangeEvent(
-                this,
-                "UPDATE_STATE",
-                null,
-                this);
-        for (PropertyChangeListener l : listeners) {
-            l.propertyChange(evt);
+        if(!finishedGame) {
+            PropertyChangeEvent evt = new PropertyChangeEvent(
+                    this,
+                    "UPDATE_STATE",
+                    null,
+                    this);
+            for (PropertyChangeListener l : listeners) {
+                l.propertyChange(evt);
+            }
         }
     }
 

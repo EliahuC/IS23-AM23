@@ -173,7 +173,8 @@ public class GameChecker {
      * @param bs is the player's bookshelf
      */
     public void isBookShelfFull(BookShelf bs) {
-        lastRound = sixthRowIsFull(bs);
+        if (sixthRowIsFull(bs))
+            lastRound = true;
     }
 
     public boolean getLastRound(){

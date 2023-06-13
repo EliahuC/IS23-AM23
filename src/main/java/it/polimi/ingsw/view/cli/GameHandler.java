@@ -141,6 +141,11 @@ public class GameHandler {
                 showBoard();
                 showBookshelfOrder();
                 showBookshelfColumn();
+                try {
+                    TimeUnit.MILLISECONDS.sleep(200);
+                } catch (InterruptedException iE) {
+                    iE.printStackTrace();
+                }
                 if(endgame)
                     break;
                 //System.out.println("Your turn is finished");
