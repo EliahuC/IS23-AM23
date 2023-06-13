@@ -101,6 +101,10 @@ public class MoveSerializer implements Printer {
                       return invalidCommand();
                   }
               }
+              for(int i= 1; i<Command.length; i++){
+                  if(Integer.parseInt(Command[i]) >= Command.length)
+                      return invalidCommand();
+              }
               Move_SelectOrder move=new Move_SelectOrder();
               move.setOrder(order);
               ClientMessage m=new OrderMessage(move);
