@@ -3,7 +3,7 @@ package it.polimi.ingsw.Network.Server.RMI;
 import com.google.gson.Gson;
 import it.polimi.ingsw.Messages.ClientToServer.ClientMessage;
 import it.polimi.ingsw.Messages.ClientToServer.LobbyCreationMessage;
-import it.polimi.ingsw.Messages.Message;
+
 import it.polimi.ingsw.Messages.MoveDeserializer;
 import it.polimi.ingsw.Messages.ServerToClient.ErrorMessage;
 import it.polimi.ingsw.Messages.ServerToClient.LobbyJoiningMessage;
