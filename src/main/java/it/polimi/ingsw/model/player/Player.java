@@ -22,6 +22,7 @@ public class Player implements Serializable {
     private PersonalGoalCard personalGoalCard;
     private final boolean nowPlaying;
     private boolean lastRound;
+    private boolean winner;
 
 
     transient PropertyChangeListener listener;
@@ -37,6 +38,7 @@ public class Player implements Serializable {
         this.playerBookshelf = new BookShelf();
         this.nowPlaying = false;
         this.lastRound = false;
+        this.winner=false;
 
 
     }
@@ -55,7 +57,13 @@ public class Player implements Serializable {
         return NickName;
     }
 
+    public void setWinner(boolean winner) {
+        this.winner = winner;
+    }
 
+    public boolean isWinner() {
+        return winner;
+    }
 
     public int getScore() {
         return score;

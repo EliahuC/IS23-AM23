@@ -2,17 +2,19 @@ package it.polimi.ingsw.Messages.ServerToClient;
 
 import it.polimi.ingsw.model.player.Player;
 
+import java.util.ArrayList;
+
 /**
  * @author Eliahu Cohen
  * Message that returns the winner of the game
  */
 public class EndGameMessage extends ServerMessage {
-    private final Player winner;
-    public EndGameMessage(Player player) {
+    private final ArrayList<Player> players;
+    public EndGameMessage(ArrayList<Player> players) {
         super(MessageCategory.END_GAME_MESSAGE);
-        this.winner=player;
+        this.players=players;
     }
-    public Player getWinner() {
-        return winner;
+    public ArrayList<Player> getPlayers() {
+        return players;
     }
 }

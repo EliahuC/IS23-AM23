@@ -46,7 +46,7 @@ public class GUIEvent implements PropertyChangeListener {
                     break;
                 case END_GAME_MESSAGE:
                     EndGameMessage temp_endGameMessage = (EndGameMessage) serverMessage;
-                    gamecontrollerGUI.setWinner(temp_endGameMessage.getWinner().getNickName());
+                    //gamecontrollerGUI.setWinner(temp_endGameMessage.getWinner().getNickName());
                     break;
             }
         }

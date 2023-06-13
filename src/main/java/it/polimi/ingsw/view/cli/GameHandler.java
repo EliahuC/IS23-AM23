@@ -293,9 +293,8 @@ public class GameHandler {
     }
 
     private void showEnd(){
-        int win = 0;
         List<Player> ranking = players.stream().sorted(Comparator.comparingInt(Player::getScore)).toList();
-        for(Player p : ranking){
+        /*for(Player p : ranking){
             if(Objects.equals(p.getNickName(), winner)){
                 win = p.getScore();
             }
@@ -305,7 +304,19 @@ public class GameHandler {
             if(!Objects.equals(p.getNickName(), winner)){
                 System.out.println(p.getNickName() + ": "+ p.getScore() + " points");
             }
+        }*/
+        for (Player p : ranking) {
+            if (p.isWinner()) {
+                System.out.println("THE WINNER IS: " + p.getNickName() + " (" + p.getScore() + " points)");
+                break;
+            }
+
         }
+        for (Player p : ranking) {
+            if (!p.isWinner())
+                System.out.println(p.getNickName() + ": " + p.getScore() + " points");
+        }
+
         System.out.println("\n\nClose the window to play again!");
     }
 
@@ -527,6 +538,8 @@ public class GameHandler {
             System.out.print("\u001b[48;2;140;68;28m   \u001B[0m");
         System.out.print("\n");
         System.out.print("   ");
+        for(int j=0; j<shelfCols;j++)
+            System.out.print("["+j+"]");
     }
 
     public void buildPersonalGoalCard(){

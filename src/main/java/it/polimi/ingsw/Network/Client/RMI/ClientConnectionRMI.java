@@ -68,13 +68,13 @@ public class ClientConnectionRMI extends ConnectionClient implements RemoteInter
                     TimeUnit.SECONDS.sleep(5);
                 } catch (InterruptedException e) {
                     clientIsActive=false;
-                    System.out.println("Timer crushed");
+                    System.out.println("Timer crashed");
                 }
                 try {
                     sendPing();
                 } catch (InterruptedException e) {
                     clientIsActive=false;
-                    System.out.println("Your connection crushed");
+                    System.out.println("Your connection crashed");
                 }
 
             }});
@@ -85,7 +85,7 @@ public class ClientConnectionRMI extends ConnectionClient implements RemoteInter
                         TimeUnit.MILLISECONDS.sleep(200);
                     } catch (InterruptedException e) {
                         clientIsActive=false;
-                        System.out.println("Timer crushed");
+                        System.out.println("Timer crashed");
                     }
                     passToListener();
                 }
@@ -172,7 +172,7 @@ public class ClientConnectionRMI extends ConnectionClient implements RemoteInter
             //System.out.println("ping arrived");
             return;
         }
-        System.out.println("connection crushed");
+        System.out.println("connection crashed");
     }
 
     public void closeConnection() {

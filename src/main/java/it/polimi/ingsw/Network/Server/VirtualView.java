@@ -8,6 +8,7 @@ import it.polimi.ingsw.model.player.Player;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.ArrayList;
 
 /**
  * @author Eliahu Cohen
@@ -53,7 +54,7 @@ private  String nickName;
                 return new LivingRoomMessage((BoardToken[][]) evt.getNewValue());
             }
             case "GAME_ENDED"->{
-                return new EndGameMessage((Player) evt.getNewValue());
+                return new EndGameMessage((ArrayList<Player>) evt.getNewValue());
             }
             case "GAME_STARTED"->{
                 return new GameIsStartingMessage((Game) evt.getNewValue());

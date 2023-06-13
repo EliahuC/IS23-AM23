@@ -3,6 +3,7 @@ package it.polimi.ingsw.Network.Server.RMI;
 import com.google.gson.Gson;
 import it.polimi.ingsw.Messages.ClientToServer.ClientMessage;
 import it.polimi.ingsw.Messages.ClientToServer.LobbyCreationMessage;
+import it.polimi.ingsw.Messages.Message;
 import it.polimi.ingsw.Messages.MoveDeserializer;
 import it.polimi.ingsw.Messages.ServerToClient.ErrorMessage;
 import it.polimi.ingsw.Messages.ServerToClient.LobbyJoiningMessage;
@@ -183,7 +184,17 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
         Gson gson=new Gson();
         String s=gson.toJson(message);
         try {
-            Server.rmiConnections.get(username).receiveMessage(s);
+            if(message.getMessageCategory()==Message.MessageCategory.UPDATE_STATE || message.getMessageCategory()==Message.MessageCategory.END_GAME_MESSAGE  || message.getMessageCategory()==Message.MessageCategory.LIVINGROOM){
+                for(String nickname : Server.rmiConnections.keySet()) {
+                    Server.rmiConnections.get(nickname).receiveMessage(s);
+                    try {
+                        TimeUnit.MILLISECONDS.sleep(200);
+                    } catch (InterruptedException iE) {
+                        iE.printStackTrace();
+                    }
+                }
+            }else
+                Server.rmiConnections.get(username).receiveMessage(s);
         } catch (RemoteException e) {
             throw new RuntimeException(e);
         }

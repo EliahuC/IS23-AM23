@@ -81,10 +81,11 @@ public class MoveSerializer implements Printer {
               return m;
           }
           case SELECT_COLUMN -> {
-              if(Integer.parseInt(Command[1])>4||Integer.parseInt(Command[1])<0){
+              if(Command.length>1) {
+                  if (Integer.parseInt(Command[1]) > 4 || Integer.parseInt(Command[1]) < 0)
+                      return invalidCommand();
+              }else
                   return invalidCommand();
-
-              }
               Move_SelectColumn move =new Move_SelectColumn();
               move.setYBookshelf(Integer.parseInt(Command[1]));
               ClientMessage m=new ColumnMessage(move);

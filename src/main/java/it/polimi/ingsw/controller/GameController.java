@@ -151,7 +151,7 @@ public class GameController {
      * @author Eliahu Cohen
      * @return the player that wins the game
      */
-    public synchronized Player endGame() {
+    public synchronized ArrayList<Player> endGame() {
         return game.endGame();
     }
 

@@ -123,7 +123,6 @@ public class Game implements Serializable {
               placeTiles(commands, column,order);
               checkCGC();
             //  turnTimer.cancel();
-              increaseCurrPlaying();
              //turnTimer(turnTimer);
               if (gameChecker.isRestorable(livingRoom.getBoard())){
                   livingRoom.restore();
@@ -136,6 +135,7 @@ public class Game implements Serializable {
                       l.propertyChange(evt);
                   }
               }
+              increaseCurrPlaying();
               return setGameSavings();
           }
           return null;
@@ -161,13 +161,16 @@ public class Game implements Serializable {
      * @author Eliahu Cohen
      * @return the player with the highest score
      */
-    public synchronized Player endGame(){
+    public synchronized ArrayList<Player> endGame(){
         Player P;
          for (Player p : Players){
              p.endGamePoints();
          }
          P=whoWins();
-        return P;
+         for(Player p : Players)
+             if(Objects.equals(p.getNickName(), P.getNickName()))
+                 p.setWinner(true);
+        return Players;
     }
 
     /**

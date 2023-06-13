@@ -486,7 +486,13 @@ public class GameTest extends TestCase {
         p2.setPersonalGoalCard(new PersonalGoalCard(12));
         p.setPersonalGoalCard(new PersonalGoalCard(2));
         Optional<Player> player = Optional.ofNullable(p2);
-        assertEquals(player.get(), G.endGame());
+        ArrayList<Player> ranking = G.endGame();
+        Player winner=null;
+        for(Player x : ranking){
+            if(x.isWinner())
+                winner=x;
+        }
+        assertEquals(player.get(), winner);
     }
 
     public void testEndgame_SECOND() {
@@ -564,7 +570,7 @@ public class GameTest extends TestCase {
         p2.setPersonalGoalCard(new PersonalGoalCard(12));
         p.setPersonalGoalCard(new PersonalGoalCard(2));
         Optional<Player> player = Optional.ofNullable(G.getPlayers().get(1));
-        assertEquals(player.get(), G.endGame());
+        assertEquals(player.get(), G.endGame().get(1));
     }
     public void testCheckLegalMove_FIRST(){
         Player y = new Player("Yoda");
