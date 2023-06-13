@@ -58,7 +58,7 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
      * Method that response to the message received with an action on the server
      */
     private void messageParser(ClientMessage message, RemoteInterfaceClient client){
-        lobby=lobbyResearch(message);
+        lobby=lobbyResearch(message.getNickname());
         namePlayer=message.getNickname();
         switch (message.getCategory()) {
             case PINGTOSERVER: {
@@ -154,14 +154,14 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
         }
     }
 
-    private Lobby lobbyResearch(ClientMessage message) {
+    private Lobby lobbyResearch(String nickname) {
         for(Lobby l: Server.lobbies){
-            if(l.getJoinedUsers().contains(message.getNickname())){
+            if(l.getJoinedUsers().contains(nickname)){
                 return l;
             }
         }
         for(Lobby l: Server.startedLobbies){
-            if(l.getJoinedUsers().contains(message.getNickname())){
+            if(l.getJoinedUsers().contains(nickname)){
                 return l;
             }
         }
@@ -183,21 +183,13 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
     public  void sendMessage(ServerMessage message, String username) {
         Gson gson=new Gson();
         String s=gson.toJson(message);
+
         try {
-            if(message.getMessageCategory()==Message.MessageCategory.UPDATE_STATE || message.getMessageCategory()==Message.MessageCategory.END_GAME_MESSAGE  || message.getMessageCategory()==Message.MessageCategory.LIVINGROOM){
-                for(String nickname : Server.rmiConnections.keySet()) {
-                    Server.rmiConnections.get(nickname).receiveMessage(s);
-                    try {
-                        TimeUnit.MILLISECONDS.sleep(200);
-                    } catch (InterruptedException iE) {
-                        iE.printStackTrace();
-                    }
-                }
-            }else
-                Server.rmiConnections.get(username).receiveMessage(s);
+            Server.rmiConnections.get(username).receiveMessage(s);
         } catch (RemoteException e) {
-            throw new RuntimeException(e);
+            closeConnection(username);
         }
+
 
     }
 
