@@ -267,7 +267,7 @@ public class LivingRoom implements Serializable {
      */
     public ArrayList<ItemTile> getTiles(ArrayList<Integer> requestedTiles) {
 
-        PropertyChangeEvent evt = new PropertyChangeEvent(
+       PropertyChangeEvent evt = new PropertyChangeEvent(
                 this,
                 "BOARD_CHANGED",
                 this.Board,
@@ -280,7 +280,7 @@ public class LivingRoom implements Serializable {
             tiles.add(tile);
             i = i + 2;
         }
-        for(PropertyChangeListener l:listeners){
+       for(PropertyChangeListener l:listeners){
             l.propertyChange(evt);
         }
         return tiles;

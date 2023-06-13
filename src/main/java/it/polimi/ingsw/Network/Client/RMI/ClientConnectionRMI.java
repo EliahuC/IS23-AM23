@@ -82,7 +82,7 @@ public class ClientConnectionRMI extends ConnectionClient implements RemoteInter
             Thread receiver= new Thread(()->{
                 while (clientIsActive) {
                     try {
-                        TimeUnit.MILLISECONDS.sleep(200);
+                        TimeUnit.MILLISECONDS.sleep(150);
                     } catch (InterruptedException e) {
                         clientIsActive=false;
                         System.out.println("Timer crashed");

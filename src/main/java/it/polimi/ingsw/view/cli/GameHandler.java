@@ -154,7 +154,7 @@ public class GameHandler {
 
     private void waiting(){
         try {
-            TimeUnit.MILLISECONDS.sleep(200);
+            TimeUnit.MILLISECONDS.sleep(500);
         } catch (InterruptedException iE) {
             iE.printStackTrace();
         }

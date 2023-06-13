@@ -46,6 +46,7 @@ public class MoveSerializer implements Printer {
      * Method that genetate the message based on the
      */
     private static Message convertCommandToMove(String[] Command) {
+        try{
       switch (checkCommand(Command[0].toUpperCase())){
           case CREATE_LOBBY -> {
               if(Command.length<2){
@@ -116,7 +117,9 @@ public class MoveSerializer implements Printer {
           case INVALID_COMMAND -> {
              return invalidCommand();
           }
-      }
+      }}catch (NumberFormatException e){
+            return invalidCommand();
+        }
       return null;
     }
 

@@ -49,10 +49,11 @@ public class CLIEvent implements PropertyChangeListener {
                 }
                 case UPDATE_STATE:{
                     UpdateStateMessage temp_updateStateMessage=(UpdateStateMessage) serverMessage;
+                    gameHandler.setCurrPlaying(temp_updateStateMessage.getGame().getWhoIsPlaying());
                     gameHandler.setLivingRoom(temp_updateStateMessage.getGame().getLivingRoom());
                     gameHandler.setPlayers(temp_updateStateMessage.getGame().getPlayers());
                     gameHandler.setPlayer(temp_updateStateMessage.getGame().getPlayers().stream().filter(player -> Objects.equals(player.getNickName(), gameHandler.getConnectionClient().getPlayerName())).findFirst().orElseThrow(() -> new IllegalArgumentException("Player not found")));
-                    gameHandler.setCurrPlaying(temp_updateStateMessage.getGame().getWhoIsPlaying());
+
                     break;
                 }
                 case CURRPLAYING:{
