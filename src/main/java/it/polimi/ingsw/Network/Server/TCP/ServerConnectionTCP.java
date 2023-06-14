@@ -366,6 +366,10 @@ public class ServerConnectionTCP implements ServerConnection{
 
     }
 
+    /**
+     * @author Eliahu Cohen
+     * method that end the game when a player crush
+     */
     private void closeClientConnection() {
         if (lobby!=null)
             lobby.endGame();

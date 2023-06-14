@@ -66,6 +66,11 @@ public class CLIEvent implements PropertyChangeListener {
                     gameHandler.setBoard(newServerMessage.getBoard());
                     break;
                 }
+                case CRASHED:{
+                    startCLI=null;
+                    lobbyHandler=null;
+                    inGameHandler=null;
+                }
             }
         }
         forwardMessage(serverMessage);

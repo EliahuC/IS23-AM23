@@ -63,7 +63,8 @@ public class ClientConnectionTCP extends ConnectionClient {
             try {
                 String s = input.nextLine();
                 receiveMessage(s);
-            } catch (NoSuchElementException ignored) {
+            } catch (NoSuchElementException e) {
+                closeConnection();
 
             }
         }
@@ -92,13 +93,17 @@ public class ClientConnectionTCP extends ConnectionClient {
         }
 
 
-
+    /**
+     * @author Eliahu Cohen
+     * method that close the connection and notify the client
+     */
     public void closeConnection(){
         try{
             socket.close();
         } catch (IOException e) {
             System.out.println("Problem closing the connection");
         }
+        System.out.println("Someone crashed, please relaunch the application to play a new game");
         clientIsActive = false;
     }
     public void sendMessage(ClientMessage message){

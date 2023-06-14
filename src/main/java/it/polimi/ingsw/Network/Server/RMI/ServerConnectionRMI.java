@@ -61,10 +61,12 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
         lobby=lobbyResearch(message.getNickname());
         namePlayer=message.getNickname();
         switch (message.getCategory()) {
+
             case PINGTOSERVER: {
                 message.dumpPingMessage();
                 break;
             }
+
             case NICKNAME:{
                 if(Server.connectedPlayers.contains(message.getNickname())){
                     alreadyLoggedNickName(message);
@@ -77,6 +79,7 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
                 System.out.println("ClientRMI connected");
                 break;
             }
+
             case CREATE_LOBBY: {
                 if(lobby!=null||namePlayer==null){
                     alreadyExistentLobby(message);
@@ -92,6 +95,7 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
                 sendMessage(new LobbyJoiningMessage(lobby.getIdLobby()),namePlayer);
                 break;
             }
+
             case ENTER_LOBBY: {
                 if(namePlayer==null)break;
                 synchronized (Server.lobbies) {
@@ -324,7 +328,10 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
             }
         }
     }
-
+    /**
+     * @author Eliahu Cohen
+     * method that end the game if a player crash
+     */
     private void closeConnection(String s) {
         for (Lobby l : Server.lobbies) {
             if(l.getJoinedUsers().contains(s)){

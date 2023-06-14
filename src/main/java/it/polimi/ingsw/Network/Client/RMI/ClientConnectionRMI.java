@@ -73,8 +73,7 @@ public class ClientConnectionRMI extends ConnectionClient implements RemoteInter
                 try {
                     sendPing();
                 } catch (InterruptedException e) {
-                    clientIsActive=false;
-                    System.out.println("Your connection crashed");
+                   closeConnection();
                 }
 
             }});
@@ -84,8 +83,7 @@ public class ClientConnectionRMI extends ConnectionClient implements RemoteInter
                     try {
                         TimeUnit.MILLISECONDS.sleep(150);
                     } catch (InterruptedException e) {
-                        clientIsActive=false;
-                        System.out.println("Timer crashed");
+                     closeConnection();
                     }
                     passToListener();
                 }
@@ -168,27 +166,23 @@ public class ClientConnectionRMI extends ConnectionClient implements RemoteInter
             ping.interrupt();
         }
         TimeUnit.SECONDS.sleep(3);
-        if(pingIsOk){
-            //System.out.println("ping arrived");
-            return;
-        }
-        System.out.println("connection crashed");
+
+
     }
 
+    /**
+     * @author Eliahu Cohen
+     * method that close the connection and notify the client
+     */
     public void closeConnection() {
         try {
             UnicastRemoteObject.unexportObject(stub , true);
-            clientIsActive=false;
-            System.out.println("connection closed");
-        } catch (NoSuchObjectException e) {
-            System.out.println("There isn't any connection to close");
+        } catch (NoSuchObjectException ignored) {
+
         }
-
+        clientIsActive=false;
+        System.out.println("Someone crashed, please relaunch the application to play a new game");
     }
-
-
-
-
     public PropertyChangeListener getListener() {
         return listener;
     }
