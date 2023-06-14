@@ -36,6 +36,7 @@ public class GameHandler {
     private static final String BLUE = "\u001b[48;2;0;104;146m";
     private static final String CYAN = "\u001b[48;2;106;183;183m";
     private static final String PINK = "\u001b[48;2;198;77;124m";
+    private static final String WOOD = "\u001b[48;2;140;68;28m";
 
     private final static String CLS = "\033[H\033[2J";
     public static final int LivingRoomSize=9;
@@ -102,6 +103,14 @@ public class GameHandler {
 
 
         }
+    }
+
+    public CommonGoalCard getCommonGoalCard1() {
+        return commonGoalCard1;
+    }
+
+    public CommonGoalCard getCommonGoalCard2() {
+        return commonGoalCard2;
     }
 
     public void setPlayer(Player player) {
@@ -486,10 +495,10 @@ public class GameHandler {
 
     private void printBookshelf(){
         for(int i=0; i<=shelfRows;i++)
-            System.out.print("\u001b[48;2;140;68;28m   \u001B[0m");
+            System.out.print(WOOD + "   "+ RESET);
         System.out.print("\n");
         for(int i=0; i<shelfRows; i++){
-            System.out.print("  \u001b[48;2;140;68;28m \u001B[0m");
+            System.out.print(WOOD + "   "+ RESET);
             for(int j=0; j<shelfCols; j++){
                 if(player.getPlayerBookshelf().getTile(i,j)==null)
                     System.out.print("   ");
@@ -504,11 +513,11 @@ public class GameHandler {
                     }
                 }
                 if(j==shelfCols-1)
-                    System.out.print("\u001b[48;2;140;68;28m \u001B[0m \n");
+                    System.out.print(WOOD + " "+ RESET);
             }
         }
         for(int i=0; i<=shelfRows;i++)
-            System.out.print("\u001b[48;2;140;68;28m   \u001B[0m");
+            System.out.print(WOOD + "   "+ RESET);
         System.out.print("\n");
         System.out.print("   ");
         for(int j=0; j<shelfCols;j++)
@@ -517,10 +526,10 @@ public class GameHandler {
 
     private void printPersonalGoalCard(){
         for(int i=0; i<=shelfRows;i++)
-            System.out.print("\u001b[48;2;140;68;28m   \u001B[0m");
+            System.out.print(WOOD + "   "+ RESET);
         System.out.print("\n");
         for(int i=0; i<shelfRows; i++){
-            System.out.print("  \u001b[48;2;140;68;28m \u001B[0m");
+            System.out.print(WOOD + "   "+ RESET);
             for(int j=0; j<shelfCols; j++){
                 if(personalGoalCard.getTile(i,j)==null)
                     System.out.print("   ");
@@ -535,12 +544,12 @@ public class GameHandler {
                     }
                 }
                 if(j==shelfCols-1) {
-                    System.out.print("\u001b[48;2;140;68;28m \u001B[0m \n");
+                    System.out.print(WOOD + " "+ RESET);
                 }
             }
         }
         for(int i=0; i<=shelfRows;i++)
-            System.out.print("\u001b[48;2;140;68;28m   \u001B[0m");
+            System.out.print(WOOD + "   "+ RESET);
         System.out.print("\n");
         System.out.print("   ");
         for(int j=0; j<shelfCols;j++)

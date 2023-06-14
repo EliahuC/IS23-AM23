@@ -38,27 +38,19 @@
         public void print(){
             System.out.print("EIGHT SAME TILES.\n\n");
 
-            /*BookShelf example= new BookShelf();
-            ItemTile green =new ItemTile("CATS");
-            ItemTile white =new ItemTile("BOOKS");
-            ItemTile yellow =new ItemTile("GAMES");
-            ItemTile blue =new ItemTile("FRAMES");
-            ItemTile cyan =new ItemTile("TROPHIES");
-            ItemTile pink =new ItemTile("PLANTS");
-            example.setTile(5,0, green);
-            example.setTile(5,2, green);
-            example.setTile(5,4, green);
-            example.setTile(3,0, green);
-            example.setTile(3,2, green);
-            example.setTile(3,4, green);
-            example.setTile(1,1, green);
-            example.setTile(1,3, green);
-
-            example.printCGC();*/
+            //                                     [0]             [1]             [2]             [3]            [4]
+            System.out.print(WOOD + "                     " + RESET +
+                    "\n  " + WOOD + " " + RESET + "   " + RESET + "   " + RESET + "   " + RESET + "   " + RESET + "   " + WOOD + " " + RESET +
+                    "\n  " + WOOD + " " + WHITE + "   " + RESET + "   " + RESET + "   " + RESET + "   " + WHITE + "   " + WOOD + " " + RESET +
+                    "\n  " + WOOD + " " + RESET + "   " + RESET + "   " + WHITE + "   " + RESET + "   " + RESET + "   " + WOOD + " " + RESET +
+                    "\n  " + WOOD + " " + WHITE + "   " + RESET + "   " + RESET + "   " + RESET + "   " + WHITE + "   " + WOOD + " " + RESET +
+                    "\n  " + WOOD + " " + RESET + "   " + RESET + "   " + WHITE + "   " + RESET + "   " + RESET + "   " + WOOD + " " + RESET +
+                    "\n  " + WOOD + " " + WHITE + "   " + RESET + "   " + RESET + "   " + RESET + "   " + WHITE + "   " + WOOD + " " + RESET +
+                    "\n" + WOOD + "                     " + RESET);
 
             System.out.print("\nDESCRIPTION: Eight tiles of the same type.\n" +
                     "There’s no restriction about the position of these tiles.\n");
-            System.out.print("POINTS:" + getPoints() + "\n\n");
+            System.out.print("POINTS:" + points + "\n\n");
         }
     }
 

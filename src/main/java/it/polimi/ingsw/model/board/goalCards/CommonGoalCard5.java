@@ -58,36 +58,18 @@ public class CommonGoalCard5 extends CommonGoalCard implements CheckCommonGoalCa
     public void print(){
         System.out.print("THREE FULL COLUMNS.\n\n");
 
-        /*BookShelf example= new BookShelf();
-        ItemTile green =new ItemTile("CATS");
-        ItemTile white =new ItemTile("BOOKS");
-        ItemTile yellow =new ItemTile("GAMES");
-        ItemTile blue =new ItemTile("FRAMES");
-        ItemTile cyan =new ItemTile("TROPHIES");
-        ItemTile pink =new ItemTile("PLANTS");
-        example.setTile(5,0, cyan);
-        example.setTile(4,0, cyan);
-        example.setTile(3,0, cyan);
-        example.setTile(2,0, cyan);
-        example.setTile(1,0, cyan);
-        example.setTile(0,0, cyan);
-        example.setTile(5,2, green);
-        example.setTile(4,2, green);
-        example.setTile(3,2, yellow);
-        example.setTile(2,2, white);
-        example.setTile(1,2, green);
-        example.setTile(0,2, yellow);
-        example.setTile(5,4, blue);
-        example.setTile(4,4, cyan);
-        example.setTile(3,4, cyan);
-        example.setTile(2,4, blue);
-        example.setTile(1,4, pink);
-        example.setTile(0,4, pink);
-
-        example.printCGC();*/
+        //                                     [0]             [1]             [2]             [3]            [4]
+        System.out.print(WOOD + "                     " + RESET +
+                "\n  " + WOOD + " " + YELLOW + "   " + RESET + "   " + PINK + "   " + RESET + "   " + CYAN + "   " + WOOD + " " + RESET +
+                "\n  " + WOOD + " " + YELLOW + "   " + RESET + "   " + PINK + "   " + RESET + "   " + CYAN + "   " + WOOD + " " + RESET +
+                "\n  " + WOOD + " " + WHITE + "   " + RESET + "   " + PINK + "   " + RESET + "   " + WHITE + "   " + WOOD + " " + RESET +
+                "\n  " + WOOD + " " + WHITE + "   " + RESET + "   " + BLUE + "   " + RESET + "   " + WHITE + "   " + WOOD + " " + RESET +
+                "\n  " + WOOD + " " + PINK + "   " + RESET + "   " + BLUE + "   " + RESET + "   " + PINK + "   " + WOOD + " " + RESET +
+                "\n  " + WOOD + " " + PINK + "   " + RESET + "   " + BLUE + "   " + RESET + "   " + PINK + "   " + WOOD + " " + RESET +
+                "\n" + WOOD + "                     " + RESET);
 
         System.out.print("\nDESCRIPTION: Three columns each formed by 6 tiles of maximum three different types.\n" +
                 "One column can show the same or a different combination of another column.\n");
-        System.out.print("POINTS:" + getPoints() + "\n\n");
+        System.out.print("POINTS:" + points + "\n\n");
     }
 }

@@ -9,9 +9,19 @@ import it.polimi.ingsw.model.player.BookShelf;
 public class CommonGoalCard {
     private int numCompleted = 0;
     private int numPlayersCGC;
+    protected int points;
     public CommonGoalCard(Integer I){
         this.numPlayersCGC =I;
+        this.points=8;
     }
+    protected static final String RESET = "\u001B[0m";
+    protected static final String GREEN = "\u001b[48;2;145;165;65m";
+    protected static final String WHITE = "\u001b[48;2;236;225;189m";
+    protected static final String YELLOW = "\u001b[48;2;223;169;59m";
+    protected static final String BLUE = "\u001b[48;2;0;104;146m";
+    protected static final String CYAN = "\u001b[48;2;106;183;183m";
+    protected static final String PINK = "\u001b[48;2;198;77;124m";
+    protected static final String WOOD = "\u001b[48;2;140;68;28m";
 
     /**
      * @author Eliahu Cohen
@@ -30,39 +40,70 @@ public class CommonGoalCard {
             this.numCompleted++;
     }
 
+    public int getScore(){
+        return points;
+    }
     /**
      * @author Eliahu Cohen
      * @return points gained with the goal
      */
     public int getPoints() {
-        int points = 0;
+        int score = 0;
         switch (numPlayersCGC) {
-            case 2: {
+            case 2 -> {
                 switch (numCompleted) {
-                    case 1 -> points = 8;
-                    case 2 -> points = 4;
+                    case 1 -> {
+                        score = 8;
+                        points = 4;
+                    }
+                    case 2 -> {
+                        score = 4;
+                        points = 0;
+                    }
                 }
-                break;
             }
-            case 3: {
+            case 3 -> {
                 switch (numCompleted) {
-                    case 1 -> points = 8;
-                    case 2 -> points = 6;
-                    case 3 -> points = 4;
+                    case 1 -> {
+                        score = 8;
+                        points=6;
+                    }
+                    case 2 -> {
+                        score = 6;
+                        points=4;
+                    }
+                    case 3 -> {
+                        score = 4;
+                        points=0;
+                    }
                 }
-                break;
             }
-            case 4: {
+            case 4 -> {
                 switch (numCompleted) {
-                    case 1 -> points = 8;
-                    case 2 -> points = 6;
-                    case 3 -> points = 4;
-                    case 4 -> points = 2;
+                    case 1 -> {
+                        score = 8;
+                        points=6;
+                    }
+                    case 2 -> {
+                        score = 6;
+                        points=4;
+                    }
+                    case 3 -> {
+                        score = 4;
+                        points=2;
+                    }
+                    case 4 -> {
+                        score = 2;
+                        points=0;
+                    }
                 }
-                break;
             }
         }
-        return points;
+        return score;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
     }
 
     public void checkGoal(BookShelf bs) {

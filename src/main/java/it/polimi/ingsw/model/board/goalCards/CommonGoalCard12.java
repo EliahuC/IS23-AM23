@@ -78,34 +78,19 @@ public class CommonGoalCard12 extends CommonGoalCard implements CheckCommonGoalC
     public void print(){
         System.out.print("STAIRCASE OF TILES.\n\n");
 
-        /*BookShelf example= new BookShelf();
-        ItemTile green =new ItemTile("CATS");
-        ItemTile white =new ItemTile("BOOKS");
-        ItemTile yellow =new ItemTile("GAMES");
-        ItemTile blue =new ItemTile("FRAMES");
-        ItemTile cyan =new ItemTile("TROPHIES");
-        ItemTile pink =new ItemTile("PLANTS");
-        example.setTile(5,0, yellow);
-        example.setTile(5,1, yellow);
-        example.setTile(5,2, yellow);
-        example.setTile(5,3, yellow);
-        example.setTile(5,4, yellow);
-        example.setTile(4,0, yellow);
-        example.setTile(4,1, yellow);
-        example.setTile(4,2, yellow);
-        example.setTile(4,3, yellow);
-        example.setTile(3,0, yellow);
-        example.setTile(3,1, yellow);
-        example.setTile(3,2, yellow);
-        example.setTile(2,0, yellow);
-        example.setTile(2,1, yellow);
-        example.setTile(1,0, yellow);
-
-        example.printCGC();*/
+        //                                     [0]             [1]             [2]             [3]            [4]
+        System.out.print(WOOD + "                     " + RESET +
+                "\n  " + WOOD + " " + BLUE + "   " + RESET + "   " + RESET + "   " + RESET + "   " + RESET + "   " + WOOD + " " + RESET +
+                "\n  " + WOOD + " " + CYAN + "   " + BLUE + "   " + RESET + "   " + RESET + "   " + RESET + "   " + WOOD + " " + RESET +
+                "\n  " + WOOD + " " + WHITE + "   " + CYAN + "   " + BLUE + "   " + RESET + "   " + RESET + "   " + WOOD + " " + RESET +
+                "\n  " + WOOD + " " + CYAN + "   " + WHITE + "   " + CYAN + "   " + BLUE + "   " + RESET + "   " + WOOD + " " + RESET +
+                "\n  " + WOOD + " " + BLUE + "   " + CYAN + "   " + WHITE + "   " + CYAN + "   " + BLUE + "   " + WOOD + " " + RESET +
+                "\n  " + WOOD + " " + CYAN + "   " + BLUE + "   " + CYAN + "   " + WHITE + "   " + CYAN + "   " + WOOD + " " + RESET +
+                "\n" + WOOD + "                     " + RESET);
 
         System.out.print("\nDESCRIPTION: Five columns of increasing or decreasing height.\n" +
                 "Starting from the first column on the left or on the right, each next column must be made\n" +
                 "of exactly one more tile. Tiles can be of any type.\n");
-        System.out.print("POINTS:" + getPoints() + "\n\n");
+        System.out.print("POINTS:" + points + "\n\n");
     }
 }

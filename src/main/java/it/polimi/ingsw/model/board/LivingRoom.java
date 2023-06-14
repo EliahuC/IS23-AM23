@@ -30,6 +30,9 @@ public class LivingRoom implements Serializable {
     private transient final ArrayList<CGCKey> commonGoalCards = new ArrayList<>();
     private transient CommonGoalCard commonGoalCard1;
     private transient CommonGoalCard commonGoalCard2;
+
+    private int pointsCGD1;
+    private int pointsCGD2;
     private Integer idCGC1;
     private Integer idCGC2;
 
@@ -212,6 +215,8 @@ public class LivingRoom implements Serializable {
             if(score2!=0)bs.setCommonGoalCard2Completed(true);
             score+=score2;
         }
+        pointsCGD1= commonGoalCard1.getScore();
+        pointsCGD2=commonGoalCard2.getScore();
 
        return score;
     }
@@ -254,6 +259,14 @@ public class LivingRoom implements Serializable {
             }
         }
         return Board;
+    }
+
+    public int getPointsCGD1() {
+        return pointsCGD1;
+    }
+
+    public int getPointsCGD2() {
+        return pointsCGD2;
     }
 
     public Bag getBag() {

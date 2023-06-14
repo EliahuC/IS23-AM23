@@ -72,22 +72,17 @@ public class CommonGoalCard11 extends CommonGoalCard implements CheckCommonGoalC
     public void print(){
         System.out.print("CROSS TILES.\n\n");
 
-        /*BookShelf example= new BookShelf();
-        ItemTile green =new ItemTile("CATS");
-        ItemTile white =new ItemTile("BOOKS");
-        ItemTile yellow =new ItemTile("GAMES");
-        ItemTile blue =new ItemTile("FRAMES");
-        ItemTile cyan =new ItemTile("TROPHIES");
-        ItemTile pink =new ItemTile("PLANTS");
-        example.setTile(4,1, white);
-        example.setTile(4,3, white);
-        example.setTile(3,2, white);
-        example.setTile(2,1, white);
-        example.setTile(2,3, white);
-
-        example.printCGC();*/
+        //                                     [0]             [1]             [2]             [3]            [4]
+        System.out.print(WOOD + "                     " + RESET +
+                "\n  " + WOOD + " " + RESET + "   " + RESET + "   " + RESET + "   " + RESET + "   " + RESET + "   " + WOOD + " " + RESET +
+                "\n  " + WOOD + " " + RESET + "   " + RESET + "   " + RESET + "   " + RESET + "   " + RESET + "   " + WOOD + " " + RESET +
+                "\n  " + WOOD + " " + RESET + "   " + CYAN + "   " + RESET + "   " + CYAN + "   " + RESET + "   " + WOOD + " " + RESET +
+                "\n  " + WOOD + " " + RESET + "   " + RESET + "   " + CYAN + "   " + RESET + "   " + RESET + "   " + WOOD + " " + RESET +
+                "\n  " + WOOD + " " + RESET + "   " + CYAN + "   " + RESET + "   " + CYAN + "   " + RESET + "   " + WOOD + " " + RESET +
+                "\n  " + WOOD + " " + RESET + "   " + RESET + "   " + RESET + "   " + RESET + "   " + RESET + "   " + WOOD + " " + RESET +
+                "\n" + WOOD + "                     " + RESET);
 
         System.out.print("\nDESCRIPTION: Five tiles of the same type forming an X.\n");
-        System.out.print("POINTS:" + getPoints() + "\n\n");
+        System.out.print("POINTS:" + points + "\n\n");
     }
 }

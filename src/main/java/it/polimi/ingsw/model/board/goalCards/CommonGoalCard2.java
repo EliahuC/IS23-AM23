@@ -2,6 +2,7 @@ package it.polimi.ingsw.model.board.goalCards;
 
 import it.polimi.ingsw.model.board.ItemTile;
 import it.polimi.ingsw.model.player.BookShelf;
+import it.polimi.ingsw.model.player.Player;
 
 public class CommonGoalCard2 extends CommonGoalCard implements CheckCommonGoalCard {
 
@@ -38,35 +39,17 @@ public class CommonGoalCard2 extends CommonGoalCard implements CheckCommonGoalCa
     @Override
     public void print(){
         System.out.print("FOUR GROUPS FORMED OF FOUR TILES.\n\n");
-
-        /*BookShelf example= new BookShelf();
-        ItemTile green =new ItemTile("CATS");
-        ItemTile white =new ItemTile("BOOKS");
-        ItemTile yellow =new ItemTile("GAMES");
-        ItemTile blue =new ItemTile("FRAMES");
-        ItemTile cyan =new ItemTile("TROPHIES");
-        ItemTile pink =new ItemTile("PLANTS");
-        example.setTile(0,0, green);
-        example.setTile(1,0, green);
-        example.setTile(2,0, green);
-        example.setTile(3,0, green);
-        example.setTile(5,0, yellow);
-        example.setTile(5,1, yellow);
-        example.setTile(5,2, yellow);
-        example.setTile(4,1, yellow);
-        example.setTile(0,2, pink);
-        example.setTile(0,3, pink);
-        example.setTile(0,4, pink);
-        example.setTile(1,4, pink);
-        example.setTile(5,4, white);
-        example.setTile(4,4, white);
-        example.setTile(4,3, white);
-        example.setTile(3,3, white);
-
-        example.printCGC();*/
-
+        //                                     [0]             [1]             [2]             [3]            [4]
+        System.out.print(WOOD + "                     " + RESET +
+                "\n  " + WOOD + " " + RESET + "   " + WHITE + "   " + WHITE + "   " + PINK + "   " + PINK + "   " + WOOD + " " + RESET +
+                "\n  " + WOOD + " " + RESET + "   " + RESET + "   " + WHITE + "   " + WHITE + "   " + PINK + "   " + WOOD + " " + RESET +
+                "\n  " + WOOD + " " + RESET + "   " + RESET + "   " + RESET + "   " + RESET + "   " + PINK + "   " + WOOD + " " + RESET +
+                "\n  " + WOOD + " " + RESET + "   " + RESET + "   " + RESET + "   " + RESET + "   " + RESET + "   " + WOOD + " " + RESET +
+                "\n  " + WOOD + " " + CYAN + "   " + WHITE + "   " + WHITE + "   " + WHITE + "   " + RESET + "   " + WOOD + " " + RESET +
+                "\n  " + WOOD + " " + CYAN + "   " + CYAN + "   " + CYAN + "   " + WHITE + "   " + RESET + "   " + WOOD + " " + RESET +
+                "\n" + WOOD + "                     " + RESET);
         System.out.print("\nDESCRIPTION: Four groups each containing at least 4 tiles of the same type.\n" +
                 "The tiles of one group can be different from those of another group.\n");
-        System.out.print("POINTS:" + getPoints() + "\n\n");
+        System.out.print("POINTS:" + points + "\n\n");
     }
 }
