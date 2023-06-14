@@ -511,7 +511,9 @@ public class Game implements Serializable {
                     null,
                     "Someone crashed");
             for(PropertyChangeListener l:listeners){
-                l.propertyChange(evt);
+                try {
+                    l.propertyChange(evt);
+                }catch (NullPointerException ignored){}
             }
         }
     }

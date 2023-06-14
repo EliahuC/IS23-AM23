@@ -340,6 +340,8 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
                 return;
             }
         }
+        Server.connectedPlayers.remove(s);
+
 
     }
     /**
@@ -370,8 +372,6 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
                     e.printStackTrace();
                 }
                 sendPing();
-
-
             }
 
         });
