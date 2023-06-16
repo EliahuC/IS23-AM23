@@ -333,6 +333,9 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
      * method that end the game if a player crash
      */
     private void closeConnection(String s) {
+
+        Server.connectedPlayers.remove(s);
+
         for (Lobby l : Server.lobbies) {
             if(l.getJoinedUsers().contains(s)){
                 lobby=l;
@@ -347,8 +350,6 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
                 return;
             }
         }
-        Server.connectedPlayers.remove(s);
-
 
     }
     /**
