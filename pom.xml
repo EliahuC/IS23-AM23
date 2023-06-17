@@ -7,7 +7,7 @@
   <groupId>AM23</groupId>
   <artifactId>IS23-AM23</artifactId>
   <version>1.0-SNAPSHOT</version>
-  <name>MyShelfie</name>
+  <name>IS23-AM23</name>
   <packaging>jar</packaging>
 
   <properties>
