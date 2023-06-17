@@ -21,6 +21,7 @@ import java.io.File;
 import java.net.URL;
 import java.io.IOException;
 import java.util.ResourceBundle;
+import java.util.concurrent.TimeUnit;
 
 public class LobbyChoiceController implements Initializable {
     @FXML
@@ -37,35 +38,49 @@ public class LobbyChoiceController implements Initializable {
     private Integer PlayersCounter = null;
     private String nickname;
     String command = null;
-    String lobby_size;
+    String lobby_size=null;
     private ConnectionClient connectionClient;
+    private GUIEvent receiver;
+    private GameControllerGUI gameControllerGUI;
 
 
 
     public void joinLobby(ActionEvent event) throws IOException {
+        receiver.setInStartGUI(false);
+        receiver.setInLobbyChoice(true);
         command = "/ENTER";
         Message message = MoveSerializer.serializeInput(command);
         connectionClient.sendMessage((ClientMessage) message);
-        if (checklobbies()) { //QUESTO METODO CONTROLLA SE CI SONO LOBBY DISPONIBILI
+        try {
+            TimeUnit.MILLISECONDS.sleep(200);
+        } catch (InterruptedException iE) {
+            iE.printStackTrace();
+        }
+        if (checklobbies()) {
             File file = new File("src/main/resources/com/example/is23am23/lobbyWaiting.fxml");
             URL url = file.toURI().toURL();
             FXMLLoader loader = new FXMLLoader(url);
             root = loader.load();
             LobbyWaitingController lobbyWaitingController = loader.getController();
+            receiver.setLobbyWaitingcontroller(lobbyWaitingController);
             lobbyWaitingController.displayNickname(nickname);
+            lobbyWaitingController.setReceiver(receiver);
+            gameControllerGUI = new GameControllerGUI();
+            receiver.setGamecontrollerGUI(gameControllerGUI);
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
-        } else {
+        }/*else if(!checklobbies()) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("No available lobbies");
             alert.setHeaderText("You have to create a new lobby!");
-            return;
-        }
+        }*/
     }
 
     public void createLobby(ActionEvent event) throws IOException {
+        receiver.setInStartGUI(false);
+        receiver.setInLobbyChoice(true);
         lobby_size = playerNumber.getValue();
         if (lobby_size != null) {
             switch (lobby_size) {
@@ -82,10 +97,15 @@ public class LobbyChoiceController implements Initializable {
             FXMLLoader loader = new FXMLLoader(url);
             Parent root = loader.load();
             LobbyWaitingController lobbyWaitingController = loader.getController();
+            receiver.setLobbyWaitingcontroller(lobbyWaitingController);
             lobbyWaitingController.displayNickname(nickname);
+            lobbyWaitingController.setReceiver(receiver);
+            gameControllerGUI = new GameControllerGUI();
+            receiver.setGamecontrollerGUI(gameControllerGUI);
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
+            receiver.setStage(stage);
             stage.show();
         }
     }
@@ -120,7 +140,7 @@ public class LobbyChoiceController implements Initializable {
     }
 
     private boolean checklobbies() {
-        if (response != null && response.getCategory() == Message.MessageCategory.WARNING) {
+        if (response.getCategory() == Message.MessageCategory.WARNING){
             return false;
         } else return true;
     }
@@ -128,8 +148,9 @@ public class LobbyChoiceController implements Initializable {
     public void setResponse(ServerMessage response) {
         this.response = response;
     }
-    public void setConnectionClient(ConnectionClient connectionClient){
+    public void setConnection(ConnectionClient connectionClient){
         this.connectionClient=connectionClient;
     }
+    public void setReceiver(GUIEvent receiver){this.receiver = receiver;}
 }
 

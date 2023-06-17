@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Objects;
 import java.util.Scanner;
@@ -28,7 +29,7 @@ public class LobbyWaitingController {
     private Parent root;
 
     @FXML
-    private Label nameDisplay;
+    private Label Display;
 
     private ConnectionClient connectionClient;
     private GUIEvent receiver;
@@ -52,23 +53,26 @@ public class LobbyWaitingController {
         connectionClient.setListener(receiver);
         this.receiver.setLobbyWaitingcontroller(this);
     }*/
-    public void waiting() {
-        GameControllerGUI gamecontrollerGUI = new GameControllerGUI();
-        receiver.setGamecontrollerGUI(gamecontrollerGUI);
-            do {
-            } while (response == null || response.getCategory() != Message.MessageCategory.STARTING_GAME_MESSAGE);
-            //System.out.print(response.getReturnMessage());  //AL POSTO DI QUESTO SI PUO' INSERIRE UN MESSAGIO DEL TIPO
-                                                                //GAME IS STARTING
-            receiver.setInLobbyWaiting(false);
-            receiver.setInGameControllerGUI(true);
+    public void waiting(GUIEvent receiver) throws IOException {
+             File file = new File("src/main/resources/com/example/is23am23/game.fxml");
+             URL url = file.toURI().toURL();
+             FXMLLoader loader = new FXMLLoader(url);
+             Parent root = loader.load();
+         }
+              //sennò aspetto
+
+
             //gamecontrollerGUI.start();
-    }
+
 
     public void setResponse(ServerMessage response) {
         this.response = response;
     }
     public void displayNickname(String nickname) {
-        nameDisplay.setText(nickname);
+        Display.setText(nickname);
+    }
+    public void setReceiver(GUIEvent receiver){
+        this.receiver=receiver;
     }
 
 }
