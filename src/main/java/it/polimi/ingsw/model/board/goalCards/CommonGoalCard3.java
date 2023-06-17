@@ -69,16 +69,17 @@ public class CommonGoalCard3 extends CommonGoalCard implements CheckCommonGoalCa
         System.out.print("TILES ON THE CORNER.\n\n");
 
         //                                     [0]             [1]             [2]             [3]            [4]
-        System.out.print(WOOD + "                     " + RESET +
-                "\n  " + WOOD + " " + YELLOW + "   " + RESET + "   " + RESET + "   " + RESET + "   " + CYAN + "   " + WOOD + " " + RESET +
-                "\n  " + WOOD + " " + RESET + "   " + RESET + "   " + RESET + "   " + RESET + "   " + RESET + "   " + WOOD + " " + RESET +
-                "\n  " + WOOD + " " + RESET + "   " + RESET + "   " + RESET + "   " + RESET + "   " + RESET + "   " + WOOD + " " + RESET +
-                "\n  " + WOOD + " " + RESET + "   " + RESET + "   " + RESET + "   " + RESET + "   " + RESET + "   " + WOOD + " " + RESET +
-                "\n  " + WOOD + " " + RESET + "   " + RESET + "   " + RESET + "   " + RESET + "   " + RESET + "   " + WOOD + " " + RESET +
-                "\n  " + WOOD + " " + PINK + "   " + RESET + "   " + RESET + "   " + RESET + "   " + WHITE + "   " + WOOD + " " + RESET +
-                "\n" + WOOD + "                     " + RESET);
+        System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t " + WOOD + "                     " + RESET +
+                "\n\t\t\t\t\t\t\t\t\t\t\t\t\t   " + WOOD + " " + YELLOW + "   " + RESET + "   " + RESET + "   " + RESET + "   " + CYAN + "   " + WOOD + " " + RESET +
+                "\n\t\t\t\t\t\t\t\t\t\t\t\t\t   " + WOOD + " " + RESET + "   " + RESET + "   " + RESET + "   " + RESET + "   " + RESET + "   " + WOOD + " " + RESET +
+                "\n\t\t\t\t\t\t\t\t\t\t\t\t\t   " + WOOD + " " + RESET + "   " + RESET + "   " + RESET + "   " + RESET + "   " + RESET + "   " + WOOD + " " + RESET +
+                "\n\t\t\t\t\t\t\t\t\t\t\t\t\t   " + WOOD + " " + RESET + "   " + RESET + "   " + RESET + "   " + RESET + "   " + RESET + "   " + WOOD + " " + RESET +
+                "\n\t\t\t\t\t\t\t\t\t\t\t\t\t   " + WOOD + " " + RESET + "   " + RESET + "   " + RESET + "   " + RESET + "   " + RESET + "   " + WOOD + " " + RESET +
+                "\n\t\t\t\t\t\t\t\t\t\t\t\t\t   " + WOOD + " " + PINK + "   " + RESET + "   " + RESET + "   " + RESET + "   " + WHITE + "   " + WOOD + " " + RESET +
+                "\n\t\t\t\t\t\t\t\t\t\t\t\t\t " + WOOD + "                     " + RESET);
 
-        System.out.print("\nDESCRIPTION: Four tiles of the same type in the four corners of the bookshelf.\n");
-        System.out.print("POINTS:" + points + "\n\n");
+        System.out.print("\n\t\t\t\t\t\t\t\t\tDESCRIPTION: Four tiles of the same type in the four" +
+                "\n\t\t\t\t\t\t\t\t\tcorners of the bookshelf.\n");
+        System.out.print("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tPOINTS:" + points + "\n\n");
     }
 }

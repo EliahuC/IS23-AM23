@@ -61,18 +61,18 @@ public class CommonGoalCard8 extends CommonGoalCard implements CheckCommonGoalCa
         System.out.print("FOUR FULL ROWS.\n\n");
 
         //                                     [0]             [1]             [2]             [3]            [4]
-        System.out.print(WOOD + "                     " + RESET +
-                "\n  " + WOOD + " " + RESET + "   " + RESET + "   " + RESET + "   " + RESET + "   " + RESET + "   " + WOOD + " " + RESET +
-                "\n  " + WOOD + " " + RESET + "   " + RESET + "   " + RESET + "   " + RESET + "   " + RESET + "   " + WOOD + " " + RESET +
-                "\n  " + WOOD + " " + GREEN + "   " + GREEN + "   " + WHITE + "   " + WHITE + "   " + CYAN + "   " + WOOD + " " + RESET +
-                "\n  " + WOOD + " " + YELLOW + "   " + WHITE + "   " + PINK + "   " + PINK + "   " + PINK + "   " + WOOD + " " + RESET +
-                "\n  " + WOOD + " " + CYAN + "   " + CYAN + "   " + WHITE + "   " + BLUE + "   " + BLUE + "   " + WOOD + " " + RESET +
-                "\n  " + WOOD + " " + PINK + "   " + PINK + "   " + YELLOW + "   " + CYAN + "   " + CYAN + "   " + WOOD + " " + RESET +
-                "\n" + WOOD + "                     " + RESET);
+        System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t " + WOOD + "                     " + RESET +
+                "\n\t\t\t\t\t\t\t\t\t\t\t\t\t   " + WOOD + " " + RESET + "   " + RESET + "   " + RESET + "   " + RESET + "   " + RESET + "   " + WOOD + " " + RESET +
+                "\n\t\t\t\t\t\t\t\t\t\t\t\t\t   " + WOOD + " " + RESET + "   " + RESET + "   " + RESET + "   " + RESET + "   " + RESET + "   " + WOOD + " " + RESET +
+                "\n\t\t\t\t\t\t\t\t\t\t\t\t\t   " + WOOD + " " + GREEN + "   " + GREEN + "   " + WHITE + "   " + WHITE + "   " + CYAN + "   " + WOOD + " " + RESET +
+                "\n\t\t\t\t\t\t\t\t\t\t\t\t\t   " + WOOD + " " + YELLOW + "   " + WHITE + "   " + PINK + "   " + PINK + "   " + PINK + "   " + WOOD + " " + RESET +
+                "\n\t\t\t\t\t\t\t\t\t\t\t\t\t   " + WOOD + " " + CYAN + "   " + CYAN + "   " + WHITE + "   " + BLUE + "   " + BLUE + "   " + WOOD + " " + RESET +
+                "\n\t\t\t\t\t\t\t\t\t\t\t\t\t   " + WOOD + " " + PINK + "   " + PINK + "   " + YELLOW + "   " + CYAN + "   " + CYAN + "   " + WOOD + " " + RESET +
+                "\n\t\t\t\t\t\t\t\t\t\t\t\t\t " + WOOD + "                     " + RESET);
 
-        System.out.print("\nDESCRIPTION: Four lines each formed by 5 tiles of maximum three different types.\n" +
-                "One line can show the same or a different combination of another line.\n");
-        System.out.print("POINTS:" + points + "\n\n");
+        System.out.print("\n\t\t\t\t\t\t\tDESCRIPTION: Four lines each formed by 5 tiles of maximum three different types.\n" +
+                "\t\t\t\t\t\t\tOne line can show the same or a different combination of another line.\n");
+        System.out.print("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tPOINTS:" + points + "\n\n");
     }
 }
 

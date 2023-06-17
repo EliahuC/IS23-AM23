@@ -78,16 +78,20 @@ public class CLIEvent implements PropertyChangeListener {
     }
 
     private void forwardMessage(ServerMessage response){
-        if(inStartCLI){
-            startCLI.setResponse(response);
-            return;
-        }
-        if(inLobbyHandler) {
-            lobbyHandler.setResponse(response);
-            return;
-        }
-        if (inGameHandler) {
-            gameHandler.setResponse(response);
+        try {
+            if (inStartCLI) {
+                startCLI.setResponse(response);
+                return;
+            }
+            if (inLobbyHandler) {
+                lobbyHandler.setResponse(response);
+                return;
+            }
+            if (inGameHandler) {
+                gameHandler.setResponse(response);
+            }
+        }catch (NullPointerException e){
+            System.out.println("\n\t\t\t\t\t\t\t\t\tSomeone crashed. Please, restart the application!");
         }
     }
     public void setLobbyHandler(LobbyHandler lobbyHandler){

@@ -244,6 +244,10 @@ public class Game implements Serializable {
             commands = sortTiles(commands);
             if (!checkNumber(size)) return false;
         }
+        for(int i=0; i<size; i++){
+            if(coordinates.get(i) < 0 || coordinates.get(i) > 8)
+                return false;
+        }
         switch (size) {
             case 1 -> {
                 if (gameChecker.isLegalAction(livingRoom.getBoardTile(commands.get(0), commands.get(1))))

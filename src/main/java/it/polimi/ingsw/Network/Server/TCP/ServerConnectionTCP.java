@@ -215,7 +215,7 @@ public class ServerConnectionTCP implements ServerConnection{
      */
     private void alreadyLoggedNickName(ClientMessage message) {
             ErrorMessage errorMessage=new ErrorMessage();
-            errorMessage.setReturnMessage("Your nickname is already used.\nINSERT A NEW NICKNAME: ");
+            errorMessage.setReturnMessage("Your nickname is already used. Please, retry.");
             sendMessage(errorMessage,message.getNickname());
     }
 
@@ -225,7 +225,7 @@ public class ServerConnectionTCP implements ServerConnection{
      */
     private void gameAlreadyStarted() {
             ErrorMessage errorMessage = new ErrorMessage();
-            errorMessage.setReturnMessage("Game already started, you can't logout until the game is finished.");
+            errorMessage.setReturnMessage("Game has already started: you can't logout until the game is finished!");
             sendMessage(errorMessage,namePlayer);
 
     }
@@ -269,10 +269,7 @@ public class ServerConnectionTCP implements ServerConnection{
     private void noLobbyInServer(ClientMessage message) {
 
             ErrorMessage errorMessage =new ErrorMessage();
-            errorMessage.setReturnMessage("""
-                    There is no available lobby, create a new one using the command:
-                    /CREATE <number of players>
-                    Remember that the number of players can only be 2, 3 or 4!""");
+            errorMessage.setReturnMessage("There is NO AVAILABLE lobby, please retry!");
             sendMessage(errorMessage,message.getNickname());
 
     }

@@ -35,14 +35,14 @@ public class TCPServerMain extends Server implements Runnable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        showMessage("TCPServer is started !");
+        showMessage("TCP server is ready on port: " + port);
 
         //Client Connection
         while(true){
             Socket clientSocket ;
             try {
                 clientSocket = serverSocket.accept();
-                showMessage("Client TCP successfully connected");
+                showMessage("Client TCP successfully connected.");
                 ServerConnectionTCP serverConnectionTCP = new ServerConnectionTCP(clientSocket);
                 new Thread(serverConnectionTCP).start();
                 VirtualView virtualView=new VirtualView(serverConnectionTCP,null);

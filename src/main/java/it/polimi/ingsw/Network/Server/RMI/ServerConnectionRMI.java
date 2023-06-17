@@ -259,10 +259,7 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
     private void noLobbyInServer(ClientMessage message) {
 
         ErrorMessage errorMessage =new ErrorMessage();
-        errorMessage.setReturnMessage("""
-                There is no available lobby, create a new one using the command:
-                /CREATE_LOBBY <your nickname> <number of players>
-                Remember that the number of players can only be 2, 3 or 4!""");
+        errorMessage.setReturnMessage("There is NO AVAILABLE lobby, please retry!");
         sendMessage(errorMessage,message.getNickname());
 
     }
@@ -287,12 +284,12 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
     private void alreadyExistentLobby(ClientMessage message){
         if (lobby.getJoinedUsers().contains(message.getNickname())) {
             ErrorMessage errorMessage=new ErrorMessage();
-            errorMessage.setReturnMessage("You are already part of a lobby,please log out if you want to create a new lobby.");
+            errorMessage.setReturnMessage("You are already part of a lobby! Please, log out if you want to create a new lobby.");
             sendMessage(errorMessage,namePlayer);
             return;
         }
         ErrorMessage errorMessage=new ErrorMessage();
-        errorMessage.setReturnMessage("Lobby already present, please join that lobby");
+        errorMessage.setReturnMessage("Lobby already present, please join that lobby.");
         sendMessage(errorMessage, namePlayer);
 
     }

@@ -73,16 +73,16 @@ public class CommonGoalCard11 extends CommonGoalCard implements CheckCommonGoalC
         System.out.print("CROSS TILES.\n\n");
 
         //                                     [0]             [1]             [2]             [3]            [4]
-        System.out.print(WOOD + "                     " + RESET +
-                "\n  " + WOOD + " " + RESET + "   " + RESET + "   " + RESET + "   " + RESET + "   " + RESET + "   " + WOOD + " " + RESET +
-                "\n  " + WOOD + " " + RESET + "   " + RESET + "   " + RESET + "   " + RESET + "   " + RESET + "   " + WOOD + " " + RESET +
-                "\n  " + WOOD + " " + RESET + "   " + CYAN + "   " + RESET + "   " + CYAN + "   " + RESET + "   " + WOOD + " " + RESET +
-                "\n  " + WOOD + " " + RESET + "   " + RESET + "   " + CYAN + "   " + RESET + "   " + RESET + "   " + WOOD + " " + RESET +
-                "\n  " + WOOD + " " + RESET + "   " + CYAN + "   " + RESET + "   " + CYAN + "   " + RESET + "   " + WOOD + " " + RESET +
-                "\n  " + WOOD + " " + RESET + "   " + RESET + "   " + RESET + "   " + RESET + "   " + RESET + "   " + WOOD + " " + RESET +
-                "\n" + WOOD + "                     " + RESET);
+        System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t " + WOOD + "                     " + RESET +
+                "\n\t\t\t\t\t\t\t\t\t\t\t\t\t   " + WOOD + " " + RESET + "   " + RESET + "   " + RESET + "   " + RESET + "   " + RESET + "   " + WOOD + " " + RESET +
+                "\n\t\t\t\t\t\t\t\t\t\t\t\t\t   " + WOOD + " " + RESET + "   " + RESET + "   " + RESET + "   " + RESET + "   " + RESET + "   " + WOOD + " " + RESET +
+                "\n\t\t\t\t\t\t\t\t\t\t\t\t\t   " + WOOD + " " + RESET + "   " + CYAN + "   " + RESET + "   " + CYAN + "   " + RESET + "   " + WOOD + " " + RESET +
+                "\n\t\t\t\t\t\t\t\t\t\t\t\t\t   " + WOOD + " " + RESET + "   " + RESET + "   " + CYAN + "   " + RESET + "   " + RESET + "   " + WOOD + " " + RESET +
+                "\n\t\t\t\t\t\t\t\t\t\t\t\t\t   " + WOOD + " " + RESET + "   " + CYAN + "   " + RESET + "   " + CYAN + "   " + RESET + "   " + WOOD + " " + RESET +
+                "\n\t\t\t\t\t\t\t\t\t\t\t\t\t   " + WOOD + " " + RESET + "   " + RESET + "   " + RESET + "   " + RESET + "   " + RESET + "   " + WOOD + " " + RESET +
+                "\n\t\t\t\t\t\t\t\t\t\t\t\t\t " + WOOD + "                     " + RESET);
 
-        System.out.print("\nDESCRIPTION: Five tiles of the same type forming an X.\n");
-        System.out.print("POINTS:" + points + "\n\n");
+        System.out.print("\n\t\t\t\t\t\t\t\t\tDESCRIPTION: Five tiles of the same type forming an X.\n");
+        System.out.print("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tPOINTS:" + points + "\n\n");
     }
 }
