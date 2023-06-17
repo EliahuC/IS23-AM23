@@ -13,15 +13,13 @@ The members of the group are:
 
 ## Development State
 
-|Functionality   	|State   	|Current   	|Comment   	|
-|---	|---	|---	|---	|
-|UML (Model and Controller)   	|🟢   	|100%   	|   	|
-|Completed Rules   	|🟢   	|100%   	|   	|
-|TUI   	|🟡   	|80%   	|    	|
-|GUI   	|🔴   	|0%   	|    	|
-|TCP   	|🟡   	|99%   	|    	|
-|RMI   	|🟡   	|99%   	|   	|
-|Resilience to disconnections   	|🔴   	|0%   	|   	|
-|Persistency   	|🟡   	|85%   	|   	|
-|Chat   	|🔴   	|0%   	|   	|
-|Multiple games   	|🟡   	|85%   	|   	|
+|Functionality   	|State   	| Current   	 |Comment   	|
+|---	|---	|-------------|---	|
+|UML (Model and Controller)   	|🟢   	| 100%   	    |   	|
+|Completed Rules   	|🟢   	| 100%   	    |   	|
+|TUI   	|🟢   	| 100%   	    |    	|
+|GUI   	|🔴   	| 0%   	      |    	|
+|TCP   	|🟢  	| 100%   	    |    	|
+|RMI   	|🟡   	| 99%   	     |   	|
+|Persistency   	|🟡   	| 85%   	     |   	|
+|Multiple games   	|🟡   	| 85%   	     |   	|
