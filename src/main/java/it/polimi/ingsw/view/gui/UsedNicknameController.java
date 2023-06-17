@@ -1,5 +1,11 @@
 package it.polimi.ingsw.view.gui;
 
+import it.polimi.ingsw.Messages.Message;
+import it.polimi.ingsw.Messages.ServerToClient.ServerMessage;
+import it.polimi.ingsw.Network.Client.ConnectionClient;
+import it.polimi.ingsw.Network.Client.RMI.ClientConnectionRMI;
+import it.polimi.ingsw.Network.Client.TCP.ClientConnectionTCP;
+import it.polimi.ingsw.Settings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,7 +17,10 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.Socket;
 import java.net.URL;
+import java.util.concurrent.TimeUnit;
 
 public class UsedNicknameController {
 
@@ -21,6 +30,13 @@ public class UsedNicknameController {
     private Stage stage;
     private Scene scene;
     private Parent root;
+    private ServerMessage response;
+    private String serverAddr;
+    private int portNum;
+    private Socket socket;
+    private ConnectionClient connectionClient;
+    private GUIEvent receiver;
+    private String nickname;
 
     public void returnToMenu(ActionEvent event) throws IOException {
 
@@ -28,28 +44,114 @@ public class UsedNicknameController {
         URL url = file.toURI().toURL();
         FXMLLoader loader = new FXMLLoader(url);
         Parent root = loader.load();
-
         stage = (Stage)((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
 
-    public void goToLobbyWaiting(ActionEvent event) throws IOException {
+    /*public void goToLobbyChoice(ActionEvent event) throws IOException {
 
-        String nickname = name.getText();
-
-        File file = new File("src/main/resources/com/example/is23am23/lobbyWaiting.fxml");
+        nickname = name.getText();
+        File file = new File("src/main/resources/com/example/is23am23/lobbyChoice.fxml");
         URL url = file.toURI().toURL();
         FXMLLoader loader = new FXMLLoader(url);
         Parent root = loader.load();
-
         LobbyChoiceController lobbyController = loader.getController();
         lobbyController.displayNickname(nickname);
-
         stage = (Stage)((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }*/
+    public void setResponse(ServerMessage response){
+        this.response=response;
+    }
+    public void goToTCP(ActionEvent event)throws IOException {
+        nickname = name.getText();
+        if (!nickname.isEmpty()) {
+            if (TCPon(event)) {
+                File file = new File("src/main/resources/com/example/is23am23/lobbyChoice.fxml");
+                URL url = file.toURI().toURL();
+                FXMLLoader loader = new FXMLLoader(url);
+                Parent root = loader.load();
+                LobbyChoiceController lobbyController = loader.getController();
+                receiver.setLobbyChoiceController(lobbyController);
+                lobbyController.displayNickname(nickname);
+                lobbyController.setConnection(connectionClient);
+                lobbyController.setReceiver(receiver);
+                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                scene = new Scene(root);
+                stage.setScene(scene);
+                stage.show();
+            }
+        }
+    }
+    public boolean TCPon(ActionEvent event) {
+        try {
+            serverAddr = Settings.SERVER_NAME;
+            portNum = Settings.PORT;
+            socket = new Socket("127.0.0.1", portNum);
+            connectionClient = new ClientConnectionTCP(socket, nickname);
+            connectionClient.setListener(receiver);
+            new Thread(connectionClient).start();
+            try {
+                TimeUnit.MILLISECONDS.sleep(500);
+            } catch (InterruptedException iE) {
+                iE.printStackTrace();
+            }
+            if(response.getCategory()==Message.MessageCategory.VALID_NICKNAME){
+                return true;
+            } else
+                return false;
+             }catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    public void goToRMI(ActionEvent event) throws IOException {
+        nickname = name.getText();
+        if (!nickname.isEmpty()) {
+            if (RMIon(event)) {
+                File file = new File("src/main/resources/com/example/is23am23/lobbyChoice.fxml");
+                URL url = file.toURI().toURL();
+                FXMLLoader loader = new FXMLLoader(url);
+                Parent root = loader.load();
+
+                LobbyChoiceController lobbyController = loader.getController();
+                receiver.setLobbyChoiceController(lobbyController);
+                lobbyController.displayNickname(nickname);
+                lobbyController.setConnection(connectionClient);
+                lobbyController.setReceiver(receiver);
+
+                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                scene = new Scene(root);
+                stage.setScene(scene);
+                stage.show();
+
+            }
+        }
+    }
+    public boolean RMIon(ActionEvent event) {
+        try {
+            connectionClient = new ClientConnectionRMI(nickname, receiver);
+            new Thread(connectionClient).start();
+            try {
+                TimeUnit.MILLISECONDS.sleep(500);
+            } catch (InterruptedException iE) {
+                iE.printStackTrace();
+            }
+            if(response.getCategory()==Message.MessageCategory.VALID_NICKNAME){
+                return true;
+            } else
+                return false;
+            }catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public void setReceiver(GUIEvent receiver) {
+        this.receiver = receiver;
     }
 }

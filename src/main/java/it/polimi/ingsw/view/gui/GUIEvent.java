@@ -25,11 +25,13 @@ public class GUIEvent implements PropertyChangeListener {
     private Boolean inLobbyWaiting = false;
     private Boolean inGameControllerGUI = false;
     private Boolean inLobbyChoice = false;
+    private Boolean inUsedNickname=false;
 
     private final MenuController menuController;
     private LobbyWaitingController lobbywaitingcontroller;
     private GameControllerGUI gamecontrollerGUI;
     private LobbyChoiceController lobbyChoiceController;
+    private UsedNicknameController usedNicknameController;
     private URL url;
     private ServerMessage serverMessage;
     private Stage stage = new Stage();
@@ -106,6 +108,9 @@ public class GUIEvent implements PropertyChangeListener {
             return;
         } else if (inGameControllerGUI) {
             gamecontrollerGUI.setResponse(response);
+        }else if(inUsedNickname) {
+            usedNicknameController.setResponse(response);
+            setInUsedNickname(false);
         }
     }
 
@@ -135,5 +140,13 @@ public class GUIEvent implements PropertyChangeListener {
 
     public void setInLobbyChoice(Boolean inLobbyChoice) {
         this.inLobbyChoice = inLobbyChoice;
+    }
+
+    public void setInUsedNickname(Boolean inUsedNickname) {
+        this.inUsedNickname = inUsedNickname;
+    }
+
+    public void setUsedNicknameController(UsedNicknameController usedNicknameController) {
+        this.usedNicknameController = usedNicknameController;
     }
 }

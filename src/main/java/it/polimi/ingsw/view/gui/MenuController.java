@@ -50,7 +50,7 @@ public class MenuController {
 
         nickname = textField.getText();
         if (!nickname.isEmpty()) {
-            if (TCPon()) {
+            if (TCPon(event)) {
                 File file = new File("src/main/resources/com/example/is23am23/lobbyChoice.fxml");
                 URL url = file.toURI().toURL();
                 FXMLLoader loader = new FXMLLoader(url);
@@ -68,7 +68,7 @@ public class MenuController {
         }
     }
 
-    public boolean TCPon() {
+    public boolean TCPon(ActionEvent event) {
 
         try {
             receiver = new GUIEvent(this);
@@ -86,15 +86,27 @@ public class MenuController {
             }
             if(response.getCategory()==Message.MessageCategory.VALID_NICKNAME){
                 return true;
-            } else
-                return false;
-        } catch (IOException e) {
+            } else {
+            File file = new File("src/main/resources/com/example/is23am23/usedNickname.fxml");
+            URL url = file.toURI().toURL();
+            FXMLLoader loader = new FXMLLoader(url);
+            Parent root = loader.load();
+            UsedNicknameController usedNicknameController = loader.getController();
+            receiver.setUsedNicknameController(usedNicknameController);
+            receiver.setInUsedNickname(true);
+            usedNicknameController.setReceiver(receiver);
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+            return false;
+        } }catch (IOException e) {
             e.printStackTrace();
             return false;
         }
     }
 
-    public boolean RMIon() {
+    public boolean RMIon(ActionEvent event) {
         try {
             receiver = new GUIEvent(this);
             receiver.setInStartGUI(true);
@@ -107,9 +119,21 @@ public class MenuController {
             }
             if(response.getCategory()==Message.MessageCategory.VALID_NICKNAME){
                 return true;
-            } else
-                return false;
-        }catch (IOException e) {
+            } else {
+            File file = new File("src/main/resources/com/example/is23am23/usedNickname.fxml");
+            URL url = file.toURI().toURL();
+            FXMLLoader loader = new FXMLLoader(url);
+            Parent root = loader.load();
+            UsedNicknameController usedNicknameController = loader.getController();
+            receiver.setUsedNicknameController(usedNicknameController);
+            receiver.setInUsedNickname(true);
+            usedNicknameController.setReceiver(receiver);
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+            return false;
+        }}catch (IOException e) {
             e.printStackTrace();
             return false;
         }
@@ -119,7 +143,7 @@ public class MenuController {
 
         String nickname = textField.getText();
         if (!nickname.isEmpty()) {
-            if (RMIon()) {
+            if (RMIon(event)) {
                 File file = new File("src/main/resources/com/example/is23am23/lobbyChoice.fxml");
                 URL url = file.toURI().toURL();
                 FXMLLoader loader = new FXMLLoader(url);
