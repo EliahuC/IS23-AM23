@@ -101,11 +101,11 @@ public class LobbyChoiceController implements Initializable {
             lobbyWaitingController.displayNickname(nickname);
             lobbyWaitingController.setReceiver(receiver);
             gameControllerGUI = new GameControllerGUI();
+            gameControllerGUI.setConnectionClient(connectionClient);
             receiver.setGamecontrollerGUI(gameControllerGUI);
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
-            receiver.setStage(stage);
             stage.show();
         }
     }

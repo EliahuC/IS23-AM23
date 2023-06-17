@@ -829,4 +829,5 @@ public class GameControllerGUI {
     public void setSeed (Integer seed){
         this.seed=seed;
     }
+    public void setConnectionClient(ConnectionClient connectionClient){this.connectionClient=connectionClient;}
 }

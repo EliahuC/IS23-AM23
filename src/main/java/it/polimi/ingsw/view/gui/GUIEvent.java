@@ -32,7 +32,7 @@ public class GUIEvent implements PropertyChangeListener {
     private LobbyChoiceController lobbyChoiceController;
     private URL url;
     private ServerMessage serverMessage;
-    private Stage stage;
+    private Stage stage = new Stage();
 
 
     public GUIEvent(MenuController menuController) {
@@ -57,15 +57,8 @@ public class GUIEvent implements PropertyChangeListener {
                         try {
                             Parent root = loader.load();
                             Scene scene = new Scene(root);
-                            if (stage.isShowing()) {
-                                stage.hide();
-                                stage.setScene(scene);
-                                stage.show();
-                            } else {
-                                stage.setScene(scene);
-                                stage.show();
-                            }
-
+                            stage.setScene(scene);
+                            stage.show();
                             GameIsStartingMessage temp_startingGameMessage = (GameIsStartingMessage) serverMessage;
                             gamecontrollerGUI.setLivingRoom(temp_startingGameMessage.getLivingRoom());
                             gamecontrollerGUI.setPlayers(temp_startingGameMessage.getPlayers());
@@ -141,8 +134,5 @@ public class GUIEvent implements PropertyChangeListener {
 
     public void setInLobbyChoice(Boolean inLobbyChoice) {
         this.inLobbyChoice = inLobbyChoice;
-    }
-    public void setStage(Stage stage){
-        this.stage=stage;
     }
 }

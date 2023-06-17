@@ -45,26 +45,6 @@ public class LobbyWaitingController {
         stage.setScene(scene);
         stage.show();
     }
-
-    /*public LobbyWaitingController(ConnectionClient connectionClient, GUIEvent receiver) {
-        this.connectionClient = connectionClient;
-        this.receiver = receiver;
-        this.receiver.setInLobbyWaiting(true);
-        connectionClient.setListener(receiver);
-        this.receiver.setLobbyWaitingcontroller(this);
-    }*/
-    public void waiting(GUIEvent receiver) throws IOException {
-             File file = new File("src/main/resources/com/example/is23am23/game.fxml");
-             URL url = file.toURI().toURL();
-             FXMLLoader loader = new FXMLLoader(url);
-             Parent root = loader.load();
-         }
-              //sennò aspetto
-
-
-            //gamecontrollerGUI.start();
-
-
     public void setResponse(ServerMessage response) {
         this.response = response;
     }
