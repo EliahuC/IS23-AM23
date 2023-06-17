@@ -36,7 +36,7 @@ public class GameControllerGUI {
     private Scene scene;
     private Parent root;
     private ConnectionClient connectionClient;
-    //private GUIEvent receiver;
+    private GUIEvent receiver;
     private ServerMessage response;
     private LivingRoom livingRoom;
     private Player player;
@@ -830,4 +830,7 @@ public class GameControllerGUI {
         this.seed=seed;
     }
     public void setConnectionClient(ConnectionClient connectionClient){this.connectionClient=connectionClient;}
+    public void setReceiver(GUIEvent receiver){
+        this.receiver=receiver;
+    }
 }

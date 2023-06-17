@@ -57,6 +57,7 @@ public class LobbyChoiceController implements Initializable {
             iE.printStackTrace();
         }
         if (checklobbies()) {
+            if(response.getCategory()==Message.MessageCategory.RETURN_MESSAGE){
             File file = new File("src/main/resources/com/example/is23am23/lobbyWaiting.fxml");
             URL url = file.toURI().toURL();
             FXMLLoader loader = new FXMLLoader(url);
@@ -65,18 +66,30 @@ public class LobbyChoiceController implements Initializable {
             receiver.setLobbyWaitingcontroller(lobbyWaitingController);
             lobbyWaitingController.displayNickname(nickname);
             lobbyWaitingController.setReceiver(receiver);
-            gameControllerGUI = new GameControllerGUI();
+            gameControllerGUI = loader.getController();
+            gameControllerGUI.setConnectionClient(connectionClient);
             receiver.setGamecontrollerGUI(gameControllerGUI);
+            gameControllerGUI.setReceiver(receiver);
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
-        }/*else if(!checklobbies()) {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("No available lobbies");
-            alert.setHeaderText("You have to create a new lobby!");
-        }*/
+        }else if(response.getCategory()==Message.MessageCategory.STARTING_GAME_MESSAGE){
+            File file = new File("src/main/resources/com/example/is23am23/game.fxml");
+            URL url = file.toURI().toURL();
+            FXMLLoader loader = new FXMLLoader(url);
+            root = loader.load();
+            gameControllerGUI = loader.getController();
+            gameControllerGUI.setConnectionClient(connectionClient);
+            receiver.setGamecontrollerGUI(gameControllerGUI);
+            gameControllerGUI.setReceiver(receiver);
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        }
     }
+}
 
     public void createLobby(ActionEvent event) throws IOException {
         receiver.setInStartGUI(false);
@@ -100,9 +113,10 @@ public class LobbyChoiceController implements Initializable {
             receiver.setLobbyWaitingcontroller(lobbyWaitingController);
             lobbyWaitingController.displayNickname(nickname);
             lobbyWaitingController.setReceiver(receiver);
-            gameControllerGUI = new GameControllerGUI();
+            gameControllerGUI = loader.getController();
             gameControllerGUI.setConnectionClient(connectionClient);
             receiver.setGamecontrollerGUI(gameControllerGUI);
+            gameControllerGUI.setReceiver(receiver);
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);

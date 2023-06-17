@@ -92,6 +92,7 @@ public class GUIEvent implements PropertyChangeListener {
     private void forwardMessage(ServerMessage response) {
         if (inStartGUI) {
             menuController.setResponse(response);
+            setInStartGUI(false);
             return;
         } else if (inLobbyChoice) {
             lobbyChoiceController.setResponse(response);

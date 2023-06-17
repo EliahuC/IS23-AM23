@@ -46,7 +46,6 @@ public class MenuController {
     private ServerMessage response;
 
 
-
     public void goTCP(ActionEvent event) throws IOException {
 
         nickname = textField.getText();
@@ -57,8 +56,10 @@ public class MenuController {
                 FXMLLoader loader = new FXMLLoader(url);
                 Parent root = loader.load();
                 LobbyChoiceController lobbyController = loader.getController();
+                receiver.setLobbyChoiceController(lobbyController);
                 lobbyController.displayNickname(nickname);
-                lobbyController.setConnectionClient(connectionClient);
+                lobbyController.setConnection(connectionClient);
+                lobbyController.setReceiver(receiver);
                 stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 scene = new Scene(root);
                 stage.setScene(scene);
@@ -70,15 +71,23 @@ public class MenuController {
     public boolean TCPon() {
 
         try {
+            receiver = new GUIEvent(this);
+            receiver.setInStartGUI(true);
             serverAddr = Settings.SERVER_NAME;
             portNum = Settings.PORT;
             socket = new Socket("127.0.0.1", portNum);
             connectionClient = new ClientConnectionTCP(socket, nickname);
-            receiver = new GUIEvent(this);
-            receiver.setInStartGUI(true);
             connectionClient.setListener(receiver);
             new Thread(connectionClient).start();
-            return true;
+            try {
+                TimeUnit.MILLISECONDS.sleep(500);
+            } catch (InterruptedException iE) {
+                iE.printStackTrace();
+            }
+            if(response.getCategory()==Message.MessageCategory.VALID_NICKNAME){
+                return true;
+            } else
+                return false;
         } catch (IOException e) {
             e.printStackTrace();
             return false;
@@ -91,8 +100,16 @@ public class MenuController {
             receiver.setInStartGUI(true);
             connectionClient = new ClientConnectionRMI(nickname, receiver);
             new Thread(connectionClient).start();
-            return true;
-        } catch (IOException e) {
+            try {
+                TimeUnit.MILLISECONDS.sleep(500);
+            } catch (InterruptedException iE) {
+                iE.printStackTrace();
+            }
+            if(response.getCategory()==Message.MessageCategory.VALID_NICKNAME){
+                return true;
+            } else
+                return false;
+        }catch (IOException e) {
             e.printStackTrace();
             return false;
         }
@@ -109,8 +126,10 @@ public class MenuController {
                 Parent root = loader.load();
 
                 LobbyChoiceController lobbyController = loader.getController();
+                receiver.setLobbyChoiceController(lobbyController);
                 lobbyController.displayNickname(nickname);
-                lobbyController.setConnectionClient(connectionClient);
+                lobbyController.setConnection(connectionClient);
+                lobbyController.setReceiver(receiver);
 
                 stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 scene = new Scene(root);
@@ -120,6 +139,7 @@ public class MenuController {
             }
         }
     }
+
     public void exit() {
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -135,8 +155,10 @@ public class MenuController {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
+            //connectionClient.closeConnection();
         }
     }
+
 
     public void setResponse(ServerMessage response) {
         this.response = response;
