@@ -30,10 +30,6 @@ public class LobbyWaitingController {
 
     @FXML
     private Label Display;
-
-    private ConnectionClient connectionClient;
-    private GUIEvent receiver;
-
     public void returnToMenu(ActionEvent event) throws IOException {
 
         File file = new File("src/main/resources/com/example/is23am23/menu.fxml");
@@ -45,14 +41,7 @@ public class LobbyWaitingController {
         stage.setScene(scene);
         stage.show();
     }
-    public void setResponse(ServerMessage response) {
-        this.response = response;
-    }
     public void displayNickname(String nickname) {
         Display.setText(nickname);
     }
-    public void setReceiver(GUIEvent receiver){
-        this.receiver=receiver;
-    }
-
 }

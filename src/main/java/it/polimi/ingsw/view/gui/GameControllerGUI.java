@@ -11,7 +11,10 @@ import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.board.BoardToken;
 import it.polimi.ingsw.model.board.ItemTile;
 import it.polimi.ingsw.model.board.LivingRoom;
+import it.polimi.ingsw.model.board.goalCards.*;
 import it.polimi.ingsw.model.player.BookShelf;
+import it.polimi.ingsw.model.player.Pair;
+import it.polimi.ingsw.model.player.PersonalGoalCard;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.view.cli.CLIEvent;
 import javafx.event.ActionEvent;
@@ -37,12 +40,13 @@ public class GameControllerGUI {
     private Parent root;
     private ConnectionClient connectionClient;
     private GUIEvent receiver;
+    private BookShelf bookshelf = new BookShelf();
     private ServerMessage response;
     private LivingRoom livingRoom;
     private Player player;
     private List<Player> players;
     private List<ItemTile> tiles;
-    private int currPlaying;
+    private int currPlaying=1;
     private String currentPlayer;
     private String winner;
     private Integer seed;
@@ -203,21 +207,19 @@ public class GameControllerGUI {
     ImageView container2;
     @FXML
     ImageView container3;
-
-    private Game game;
-
-    public void setGame(Game game){
-        this.game = game;
-    }
+    private int currPlayer=1;
+    public static final int LivingRoomSize=9;
+    private static final int shelfRows = 6;
+    private static final int shelfCols = 5;
+    private boolean endgame;
+    private CommonGoalCard commonGoalCard1;
+    private CommonGoalCard commonGoalCard2;
     public void displayLivingroom(){
-
-        LivingRoom livingroom = game.getLivingRoom();
-
-        for(int i=0; i<9; i++)
+        for(int i=0; i<LivingRoomSize; i++)
         {
             for(int  j=0; j<9; j++)
             {
-                ItemTile tile = livingroom.getBoardTile(i,j).getTile();
+                ItemTile tile = livingRoom.getBoardTile(i,j).getTile();
                 if(i==0 && j == 3)
                 {
                     displayImage(livingroom_0_3, chooseCategoryImage(tile));
@@ -403,13 +405,13 @@ public class GameControllerGUI {
     }
 
     public void displayBookshelf(){
-        BookShelf shelf = player.getPlayerBookshelf();
+        bookshelf = player.getPlayerBookshelf();
 
-        for(int i=0; i<6; i++)
+        for(int i=0; i<shelfRows; i++)
         {
-            for(int  j=0; j<5; j++)
+            for(int  j=0; j<shelfCols; j++)
             {
-                ItemTile tile = shelf.getTile(i,j);
+                ItemTile tile = bookshelf.getTile(i,j);
 
                 if(i==0 && j == 0)
                 {
@@ -588,6 +590,9 @@ public class GameControllerGUI {
         Parent root = loader.load();
 
         GoalsController goalsController = loader.getController();
+        if(goalsController.getGameControllerGUI()==null){
+            goalsController.setGameControllerGUI(this);
+        }
         goalsController.displayPersonalGoal();
         goalsController.displayCommonGoal();
         goalsController.displayPoints();
@@ -615,7 +620,43 @@ public class GameControllerGUI {
     }
 
     public void setLivingRoom(LivingRoom livingRoom) {
+
         this.livingRoom = livingRoom;
+        createCommonGoalCard1(livingRoom.getIdCGC1());
+        createCommonGoalCard2(livingRoom.getIdCGC2());
+    }
+    private void createCommonGoalCard1(Integer idCGC1) {
+        switch (idCGC1) {
+            case 1 -> this.commonGoalCard1 = new CommonGoalCard1(players.size());
+            case 2 -> this.commonGoalCard1 = new CommonGoalCard2(players.size());
+            case 3 -> this.commonGoalCard1 = new CommonGoalCard3(players.size());
+            case 4 -> this.commonGoalCard1 = new CommonGoalCard4(players.size());
+            case 5 -> this.commonGoalCard1 = new CommonGoalCard5(players.size());
+            case 6 -> this.commonGoalCard1 = new CommonGoalCard6(players.size());
+            case 7 -> this.commonGoalCard1 = new CommonGoalCard7(players.size());
+            case 8 -> this.commonGoalCard1 = new CommonGoalCard8(players.size());
+            case 9 -> this.commonGoalCard1 = new CommonGoalCard9(players.size());
+            case 10 -> this.commonGoalCard1 = new CommonGoalCard10(players.size());
+            case 11 -> this.commonGoalCard1 = new CommonGoalCard11(players.size());
+            case 12 -> this.commonGoalCard1 = new CommonGoalCard12(players.size());
+        }
+    }
+    private void createCommonGoalCard2(Integer idCGC2) {
+        switch (idCGC2) {
+            case 1 -> this.commonGoalCard2 = new CommonGoalCard1(players.size());
+            case 2 -> this.commonGoalCard2 = new CommonGoalCard2(players.size());
+            case 3 -> this.commonGoalCard2 = new CommonGoalCard3(players.size());
+            case 4 -> this.commonGoalCard2 = new CommonGoalCard4(players.size());
+            case 5 -> this.commonGoalCard2 = new CommonGoalCard5(players.size());
+            case 6 -> this.commonGoalCard2 = new CommonGoalCard6(players.size());
+            case 7 -> this.commonGoalCard2 = new CommonGoalCard7(players.size());
+            case 8 -> this.commonGoalCard2 = new CommonGoalCard8(players.size());
+            case 9 -> this.commonGoalCard2 = new CommonGoalCard9(players.size());
+            case 10 -> this.commonGoalCard2 = new CommonGoalCard10(players.size());
+            case 11 -> this.commonGoalCard2 = new CommonGoalCard11(players.size());
+            case 12 -> this.commonGoalCard2 = new CommonGoalCard12(players.size());
+
+        }
     }
 
     public void setPlayer(Player player) {
@@ -832,5 +873,11 @@ public class GameControllerGUI {
     public void setConnectionClient(ConnectionClient connectionClient){this.connectionClient=connectionClient;}
     public void setReceiver(GUIEvent receiver){
         this.receiver=receiver;
+    }
+    public void startGame(){
+    }
+
+    public Integer getSeed() {
+        return seed;
     }
 }
