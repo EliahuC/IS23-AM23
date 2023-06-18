@@ -22,13 +22,11 @@ import static java.awt.SystemColor.window;
 
 public class GUIEvent implements PropertyChangeListener {
     private Boolean inStartGUI = false;
-    private Boolean inLobbyWaiting = false;
     private Boolean inGameControllerGUI = false;
     private Boolean inLobbyChoice = false;
     private Boolean inUsedNickname=false;
 
     private final MenuController menuController;
-    private LobbyWaitingController lobbywaitingcontroller;
     private GameControllerGUI gamecontrollerGUI;
     private LobbyChoiceController lobbyChoiceController;
     private UsedNicknameController usedNicknameController;
@@ -62,11 +60,12 @@ public class GUIEvent implements PropertyChangeListener {
                             stage.setScene(scene);
                             stage.show();
                             GameIsStartingMessage temp_startingGameMessage = (GameIsStartingMessage) serverMessage;
-                            gamecontrollerGUI.setLivingRoom(temp_startingGameMessage.getLivingRoom());
                             gamecontrollerGUI.setPlayers(temp_startingGameMessage.getPlayers());
+                            gamecontrollerGUI.setLivingRoom(temp_startingGameMessage.getLivingRoom());
                             gamecontrollerGUI.setPlayer(temp_startingGameMessage.getPlayers().stream().filter(player -> Objects.equals(player.getNickName(), gamecontrollerGUI.getConnectionClient().getPlayerName())).findFirst().orElseThrow(() -> new IllegalArgumentException("Player not found")));
                             gamecontrollerGUI.setCurrentPlayer(temp_startingGameMessage.getCurrPlaying());
                             gamecontrollerGUI.setSeed(gamecontrollerGUI.getPlayer().getPersonalGoalCard().getNumeroCarta());
+                            gamecontrollerGUI.startGame();
                         } catch (IOException e) {
                             throw new RuntimeException(e);
                         }
@@ -98,13 +97,8 @@ public class GUIEvent implements PropertyChangeListener {
             return;
         } else if (inLobbyChoice) {
             lobbyChoiceController.setResponse(response);
-            setInLobbyWaiting(true);
-            setInLobbyChoice(false);
-            return;
-        } else if (inLobbyWaiting) {
-            lobbywaitingcontroller.setResponse(response);
-            setInLobbyWaiting(false);
             setInGameControllerGUI(true);
+            setInLobbyChoice(false);
             return;
         } else if (inGameControllerGUI) {
             gamecontrollerGUI.setResponse(response);
@@ -113,11 +107,6 @@ public class GUIEvent implements PropertyChangeListener {
             setInUsedNickname(false);
         }
     }
-
-    public void setLobbyWaitingcontroller(LobbyWaitingController lobbywaitingcontroller) {
-        this.lobbywaitingcontroller = lobbywaitingcontroller;
-    }
-
     public void setGamecontrollerGUI(GameControllerGUI gamecontrollerGUI) {
         this.gamecontrollerGUI = gamecontrollerGUI;
     }
@@ -129,11 +118,6 @@ public class GUIEvent implements PropertyChangeListener {
     public void setInStartGUI(Boolean inStartGUI) {
         this.inStartGUI = inStartGUI;
     }
-
-    public void setInLobbyWaiting(Boolean inLobbyWaiting) {
-        this.inLobbyWaiting = inLobbyWaiting;
-    }
-
     public void setInGameControllerGUI(Boolean inGameControllerGUI) {
         this.inGameControllerGUI = inGameControllerGUI;
     }

@@ -48,6 +48,10 @@ public class LobbyChoiceController implements Initializable {
     public void joinLobby(ActionEvent event) throws IOException {
         receiver.setInStartGUI(false);
         receiver.setInLobbyChoice(true);
+        gameControllerGUI = new GameControllerGUI();
+        gameControllerGUI.setConnectionClient(connectionClient);
+        receiver.setGamecontrollerGUI(gameControllerGUI);
+        gameControllerGUI.setReceiver(receiver);
         command = "/ENTER";
         Message message = MoveSerializer.serializeInput(command);
         connectionClient.sendMessage((ClientMessage) message);
@@ -63,34 +67,15 @@ public class LobbyChoiceController implements Initializable {
                 FXMLLoader loader = new FXMLLoader(url);
                 root = loader.load();
                 LobbyWaitingController lobbyWaitingController = loader.getController();
-                receiver.setLobbyWaitingcontroller(lobbyWaitingController);
                 lobbyWaitingController.displayNickname(nickname);
-                lobbyWaitingController.setReceiver(receiver);
-                gameControllerGUI = loader.getController();
-                gameControllerGUI.setConnectionClient(connectionClient);
-                receiver.setGamecontrollerGUI(gameControllerGUI);
-                gameControllerGUI.setReceiver(receiver);
                 stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 scene = new Scene(root);
                 stage.setScene(scene);
                 stage.show();
-       /* }else if(response.getCategory()==Message.MessageCategory.STARTING_GAME_MESSAGE){
-            File file = new File("src/main/resources/com/example/is23am23/game.fxml");
-            URL url = file.toURI().toURL();
-            FXMLLoader loader = new FXMLLoader(url);
-            root = loader.load();
-            gameControllerGUI = loader.getController();
-            gameControllerGUI.setConnectionClient(connectionClient);
-            receiver.setGamecontrollerGUI(gameControllerGUI);
-            gameControllerGUI.setReceiver(receiver);
-            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        }*/
             }
         }
     }
+
 
     public void createLobby(ActionEvent event) throws IOException {
         receiver.setInStartGUI(false);
@@ -102,7 +87,6 @@ public class LobbyChoiceController implements Initializable {
                 case "3" -> setPlayersCounter(3);
                 case "4" -> setPlayersCounter(4);
             }
-            //lobby_size = Integer.toString(getPlayersCounter());
             command = "/CREATE " + lobby_size;
             Message message = MoveSerializer.serializeInput(command);
             connectionClient.sendMessage((ClientMessage) message);
@@ -111,10 +95,8 @@ public class LobbyChoiceController implements Initializable {
             FXMLLoader loader = new FXMLLoader(url);
             Parent root = loader.load();
             LobbyWaitingController lobbyWaitingController = loader.getController();
-            receiver.setLobbyWaitingcontroller(lobbyWaitingController);
             lobbyWaitingController.displayNickname(nickname);
-            lobbyWaitingController.setReceiver(receiver);
-            gameControllerGUI = loader.getController();
+            gameControllerGUI = new GameControllerGUI();
             gameControllerGUI.setConnectionClient(connectionClient);
             receiver.setGamecontrollerGUI(gameControllerGUI);
             gameControllerGUI.setReceiver(receiver);
