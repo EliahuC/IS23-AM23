@@ -67,6 +67,7 @@ public class UsedNicknameController {
     public void setResponse(ServerMessage response){
         this.response=response;
     }
+
     public void goToTCP(ActionEvent event)throws IOException {
         nickname = name.getText();
         if (!nickname.isEmpty()) {
@@ -87,6 +88,7 @@ public class UsedNicknameController {
             }
         }
     }
+
     public boolean TCPon(ActionEvent event) {
         try {
             serverAddr = Settings.SERVER_NAME;
@@ -109,6 +111,7 @@ public class UsedNicknameController {
             return false;
         }
     }
+
     public void goToRMI(ActionEvent event) throws IOException {
         nickname = name.getText();
         if (!nickname.isEmpty()) {
@@ -132,6 +135,7 @@ public class UsedNicknameController {
             }
         }
     }
+
     public boolean RMIon(ActionEvent event) {
         try {
             connectionClient = new ClientConnectionRMI(nickname, receiver);
@@ -154,4 +158,5 @@ public class UsedNicknameController {
     public void setReceiver(GUIEvent receiver) {
         this.receiver = receiver;
     }
+
 }

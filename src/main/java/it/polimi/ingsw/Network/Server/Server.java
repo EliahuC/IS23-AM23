@@ -26,6 +26,7 @@ public class Server implements Printer {
     public static final ArrayList<Lobby> startedLobbies=new ArrayList<>();
     public static final ArrayList<String> connectedPlayers=new ArrayList<>();
     public static final HashMap<String, RemoteInterfaceClient> rmiConnections = new HashMap<>();
+
     public static void main(String[] args){
         loadSaves();
         TCPServerMain tcpServerMain =new TCPServerMain(TCPParams.PORT);
@@ -57,14 +58,12 @@ public class Server implements Printer {
         } catch (IOException e) {
             System.out.println("Savings completely loaded");
         }
-
     }
 
     @Override
     public void showMessage(String s) {
         System.out.println(s);
     }
-
 
 
     //TODO ricaricamento dei salvataggi delle lobby

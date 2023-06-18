@@ -208,16 +208,17 @@ public class GameControllerGUI {
     @FXML
     ImageView container3;
     private int currPlayer=1;
-    public static final int LivingRoomSize=9;
+    public static final int livingRoomSize=9;
     private static final int shelfRows = 6;
     private static final int shelfCols = 5;
     private boolean endgame;
     private CommonGoalCard commonGoalCard1;
     private CommonGoalCard commonGoalCard2;
+
     public void displayLivingroom(){
-        for(int i=0; i<LivingRoomSize; i++)
+        for(int i=0; i<livingRoomSize; i++)
         {
-            for(int  j=0; j<9; j++)
+            for(int  j=0; j<livingRoomSize; j++)
             {
                 ItemTile tile = livingRoom.getBoardTile(i,j).getTile();
                 if(i==0 && j == 3)
@@ -582,6 +583,19 @@ public class GameControllerGUI {
         return image;
     }
 
+    public void displayWinner(ActionEvent event) throws IOException {
+
+        File file = new File("src/main/resources/com/example/is23am23/winner.fxml");
+        URL url = file.toURI().toURL();
+        FXMLLoader loader = new FXMLLoader(url);
+        Parent root = loader.load();
+
+        stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
     public void goToGoals(ActionEvent event) throws IOException {
 
         File file = new File("src/main/resources/com/example/is23am23/goals.fxml");
@@ -600,8 +614,8 @@ public class GameControllerGUI {
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-
     }
+
     public void returnToMenu(ActionEvent event) throws IOException {
 
         File file = new File("src/main/resources/com/example/is23am23/menu.fxml");
@@ -625,6 +639,7 @@ public class GameControllerGUI {
         createCommonGoalCard1(livingRoom.getIdCGC1());
         createCommonGoalCard2(livingRoom.getIdCGC2());
     }
+
     private void createCommonGoalCard1(Integer idCGC1) {
         switch (idCGC1) {
             case 1 -> this.commonGoalCard1 = new CommonGoalCard1(players.size());
@@ -641,6 +656,7 @@ public class GameControllerGUI {
             case 12 -> this.commonGoalCard1 = new CommonGoalCard12(players.size());
         }
     }
+
     private void createCommonGoalCard2(Integer idCGC2) {
         switch (idCGC2) {
             case 1 -> this.commonGoalCard2 = new CommonGoalCard1(players.size());
@@ -720,8 +736,8 @@ public class GameControllerGUI {
         while(!player.getNowPlaying()){
         }
     }
-    public LivingRoom getLivingRoom(){
 
+    public LivingRoom getLivingRoom(){
         return livingRoom;
     }
 
@@ -731,7 +747,6 @@ public class GameControllerGUI {
 
     public List<Player> getPlayersList(){
         return players;
-
     }
 
     private void displayBoard(){
