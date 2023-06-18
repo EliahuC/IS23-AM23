@@ -36,6 +36,7 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
 
     public ServerConnectionRMI() throws RemoteException {
         super();
+        this.run();
     }
 
     /**
@@ -129,17 +130,18 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
                 reconnectedPlayer(message);
 
 
-                lobby = Server.lobbies.get(0);
+
                 disconnectionHandler = new DisconnectionHandler(lobby);
                if (!checkLobbySpace()){
                     lobbyIsFull();
                     break;
                 }
+
                 VirtualView virtualView=new VirtualView(this,namePlayer);
                 virtualViews.add(virtualView);
                 lobby.addUser(this, message.getNickname(), virtualView);
-                checkCompletedLobby();
-                sendMessage(new LobbyJoiningMessage(lobby.getIdLobby()),namePlayer);
+                if(!checkCompletedLobby())
+                    sendMessage(new LobbyJoiningMessage(lobby.getIdLobby()),namePlayer);
                 break;
             }
 
@@ -332,7 +334,7 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
     private void closeConnection(String s) {
 
         Server.connectedPlayers.remove(s);
-
+        System.out.println(s+ " disconnected from the server");
         for (Lobby l : Server.lobbies) {
             if(l.getJoinedUsers().contains(s)){
                 lobby=l;
@@ -367,12 +369,11 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
     public void run(){
 
         serverIsActive=true;
-        //Metto a dormire thread per 5 secondi
         Thread ping = new Thread(() -> {
             while (serverIsActive) {
                 try {
                     //Metto a dormire thread per 5 secondi
-                    TimeUnit.SECONDS.sleep(15);
+                    TimeUnit.SECONDS.sleep(5);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
