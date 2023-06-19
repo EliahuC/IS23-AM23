@@ -324,7 +324,7 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
             } catch (InterruptedException e) {
                 System.out.println(s+ " connection crashed");
                 closeConnection(s);
-            }
+           }
         }
     }
     /**
@@ -334,6 +334,7 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
     private void closeConnection(String s) {
 
         Server.connectedPlayers.remove(s);
+        Server.rmiConnections.remove(s);
         System.out.println(s+ " disconnected from the server");
         for (Lobby l : Server.lobbies) {
             if(l.getJoinedUsers().contains(s)){
