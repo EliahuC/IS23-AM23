@@ -393,12 +393,12 @@ public class GoalsController {
 
         switch (card2) {
             case 1: {
-                Image image = new Image(getClass().getResourceAsStream("1.jpg"));
+                Image image = new Image(getClass().getResourceAsStream("4.jpg"));
                 displayImage(commonGoal2, image);
                 break;
             }
             case 2: {
-                Image image = new Image(getClass().getResourceAsStream("2.jpg"));
+                Image image = new Image(getClass().getResourceAsStream("8.jpg"));
                 displayImage(commonGoal2, image);
                 break;
             }
@@ -408,7 +408,7 @@ public class GoalsController {
                 break;
             }
             case 4: {
-                Image image = new Image(getClass().getResourceAsStream("4.jpg"));
+                Image image = new Image(getClass().getResourceAsStream("1.jpg"));
                 displayImage(commonGoal2, image);
                 break;
             }
@@ -418,32 +418,32 @@ public class GoalsController {
                 break;
             }
             case 6: {
-                Image image = new Image(getClass().getResourceAsStream("6.jpg"));
-                displayImage(commonGoal2, image);
-                break;
-            }
-            case 7: {
-                Image image = new Image(getClass().getResourceAsStream("7.jpg"));
-                displayImage(commonGoal2, image);
-                break;
-            }
-            case 8: {
-                Image image = new Image(getClass().getResourceAsStream("8.jpg"));
-                displayImage(commonGoal2, image);
-                break;
-            }
-            case 9: {
                 Image image = new Image(getClass().getResourceAsStream("9.jpg"));
                 displayImage(commonGoal2, image);
                 break;
             }
+            case 7: {
+                Image image = new Image(getClass().getResourceAsStream("11.jpg"));
+                displayImage(commonGoal2, image);
+                break;
+            }
+            case 8: {
+                Image image = new Image(getClass().getResourceAsStream("7.jpg"));
+                displayImage(commonGoal2, image);
+                break;
+            }
+            case 9: {
+                Image image = new Image(getClass().getResourceAsStream("2.jpg"));
+                displayImage(commonGoal2, image);
+                break;
+            }
             case 10: {
-                Image image = new Image(getClass().getResourceAsStream("10.jpg"));
+                Image image = new Image(getClass().getResourceAsStream("6.jpg"));
                 displayImage(commonGoal2, image);
                 break;
             }
             case 11: {
-                Image image = new Image(getClass().getResourceAsStream("11.jpg"));
+                Image image = new Image(getClass().getResourceAsStream("10.jpg"));
                 displayImage(commonGoal2, image);
                 break;
             }
