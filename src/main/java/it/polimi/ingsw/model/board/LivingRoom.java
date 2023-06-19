@@ -62,7 +62,7 @@ public class LivingRoom implements Serializable {
         //Each board box gets board reference.
         SetBoard();
 
-        //Start(L.getNumPlayers());
+
     }
 
     /**

@@ -46,7 +46,7 @@ public class GoalsController {
         Parent root = loader.load();
 
         GameControllerGUI gameControllerGUI = loader.getController();
-        gameControllerGUI.displayBookshelf();
+        //gameControllerGUI.displayBookshelf();
         gameControllerGUI.displayContainer();
         gameControllerGUI.displayLivingroom();
         stage = (Stage)((Node) event.getSource()).getScene().getWindow();
@@ -57,7 +57,7 @@ public class GoalsController {
 
     public void displayPoints(){
 
-        int numPlayers = gameControllerGUI.getPlayersList().size();
+        int numPlayers = gameControllerGUI.getPlayers().size();
         int numCompleted1 = gameControllerGUI.getLivingRoom().getCommonGoalCard1().getNumCompleted();
         int numCompleted2 = gameControllerGUI.getLivingRoom().getCommonGoalCard2().getNumCompleted();
 

@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.gui.GameControllerGUI">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.gui.GameControllerGUI">
     <children>
         <ImageView fitHeight="400.0" fitWidth="610.0" layoutX="-4.0" pickOnBounds="true">
             <image>
@@ -20,7 +20,7 @@
                 <Image url="@bookshelf.png" />
             </image>
         </ImageView>
-        <ImageView fitHeight="341.0" fitWidth="663.0" layoutX="14.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="341.0" fitWidth="663.0" layoutX="14.0" layoutY="45.0" opacity="0.31" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@livingroom.png" />
             </image>
@@ -74,50 +74,29 @@
       <ImageView fx:id="shelf_5_2" fitHeight="27.0" fitWidth="27.0" layoutX="465.0" layoutY="325.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="shelf_5_3" fitHeight="27.0" fitWidth="27.0" layoutX="503.0" layoutY="325.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="shelf_5_4" fitHeight="27.0" fitWidth="27.0" layoutX="540.0" layoutY="325.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="livingroom_1_3" fitHeight="32.0" fitWidth="32.0" layoutX="133.0" layoutY="96.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="livingroom_0_3" fitHeight="32.0" fitWidth="32.0" layoutX="133.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="livingroom_0_4" fitHeight="32.0" fitWidth="32.0" layoutX="168.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="livingroom_1_4" fitHeight="32.0" fitWidth="32.0" layoutX="168.0" layoutY="96.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="livingroom_1_5" fitHeight="32.0" fitWidth="32.0" layoutX="201.0" layoutY="96.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="livingroom_2_2" fitHeight="32.0" fitWidth="32.0" layoutX="98.0" layoutY="131.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="livingroom_2_3" fitHeight="32.0" fitWidth="32.0" layoutX="133.0" layoutY="131.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="livingroom_2_4" fitHeight="32.0" fitWidth="32.0" layoutX="168.0" layoutY="131.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="livingroom_2_5" fitHeight="32.0" fitWidth="32.0" layoutX="201.0" layoutY="131.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="livingroom_2_6" fitHeight="32.0" fitWidth="32.0" layoutX="236.0" layoutY="131.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="livingroom_3_1" fitHeight="32.0" fitWidth="32.0" layoutX="63.0" layoutY="166.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="livingroom_3_2" fitHeight="32.0" fitWidth="32.0" layoutX="98.0" layoutY="166.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="livingroom_3_3" fitHeight="32.0" fitWidth="32.0" layoutX="133.0" layoutY="166.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="livingroom_3_4" fitHeight="32.0" fitWidth="32.0" layoutX="168.0" layoutY="166.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="livingroom_3_5" fitHeight="32.0" fitWidth="32.0" layoutX="201.0" layoutY="166.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="livingroom_3_6" fitHeight="32.0" fitWidth="32.0" layoutX="236.0" layoutY="166.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="livingroom_3_7" fitHeight="32.0" fitWidth="32.0" layoutX="270.0" layoutY="166.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="livingroom_3_8" fitHeight="32.0" fitWidth="32.0" layoutX="305.0" layoutY="166.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="livingroom_4_0" fitHeight="32.0" fitWidth="32.0" layoutX="30.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="livingroom_4_1" fitHeight="32.0" fitWidth="32.0" layoutX="63.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="livingroom_4_2" fitHeight="32.0" fitWidth="32.0" layoutX="98.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="livingroom_4_3" fitHeight="32.0" fitWidth="32.0" layoutX="133.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="livingroom_4_4" fitHeight="32.0" fitWidth="32.0" layoutX="168.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="livingroom_4_5" fitHeight="32.0" fitWidth="32.0" layoutX="201.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="livingroom_4_6" fitHeight="32.0" fitWidth="32.0" layoutX="236.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="livingroom_4_7" fitHeight="32.0" fitWidth="32.0" layoutX="270.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="livingroom_4_8" fitHeight="32.0" fitWidth="32.0" layoutX="305.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="livingroom_5_0" fitHeight="32.0" fitWidth="32.0" layoutX="30.0" layoutY="234.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="livingroom_5_1" fitHeight="32.0" fitWidth="32.0" layoutX="63.0" layoutY="234.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="livingroom_5_2" fitHeight="32.0" fitWidth="32.0" layoutX="98.0" layoutY="234.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="livingroom_5_3" fitHeight="32.0" fitWidth="32.0" layoutX="133.0" layoutY="234.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="livingroom_5_4" fitHeight="32.0" fitWidth="32.0" layoutX="168.0" layoutY="234.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="livingroom_5_5" fitHeight="32.0" fitWidth="32.0" layoutX="201.0" layoutY="234.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="livingroom_5_6" fitHeight="32.0" fitWidth="32.0" layoutX="236.0" layoutY="234.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="livingroom_5_7" fitHeight="32.0" fitWidth="32.0" layoutX="270.0" layoutY="234.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="livingroom_6_2" fitHeight="32.0" fitWidth="32.0" layoutX="98.0" layoutY="268.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="livingroom_6_3" fitHeight="32.0" fitWidth="32.0" layoutX="133.0" layoutY="268.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="livingroom_6_4" fitHeight="32.0" fitWidth="32.0" layoutX="168.0" layoutY="268.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="livingroom_6_5" fitHeight="32.0" fitWidth="32.0" layoutX="201.0" layoutY="268.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="livingroom_6_6" fitHeight="32.0" fitWidth="32.0" layoutX="236.0" layoutY="268.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="livingroom_7_3" fitHeight="32.0" fitWidth="32.0" layoutX="133.0" layoutY="304.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="livingroom_7_4" fitHeight="32.0" fitWidth="32.0" layoutX="168.0" layoutY="304.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="livingroom_8_4" fitHeight="32.0" fitWidth="32.0" layoutX="168.0" layoutY="337.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="livingroom_7_5" fitHeight="32.0" fitWidth="32.0" layoutX="201.0" layoutY="304.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="livingroom_8_5" fitHeight="32.0" fitWidth="32.0" layoutX="201.0" layoutY="337.0" pickOnBounds="true" preserveRatio="true" />
+      <GridPane fx:id="myGridPane" layoutX="15.0" layoutY="42.0" prefHeight="348.0" prefWidth="341.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="52.9999755859375" minHeight="10.0" prefHeight="48.9999755859375" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="33.8000244140625" minHeight="10.0" prefHeight="29.8000244140625" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="35.79999389648438" minHeight="10.0" prefHeight="29.199993896484372" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="54.39999999999999" minHeight="10.0" prefHeight="30.400000000000006" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="58.400000000000006" minHeight="10.0" prefHeight="33.59998168945313" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="59.20001831054688" minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="61.400000000000006" minHeight="10.0" prefHeight="38.399987792968744" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="58.19998779296873" minHeight="10.0" prefHeight="34.39999999999998" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="56.39999999999998" minHeight="10.0" prefHeight="56.39999999999998" vgrow="SOMETIMES" />
+        </rowConstraints>
+      </GridPane>
     </children>
 </AnchorPane>

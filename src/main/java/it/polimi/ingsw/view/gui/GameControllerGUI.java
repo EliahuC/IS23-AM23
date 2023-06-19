@@ -17,18 +17,24 @@ import it.polimi.ingsw.model.player.Pair;
 import it.polimi.ingsw.model.player.PersonalGoalCard;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.view.cli.CLIEvent;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import javafx.scene.layout.VBox;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
@@ -50,157 +56,7 @@ public class GameControllerGUI {
     private String currentPlayer;
     private String winner;
     private Integer seed;
-
-    @FXML
-    ImageView shelf_0_0;
-    @FXML
-    ImageView shelf_0_1;
-    @FXML
-    ImageView shelf_0_2;
-    @FXML
-    ImageView shelf_0_3;
-    @FXML
-    ImageView shelf_0_4;
-    @FXML
-    ImageView shelf_1_0;
-    @FXML
-    ImageView shelf_1_1;
-    @FXML
-    ImageView shelf_1_2;
-    @FXML
-    ImageView shelf_1_3;
-    @FXML
-    ImageView shelf_1_4;
-    @FXML
-    ImageView shelf_2_0;
-    @FXML
-    ImageView shelf_2_1;
-    @FXML
-    ImageView shelf_2_2;
-    @FXML
-    ImageView shelf_2_3;
-    @FXML
-    ImageView shelf_2_4;
-    @FXML
-    ImageView shelf_3_0;
-    @FXML
-    ImageView shelf_3_1;
-    @FXML
-    ImageView shelf_3_2;
-    @FXML
-    ImageView shelf_3_3;
-    @FXML
-    ImageView shelf_3_4;
-    @FXML
-    ImageView shelf_4_0;
-    @FXML
-    ImageView shelf_4_1;
-    @FXML
-    ImageView shelf_4_2;
-    @FXML
-    ImageView shelf_4_3;
-    @FXML
-    ImageView shelf_4_4;
-    @FXML
-    ImageView shelf_5_0;
-    @FXML
-    ImageView shelf_5_1;
-    @FXML
-    ImageView shelf_5_2;
-    @FXML
-    ImageView shelf_5_3;
-    @FXML
-    ImageView shelf_5_4;
-    @FXML
-    ImageView livingroom_0_3;
-    @FXML
-    ImageView livingroom_0_4;
-    @FXML
-    ImageView livingroom_1_3;
-    @FXML
-    ImageView livingroom_1_4;
-    @FXML
-    ImageView livingroom_1_5;
-    @FXML
-    ImageView livingroom_2_2;
-    @FXML
-    ImageView livingroom_2_3;
-    @FXML
-    ImageView livingroom_2_4;
-    @FXML
-    ImageView livingroom_2_5;
-    @FXML
-    ImageView livingroom_2_6;
-    @FXML
-    ImageView livingroom_3_1;
-    @FXML
-    ImageView livingroom_3_2;
-    @FXML
-    ImageView livingroom_3_3;
-    @FXML
-    ImageView livingroom_3_4;
-    @FXML
-    ImageView livingroom_3_5;
-    @FXML
-    ImageView livingroom_3_6;
-    @FXML
-    ImageView livingroom_3_7;
-    @FXML
-    ImageView livingroom_3_8;
-    @FXML
-    ImageView livingroom_4_0;
-    @FXML
-    ImageView livingroom_4_1;
-    @FXML
-    ImageView livingroom_4_2;
-    @FXML
-    ImageView livingroom_4_3;
-    @FXML
-    ImageView livingroom_4_4;
-    @FXML
-    ImageView livingroom_4_5;
-    @FXML
-    ImageView livingroom_4_6;
-    @FXML
-    ImageView livingroom_4_7;
-    @FXML
-    ImageView livingroom_4_8;
-    @FXML
-    ImageView livingroom_5_0;
-    @FXML
-    ImageView livingroom_5_1;
-    @FXML
-    ImageView livingroom_5_2;
-    @FXML
-    ImageView livingroom_5_3;
-    @FXML
-    ImageView livingroom_5_4;
-    @FXML
-    ImageView livingroom_5_5;
-    @FXML
-    ImageView livingroom_5_6;
-    @FXML
-    ImageView livingroom_5_7;
-    @FXML
-    ImageView livingroom_6_2;
-    @FXML
-    ImageView livingroom_6_3;
-    @FXML
-    ImageView livingroom_6_4;
-    @FXML
-    ImageView livingroom_6_5;
-    @FXML
-    ImageView livingroom_6_6;
-    @FXML
-    ImageView livingroom_7_3;
-    @FXML
-    ImageView livingroom_7_4;
-    @FXML
-    ImageView livingroom_7_5;
-    @FXML
-    ImageView livingroom_8_4;
-    @FXML
-    ImageView livingroom_8_5;
+    private Image image;
     @FXML
     ImageView container1;
     @FXML
@@ -214,197 +70,41 @@ public class GameControllerGUI {
     private boolean endgame;
     private CommonGoalCard commonGoalCard1;
     private CommonGoalCard commonGoalCard2;
-    public void displayLivingroom(){
-        for(int i=0; i<LivingRoomSize; i++)
-        {
-            for(int  j=0; j<9; j++)
-            {
-                ItemTile tile = livingRoom.getBoardTile(i,j).getTile();
-                if(i==0 && j == 3)
-                {
-                    displayImage(livingroom_0_3, chooseCategoryImage(tile));
-                }
-                else if(i==0 && j == 4)
-                {
-                    displayImage(livingroom_0_4, chooseCategoryImage(tile));
-                }
-                else if(i==1 && j == 3)
-                {
-                    displayImage(livingroom_1_3, chooseCategoryImage(tile));
-                }
-                else if(i==1 && j == 4)
-                {
-                    displayImage(livingroom_1_4, chooseCategoryImage(tile));
-                }
-                else if(i==1 && j == 5)
-                {
-                    displayImage(livingroom_1_5, chooseCategoryImage(tile));
-                }
-                else if(i==2 && j == 2)
-                {
-                    displayImage(livingroom_2_2, chooseCategoryImage(tile));
-                }
-                else if(i==2 && j == 3)
-                {
-                    displayImage(livingroom_2_3, chooseCategoryImage(tile));
-                }
-                else if(i==2 && j == 4)
-                {
-                    displayImage(livingroom_2_4, chooseCategoryImage(tile));
-                }
-                else if(i==2 && j == 5)
-                {
-                    displayImage(livingroom_2_5, chooseCategoryImage(tile));
-                }
-                else if(i==2 && j == 6)
-                {
-                    displayImage(livingroom_2_6, chooseCategoryImage(tile));
-                }
-                else if(i==3 && j == 1)
-                {
-                    displayImage(livingroom_3_1, chooseCategoryImage(tile));
-                }
-                else if(i==3 && j == 2)
-                {
-                    displayImage(livingroom_3_2, chooseCategoryImage(tile));
-                }
-                else if(i==3 && j == 3)
-                {
-                    displayImage(livingroom_3_3, chooseCategoryImage(tile));
-                }
-                else if(i==3 && j == 4)
-                {
-                    displayImage(livingroom_3_4, chooseCategoryImage(tile));
-                }
-                else if(i==3 && j == 5)
-                {
-                    displayImage(livingroom_3_5, chooseCategoryImage(tile));
-                }
-                else if(i==3 && j == 6)
-                {
-                    displayImage(livingroom_3_6, chooseCategoryImage(tile));
-                }
-                else if(i==3 && j == 7)
-                {
-                    displayImage(livingroom_3_7, chooseCategoryImage(tile));
-                }
-                else if(i==3 && j == 8)
-                {
-                    displayImage(livingroom_3_8, chooseCategoryImage(tile));
-                }
-                else if(i==4 && j == 0)
-                {
-                    displayImage(livingroom_4_0, chooseCategoryImage(tile));
-                }
-                else if(i==4 && j == 1)
-                {
-                    displayImage(livingroom_4_1, chooseCategoryImage(tile));
-                }
-                else if(i==4 && j == 2)
-                {
-                    displayImage(livingroom_4_2, chooseCategoryImage(tile));
-                }
-                else if(i==4 && j == 3)
-                {
-                    displayImage(livingroom_4_3, chooseCategoryImage(tile));
-                }
-                else if(i==4 && j == 4)
-                {
-                    displayImage(livingroom_4_4, chooseCategoryImage(tile));
-                }
-                else if(i==4 && j == 5)
-                {
-                    displayImage(livingroom_4_5, chooseCategoryImage(tile));
-                }
-                else if(i==4 && j == 6)
-                {
-                    displayImage(livingroom_4_6, chooseCategoryImage(tile));
-                }
-                else if(i==4 && j == 7)
-                {
-                    displayImage(livingroom_4_7, chooseCategoryImage(tile));
-                }
-                else if(i==4 && j == 8)
-                {
-                    displayImage(livingroom_4_8, chooseCategoryImage(tile));
-                }
-                else if(i==5 && j == 0)
-                {
-                    displayImage(livingroom_5_0, chooseCategoryImage(tile));
-                }
-                else if(i==5 && j == 1)
-                {
-                    displayImage(livingroom_5_1, chooseCategoryImage(tile));
-                }
-                else if(i==5 && j == 2)
-                {
-                    displayImage(livingroom_5_2, chooseCategoryImage(tile));
-                }
-                else if(i==5 && j == 3)
-                {
-                    displayImage(livingroom_5_3, chooseCategoryImage(tile));
-                }
-                else if(i==5 && j == 4)
-                {
-                    displayImage(livingroom_5_4, chooseCategoryImage(tile));
-                }
-                else if(i==5 && j == 5)
-                {
-                    displayImage(livingroom_5_5, chooseCategoryImage(tile));
-                }
-                else if(i==5 && j == 6)
-                {
-                    displayImage(livingroom_5_6, chooseCategoryImage(tile));
-                }
-                else if(i==5 && j == 7)
-                {
-                    displayImage(livingroom_5_7, chooseCategoryImage(tile));
-                }
-                else if(i==6 && j == 2)
-                {
-                    displayImage(livingroom_6_2, chooseCategoryImage(tile));
-                }
-                else if(i==6 && j == 3)
-                {
-                    displayImage(livingroom_6_3, chooseCategoryImage(tile));
-                }
-                else if(i==6 && j == 4)
-                {
-                    displayImage(livingroom_6_4, chooseCategoryImage(tile));
-                }
-                else if(i==6 && j == 5)
-                {
-                    displayImage(livingroom_6_5, chooseCategoryImage(tile));
-                }
-                else if(i==6 && j == 6)
-                {
-                    displayImage(livingroom_6_6, chooseCategoryImage(tile));
-                }
-                else if(i==7 && j == 3)
-                {
-                    displayImage(livingroom_7_3, chooseCategoryImage(tile));
-                }
-                else if(i==7 && j == 4)
-                {
-                    displayImage(livingroom_7_4, chooseCategoryImage(tile));
-                }
-                else if(i==7 && j == 5)
-                {
-                    displayImage(livingroom_7_5, chooseCategoryImage(tile));
-                }
-                else if(i==8 && j == 4)
-                {
-                    displayImage(livingroom_8_4, chooseCategoryImage(tile));
-                }
-                else if(i==8 && j == 5)
-                {
-                    displayImage(livingroom_8_5, chooseCategoryImage(tile));
+    @FXML
+    GridPane myGridPane;
+    public void displayLivingroom() throws IOException {
+        myGridPane=new GridPane();
+        for (int i = 0; i < LivingRoomSize; i++) {
+            for (int j = 0; j < LivingRoomSize; j++) {
+                if (livingRoom.getBoardTile(i, j).getCategory() != BoardToken.boardTokenCategory.UNAVAILABLE) {
+                    ItemTile tile = livingRoom.getBoardTile(i, j).getTile();
+                    ImageView imageView = new ImageView();
+                    imageView.setImage(chooseCategoryImage(tile));
+                    imageView.setFitWidth(40);
+                    imageView.setFitHeight(40);
+
+                    // Opzionale: Imposta il padding o altre proprietà per gli ImageView
+                    GridPane.setMargin(imageView, new Insets(0));
+                    myGridPane.add(imageView, j, i);
                 }
             }
         }
+                File file = new File("src/main/resources/com/example/is23am23/game.fxml");
+                URL url = file.toURI().toURL();
+                FXMLLoader loader = new FXMLLoader(url);
+                AnchorPane root = loader.load();
+                root.getChildren().add(myGridPane);
+                Scene scene = new Scene(root);
+                    //Stage stage = new Stage();
+                    // Impostazione della scena sullo stage
+                stage.setScene(scene);
+
+                    // Mostra lo stage
+                stage.show();
+                    //displayImage(livingroom_0_3, chooseCategory(tile))
     }
 
-    public void displayBookshelf(){
+    /*public void displayBookshelf() throws IOException {
         bookshelf = player.getPlayerBookshelf();
 
         for(int i=0; i<shelfRows; i++)
@@ -535,48 +235,56 @@ public class GameControllerGUI {
                 }
             }
         }
-    }
+    }*/
 
     public void displayContainer(){
 
     }
 
-    public void displayImage(ImageView view, Image image){
-        view.setImage(image);
-    }
+    /*public void displayImage(ImageView view, Image image){
+        if (image != null) {
+            view=new ImageView();
+            view.setImage(image);
+           //MYvBox.setPadding(new Insets(0));
+           //MYvBox.setSpacing(0);
+           //MYvBox.getChildren().add(view);
+        }
+    }*/
+    public Image chooseCategoryImage(ItemTile tile) {
 
-    public Image chooseCategoryImage(ItemTile tile){
-
-        Image image = null;
-        switch(tile.getCategory()){
-            case GAMES:
-            {
-                image = new Image(getClass().getResourceAsStream("Giochi.png"));
-                break;
-            }
-            case CATS:
-            {
-                image = new Image(getClass().getResourceAsStream("Gatti.png"));
-                break;
-            }
-            case BOOKS:
-            {
-                image = new Image(getClass().getResourceAsStream("Libri.png"));
-                break;
-            }
-            case FRAMES:
-            {
-                image = new Image(getClass().getResourceAsStream("Cornici.png"));
-                break;
-            }
-            case PLANTS:
-            {
-                image = new Image(getClass().getResourceAsStream("Piante.png"));
-                break;
-            }
-            case TROPHIES: {
-                image = new Image(getClass().getResourceAsStream("Trofei.png"));
-                break;
+        image = null;
+        if (tile != null) {
+            switch (tile.getCategory()) {
+                case GAMES: {
+                    File file = new File("/com/example/is23am23/Giochi.png");
+                    image = new Image(String.valueOf(file));
+                    break;
+                }
+                case CATS: {
+                    File file = new File("/com/example/is23am23/Gatti.png");
+                    image = new Image(String.valueOf(file));
+                    break;
+                }
+                case BOOKS: {
+                    File file = new File("/com/example/is23am23/Libri.png");
+                    image = new Image(String.valueOf(file));
+                    break;
+                }
+                case FRAMES: {
+                    File file = new File("/com/example/is23am23/Cornici.png");
+                    image = new Image(String.valueOf(file));
+                    break;
+                }
+                case PLANTS: {
+                    File file = new File("/com/example/is23am23/Piante.png");
+                    image = new Image(String.valueOf(file));
+                    break;
+                }
+                case TROPHIES: {
+                    File file = new File("/com/example/is23am23/Trofei.png");
+                    image = new Image(String.valueOf(file));
+                    break;
+                }
             }
         }
         return image;
@@ -758,7 +466,7 @@ public class GameControllerGUI {
                 break;
             }
             if(Objects.equals(command.toUpperCase(), "/BOOKSHELF")){
-                displayBookshelf();
+                //displayBookshelf();
                 break;
             }
             ClientMessage message = (ClientMessage) MoveSerializer.serializeInput(command);
@@ -874,10 +582,37 @@ public class GameControllerGUI {
     public void setReceiver(GUIEvent receiver){
         this.receiver=receiver;
     }
-    public void startGame(){
+    public void startGame() throws IOException {
+        //while(response.getCategory()!=Message.MessageCategory.END_GAME_MESSAGE){
+                displayLivingroom();
+            //}
+
     }
 
     public Integer getSeed() {
         return seed;
     }
+
+    public List<Player> getPlayers() {
+        return players;
+    }
+    public void refreshScene(GridPane gridPane) throws IOException {
+        /*File file = new File("src/main/resources/com/example/is23am23/game.fxml");
+            URL url = null;
+            try {
+                url = file.toURI().toURL();
+            } catch (MalformedURLException e) {
+                throw new RuntimeException(e);
+            }
+        FXMLLoader loader = new FXMLLoader(url);
+        stage.hide();
+        //scene = new Scene(MYvBox);
+        stage.setScene(scene);
+        stage.show();*/
+
+        }
+        public void setStage(Stage stage){
+        this.stage=stage;
+        }
 }
+
