@@ -72,6 +72,9 @@ public class GameControllerGUI {
     private CommonGoalCard commonGoalCard2;
     @FXML
     GridPane myGridPane_lr;
+    @FXML
+    GridPane myGridPane_bs;
+
     public void displayLivingroom() throws IOException {
         myGridPane_lr = new GridPane();
         for (int i = 0; i < LivingRoomSize; i++) {
@@ -91,11 +94,35 @@ public class GameControllerGUI {
                 }
             }
         }
+
+        bookshelf = player.getPlayerBookshelf();
+        myGridPane_bs = new GridPane();
+        for (int i = 0; i < shelfRows; i++) {
+            for (int j = 0; j < shelfCols; j++) {
+                //if (bookshelf.getTile(i,j).getCategory() != null) {
+                ItemTile tile = bookshelf.getTile(i,j);
+                ImageView imageView = new ImageView();
+                File file = new File("/com/example/is23am23/Cornici.png");
+                image = new Image(String.valueOf(file));
+                imageView.setImage(image);
+                imageView.setFitWidth(32);
+                imageView.setFitHeight(32);
+                myGridPane_bs.setLayoutX(386);
+                myGridPane_bs.setLayoutY(158);
+
+                // Opzionale: Imposta il padding o altre proprietà per gli ImageView
+                GridPane.setMargin(imageView, new Insets(0, 2,0,2));
+                myGridPane_bs.add(imageView, j, i);
+                //}
+            }
+        }
+
                 File file = new File("src/main/resources/com/example/is23am23/game.fxml");
                 URL url = file.toURI().toURL();
                 FXMLLoader loader = new FXMLLoader(url);
                 AnchorPane root = loader.load();
                 root.getChildren().add(myGridPane_lr);
+                root.getChildren().add(myGridPane_bs);
                 Scene scene = new Scene(root);
                     //Stage stage = new Stage();
                     // Impostazione della scena sullo stage
@@ -108,137 +135,42 @@ public class GameControllerGUI {
 
     /*public void displayBookshelf() throws IOException {
         bookshelf = player.getPlayerBookshelf();
+        myGridPane_bs = new GridPane();
+        for (int i = 0; i < shelfRows; i++) {
+            for (int j = 0; j < shelfCols; j++) {
+                //if (bookshelf.getTile(i,j).getCategory() != null) {
+                    ItemTile tile = bookshelf.getTile(i,j);
+                    ImageView imageView = new ImageView();
+                    File file = new File("/com/example/is23am23/Cornici.png");
+                    image = new Image(String.valueOf(file));
+                    imageView.setImage(image);
+                    imageView.setFitWidth(32);
+                    imageView.setFitHeight(32);
+                    myGridPane_bs.setLayoutX(386);
+                    myGridPane_bs.setLayoutY(158);
 
-        for(int i=0; i<shelfRows; i++)
-        {
-            for(int  j=0; j<shelfCols; j++)
-            {
-                ItemTile tile = bookshelf.getTile(i,j);
-
-                if(i==0 && j == 0)
-                {
-                    displayImage(shelf_0_0, chooseCategoryImage(tile));
-                }
-                else if(i==0 && j == 1)
-                {
-                    displayImage(shelf_0_1, chooseCategoryImage(tile));
-                }
-                else if(i==0 && j == 2)
-                {
-                    displayImage(shelf_0_2, chooseCategoryImage(tile));
-                }
-                else if(i==0 && j == 3)
-                {
-                    displayImage(shelf_0_3, chooseCategoryImage(tile));
-                }
-                else if(i==0 && j == 4)
-                {
-                    displayImage(shelf_0_4, chooseCategoryImage(tile));
-                }
-                else if(i==1 && j == 0)
-                {
-                    displayImage(shelf_1_0, chooseCategoryImage(tile));
-                }
-                else if(i==1 && j == 1)
-                {
-                    displayImage(shelf_1_1, chooseCategoryImage(tile));
-                }
-                else if(i==1 && j == 2)
-                {
-                    displayImage(shelf_1_2, chooseCategoryImage(tile));
-                }
-                else if(i==1 && j == 3)
-                {
-                    displayImage(shelf_1_3, chooseCategoryImage(tile));
-                }
-                else if(i==1 && j == 4)
-                {
-                    displayImage(shelf_1_4, chooseCategoryImage(tile));
-                }
-                else if(i==2 && j == 0)
-                {
-                    displayImage(shelf_2_0, chooseCategoryImage(tile));
-                }
-                else if(i==2 && j == 1)
-                {
-                    displayImage(shelf_2_1, chooseCategoryImage(tile));
-                }
-                else if(i==2 && j == 2)
-                {
-                    displayImage(shelf_2_2, chooseCategoryImage(tile));
-                }
-                else if(i==2 && j == 3)
-                {
-                    displayImage(shelf_2_3, chooseCategoryImage(tile));
-                }
-                else if(i==2 && j == 4)
-                {
-                    displayImage(shelf_2_4, chooseCategoryImage(tile));
-                }
-                else if(i==3 && j == 0)
-                {
-                    displayImage(shelf_3_0, chooseCategoryImage(tile));
-                }
-                else if(i==3 && j == 1)
-                {
-                    displayImage(shelf_3_1, chooseCategoryImage(tile));
-                }
-                else if(i==3 && j == 2)
-                {
-                    displayImage(shelf_3_2, chooseCategoryImage(tile));
-                }
-                else if(i==3 && j == 3)
-                {
-                    displayImage(shelf_3_3, chooseCategoryImage(tile));
-                }
-                else if(i==3 && j == 4)
-                {
-                    displayImage(shelf_3_4, chooseCategoryImage(tile));
-                }
-                else if(i==4 && j == 0)
-                {
-                    displayImage(shelf_4_0, chooseCategoryImage(tile));
-                }
-                else if(i==4 && j == 1)
-                {
-                    displayImage(shelf_4_1, chooseCategoryImage(tile));
-                }
-                else if(i==4 && j == 2)
-                {
-                    displayImage(shelf_4_2, chooseCategoryImage(tile));
-                }
-                else if(i==4 && j == 3)
-                {
-                    displayImage(shelf_4_3, chooseCategoryImage(tile));
-                }
-                else if(i==4 && j == 4)
-                {
-                    displayImage(shelf_4_4, chooseCategoryImage(tile));
-                }
-                else if(i==5 && j == 0)
-                {
-                    displayImage(shelf_5_0, chooseCategoryImage(tile));
-                }
-                else if(i==5 && j == 1)
-                {
-                    displayImage(shelf_5_1, chooseCategoryImage(tile));
-                }
-                else if(i==5 && j == 2)
-                {
-                    displayImage(shelf_5_2, chooseCategoryImage(tile));
-                }
-                else if(i==5 && j == 3)
-                {
-                    displayImage(shelf_5_3, chooseCategoryImage(tile));
-                }
-                else if(i==5 && j == 4)
-                {
-                    displayImage(shelf_5_4, chooseCategoryImage(tile));
-                }
+                    // Opzionale: Imposta il padding o altre proprietà per gli ImageView
+                    GridPane.setMargin(imageView, new Insets(1));
+                    myGridPane_bs.add(imageView, j, i);
+                //}
             }
         }
-    }*/
+                File file = new File("src/main/resources/com/example/is23am23/game.fxml");
+                URL url = file.toURI().toURL();
+                FXMLLoader loader = new FXMLLoader(url);
+                AnchorPane root = loader.load();
+                root.getChildren().add(myGridPane_bs);
+                Scene scene = new Scene(root);
+                    //Stage stage = new Stage();
+                    // Impostazione della scena sullo stage
+                stage.setScene(scene);
 
+                    // Mostra lo stage
+                stage.show();
+                    //displayImage(livingroom_0_3, chooseCategory(tile))
+    }
+
+*/
     public void displayContainer(){
 
     }
@@ -587,6 +519,7 @@ public class GameControllerGUI {
     public void startGame() throws IOException {
         //while(response.getCategory()!=Message.MessageCategory.END_GAME_MESSAGE){
                 displayLivingroom();
+                //displayBookshelf();
             //}
 
     }

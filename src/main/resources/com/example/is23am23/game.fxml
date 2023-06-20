@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -13,11 +14,6 @@
         <ImageView fitHeight="400.0" fitWidth="600.0" pickOnBounds="true">
             <image>
                 <Image url="@sfondo_parquet.jpg" />
-            </image>
-        </ImageView>
-        <ImageView fitHeight="240.0" fitWidth="240.0" layoutX="360.0" layoutY="146.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-                <Image url="@bookshelf.png" />
             </image>
         </ImageView>
         <ImageView fitHeight="341.0" fitWidth="663.0" layoutX="14.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
@@ -98,5 +94,33 @@
           <RowConstraints fillHeight="false" maxHeight="34.0" minHeight="34.0" prefHeight="34.0" vgrow="NEVER" />
         </rowConstraints>
       </GridPane>
+      <GridPane fx:id="myGridPane_bs" gridLinesVisible="true" layoutX="386.0" layoutY="162.0" prefHeight="200.0" prefWidth="188.0">
+        <columnConstraints>
+            <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="NEVER" maxWidth="36.0" minWidth="36.0" prefWidth="36.0" />
+            <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="NEVER" maxWidth="36.0" minWidth="36.0" prefWidth="36.0" />
+            <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="NEVER" maxWidth="41.866607666015625" minWidth="36.0" prefWidth="39.733306884765625" />
+          <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="NEVER" maxWidth="43.46668701171876" minWidth="30.133392333984375" prefWidth="38.66663818359376" />
+          <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="NEVER" maxWidth="37.0" minWidth="25.33331298828125" prefWidth="30.13336181640625" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints fillHeight="false" maxHeight="36.0" minHeight="36.0" prefHeight="36.0" valignment="CENTER" vgrow="NEVER" />
+            <RowConstraints fillHeight="false" maxHeight="39.73333740234375" minHeight="29.599990844726562" prefHeight="33.39997863769531" valignment="CENTER" vgrow="NEVER" />
+            <RowConstraints fillHeight="false" maxHeight="42.40000915527344" minHeight="26.799999999999997" prefHeight="32.60002136230469" valignment="CENTER" vgrow="NEVER" />
+          <RowConstraints fillHeight="false" maxHeight="36.8" minHeight="28.000000000000014" prefHeight="31.999981689453122" valignment="CENTER" vgrow="NEVER" />
+          <RowConstraints fillHeight="false" maxHeight="35.19999999999999" minHeight="10.0" prefHeight="33.599993896484364" valignment="CENTER" vgrow="NEVER" />
+          <RowConstraints fillHeight="false" maxHeight="28.000006134035157" minHeight="34.0" prefHeight="34.0" valignment="CENTER" vgrow="NEVER" />
+        </rowConstraints>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <padding>
+            <Insets bottom="1.0" left="2.0" right="2.0" top="1.0" />
+         </padding>
+      </GridPane>
+      <ImageView fitHeight="240.0" fitWidth="240.0" layoutX="360.0" layoutY="146.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@bookshelf.png" />
+         </image>
+      </ImageView>
     </children>
 </AnchorPane>
