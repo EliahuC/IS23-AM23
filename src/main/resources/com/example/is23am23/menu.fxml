@@ -10,7 +10,7 @@
 
 <AnchorPane maxHeight="1080.0" maxWidth="1920.0" minHeight="400.0" minWidth="600.0" prefHeight="400.0" prefWidth="600.0" snapToPixel="false" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.gui.MenuController">
   <children>
-    <ImageView fitHeight="410.0" fitWidth="608.0" layoutX="-1.0" layoutY="-3.0" nodeOrientation="INHERIT" pickOnBounds="true">
+    <ImageView fitHeight="400.0" fitWidth="600.0" nodeOrientation="INHERIT" pickOnBounds="true">
       <image>
         <Image url="@sfondo_parquet.jpg" />
       </image>

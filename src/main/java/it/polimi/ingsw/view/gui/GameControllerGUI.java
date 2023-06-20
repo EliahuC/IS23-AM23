@@ -71,9 +71,9 @@ public class GameControllerGUI {
     private CommonGoalCard commonGoalCard1;
     private CommonGoalCard commonGoalCard2;
     @FXML
-    GridPane myGridPane;
+    GridPane myGridPane_lr;
     public void displayLivingroom() throws IOException {
-        myGridPane=new GridPane();
+        myGridPane_lr = new GridPane();
         for (int i = 0; i < LivingRoomSize; i++) {
             for (int j = 0; j < LivingRoomSize; j++) {
                 if (livingRoom.getBoardTile(i, j).getCategory() != BoardToken.boardTokenCategory.UNAVAILABLE) {
@@ -82,12 +82,12 @@ public class GameControllerGUI {
                     imageView.setImage(chooseCategoryImage(tile));
                     imageView.setFitWidth(34);
                     imageView.setFitHeight(34);
-                    myGridPane.setLayoutX(29);
-                    myGridPane.setLayoutY(61);
+                    myGridPane_lr.setLayoutX(29);
+                    myGridPane_lr.setLayoutY(61);
 
                     // Opzionale: Imposta il padding o altre proprietà per gli ImageView
                     GridPane.setMargin(imageView, new Insets(0));
-                    myGridPane.add(imageView, j, i);
+                    myGridPane_lr.add(imageView, j, i);
                 }
             }
         }
@@ -95,7 +95,7 @@ public class GameControllerGUI {
                 URL url = file.toURI().toURL();
                 FXMLLoader loader = new FXMLLoader(url);
                 AnchorPane root = loader.load();
-                root.getChildren().add(myGridPane);
+                root.getChildren().add(myGridPane_lr);
                 Scene scene = new Scene(root);
                     //Stage stage = new Stage();
                     // Impostazione della scena sullo stage
