@@ -80,8 +80,10 @@ public class GameControllerGUI {
                     ItemTile tile = livingRoom.getBoardTile(i, j).getTile();
                     ImageView imageView = new ImageView();
                     imageView.setImage(chooseCategoryImage(tile));
-                    imageView.setFitWidth(40);
-                    imageView.setFitHeight(40);
+                    imageView.setFitWidth(34);
+                    imageView.setFitHeight(34);
+                    myGridPane.setLayoutX(29);
+                    myGridPane.setLayoutY(61);
 
                     // Opzionale: Imposta il padding o altre proprietà per gli ImageView
                     GridPane.setMargin(imageView, new Insets(0));
