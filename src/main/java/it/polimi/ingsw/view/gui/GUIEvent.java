@@ -47,18 +47,18 @@ public class GUIEvent implements PropertyChangeListener {
             Platform.runLater(()-> {
                 switch (serverMessage.getCategory()) {
                     case STARTING_GAME_MESSAGE:
-                        File file = new File("src/main/resources/com/example/is23am23/game.fxml");
+                        /*File file = new File("src/main/resources/com/example/is23am23/game.fxml");
                         try {
                             url = file.toURI().toURL();
                         } catch (MalformedURLException e) {
                             throw new RuntimeException(e);
                         }
-                        FXMLLoader loader = new FXMLLoader(url);
+                        FXMLLoader loader = new FXMLLoader(url);*/
                         try {
-                            Parent root = loader.load();
+                            /*Parent root = loader.load();
                             Scene scene = new Scene(root);
                             stage.setScene(scene);
-                            stage.show();
+                            stage.show();*/
                             GameIsStartingMessage temp_startingGameMessage = (GameIsStartingMessage) serverMessage;
                             gamecontrollerGUI.setPlayers(temp_startingGameMessage.getPlayers());
                             gamecontrollerGUI.setLivingRoom(temp_startingGameMessage.getLivingRoom());

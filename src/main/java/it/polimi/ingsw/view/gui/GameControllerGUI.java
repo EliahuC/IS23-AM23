@@ -73,6 +73,8 @@ public class GameControllerGUI {
     @FXML
     GridPane myGridPane_lr;
     @FXML
+    GridPane myGridPane_container;
+    @FXML
     GridPane myGridPane_bs;
 
     public void displayLivingroom() throws IOException {
@@ -101,12 +103,16 @@ public class GameControllerGUI {
             for (int j = 0; j < shelfCols; j++) {
                 //if (bookshelf.getTile(i,j).getCategory() != null) {
                 ItemTile tile = bookshelf.getTile(i,j);
+
+                //PROVA CON IMMAGINI IMPOSTATE
                 ImageView imageView = new ImageView();
                 File file = new File("/com/example/is23am23/Cornici.png");
                 image = new Image(String.valueOf(file));
                 imageView.setImage(image);
-                imageView.setFitWidth(32);
-                imageView.setFitHeight(32);
+
+                //imageView.setImage(chooseCategoryImage(tile));
+                imageView.setFitWidth(33);
+                imageView.setFitHeight(33);
                 myGridPane_bs.setLayoutX(386);
                 myGridPane_bs.setLayoutY(158);
 
@@ -117,12 +123,31 @@ public class GameControllerGUI {
             }
         }
 
+        //MANCA IL RIFERIMENTO ALLE TESSERE GIA' PRESE
+
+        myGridPane_container = new GridPane();
+        for (int i = 0; i < 3; i++) {
+                ImageView imageView = new ImageView();
+                File file = new File("/com/example/is23am23/Cornici.png");
+                image = new Image(String.valueOf(file));
+                imageView.setImage(image);
+                imageView.setFitWidth(30);
+                imageView.setFitHeight(30);
+                myGridPane_container.setLayoutX(384);
+                myGridPane_container.setLayoutY(66);
+
+                // Opzionale: Imposta il padding o altre proprietà per gli ImageView
+                GridPane.setMargin(imageView, new Insets(0));
+                myGridPane_container.add(imageView, i, 0);
+        }
+
                 File file = new File("src/main/resources/com/example/is23am23/game.fxml");
                 URL url = file.toURI().toURL();
                 FXMLLoader loader = new FXMLLoader(url);
                 AnchorPane root = loader.load();
                 root.getChildren().add(myGridPane_lr);
                 root.getChildren().add(myGridPane_bs);
+                root.getChildren().add(myGridPane_container);
                 Scene scene = new Scene(root);
                     //Stage stage = new Stage();
                     // Impostazione della scena sullo stage
@@ -171,9 +196,7 @@ public class GameControllerGUI {
     }
 
 */
-    public void displayContainer(){
-
-    }
+    //public void displayContainer(){}
 
     /*public void displayImage(ImageView view, Image image){
         if (image != null) {
