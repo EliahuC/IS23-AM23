@@ -336,17 +336,11 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
         Server.connectedPlayers.remove(s);
         Server.rmiConnections.remove(s);
         System.out.println(s+ " disconnected from the server");
-        for (Lobby l : Server.lobbies) {
-            if(l.getJoinedUsers().contains(s)){
-                lobby=l;
-                lobby.endGame();
-                return;
-            }
-        }
         for (Lobby l : Server.startedLobbies) {
             if(l.getJoinedUsers().contains(s)){
                 lobby=l;
                 lobby.endGame();
+                Server.startedLobbies.remove(lobby);
                 return;
             }
         }
