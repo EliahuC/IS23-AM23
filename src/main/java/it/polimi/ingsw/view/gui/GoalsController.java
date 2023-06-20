@@ -47,7 +47,7 @@ public class GoalsController {
 
         GameControllerGUI gameControllerGUI = loader.getController();
         //gameControllerGUI.displayBookshelf();
-        gameControllerGUI.displayContainer();
+        //gameControllerGUI.displayContainer();
         gameControllerGUI.displayLivingroom();
         stage = (Stage)((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
