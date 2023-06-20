@@ -101,19 +101,25 @@ public class GameControllerGUI {
         myGridPane_bs = new GridPane();
         for (int i = 0; i < shelfRows; i++) {
             for (int j = 0; j < shelfCols; j++) {
-                if (bookshelf.getTile(i,j).getCategory() != null) {
+                //if (bookshelf.getTile(i,j).getCategory() != null) {
                 ItemTile tile = bookshelf.getTile(i,j);
+
+                //PROVA CON IMMAGINI IMPOSTATE
                 ImageView imageView = new ImageView();
-                imageView.setImage(chooseCategoryImage(tile));
-                imageView.setFitWidth(32);
-                imageView.setFitHeight(32);
+                File file = new File("/com/example/is23am23/Cornici.png");
+                image = new Image(String.valueOf(file));
+                imageView.setImage(image);
+
+                //imageView.setImage(chooseCategoryImage(tile));
+                imageView.setFitWidth(33);
+                imageView.setFitHeight(33);
                 myGridPane_bs.setLayoutX(386);
                 myGridPane_bs.setLayoutY(158);
 
                 // Opzionale: Imposta il padding o altre proprietà per gli ImageView
                 GridPane.setMargin(imageView, new Insets(0, 2,0,2));
                 myGridPane_bs.add(imageView, j, i);
-                }
+                //}
             }
         }
 
