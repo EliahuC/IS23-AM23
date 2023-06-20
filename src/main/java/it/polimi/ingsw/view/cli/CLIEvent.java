@@ -91,7 +91,7 @@ public class CLIEvent implements PropertyChangeListener {
                 gameHandler.setResponse(response);
             }
         }catch (NullPointerException e){
-            System.out.println("\n\t\t\t\t\t\t\t\t\tSomeone crashed. Please, restart the application!");
+            System.out.println("\n\n                   Someone crashed. Please, restart the application!");
         }
     }
     public void setLobbyHandler(LobbyHandler lobbyHandler){

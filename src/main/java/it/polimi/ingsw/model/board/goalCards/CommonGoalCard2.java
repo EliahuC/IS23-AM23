@@ -40,16 +40,20 @@ public class CommonGoalCard2 extends CommonGoalCard implements CheckCommonGoalCa
     public void print(){
         System.out.print("FOUR GROUPS FORMED OF FOUR TILES.\n\n");
         //                                     [0]             [1]             [2]             [3]            [4]
-        System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t " + WOOD + "                     " + RESET +
-                "\n\t\t\t\t\t\t\t\t\t\t\t\t\t   " + WOOD + " " + RESET + "   " + WHITE + "   " + WHITE + "   " + PINK + "   " + PINK + "   " + WOOD + " " + RESET +
-                "\n\t\t\t\t\t\t\t\t\t\t\t\t\t   " + WOOD + " " + RESET + "   " + RESET + "   " + WHITE + "   " + WHITE + "   " + PINK + "   " + WOOD + " " + RESET +
-                "\n\t\t\t\t\t\t\t\t\t\t\t\t\t   " + WOOD + " " + RESET + "   " + RESET + "   " + RESET + "   " + RESET + "   " + PINK + "   " + WOOD + " " + RESET +
-                "\n\t\t\t\t\t\t\t\t\t\t\t\t\t   " + WOOD + " " + RESET + "   " + RESET + "   " + RESET + "   " + RESET + "   " + RESET + "   " + WOOD + " " + RESET +
-                "\n\t\t\t\t\t\t\t\t\t\t\t\t\t   " + WOOD + " " + CYAN + "   " + WHITE + "   " + WHITE + "   " + WHITE + "   " + RESET + "   " + WOOD + " " + RESET +
-                "\n\t\t\t\t\t\t\t\t\t\t\t\t\t   " + WOOD + " " + CYAN + "   " + CYAN + "   " + CYAN + "   " + WHITE + "   " + RESET + "   " + WOOD + " " + RESET +
-                "\n\t\t\t\t\t\t\t\t\t\t\t\t\t " + WOOD + "                     " + RESET);
-        System.out.print("\n\t\t\t\t\t\t\tDESCRIPTION: Four groups each containing at least 4 tiles of the same type.\n" +
-                "\t\t\t\t\t\t\tThe tiles of one group can be different from those of another group.\n");
-        System.out.print("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tPOINTS:" + points + "\n\n");
+        System.out.println("                    " + WOOD + "                     " + RESET +
+                "\n                      " + WOOD + " " + RESET + "   " + WHITE + "   " + WHITE + "   " + PINK + "   " + PINK + "   " + WOOD + " " + RESET +
+                "\n                      " + WOOD + " " + RESET + "   " + RESET + "   " + WHITE + "   " + WHITE + "   " + PINK + "   " + WOOD + " " + RESET +
+                "\n                      " + WOOD + " " + RESET + "   " + RESET + "   " + RESET + "   " + RESET + "   " + PINK + "   " + WOOD + " " + RESET +
+                "\n                      " + WOOD + " " + RESET + "   " + RESET + "   " + RESET + "   " + RESET + "   " + RESET + "   " + WOOD + " " + RESET +
+                "\n                      " + WOOD + " " + CYAN + "   " + WHITE + "   " + WHITE + "   " + WHITE + "   " + RESET + "   " + WOOD + " " + RESET +
+                "\n                      " + WOOD + " " + CYAN + "   " + CYAN + "   " + CYAN + "   " + WHITE + "   " + RESET + "   " + WOOD + " " + RESET +
+                "\n                    " + WOOD + "                     " + RESET);
+        System.out.print("""
+                
+                > DESCRIPTION: Four groups each containing at least 4 tiles of the
+                same type. The tiles of one group can be different from those of
+                another group.
+                """);
+        System.out.print("> POINTS: " + points + "\n\n");
     }
 }

@@ -107,6 +107,7 @@
             <configuration>
               <archive>
                 <manifest>
+                  <!--<mainClass>it.polimi.ingsw.Network.Server.Server</mainClass>-->
                   <mainClass>it.polimi.ingsw.view.cli.CLImain</mainClass>
                 </manifest>
               </archive>

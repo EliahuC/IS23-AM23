@@ -79,19 +79,22 @@ public class CommonGoalCard12 extends CommonGoalCard implements CheckCommonGoalC
         System.out.print("STAIRCASE OF TILES.\n\n");
 
         //                                     [0]             [1]             [2]             [3]            [4]
-        System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t " + WOOD + "                     " + RESET +
-                "\n\t\t\t\t\t\t\t\t\t\t\t\t\t   " + WOOD + " " + BLUE + "   " + RESET + "   " + RESET + "   " + RESET + "   " + RESET + "   " + WOOD + " " + RESET +
-                "\n\t\t\t\t\t\t\t\t\t\t\t\t\t   " + WOOD + " " + CYAN + "   " + BLUE + "   " + RESET + "   " + RESET + "   " + RESET + "   " + WOOD + " " + RESET +
-                "\n\t\t\t\t\t\t\t\t\t\t\t\t\t   " + WOOD + " " + WHITE + "   " + CYAN + "   " + BLUE + "   " + RESET + "   " + RESET + "   " + WOOD + " " + RESET +
-                "\n\t\t\t\t\t\t\t\t\t\t\t\t\t   " + WOOD + " " + CYAN + "   " + WHITE + "   " + CYAN + "   " + BLUE + "   " + RESET + "   " + WOOD + " " + RESET +
-                "\n\t\t\t\t\t\t\t\t\t\t\t\t\t   " + WOOD + " " + BLUE + "   " + CYAN + "   " + WHITE + "   " + CYAN + "   " + BLUE + "   " + WOOD + " " + RESET +
-                "\n\t\t\t\t\t\t\t\t\t\t\t\t\t   " + WOOD + " " + CYAN + "   " + BLUE + "   " + CYAN + "   " + WHITE + "   " + CYAN + "   " + WOOD + " " + RESET +
-                "\n\t\t\t\t\t\t\t\t\t\t\t\t\t " + WOOD + "                     " + RESET);
+        System.out.println("                    " + WOOD + "                     " + RESET +
+                "\n                      " + WOOD + " " + BLUE + "   " + RESET + "   " + RESET + "   " + RESET + "   " + RESET + "   " + WOOD + " " + RESET +
+                "\n                      " + WOOD + " " + CYAN + "   " + BLUE + "   " + RESET + "   " + RESET + "   " + RESET + "   " + WOOD + " " + RESET +
+                "\n                      " + WOOD + " " + WHITE + "   " + CYAN + "   " + BLUE + "   " + RESET + "   " + RESET + "   " + WOOD + " " + RESET +
+                "\n                      " + WOOD + " " + CYAN + "   " + WHITE + "   " + CYAN + "   " + BLUE + "   " + RESET + "   " + WOOD + " " + RESET +
+                "\n                      " + WOOD + " " + BLUE + "   " + CYAN + "   " + WHITE + "   " + CYAN + "   " + BLUE + "   " + WOOD + " " + RESET +
+                "\n                      " + WOOD + " " + CYAN + "   " + BLUE + "   " + CYAN + "   " + WHITE + "   " + CYAN + "   " + WOOD + " " + RESET +
+                "\n                    " + WOOD + "                     " + RESET);
 
-        System.out.print("\n\t\t\t\t\t\t\t\t\tDESCRIPTION: Five columns of increasing or decreasing height.\n" +
-                "\t\t\t\t\t\t\t\t\tStarting from the first column on the left or on the right," +
-                "\n\t\t\t\t\t\t\t\t\t\t\teach next column must be made of exactly\n" +
-                "\t\t\t\t\t\t\t\t\t\t\tone more tile. Tiles can be of any type.\n");
-        System.out.print("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tPOINTS:" + points + "\n\n");
+        System.out.print("""
+                
+                > DESCRIPTION: Five columns of increasing or decreasing height.
+                Starting from the first column on the left or on the right,
+                each next column must be made of exactly one more tile.
+                Tiles can be of any type.
+                """);
+        System.out.print("> POINTS: " + points + "\n\n");
     }
 }

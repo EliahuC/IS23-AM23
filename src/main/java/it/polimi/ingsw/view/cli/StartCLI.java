@@ -22,67 +22,67 @@ public class StartCLI {
     private ConnectionClient connectionClient;
     private ServerMessage response;
     private CLIEvent receiver;
-    private final static String CLS = "\u001B[8;46;123t" + "\u001B[2J\u001B[3J\u001B[H";
+    private final static String CLS = "\u001B[2J\u001B[3J\u001B[H";
     public void setResponse(ServerMessage response){
         this.response=response;
     }
 
     public void startClient(){
+        boolean lock = false;
+        System.out.print(CLS);
         System.out.print("""
-                                                                                                                                           \s
-                																															
-                                                                                                                                           \s
-                																															
-                                                                                                                                           \s
-                																															
-                                                                                                                                           \s
-                																															
-                                                       __  ___          _____  __           __ ____ _                                      \s
-                                                      /  |/  /__  __   / ___/ / /_   ___   / // __/(_)___                                  \s
-                                                     / /|_/ // / / /   \\__ \\ / __ \\ / _ \\ / // /_ / // _ \\                                 \s
-                                                    / /  / // /_/ /   ___/ // / / //  __// // __// //  __/                                 \s
-                                                   /_/  /_/ \\__, /   /____//_/ /_/ \\___//_//_/  /_/ \\___/                                  \s
-                                                           /____/                                                                          \s
-                                                                                                                                           \s
-                																															
-                                                                                                                                           \s
-                																															
-                                                                                                                                           \s
-                																															
-                                                                                                                                           \s
-                																															
+                					
+                					
+                					
+                					
+                					
+                					
+                					
+                					
+                	
+                																							
+                                       __  ___          _____  __           __ ____ _
+                                      /  |/  /__  __   / ___/ / /_   ___   / // __/(_)___
+                                     / /|_/ // / / /   \\__ \\ / __ \\ / _ \\ / // /_ / // _ \\
+                                    / /  / // /_/ /   ___/ // / / //  __// // __// //  __/
+                                   /_/  /_/ \\__, /   /____//_/ /_/ \\___//_//_/  /_/ \\___/
+                                           /____/
                 """);
         try{
-            TimeUnit.SECONDS.sleep(2);
+            TimeUnit.SECONDS.sleep(3);
         }catch (InterruptedException iE){
             iE.printStackTrace();
         }
         System.out.print(CLS);
         System.out.flush();
         System.out.print("""
-                																															
-                                                       __  ___          _____  __           __ ____ _                                      \s
-                                                      /  |/  /__  __   / ___/ / /_   ___   / // __/(_)___                                  \s
-                                                     / /|_/ // / / /   \\__ \\ / __ \\ / _ \\ / // /_ / // _ \\                                 \s
-                                                    / /  / // /_/ /   ___/ // / / //  __// // __// //  __/                                 \s
-                                                   /_/  /_/ \\__, /   /____//_/ /_/ \\___//_//_/  /_/ \\___/                                  \s
-                                                           /____/                                                                          \s
-                                                                                                                                           \s
-                																															
-                """ +
-                "\t\t\t\t\t\t\t\tINSERT YOUR NICKNAME: ");
+                					
+                					
+                																							
+                                       __  ___          _____  __           __ ____ _
+                                      /  |/  /__  __   / ___/ / /_   ___   / // __/(_)___
+                                     / /|_/ // / / /   \\__ \\ / __ \\ / _ \\ / // /_ / // _ \\
+                                    / /  / // /_/ /   ___/ // / / //  __// // __// //  __/
+                                   /_/  /_/ \\__, /   /____//_/ /_/ \\___//_//_/  /_/ \\___/
+                                           /____/
+                """);
+        System.out.print("\n                INSERT YOU NICKNAME: ");
         do{
             Scanner input = new Scanner(System.in);
             nickname= input.nextLine();
 
-            System.out.print("\n\t\t\t\t\t\t\t\tINSERT IP ADDRESS (PRESS ENTER FOR DEFAULT): ");
+            System.out.print("\n                INSERT IP ADDRESS (PRESS ENTER FOR DEFAULT): ");
             serverAddr = input.nextLine();
-            System.out.print("\n\t\t\t\t\t\t\t\tINSERT PORT NUMBER: ");
-            String portNumber = input.nextLine();
-            portNum = Integer.parseInt(portNumber);
-
-            System.out.print("\n\t\t\t\t\t\t\t\tTYPE OF CONNECTION [TCP/RMI]: ");
-            String connectionType = input.nextLine();
+            System.out.print("\n                INSERT PORT NUMBER: ");
+            String connectionType;
+            try {
+                String portNumber = input.nextLine();
+                portNum = Integer.parseInt(portNumber);
+                System.out.print("\n                TYPE OF CONNECTION [TCP/RMI]: ");
+                connectionType = input.nextLine();
+            }catch (NumberFormatException e){
+                connectionType = "other";
+            };
             switch (connectionType.toUpperCase()) {
                 case "TCP":
                     try {
@@ -97,36 +97,36 @@ public class StartCLI {
                         System.out.print(CLS);
                         System.out.flush();
                         System.out.print("""
-                                																															
-                                                                       __  ___          _____  __           __ ____ _                                      \s
-                                                                      /  |/  /__  __   / ___/ / /_   ___   / // __/(_)___                                  \s
-                                                                     / /|_/ // / / /   \\__ \\ / __ \\ / _ \\ / // /_ / // _ \\                                 \s
-                                                                    / /  / // /_/ /   ___/ // / / //  __// // __// //  __/                                 \s
-                                                                   /_/  /_/ \\__, /   /____//_/ /_/ \\___//_//_/  /_/ \\___/                                  \s
-                                                                           /____/                                                                          \s
-                                                                                                                                                           \s
-                                																															
-                                											  Please, insert a CORRECT address!		
+                                                							
+                                                        					
+                                        															
+                                                       __  ___          _____  __           __ ____ _
+                                                      /  |/  /__  __   / ___/ / /_   ___   / // __/(_)___
+                                                     / /|_/ // / / /   \\__ \\ / __ \\ / _ \\ / // /_ / // _ \\
+                                                    / /  / // /_/ /   ___/ // / / //  __// // __// //  __/
+                                                   /_/  /_/ \\__, /   /____//_/ /_/ \\___//_//_/  /_/ \\___/
+                                                           /____/
                                 """);
+                        System.out.println("\n                              Please, insert a CORRECT address ...");
                         try{
-                            TimeUnit.SECONDS.sleep(1);
+                            TimeUnit.SECONDS.sleep(3);
                         }catch (InterruptedException iE){
                             iE.printStackTrace();
                         }
                         System.out.print(CLS);
                         System.out.flush();
                         System.out.print("""
-                																															
-                                                       __  ___          _____  __           __ ____ _                                      \s
-                                                      /  |/  /__  __   / ___/ / /_   ___   / // __/(_)___                                  \s
-                                                     / /|_/ // / / /   \\__ \\ / __ \\ / _ \\ / // /_ / // _ \\                                 \s
-                                                    / /  / // /_/ /   ___/ // / / //  __// // __// //  __/                                 \s
-                                                   /_/  /_/ \\__, /   /____//_/ /_/ \\___//_//_/  /_/ \\___/                                  \s
-                                                           /____/                                                                          \s
-                                                                                                                                           \s
-                																															
-                """ +
-                                "\t\t\t\t\t\t\t\tINSERT YOUR NICKNAME: ");
+                                                							
+                                                        					
+                                        															
+                                                       __  ___          _____  __           __ ____ _
+                                                      /  |/  /__  __   / ___/ / /_   ___   / // __/(_)___
+                                                     / /|_/ // / / /   \\__ \\ / __ \\ / _ \\ / // /_ / // _ \\
+                                                    / /  / // /_/ /   ___/ // / / //  __// // __// //  __/
+                                                   /_/  /_/ \\__, /   /____//_/ /_/ \\___//_//_/  /_/ \\___/
+                                                           /____/
+                                """);
+                        System.out.print("\n                INSERT YOU NICKNAME: ");
                     }
                     try{
                         TimeUnit.SECONDS.sleep(3);
@@ -141,40 +141,40 @@ public class StartCLI {
                         connectionClient = new ClientConnectionRMI(nickname,receiver, serverAddr);
                         new Thread(connectionClient).start();
                         break;
-                    } catch (RemoteException e){
+                    } catch (RemoteException | NullPointerException e){
                         System.out.print(CLS);
                         System.out.flush();
                         System.out.print("""
-                                																															
-                                                                       __  ___          _____  __           __ ____ _                                      \s
-                                                                      /  |/  /__  __   / ___/ / /_   ___   / // __/(_)___                                  \s
-                                                                     / /|_/ // / / /   \\__ \\ / __ \\ / _ \\ / // /_ / // _ \\                                 \s
-                                                                    / /  / // /_/ /   ___/ // / / //  __// // __// //  __/                                 \s
-                                                                   /_/  /_/ \\__, /   /____//_/ /_/ \\___//_//_/  /_/ \\___/                                  \s
-                                                                           /____/                                                                          \s
-                                                                                                                                                           \s
-                                																															
-                                											  Please, insert a CORRECT address!		
+                                                							
+                                                        					
+                                        															
+                                                       __  ___          _____  __           __ ____ _
+                                                      /  |/  /__  __   / ___/ / /_   ___   / // __/(_)___
+                                                     / /|_/ // / / /   \\__ \\ / __ \\ / _ \\ / // /_ / // _ \\
+                                                    / /  / // /_/ /   ___/ // / / //  __// // __// //  __/
+                                                   /_/  /_/ \\__, /   /____//_/ /_/ \\___//_//_/  /_/ \\___/
+                                                           /____/
                                 """);
+                        System.out.println("\n                              Please, insert a CORRECT address ...");
                         try{
-                            TimeUnit.SECONDS.sleep(2);
+                            TimeUnit.SECONDS.sleep(3);
                         }catch (InterruptedException iE){
                             iE.printStackTrace();
                         }
                         System.out.print(CLS);
                         System.out.flush();
                         System.out.print("""
-                																															
-                                                       __  ___          _____  __           __ ____ _                                      \s
-                                                      /  |/  /__  __   / ___/ / /_   ___   / // __/(_)___                                  \s
-                                                     / /|_/ // / / /   \\__ \\ / __ \\ / _ \\ / // /_ / // _ \\                                 \s
-                                                    / /  / // /_/ /   ___/ // / / //  __// // __// //  __/                                 \s
-                                                   /_/  /_/ \\__, /   /____//_/ /_/ \\___//_//_/  /_/ \\___/                                  \s
-                                                           /____/                                                                          \s
-                                                                                                                                           \s
-                																															
-                """ +
-                                "\t\t\t\t\t\t\t\tINSERT YOUR NICKNAME: ");
+                                                							
+                                                        					
+                                        															
+                                                       __  ___          _____  __           __ ____ _
+                                                      /  |/  /__  __   / ___/ / /_   ___   / // __/(_)___
+                                                     / /|_/ // / / /   \\__ \\ / __ \\ / _ \\ / // /_ / // _ \\
+                                                    / /  / // /_/ /   ___/ // / / //  __// // __// //  __/
+                                                   /_/  /_/ \\__, /   /____//_/ /_/ \\___//_//_/  /_/ \\___/
+                                                           /____/
+                                """);
+                        System.out.print("\n                INSERT YOU NICKNAME: ");
                     }
                     try{
                         TimeUnit.SECONDS.sleep(3);
@@ -186,36 +186,36 @@ public class StartCLI {
                     System.out.print(CLS);
                     System.out.flush();
                     System.out.print("""
-                                																															
-                                                                       __  ___          _____  __           __ ____ _                                      \s
-                                                                      /  |/  /__  __   / ___/ / /_   ___   / // __/(_)___                                  \s
-                                                                     / /|_/ // / / /   \\__ \\ / __ \\ / _ \\ / // /_ / // _ \\                                 \s
-                                                                    / /  / // /_/ /   ___/ // / / //  __// // __// //  __/                                 \s
-                                                                   /_/  /_/ \\__, /   /____//_/ /_/ \\___//_//_/  /_/ \\___/                                  \s
-                                                                           /____/                                                                          \s
-                                                                                                                                                           \s
-                                																															
-                                											  Please, insert a CORRECT address!		
+                                                							
+                                                        					
+                                        															
+                                                       __  ___          _____  __           __ ____ _
+                                                      /  |/  /__  __   / ___/ / /_   ___   / // __/(_)___
+                                                     / /|_/ // / / /   \\__ \\ / __ \\ / _ \\ / // /_ / // _ \\
+                                                    / /  / // /_/ /   ___/ // / / //  __// // __// //  __/
+                                                   /_/  /_/ \\__, /   /____//_/ /_/ \\___//_//_/  /_/ \\___/
+                                                           /____/
                                 """);
+                    System.out.println("\n                              Please, insert a CORRECT address ...");
                     try{
-                        TimeUnit.SECONDS.sleep(2);
+                        TimeUnit.SECONDS.sleep(3);
                     }catch (InterruptedException iE){
                         iE.printStackTrace();
                     }
                     System.out.print(CLS);
                     System.out.flush();
                     System.out.print("""
-                																															
-                                                       __  ___          _____  __           __ ____ _                                      \s
-                                                      /  |/  /__  __   / ___/ / /_   ___   / // __/(_)___                                  \s
-                                                     / /|_/ // / / /   \\__ \\ / __ \\ / _ \\ / // /_ / // _ \\                                 \s
-                                                    / /  / // /_/ /   ___/ // / / //  __// // __// //  __/                                 \s
-                                                   /_/  /_/ \\__, /   /____//_/ /_/ \\___//_//_/  /_/ \\___/                                  \s
-                                                           /____/                                                                          \s
-                                                                                                                                           \s
-                																															
-                """ +
-                            "\t\t\t\t\t\t\t\tINSERT YOUR NICKNAME: ");
+                                                							
+                                                        					
+                                        															
+                                                       __  ___          _____  __           __ ____ _
+                                                      /  |/  /__  __   / ___/ / /_   ___   / // __/(_)___
+                                                     / /|_/ // / / /   \\__ \\ / __ \\ / _ \\ / // /_ / // _ \\
+                                                    / /  / // /_/ /   ___/ // / / //  __// // __// //  __/
+                                                   /_/  /_/ \\__, /   /____//_/ /_/ \\___//_//_/  /_/ \\___/
+                                                           /____/
+                                """);
+                    System.out.print("\n                INSERT YOU NICKNAME: ");
                     break;
             }
             try{
@@ -224,18 +224,21 @@ public class StartCLI {
                 iE.printStackTrace();
             }
             if(response!=null && response.getCategory()==Message.MessageCategory.WARNING) {
+                System.out.print(CLS);
+                System.out.flush();
                 System.out.print("""
-                																															
-                                                       __  ___          _____  __           __ ____ _                                      \s
-                                                      /  |/  /__  __   / ___/ / /_   ___   / // __/(_)___                                  \s
-                                                     / /|_/ // / / /   \\__ \\ / __ \\ / _ \\ / // /_ / // _ \\                                 \s
-                                                    / /  / // /_/ /   ___/ // / / //  __// // __// //  __/                                 \s
-                                                   /_/  /_/ \\__, /   /____//_/ /_/ \\___//_//_/  /_/ \\___/                                  \s
-                                                           /____/                                                                          \s
-                                                                                                                                           \s
-                																															
-                """ +
-                        "\t\t\t\t\t\t\t\t\t\t" + response.getReturnMessage());
+                                                							
+                                                        					
+                                        															
+                                                       __  ___          _____  __           __ ____ _
+                                                      /  |/  /__  __   / ___/ / /_   ___   / // __/(_)___
+                                                     / /|_/ // / / /   \\__ \\ / __ \\ / _ \\ / // /_ / // _ \\
+                                                    / /  / // /_/ /   ___/ // / / //  __// // __// //  __/
+                                                   /_/  /_/ \\__, /   /____//_/ /_/ \\___//_//_/  /_/ \\___/
+                                                           /____/
+                                """);
+
+                System.out.print("\n                        " + response.getReturnMessage());
                 try{
                     TimeUnit.SECONDS.sleep(2);
                 }catch (InterruptedException iE){
@@ -244,17 +247,17 @@ public class StartCLI {
                 System.out.print(CLS);
                 System.out.flush();
                 System.out.print("""
-                																															
-                                                       __  ___          _____  __           __ ____ _                                      \s
-                                                      /  |/  /__  __   / ___/ / /_   ___   / // __/(_)___                                  \s
-                                                     / /|_/ // / / /   \\__ \\ / __ \\ / _ \\ / // /_ / // _ \\                                 \s
-                                                    / /  / // /_/ /   ___/ // / / //  __// // __// //  __/                                 \s
-                                                   /_/  /_/ \\__, /   /____//_/ /_/ \\___//_//_/  /_/ \\___/                                  \s
-                                                           /____/                                                                          \s
-                                                                                                                                           \s
-                																															
-                """ +
-                        "\t\t\t\t\t\t\t\tINSERT YOUR NICKNAME: ");
+                                                							
+                                                        					
+                                        															
+                                                       __  ___          _____  __           __ ____ _
+                                                      /  |/  /__  __   / ___/ / /_   ___   / // __/(_)___
+                                                     / /|_/ // / / /   \\__ \\ / __ \\ / _ \\ / // /_ / // _ \\
+                                                    / /  / // /_/ /   ___/ // / / //  __// // __// //  __/
+                                                   /_/  /_/ \\__, /   /____//_/ /_/ \\___//_//_/  /_/ \\___/
+                                                           /____/
+                                """);
+                System.out.print("\n                INSERT YOU NICKNAME: ");
                 response=null;
             }
         }while(response==null || (response.getCategory()!=Message.MessageCategory.VALID_NICKNAME && response!=null));

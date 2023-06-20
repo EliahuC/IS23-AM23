@@ -39,18 +39,21 @@
             System.out.print("EIGHT SAME TILES.\n\n");
 
             //                                     [0]             [1]             [2]             [3]            [4]
-            System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t " + WOOD + "                     " + RESET +
-                    "\n\t\t\t\t\t\t\t\t\t\t\t\t\t   " + WOOD + " " + RESET + "   " + RESET + "   " + RESET + "   " + RESET + "   " + RESET + "   " + WOOD + " " + RESET +
-                    "\n\t\t\t\t\t\t\t\t\t\t\t\t\t   " + WOOD + " " + WHITE + "   " + RESET + "   " + RESET + "   " + RESET + "   " + WHITE + "   " + WOOD + " " + RESET +
-                    "\n\t\t\t\t\t\t\t\t\t\t\t\t\t   " + WOOD + " " + RESET + "   " + RESET + "   " + WHITE + "   " + RESET + "   " + RESET + "   " + WOOD + " " + RESET +
-                    "\n\t\t\t\t\t\t\t\t\t\t\t\t\t   " + WOOD + " " + WHITE + "   " + RESET + "   " + RESET + "   " + RESET + "   " + WHITE + "   " + WOOD + " " + RESET +
-                    "\n\t\t\t\t\t\t\t\t\t\t\t\t\t   " + WOOD + " " + RESET + "   " + RESET + "   " + WHITE + "   " + RESET + "   " + RESET + "   " + WOOD + " " + RESET +
-                    "\n\t\t\t\t\t\t\t\t\t\t\t\t\t   " + WOOD + " " + WHITE + "   " + RESET + "   " + RESET + "   " + RESET + "   " + WHITE + "   " + WOOD + " " + RESET +
-                    "\n\t\t\t\t\t\t\t\t\t\t\t\t\t " + WOOD + "                     " + RESET);
+            System.out.println("                    " + WOOD + "                     " + RESET +
+                    "\n                      " + WOOD + " " + RESET + "   " + RESET + "   " + RESET + "   " + RESET + "   " + RESET + "   " + WOOD + " " + RESET +
+                    "\n                      " + WOOD + " " + WHITE + "   " + RESET + "   " + RESET + "   " + RESET + "   " + WHITE + "   " + WOOD + " " + RESET +
+                    "\n                      " + WOOD + " " + RESET + "   " + RESET + "   " + WHITE + "   " + RESET + "   " + RESET + "   " + WOOD + " " + RESET +
+                    "\n                      " + WOOD + " " + WHITE + "   " + RESET + "   " + RESET + "   " + RESET + "   " + WHITE + "   " + WOOD + " " + RESET +
+                    "\n                      " + WOOD + " " + RESET + "   " + RESET + "   " + WHITE + "   " + RESET + "   " + RESET + "   " + WOOD + " " + RESET +
+                    "\n                      " + WOOD + " " + WHITE + "   " + RESET + "   " + RESET + "   " + RESET + "   " + WHITE + "   " + WOOD + " " + RESET +
+                    "\n                    " + WOOD + "                     " + RESET);
 
-            System.out.print("\n\t\t\t\t\t\t\t\t\t\t  DESCRIPTION: Eight tiles of the same type.\n" +
-                    "\t\t\t\t\t\t\t\t\tThere’s no restriction about the position of these tiles.\n");
-            System.out.print("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tPOINTS:" + points + "\n\n");
+            System.out.print("""
+                
+                > DESCRIPTION: Eight tiles of the same type. There’s no restriction
+                about the position of these tiles.
+                """);
+            System.out.print("> POINTS: " + points + "\n\n");
         }
     }
 

@@ -69,17 +69,21 @@ public class CommonGoalCard1 extends CommonGoalCard implements CheckCommonGoalCa
     public void print(){
         System.out.print("SIX GROUPS FORMED OF TWO TILES.\n\n");
         //                                      [0]             [1]             [2]             [3]            [4]
-        System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t " + WOOD + "                     " + RESET +
-                "\n\t\t\t\t\t\t\t\t\t\t\t\t\t   " + WOOD + " " + CYAN + "   " + CYAN + "   " + RESET + "   " + RESET + "   " + RESET + "   " + WOOD + " " + RESET +
-                "\n\t\t\t\t\t\t\t\t\t\t\t\t\t   " + WOOD + " " + RESET + "   " + RESET + "   " + RESET + "   " + BLUE + "   " + BLUE + "   " + WOOD + " " + RESET +
-                "\n\t\t\t\t\t\t\t\t\t\t\t\t\t   " + WOOD + " " + RESET + "   " + WHITE + "   " + WHITE + "   " + RESET + "   " + RESET + "   " + WOOD + " " + RESET +
-                "\n\t\t\t\t\t\t\t\t\t\t\t\t\t   " + WOOD + " " + RESET + "   " + RESET + "   " + RESET + "   " + RESET + "   " + CYAN + "   " + WOOD + " " + RESET +
-                "\n\t\t\t\t\t\t\t\t\t\t\t\t\t   " + WOOD + " " + BLUE + "   " + RESET + "   " + RESET + "   " + WHITE + "   " + CYAN + "   " + WOOD + " " + RESET +
-                "\n\t\t\t\t\t\t\t\t\t\t\t\t\t   " + WOOD + " " + BLUE + "   " + RESET + "   " + RESET + "   " + WHITE + "   " + RESET + "   " + WOOD + " " + RESET +
-                "\n\t\t\t\t\t\t\t\t\t\t\t\t\t " + WOOD + "                     " + RESET);
+        System.out.println("                    " + WOOD + "                     " + RESET +
+                "\n                      " + WOOD + " " + CYAN + "   " + CYAN + "   " + RESET + "   " + RESET + "   " + RESET + "   " + WOOD + " " + RESET +
+                "\n                      " + WOOD + " " + RESET + "   " + RESET + "   " + RESET + "   " + BLUE + "   " + BLUE + "   " + WOOD + " " + RESET +
+                "\n                      " + WOOD + " " + RESET + "   " + WHITE + "   " + WHITE + "   " + RESET + "   " + RESET + "   " + WOOD + " " + RESET +
+                "\n                      " + WOOD + " " + RESET + "   " + RESET + "   " + RESET + "   " + RESET + "   " + CYAN + "   " + WOOD + " " + RESET +
+                "\n                      " + WOOD + " " + BLUE + "   " + RESET + "   " + RESET + "   " + WHITE + "   " + CYAN + "   " + WOOD + " " + RESET +
+                "\n                      " + WOOD + " " + BLUE + "   " + RESET + "   " + RESET + "   " + WHITE + "   " + RESET + "   " + WOOD + " " + RESET +
+                "\n                    " + WOOD + "                     " + RESET);
 
-        System.out.print("\n\t\t\t\t\t\t\tDESCRIPTION: Six groups each containing at least 2 tiles of the same type.\n" +
-                "\t\t\t\t\t\t\tThe tiles of one group can be different from those of another group.\n");
-        System.out.print("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tPOINTS:" + points + "\n\n");
+        System.out.print("""
+                
+                > DESCRIPTION: Six groups each containing at least 2 tiles of the
+                same type. The tiles of one group can be different from those of
+                another group.
+                """);
+        System.out.print("> POINTS: " + points + "\n\n");
     }
 }

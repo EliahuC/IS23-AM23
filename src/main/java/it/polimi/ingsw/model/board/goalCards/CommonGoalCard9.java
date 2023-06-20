@@ -67,17 +67,20 @@ public class CommonGoalCard9 extends CommonGoalCard implements CheckCommonGoalCa
         System.out.print("TWO COLUMNS WITH DIFFERENT TILES.\n\n");
 
         //                                     [0]             [1]             [2]             [3]            [4]
-        System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t " + WOOD + "                     " + RESET +
-                "\n\t\t\t\t\t\t\t\t\t\t\t\t\t   " + WOOD + " " + RESET + "   " + PINK + "   " + RESET + "   " + BLUE + "   " + RESET + "   " + WOOD + " " + RESET +
-                "\n\t\t\t\t\t\t\t\t\t\t\t\t\t   " + WOOD + " " + RESET + "   " + YELLOW + "   " + RESET + "   " + CYAN + "   " + RESET + "   " + WOOD + " " + RESET +
-                "\n\t\t\t\t\t\t\t\t\t\t\t\t\t   " + WOOD + " " + RESET + "   " + WHITE + "   " + RESET + "   " + GREEN + "   " + RESET + "   " + WOOD + " " + RESET +
-                "\n\t\t\t\t\t\t\t\t\t\t\t\t\t   " + WOOD + " " + RESET + "   " + GREEN + "   " + RESET + "   " + WHITE + "   " + RESET + "   " + WOOD + " " + RESET +
-                "\n\t\t\t\t\t\t\t\t\t\t\t\t\t   " + WOOD + " " + RESET + "   " + CYAN + "   " + RESET + "   " + YELLOW + "   " + RESET + "   " + WOOD + " " + RESET +
-                "\n\t\t\t\t\t\t\t\t\t\t\t\t\t   " + WOOD + " " + RESET + "   " + BLUE + "   " + RESET + "   " + PINK + "   " + RESET + "   " + WOOD + " " + RESET +
-                "\n\t\t\t\t\t\t\t\t\t\t\t\t\t " + WOOD + "                     " + RESET);
+        System.out.println("                    " + WOOD + "                     " + RESET +
+                "\n                      " + WOOD + " " + RESET + "   " + PINK + "   " + RESET + "   " + BLUE + "   " + RESET + "   " + WOOD + " " + RESET +
+                "\n                      " + WOOD + " " + RESET + "   " + YELLOW + "   " + RESET + "   " + CYAN + "   " + RESET + "   " + WOOD + " " + RESET +
+                "\n                      " + WOOD + " " + RESET + "   " + WHITE + "   " + RESET + "   " + GREEN + "   " + RESET + "   " + WOOD + " " + RESET +
+                "\n                      " + WOOD + " " + RESET + "   " + GREEN + "   " + RESET + "   " + WHITE + "   " + RESET + "   " + WOOD + " " + RESET +
+                "\n                      " + WOOD + " " + RESET + "   " + CYAN + "   " + RESET + "   " + YELLOW + "   " + RESET + "   " + WOOD + " " + RESET +
+                "\n                      " + WOOD + " " + RESET + "   " + BLUE + "   " + RESET + "   " + PINK + "   " + RESET + "   " + WOOD + " " + RESET +
+                "\n                    " + WOOD + "                     " + RESET);
 
-        System.out.print("\n\t\t\t\t\t\t\tDESCRIPTION: Two columns each formed by 6 different types of tiles.\n");
-        System.out.print("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tPOINTS:" + points + "\n\n");
+        System.out.print("""
+                
+                > DESCRIPTION: Two columns each formed by 6 different types of tiles.
+                """);
+        System.out.print("> POINTS: " + points + "\n\n");
     }
 }
 

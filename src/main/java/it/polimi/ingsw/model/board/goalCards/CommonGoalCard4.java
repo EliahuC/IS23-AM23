@@ -626,17 +626,21 @@ public class CommonGoalCard4 extends CommonGoalCard implements CheckCommonGoalCa
         System.out.print("TWO SQUARES.\n\n");
 
         //                                     [0]             [1]             [2]             [3]            [4]
-        System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t " + WOOD + "                     " + RESET +
-                "\n\t\t\t\t\t\t\t\t\t\t\t\t\t   " + WOOD + " " + RESET + "   " + RESET + "   " + RESET + "   " + RESET + "   " + RESET + "   " + WOOD + " " + RESET +
-                "\n\t\t\t\t\t\t\t\t\t\t\t\t\t   " + WOOD + " " + RESET + "   " + RESET + "   " + RESET + "   " + BLUE + "   " + BLUE + "   " + WOOD + " " + RESET +
-                "\n\t\t\t\t\t\t\t\t\t\t\t\t\t   " + WOOD + " " + RESET + "   " + RESET + "   " + RESET + "   " + BLUE + "   " + BLUE + "   " + WOOD + " " + RESET +
-                "\n\t\t\t\t\t\t\t\t\t\t\t\t\t   " + WOOD + " " + PINK + "   " + PINK + "   " + RESET + "   " + RESET + "   " + RESET + "   " + WOOD + " " + RESET +
-                "\n\t\t\t\t\t\t\t\t\t\t\t\t\t   " + WOOD + " " + PINK + "   " + PINK + "   " + RESET + "   " + RESET + "   " + RESET + "   " + WOOD + " " + RESET +
-                "\n\t\t\t\t\t\t\t\t\t\t\t\t\t   " + WOOD + " " + RESET + "   " + RESET + "   " + RESET + "   " + RESET + "   " + RESET + "   " + WOOD + " " + RESET +
-                "\n\t\t\t\t\t\t\t\t\t\t\t\t\t " + WOOD + "                     " + RESET);
+        System.out.println("                    " + WOOD + "                     " + RESET +
+                "\n                      " + WOOD + " " + RESET + "   " + RESET + "   " + RESET + "   " + RESET + "   " + RESET + "   " + WOOD + " " + RESET +
+                "\n                      " + WOOD + " " + RESET + "   " + RESET + "   " + RESET + "   " + BLUE + "   " + BLUE + "   " + WOOD + " " + RESET +
+                "\n                      " + WOOD + " " + RESET + "   " + RESET + "   " + RESET + "   " + BLUE + "   " + BLUE + "   " + WOOD + " " + RESET +
+                "\n                      " + WOOD + " " + PINK + "   " + PINK + "   " + RESET + "   " + RESET + "   " + RESET + "   " + WOOD + " " + RESET +
+                "\n                      " + WOOD + " " + PINK + "   " + PINK + "   " + RESET + "   " + RESET + "   " + RESET + "   " + WOOD + " " + RESET +
+                "\n                      " + WOOD + " " + RESET + "   " + RESET + "   " + RESET + "   " + RESET + "   " + RESET + "   " + WOOD + " " + RESET +
+                "\n                    " + WOOD + "                     " + RESET);
 
-        System.out.print("\n\t\t\t\t\t\t\tDESCRIPTION: Two groups each containing 4 tiles of the same type in a 2x2 square.\n" +
-                "\t\t\t\t\t\t\tThe tiles of one square can be different from those of the other square.\n");
-        System.out.print("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tPOINTS:" + points + "\n\n");
+        System.out.print("""
+                
+                > DESCRIPTION: Two groups each containing 4 tiles of the same type
+                in a 2x2 square. The tiles of one square can be different from
+                those of the other square.
+                """);
+        System.out.print("> POINTS: " + points + "\n\n");
     }
 }
