@@ -14,6 +14,8 @@ import java.rmi.server.UnicastRemoteObject;
  */
 public abstract class ConnectionClient extends UnicastRemoteObject implements Runnable {
 
+    protected String address;
+
     public ConnectionClient() throws RemoteException {
         super();
     }
@@ -33,5 +35,9 @@ public abstract class ConnectionClient extends UnicastRemoteObject implements Ru
 
     public void setListener(PropertyChangeListener listener) {
 
+    }
+
+    public void setAddress(String address){
+        this.address=address;
     }
 }

@@ -139,6 +139,7 @@ public class StartCLI {
                         receiver=new CLIEvent(this);
                         receiver.setInStartCLI(true);
                         connectionClient = new ClientConnectionRMI(nickname,receiver);
+                        connectionClient.setAddress(serverAddr);
                         new Thread(connectionClient).start();
                         break;
                     } catch (RemoteException e){

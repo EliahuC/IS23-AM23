@@ -45,7 +45,10 @@ public class ClientConnectionRMI extends ConnectionClient implements RemoteInter
         this.listener=listener;
         this.clientIsActive =true;
         try{
-            stub =(RemoteInterface) Naming.lookup("rmi://localhost:"+22011+"/RMIServer");
+            if(address=="")
+                stub =(RemoteInterface) Naming.lookup("rmi://localhost:"+22011+"/RMIServer");
+            else
+                stub =(RemoteInterface) Naming.lookup("rmi://" + address + ":"+22011+"/RMIServer");
 
         } catch (MalformedURLException | NotBoundException | RemoteException e) {
             System.out.println("you couldn't establish the connection");
