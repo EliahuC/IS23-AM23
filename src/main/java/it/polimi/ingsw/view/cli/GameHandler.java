@@ -186,7 +186,7 @@ public class GameHandler {
         while(!Objects.equals(player.getNickName(), players.get(currPlaying - 1).getNickName())){
             if(endgame)
                 break;
-            /*System.out.print(CLS);
+            /*System.out.print(CLS); TODO abilitare durante la creazione del JAR
             //System.out.flush();
             System.out.print("\n\n                                      It's NOT your turn!\n\n                                    CURRENTLY PLAYING: ");
             if(players.get(currPlaying-1).isFirstPlayerSeat())
@@ -583,7 +583,7 @@ public class GameHandler {
                     }
                 }
                 if(j==shelfCols-1)
-                    System.out.println(WOOD + " "+ RESET + "\n");
+                    System.out.println(WOOD + " "+ RESET);
             }
         }
 
@@ -594,6 +594,7 @@ public class GameHandler {
         System.out.print("                      ");
         for(int j=0; j<shelfCols;j++)
             System.out.print("["+j+"]");
+        System.out.print("\n");
     }
 
     private void printPersonalGoalCard(){

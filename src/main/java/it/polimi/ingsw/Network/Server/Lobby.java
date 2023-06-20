@@ -26,6 +26,7 @@ public class Lobby implements Serializable {
     private final ArrayList<String> joinedUsers;
     private Boolean startedGame=false;
     private Boolean fullLobby=false;
+    //private  transient String saveFilePath="../Savings"; TODO abilitare durante la creazione del JAR
     private  transient String saveFilePath="Savings";
     private final Integer idLobby;
     public Lobby(Integer numPlayersLobby,Integer ID){
