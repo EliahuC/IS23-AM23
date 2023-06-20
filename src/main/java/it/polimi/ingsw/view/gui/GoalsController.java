@@ -33,6 +33,7 @@ public class GoalsController {
     ImageView points2;
 
     private Stage stage;
+    private Image image;
     private Scene scene;
     private Parent root;
     private LivingRoom livingRoom;
@@ -249,74 +250,100 @@ public class GoalsController {
         switch (personalCard) {
             case 1:
             {
-                Image image = new Image(getClass().getResourceAsStream("Personal_Goals.png"));
+                File file = new File("com/example/is23am23/Personal_Goals.png");
+                image = new Image(String.valueOf(file));
                 displayImage(personalGoal, image);
+                //Image image = new Image(getClass().getResourceAsStream("com/example/is23am23/Personal_Goals.png"));
+
                 break;
             }
             case 2:
             {
-                Image image = new Image(getClass().getResourceAsStream("Personal_Goals2.png"));
+                File file = new File("com/example/is23am23/Personal_Goals2.png");
+                image = new Image(String.valueOf(file));
                 displayImage(personalGoal, image);
+                //Image image = new Image(getClass().getResourceAsStream("Personal_Goals2.png"));
                 break;
             }
             case 3:
             {
-                Image image = new Image(getClass().getResourceAsStream("Personal_Goals3.png"));
+                File file = new File("com/example/is23am23/Personal_Goals3.png");
+                image = new Image(String.valueOf(file));
                 displayImage(personalGoal, image);
+                //Image image = new Image(getClass().getResourceAsStream("Personal_Goals3.png"));
                 break;
             }
             case 4:
             {
-                Image image = new Image(getClass().getResourceAsStream("Personal_Goals4.png"));
+                File file = new File("com/example/is23am23/Personal_Goals4.png");
+                image = new Image(String.valueOf(file));
                 displayImage(personalGoal, image);
+                //Image image = new Image(getClass().getResourceAsStream("Personal_Goals4.png"));
+
                 break;
             }
             case 5:
             {
-                Image image = new Image(getClass().getResourceAsStream("Personal_Goals5.png"));
+                File file = new File("com/example/is23am23/Personal_Goals5.png");
+                image = new Image(String.valueOf(file));
                 displayImage(personalGoal, image);
+                //Image image = new Image(getClass().getResourceAsStream("Personal_Goals5.png"));
                 break;
             }
             case 6:
             {
-                Image image = new Image(getClass().getResourceAsStream("Personal_Goals6.png"));
+                File file = new File("com/example/is23am23/Personal_Goals6.png");
+                image = new Image(String.valueOf(file));
                 displayImage(personalGoal, image);
+                //Image image = new Image(getClass().getResourceAsStream("Personal_Goals6.png"));
                 break;
             }
             case 7:
             {
-                Image image = new Image(getClass().getResourceAsStream("Personal_Goals7.png"));
+                File file = new File("com/example/is23am23/Personal_Goals7.png");
+                image = new Image(String.valueOf(file));
                 displayImage(personalGoal, image);
+                //Image image = new Image(getClass().getResourceAsStream("Personal_Goals7.png"));
                 break;
             }
             case 8:
             {
-                Image image = new Image(getClass().getResourceAsStream("Personal_Goals8.png"));
+                File file = new File("com/example/is23am23/Personal_Goals8.png");
+                image = new Image(String.valueOf(file));
                 displayImage(personalGoal, image);
+                //Image image = new Image(getClass().getResourceAsStream("Personal_Goals8.png"));
                 break;
             }
             case 9:
             {
-                Image image = new Image(getClass().getResourceAsStream("Personal_Goals9.png"));
+                File file = new File("com/example/is23am23/Personal_Goals9.png");
+                image = new Image(String.valueOf(file));
                 displayImage(personalGoal, image);
+                //Image image = new Image(getClass().getResourceAsStream("Personal_Goals9.png"));
                 break;
             }
             case 10:
             {
-                Image image = new Image(getClass().getResourceAsStream("Personal_Goals10.png"));
+                File file = new File("com/example/is23am23/Personal_Goals10.png");
+                image = new Image(String.valueOf(file));
                 displayImage(personalGoal, image);
+                //Image image = new Image(getClass().getResourceAsStream("Personal_Goals10.png"));
                 break;
             }
             case 11:
             {
-                Image image = new Image(getClass().getResourceAsStream("Personal_Goals11.png"));
-                displayImage(commonGoal1, image);
+                File file = new File("com/example/is23am23/Personal_Goals11.png");
+                image = new Image(String.valueOf(file));
+                displayImage(personalGoal, image);
+                //Image image = new Image(getClass().getResourceAsStream("Personal_Goals11.png"));
                 break;
             }
             case 12:
             {
-                Image image = new Image(getClass().getResourceAsStream("Personal_Goals12.png.jpg"));
+                File file = new File("com/example/is23am23/Personal_Goals12.png");
+                image = new Image(String.valueOf(file));
                 displayImage(personalGoal, image);
+                //Image image = new Image(getClass().getResourceAsStream("Personal_Goals12.png"));
                 break;
             }
         }
@@ -455,8 +482,8 @@ public class GoalsController {
         }
     }
 
-    public void displayImage(ImageView commonGoal1,Image image){
-        commonGoal1.setImage(image);
+    public void displayImage(ImageView commonGoal,Image image){
+        commonGoal.setImage(image);
     }
     public void setGameControllerGUI(GameControllerGUI gameControllerGUI){
         this.gameControllerGUI=gameControllerGUI;
