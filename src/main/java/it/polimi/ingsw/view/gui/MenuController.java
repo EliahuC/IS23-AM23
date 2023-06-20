@@ -110,7 +110,7 @@ public class MenuController {
         try {
             receiver = new GUIEvent(this);
             receiver.setInStartGUI(true);
-            connectionClient = new ClientConnectionRMI(nickname, receiver);
+            connectionClient = new ClientConnectionRMI(nickname, receiver, serverAddr);
             new Thread(connectionClient).start();
             try {
                 TimeUnit.MILLISECONDS.sleep(500);

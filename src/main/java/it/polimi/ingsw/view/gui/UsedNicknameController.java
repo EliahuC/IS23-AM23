@@ -138,7 +138,7 @@ public class UsedNicknameController {
 
     public boolean RMIon(ActionEvent event) {
         try {
-            connectionClient = new ClientConnectionRMI(nickname, receiver);
+            connectionClient = new ClientConnectionRMI(nickname, receiver, serverAddr);
             new Thread(connectionClient).start();
             try {
                 TimeUnit.MILLISECONDS.sleep(500);
