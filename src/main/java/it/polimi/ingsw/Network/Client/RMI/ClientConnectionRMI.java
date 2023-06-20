@@ -39,11 +39,12 @@ public class ClientConnectionRMI extends ConnectionClient implements RemoteInter
      * @throws RemoteException if the connection couldn't start
      * Constructor to start the RMI connection and set the playerNick
      */
-    public ClientConnectionRMI(String nickname,PropertyChangeListener listener) throws RemoteException {
+    public ClientConnectionRMI(String nickname,PropertyChangeListener listener, String address) throws RemoteException {
         super();
         this.playerName=nickname;
         this.listener=listener;
         this.clientIsActive =true;
+        this.address=address;
         try{
             if(address == null)
                 stub =(RemoteInterface) Naming.lookup("rmi://localhost:"+22011+"/RMIServer");
