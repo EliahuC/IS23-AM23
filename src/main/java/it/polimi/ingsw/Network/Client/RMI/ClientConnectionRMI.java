@@ -45,7 +45,7 @@ public class ClientConnectionRMI extends ConnectionClient implements RemoteInter
         this.listener=listener;
         this.clientIsActive =true;
         try{
-            if(address=="")
+            if(address == null)
                 stub =(RemoteInterface) Naming.lookup("rmi://localhost:"+22011+"/RMIServer");
             else
                 stub =(RemoteInterface) Naming.lookup("rmi://" + address + ":"+22011+"/RMIServer");
