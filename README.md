@@ -21,5 +21,5 @@ The members of the group are:
 |GUI   	|🟡   	| 50%   	      |    	|
 |TCP   	|🟢  	| 100%   	    |    	|
 |RMI   	|🟡   	| 99%   	     |   	|
-|Persistency   	|🟡   	| 85%   	     |   	|
+|Persistency   	|🟡   	| 99%   	     |   	|
 |Multiple games   	|🟢   	| 100%   	     |   	|
