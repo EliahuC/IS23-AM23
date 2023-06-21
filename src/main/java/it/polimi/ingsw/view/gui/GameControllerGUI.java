@@ -52,7 +52,7 @@ public class GameControllerGUI {
     private Player player;
     private List<Player> players;
     private List<ItemTile> tiles;
-    private int currPlaying=1;
+    private int currPlaying = 1;
     private String currentPlayer;
     private String winner;
     private Integer seed;
@@ -63,8 +63,8 @@ public class GameControllerGUI {
     ImageView container2;
     @FXML
     ImageView container3;
-    private int currPlayer=1;
-    public static final int LivingRoomSize=9;
+    private int currPlayer = 1;
+    public static final int LivingRoomSize = 9;
     private static final int shelfRows = 6;
     private static final int shelfCols = 5;
     private boolean endgame;
@@ -76,8 +76,10 @@ public class GameControllerGUI {
     GridPane myGridPane_container;
     @FXML
     GridPane myGridPane_bs;
+    private static GameControllerGUI currentIstance;
 
     public void displayLivingroom() throws IOException {
+        GameControllerGUI.currentIstance = this;
         myGridPane_lr = new GridPane();
         for (int i = 0; i < LivingRoomSize; i++) {
             for (int j = 0; j < LivingRoomSize; j++) {
@@ -102,7 +104,7 @@ public class GameControllerGUI {
         for (int i = 0; i < shelfRows; i++) {
             for (int j = 0; j < shelfCols; j++) {
                 //if (bookshelf.getTile(i,j).getCategory() != null) {
-                ItemTile tile = bookshelf.getTile(i,j);
+                ItemTile tile = bookshelf.getTile(i, j);
 
                 //PROVA CON IMMAGINI IMPOSTATE
                 ImageView imageView = new ImageView();
@@ -117,7 +119,7 @@ public class GameControllerGUI {
                 myGridPane_bs.setLayoutY(158);
 
                 // Opzionale: Imposta il padding o altre proprietà per gli ImageView
-                GridPane.setMargin(imageView, new Insets(0, 2,0,2));
+                GridPane.setMargin(imageView, new Insets(0, 2, 0, 2));
                 myGridPane_bs.add(imageView, j, i);
                 //}
             }
@@ -127,35 +129,35 @@ public class GameControllerGUI {
 
         myGridPane_container = new GridPane();
         for (int i = 0; i < 3; i++) {
-                ImageView imageView = new ImageView();
-                File file = new File("/com/example/is23am23/Cornici.png");
-                image = new Image(String.valueOf(file));
-                imageView.setImage(image);
-                imageView.setFitWidth(30);
-                imageView.setFitHeight(30);
-                myGridPane_container.setLayoutX(384);
-                myGridPane_container.setLayoutY(66);
+            ImageView imageView = new ImageView();
+            File file = new File("/com/example/is23am23/Cornici.png");
+            image = new Image(String.valueOf(file));
+            imageView.setImage(image);
+            imageView.setFitWidth(30);
+            imageView.setFitHeight(30);
+            myGridPane_container.setLayoutX(384);
+            myGridPane_container.setLayoutY(66);
 
-                // Opzionale: Imposta il padding o altre proprietà per gli ImageView
-                GridPane.setMargin(imageView, new Insets(0));
-                myGridPane_container.add(imageView, i, 0);
+            // Opzionale: Imposta il padding o altre proprietà per gli ImageView
+            GridPane.setMargin(imageView, new Insets(0));
+            myGridPane_container.add(imageView, i, 0);
         }
 
-                File file = new File("src/main/resources/com/example/is23am23/game.fxml");
-                URL url = file.toURI().toURL();
-                FXMLLoader loader = new FXMLLoader(url);
-                AnchorPane root = loader.load();
-                root.getChildren().add(myGridPane_lr);
-                root.getChildren().add(myGridPane_bs);
-                root.getChildren().add(myGridPane_container);
-                Scene scene = new Scene(root);
-                    //Stage stage = new Stage();
-                    // Impostazione della scena sullo stage
-                stage.setScene(scene);
+        File file = new File("src/main/resources/com/example/is23am23/game.fxml");
+        URL url = file.toURI().toURL();
+        FXMLLoader loader = new FXMLLoader(url);
+        AnchorPane root = loader.load();
+        root.getChildren().add(myGridPane_lr);
+        root.getChildren().add(myGridPane_bs);
+        root.getChildren().add(myGridPane_container);
+        Scene scene = new Scene(root);
+        //Stage stage = new Stage();
+        // Impostazione della scena sullo stage
+        stage.setScene(scene);
 
-                    // Mostra lo stage
-                stage.show();
-                    //displayImage(livingroom_0_3, chooseCategory(tile))
+        // Mostra lo stage
+        stage.show();
+        //displayImage(livingroom_0_3, chooseCategory(tile))
     }
 
     /*public void displayBookshelf() throws IOException {
@@ -255,18 +257,19 @@ public class GameControllerGUI {
         Parent root = loader.load();
 
         GoalsController goalsController = loader.getController();
-        if(goalsController.getGameControllerGUI()==null){
-            goalsController.setGameControllerGUI(this);
+        if (goalsController.getGameControllerGUI() == null) {
+            goalsController.setGameControllerGUI(getCurrentIstance());
         }
         goalsController.displayPersonalGoal();
         goalsController.displayCommonGoal();
-        goalsController.displayPoints();
+        //goalsController.displayPoints();
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
 
     }
+
     public void returnToMenu(ActionEvent event) throws IOException {
 
         File file = new File("src/main/resources/com/example/is23am23/menu.fxml");
@@ -274,14 +277,14 @@ public class GameControllerGUI {
         FXMLLoader loader = new FXMLLoader(url);
         Parent root = loader.load();
 
-        stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
 
-    public void setResponse(ServerMessage response){
-        this.response=response;
+    public void setResponse(ServerMessage response) {
+        this.response = response;
     }
 
     public void setLivingRoom(LivingRoom livingRoom) {
@@ -290,6 +293,7 @@ public class GameControllerGUI {
         createCommonGoalCard1(livingRoom.getIdCGC1());
         createCommonGoalCard2(livingRoom.getIdCGC2());
     }
+
     private void createCommonGoalCard1(Integer idCGC1) {
         switch (idCGC1) {
             case 1 -> this.commonGoalCard1 = new CommonGoalCard1(players.size());
@@ -306,6 +310,7 @@ public class GameControllerGUI {
             case 12 -> this.commonGoalCard1 = new CommonGoalCard12(players.size());
         }
     }
+
     private void createCommonGoalCard2(Integer idCGC2) {
         switch (idCGC2) {
             case 1 -> this.commonGoalCard2 = new CommonGoalCard1(players.size());
@@ -368,24 +373,25 @@ public class GameControllerGUI {
         displayEnd();
     }*/
 
-    private void waiting(){
+    private void waiting() {
         System.out.print("It's not your turn, yet. Wait for other players to finish their turn.\n\n");
         System.out.print("CURRENT PLAYING: ");
-        if(players.get(currPlaying).isFirstPlayerSeat())
-            System.out.print(players.get(currPlaying).getNickName()+" SEAT MASTER\n");
+        if (players.get(currPlaying).isFirstPlayerSeat())
+            System.out.print(players.get(currPlaying).getNickName() + " SEAT MASTER\n");
         else
-            System.out.print(players.get(currPlaying).getNickName()+"\n");
-        try{
+            System.out.print(players.get(currPlaying).getNickName() + "\n");
+        try {
             TimeUnit.MILLISECONDS.sleep(200);
-        }catch (InterruptedException iE){
+        } catch (InterruptedException iE) {
             iE.printStackTrace();
         }
-        if(response!=null && response.getCategory()==Message.MessageCategory.LAST_TURN_MESSAGE)
+        if (response != null && response.getCategory() == Message.MessageCategory.LAST_TURN_MESSAGE)
             System.out.print(response.getReturnMessage());
-        while(!player.getNowPlaying()){
+        while (!player.getNowPlaying()) {
         }
     }
-    public LivingRoom getLivingRoom(){
+
+    public LivingRoom getLivingRoom() {
 
         return livingRoom;
     }
@@ -394,17 +400,17 @@ public class GameControllerGUI {
         return player;
     }
 
-    public List<Player> getPlayersList(){
+    public List<Player> getPlayersList() {
         return players;
 
     }
 
-    private void displayBoard(){
+    private void displayBoard() {
         System.out.print("LIVING BOARD\n");
         //livingRoom.print();
-        try{
+        try {
             TimeUnit.MILLISECONDS.sleep(200);
-        }catch (InterruptedException iE){
+        } catch (InterruptedException iE) {
             iE.printStackTrace();
         }
         System.out.print("\n\nPICK YOUR TILES! You can choose one, two or three tiles: use the command /SELECT\n" +
@@ -416,26 +422,26 @@ public class GameControllerGUI {
                 "[Use the command /BOOKSHELF to see your personal bookshelf.]\n" +
                 "[Use the command /GOALS to see the description of your personal or common goal cards.]\n");
         Scanner input = new Scanner(System.in);
-        while (true){
+        while (true) {
             String command = input.nextLine();
-            if(Objects.equals(command.toUpperCase(), "/GOALS")){
+            if (Objects.equals(command.toUpperCase(), "/GOALS")) {
                 //displayGoals("Living Board");
                 break;
             }
-            if(Objects.equals(command.toUpperCase(), "/BOOKSHELF")){
+            if (Objects.equals(command.toUpperCase(), "/BOOKSHELF")) {
                 //displayBookshelf();
                 break;
             }
             ClientMessage message = (ClientMessage) MoveSerializer.serializeInput(command);
             connectionClient.sendMessage((ClientMessage) message);
-            try{
+            try {
                 TimeUnit.MILLISECONDS.sleep(200);
-            }catch (InterruptedException iE){
+            } catch (InterruptedException iE) {
                 iE.printStackTrace();
             }
-            if(response!=null && response.getCategory()==Message.MessageCategory.VALID_MESSAGE){
-                for(int i=1; command.split(" ")[i]!=null; i+=2)
-                    tiles.add(livingRoom.getBoardTile(i,i+1).getTile());
+            if (response != null && response.getCategory() == Message.MessageCategory.VALID_MESSAGE) {
+                for (int i = 1; command.split(" ")[i] != null; i += 2)
+                    tiles.add(livingRoom.getBoardTile(i, i + 1).getTile());
                 break;
             }
             System.out.print("Your move is not valid. Please, pick again and correctly your tiles.\n" +
@@ -443,17 +449,17 @@ public class GameControllerGUI {
         }
     }
 
-    private void displayEnd(){
+    private void displayEnd() {
         System.out.print("THE WINNER IS: " + winner + "\n");
         List<Player> ranking = players.stream().sorted(Comparator.comparingInt(Player::getScore)).toList();
-        for(Player p : ranking){
-            if(p.getNickName()!=winner){
-                System.out.print(p.getNickName() + ": "+ p.getScore() + "points\n");
+        for (Player p : ranking) {
+            if (p.getNickName() != winner) {
+                System.out.print(p.getNickName() + ": " + p.getScore() + "points\n");
             }
         }
     }
 
-    private void displayBookshelfOrder(){
+    private void displayBookshelfOrder() {
         Scanner input = new Scanner(System.in);
         System.out.print("YOUR BOOKSHELF\n");
         //player.getPlayerBookshelf().print();
@@ -463,26 +469,26 @@ public class GameControllerGUI {
                 "(If you have just one picked tile, just type: /ORDER 1\n\n" +
                 "[Use the command /GOALS to see the description of your personal or common goal cards.]\n");
         printSelection();
-        while(true){
+        while (true) {
             String command = input.nextLine();
-            if(Objects.equals(command.toUpperCase(), "/GOALS")){
+            if (Objects.equals(command.toUpperCase(), "/GOALS")) {
                 //displayGoals("BookshelfOrder");
                 break;
             }
             Message message = MoveSerializer.serializeInput(command);
             connectionClient.sendMessage((ClientMessage) message);
-            try{
+            try {
                 TimeUnit.MILLISECONDS.sleep(200);
-            }catch (InterruptedException iE){
+            } catch (InterruptedException iE) {
                 iE.printStackTrace();
             }
-            if(response!=null && response.getCategory()==Message.MessageCategory.VALID_MESSAGE)
+            if (response != null && response.getCategory() == Message.MessageCategory.VALID_MESSAGE)
                 break;
             System.out.print("You didn't choose the order appropriately. Please, retry.\n");
         }
     }
 
-    private void displayBookshelfColumn(){
+    private void displayBookshelfColumn() {
         Scanner input = new Scanner(System.in);
         System.out.print("YOUR BOOKSHELF\n");
         //player.getPlayerBookshelf().print();
@@ -490,20 +496,20 @@ public class GameControllerGUI {
                 "using the command /COLUMN and the coordinate of the column.\n" +
                 "For example: if you want to insert the tiles in the second column, you should write /COLUMN 1\n\n" +
                 "[Use the command /GOALS to see the description of your personal or common goal cards.]\n");
-        while(true){
+        while (true) {
             String command = input.nextLine();
-            if(Objects.equals(command.toUpperCase(), "/GOALS")){
+            if (Objects.equals(command.toUpperCase(), "/GOALS")) {
                 //displayGoals("BookshelfColumn");
                 break;
             }
             Message message = MoveSerializer.serializeInput(command);
             connectionClient.sendMessage((ClientMessage) message);
-            try{
+            try {
                 TimeUnit.MILLISECONDS.sleep(200);
-            }catch (InterruptedException iE){
+            } catch (InterruptedException iE) {
                 iE.printStackTrace();
             }
-            if(response!=null && response.getCategory()==Message.MessageCategory.VALID_MESSAGE)
+            if (response != null && response.getCategory() == Message.MessageCategory.VALID_MESSAGE)
                 break;
             System.out.print("The chosen column is too full. Please, choose another one.\n");
         }
@@ -524,26 +530,32 @@ public class GameControllerGUI {
         displayBoard();
     }*/
 
-    private void printSelection(){
-        for(int i=0; tiles.get(i)!=null; i++)
+    private void printSelection() {
+        for (int i = 0; tiles.get(i) != null; i++)
             //System.out.print(tiles.get(i).getColor() + "   ");
+            System.out.print("\n");
+        for (int i = 0; tiles.get(i) != null; i++)
+            System.out.print("(" + i + 1 + ")   ");
         System.out.print("\n");
-        for(int i=0; tiles.get(i)!=null; i++)
-            System.out.print("(" + i+1 + ")   ");
-        System.out.print("\n");
     }
-    public void setSeed (Integer seed){
-        this.seed=seed;
+
+    public void setSeed(Integer seed) {
+        this.seed = seed;
     }
-    public void setConnectionClient(ConnectionClient connectionClient){this.connectionClient=connectionClient;}
-    public void setReceiver(GUIEvent receiver){
-        this.receiver=receiver;
+
+    public void setConnectionClient(ConnectionClient connectionClient) {
+        this.connectionClient = connectionClient;
     }
+
+    public void setReceiver(GUIEvent receiver) {
+        this.receiver = receiver;
+    }
+
     public void startGame() throws IOException {
         //while(response.getCategory()!=Message.MessageCategory.END_GAME_MESSAGE){
-                displayLivingroom();
-                //displayBookshelf();
-            //}
+        displayLivingroom();
+        //displayBookshelf();
+        //}
 
     }
 
@@ -554,6 +566,7 @@ public class GameControllerGUI {
     public List<Player> getPlayers() {
         return players;
     }
+
     public void refreshScene(GridPane gridPane) throws IOException {
         /*File file = new File("src/main/resources/com/example/is23am23/game.fxml");
             URL url = null;
@@ -568,9 +581,14 @@ public class GameControllerGUI {
         stage.setScene(scene);
         stage.show();*/
 
-        }
-        public void setStage(Stage stage){
-        this.stage=stage;
-        }
+    }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+
+    private static GameControllerGUI getCurrentIstance(){
+        return currentIstance;
+    }
 }
 

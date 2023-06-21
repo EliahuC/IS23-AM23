@@ -68,20 +68,27 @@ public class GoalsController {
                 switch (numCompleted1) {
                     case 0:
                     {
-                        Image image = new Image(getClass().getResourceAsStream("scoring_8.jpg"));
+                        File file = new File("com/example/is23am23/scoring_8.jpg");
+                        image = new Image(String.valueOf(file));
                         displayImage(points1, image);
+
+                        //Image image = new Image(getClass().getResourceAsStream("scoring_8.jpg"));
                         break;
                     }
                     case 1:
                     {
-                        Image image = new Image(getClass().getResourceAsStream("scoring_4.jpg"));
+                        File file = new File("com/example/is23am23/scoring_4.jpg");
+                        image = new Image(String.valueOf(file));
                         displayImage(points1, image);
+                       // Image image = new Image(getClass().getResourceAsStream("scoring_4.jpg"));
                         break;
                     }
                     default:
                     {
-                        Image image = new Image(getClass().getResourceAsStream("scoring_back_EMPTY.jpg"));
+                        File file = new File("com/example/is23am23/scoring_back_EMPTY.jpg");
+                        image = new Image(String.valueOf(file));
                         displayImage(points1, image);
+                        //Image image = new Image(getClass().getResourceAsStream("scoring_back_EMPTY.jpg"));
                         break;
                     }
                 }
@@ -91,26 +98,34 @@ public class GoalsController {
                 switch (numCompleted1) {
                     case 0:
                     {
-                        Image image = new Image(getClass().getResourceAsStream("scoring_8.jpg"));
+                        File file = new File("com/example/is23am23/scoring_8.jpg");
+                        image = new Image(String.valueOf(file));
                         displayImage(points1, image);
+                      //  Image image = new Image(getClass().getResourceAsStream("scoring_8.jpg"));
                         break;
                     }
                     case 1:
                     {
-                        Image image = new Image(getClass().getResourceAsStream("scoring_6.jpg"));
+                        File file = new File("com/example/is23am23/scoring_6.jpg");
+                        image = new Image(String.valueOf(file));
                         displayImage(points1, image);
+                        //Image image = new Image(getClass().getResourceAsStream("scoring_6.jpg"));
                         break;
                     }
                     case 2:
                     {
-                        Image image = new Image(getClass().getResourceAsStream("scoring_4.jpg"));
+                        File file = new File("com/example/is23am23/scoring_4.jpg");
+                        image = new Image(String.valueOf(file));
                         displayImage(points1, image);
+                        //Image image = new Image(getClass().getResourceAsStream("scoring_4.jpg"));
                         break;
                     }
                     default:
                     {
-                        Image image = new Image(getClass().getResourceAsStream("scoring_back_EMPTY.jpg"));
+                        File file = new File("com/example/is23am23/scoring_back_EMPTY.jpg");
+                        image = new Image(String.valueOf(file));
                         displayImage(points1, image);
+                       // Image image = new Image(getClass().getResourceAsStream("scoring_back_EMPTY.jpg"));
                         break;
                     }
                 }
@@ -120,31 +135,41 @@ public class GoalsController {
                 switch (numCompleted1) {
                     case 0:
                     {
-                        Image image = new Image(getClass().getResourceAsStream("scoring_8.jpg"));
+                        File file = new File("com/example/is23am23/scoring_8.jpg");
+                        image = new Image(String.valueOf(file));
                         displayImage(points1, image);
+                        //Image image = new Image(getClass().getResourceAsStream("scoring_8.jpg"));
                         break;
                     }
                     case 1:
                     {
-                        Image image = new Image(getClass().getResourceAsStream("scoring_6.jpg"));
+                        File file = new File("com/example/is23am23/scoring_6.jpg");
+                        image = new Image(String.valueOf(file));
                         displayImage(points1, image);
+                        //Image image = new Image(getClass().getResourceAsStream("scoring_6.jpg"));
                         break;
                     }
                     case 2:
                     {
-                        Image image = new Image(getClass().getResourceAsStream("scoring_4.jpg"));
+                        File file = new File("com/example/is23am23/scoring_4.jpg");
+                        image = new Image(String.valueOf(file));
                         displayImage(points1, image);
+                        //Image image = new Image(getClass().getResourceAsStream("scoring_4.jpg"));
                         break;
                     }
                     case 3:  {
-                        Image image = new Image(getClass().getResourceAsStream("scoring_2.jpg"));
+                        File file = new File("com/example/is23am23/scoring_2.jpg");
+                        image = new Image(String.valueOf(file));
                         displayImage(points1, image);
+                    // Image image = new Image(getClass().getResourceAsStream("scoring_2.jpg"));
                         break;
                     }
                     default:
                     {
-                        Image image = new Image(getClass().getResourceAsStream("scoring_back_EMPTY.jpg"));
+                        File file = new File("com/example/is23am23/scoring_back_EMPTY.jpg");
+                        image = new Image(String.valueOf(file));
                         displayImage(points1, image);
+                        //Image image = new Image(getClass().getResourceAsStream("scoring_back_EMPTY.jpg"));
                         break;
                     }
                 }
@@ -158,20 +183,26 @@ public class GoalsController {
                 switch (numCompleted2) {
                     case 0:
                     {
-                        Image image = new Image(getClass().getResourceAsStream("scoring_8.jpg"));
+                        File file = new File("com/example/is23am23/scoring_8.jpg");
+                        image = new Image(String.valueOf(file));
                         displayImage(points2, image);
+                        //Image image = new Image(getClass().getResourceAsStream("scoring_8.jpg"));
                         break;
                     }
                     case 1:
                     {
-                        Image image = new Image(getClass().getResourceAsStream("scoring_4.jpg"));
+                        File file = new File("com/example/is23am23/scoring_4.jpg");
+                        image = new Image(String.valueOf(file));
                         displayImage(points2, image);
+                        //Image image = new Image(getClass().getResourceAsStream("scoring_4.jpg"));
                         break;
                     }
                     default:
                     {
-                        Image image = new Image(getClass().getResourceAsStream("scoring_back_EMPTY.jpg"));
+                        File file = new File("com/example/is23am23/scoring_back_EMPTY.jpg");
+                        image = new Image(String.valueOf(file));
                         displayImage(points2, image);
+                       // Image image = new Image(getClass().getResourceAsStream("scoring_back_EMPTY.jpg"));
                         break;
                     }
                 }
@@ -181,26 +212,34 @@ public class GoalsController {
                 switch (numCompleted2) {
                     case 0:
                     {
-                        Image image = new Image(getClass().getResourceAsStream("scoring_8.jpg"));
+                        File file = new File("com/example/is23am23/scoring_8.jpg");
+                        image = new Image(String.valueOf(file));
                         displayImage(points2, image);
+                      //  Image image = new Image(getClass().getResourceAsStream("scoring_8.jpg"));
                         break;
                     }
                     case 1:
                     {
-                        Image image = new Image(getClass().getResourceAsStream("scoring_6.jpg"));
+                        File file = new File("com/example/is23am23/scoring_6.jpg");
+                        image = new Image(String.valueOf(file));
                         displayImage(points2, image);
+                        //Image image = new Image(getClass().getResourceAsStream("scoring_6.jpg"));
                         break;
                     }
                     case 2:
                     {
-                        Image image = new Image(getClass().getResourceAsStream("scoring_4.jpg"));
+                        File file = new File("com/example/is23am23/scoring_4.jpg");
+                        image = new Image(String.valueOf(file));
                         displayImage(points2, image);
+                      //  Image image = new Image(getClass().getResourceAsStream("scoring_4.jpg"));
                         break;
                     }
                     default:
                     {
-                        Image image = new Image(getClass().getResourceAsStream("scoring_back_EMPTY.jpg"));
+                        File file = new File("com/example/is23am23/scoring_back_EMPTY.jpg");
+                        image = new Image(String.valueOf(file));
                         displayImage(points2, image);
+                       // Image image = new Image(getClass().getResourceAsStream("scoring_back_EMPTY.jpg"));
                         break;
                     }
                 }
@@ -210,31 +249,41 @@ public class GoalsController {
                 switch (numCompleted2) {
                     case 0:
                     {
-                        Image image = new Image(getClass().getResourceAsStream("scoring_8.jpg"));
+                        File file = new File("com/example/is23am23/scoring_8.jpg");
+                        image = new Image(String.valueOf(file));
                         displayImage(points2, image);
+                        //Image image = new Image(getClass().getResourceAsStream("scoring_8.jpg"));
                         break;
                     }
                     case 1:
                     {
-                        Image image = new Image(getClass().getResourceAsStream("scoring_6.jpg"));
+                        File file = new File("com/example/is23am23/scoring_6.jpg");
+                        image = new Image(String.valueOf(file));
                         displayImage(points2, image);
+                        //Image image = new Image(getClass().getResourceAsStream("scoring_6.jpg"));
                         break;
                     }
                     case 2:
                     {
-                        Image image = new Image(getClass().getResourceAsStream("scoring_4.jpg"));
+                        File file = new File("com/example/is23am23/scoring_4.jpg");
+                        image = new Image(String.valueOf(file));
                         displayImage(points2, image);
+                       // Image image = new Image(getClass().getResourceAsStream("scoring_4.jpg"));
                         break;
                     }
                     case 3:  {
-                        Image image = new Image(getClass().getResourceAsStream("scoring_2.jpg"));
+                        File file = new File("com/example/is23am23/scoring_2.jpg");
+                        image = new Image(String.valueOf(file));
                         displayImage(points2, image);
+                  //      Image image = new Image(getClass().getResourceAsStream("scoring_2.jpg"));
                         break;
                     }
                     default:
                     {
-                        Image image = new Image(getClass().getResourceAsStream("scoring_back_EMPTY.jpg"));
+                        File file = new File("com/example/is23am23/scoring_back_EMPTY.jpg");
+                        image = new Image(String.valueOf(file));
                         displayImage(points2, image);
+                //        Image image = new Image(getClass().getResourceAsStream("scoring_back_EMPTY.jpg"));
                         break;
                     }
                 }
@@ -357,62 +406,76 @@ public class GoalsController {
 
         switch (card1) {
             case 1: {
-                Image image = new Image(getClass().getResourceAsStream("4.jpg"));
+                File file = new File("com/example/is23am23/4.jpg");
+                image = new Image(String.valueOf(file));
                 displayImage(commonGoal1, image);
+                //Image image = new Image(getClass().getResourceAsStream("4.jpg"));
                 break;
             }
             case 2: {
-                Image image = new Image(getClass().getResourceAsStream("8.jpg"));
+                File file = new File("com/example/is23am23/8.jpg");
+                image = new Image(String.valueOf(file));
                 displayImage(commonGoal1, image);
+              //  Image image = new Image(getClass().getResourceAsStream("8.jpg"));
                 break;
             }
             case 3: {
-                Image image = new Image(getClass().getResourceAsStream("3.jpg"));
+                File file = new File("com/example/is23am23/3.jpg");
+                image = new Image(String.valueOf(file));
                 displayImage(commonGoal1, image);
                 break;
             }
             case 4: {
-                Image image = new Image(getClass().getResourceAsStream("1.jpg"));
+                File file = new File("com/example/is23am23/1.jpg");
+                image = new Image(String.valueOf(file));
                 displayImage(commonGoal1, image);
                 break;
             }
             case 5: {
-                Image image = new Image(getClass().getResourceAsStream("5.jpg"));
+                File file = new File("com/example/is23am23/5.jpg");
+                image = new Image(String.valueOf(file));
                 displayImage(commonGoal1, image);
                 break;
             }
             case 6: {
-                Image image = new Image(getClass().getResourceAsStream("9.jpg"));
+                File file = new File("com/example/is23am23/9.jpg");
+                image = new Image(String.valueOf(file));
                 displayImage(commonGoal1, image);
                 break;
             }
             case 7: {
-                Image image = new Image(getClass().getResourceAsStream("11.jpg"));
+                File file = new File("com/example/is23am23/11.jpg");
+                image = new Image(String.valueOf(file));
                 displayImage(commonGoal1, image);
                 break;
             }
             case 8: {
-                Image image = new Image(getClass().getResourceAsStream("7.jpg"));
+                File file = new File("com/example/is23am23/7.jpg");
+                image = new Image(String.valueOf(file));
                 displayImage(commonGoal1, image);
                 break;
             }
             case 9: {
-                Image image = new Image(getClass().getResourceAsStream("2.jpg"));
+                File file = new File("com/example/is23am23/2.jpg");
+                image = new Image(String.valueOf(file));
                 displayImage(commonGoal1, image);
                 break;
             }
             case 10: {
-                Image image = new Image(getClass().getResourceAsStream("6.jpg"));
+                File file = new File("com/example/is23am23/6.jpg");
+                image = new Image(String.valueOf(file));
                 displayImage(commonGoal1, image);
                 break;
             }
             case 11: {
-                Image image = new Image(getClass().getResourceAsStream("10.jpg"));
+                File file = new File("com/example/is23am23/10.jpg");
+                image = new Image(String.valueOf(file));
                 displayImage(commonGoal1, image);
                 break;
             }
             case 12: {
-                Image image = new Image(getClass().getResourceAsStream("12.jpg"));
+                File file = new File("com/example/is23am23/12.jpg");
+                image = new Image(String.valueOf(file));
                 displayImage(commonGoal1, image);
                 break;
             }
@@ -420,62 +483,74 @@ public class GoalsController {
 
         switch (card2) {
             case 1: {
-                Image image = new Image(getClass().getResourceAsStream("4.jpg"));
+                File file = new File("com/example/is23am23/4.jpg");
+                image = new Image(String.valueOf(file));
                 displayImage(commonGoal2, image);
                 break;
             }
             case 2: {
-                Image image = new Image(getClass().getResourceAsStream("8.jpg"));
+                File file = new File("com/example/is23am23/8.jpg");
+                image = new Image(String.valueOf(file));
                 displayImage(commonGoal2, image);
                 break;
             }
             case 3: {
-                Image image = new Image(getClass().getResourceAsStream("3.jpg"));
+                File file = new File("com/example/is23am23/3.jpg");
+                image = new Image(String.valueOf(file));
                 displayImage(commonGoal2, image);
                 break;
             }
             case 4: {
-                Image image = new Image(getClass().getResourceAsStream("1.jpg"));
+                File file = new File("com/example/is23am23/1.jpg");
+                image = new Image(String.valueOf(file));
                 displayImage(commonGoal2, image);
                 break;
             }
             case 5: {
-                Image image = new Image(getClass().getResourceAsStream("5.jpg"));
+                File file = new File("com/example/is23am23/5.jpg");
+                image = new Image(String.valueOf(file));
                 displayImage(commonGoal2, image);
                 break;
             }
             case 6: {
-                Image image = new Image(getClass().getResourceAsStream("9.jpg"));
+                File file = new File("com/example/is23am23/9.jpg");
+                image = new Image(String.valueOf(file));
                 displayImage(commonGoal2, image);
                 break;
             }
             case 7: {
-                Image image = new Image(getClass().getResourceAsStream("11.jpg"));
+                File file = new File("com/example/is23am23/11.jpg");
+                image = new Image(String.valueOf(file));
                 displayImage(commonGoal2, image);
                 break;
             }
             case 8: {
-                Image image = new Image(getClass().getResourceAsStream("7.jpg"));
+                File file = new File("com/example/is23am23/7.jpg");
+                image = new Image(String.valueOf(file));
                 displayImage(commonGoal2, image);
                 break;
             }
             case 9: {
-                Image image = new Image(getClass().getResourceAsStream("2.jpg"));
+                File file = new File("com/example/is23am23/2.jpg");
+                image = new Image(String.valueOf(file));
                 displayImage(commonGoal2, image);
                 break;
             }
             case 10: {
-                Image image = new Image(getClass().getResourceAsStream("6.jpg"));
+                File file = new File("com/example/is23am23/6.jpg");
+                image = new Image(String.valueOf(file));
                 displayImage(commonGoal2, image);
                 break;
             }
             case 11: {
-                Image image = new Image(getClass().getResourceAsStream("10.jpg"));
+                File file = new File("com/example/is23am23/10.jpg");
+                image = new Image(String.valueOf(file));
                 displayImage(commonGoal2, image);
                 break;
             }
             case 12: {
-                Image image = new Image(getClass().getResourceAsStream("12.jpg"));
+                File file = new File("com/example/is23am23/12.jpg");
+                image = new Image(String.valueOf(file));
                 displayImage(commonGoal2, image);
                 break;
             }

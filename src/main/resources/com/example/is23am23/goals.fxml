@@ -12,31 +12,11 @@
                 <Image url="@sfondo_parquet.jpg" />
             </image>
         </ImageView>
-        <ImageView fx:id="personalGoal" fitHeight="265.0" fitWidth="188.0" layoutX="98.0" layoutY="68.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-                <Image url="@Personal_Goals4.png" />
-            </image>
-        </ImageView>
-        <ImageView fx:id="commonGoal1" fitHeight="110.0" fitWidth="200.0" layoutX="341.0" layoutY="68.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-                <Image url="@1.jpg" />
-            </image>
-        </ImageView>
-        <ImageView fx:id="commonGoal2" fitHeight="110.0" fitWidth="184.0" layoutX="341.0" layoutY="219.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-                <Image url="@2.jpg" />
-            </image>
-        </ImageView>
+        <ImageView fx:id="personalGoal" fitHeight="265.0" fitWidth="188.0" layoutX="98.0" layoutY="68.0" pickOnBounds="true" preserveRatio="true" />
+        <ImageView fx:id="commonGoal1" fitHeight="110.0" fitWidth="200.0" layoutX="341.0" layoutY="68.0" pickOnBounds="true" preserveRatio="true" />
+        <ImageView fx:id="commonGoal2" fitHeight="110.0" fitWidth="184.0" layoutX="341.0" layoutY="219.0" pickOnBounds="true" preserveRatio="true" />
         <Button layoutX="235.0" layoutY="21.0" mnemonicParsing="false" onAction="#goToLivingroom" text="Back to Livingroom" />
-      <ImageView fx:id="points1" fitHeight="54.0" fitWidth="55.0" layoutX="438.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true" rotate="-98.5">
-         <image>
-            <Image url="@scoring_back_EMPTY.jpg" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="points2" fitHeight="54.0" fitWidth="55.0" layoutX="438.0" layoutY="247.0" pickOnBounds="true" preserveRatio="true" rotate="-98.5">
-         <image>
-            <Image url="@scoring_back_EMPTY.jpg" />
-         </image>
-      </ImageView>
+      <ImageView fx:id="points1" fitHeight="54.0" fitWidth="55.0" layoutX="438.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true" rotate="-98.5" />
+      <ImageView fx:id="points2" fitHeight="54.0" fitWidth="55.0" layoutX="438.0" layoutY="247.0" pickOnBounds="true" preserveRatio="true" rotate="-98.5" />
     </children>
 </AnchorPane>
