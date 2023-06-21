@@ -16,6 +16,7 @@ public class GUIEvent implements PropertyChangeListener {
     private Boolean inUsedNickname=false;
     private final MenuController menuController;
     private GameControllerGUI gamecontrollerGUI;
+    private WinnerController winnerController;
     private LobbyChoiceController lobbyChoiceController;
     private UsedNicknameController usedNicknameController;
     private URL url;
@@ -61,7 +62,8 @@ public class GUIEvent implements PropertyChangeListener {
                         break;
                     case END_GAME_MESSAGE:
                         EndGameMessage temp_endGameMessage = (EndGameMessage) serverMessage;
-                        //gamecontrollerGUI.setWinner(temp_endGameMessage.getWinner().getNickName());
+                        //gamecontrollerGUI.setWinner(temp_endGameMessage.getWinner().getNickName()); MANCA METODO GETWINNER()
+                        winnerController.printWinner(); //magari metto il metodo in gamecontrollerGUI e poi chiamo il controller
                         break;
                 }
             });
