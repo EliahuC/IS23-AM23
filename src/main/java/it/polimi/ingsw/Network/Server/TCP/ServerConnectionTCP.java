@@ -383,17 +383,23 @@ public class ServerConnectionTCP implements ServerConnection{
      * method that end the game when a player crush
      */
     private void closeClientConnection() {
-        if (lobby!=null&&lobby.getStartedGame())
-            lobby.endGame();
-        System.out.println(namePlayer+" disconnected from the server");
-        ping.interrupt();
-        Server.connectedPlayers.remove(namePlayer);
-        Server.startedLobbies.remove(lobby);
-        try {
-            clientSocket.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+        if(lobby!=null) {
+            if (lobby.getStartedGame())
+            {
+                lobby.endGame();
+                Server.startedLobbies.remove(lobby);
+            }
+            else{
+                lobby.removePlayer(this,namePlayer);
+            }
+            System.out.println(namePlayer + " disconnected from the server");
+            ping.interrupt();
+            Server.connectedPlayers.remove(namePlayer);
+            try {
+                clientSocket.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-
     }
 }

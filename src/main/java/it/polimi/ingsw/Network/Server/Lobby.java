@@ -7,6 +7,7 @@ import it.polimi.ingsw.Messages.Message;
 import it.polimi.ingsw.Messages.ServerToClient.ErrorMessage;
 import it.polimi.ingsw.Messages.ServerToClient.ServerMessage;
 import it.polimi.ingsw.Messages.ServerToClient.ValidMoveMessage;
+import it.polimi.ingsw.Network.Server.TCP.ServerConnectionTCP;
 import it.polimi.ingsw.Savings;
 import it.polimi.ingsw.controller.ControllerCoordinator;
 import it.polimi.ingsw.model.Game;
@@ -250,5 +251,15 @@ public class Lobby implements Serializable {
             l.propertyChange(evt);
         }
 
+    }
+
+    public void removePlayer(ServerConnection serverConnection, String namePlayer) {
+        for(Player p: controllerCoordinator.getConnectedPlayers())
+            if(namePlayer.equals(p.getNickName())){
+                controllerCoordinator.getConnectedPlayers().remove(p);
+                joinedUsers.remove(namePlayer);
+                connections.remove(serverConnection);
+                return;
+            }
     }
 }

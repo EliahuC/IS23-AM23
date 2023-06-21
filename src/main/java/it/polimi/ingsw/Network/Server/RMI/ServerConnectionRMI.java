@@ -353,8 +353,14 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
         for (Lobby l : Server.startedLobbies) {
             if(l.getJoinedUsers().contains(s)){
                 lobby=l;
-                lobby.endGame();
-                Server.startedLobbies.remove(lobby);
+                if (lobby.getStartedGame())
+                {
+                    lobby.endGame();
+                    Server.startedLobbies.remove(lobby);
+                }
+                else{
+                    lobby.removePlayer(this,namePlayer);
+                }
                 return;
             }
         }
