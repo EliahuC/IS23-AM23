@@ -71,11 +71,14 @@ public class GameControllerGUI {
     private CommonGoalCard commonGoalCard1;
     private CommonGoalCard commonGoalCard2;
     @FXML
+    GridPane myGridPane_columns;
+    @FXML
     GridPane myGridPane_lr;
     @FXML
     GridPane myGridPane_container;
     @FXML
     GridPane myGridPane_bs;
+
     private static GameControllerGUI currentIstance;
 
     public void displayLivingroom() throws IOException {
@@ -119,7 +122,7 @@ public class GameControllerGUI {
                 myGridPane_bs.setLayoutY(158);
 
                 // Opzionale: Imposta il padding o altre proprietà per gli ImageView
-                GridPane.setMargin(imageView, new Insets(0, 2, 0, 2));
+                GridPane.setMargin(imageView, new Insets(0, 1.5, 0, 1.5));
                 myGridPane_bs.add(imageView, j, i);
                 //}
             }
@@ -139,6 +142,22 @@ public class GameControllerGUI {
             myGridPane_container.add(imageView, i, 0);
         }
 
+        myGridPane_columns = new GridPane();
+        for (int i = 0; i < 5; i++) {
+            ImageView imageView = new ImageView();
+
+            //IMMAGINE FRECCIA DA INSERIRE
+            File file = new File("/com/example/is23am23/Trofei.png");
+            image = new Image(String.valueOf(file));
+            imageView.setImage(image);
+            imageView.setFitWidth(33);
+            imageView.setFitHeight(33);
+            myGridPane_columns.setLayoutX(385);
+            myGridPane_columns.setLayoutY(105);
+            myGridPane_columns.add(imageView, i, 0);
+            GridPane.setMargin(imageView, new Insets(1.5));
+        }
+
         File file = new File("src/main/resources/com/example/is23am23/game.fxml");
         URL url = file.toURI().toURL();
         FXMLLoader loader = new FXMLLoader(url);
@@ -146,6 +165,7 @@ public class GameControllerGUI {
         root.getChildren().add(myGridPane_lr);
         root.getChildren().add(myGridPane_bs);
         root.getChildren().add(myGridPane_container);
+        root.getChildren().add(myGridPane_columns);
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
@@ -313,7 +333,7 @@ public class GameControllerGUI {
                 waiting();
         }
         displayEnd();
-    }*/
+    }
 
     private void waiting() {
         System.out.print("It's not your turn, yet. Wait for other players to finish their turn.\n\n");
@@ -331,7 +351,7 @@ public class GameControllerGUI {
             System.out.print(response.getReturnMessage());
         while (!player.getNowPlaying()) {
         }
-    }
+    }*/
 
     public LivingRoom getLivingRoom() {
         return livingRoom;
@@ -345,7 +365,7 @@ public class GameControllerGUI {
         return players;
     }
 
-    private void displayBoard() {
+    /*private void displayBoard() {
         System.out.print("LIVING BOARD\n");
         //livingRoom.print();
         try {
@@ -455,7 +475,7 @@ public class GameControllerGUI {
         }
     }
 
-    /*private void displayBookshelf(){
+    private void displayBookshelf(){
         Scanner input = new Scanner(System.in);
         String command;
         System.out.print("YOUR BOOKSHELF\n\n");
@@ -468,7 +488,7 @@ public class GameControllerGUI {
             System.out.print("Please, use the /BACK command correctly.\n");
         }
         displayBoard();
-    }*/
+    }
 
     private void printSelection() {
         for (int i = 0; tiles.get(i) != null; i++)
@@ -477,7 +497,7 @@ public class GameControllerGUI {
         for (int i = 0; tiles.get(i) != null; i++)
             System.out.print("(" + i + 1 + ")   ");
         System.out.print("\n");
-    }
+    }*/
 
     public void setSeed(Integer seed) {
         this.seed = seed;
@@ -525,6 +545,18 @@ public class GameControllerGUI {
 
     private static GameControllerGUI getCurrentIstance(){
         return currentIstance;
+    }
+
+    public void pickTiles(){
+
+    }
+
+    public void selectColumn(){
+
+    }
+
+    public void putTiles(){
+
     }
 }
 

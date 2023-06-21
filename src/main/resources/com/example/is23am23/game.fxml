@@ -35,36 +35,6 @@
           <RowConstraints fillHeight="false" maxHeight="30.0" minHeight="30.0" percentHeight="0.0" prefHeight="30.0" valignment="CENTER" vgrow="NEVER" />
         </rowConstraints>
       </GridPane>
-      <ImageView fx:id="shelf_0_0" fitHeight="27.0" fitWidth="27.0" layoutX="391.0" layoutY="164.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="shelf_0_1" fitHeight="27.0" fitWidth="27.0" layoutX="427.0" layoutY="164.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="shelf_0_2" fitHeight="27.0" fitWidth="27.0" layoutX="465.0" layoutY="164.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="shelf_0_3" fitHeight="27.0" fitWidth="27.0" layoutX="503.0" layoutY="164.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="shelf_0_4" fitHeight="27.0" fitWidth="27.0" layoutX="540.0" layoutY="164.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="shelf_1_0" fitHeight="27.0" fitWidth="27.0" layoutX="391.0" layoutY="197.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="shelf_1_1" fitHeight="27.0" fitWidth="27.0" layoutX="427.0" layoutY="197.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="shelf_1_2" fitHeight="27.0" fitWidth="27.0" layoutX="465.0" layoutY="197.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="shelf_1_3" fitHeight="27.0" fitWidth="27.0" layoutX="503.0" layoutY="197.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="shelf_1_4" fitHeight="27.0" fitWidth="27.0" layoutX="540.0" layoutY="197.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="shelf_2_0" fitHeight="27.0" fitWidth="27.0" layoutX="391.0" layoutY="229.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="shelf_2_1" fitHeight="27.0" fitWidth="27.0" layoutX="428.0" layoutY="229.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="shelf_2_2" fitHeight="27.0" fitWidth="27.0" layoutX="465.0" layoutY="229.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="shelf_2_3" fitHeight="27.0" fitWidth="27.0" layoutX="503.0" layoutY="229.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="shelf_2_4" fitHeight="27.0" fitWidth="27.0" layoutX="540.0" layoutY="229.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="shelf_3_0" fitHeight="27.0" fitWidth="27.0" layoutX="391.0" layoutY="262.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="shelf_3_1" fitHeight="27.0" fitWidth="27.0" layoutX="428.0" layoutY="262.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="shelf_3_2" fitHeight="27.0" fitWidth="27.0" layoutX="465.0" layoutY="262.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="shelf_3_3" fitHeight="27.0" fitWidth="27.0" layoutX="503.0" layoutY="262.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="shelf_3_4" fitHeight="27.0" fitWidth="27.0" layoutX="540.0" layoutY="262.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="shelf_4_0" fitHeight="27.0" fitWidth="27.0" layoutX="391.0" layoutY="292.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="shelf_4_1" fitHeight="27.0" fitWidth="27.0" layoutX="428.0" layoutY="292.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="shelf_4_2" fitHeight="27.0" fitWidth="27.0" layoutX="465.0" layoutY="292.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="shelf_4_3" fitHeight="27.0" fitWidth="27.0" layoutX="503.0" layoutY="292.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="shelf_4_4" fitHeight="27.0" fitWidth="27.0" layoutX="540.0" layoutY="292.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="shelf_5_0" fitHeight="27.0" fitWidth="27.0" layoutX="391.0" layoutY="325.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="shelf_5_1" fitHeight="27.0" fitWidth="27.0" layoutX="428.0" layoutY="325.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="shelf_5_2" fitHeight="27.0" fitWidth="27.0" layoutX="465.0" layoutY="325.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="shelf_5_3" fitHeight="27.0" fitWidth="27.0" layoutX="503.0" layoutY="325.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="shelf_5_4" fitHeight="27.0" fitWidth="27.0" layoutX="540.0" layoutY="325.0" pickOnBounds="true" preserveRatio="true" />
       <GridPane fx:id="myGridPane_lr" layoutX="29.0" layoutY="61.0" prefHeight="312.0" prefWidth="309.0">
         <columnConstraints>
           <ColumnConstraints fillWidth="false" hgrow="NEVER" maxWidth="34.0" minWidth="34.0" prefWidth="34.0" />
@@ -117,5 +87,17 @@
             <Image url="@bookshelf.png" />
          </image>
       </ImageView>
+      <GridPane fx:id="myGridPane_columns" layoutX="386.0" layoutY="105.0" prefHeight="30.0" prefWidth="178.0">
+        <columnConstraints>
+          <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="NEVER" maxWidth="33.0" minWidth="33.0" percentWidth="0.0" prefWidth="33.0" />
+            <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="NEVER" maxWidth="33.0" minWidth="33.0" percentWidth="0.0" prefWidth="33.0" />
+            <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="NEVER" maxWidth="33.0" minWidth="33.0" percentWidth="0.0" prefWidth="33.0" />
+            <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="NEVER" maxWidth="33.0" minWidth="33.0" percentWidth="0.0" prefWidth="33.0" />
+          <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="NEVER" maxWidth="33.0" minWidth="33.0" percentWidth="0.0" prefWidth="33.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints fillHeight="false" maxHeight="33.0" minHeight="33.0" percentHeight="0.0" prefHeight="33.0" valignment="CENTER" vgrow="NEVER" />
+        </rowConstraints>
+      </GridPane>
     </children>
 </AnchorPane>
