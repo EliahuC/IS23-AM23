@@ -46,8 +46,8 @@ public class GoalsController {
     public void displayPoints(){
 
         int numPlayers = gameControllerGUI.getPlayers().size();
-        int numCompleted1 = gameControllerGUI.getLivingRoom().getCommonGoalCard1().getNumCompleted();
-        int numCompleted2 = gameControllerGUI.getLivingRoom().getCommonGoalCard2().getNumCompleted();
+        int numCompleted1 = gameControllerGUI.getLivingRoom().getPointsCGD1();
+        int numCompleted2 = gameControllerGUI.getLivingRoom().getPointsCGD2();
 
         // score common goal card 1
         switch (numPlayers) {
