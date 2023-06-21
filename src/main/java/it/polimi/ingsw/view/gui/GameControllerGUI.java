@@ -160,55 +160,6 @@ public class GameControllerGUI {
         //displayImage(livingroom_0_3, chooseCategory(tile))
     }
 
-    /*public void displayBookshelf() throws IOException {
-        bookshelf = player.getPlayerBookshelf();
-        myGridPane_bs = new GridPane();
-        for (int i = 0; i < shelfRows; i++) {
-            for (int j = 0; j < shelfCols; j++) {
-                //if (bookshelf.getTile(i,j).getCategory() != null) {
-                    ItemTile tile = bookshelf.getTile(i,j);
-                    ImageView imageView = new ImageView();
-                    File file = new File("/com/example/is23am23/Cornici.png");
-                    image = new Image(String.valueOf(file));
-                    imageView.setImage(image);
-                    imageView.setFitWidth(32);
-                    imageView.setFitHeight(32);
-                    myGridPane_bs.setLayoutX(386);
-                    myGridPane_bs.setLayoutY(158);
-
-                    // Opzionale: Imposta il padding o altre proprietà per gli ImageView
-                    GridPane.setMargin(imageView, new Insets(1));
-                    myGridPane_bs.add(imageView, j, i);
-                //}
-            }
-        }
-                File file = new File("src/main/resources/com/example/is23am23/game.fxml");
-                URL url = file.toURI().toURL();
-                FXMLLoader loader = new FXMLLoader(url);
-                AnchorPane root = loader.load();
-                root.getChildren().add(myGridPane_bs);
-                Scene scene = new Scene(root);
-                    //Stage stage = new Stage();
-                    // Impostazione della scena sullo stage
-                stage.setScene(scene);
-
-                    // Mostra lo stage
-                stage.show();
-                    //displayImage(livingroom_0_3, chooseCategory(tile))
-    }
-
-*/
-    //public void displayContainer(){}
-
-    /*public void displayImage(ImageView view, Image image){
-        if (image != null) {
-            view=new ImageView();
-            view.setImage(image);
-           //MYvBox.setPadding(new Insets(0));
-           //MYvBox.setSpacing(0);
-           //MYvBox.getChildren().add(view);
-        }
-    }*/
     public Image chooseCategoryImage(ItemTile tile) {
 
         image = null;
@@ -392,7 +343,6 @@ public class GameControllerGUI {
     }
 
     public LivingRoom getLivingRoom() {
-
         return livingRoom;
     }
 
@@ -402,7 +352,6 @@ public class GameControllerGUI {
 
     public List<Player> getPlayersList() {
         return players;
-
     }
 
     private void displayBoard() {
@@ -552,11 +501,7 @@ public class GameControllerGUI {
     }
 
     public void startGame() throws IOException {
-        //while(response.getCategory()!=Message.MessageCategory.END_GAME_MESSAGE){
         displayLivingroom();
-        //displayBookshelf();
-        //}
-
     }
 
     public Integer getSeed() {

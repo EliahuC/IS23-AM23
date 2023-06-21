@@ -40,20 +40,7 @@ public class GoalsController {
     private GameControllerGUI gameControllerGUI;
 
     public void goToLivingroom(ActionEvent event) throws IOException {
-
-        File file = new File("src/main/resources/com/example/is23am23/game.fxml");
-        URL url = file.toURI().toURL();
-        FXMLLoader loader = new FXMLLoader(url);
-        Parent root = loader.load();
-
-        GameControllerGUI gameControllerGUI = loader.getController();
-        //gameControllerGUI.displayBookshelf();
-        //gameControllerGUI.displayContainer();
-        gameControllerGUI.displayLivingroom();
-        stage = (Stage)((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+            gameControllerGUI.displayLivingroom();
     }
 
     public void displayPoints(){
@@ -71,8 +58,6 @@ public class GoalsController {
                         File file = new File("com/example/is23am23/scoring_8.jpg");
                         image = new Image(String.valueOf(file));
                         displayImage(points1, image);
-
-                        //Image image = new Image(getClass().getResourceAsStream("scoring_8.jpg"));
                         break;
                     }
                     case 1:
@@ -80,7 +65,6 @@ public class GoalsController {
                         File file = new File("com/example/is23am23/scoring_4.jpg");
                         image = new Image(String.valueOf(file));
                         displayImage(points1, image);
-                       // Image image = new Image(getClass().getResourceAsStream("scoring_4.jpg"));
                         break;
                     }
                     default:
@@ -88,7 +72,6 @@ public class GoalsController {
                         File file = new File("com/example/is23am23/scoring_back_EMPTY.jpg");
                         image = new Image(String.valueOf(file));
                         displayImage(points1, image);
-                        //Image image = new Image(getClass().getResourceAsStream("scoring_back_EMPTY.jpg"));
                         break;
                     }
                 }
@@ -101,7 +84,6 @@ public class GoalsController {
                         File file = new File("com/example/is23am23/scoring_8.jpg");
                         image = new Image(String.valueOf(file));
                         displayImage(points1, image);
-                      //  Image image = new Image(getClass().getResourceAsStream("scoring_8.jpg"));
                         break;
                     }
                     case 1:
@@ -109,7 +91,6 @@ public class GoalsController {
                         File file = new File("com/example/is23am23/scoring_6.jpg");
                         image = new Image(String.valueOf(file));
                         displayImage(points1, image);
-                        //Image image = new Image(getClass().getResourceAsStream("scoring_6.jpg"));
                         break;
                     }
                     case 2:
@@ -117,7 +98,6 @@ public class GoalsController {
                         File file = new File("com/example/is23am23/scoring_4.jpg");
                         image = new Image(String.valueOf(file));
                         displayImage(points1, image);
-                        //Image image = new Image(getClass().getResourceAsStream("scoring_4.jpg"));
                         break;
                     }
                     default:
@@ -125,7 +105,6 @@ public class GoalsController {
                         File file = new File("com/example/is23am23/scoring_back_EMPTY.jpg");
                         image = new Image(String.valueOf(file));
                         displayImage(points1, image);
-                       // Image image = new Image(getClass().getResourceAsStream("scoring_back_EMPTY.jpg"));
                         break;
                     }
                 }
@@ -138,7 +117,6 @@ public class GoalsController {
                         File file = new File("com/example/is23am23/scoring_8.jpg");
                         image = new Image(String.valueOf(file));
                         displayImage(points1, image);
-                        //Image image = new Image(getClass().getResourceAsStream("scoring_8.jpg"));
                         break;
                     }
                     case 1:
@@ -146,7 +124,6 @@ public class GoalsController {
                         File file = new File("com/example/is23am23/scoring_6.jpg");
                         image = new Image(String.valueOf(file));
                         displayImage(points1, image);
-                        //Image image = new Image(getClass().getResourceAsStream("scoring_6.jpg"));
                         break;
                     }
                     case 2:
@@ -154,14 +131,12 @@ public class GoalsController {
                         File file = new File("com/example/is23am23/scoring_4.jpg");
                         image = new Image(String.valueOf(file));
                         displayImage(points1, image);
-                        //Image image = new Image(getClass().getResourceAsStream("scoring_4.jpg"));
                         break;
                     }
                     case 3:  {
                         File file = new File("com/example/is23am23/scoring_2.jpg");
                         image = new Image(String.valueOf(file));
                         displayImage(points1, image);
-                    // Image image = new Image(getClass().getResourceAsStream("scoring_2.jpg"));
                         break;
                     }
                     default:
@@ -169,7 +144,6 @@ public class GoalsController {
                         File file = new File("com/example/is23am23/scoring_back_EMPTY.jpg");
                         image = new Image(String.valueOf(file));
                         displayImage(points1, image);
-                        //Image image = new Image(getClass().getResourceAsStream("scoring_back_EMPTY.jpg"));
                         break;
                     }
                 }
@@ -186,7 +160,6 @@ public class GoalsController {
                         File file = new File("com/example/is23am23/scoring_8.jpg");
                         image = new Image(String.valueOf(file));
                         displayImage(points2, image);
-                        //Image image = new Image(getClass().getResourceAsStream("scoring_8.jpg"));
                         break;
                     }
                     case 1:
@@ -194,7 +167,6 @@ public class GoalsController {
                         File file = new File("com/example/is23am23/scoring_4.jpg");
                         image = new Image(String.valueOf(file));
                         displayImage(points2, image);
-                        //Image image = new Image(getClass().getResourceAsStream("scoring_4.jpg"));
                         break;
                     }
                     default:
@@ -202,7 +174,6 @@ public class GoalsController {
                         File file = new File("com/example/is23am23/scoring_back_EMPTY.jpg");
                         image = new Image(String.valueOf(file));
                         displayImage(points2, image);
-                       // Image image = new Image(getClass().getResourceAsStream("scoring_back_EMPTY.jpg"));
                         break;
                     }
                 }
@@ -215,7 +186,6 @@ public class GoalsController {
                         File file = new File("com/example/is23am23/scoring_8.jpg");
                         image = new Image(String.valueOf(file));
                         displayImage(points2, image);
-                      //  Image image = new Image(getClass().getResourceAsStream("scoring_8.jpg"));
                         break;
                     }
                     case 1:
@@ -223,7 +193,6 @@ public class GoalsController {
                         File file = new File("com/example/is23am23/scoring_6.jpg");
                         image = new Image(String.valueOf(file));
                         displayImage(points2, image);
-                        //Image image = new Image(getClass().getResourceAsStream("scoring_6.jpg"));
                         break;
                     }
                     case 2:
@@ -231,7 +200,6 @@ public class GoalsController {
                         File file = new File("com/example/is23am23/scoring_4.jpg");
                         image = new Image(String.valueOf(file));
                         displayImage(points2, image);
-                      //  Image image = new Image(getClass().getResourceAsStream("scoring_4.jpg"));
                         break;
                     }
                     default:
@@ -239,7 +207,6 @@ public class GoalsController {
                         File file = new File("com/example/is23am23/scoring_back_EMPTY.jpg");
                         image = new Image(String.valueOf(file));
                         displayImage(points2, image);
-                       // Image image = new Image(getClass().getResourceAsStream("scoring_back_EMPTY.jpg"));
                         break;
                     }
                 }
@@ -252,7 +219,6 @@ public class GoalsController {
                         File file = new File("com/example/is23am23/scoring_8.jpg");
                         image = new Image(String.valueOf(file));
                         displayImage(points2, image);
-                        //Image image = new Image(getClass().getResourceAsStream("scoring_8.jpg"));
                         break;
                     }
                     case 1:
@@ -260,7 +226,6 @@ public class GoalsController {
                         File file = new File("com/example/is23am23/scoring_6.jpg");
                         image = new Image(String.valueOf(file));
                         displayImage(points2, image);
-                        //Image image = new Image(getClass().getResourceAsStream("scoring_6.jpg"));
                         break;
                     }
                     case 2:
@@ -268,14 +233,12 @@ public class GoalsController {
                         File file = new File("com/example/is23am23/scoring_4.jpg");
                         image = new Image(String.valueOf(file));
                         displayImage(points2, image);
-                       // Image image = new Image(getClass().getResourceAsStream("scoring_4.jpg"));
                         break;
                     }
                     case 3:  {
                         File file = new File("com/example/is23am23/scoring_2.jpg");
                         image = new Image(String.valueOf(file));
                         displayImage(points2, image);
-                  //      Image image = new Image(getClass().getResourceAsStream("scoring_2.jpg"));
                         break;
                     }
                     default:
@@ -283,7 +246,6 @@ public class GoalsController {
                         File file = new File("com/example/is23am23/scoring_back_EMPTY.jpg");
                         image = new Image(String.valueOf(file));
                         displayImage(points2, image);
-                //        Image image = new Image(getClass().getResourceAsStream("scoring_back_EMPTY.jpg"));
                         break;
                     }
                 }
@@ -302,8 +264,6 @@ public class GoalsController {
                 File file = new File("com/example/is23am23/Personal_Goals.png");
                 image = new Image(String.valueOf(file));
                 displayImage(personalGoal, image);
-                //Image image = new Image(getClass().getResourceAsStream("com/example/is23am23/Personal_Goals.png"));
-
                 break;
             }
             case 2:
@@ -311,7 +271,6 @@ public class GoalsController {
                 File file = new File("com/example/is23am23/Personal_Goals2.png");
                 image = new Image(String.valueOf(file));
                 displayImage(personalGoal, image);
-                //Image image = new Image(getClass().getResourceAsStream("Personal_Goals2.png"));
                 break;
             }
             case 3:
@@ -319,7 +278,6 @@ public class GoalsController {
                 File file = new File("com/example/is23am23/Personal_Goals3.png");
                 image = new Image(String.valueOf(file));
                 displayImage(personalGoal, image);
-                //Image image = new Image(getClass().getResourceAsStream("Personal_Goals3.png"));
                 break;
             }
             case 4:
@@ -327,8 +285,6 @@ public class GoalsController {
                 File file = new File("com/example/is23am23/Personal_Goals4.png");
                 image = new Image(String.valueOf(file));
                 displayImage(personalGoal, image);
-                //Image image = new Image(getClass().getResourceAsStream("Personal_Goals4.png"));
-
                 break;
             }
             case 5:
@@ -336,7 +292,6 @@ public class GoalsController {
                 File file = new File("com/example/is23am23/Personal_Goals5.png");
                 image = new Image(String.valueOf(file));
                 displayImage(personalGoal, image);
-                //Image image = new Image(getClass().getResourceAsStream("Personal_Goals5.png"));
                 break;
             }
             case 6:
@@ -344,7 +299,6 @@ public class GoalsController {
                 File file = new File("com/example/is23am23/Personal_Goals6.png");
                 image = new Image(String.valueOf(file));
                 displayImage(personalGoal, image);
-                //Image image = new Image(getClass().getResourceAsStream("Personal_Goals6.png"));
                 break;
             }
             case 7:
@@ -352,7 +306,6 @@ public class GoalsController {
                 File file = new File("com/example/is23am23/Personal_Goals7.png");
                 image = new Image(String.valueOf(file));
                 displayImage(personalGoal, image);
-                //Image image = new Image(getClass().getResourceAsStream("Personal_Goals7.png"));
                 break;
             }
             case 8:
@@ -360,7 +313,6 @@ public class GoalsController {
                 File file = new File("com/example/is23am23/Personal_Goals8.png");
                 image = new Image(String.valueOf(file));
                 displayImage(personalGoal, image);
-                //Image image = new Image(getClass().getResourceAsStream("Personal_Goals8.png"));
                 break;
             }
             case 9:
@@ -368,7 +320,6 @@ public class GoalsController {
                 File file = new File("com/example/is23am23/Personal_Goals9.png");
                 image = new Image(String.valueOf(file));
                 displayImage(personalGoal, image);
-                //Image image = new Image(getClass().getResourceAsStream("Personal_Goals9.png"));
                 break;
             }
             case 10:
@@ -376,7 +327,6 @@ public class GoalsController {
                 File file = new File("com/example/is23am23/Personal_Goals10.png");
                 image = new Image(String.valueOf(file));
                 displayImage(personalGoal, image);
-                //Image image = new Image(getClass().getResourceAsStream("Personal_Goals10.png"));
                 break;
             }
             case 11:
@@ -384,7 +334,6 @@ public class GoalsController {
                 File file = new File("com/example/is23am23/Personal_Goals11.png");
                 image = new Image(String.valueOf(file));
                 displayImage(personalGoal, image);
-                //Image image = new Image(getClass().getResourceAsStream("Personal_Goals11.png"));
                 break;
             }
             case 12:
@@ -392,7 +341,6 @@ public class GoalsController {
                 File file = new File("com/example/is23am23/Personal_Goals12.png");
                 image = new Image(String.valueOf(file));
                 displayImage(personalGoal, image);
-                //Image image = new Image(getClass().getResourceAsStream("Personal_Goals12.png"));
                 break;
             }
         }
@@ -409,14 +357,12 @@ public class GoalsController {
                 File file = new File("com/example/is23am23/4.jpg");
                 image = new Image(String.valueOf(file));
                 displayImage(commonGoal1, image);
-                //Image image = new Image(getClass().getResourceAsStream("4.jpg"));
                 break;
             }
             case 2: {
                 File file = new File("com/example/is23am23/8.jpg");
                 image = new Image(String.valueOf(file));
                 displayImage(commonGoal1, image);
-              //  Image image = new Image(getClass().getResourceAsStream("8.jpg"));
                 break;
             }
             case 3: {
@@ -563,7 +509,6 @@ public class GoalsController {
     public void setGameControllerGUI(GameControllerGUI gameControllerGUI){
         this.gameControllerGUI=gameControllerGUI;
     }
-
     public GameControllerGUI getGameControllerGUI() {
         return gameControllerGUI;
     }
