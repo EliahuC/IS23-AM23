@@ -105,9 +105,10 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
                         for(Lobby l:Server.startedLobbies){
                             if(l.getPlayer(namePlayer)!=null){
                                 VirtualView virtualView=new VirtualView(this,namePlayer);
+                                l.reconnectPlayer(this,namePlayer);
                                 l.getPlayer(namePlayer).setListener(virtualView);
                                 lobby=l;
-                                if(!checkCompletedLobby())
+                                if(!checkReconnectedLobby())
                                     sendMessage(new LobbyJoiningMessage(lobby.getIdLobby()),namePlayer);
                             }
                             break;
@@ -223,6 +224,19 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
         sendMessage(errorMessage,namePlayer);
 
     }
+    /**
+     * @author Eliahu Cohen
+     * @return true if the lobby is full
+     * method to check if the reconnected lobby is full
+     */
+    private boolean checkReconnectedLobby() {
+        if(lobby.getNumPlayersLobby()==lobby.getJoinedUsers().size()){
+            lobby.restartGame();
+            return true;
+        }
+        return false;
+    }
+
 
     /**
      * @author Eliahu Cohen

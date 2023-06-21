@@ -9,8 +9,11 @@ import it.polimi.ingsw.Messages.ServerToClient.ServerMessage;
 import it.polimi.ingsw.Messages.ServerToClient.ValidMoveMessage;
 import it.polimi.ingsw.Savings;
 import it.polimi.ingsw.controller.ControllerCoordinator;
+import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.player.Player;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.*;
 import java.util.ArrayList;
 
@@ -208,6 +211,16 @@ public class Lobby implements Serializable {
         return idLobby;
     }
 
+    /**
+     * @author Eliahu Cohen
+     * @param serverConnection connection of the player
+     * @param s name of the player
+     */
+    public void reconnectPlayer(ServerConnection serverConnection, String s){
+        connections.add(serverConnection);
+        joinedUsers.add(s);
+    }
+
     public void endGame() {
         controllerCoordinator.endgame();
     }
@@ -219,5 +232,23 @@ public class Lobby implements Serializable {
         controllerCoordinator.setGame(gameSavings);
     }
 
+    /**
+     * @author Eliahu Cohen
+     * method to restart a lobby saved on the disk
+     */
+    public void restartGame() {
+        this.startedGame=true;
+        Game game=controllerCoordinator.getGameController().getGame();
+        PropertyChangeEvent evt = new PropertyChangeEvent(
+                this,
+                "GAME_STARTED",
+                null,
+                game);
 
+        for(int i=0;i<controllerCoordinator.getConnectedPlayers().size();i++){
+            PropertyChangeListener l=controllerCoordinator.getConnectedPlayers().get(i).getListener();
+            l.propertyChange(evt);
+        }
+
+    }
 }

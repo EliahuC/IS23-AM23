@@ -155,9 +155,10 @@ public class ServerConnectionTCP implements ServerConnection{
                     synchronized (Server.startedLobbies){
                         for(Lobby l:Server.startedLobbies){
                             if(l.getPlayer(namePlayer)!=null){
+                                l.reconnectPlayer(this,namePlayer);
                                 l.getPlayer(namePlayer).setListener(virtualView);
                                 lobby=l;
-                                if(!checkCompletedLobby())
+                                if(!checkReconnectedLobby())
                                     sendMessage(new LobbyJoiningMessage(lobby.getIdLobby()),namePlayer);
                             }
                             break;
@@ -207,6 +208,20 @@ public class ServerConnectionTCP implements ServerConnection{
 
         }
     }
+
+    /**
+     * @author Eliahu Cohen
+     * @return true if the lobby is full
+     * method to check if the reconnected lobby is full
+     */
+    private boolean checkReconnectedLobby() {
+        if(lobby.getNumPlayersLobby()==lobby.getJoinedUsers().size()){
+            lobby.restartGame();
+            return true;
+        }
+        return false;
+    }
+
 
     /**
      * @author Eliahu Cohen
