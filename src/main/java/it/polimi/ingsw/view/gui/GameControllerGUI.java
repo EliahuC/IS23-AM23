@@ -57,12 +57,6 @@ public class GameControllerGUI {
     private String winner;
     private Integer seed;
     private Image image;
-    @FXML
-    ImageView container1;
-    @FXML
-    ImageView container2;
-    @FXML
-    ImageView container3;
     private int currPlayer = 1;
     public static final int LivingRoomSize = 9;
     private static final int shelfRows = 6;
@@ -70,6 +64,8 @@ public class GameControllerGUI {
     private boolean endgame;
     private CommonGoalCard commonGoalCard1;
     private CommonGoalCard commonGoalCard2;
+    @FXML
+    GridPane bsImage;
     @FXML
     GridPane myGridPane_columns;
     @FXML
@@ -116,17 +112,28 @@ public class GameControllerGUI {
                 imageView.setImage(image);
 
                 //imageView.setImage(chooseCategoryImage(tile));
-                imageView.setFitWidth(33);
-                imageView.setFitHeight(33);
+                imageView.setFitWidth(32.5);
+                imageView.setFitHeight(32.5);
                 myGridPane_bs.setLayoutX(386);
                 myGridPane_bs.setLayoutY(158);
 
                 // Opzionale: Imposta il padding o altre proprietà per gli ImageView
-                GridPane.setMargin(imageView, new Insets(0, 1.5, 0, 1.5));
+                GridPane.setMargin(imageView, new Insets(0, 2.5, 0, 2.5));
                 myGridPane_bs.add(imageView, j, i);
                 //}
             }
         }
+
+        bsImage = new GridPane();
+        ImageView view = new ImageView();
+        File file_bs = new File("/com/example/is23am23/bookshelf.png");
+        image = new Image(String.valueOf(file_bs));
+        view.setImage(image);
+        view.setFitWidth(240);
+        view.setFitHeight(240);
+        bsImage.setLayoutX(360);
+        bsImage.setLayoutY(146);
+        bsImage.add(view, 0, 0);
 
         //MANCA IL RIFERIMENTO ALLE TESSERE GIA' PRESE(PER ORA IMMAGINI IMPOSTATE)
         myGridPane_container = new GridPane();
@@ -166,6 +173,7 @@ public class GameControllerGUI {
         root.getChildren().add(myGridPane_bs);
         root.getChildren().add(myGridPane_container);
         root.getChildren().add(myGridPane_columns);
+        root.getChildren().add(bsImage);
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();

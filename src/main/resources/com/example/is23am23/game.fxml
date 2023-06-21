@@ -82,11 +82,14 @@
             <Insets bottom="1.0" left="2.0" right="2.0" top="1.0" />
          </padding>
       </GridPane>
-      <ImageView fitHeight="240.0" fitWidth="240.0" layoutX="360.0" layoutY="146.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@bookshelf.png" />
-         </image>
-      </ImageView>
+      <GridPane fx:id="bsImage" layoutX="360.0" layoutY="146.0" prefHeight="240.0" prefWidth="240.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+      </GridPane>
       <GridPane fx:id="myGridPane_columns" layoutX="386.0" layoutY="105.0" prefHeight="30.0" prefWidth="178.0">
         <columnConstraints>
           <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="NEVER" maxWidth="33.0" minWidth="33.0" percentWidth="0.0" prefWidth="33.0" />
