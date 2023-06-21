@@ -4,8 +4,6 @@ import it.polimi.ingsw.view.View;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -33,7 +31,6 @@ public class GUIMain extends Application implements View {
             Image icon = new Image("com/example/is23am23/little_icon.png");
             stage.getIcons().add(icon);
             //stage.setFullScreen(true);
-
           /*  stage.setOnCloseRequest(event ->{
                 event.consume();
                 exit(stage);
@@ -46,7 +43,7 @@ public class GUIMain extends Application implements View {
     public static void main(String[] args) {
         launch(args);
     }
-
+/*
     public void exit(){
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -59,7 +56,7 @@ public class GUIMain extends Application implements View {
             stage.close();
         }
     }
-
+*/
     @Override
     public void run() {
     }

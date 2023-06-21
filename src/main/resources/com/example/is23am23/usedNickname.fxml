@@ -8,9 +8,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.gui.UsedNicknameController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.gui.UsedNicknameController">
     <children>
-        <ImageView fx:id="" fitHeight="405.0" fitWidth="605.0" layoutY="-1.0" pickOnBounds="true">
+        <ImageView fx:id="" fitHeight="405.0" fitWidth="605.0" pickOnBounds="true">
             <image>
                 <Image url="@sfondo_parquet.jpg" />
             </image>
@@ -32,7 +32,7 @@
       </Label>
       <TextField fx:id="name" alignment="CENTER" layoutX="228.0" layoutY="251.0" promptText="Insert your nickname" />
       <Button layoutX="253.0" layoutY="334.0" mnemonicParsing="false" onAction="#returnToMenu" text="Return to menu" />
-      <Button layoutX="443.0" layoutY="251.0" mnemonicParsing="false" onAction="#goToRMI" text="RMI" />
-      <Button layoutX="391.0" layoutY="251.0" mnemonicParsing="false" onAction="#goToTCP" text="TCP" />
+      <Button layoutX="443.0" layoutY="251.0" mnemonicParsing="false" onAction="#goRMI" text="RMI" />
+      <Button layoutX="391.0" layoutY="251.0" mnemonicParsing="false" onAction="#goTCP" text="TCP" />
     </children>
 </AnchorPane>

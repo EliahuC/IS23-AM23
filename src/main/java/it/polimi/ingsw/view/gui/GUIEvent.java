@@ -2,30 +2,18 @@ package it.polimi.ingsw.view.gui;
 
 import it.polimi.ingsw.Messages.ServerToClient.*;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.stage.Window;
-
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Objects;
-
-import static java.awt.SystemColor.window;
 
 public class GUIEvent implements PropertyChangeListener {
     private Boolean inStartGUI = false;
     private Boolean inGameControllerGUI = false;
     private Boolean inLobbyChoice = false;
     private Boolean inUsedNickname=false;
-
     private final MenuController menuController;
     private GameControllerGUI gamecontrollerGUI;
     private LobbyChoiceController lobbyChoiceController;
@@ -47,18 +35,7 @@ public class GUIEvent implements PropertyChangeListener {
             Platform.runLater(()-> {
                 switch (serverMessage.getCategory()) {
                     case STARTING_GAME_MESSAGE:
-                        /*File file = new File("src/main/resources/com/example/is23am23/game.fxml");
                         try {
-                            url = file.toURI().toURL();
-                        } catch (MalformedURLException e) {
-                            throw new RuntimeException(e);
-                        }
-                        FXMLLoader loader = new FXMLLoader(url);*/
-                        try {
-                            /*Parent root = loader.load();
-                            Scene scene = new Scene(root);
-                            stage.setScene(scene);
-                            stage.show();*/
                             GameIsStartingMessage temp_startingGameMessage = (GameIsStartingMessage) serverMessage;
                             gamecontrollerGUI.setPlayers(temp_startingGameMessage.getPlayers());
                             gamecontrollerGUI.setLivingRoom(temp_startingGameMessage.getLivingRoom());
@@ -108,6 +85,7 @@ public class GUIEvent implements PropertyChangeListener {
             setInUsedNickname(false);
         }
     }
+
     public void setGamecontrollerGUI(GameControllerGUI gamecontrollerGUI) {
         this.gamecontrollerGUI = gamecontrollerGUI;
     }
@@ -119,6 +97,7 @@ public class GUIEvent implements PropertyChangeListener {
     public void setInStartGUI(Boolean inStartGUI) {
         this.inStartGUI = inStartGUI;
     }
+
     public void setInGameControllerGUI(Boolean inGameControllerGUI) {
         this.inGameControllerGUI = inGameControllerGUI;
     }

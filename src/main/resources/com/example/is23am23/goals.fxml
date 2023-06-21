@@ -12,11 +12,11 @@
                 <Image url="@sfondo_parquet.jpg" />
             </image>
         </ImageView>
-        <ImageView fx:id="personalGoal" fitHeight="265.0" fitWidth="188.0" layoutX="98.0" layoutY="68.0" pickOnBounds="true" preserveRatio="true" />
-        <ImageView fx:id="commonGoal1" fitHeight="110.0" fitWidth="200.0" layoutX="341.0" layoutY="68.0" pickOnBounds="true" preserveRatio="true" />
-        <ImageView fx:id="commonGoal2" fitHeight="110.0" fitWidth="184.0" layoutX="341.0" layoutY="219.0" pickOnBounds="true" preserveRatio="true" />
+        <ImageView fx:id="personalGoalCard" fitHeight="265.0" fitWidth="188.0" layoutX="98.0" layoutY="68.0" pickOnBounds="true" preserveRatio="true" />
+        <ImageView fx:id="commonGoalCard1" fitHeight="110.0" fitWidth="200.0" layoutX="341.0" layoutY="68.0" pickOnBounds="true" preserveRatio="true" />
+        <ImageView fx:id="commonGoalCard2" fitHeight="110.0" fitWidth="184.0" layoutX="341.0" layoutY="219.0" pickOnBounds="true" preserveRatio="true" />
         <Button layoutX="235.0" layoutY="21.0" mnemonicParsing="false" onAction="#goToLivingroom" text="Back to Livingroom" />
-      <ImageView fx:id="points1" fitHeight="49.0" fitWidth="52.0" layoutX="438.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true" rotate="-8.1" />
-      <ImageView fx:id="points2" fitHeight="51.0" fitWidth="51.0" layoutX="437.0" layoutY="245.0" pickOnBounds="true" preserveRatio="true" rotate="-8.1" />
+      <ImageView fx:id="pointsCGC1" fitHeight="49.0" fitWidth="52.0" layoutX="438.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true" rotate="-8.1" />
+      <ImageView fx:id="pointsCGC2" fitHeight="51.0" fitWidth="51.0" layoutX="437.0" layoutY="245.0" pickOnBounds="true" preserveRatio="true" rotate="-8.1" />
     </children>
 </AnchorPane>

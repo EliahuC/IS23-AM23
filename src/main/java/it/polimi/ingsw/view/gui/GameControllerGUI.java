@@ -125,8 +125,7 @@ public class GameControllerGUI {
             }
         }
 
-        //MANCA IL RIFERIMENTO ALLE TESSERE GIA' PRESE
-
+        //MANCA IL RIFERIMENTO ALLE TESSERE GIA' PRESE(PER ORA IMMAGINI IMPOSTATE)
         myGridPane_container = new GridPane();
         for (int i = 0; i < 3; i++) {
             ImageView imageView = new ImageView();
@@ -137,9 +136,6 @@ public class GameControllerGUI {
             imageView.setFitHeight(30);
             myGridPane_container.setLayoutX(384);
             myGridPane_container.setLayoutY(66);
-
-            // Opzionale: Imposta il padding o altre proprietà per gli ImageView
-            GridPane.setMargin(imageView, new Insets(0));
             myGridPane_container.add(imageView, i, 0);
         }
 
@@ -151,13 +147,8 @@ public class GameControllerGUI {
         root.getChildren().add(myGridPane_bs);
         root.getChildren().add(myGridPane_container);
         Scene scene = new Scene(root);
-        //Stage stage = new Stage();
-        // Impostazione della scena sullo stage
         stage.setScene(scene);
-
-        // Mostra lo stage
         stage.show();
-        //displayImage(livingroom_0_3, chooseCategory(tile))
     }
 
     public Image chooseCategoryImage(ItemTile tile) {

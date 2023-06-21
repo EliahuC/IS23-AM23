@@ -14,10 +14,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
 import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.Socket;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
@@ -26,10 +24,8 @@ public class UsedNicknameController {
 
     @FXML
     TextField name;
-
     private Stage stage;
     private Scene scene;
-    private Parent root;
     private ServerMessage response;
     private String serverAddr;
     private int portNum;
@@ -50,25 +46,11 @@ public class UsedNicknameController {
         stage.show();
     }
 
-    /*public void goToLobbyChoice(ActionEvent event) throws IOException {
-
-        nickname = name.getText();
-        File file = new File("src/main/resources/com/example/is23am23/lobbyChoice.fxml");
-        URL url = file.toURI().toURL();
-        FXMLLoader loader = new FXMLLoader(url);
-        Parent root = loader.load();
-        LobbyChoiceController lobbyController = loader.getController();
-        lobbyController.displayNickname(nickname);
-        stage = (Stage)((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }*/
     public void setResponse(ServerMessage response){
         this.response=response;
     }
 
-    public void goToTCP(ActionEvent event)throws IOException {
+    public void goTCP(ActionEvent event)throws IOException {
         nickname = name.getText();
         if (!nickname.isEmpty()) {
             if (TCPon(event)) {
@@ -112,7 +94,7 @@ public class UsedNicknameController {
         }
     }
 
-    public void goToRMI(ActionEvent event) throws IOException {
+    public void goRMI(ActionEvent event) throws IOException {
         nickname = name.getText();
         if (!nickname.isEmpty()) {
             if (RMIon(event)) {

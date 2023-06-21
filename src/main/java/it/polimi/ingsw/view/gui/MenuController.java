@@ -12,29 +12,22 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.URL;
-import java.rmi.RemoteException;
-import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 public class MenuController {
 
     @FXML
     private TextField textField;
-    @FXML
-    private Button exitButton;
     private AnchorPane scenePane;
-
     private Stage stage;
     private Scene scene;
     private String serverAddr;
@@ -44,7 +37,6 @@ public class MenuController {
     private ConnectionClient connectionClient;
     private GUIEvent receiver;
     private ServerMessage response;
-
 
     public void goTCP(ActionEvent event) throws IOException {
 
@@ -100,7 +92,8 @@ public class MenuController {
             stage.setScene(scene);
             stage.show();
             return false;
-        } }catch (IOException e) {
+        }
+        }catch (IOException e) {
             e.printStackTrace();
             return false;
         }
@@ -133,7 +126,9 @@ public class MenuController {
             stage.setScene(scene);
             stage.show();
             return false;
-        }}catch (IOException e) {
+        }
+        }
+        catch (IOException e) {
             e.printStackTrace();
             return false;
         }
@@ -159,7 +154,6 @@ public class MenuController {
                 scene = new Scene(root);
                 stage.setScene(scene);
                 stage.show();
-
             }
         }
     }
@@ -179,10 +173,9 @@ public class MenuController {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            //connectionClient.closeConnection();
+            connectionClient.closeConnection();
         }
     }
-
 
     public void setResponse(ServerMessage response) {
         this.response = response;

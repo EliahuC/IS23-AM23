@@ -9,11 +9,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.fxml.LoadException;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
@@ -24,13 +22,12 @@ import java.util.ResourceBundle;
 import java.util.concurrent.TimeUnit;
 
 public class LobbyChoiceController implements Initializable {
+
     @FXML
     private Label nameDisplay;
     @FXML
     private ChoiceBox<String> playerNumber;
-
     private String[] number = {"2", "3", "4"};
-
     private Stage stage;
     private Scene scene;
     private ServerMessage response;
@@ -42,8 +39,6 @@ public class LobbyChoiceController implements Initializable {
     private ConnectionClient connectionClient;
     private GUIEvent receiver;
     private GameControllerGUI gameControllerGUI;
-
-
 
     public void joinLobby(ActionEvent event) throws IOException {
         receiver.setInStartGUI(false);
@@ -75,7 +70,6 @@ public class LobbyChoiceController implements Initializable {
             }
         }
     }
-
 
     public void createLobby(ActionEvent event) throws IOException {
         receiver.setInStartGUI(false);
@@ -145,9 +139,11 @@ public class LobbyChoiceController implements Initializable {
     public void setResponse(ServerMessage response) {
         this.response = response;
     }
+
     public void setConnection(ConnectionClient connectionClient){
         this.connectionClient=connectionClient;
     }
+
     public void setReceiver(GUIEvent receiver){this.receiver = receiver;}
 }
 
