@@ -48,18 +48,13 @@ public class GameControllerGUI {
     private LivingRoom livingRoom;
     private Player player;
     private List<Player> players;
+    private List<Player> ranking;
     private List<ItemTile> tiles = new ArrayList<>();
     private int currPlaying = 1;
     private String currentPlayer;
     private String winner;
     private Integer seed;
     private Image image;
-    @FXML
-    ImageView container1;
-    @FXML
-    ImageView container2;
-    @FXML
-    ImageView container3;
     private int currPlayer = 1;
     public static final int LivingRoomSize = 9;
     private static final int shelfRows = 6;
@@ -376,15 +371,6 @@ public class GameControllerGUI {
         return players;
     }
 
-    private void displayEnd() {
-        System.out.print("THE WINNER IS: " + winner + "\n");
-        List<Player> ranking = players.stream().sorted(Comparator.comparingInt(Player::getScore)).toList();
-        for (Player p : ranking) {
-            if (p.getNickName() != winner) {
-                System.out.print(p.getNickName() + ": " + p.getScore() + "points\n");
-            }
-        }
-    }
 /*
     private void displayBookshelfOrder() {
         Scanner input = new Scanner(System.in);
@@ -578,49 +564,25 @@ public class GameControllerGUI {
         this.firstTime = firstTime;
     }
 
-    private void printLeaderbord(){
+    public List<Player> displayLeaderbord(){
 
-        GridPane leaderbord = new GridPane();
-        int numPlayers = currentIstance.getPlayers().size();
-        int pos = 0;
-
-        switch (numPlayers) {
-            case 2: {
-                for (int i = 0; i < 2; i++) {
-                    pos = i + 2;
-                    Label label = new Label();
-                    label.setText(pos + "° position: "); // + player.getNickname()
-                    leaderbord.add(label, i, 0);
-                }
-            }
-            case 3: {
-                for (int i = 0; i < 3; i++) {
-                    pos = i + 2;
-                    Label label = new Label();
-                    label.setText(pos + "° position: "); // + player.getNickname()
-                    leaderbord.add(label, i, 0);
-                }
-            }
-            case 4: {
-                for (int i = 0; i < 4; i++) {
-                    pos = i + 2;
-                    Label label = new Label();
-                    label.setText(pos + "° position: "); // + player.getNickname()
-                    leaderbord.add(label, i, 0);
-                }
-            }
-        }
-    }
-/*
-    public void printWinner(){
-
-        winnerLabel = new Label();
-        winnerLabel.setText("!"); // gameControllerGUI.getWinner().getNickname() +
+        ranking = players.stream().sorted(Comparator.comparingInt(Player::getScore)).toList();
+        return ranking;
     }
 
-    public List<Player> getLeaderbord(){
-        return list;
-    }*/
+    public void goToResults() throws IOException {
+
+        File file = new File("src/main/resources/com/example/is23am23/winner.fxml");
+        URL url = file.toURI().toURL();
+        FXMLLoader loader = new FXMLLoader(url);
+        WinnerController winnerController = loader.getController();
+        winnerController.displayWinner(winner);
+        winnerController.displayLeaderbord(ranking);
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
     public String getWinner(){
         return winner;
     }

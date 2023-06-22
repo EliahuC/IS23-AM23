@@ -78,7 +78,7 @@ public class GUIEvent implements PropertyChangeListener {
                     case END_GAME_MESSAGE:
                         EndGameMessage temp_endGameMessage = (EndGameMessage) serverMessage;
                         //gamecontrollerGUI.setWinner(temp_endGameMessage.getWinner().getNickName()); MANCA METODO GETWINNER()
-                        winnerController.printWinner(); //magari metto il metodo in gamecontrollerGUI e poi chiamo il controller
+                        //gamecontrollerGUI.goToResults();
                         break;
                 }
             });

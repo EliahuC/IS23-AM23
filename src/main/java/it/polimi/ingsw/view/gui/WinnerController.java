@@ -7,7 +7,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
@@ -26,73 +28,49 @@ public class WinnerController {
     @FXML
     private Label winnerLabel;
     private String winner;
-    private Stage stage;
     private Scene scene;
+    private Stage stage;
 
-    private void printLeaderbord(){
+
+    public void displayLeaderbord(List<Player> ranking) {
 
         leaderbord = new GridPane();
         //SETTARE IL GAMECONTROLLERGUI CORRETTO(GUARDA PER GOALSCONTROLLER)
         //int numPlayers = gameControllerGUI.getPlayers().size();
-        int numPlayers = 2;
-        int pos = 0;
-
-        switch (numPlayers) {
-            case 2: {
-                for (int i = 0; i < 2; i++) {
-                    pos = i + 2;
-                    Label label = new Label();
-                    label.setText(pos + "° position: "); // + player.getNickname()
-                    leaderbord.add(label, i, 0);
-                }
+        int pos = 2;
+        int i = -1;
+        for (Player p : ranking) {
+            if(i>=0){
+            Label label = new Label();
+            label.setText(pos + "° position: " + p.getNickName());
+            leaderbord.add(label, i, 0);
             }
-            case 3: {
-                for (int i = 0; i < 3; i++) {
-                    pos = i + 2;
-                    Label label = new Label();
-                    label.setText(pos + "° position: "); // + player.getNickname()
-                    leaderbord.add(label, i, 0);
-                }
-            }
-            case 4: {
-                for (int i = 0; i < 4; i++) {
-                    pos = i + 2;
-                    Label label = new Label();
-                    label.setText(pos + "° position: "); // + player.getNickname()
-                    leaderbord.add(label, i, 0);
-                }
-            }
+            i++;
         }
     }
 
-    public void printWinner(){
-
+    public void displayWinner(String winner){
+        this.winner = winner;
         winnerLabel = new Label();
-        winnerLabel.setText("!"); // gameControllerGUI.getWinner().getNickname() +
+        winnerLabel.setText(winner + "!");
     }
 
     public void returnToMenu(ActionEvent event) throws IOException {
 
-        File file = new File("src/main/resources/com/example/is23am23/menu.fxml");
-        URL url = file.toURI().toURL();
-        FXMLLoader loader = new FXMLLoader(url);
-        Parent root = loader.load();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Return to menu");
+        alert.setHeaderText("You are about to return to the menu");
+        alert.setContentText("Are you sure?");
 
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
-/*
-    public List<Player> getLeaderbord(){
-        return list;
-    }*/
-
-    public void setWinner(String string){
-        this.winner = string;
-    }
-
-    public String getWinner(){
-        return winner;
+        if (alert.showAndWait().get() == ButtonType.OK) {
+            File file = new File("src/main/resources/com/example/is23am23/menu.fxml");
+            URL url = file.toURI().toURL();
+            FXMLLoader loader = new FXMLLoader(url);
+            Parent root = loader.load();
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        }
     }
 }
