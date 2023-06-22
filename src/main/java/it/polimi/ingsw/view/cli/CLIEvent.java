@@ -37,7 +37,9 @@ public class CLIEvent implements PropertyChangeListener {
                     gameHandler.setLivingRoom(temp_startingGameMessage.getLivingRoom());
                     gameHandler.setPlayer(temp_startingGameMessage.getPlayers().stream().filter(player -> Objects.equals(player.getNickName(), gameHandler.getConnectionClient().getPlayerName())).findFirst().orElseThrow(() -> new IllegalArgumentException("Player not found")));
                     gameHandler.setCurrentPlayer(temp_startingGameMessage.getCurrPlaying());
+                    gameHandler.setCurrPlaying(temp_startingGameMessage.getIsPlaying());
                     gameHandler.setSeed(gameHandler.getPlayer().getPersonalGoalCard().getNumeroCarta());
+
                     break;
                 }
                 case END_GAME_MESSAGE:{

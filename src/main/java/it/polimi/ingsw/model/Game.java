@@ -65,6 +65,18 @@ public class Game implements Serializable {
         }
         livingRoom.setListeners(listeners);
     }
+
+    public GameChecker getGameChecker() {
+        return gameChecker;
+    }
+
+    public ArrayList<VirtualView> getListeners() {
+        listeners.clear();
+        for(Player p:Players){
+            listeners.add((VirtualView) p.getListener());
+        }
+        return listeners;
+    }
    /* public void setDisconnectedPlayers(Player p){
         disconnectedPlayers.add(p);
     }*/

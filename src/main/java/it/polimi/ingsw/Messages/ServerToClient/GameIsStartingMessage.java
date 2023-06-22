@@ -17,6 +17,7 @@ public class GameIsStartingMessage extends ServerMessage{
     private  CommonGoalCard commonGoalCard2;
     private  ArrayList<Player> players;
     private  String currPlaying;
+    private Integer isPlaying;
 
     public GameIsStartingMessage(Game game) {
         super(MessageCategory.STARTING_GAME_MESSAGE);
@@ -25,6 +26,7 @@ public class GameIsStartingMessage extends ServerMessage{
         this.commonGoalCard2=livingRoom.getCommonGoalCard2();
         this.players=game.getPlayers();
         this.currPlaying=game.getCurrPlaying();
+        this.isPlaying=game.getWhoIsPlaying();
         setReturnMessage("The game is starting...");
     }
 
@@ -66,5 +68,9 @@ public class GameIsStartingMessage extends ServerMessage{
 
     public void setCommonGoalCard1(CommonGoalCard commonGoalCard1) {
         this.commonGoalCard1 = commonGoalCard1;
+    }
+
+    public Integer getIsPlaying() {
+        return isPlaying;
     }
 }

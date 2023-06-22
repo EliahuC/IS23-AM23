@@ -42,6 +42,10 @@ public class ControllerCoordinator {
         connectedPlayers.add(p);
     }
 
+    public void setStartedGame(Boolean startedGame) {
+        this.startedGame = startedGame;
+    }
+
     public GameController getGameController() {
         return gameController;
     }

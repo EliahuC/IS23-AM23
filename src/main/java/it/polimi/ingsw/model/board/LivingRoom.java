@@ -23,9 +23,9 @@ public class LivingRoom implements Serializable {
     transient ArrayList<PropertyChangeListener> listeners=new ArrayList<>();
 
     private BoardToken[][] Board = new BoardToken[MAX_Row][MAX_Column];
-    private transient final Launcher L;
+    private transient Launcher L;
     private  final Bag bag;
-    private transient final GameChecker gameChecker;
+    private transient GameChecker gameChecker;
 
     private transient final ArrayList<CGCKey> commonGoalCards = new ArrayList<>();
     private transient CommonGoalCard commonGoalCard1;
@@ -317,7 +317,7 @@ public class LivingRoom implements Serializable {
         }
     }
 
-    private void SetBoard(){
+    public void SetBoard(){
         for(int i = 0; i < MAX_Row; i++){
             for(int j = 0; j < MAX_Column; j++)
                 this.Board[i][j].setBoard(this.Board);
@@ -340,7 +340,13 @@ public class LivingRoom implements Serializable {
     }
 
     public void setListeners(ArrayList<VirtualView> listener) {
-         listeners.addAll(listener);
+        listeners=new ArrayList<>();
+        listeners.clear();
+        listeners.addAll(listener);
+    }
+
+    public void setLauncher(Launcher l) {
+        L = l;
     }
 
     public CommonGoalCard getCommonGoalCard1() {
@@ -353,6 +359,10 @@ public class LivingRoom implements Serializable {
 
     public GameChecker getGameChecker() {
         return gameChecker;
+    }
+
+    public void setGameChecker(GameChecker gameChecker){
+        this.gameChecker=gameChecker;
     }
 
     public void setCommonGoalCard1(CommonGoalCard commonGoalCard1) {

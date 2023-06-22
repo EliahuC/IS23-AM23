@@ -118,7 +118,7 @@ public class LobbyHandler {
                 } catch (InterruptedException iE) {
                     iE.printStackTrace();
                 }
-                /*System.out.println(CLS); TODO abilitare durante la creazione del JAR
+                /*System.out.println(CLS); //TODO abilitare durante la creazione del JAR
                 System.out.flush();
                 System.out.println("""
                                                 							

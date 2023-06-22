@@ -22,6 +22,7 @@ import it.polimi.ingsw.model.player.Player;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
@@ -103,15 +104,15 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
                     //reconnected player
                     synchronized (Server.startedLobbies){
                         for(Lobby l:Server.startedLobbies){
-                            if(l.getPlayer(namePlayer)!=null){
-                                VirtualView virtualView=new VirtualView(this,namePlayer);
-                                l.reconnectPlayer(this,namePlayer);
+                            if(l.getPlayer(namePlayer)!=null) {
+                                VirtualView virtualView = new VirtualView(this, namePlayer);
+                                l.reconnectPlayer(this, namePlayer);
                                 l.getPlayer(namePlayer).setListener(virtualView);
-                                lobby=l;
-                                if(!checkReconnectedLobby())
-                                    sendMessage(new LobbyJoiningMessage(lobby.getIdLobby()),namePlayer);
+                                lobby = l;
+                                if (!checkReconnectedLobby())
+                                    sendMessage(new LobbyJoiningMessage(lobby.getIdLobby()), namePlayer);
+                                break;
                             }
-                            break;
                         }
                         if(lobby!=null)break;
                     }
@@ -326,19 +327,23 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
      * Method used to send a ping to the client
      */
     public void sendPing() {
-        for (String s : Server.rmiConnections.keySet()) {
-            boolean pingIsOk = false;
-            try {
-                pingIsOk = Server.rmiConnections.get(s).getPing();
-            } catch (RemoteException e) {
-                closeConnection(s);
+        try {
+            for (String s : Server.rmiConnections.keySet()) {
+                boolean pingIsOk = false;
+                try {
+                    pingIsOk = Server.rmiConnections.get(s).getPing();
+                } catch (RemoteException e) {
+                    closeConnection(s);
+                }
+                try {
+                    TimeUnit.SECONDS.sleep(3);
+                } catch (InterruptedException e) {
+                    System.out.println(s + " connection crashed");
+                    closeConnection(s);
+                }
             }
-            try {
-                TimeUnit.SECONDS.sleep(3);
-            } catch (InterruptedException e) {
-                System.out.println(s+ " connection crashed");
-                closeConnection(s);
-           }
+        }catch (ConcurrentModificationException e){
+            sendPing();
         }
     }
     /**
@@ -350,7 +355,7 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
         Server.connectedPlayers.remove(s);
         Server.rmiConnections.remove(s);
         System.out.println(s+ " disconnected from the server");
-        for (Lobby l : Server.startedLobbies) {
+        for (Lobby l : Server.lobbies) {
             if(l.getJoinedUsers().contains(s)){
                 lobby=l;
                 if (lobby.getStartedGame())
@@ -360,7 +365,9 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
                 }
                 else{
                     lobby.removePlayer(this,namePlayer);
+                    Server.lobbies.remove(lobby);
                 }
+                lobby=null;
                 return;
             }
         }

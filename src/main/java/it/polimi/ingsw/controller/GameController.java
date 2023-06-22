@@ -196,4 +196,8 @@ public class GameController {
         game.setStartedGame(true);
         game.setCurrPlaying(gameSavings.getCurrPlaying());
     }
+
+    public Launcher getLauncher() {
+        return launcher;
+    }
 }

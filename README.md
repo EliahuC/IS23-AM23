@@ -18,8 +18,8 @@ The members of the group are:
 |UML (Model and Controller)   	|🟢   	| 100%   	    |   	|
 |Completed Rules   	|🟢   	| 100%   	    |   	|
 |TUI   	|🟢   	| 100%   	    |    	|
-|GUI   	|🟡   	| 50%   	      |    	|
+|GUI   	|🟡   	| 50%   	     |    	|
 |TCP   	|🟢  	| 100%   	    |    	|
 |RMI   	|🟡   	| 99%   	     |   	|
-|Persistency   	|🟡   	| 99%   	     |   	|
-|Multiple games   	|🟢   	| 100%   	     |   	|
+|Persistency   	|🟢   	| 100%   	    |   	|
+|Multiple games   	|🟢   	| 100%   	    |   	|

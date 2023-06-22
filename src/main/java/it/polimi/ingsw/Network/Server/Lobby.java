@@ -11,6 +11,7 @@ import it.polimi.ingsw.Network.Server.TCP.ServerConnectionTCP;
 import it.polimi.ingsw.Savings;
 import it.polimi.ingsw.controller.ControllerCoordinator;
 import it.polimi.ingsw.model.Game;
+import it.polimi.ingsw.model.board.goalCards.CommonGoalCard;
 import it.polimi.ingsw.model.player.Player;
 
 import java.beans.PropertyChangeEvent;
@@ -30,8 +31,8 @@ public class Lobby implements Serializable {
     private final ArrayList<String> joinedUsers;
     private Boolean startedGame=false;
     private Boolean fullLobby=false;
-    //private  transient String saveFilePath="../Savings"; TODO abilitare durante la creazione del JAR
-    private  transient String saveFilePath="Savings";
+    private transient String saveFilePath="../Savings"; //TODO abilitare durante la creazione del JAR
+    //private transient String saveFilePath="Savings";
     private final Integer idLobby;
     public Lobby(Integer numPlayersLobby,Integer ID){
         this.NumPlayersLobby=numPlayersLobby;
@@ -229,6 +230,8 @@ public class Lobby implements Serializable {
     public void reloadGame(GameSavings gameSavings) {
         controllerCoordinator=new ControllerCoordinator();
         connections=new ArrayList<>();
+        saveFilePath="../Savings"; //TODO abilitare durante la creazione del JAR
+        //saveFilePath="Savings";
         setSavesOfTheLobby();
         controllerCoordinator.setGame(gameSavings);
     }
@@ -240,6 +243,14 @@ public class Lobby implements Serializable {
     public void restartGame() {
         this.startedGame=true;
         Game game=controllerCoordinator.getGameController().getGame();
+        game.getLivingRoom().SetBoard();
+        game.getLivingRoom().setGameChecker(controllerCoordinator.getGameController().getGame().getGameChecker());
+        game.getLivingRoom().setListeners(controllerCoordinator.getGameController().getGame().getListeners());
+        game.getLivingRoom().setCommonGoalCard1(new CommonGoalCard(game.getLivingRoom().getIdCGC1()));
+        game.getLivingRoom().setCommonGoalCard2(new CommonGoalCard(game.getLivingRoom().getIdCGC2()));
+        controllerCoordinator.setStartedGame(controllerCoordinator.getGameController().getGame().isStartedGame());
+        game.getLivingRoom().setLauncher(controllerCoordinator.getGameController().getLauncher());
+
         PropertyChangeEvent evt = new PropertyChangeEvent(
                 this,
                 "GAME_STARTED",

@@ -154,14 +154,14 @@ public class ServerConnectionTCP implements ServerConnection{
                     //reconnected player
                     synchronized (Server.startedLobbies){
                         for(Lobby l:Server.startedLobbies){
-                            if(l.getPlayer(namePlayer)!=null){
-                                l.reconnectPlayer(this,namePlayer);
+                            if(l.getPlayer(namePlayer)!=null) {
+                                l.reconnectPlayer(this, namePlayer);
                                 l.getPlayer(namePlayer).setListener(virtualView);
-                                lobby=l;
-                                if(!checkReconnectedLobby())
-                                    sendMessage(new LobbyJoiningMessage(lobby.getIdLobby()),namePlayer);
+                                lobby = l;
+                                if (!checkReconnectedLobby())
+                                    sendMessage(new LobbyJoiningMessage(lobby.getIdLobby()), namePlayer);
+                                break;
                             }
-                            break;
                         }
                         if(lobby!=null)break;
                     }

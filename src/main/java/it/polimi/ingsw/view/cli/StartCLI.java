@@ -109,7 +109,7 @@ public class StartCLI {
                                 """);
                         System.out.println("\n                              Please, insert a CORRECT address ...");
                         try{
-                            TimeUnit.SECONDS.sleep(3);
+                            TimeUnit.SECONDS.sleep(2);
                         }catch (InterruptedException iE){
                             iE.printStackTrace();
                         }
@@ -157,7 +157,7 @@ public class StartCLI {
                                 """);
                         System.out.println("\n                              Please, insert a CORRECT address ...");
                         try{
-                            TimeUnit.SECONDS.sleep(3);
+                            TimeUnit.SECONDS.sleep(2);
                         }catch (InterruptedException iE){
                             iE.printStackTrace();
                         }
@@ -198,7 +198,7 @@ public class StartCLI {
                                 """);
                     System.out.println("\n                              Please, insert a CORRECT address ...");
                     try{
-                        TimeUnit.SECONDS.sleep(3);
+                        TimeUnit.SECONDS.sleep(2);
                     }catch (InterruptedException iE){
                         iE.printStackTrace();
                     }

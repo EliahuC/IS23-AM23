@@ -186,7 +186,7 @@ public class GameHandler {
         while(!Objects.equals(player.getNickName(), players.get(currPlaying - 1).getNickName())){
             if(endgame)
                 break;
-            /*System.out.print(CLS); TODO abilitare durante la creazione del JAR
+            /*System.out.print(CLS); //TODO abilitare durante la creazione del JAR
             //System.out.flush();
             System.out.print("\n\n                                      It's NOT your turn!\n\n                                    CURRENTLY PLAYING: ");
             if(players.get(currPlaying-1).isFirstPlayerSeat())
@@ -341,7 +341,7 @@ public class GameHandler {
         }
         for (Player p : ranking) {
             if (!p.isWinner())
-                System.out.println("                    " + p.getNickName() + ": " + p.getScore() + " points");
+                System.out.println("                                     " + p.getNickName() + ": " + p.getScore() + " points");
         }
 
         System.out.println("\n\n                            > Close the window to play again <");
