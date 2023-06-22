@@ -15,6 +15,7 @@ import java.rmi.registry.Registry;
  */
 public class RMIServerMain extends Server implements Runnable {
     private static int port = 22011;
+    private static String IP;
 
 
     /**
@@ -27,14 +28,15 @@ public class RMIServerMain extends Server implements Runnable {
         if (args.length > 0) {
             port = Integer.parseInt(args[0]);
         }
-        RMIServerMain serverMain = new RMIServerMain(port);
+        RMIServerMain serverMain = new RMIServerMain(port, IP);
         Thread thread = new Thread(serverMain);
         thread.start();
     }
 
 
-    public RMIServerMain(int port) {
+    public RMIServerMain(int port, String IP) {
         RMIServerMain.port = port;
+        RMIServerMain.IP =IP;
     }
 
     /**
@@ -45,11 +47,13 @@ public class RMIServerMain extends Server implements Runnable {
     public void run() {
 
         try {
+
+            System.setProperty("java.rmi.server.hostname",IP);
             Registry registry = LocateRegistry.createRegistry(22011);
             showMessage("RMI server is ready on port: "+ port);
             ServerConnectionRMI rmiHandler = new ServerConnectionRMI();
             Naming.rebind("rmi://localhost:"+22011+"/RMIServer",rmiHandler);
-            //showMessage("Client successfully connected");
+
 
         } catch (IOException e) {
             e.printStackTrace();

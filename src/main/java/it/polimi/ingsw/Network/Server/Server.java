@@ -15,6 +15,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Scanner;
 
 /**
  * @author Eliahu Cohen
@@ -29,8 +30,11 @@ public class Server implements Printer {
 
     public static void main(String[] args){
         loadSaves();
+        System.out.println("INSERT THE IPv4 ADDRESS");
+        Scanner input = new Scanner(System.in);
+        String IP = input.nextLine();
         TCPServerMain tcpServerMain =new TCPServerMain(TCPParams.PORT);
-        RMIServerMain rmiServerMain=new RMIServerMain(RMIparams.PORT);
+        RMIServerMain rmiServerMain=new RMIServerMain(RMIparams.PORT,IP);
         Thread thread1=new Thread(tcpServerMain);
         Thread thread2=new Thread(rmiServerMain);
         thread1.start();
