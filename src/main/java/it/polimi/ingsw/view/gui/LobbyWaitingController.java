@@ -32,6 +32,7 @@ public class LobbyWaitingController {
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+        connectionClient.closeConnection();
     }
 
     public void displayNickname(String nickname) {

@@ -51,12 +51,6 @@ public class GameControllerGUI {
     private String winner;
     private Integer seed;
     private Image image;
-    @FXML
-    ImageView container1;
-    @FXML
-    ImageView container2;
-    @FXML
-    ImageView container3;
     private int currPlayer = 1;
     public static final int LivingRoomSize = 9;
     private static final int shelfRows = 6;
@@ -184,7 +178,11 @@ public class GameControllerGUI {
         root.getChildren().add(myGridPane_columns);
         Scene scene = new Scene(root);
         stage.setScene(scene);
+        Image icon = new Image("com/example/is23am23/little_icon.png");
+        stage.getIcons().add(icon);
+        stage.setTitle("My Shelfie");
         stage.show();
+
     }
 
     public Image chooseCategoryImage(ItemTile tile) {
@@ -258,6 +256,7 @@ public class GameControllerGUI {
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+        currentIstance.getConnectionClient().closeConnection();
     }
 
     public void setResponse(ServerMessage response) {
