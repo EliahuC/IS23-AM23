@@ -154,7 +154,7 @@ public class GameControllerGUI {
             ImageView imageView = new ImageView();
 
             //IMMAGINE FRECCIA DA INSERIRE
-            File file = new File("/com/example/is23am23/Trofei.png");
+            File file = new File("/com/example/is23am23/arrow_icon.png");
             image = new Image(String.valueOf(file));
             imageView.setImage(image);
             imageView.setFitWidth(33);
@@ -162,7 +162,7 @@ public class GameControllerGUI {
             myGridPane_columns.setLayoutX(385);
             myGridPane_columns.setLayoutY(105);
             myGridPane_columns.add(imageView, i, 0);
-            GridPane.setMargin(imageView, new Insets(1.5));
+            GridPane.setMargin(imageView, new Insets(2));
         }
 
         File file = new File("src/main/resources/com/example/is23am23/game.fxml");
