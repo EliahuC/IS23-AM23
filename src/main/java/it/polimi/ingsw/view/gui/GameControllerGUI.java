@@ -21,7 +21,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -63,6 +62,8 @@ public class GameControllerGUI {
     private boolean firstTime = true;
     private CommonGoalCard commonGoalCard1;
     private CommonGoalCard commonGoalCard2;
+    @FXML
+    GridPane myGridPane_choice;
     @FXML
     GridPane myGridPane_lr;
     @FXML
@@ -167,6 +168,7 @@ public class GameControllerGUI {
                 ImageView imageView = new ImageView();
                 //File file = new File("/com/example/is23am23/Cornici.png");
                 //image = new Image(String.valueOf(file));
+                //imageView.setImage(image);
                 imageView.setImage(chooseCategoryImage(getCurrentIstance().getTiles().get(i)));
                 imageView.setFitWidth(30);
                 imageView.setFitHeight(30);
@@ -175,6 +177,24 @@ public class GameControllerGUI {
                 myGridPane_container.add(imageView, i, 0);
             }
         }
+
+        myGridPane_choice = new GridPane();
+        for (int i = 0; i < 2; i++) {
+            ImageView imageView = new ImageView();
+
+            //IMMAGINE FRECCIA DA INSERIRE
+            File file = new File("/com/example/is23am23/arrow_image.png");
+            image = new Image(String.valueOf(file));
+            imageView.setImage(image);
+            imageView.setFitWidth(20);
+            imageView.setFitHeight(20);
+            imageView.setRotate(-90);
+            myGridPane_choice.setLayoutX(400);
+            myGridPane_choice.setLayoutY(68);
+            myGridPane_choice.add(imageView, i, 0);
+            GridPane.setMargin(imageView, new Insets(5));
+        }
+
         File file = new File("src/main/resources/com/example/is23am23/game.fxml");
         URL url = file.toURI().toURL();
         FXMLLoader loader = new FXMLLoader(url);
@@ -184,8 +204,12 @@ public class GameControllerGUI {
         root.getChildren().add(myGridPane_container);
         root.getChildren().add(bsImage);
         root.getChildren().add(myGridPane_columns);
+        root.getChildren().add(myGridPane_choice);
         Scene scene = new Scene(root);
         stage.setScene(scene);
+        stage.setTitle("My Shelfie");
+        Image icon = new Image("com/example/is23am23/little_icon.png");
+        stage.getIcons().add(icon);
         stage.show();
         if (firstTime) {
             setOnMouseclicked();

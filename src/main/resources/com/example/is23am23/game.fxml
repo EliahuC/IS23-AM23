@@ -21,10 +21,10 @@
                 <Image url="@livingroom.png" />
             </image>
         </ImageView>
-        <Button layoutX="64.0" layoutY="13.0" mnemonicParsing="false" text="Next Player" />
-        <Button layoutX="151.0" layoutY="13.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Me" />
-        <Button layoutX="326.0" layoutY="15.0" mnemonicParsing="false" onAction="#goToGoals" prefHeight="26.0" prefWidth="52.0" text="Goals" />
-        <Button layoutX="515.0" layoutY="15.0" mnemonicParsing="false" onAction="#returnToMenu" text="Quit" />
+        <Button layoutX="14.0" layoutY="15.0" mnemonicParsing="false" text="Next Player" />
+        <Button layoutX="107.0" layoutY="15.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Me" />
+        <Button layoutX="300.0" layoutY="14.0" mnemonicParsing="false" onAction="#goToGoals" prefHeight="26.0" prefWidth="52.0" text="Goals" />
+        <Button layoutX="534.0" layoutY="15.0" mnemonicParsing="false" onAction="#returnToMenu" text="Quit" />
       <GridPane fx:id="myGridPane_container" gridLinesVisible="true" layoutX="384.0" layoutY="66.0" prefHeight="27.0" prefWidth="94.0">
         <columnConstraints>
             <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="NEVER" maxWidth="30.0" minWidth="30.0" percentWidth="0.0" prefWidth="30.0" />
@@ -100,6 +100,15 @@
         </columnConstraints>
         <rowConstraints>
           <RowConstraints fillHeight="false" maxHeight="33.0" minHeight="33.0" percentHeight="0.0" prefHeight="33.0" valignment="CENTER" vgrow="NEVER" />
+        </rowConstraints>
+      </GridPane>
+      <GridPane fx:id="myGridPane_choice" layoutX="399.0" layoutY="72.0">
+        <columnConstraints>
+          <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" maxWidth="20.0" minWidth="20.0" percentWidth="0.0" prefWidth="20.0" />
+            <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" maxWidth="20.0" minWidth="20.0" percentWidth="0.0" prefWidth="20.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints fillHeight="false" maxHeight="20.0" minHeight="20.0" percentHeight="0.0" prefHeight="20.0" vgrow="SOMETIMES" />
         </rowConstraints>
       </GridPane>
     </children>
