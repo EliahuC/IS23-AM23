@@ -1,6 +1,7 @@
 package it.polimi.ingsw.view.gui;
 
 import it.polimi.ingsw.Messages.ServerToClient.ServerMessage;
+import it.polimi.ingsw.Network.Client.ConnectionClient;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,6 +20,7 @@ public class LobbyWaitingController {
     private Scene scene;
     @FXML
     private Label Display;
+    private ConnectionClient connectionClient;
 
     public void returnToMenu(ActionEvent event) throws IOException {
 
@@ -34,5 +36,9 @@ public class LobbyWaitingController {
 
     public void displayNickname(String nickname) {
         Display.setText(nickname);
+    }
+
+    public void setConnectionClient(ConnectionClient connectionClient) {
+        this.connectionClient=connectionClient;
     }
 }

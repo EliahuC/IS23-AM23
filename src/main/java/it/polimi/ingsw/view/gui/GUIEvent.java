@@ -1,6 +1,7 @@
 package it.polimi.ingsw.view.gui;
 
 import it.polimi.ingsw.Messages.ServerToClient.*;
+import it.polimi.ingsw.Network.Client.ConnectionClient;
 import javafx.application.Platform;
 import javafx.stage.Stage;
 import java.beans.PropertyChangeEvent;
@@ -22,6 +23,7 @@ public class GUIEvent implements PropertyChangeListener {
     private URL url;
     private ServerMessage serverMessage;
     private Stage stage = new Stage();
+    private ConnectionClient connectionClient;
 
 
     public GUIEvent(MenuController menuController) {
@@ -44,6 +46,7 @@ public class GUIEvent implements PropertyChangeListener {
                             gamecontrollerGUI.setCurrentPlayer(temp_startingGameMessage.getCurrPlaying());
                             gamecontrollerGUI.setSeed(gamecontrollerGUI.getPlayer().getPersonalGoalCard().getNumeroCarta());
                             gamecontrollerGUI.setStage(stage);
+                            gamecontrollerGUI.setReceiver(this);
                             gamecontrollerGUI.startGame();
                         } catch (IOException e) {
                             throw new RuntimeException(e);
@@ -52,6 +55,7 @@ public class GUIEvent implements PropertyChangeListener {
                     case UPDATE_STATE:
                         UpdateStateMessage temp_updateStateMessage = (UpdateStateMessage) serverMessage;
                         gamecontrollerGUI.setLivingRoom(temp_updateStateMessage.getGame().getLivingRoom());
+                        gamecontrollerGUI.setFlag(true);
                         gamecontrollerGUI.setPlayers(temp_updateStateMessage.getGame().getPlayers());
                         gamecontrollerGUI.setPlayer(temp_updateStateMessage.getGame().getPlayers().stream().filter(player -> Objects.equals(player.getNickName(), gamecontrollerGUI.getConnectionClient().getPlayerName())).findFirst().orElseThrow(() -> new IllegalArgumentException("Player not found")));
                         gamecontrollerGUI.setCurrPlaying(temp_updateStateMessage.getGame().getWhoIsPlaying());
@@ -114,5 +118,9 @@ public class GUIEvent implements PropertyChangeListener {
 
     public void setUsedNicknameController(UsedNicknameController usedNicknameController) {
         this.usedNicknameController = usedNicknameController;
+    }
+
+    public void setConnectionClient(ConnectionClient connectionClient) {
+        this.connectionClient = connectionClient;
     }
 }
