@@ -25,7 +25,6 @@ public class MenuController {
 
     @FXML
     private TextField textField;
-    private AnchorPane scenePane;
     private Stage stage;
     private Scene scene;
     private String serverAddr;

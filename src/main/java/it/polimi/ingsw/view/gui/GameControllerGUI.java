@@ -61,6 +61,8 @@ public class GameControllerGUI {
     private CommonGoalCard commonGoalCard1;
     private CommonGoalCard commonGoalCard2;
     @FXML
+    AnchorPane myAnchorPane;
+    @FXML
     GridPane myGridPane_lr;
     @FXML
     GridPane bsImage;
@@ -141,7 +143,7 @@ public class GameControllerGUI {
             ImageView imageView = new ImageView();
 
             //IMMAGINE FRECCIA DA INSERIRE
-            File file = new File("/com/example/is23am23/arrow_icon.png");
+            File file = new File("/com/example/is23am23/arrow_image.png");
             image = new Image(String.valueOf(file));
             imageView.setImage(image);
             imageView.setFitWidth(33);
@@ -172,13 +174,13 @@ public class GameControllerGUI {
         File file = new File("src/main/resources/com/example/is23am23/game.fxml");
         URL url = file.toURI().toURL();
         FXMLLoader loader = new FXMLLoader(url);
-        AnchorPane root = loader.load();
-        root.getChildren().add(myGridPane_lr);
-        root.getChildren().add(myGridPane_bs);
-        root.getChildren().add(myGridPane_container);
-        root.getChildren().add(bsImage);
-        root.getChildren().add(myGridPane_columns);
-        Scene scene = new Scene(root);
+        myAnchorPane = loader.load();
+        myAnchorPane.getChildren().add(myGridPane_lr);
+        myAnchorPane.getChildren().add(myGridPane_bs);
+        myAnchorPane.getChildren().add(myGridPane_container);
+        myAnchorPane.getChildren().add(bsImage);
+        myAnchorPane.getChildren().add(myGridPane_columns);
+        Scene scene = new Scene(myAnchorPane);
         stage.setScene(scene);
         Image icon = new Image("com/example/is23am23/little_icon.png");
         stage.getIcons().add(icon);
