@@ -59,6 +59,7 @@ public class GUIMain extends Application implements View {
 */
     @Override
     public void run() {
+        main(null);
     }
 }
 
