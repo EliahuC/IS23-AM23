@@ -23,7 +23,7 @@ public class GoalsController {
     private GameControllerGUI gameControllerGUI;
 
     public void goToLivingroom(ActionEvent event) throws IOException {
-            gameControllerGUI.displayLivingroom();
+            gameControllerGUI.displayScene();
     }
 
     public void displayPoints(){

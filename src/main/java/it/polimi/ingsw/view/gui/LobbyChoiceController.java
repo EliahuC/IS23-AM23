@@ -27,7 +27,7 @@ public class LobbyChoiceController implements Initializable {
     private Label nameDisplay;
     @FXML
     private ChoiceBox<String> playerNumber;
-    private String[] number = {"2", "3", "4"};
+    private final String[] number = {"2", "3", "4"};
     private Stage stage;
     private Scene scene;
     private ServerMessage response;
@@ -46,6 +46,7 @@ public class LobbyChoiceController implements Initializable {
         gameControllerGUI = new GameControllerGUI();
         gameControllerGUI.setConnectionClient(connectionClient);
         receiver.setGamecontrollerGUI(gameControllerGUI);
+        receiver.setConnectionClient(connectionClient);
         gameControllerGUI.setReceiver(receiver);
         command = "/ENTER";
         Message message = MoveSerializer.serializeInput(command);
@@ -63,6 +64,7 @@ public class LobbyChoiceController implements Initializable {
                 root = loader.load();
                 LobbyWaitingController lobbyWaitingController = loader.getController();
                 lobbyWaitingController.displayNickname(nickname);
+                lobbyWaitingController.setConnectionClient(connectionClient);
                 stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 scene = new Scene(root);
                 stage.setScene(scene);
@@ -74,6 +76,7 @@ public class LobbyChoiceController implements Initializable {
     public void createLobby(ActionEvent event) throws IOException {
         receiver.setInStartGUI(false);
         receiver.setInLobbyChoice(true);
+        receiver.setConnectionClient(connectionClient);
         lobby_size = playerNumber.getValue();
         if (lobby_size != null) {
             switch (lobby_size) {
@@ -90,6 +93,7 @@ public class LobbyChoiceController implements Initializable {
             Parent root = loader.load();
             LobbyWaitingController lobbyWaitingController = loader.getController();
             lobbyWaitingController.displayNickname(nickname);
+            lobbyWaitingController.setConnectionClient(connectionClient);
             gameControllerGUI = new GameControllerGUI();
             gameControllerGUI.setConnectionClient(connectionClient);
             receiver.setGamecontrollerGUI(gameControllerGUI);
@@ -146,4 +150,3 @@ public class LobbyChoiceController implements Initializable {
 
     public void setReceiver(GUIEvent receiver){this.receiver = receiver;}
 }
-
