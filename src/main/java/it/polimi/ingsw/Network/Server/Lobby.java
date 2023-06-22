@@ -31,8 +31,8 @@ public class Lobby implements Serializable {
     private final ArrayList<String> joinedUsers;
     private Boolean startedGame=false;
     private Boolean fullLobby=false;
-    private transient String saveFilePath="../Savings"; //TODO abilitare durante la creazione del JAR
-    //private transient String saveFilePath="Savings";
+    //private transient String saveFilePath="../Savings"; //TODO abilitare durante la creazione del JAR
+    private transient String saveFilePath="Savings";
     private final Integer idLobby;
     public Lobby(Integer numPlayersLobby,Integer ID){
         this.NumPlayersLobby=numPlayersLobby;
@@ -230,8 +230,8 @@ public class Lobby implements Serializable {
     public void reloadGame(GameSavings gameSavings) {
         controllerCoordinator=new ControllerCoordinator();
         connections=new ArrayList<>();
-        saveFilePath="../Savings"; //TODO abilitare durante la creazione del JAR
-        //saveFilePath="Savings";
+        //saveFilePath="../Savings"; //TODO abilitare durante la creazione del JAR
+        saveFilePath="Savings";
         setSavesOfTheLobby();
         controllerCoordinator.setGame(gameSavings);
     }
