@@ -136,7 +136,7 @@ public class MenuController {
 
     public void goRMI(ActionEvent event) throws IOException {
 
-        String nickname = textField.getText();
+        nickname = textField.getText();
         if (!nickname.isEmpty()) {
             if (RMIon(event)) {
                 File file = new File("src/main/resources/com/example/is23am23/lobbyChoice.fxml");
