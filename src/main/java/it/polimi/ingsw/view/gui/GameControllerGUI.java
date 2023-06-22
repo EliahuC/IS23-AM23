@@ -21,6 +21,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -53,15 +54,20 @@ public class GameControllerGUI {
     private String winner;
     private Integer seed;
     private Image image;
+    @FXML
+    ImageView container1;
+    @FXML
+    ImageView container2;
+    @FXML
+    ImageView container3;
     private int currPlayer = 1;
     public static final int LivingRoomSize = 9;
     private static final int shelfRows = 6;
     private static final int shelfCols = 5;
     private boolean endgame;
+    private boolean firstTime = true;
     private CommonGoalCard commonGoalCard1;
     private CommonGoalCard commonGoalCard2;
-    @FXML
-    AnchorPane myAnchorPane;
     @FXML
     GridPane myGridPane_lr;
     @FXML
@@ -72,9 +78,11 @@ public class GameControllerGUI {
     GridPane myGridPane_container;
     @FXML
     GridPane myGridPane_bs;
-    private ImageView[][] imageViews = new ImageView[LivingRoomSize][LivingRoomSize];
+    //private ImageView[][] imageViews = new ImageView[LivingRoomSize][LivingRoomSize];
     private static GameControllerGUI currentIstance = new GameControllerGUI();
     private Boolean flag = true;
+    private Integer rowIndex=null;
+    private Integer columnIndex=null;
 
     public void displayScene() throws IOException {
         if (instance()) {
@@ -89,7 +97,7 @@ public class GameControllerGUI {
                     ItemTile tile = livingRoom.getBoardTile(i, j).getTile();
                     ImageView imageView = new ImageView();
                     imageView.setImage(chooseCategoryImage(tile));
-                    imageViews[i][j] = imageView;
+                    //imageViews[i][j] = imageView;
                     imageView.setFitWidth(34);
                     imageView.setFitHeight(34);
                     myGridPane_lr.setLayoutX(29);
@@ -110,21 +118,21 @@ public class GameControllerGUI {
                 ImageView imageView = new ImageView();
                 imageView.setImage(chooseCategoryImage(tile));
                 //File file = new File("/com/example/is23am23/Cornici.png");
-               // image = new Image(String.valueOf(file));
+                // image = new Image(String.valueOf(file));
                 //imageView.setImage(image);
 
-                    //imageView.setImage(chooseCategoryImage(tile));
-                    imageView.setFitWidth(33);
-                    imageView.setFitHeight(33);
-                    myGridPane_bs.setLayoutX(386);
-                    myGridPane_bs.setLayoutY(158);
+                //imageView.setImage(chooseCategoryImage(tile));
+                imageView.setFitWidth(33);
+                imageView.setFitHeight(33);
+                myGridPane_bs.setLayoutX(386);
+                myGridPane_bs.setLayoutY(158);
 
-                    // Opzionale: Imposta il padding o altre proprietà per gli ImageView
-                    GridPane.setMargin(imageView, new Insets(0, 2, 0, 2));
-                    myGridPane_bs.add(imageView, j, i);
-                    //}
-                }
+                // Opzionale: Imposta il padding o altre proprietà per gli ImageView
+                GridPane.setMargin(imageView, new Insets(0, 2, 0, 2));
+                myGridPane_bs.add(imageView, j, i);
+                //}
             }
+        }
 
         bsImage = new GridPane();
         ImageView view = new ImageView();
@@ -155,9 +163,9 @@ public class GameControllerGUI {
         }
 
 
-            //MANCA IL RIFERIMENTO ALLE TESSERE GIA' PRESE(PER ORA IMMAGINI IMPOSTATE)
-            myGridPane_container = new GridPane();
-            if(getCurrentIstance().getTiles().size()>0){
+        //MANCA IL RIFERIMENTO ALLE TESSERE GIA' PRESE(PER ORA IMMAGINI IMPOSTATE)
+        myGridPane_container = new GridPane();
+        if (getCurrentIstance().getTiles().size() > 0) {
             for (int i = 0; i < 3; i++) {
                 ImageView imageView = new ImageView();
                 //File file = new File("/com/example/is23am23/Cornici.png");
@@ -170,23 +178,22 @@ public class GameControllerGUI {
                 myGridPane_container.add(imageView, i, 0);
             }
         }
-
         File file = new File("src/main/resources/com/example/is23am23/game.fxml");
         URL url = file.toURI().toURL();
         FXMLLoader loader = new FXMLLoader(url);
-        myAnchorPane = loader.load();
-        myAnchorPane.getChildren().add(myGridPane_lr);
-        myAnchorPane.getChildren().add(myGridPane_bs);
-        myAnchorPane.getChildren().add(myGridPane_container);
-        myAnchorPane.getChildren().add(bsImage);
-        myAnchorPane.getChildren().add(myGridPane_columns);
-        Scene scene = new Scene(myAnchorPane);
+        AnchorPane root = loader.load();
+        root.getChildren().add(myGridPane_lr);
+        root.getChildren().add(myGridPane_bs);
+        root.getChildren().add(myGridPane_container);
+        root.getChildren().add(bsImage);
+        root.getChildren().add(myGridPane_columns);
+        Scene scene = new Scene(root);
         stage.setScene(scene);
-        Image icon = new Image("com/example/is23am23/little_icon.png");
-        stage.getIcons().add(icon);
-        stage.setTitle("My Shelfie");
         stage.show();
-
+        if (firstTime) {
+            setOnMouseclicked();
+            firstTime = false;
+        }
     }
 
     public Image chooseCategoryImage(ItemTile tile) {
@@ -261,7 +268,6 @@ public class GameControllerGUI {
             URL url = file.toURI().toURL();
             FXMLLoader loader = new FXMLLoader(url);
             Parent root = loader.load();
-
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
@@ -339,26 +345,6 @@ public class GameControllerGUI {
     public void setWinner(String winner) {
         this.winner = winner;
     }
-/*
-    public void start(){
-        while(true){
-            if(player.getNickName()==currentPlayer || player.getNickName()==players.get(currPlaying).getNickName()) {
-                displayBoard();
-                displayBookshelfOrder();
-                displayBookshelfColumn();
-                try {
-                    TimeUnit.MILLISECONDS.sleep(200);
-                } catch (InterruptedException iE) {
-                    iE.printStackTrace();
-                }
-                if (response != null && response.getCategory() == Message.MessageCategory.END_GAME_MESSAGE)
-                    break;
-                waiting();
-            }else
-                waiting();
-        }
-        displayEnd();
-    }*/
 
     private void waiting() {
         System.out.print("It's not your turn, yet. Wait for other players to finish their turn.\n\n");
@@ -390,50 +376,6 @@ public class GameControllerGUI {
         return players;
     }
 
-    private void displayBoard() {
-        System.out.print("LIVING BOARD\n");
-        //livingRoom.print();
-        try {
-            TimeUnit.MILLISECONDS.sleep(200);
-        } catch (InterruptedException iE) {
-            iE.printStackTrace();
-        }
-        System.out.print("\n\nPICK YOUR TILES! You can choose one, two or three tiles: use the command /SELECT\n" +
-                "writing respectively the row's coordinate and the column's coordinate.\n" +
-                "You must know that you can only pick adjacent tiles that are in the same row or in the same column,\n" +
-                "plus you can only choose external tiles!\n\n" +
-                "For example, to pick the two tiles in 8,5 and in 8,4, the right command is:\n" +
-                "/SELECT 8 5 8 4\n\n" +
-                "[Use the command /BOOKSHELF to see your personal bookshelf.]\n" +
-                "[Use the command /GOALS to see the description of your personal or common goal cards.]\n");
-        Scanner input = new Scanner(System.in);
-        while (true) {
-            String command = input.nextLine();
-            if (Objects.equals(command.toUpperCase(), "/GOALS")) {
-                //displayGoals("Living Board");
-                break;
-            }
-            if (Objects.equals(command.toUpperCase(), "/BOOKSHELF")) {
-                //displayBookshelf();
-                break;
-            }
-            ClientMessage message = (ClientMessage) MoveSerializer.serializeInput(command);
-            connectionClient.sendMessage((ClientMessage) message);
-            try {
-                TimeUnit.MILLISECONDS.sleep(200);
-            } catch (InterruptedException iE) {
-                iE.printStackTrace();
-            }
-            if (response != null && response.getCategory() == Message.MessageCategory.VALID_MESSAGE) {
-                for (int i = 1; command.split(" ")[i] != null; i += 2)
-                    tiles.add(livingRoom.getBoardTile(i, i + 1).getTile());
-                break;
-            }
-            System.out.print("Your move is not valid. Please, pick again and correctly your tiles.\n" +
-                    "[You can still see your goal cards, using the command /GOALS, or your personal bookshelf using /BOOKSHELF]\n");
-        }
-    }
-
     private void displayEnd() {
         System.out.print("THE WINNER IS: " + winner + "\n");
         List<Player> ranking = players.stream().sorted(Comparator.comparingInt(Player::getScore)).toList();
@@ -443,7 +385,7 @@ public class GameControllerGUI {
             }
         }
     }
-
+/*
     private void displayBookshelfOrder() {
         Scanner input = new Scanner(System.in);
         System.out.print("YOUR BOOKSHELF\n");
@@ -499,21 +441,7 @@ public class GameControllerGUI {
             System.out.print("The chosen column is too full. Please, choose another one.\n");
         }
     }
-
-    /*private void displayBookshelf(){
-        Scanner input = new Scanner(System.in);
-        String command;
-        System.out.print("YOUR BOOKSHELF\n\n");
-        //player.getPlayerBookshelf().print();
-        System.out.print("\n\n[If you want to come back to the previous screen, use the command /BACK]\n");
-        while (true){
-            command = input.nextLine();
-            if(Objects.equals(command.toUpperCase(), "/BACK"))
-                break;
-            System.out.print("Please, use the /BACK command correctly.\n");
-        }
-        displayBoard();
-    }*/
+*/
 
     private void printSelection() {
         for (int i = 0; tiles.get(i) != null; i++)
@@ -543,22 +471,14 @@ public class GameControllerGUI {
         displayScene();
         if (getCurrentIstance().getPlayer().getNickName().equals(getCurrentIstance().getPlayers().
                 get(currPlaying - 1).getNickName())) {
-            ObservableList<Node> children = myGridPane_lr.getChildren();
-            while ((getCurrentIstance().getResponse() == null) || (getCurrentIstance().getResponse().getCategory() != Message.MessageCategory.VALID_MESSAGE)) {
-                for (Node node : children) {            //OTTENGO TUTTE LE COORDINATE, CAPISCO COME USCIRE
-                    if (node instanceof ImageView) {
-                        ImageView imageView = (ImageView) node;
-                        imageView.setOnMouseClicked(event -> {
-                            int rowIndex = myGridPane_lr.getRowIndex(imageView);
-                            int columnIndex = myGridPane_lr.getColumnIndex(imageView);
-                            coordinates.add(Integer.toString(rowIndex));
-                            coordinates.add(Integer.toString(columnIndex));
-
-                        });
-
-                    }
+            while (true) {
+                //FINTANTOCHE' NON VIENE PREMUTA LA FRECCIA
+                if((rowIndex!=null)&&(columnIndex!=null)) {
+                    coordinates.add(Integer.toString(rowIndex));            //WHILE INTERNO RIGA 545 E 546
+                    coordinates.add(Integer.toString(columnIndex));
+                    columnIndex = null;
+                    rowIndex = null;
                 }
-                //APPENA ESCO FACCIO PARTIRE IL COMANDO
                 switch (coordinates.size()) {
                     case 2 -> command = "/SELECT" + "\t" + coordinates.get(0) + "\t" + coordinates.get(1);
                     case 4 -> command = "/SELECT" + "\t" + coordinates.get(0) + "\t" + coordinates.get(1) +
@@ -574,12 +494,16 @@ public class GameControllerGUI {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+                if(getCurrentIstance().getResponse().getCategory()==Message.MessageCategory.VALID_MESSAGE)
+                    break;
+                //else
+                    //INSERIRE UNA LABEL CHE INFORMA CHE LA MOSSA NON E' VALIDA
             }
-            //POSSO DISPLAYARE IL CONTAINER
             cleanTiles(coordinates);
-
         }
+    //INSERIRE LE TESSERE NELLA BOOKSHELF SCEGLIENDO LA COLONNA CON LA FRECCIA
     }
+
 
 
     public Integer getSeed() {
@@ -637,6 +561,70 @@ public class GameControllerGUI {
     public List<ItemTile> getTiles() {
         return tiles;
     }
+    public void setOnMouseclicked(){
+        ObservableList<Node> children = myGridPane_lr.getChildren();
+            for(Node node : children){
+                if (node instanceof ImageView){
+                    ImageView imageView = (ImageView) node;
+                    imageView.setOnMouseClicked(event -> {
+                        rowIndex = myGridPane_lr.getRowIndex(imageView);
+                        columnIndex = myGridPane_lr.getColumnIndex(imageView);
+                    });
+                }
+            }
+        }
+
+    public void setFirstTime(boolean firstTime) {
+        this.firstTime = firstTime;
+    }
+
+    private void printLeaderbord(){
+
+        GridPane leaderbord = new GridPane();
+        int numPlayers = currentIstance.getPlayers().size();
+        int pos = 0;
+
+        switch (numPlayers) {
+            case 2: {
+                for (int i = 0; i < 2; i++) {
+                    pos = i + 2;
+                    Label label = new Label();
+                    label.setText(pos + "° position: "); // + player.getNickname()
+                    leaderbord.add(label, i, 0);
+                }
+            }
+            case 3: {
+                for (int i = 0; i < 3; i++) {
+                    pos = i + 2;
+                    Label label = new Label();
+                    label.setText(pos + "° position: "); // + player.getNickname()
+                    leaderbord.add(label, i, 0);
+                }
+            }
+            case 4: {
+                for (int i = 0; i < 4; i++) {
+                    pos = i + 2;
+                    Label label = new Label();
+                    label.setText(pos + "° position: "); // + player.getNickname()
+                    leaderbord.add(label, i, 0);
+                }
+            }
+        }
+    }
+/*
+    public void printWinner(){
+
+        winnerLabel = new Label();
+        winnerLabel.setText("!"); // gameControllerGUI.getWinner().getNickname() +
+    }
+
+    public List<Player> getLeaderbord(){
+        return list;
+    }*/
+    public String getWinner(){
+        return winner;
+    }
+
 }
 
 
