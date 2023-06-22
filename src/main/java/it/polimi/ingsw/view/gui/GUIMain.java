@@ -44,16 +44,17 @@ public class GUIMain extends Application implements View {
         launch(args);
     }
 /*
-    public void exit(){
+    public void exit() {
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Exit the game");
         alert.setHeaderText("You are about to exit the game");
         alert.setContentText("Are you sure?");
 
-        if(alert.showAndWait().get() == ButtonType.OK){
+        if (alert.showAndWait().get() == ButtonType.OK) {
             Stage stage = (Stage) scenePane.getScene().getWindow();
             stage.close();
+
         }
     }
 */

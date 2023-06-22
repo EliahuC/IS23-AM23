@@ -452,14 +452,14 @@ public class GameControllerGUI {
         if (getCurrentIstance().getPlayer().getNickName().equals(getCurrentIstance().getPlayers().
                 get(getCurrentIstance().getCurrPlaying() - 1).getNickName())) {
             while (true) {
-                while(!getCurrentIstance().getEndSelection()) {
+                //while(!getCurrentIstance().getendSelection()) {
                     if ((getCurrentIstance().getRowIndex() != null) && (getCurrentIstance().getColumnIndex() != null)) {
-                        coordinates.add(Integer.toString(getCurrentIstance().getRowIndex()));            //WHILE INTERNO RIGA 545 E 546
+                        coordinates.add(Integer.toString((getCurrentIstance().getRowIndex())));
                         coordinates.add(Integer.toString(getCurrentIstance().getColumnIndex()));
                         columnIndex = null;
                         rowIndex = null;
                     }
-                }
+                //}
                 switch (coordinates.size()) {
                     case 2 -> command = "/SELECT" + "\t" + coordinates.get(0) + "\t" + coordinates.get(1);
                     case 4 -> command = "/SELECT" + "\t" + coordinates.get(0) + "\t" + coordinates.get(1) +
@@ -615,7 +615,7 @@ public class GameControllerGUI {
     public Integer getBcolumn() {
         return Bcolumn;
     }
-    public boolean getEndSelection(){
+    public boolean getendSelection(){
         return endSelection;
     }
 
