@@ -45,8 +45,8 @@ public class Server implements Printer {
             int i=0;
             while (true){
 
-                String path="../Savings"+"/Lobby"+i+".json"; //TODO abilitare durante la creazione del JAR
-                //String path="Savings"+"/Lobby"+i+".json";
+                //String path="../Savings"+"/Lobby"+i+".json"; //TODO abilitare durante la creazione del JAR
+                String path="Savings"+"/Lobby"+i+".json";
                 reader= Files.newBufferedReader(Paths.get(path));
                 savings=gson.fromJson(reader, Savings.class);
                 Lobby lobby=savings.getLobby();
