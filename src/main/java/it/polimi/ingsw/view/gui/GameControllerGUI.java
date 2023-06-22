@@ -78,6 +78,8 @@ public class GameControllerGUI {
     private Boolean flag = true;
     private Integer rowIndex=null;
     private Integer columnIndex=null;
+    private boolean endSelection=false;
+    private Integer Bcolumn;
 
     public void displayScene() throws IOException {
         if (instance()) {
@@ -367,41 +369,9 @@ public class GameControllerGUI {
         return player;
     }
 
-    public List<Player> getPlayersList() {
-        return players;
-    }
 
-/*
-    private void displayBookshelfOrder() {
-        Scanner input = new Scanner(System.in);
-        System.out.print("YOUR BOOKSHELF\n");
-        //player.getPlayerBookshelf().print();
-        System.out.print("ORDER YOUR TILES! The tiles you picked before from the board are shown above.\n" +
-                "Use the command /ORDER to choose in which order you want to insert the tiles in your bookshelf.\n\n" +
-                "For example: if you have three tiles to order, you could write: /ORDER 2 1 3 or /ORDER 3 2 1\n" +
-                "(If you have just one picked tile, just type: /ORDER 1\n\n" +
-                "[Use the command /GOALS to see the description of your personal or common goal cards.]\n");
-        printSelection();
-        while (true) {
-            String command = input.nextLine();
-            if (Objects.equals(command.toUpperCase(), "/GOALS")) {
-                //displayGoals("BookshelfOrder");
-                break;
-            }
-            Message message = MoveSerializer.serializeInput(command);
-            connectionClient.sendMessage((ClientMessage) message);
-            try {
-                TimeUnit.MILLISECONDS.sleep(200);
-            } catch (InterruptedException iE) {
-                iE.printStackTrace();
-            }
-            if (response != null && response.getCategory() == Message.MessageCategory.VALID_MESSAGE)
-                break;
-            System.out.print("You didn't choose the order appropriately. Please, retry.\n");
-        }
-    }
 
-    private void displayBookshelfColumn() {
+    /*private void displayBookshelfColumn() {
         Scanner input = new Scanner(System.in);
         System.out.print("YOUR BOOKSHELF\n");
         //player.getPlayerBookshelf().print();
@@ -456,14 +426,15 @@ public class GameControllerGUI {
         ClientMessage message = null;
         displayScene();
         if (getCurrentIstance().getPlayer().getNickName().equals(getCurrentIstance().getPlayers().
-                get(currPlaying - 1).getNickName())) {
+                get(getCurrentIstance().getCurrPlaying() - 1).getNickName())) {
             while (true) {
-                //FINTANTOCHE' NON VIENE PREMUTA LA FRECCIA
-                if((rowIndex!=null)&&(columnIndex!=null)) {
-                    coordinates.add(Integer.toString(rowIndex));            //WHILE INTERNO RIGA 545 E 546
-                    coordinates.add(Integer.toString(columnIndex));
-                    columnIndex = null;
-                    rowIndex = null;
+                while(!getCurrentIstance().getEndSelection()) {
+                    if ((getCurrentIstance().getRowIndex() != null) && (getCurrentIstance().getColumnIndex() != null)) {
+                        coordinates.add(Integer.toString(getCurrentIstance().getRowIndex()));            //WHILE INTERNO RIGA 545 E 546
+                        coordinates.add(Integer.toString(getCurrentIstance().getColumnIndex()));
+                        columnIndex = null;
+                        rowIndex = null;
+                    }
                 }
                 switch (coordinates.size()) {
                     case 2 -> command = "/SELECT" + "\t" + coordinates.get(0) + "\t" + coordinates.get(1);
@@ -585,6 +556,43 @@ public class GameControllerGUI {
 
     public String getWinner(){
         return winner;
+    }
+
+    public int getCurrPlaying() {
+        return currPlaying;
+    }
+
+    public Integer getRowIndex() {
+        return rowIndex;
+    }
+
+    public Integer getColumnIndex() {
+        return columnIndex;
+    }
+
+    public boolean isEndSelection() {
+        return endSelection;
+    }
+    public void setOnArrowclicked(){
+        ObservableList<Node> children = myGridPane_columns.getChildren();
+        for(Node node : children){
+            if(node instanceof ImageView){
+                ImageView imageView = (ImageView) node;
+                imageView.setOnMouseClicked(event ->{
+                   Bcolumn = myGridPane_columns.getColumnIndex(imageView);
+                });
+            }
+        }
+    }
+    public void Endselection(ActionEvent event){
+        endSelection=true;
+    }
+
+    public Integer getBcolumn() {
+        return Bcolumn;
+    }
+    public boolean getEndSelection(){
+        return endSelection;
     }
 
 }
