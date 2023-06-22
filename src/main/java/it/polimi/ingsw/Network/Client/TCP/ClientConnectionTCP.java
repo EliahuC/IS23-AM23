@@ -114,7 +114,6 @@ public class ClientConnectionTCP extends ConnectionClient {
         output.flush();
     }
 
-
     private void sendPing() throws InterruptedException {
         PingToServer ping=new PingToServer(playerName);
         sendMessage(ping);

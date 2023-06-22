@@ -35,7 +35,7 @@ public class TCPServerMain extends Server implements Runnable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        showMessage("TCP server is ready on port: " + port);
+        showMessage("Socket server is ready on port: " + port);
 
         //Client Connection
         while(true){
