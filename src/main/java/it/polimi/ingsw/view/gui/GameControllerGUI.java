@@ -67,6 +67,10 @@ public class GameControllerGUI {
     @FXML
     GridPane myGridPane_lr;
     @FXML
+    GridPane bsImage;
+    @FXML
+    GridPane myGridPane_columns;
+    @FXML
     GridPane myGridPane_container;
     @FXML
     GridPane myGridPane_bs;
@@ -124,6 +128,34 @@ public class GameControllerGUI {
                 }
             }
 
+        bsImage = new GridPane();
+        ImageView view = new ImageView();
+        File file_bs = new File("/com/example/is23am23/bookshelf.png");
+        image = new Image(String.valueOf(file_bs));
+        view.setImage(image);
+        view.setFitWidth(240);
+        view.setFitHeight(240);
+        bsImage.setLayoutX(360);
+        bsImage.setLayoutY(146);
+        bsImage.add(view, 0, 0);
+
+
+        myGridPane_columns = new GridPane();
+        for (int i = 0; i < 5; i++) {
+            ImageView imageView = new ImageView();
+
+            //IMMAGINE FRECCIA DA INSERIRE
+            File file = new File("/com/example/is23am23/arrow_icon.png");
+            image = new Image(String.valueOf(file));
+            imageView.setImage(image);
+            imageView.setFitWidth(33);
+            imageView.setFitHeight(33);
+            myGridPane_columns.setLayoutX(385);
+            myGridPane_columns.setLayoutY(105);
+            myGridPane_columns.add(imageView, i, 0);
+            GridPane.setMargin(imageView, new Insets(2));
+        }
+
 
             //MANCA IL RIFERIMENTO ALLE TESSERE GIA' PRESE(PER ORA IMMAGINI IMPOSTATE)
             myGridPane_container = new GridPane();
@@ -148,6 +180,8 @@ public class GameControllerGUI {
         root.getChildren().add(myGridPane_lr);
         root.getChildren().add(myGridPane_bs);
         root.getChildren().add(myGridPane_container);
+        root.getChildren().add(bsImage);
+        root.getChildren().add(myGridPane_columns);
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
