@@ -19,6 +19,9 @@ import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -148,7 +151,7 @@ public class GameControllerGUI {
             ImageView imageView = new ImageView();
 
             //IMMAGINE FRECCIA DA INSERIRE
-            File file = new File("/com/example/is23am23/arrow_icon.png");
+            File file = new File("/com/example/is23am23/arrow_image.png");
             image = new Image(String.valueOf(file));
             imageView.setImage(image);
             imageView.setFitWidth(33);
@@ -255,15 +258,22 @@ public class GameControllerGUI {
 
     public void returnToMenu(ActionEvent event) throws IOException {
 
-        File file = new File("src/main/resources/com/example/is23am23/menu.fxml");
-        URL url = file.toURI().toURL();
-        FXMLLoader loader = new FXMLLoader(url);
-        Parent root = loader.load();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Return to menu");
+        alert.setHeaderText("You are about to return to the menu");
+        alert.setContentText("Are you sure?");
 
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        if (alert.showAndWait().get() == ButtonType.OK) {
+            File file = new File("src/main/resources/com/example/is23am23/menu.fxml");
+            URL url = file.toURI().toURL();
+            FXMLLoader loader = new FXMLLoader(url);
+            Parent root = loader.load();
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+            currentIstance.getConnectionClient().closeConnection();
+        }
     }
 
     public void setResponse(ServerMessage response) {
@@ -335,26 +345,6 @@ public class GameControllerGUI {
     public void setWinner(String winner) {
         this.winner = winner;
     }
-/*
-    public void start(){
-        while(true){
-            if(player.getNickName()==currentPlayer || player.getNickName()==players.get(currPlaying).getNickName()) {
-                displayBoard();
-                displayBookshelfOrder();
-                displayBookshelfColumn();
-                try {
-                    TimeUnit.MILLISECONDS.sleep(200);
-                } catch (InterruptedException iE) {
-                    iE.printStackTrace();
-                }
-                if (response != null && response.getCategory() == Message.MessageCategory.END_GAME_MESSAGE)
-                    break;
-                waiting();
-            }else
-                waiting();
-        }
-        displayEnd();
-    }*/
 
     private void waiting() {
         System.out.print("It's not your turn, yet. Wait for other players to finish their turn.\n\n");
@@ -386,50 +376,6 @@ public class GameControllerGUI {
         return players;
     }
 
-    private void displayBoard() {
-        System.out.print("LIVING BOARD\n");
-        //livingRoom.print();
-        try {
-            TimeUnit.MILLISECONDS.sleep(200);
-        } catch (InterruptedException iE) {
-            iE.printStackTrace();
-        }
-        System.out.print("\n\nPICK YOUR TILES! You can choose one, two or three tiles: use the command /SELECT\n" +
-                "writing respectively the row's coordinate and the column's coordinate.\n" +
-                "You must know that you can only pick adjacent tiles that are in the same row or in the same column,\n" +
-                "plus you can only choose external tiles!\n\n" +
-                "For example, to pick the two tiles in 8,5 and in 8,4, the right command is:\n" +
-                "/SELECT 8 5 8 4\n\n" +
-                "[Use the command /BOOKSHELF to see your personal bookshelf.]\n" +
-                "[Use the command /GOALS to see the description of your personal or common goal cards.]\n");
-        Scanner input = new Scanner(System.in);
-        while (true) {
-            String command = input.nextLine();
-            if (Objects.equals(command.toUpperCase(), "/GOALS")) {
-                //displayGoals("Living Board");
-                break;
-            }
-            if (Objects.equals(command.toUpperCase(), "/BOOKSHELF")) {
-                //displayBookshelf();
-                break;
-            }
-            ClientMessage message = (ClientMessage) MoveSerializer.serializeInput(command);
-            connectionClient.sendMessage((ClientMessage) message);
-            try {
-                TimeUnit.MILLISECONDS.sleep(200);
-            } catch (InterruptedException iE) {
-                iE.printStackTrace();
-            }
-            if (response != null && response.getCategory() == Message.MessageCategory.VALID_MESSAGE) {
-                for (int i = 1; command.split(" ")[i] != null; i += 2)
-                    tiles.add(livingRoom.getBoardTile(i, i + 1).getTile());
-                break;
-            }
-            System.out.print("Your move is not valid. Please, pick again and correctly your tiles.\n" +
-                    "[You can still see your goal cards, using the command /GOALS, or your personal bookshelf using /BOOKSHELF]\n");
-        }
-    }
-
     private void displayEnd() {
         System.out.print("THE WINNER IS: " + winner + "\n");
         List<Player> ranking = players.stream().sorted(Comparator.comparingInt(Player::getScore)).toList();
@@ -439,7 +385,7 @@ public class GameControllerGUI {
             }
         }
     }
-
+/*
     private void displayBookshelfOrder() {
         Scanner input = new Scanner(System.in);
         System.out.print("YOUR BOOKSHELF\n");
@@ -495,21 +441,7 @@ public class GameControllerGUI {
             System.out.print("The chosen column is too full. Please, choose another one.\n");
         }
     }
-
-    /*private void displayBookshelf(){
-        Scanner input = new Scanner(System.in);
-        String command;
-        System.out.print("YOUR BOOKSHELF\n\n");
-        //player.getPlayerBookshelf().print();
-        System.out.print("\n\n[If you want to come back to the previous screen, use the command /BACK]\n");
-        while (true){
-            command = input.nextLine();
-            if(Objects.equals(command.toUpperCase(), "/BACK"))
-                break;
-            System.out.print("Please, use the /BACK command correctly.\n");
-        }
-        displayBoard();
-    }*/
+*/
 
     private void printSelection() {
         for (int i = 0; tiles.get(i) != null; i++)
@@ -645,6 +577,54 @@ public class GameControllerGUI {
     public void setFirstTime(boolean firstTime) {
         this.firstTime = firstTime;
     }
+
+    private void printLeaderbord(){
+
+        GridPane leaderbord = new GridPane();
+        int numPlayers = currentIstance.getPlayers().size();
+        int pos = 0;
+
+        switch (numPlayers) {
+            case 2: {
+                for (int i = 0; i < 2; i++) {
+                    pos = i + 2;
+                    Label label = new Label();
+                    label.setText(pos + "° position: "); // + player.getNickname()
+                    leaderbord.add(label, i, 0);
+                }
+            }
+            case 3: {
+                for (int i = 0; i < 3; i++) {
+                    pos = i + 2;
+                    Label label = new Label();
+                    label.setText(pos + "° position: "); // + player.getNickname()
+                    leaderbord.add(label, i, 0);
+                }
+            }
+            case 4: {
+                for (int i = 0; i < 4; i++) {
+                    pos = i + 2;
+                    Label label = new Label();
+                    label.setText(pos + "° position: "); // + player.getNickname()
+                    leaderbord.add(label, i, 0);
+                }
+            }
+        }
+    }
+/*
+    public void printWinner(){
+
+        winnerLabel = new Label();
+        winnerLabel.setText("!"); // gameControllerGUI.getWinner().getNickname() +
+    }
+
+    public List<Player> getLeaderbord(){
+        return list;
+    }*/
+    public String getWinner(){
+        return winner;
+    }
+
 }
 
 
