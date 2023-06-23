@@ -1,7 +1,10 @@
 package it.polimi.ingsw.model.player;
 
+import com.google.gson.Gson;
 import it.polimi.ingsw.model.board.ItemTile;
 import junit.framework.TestCase;
+
+import java.util.HashMap;
 
 public class PersonalGoalCardTest extends TestCase {
 
@@ -87,6 +90,18 @@ public class PersonalGoalCardTest extends TestCase {
         b.setTile(3, 1, new ItemTile("GAMES"));
         b.setTile(5, 2, new ItemTile("TROPHIES"));
         assertEquals(12, PG1.CheckGoal(b));
+        HashMap<Pair, ItemTile> arg = new HashMap<>();
+        PG1 = new PersonalGoalCard(new HashMap<Pair, ItemTile>(), 2);
+        arg=PG1.getGoal();
+        PG1.equals(arg);
+        PG1.setCompleted(1);
+        int x = PG1.getCompleted();
+        PG1.setCompleted(x);
+        PG1.setPoints(2);
+        x=PG1.getPoints();
+        PG1.setPoints(x);
+        x=PG1.getNumeroCarta();
+        String s = PG1.toJson();
     }
 
     public void testCheckGoalPGC2_0() {

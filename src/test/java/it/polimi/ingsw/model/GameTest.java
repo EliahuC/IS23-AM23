@@ -3,6 +3,8 @@ package it.polimi.ingsw.model;
 import it.polimi.ingsw.Launcher;
 import it.polimi.ingsw.Network.Server.VirtualView;
 import it.polimi.ingsw.model.board.ItemTile;
+import it.polimi.ingsw.model.board.LivingRoom;
+import it.polimi.ingsw.model.player.BookShelf;
 import it.polimi.ingsw.model.player.PersonalGoalCard;
 import it.polimi.ingsw.model.player.Player;
 import junit.framework.TestCase;
@@ -22,9 +24,14 @@ public class GameTest extends TestCase {
             p1.setListener(new VirtualView(null,"Tom"));
             p2.setListener(new VirtualView(null,"Jerry"));
             Game G = new Game(L,L.getPlayers());
+            Game j = new Game(L.getPlayers());
+            j=G;
             G.startGame();
+            j.startGame();
             G.getLivingRoom().getCommonGoalCard1().print();
             assertTrue(G.isStartedGame());
+            j.getLivingRoom().getCommonGoalCard1().print();
+            assertTrue(j.isStartedGame());
         }
         public void testStartGameG_SECOND(){        //PLAYER IN FIRST POSITION IN L.getPlayers (after calling startGame()
             //method that mix the list changing the order of players) ACHIEVES
@@ -114,6 +121,37 @@ public class GameTest extends TestCase {
             G.playMove(CoordinatesTiles, 3, OrderTiles);
             assertEquals(i, G.getPlayers().get(0).getPlayerBookshelf().getTile(5, 3));
             assertEquals(it, G.getPlayers().get(0).getPlayerBookshelf().getTile(4, 3));
+            BookShelf bs = new BookShelf();
+            ItemTile t = new ItemTile("CATS");
+            for(int x=5; x>2; x--){
+                for(int j=0; j<5; j++)
+                    bs.setTile(x,j,t);
+            }
+            bs.setTile(2,0,t);
+            bs.setTile(2,1,t);
+            bs.setTile(2,2,t);
+            bs.setTile(2,3,t);
+            bs.setTile(2,4,t);
+            bs.setTile(1,0,t);
+            bs.setTile(1,1,t);
+            bs.setTile(1,2,t);
+            bs.setTile(1,3,t);
+            bs.setTile(1,4,t);
+
+            G.getGameChecker().checkColumnCapability(bs);
+            G.getGameChecker().isBookShelfFull(bs);
+            CoordinatesTiles.clear();
+            CoordinatesTiles.add(8);
+            CoordinatesTiles.add(5);
+            OrderTiles.clear();
+            OrderTiles.add(1);
+            G.setCurrPlaying(4);
+            G.setFinishedGame(true);
+            G.playMove(CoordinatesTiles, 1, OrderTiles);
+            assertNotSame(t, G.getPlayers().get(3).getPlayerBookshelf().getTile(0, 1));
+            G.terminateGame();
+            ArrayList<Player> players = new ArrayList<>();
+            players = G.getDisconnectedPlayers();
         }
         public void testPlayMove_THIRD(){       //ONE MOVE BUT DIFFERENT INSERT ORDER
             Player p1 = new Player("Tom");
@@ -189,6 +227,9 @@ public class GameTest extends TestCase {
             G.playMove(CoordinatesTiles,2,OrderTiles);
             assertEquals(i,G.getPlayers().get(1).getPlayerBookshelf().getTile(5,2));
             assertEquals(it,G.getPlayers().get(1).getPlayerBookshelf().getTile(4,2));
+            G.setLivingRoom(new LivingRoom(new Launcher()));
+            G.setPlayers(new ArrayList<>());
+            G.setStartedGame(false);
         }
         public void testPlayMove_FIFTH(){           //THREE MOVES
             Player p1 = new Player("Tom");
@@ -616,6 +657,8 @@ public class GameTest extends TestCase {
         Coordinates.add(4);
         GC.checkColumnCapability(G.getPlayers().get(0).getPlayerBookshelf());
         assertFalse(G.checkLegalMove(Coordinates,Coordinates.size()/2));
+        assertNotNull(G.getGameChecker());
+        assertNotNull(G.getListeners());
     }
     public void testCheckLegalMove_SECOND() {
         Player y = new Player("Yoda");

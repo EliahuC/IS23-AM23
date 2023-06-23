@@ -20,9 +20,11 @@ public class GameCheckerTest extends TestCase {
         //At the moment, there's only one tile on the board. So the board must be restored!
         board.putTile(4,4);
         assertTrue(gc.isRestorable(board.getBoard()));
+        assertTrue(gc.getRestorable());
         //Now, there are two adjacent tiles on the board. Restoring is not necessary anymore.
         board.putTile(4,5);
         assertFalse(gc.isRestorable(board.getBoard()));
+        assertFalse(gc.getRestorable());
     }
 
     public void testCheckColumnCapability() {
@@ -43,6 +45,7 @@ public class GameCheckerTest extends TestCase {
         assertTrue(bs.getMaxPickableTiles()[3]==3);
         assertTrue(bs.getMaxPickableTiles()[4]==3);
         assertTrue(gc.getMaxPickableTiles(bs)==3);
+        assertTrue(gc.getMaxPickableTiles()==3);
         gc.isBookShelfFull(bs);
         assertFalse(gc.getLastRound());
         //Adding one tile per time to the fourth row of the bookshelf.
@@ -250,6 +253,7 @@ public class GameCheckerTest extends TestCase {
         assertFalse(gc4.isLegalAction(board4.getBoardTile(5,3)));
         assertTrue(gc4.isLegalAction(board4.getBoardTile(7,5)));
         assertTrue(gc4.isLegalAction(board4.getBoardTile(5,1)));
+        assertTrue(gc4.getLegalSelection());
 
         board3.start(3);
         assertFalse(gc3.isLegalAction(board3.getBoardTile(8,4)));

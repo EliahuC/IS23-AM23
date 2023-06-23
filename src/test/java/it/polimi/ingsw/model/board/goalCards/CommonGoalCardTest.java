@@ -80,6 +80,9 @@ public class CommonGoalCardTest
         c9.increaseNumCompleted();
         c9.increaseNumCompleted();
         assertEquals(6,c9.getPoints());
+        CGCKey x = new CGCKey(c9, 9);
+        x.setCommonGoalCard(c9);
+        x.setId(9);
     }
 
     public void testGetPoints5(){
@@ -104,6 +107,7 @@ public class CommonGoalCardTest
         c12.increaseNumCompleted();
         c12.increaseNumCompleted();
         assertEquals(6,c12.getPoints());
+        c12.setPoints(2);
     }
 
     public void testGetPoints8(){

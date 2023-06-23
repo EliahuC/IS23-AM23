@@ -1,6 +1,8 @@
 package it.polimi.ingsw.model.board;
 
 import it.polimi.ingsw.Launcher;
+import it.polimi.ingsw.model.GameChecker;
+import it.polimi.ingsw.model.board.goalCards.CommonGoalCard;
 import junit.framework.TestCase;
 
 import java.util.ArrayList;
@@ -119,6 +121,9 @@ public class LivingRoomTest extends TestCase {
         L2 = new LivingRoom(L);
         L2.putTile(1, 5);
         assertNull(L2.getBoard()[1][5].getTile());
+        EndGameToken w = new EndGameToken(1);
+        ScoringToken st = new ScoringToken(1);
+        int amount = st.getPoints();
     }
 
     public void testPutTile3() {         //two players, BoardTokenCategory "UNAVAILABLE
@@ -191,6 +196,8 @@ public class LivingRoomTest extends TestCase {
         L10 = new LivingRoom(L);
         L10.putTile(1, 5);
         assertNotNull(L10.getBoard()[1][5].getTile());
+        L10.restore();
+        L10.getPointsCGD1();
     }
 
     public void testPutTile11() {         //four players, BoardTokenCategory "UNAVAILABLE
@@ -209,6 +216,8 @@ public class LivingRoomTest extends TestCase {
         L12 = new LivingRoom(L);
         L12.putTile(4, 3);
         assertNotNull(L12.getBoard()[4][3].getTile());
+        L12.getPointsCGD2();
+        L12.getBag();
     }
 
     public void testNullTileAfterExtraction_FIRST() {    //AFTER A PLAYER'S LEGAL MOVE, TAKING AN ITEM TILE FROM THE LIVINGROOM,
@@ -236,6 +245,8 @@ public class LivingRoomTest extends TestCase {
         CoordinatesTiles.add(5);
         L14.getTiles(CoordinatesTiles);
         assertNotNull(L14.getBoardTile(6, 4).getTile());
+        L14.getListener();
+        L14.setLauncher(new Launcher());
     }
 
     public void testNullTileAfterExtraction_THIRD() {       //AFTER A PLAYER'S LEGAL MOVE, TAKING TWO ITEM TILES FROM THE
@@ -252,6 +263,12 @@ public class LivingRoomTest extends TestCase {
         L15.getTiles(CoordinatesTiles);
         assertNull(L15.getBoardTile(8, 5).getTile());
         assertNull(L15.getBoardTile(8, 4).getTile());
+        L15.setGameChecker(new GameChecker(new Launcher()));
+        L15.setCommonGoalCard1(new CommonGoalCard(1));
+        L15.setIdCGC1(1);
+        L15.setCommonGoalCard2(new CommonGoalCard(2));
+        L15.setIdCGC2(2);
+        L15.setBoard(new BoardToken[][]{});
     }
     public void testNullTileAfterExtraction_FOURTH() {   //AFTER A PLAYER'S LEGAL MOVE, TAKING THREE ITEM TILES FROM THE
         LivingRoom L17;                                     //LIVINGROOM, TILES' REFERENCES ARE SETTED TO NULL

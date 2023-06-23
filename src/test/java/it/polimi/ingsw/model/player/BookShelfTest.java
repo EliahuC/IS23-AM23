@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model.player;
 
 import it.polimi.ingsw.model.board.ItemTile;
+import it.polimi.ingsw.model.board.ItemTileCategory;
 import junit.framework.TestCase;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -146,6 +147,9 @@ public class BookShelfTest extends TestCase {
         B.setTile(5,4,new ItemTile("BOOKS"));
         B.AdjacentScore();
         assertEquals(8,B.getPoints());
+        ItemTileCategory t = B.getCategory();
+        B.setCommonGoalCard1Completed(false);
+        B.setCommonGoalCard2Completed(true);
     }
     public void testAdjacentScore_FIFTH(){         //EXAMPLE 5
         BookShelf B = new BookShelf();

@@ -156,5 +156,11 @@ public class PlayerTest extends TestCase {
         p2.setPersonalGoalCard(new PersonalGoalCard(12));
         p2.endGamePoints();
         assertEquals(30,p2.getScore());
+        Pair x = new Pair(0,0);
+        x.setX(4);
+        x.setY(3);
+        assertFalse(p.isNowPlaying());
+        assertFalse(p.getNowPlaying());
+        assertFalse(p.isLastRound());
     }
 }

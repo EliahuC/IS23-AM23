@@ -185,10 +185,6 @@ public class GameChecker {
         isYourTurn = p.getNowPlaying();
     }*/
 
-    public boolean GetIsYourTurn() {
-        return isYourTurn;
-    }
-
     /**
      * @author Simone Controguerra
      * @param t is the board's space hosting the tile chosen by the player
