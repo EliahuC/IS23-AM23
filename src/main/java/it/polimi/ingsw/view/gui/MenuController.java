@@ -49,6 +49,7 @@ public class MenuController {
                 lobbyController.displayNickname(nickname);
                 lobbyController.setConnection(connectionClient);
                 lobbyController.setReceiver(receiver);
+                loadGameFXML();
                 stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 scene = new Scene(root);
                 stage.setScene(scene);
@@ -146,7 +147,7 @@ public class MenuController {
                 lobbyController.displayNickname(nickname);
                 lobbyController.setConnection(connectionClient);
                 lobbyController.setReceiver(receiver);
-
+                loadGameFXML();
                 stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 scene = new Scene(root);
                 stage.setScene(scene);
@@ -155,7 +156,17 @@ public class MenuController {
         }
     }
 
-
+    private void loadGameFXML() throws IOException {
+        File game = new File("src/main/resources/com/example/is23am23/game.fxml");
+        URL urlGame = game.toURI().toURL();
+        FXMLLoader loaderGame = new FXMLLoader(urlGame);
+        AnchorPane rootGame=loaderGame.getRoot();
+        GameControllerGUI gameControllerGUI = loaderGame.getController();
+        gameControllerGUI.setConnectionClient(connectionClient);
+        receiver.setGamecontrollerGUI(gameControllerGUI);
+        gameControllerGUI.setReceiver(receiver);
+        gameControllerGUI.setRoot(loaderGame);
+    }
 
     public void setResponse(ServerMessage response) {
         this.response = response;

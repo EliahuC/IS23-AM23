@@ -23,7 +23,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
@@ -194,16 +193,7 @@ public class GameControllerGUI {
             GridPane.setMargin(imageView, new Insets(5));
         }
 
-        File file = new File("src/main/resources/com/example/is23am23/game.fxml");
-        URL url = file.toURI().toURL();
-        FXMLLoader loader = new FXMLLoader(url);
-        AnchorPane root = loader.load();
-        root.getChildren().add(myGridPane_lr);
-        root.getChildren().add(myGridPane_bs);
-        root.getChildren().add(myGridPane_container);
-        root.getChildren().add(bsImage);
-        root.getChildren().add(myGridPane_columns);
-        root.getChildren().add(myGridPane_choice);
+
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setTitle("My Shelfie");
@@ -646,6 +636,10 @@ public class GameControllerGUI {
     }
     public boolean getendSelection(){
         return endSelection;
+    }
+
+    public void setRoot(FXMLLoader rootGame) throws IOException {
+        root=rootGame.load();
     }
     /*public void pickTiles(ArrayList<String> coordinates){
          if(getCurrentIstance().getPlayer().getNickName().equals(getCurrentIstance().getPlayers().
