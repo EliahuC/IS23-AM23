@@ -1,4 +1,3 @@
-/*
 package it.polimi.ingsw.view.gui;
 
 import it.polimi.ingsw.Messages.ClientToServer.ClientMessage;
@@ -395,9 +394,6 @@ public class GameControllerGUI {
         return player;
     }
 
-
-
-    */
 /*private void displayBookshelfColumn() {
         Scanner input = new Scanner(System.in);
         System.out.print("YOUR BOOKSHELF\n");
@@ -424,7 +420,7 @@ public class GameControllerGUI {
             System.out.print("The chosen column is too full. Please, choose another one.\n");
         }
     }
-*//*
+*/
 
 
     private void printSelection() {
@@ -448,7 +444,7 @@ public class GameControllerGUI {
         this.receiver = receiver;
     }
 
-    */
+
 /*public void startGame() throws IOException {
         ArrayList<String> coordinates = new ArrayList<>();
         String command = null;
@@ -488,10 +484,7 @@ public class GameControllerGUI {
             cleanTiles(coordinates);
         }
     //INSERIRE LE TESSERE NELLA BOOKSHELF SCEGLIENDO LA COLONNA CON LA FRECCIA
-    }*//*
-
-
-
+    }*/
 
     public Integer getSeed() {
         return seed;
@@ -646,28 +639,25 @@ public class GameControllerGUI {
         }
     }
 
+    /*public void setRoot(FXMLLoader rootGame) throws IOException {
+        root=rootGame.load();
+    }*/
+
     public Integer getBcolumn() {
         return Bcolumn;
     }
     public boolean getendSelection(){
         return endSelection;
     }
-    */
-/*public void pickTiles(ArrayList<String> coordinates){
+
+    public void pickTiles(ArrayList<String> coordinates){
          if(getCurrentIstance().getPlayer().getNickName().equals(getCurrentIstance().getPlayers().
                  get(getCurrentIstance().getCurrPlaying()-1).getNickName())){
              while(!getCurrentIstance().getendSelection()){
                  if((getCurrentIstance().getRowIndex()!=null)&&(getCurrentIstance().getColumnIndex()!=null)){
-                     coordinates.add()
+                     //coordinates.add();
                  }
              }
          }
-    }*//*
-
-
+    }
 }
-
-
-
-
-*/
