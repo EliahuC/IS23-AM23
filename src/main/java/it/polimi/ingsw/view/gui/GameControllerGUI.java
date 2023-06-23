@@ -21,12 +21,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+import javax.swing.text.Style;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -62,6 +65,10 @@ public class GameControllerGUI {
     private boolean firstTime = true;
     private CommonGoalCard commonGoalCard1;
     private CommonGoalCard commonGoalCard2;
+    @FXML
+    GridPane myGridpane_turn;
+    @FXML
+    GridPane myGridpane_me;
     @FXML
     GridPane myGridPane_choice;
     @FXML
@@ -145,6 +152,24 @@ public class GameControllerGUI {
         bsImage.add(view, 0, 0);
 
 
+        myGridpane_turn = new GridPane();
+        Label label = new Label();
+        label.setText("Now playing: " + currentPlayer);
+        label.setFont(new Font(15));
+        myGridpane_turn.setLayoutX(14);
+        myGridpane_turn.setLayoutY(16);
+        myGridpane_turn.add(label, 0, 0);
+
+
+        myGridpane_me = new GridPane();
+        Label labelMe = new Label();
+        labelMe.setText("Now playing: " + currentPlayer);
+        labelMe.setFont(new Font(15));
+        myGridpane_me.setLayoutX(14);
+        myGridpane_me.setLayoutY(16);
+        myGridpane_me.add(labelMe, 0, 0);
+
+
         myGridPane_columns = new GridPane();
         for (int i = 0; i < 5; i++) {
             ImageView imageView = new ImageView();
@@ -206,6 +231,8 @@ public class GameControllerGUI {
         root.getChildren().add(bsImage);
         root.getChildren().add(myGridPane_columns);
         root.getChildren().add(myGridPane_choice);
+        root.getChildren().add(myGridpane_turn);
+        root.getChildren().add(myGridpane_me);
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setTitle("My Shelfie");

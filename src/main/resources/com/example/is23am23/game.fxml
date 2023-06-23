@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane fx:id="myAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.gui.GameControllerGUI">
+<AnchorPane fx:id="myAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.gui.GameControllerGUI">
     <children>
         <ImageView fitHeight="400.0" fitWidth="600.0" pickOnBounds="true">
             <image>
@@ -21,8 +21,7 @@
                 <Image url="@livingroom.png" />
             </image>
         </ImageView>
-        <Button layoutX="14.0" layoutY="15.0" mnemonicParsing="false" text="Next Player" />
-        <Button layoutX="107.0" layoutY="15.0" mnemonicParsing="false" onAction="#Endselection" prefHeight="25.0" prefWidth="77.0" text="Enter" />
+        <Button layoutX="238.0" layoutY="15.0" mnemonicParsing="false" onAction="#Endselection" prefHeight="26.0" prefWidth="52.0" text="Enter" />
         <Button layoutX="300.0" layoutY="14.0" mnemonicParsing="false" onAction="#goToGoals" prefHeight="26.0" prefWidth="52.0" text="Goals" />
         <Button layoutX="534.0" layoutY="15.0" mnemonicParsing="false" onAction="#returnToMenu" text="Quit" />
       <GridPane fx:id="myGridPane_container" gridLinesVisible="true" layoutX="384.0" layoutY="66.0" prefHeight="27.0" prefWidth="94.0">
@@ -110,6 +109,22 @@
         <rowConstraints>
           <RowConstraints fillHeight="false" maxHeight="20.0" minHeight="20.0" percentHeight="0.0" prefHeight="20.0" vgrow="SOMETIMES" />
         </rowConstraints>
+      </GridPane>
+      <GridPane fx:id="myGridpane_turn" layoutX="14.0" layoutY="16.0" prefHeight="26.0" prefWidth="178.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+      </GridPane>
+      <GridPane fx:id="myGridpane_me" layoutX="384.0" layoutY="14.0" prefHeight="26.0" prefWidth="128.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
       </GridPane>
     </children>
 </AnchorPane>

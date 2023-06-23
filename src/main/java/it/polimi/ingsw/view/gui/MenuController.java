@@ -65,7 +65,7 @@ public class MenuController {
             receiver.setInStartGUI(true);
             serverAddr = Settings.SERVER_NAME;
             portNum = Settings.PORT;
-            socket = new Socket("127.0.0.1", portNum);
+            socket = new Socket(serverAddr, portNum);
             connectionClient = new ClientConnectionTCP(socket, nickname);
             connectionClient.setListener(receiver);
             new Thread(connectionClient).start();
