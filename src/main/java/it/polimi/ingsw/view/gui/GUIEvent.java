@@ -80,7 +80,11 @@ public class GUIEvent implements PropertyChangeListener {
                     case END_GAME_MESSAGE:
                         EndGameMessage temp_endGameMessage = (EndGameMessage) serverMessage;
                         //gamecontrollerGUI.setWinner(temp_endGameMessage.getWinner().getNickName()); MANCA METODO GETWINNER()
-                        //gamecontrollerGUI.goToResults();
+                        try {
+                            gamecontrollerGUI.goToResults();
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
                         break;
                 }
             });

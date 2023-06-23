@@ -11,6 +11,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -54,6 +56,22 @@ public class MenuController {
                 scene = new Scene(root);
                 stage.setScene(scene);
                 stage.show();
+            }
+            else{
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("CONNECTION ERROR");
+                alert.setHeaderText("Unable to connect to the server, check your connection!");
+                if (alert.showAndWait().get() == ButtonType.OK) {
+
+                }
+            }
+        }
+        else{
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("INVALID NICKNAME");
+            alert.setHeaderText("You forgot to insert your nickname!");
+            if (alert.showAndWait().get() == ButtonType.OK) {
+
             }
         }
     }
@@ -153,6 +171,23 @@ public class MenuController {
                 scene = new Scene(root);
                 stage.setScene(scene);
                 stage.show();
+            }
+            else{
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("CONNECTION ERROR");
+                alert.setHeaderText("Unable to connect to the server, check your connection!");
+                if (alert.showAndWait().get() == ButtonType.OK) {
+
+                }
+            }
+
+        }
+        else {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("INVALID NICKNAME");
+            alert.setHeaderText("You forgot to insert your nickname!");
+            if (alert.showAndWait().get() == ButtonType.OK) {
+
             }
         }
     }

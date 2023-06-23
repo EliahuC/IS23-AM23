@@ -26,9 +26,8 @@ public class LobbyWaitingController {
     public void returnToMenu(ActionEvent event) throws IOException {
 
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Return to menu");
-            alert.setHeaderText("You are about to return to the menu");
-            alert.setContentText("Are you sure?");
+            alert.setTitle("RETURN TO MENU");
+            alert.setHeaderText("You are about to return to the menu, are you sure?");
 
             if (alert.showAndWait().get() == ButtonType.OK) {
                 File file = new File("src/main/resources/com/example/is23am23/menu.fxml");

@@ -310,9 +310,8 @@ public class GameControllerGUI {
     public void returnToMenu(ActionEvent event) throws IOException {
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Return to menu");
-        alert.setHeaderText("You are about to return to the menu");
-        alert.setContentText("Are you sure?");
+        alert.setTitle("RETURN TO MENU");
+        alert.setHeaderText("You are about to return to the menu, are you sure?");
 
         if (alert.showAndWait().get() == ButtonType.OK) {
             File file = new File("src/main/resources/com/example/is23am23/menu.fxml");
@@ -580,7 +579,15 @@ public class GameControllerGUI {
                                 (getCurrentIstance().getCurrPlaying()-1).getNickName())) {
                             coordinates.add(Integer.toString(myGridPane_lr.getRowIndex(imageView)));
                             coordinates.add(Integer.toString(myGridPane_lr.getColumnIndex(imageView)));
-                        }//ELSE SI PUO' FAR COMPARIRE UNA LABEL CHE RECITA "IT'S NOT YOUR TURN"
+                        }
+                        else{
+                            Alert alert = new Alert(Alert.AlertType.WARNING);
+                            alert.setTitle("INVALID MOVE");
+                            alert.setHeaderText("It's not your turn!");
+                            if (alert.showAndWait().get() == ButtonType.OK) {
+
+                            }
+                            }
                     });
                 }
             }
@@ -664,7 +671,15 @@ public class GameControllerGUI {
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
-            }//ELSE SI PUO' STAMPARE A VIDEO "MOVE NOT VALID/LEGAL"
+            }
+            else{
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("INVALID MOVE");
+                alert.setHeaderText("Your move is not valid!");
+                if (alert.showAndWait().get() == ButtonType.OK) {
+
+                }
+            }
         }
     }
 
