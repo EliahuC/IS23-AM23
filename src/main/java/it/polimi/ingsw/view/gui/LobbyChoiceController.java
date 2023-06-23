@@ -15,6 +15,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import java.io.File;
 import java.net.URL;
@@ -44,11 +45,6 @@ public class LobbyChoiceController implements Initializable {
     public void joinLobby(ActionEvent event) throws IOException {
         receiver.setInStartGUI(false);
         receiver.setInLobbyChoice(true);
-        gameControllerGUI = new GameControllerGUI();
-        gameControllerGUI.setConnectionClient(connectionClient);
-        receiver.setGamecontrollerGUI(gameControllerGUI);
-        receiver.setConnectionClient(connectionClient);
-        gameControllerGUI.setReceiver(receiver);
         command = "/ENTER";
         Message message = MoveSerializer.serializeInput(command);
         connectionClient.sendMessage((ClientMessage) message);
@@ -95,10 +91,6 @@ public class LobbyChoiceController implements Initializable {
             LobbyWaitingController lobbyWaitingController = loader.getController();
             lobbyWaitingController.displayNickname(nickname);
             lobbyWaitingController.setConnectionClient(connectionClient);
-            gameControllerGUI = new GameControllerGUI();
-            gameControllerGUI.setConnectionClient(connectionClient);
-            receiver.setGamecontrollerGUI(gameControllerGUI);
-            gameControllerGUI.setReceiver(receiver);
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
