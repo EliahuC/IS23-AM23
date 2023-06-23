@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.board.goalCards;
 
+import it.polimi.ingsw.model.player.BookShelf;
 import junit.framework.TestCase;
 
 /**
@@ -127,5 +128,9 @@ public class CommonGoalCardTest
         c14.increaseNumCompleted();
         c14.increaseNumCompleted();
         assertEquals(2,c14.getPoints());
+
+        c14= new CommonGoalCard(3);
+        c14.checkGoal(new BookShelf());
+        c14.print();
     }
 }

@@ -1,5 +1,7 @@
 package it.polimi.ingsw.controller;
 
+import it.polimi.ingsw.GameSavings;
+import it.polimi.ingsw.Launcher;
 import it.polimi.ingsw.Messages.ClientToServer.ClientMessage;
 import it.polimi.ingsw.Messages.ClientToServer.CoordinatesMessage;
 import it.polimi.ingsw.Messages.ClientToServer.PossibleMoves.Move_SelectColumn;
@@ -214,6 +216,13 @@ public class GameControllerTest extends TestCase {
         p.setPersonalGoalCard(new PersonalGoalCard(2));
         Optional<Player> player = Optional.ofNullable(GC.getGame().getPlayers().get(1));
         assertEquals(player.get(), GC.endGame().get(1));
+
+        GameSavings gs = new GameSavings(Players);
+        GameController gcx = new GameController(gs);
+        int col = GC.getColumn();
+        Players=gcx.getPlayers();
+        Launcher l = GC.getLauncher();
+
     }
     /*METODO COMMENTATO PERCHE IMPLEMENTATA PERSISTENZA
     public void testPlayMoveGC_FIRST(){

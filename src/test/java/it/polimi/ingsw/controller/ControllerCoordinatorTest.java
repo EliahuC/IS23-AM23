@@ -1,5 +1,6 @@
 package it.polimi.ingsw.controller;
 
+import it.polimi.ingsw.GameSavings;
 import it.polimi.ingsw.Messages.ClientToServer.ClientMessage;
 import it.polimi.ingsw.Messages.ClientToServer.CoordinatesMessage;
 import it.polimi.ingsw.Messages.ClientToServer.PossibleMoves.Move_SelectColumn;
@@ -10,6 +11,7 @@ import it.polimi.ingsw.Messages.ServerToClient.ErrorMessage;
 import it.polimi.ingsw.Messages.ServerToClient.ValidMoveMessage;
 import it.polimi.ingsw.Network.Server.VirtualView;
 import it.polimi.ingsw.model.board.ItemTile;
+import it.polimi.ingsw.model.player.Player;
 import junit.framework.TestCase;
 
 import java.util.ArrayList;
@@ -192,6 +194,10 @@ public class ControllerCoordinatorTest extends TestCase {
         m.setNickname(controllerCoordinator.getGameController().getGame().getPlayers().get(0).getNickName());
         ValidMoveMessage valid = new ValidMoveMessage();
         assertEquals(valid, controllerCoordinator.setMessage(m));
+
+        controllerCoordinator.setStartedGame(false);
+        ArrayList<Player> dp = controllerCoordinator.getDisconnectedPlayers();
+        Player p = controllerCoordinator.getConnectedPlayer("Alice");
     }
 
     public void testSetMessage_SIXTH() {
@@ -236,6 +242,11 @@ public class ControllerCoordinatorTest extends TestCase {
                 getNickName());
         ValidMoveMessage valid = new ValidMoveMessage();
         assertEquals(valid, controllerCoordinator.setMessage(m));
+        ArrayList<Player> dp = controllerCoordinator.getDisconnectedPlayers();
+        controllerCoordinator.endgame();
+        GameSavings gs = new GameSavings(dp);
+        gs.setCurrPlaying(1);
+        controllerCoordinator.setGame(gs);
     }
 
     public void testSetMessage_EIGHTH() {
