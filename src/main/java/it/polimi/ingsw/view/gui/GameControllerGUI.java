@@ -29,10 +29,8 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.*;
-import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 
 public class GameControllerGUI {
@@ -81,7 +79,7 @@ public class GameControllerGUI {
     private Integer columnIndex=null;
     private boolean endSelection=false;
     private Integer Bcolumn;
-    private ArrayList<String> coordinates = new ArrayList<>();
+    private ArrayList<Integer> coordinates = new ArrayList<>();
 
     public void displayScene() throws IOException {
         if (instance()) {
@@ -89,7 +87,7 @@ public class GameControllerGUI {
             flag = false;
         }
         receiver.setGamecontrollerGUI(getCurrentIstance());
-        myGridPane_lr = new GridPane();
+        myGridPane_lr.getChildren().clear();
         for (int i = 0; i < LivingRoomSize; i++) {
             for (int j = 0; j < LivingRoomSize; j++) {
                 if (livingRoom.getBoardTile(i, j).getCategory() != BoardToken.boardTokenCategory.UNAVAILABLE) {
@@ -110,7 +108,7 @@ public class GameControllerGUI {
         }
 
         bookshelf = player.getPlayerBookshelf();
-        myGridPane_bs = new GridPane();
+        myGridPane_bs.getChildren().clear();
         for (int i = 0; i < shelfRows; i++) {
             for (int j = 0; j < shelfCols; j++) {
                 ItemTile tile = bookshelf.getTile(i, j);
@@ -133,7 +131,7 @@ public class GameControllerGUI {
             }
         }
 
-        bsImage = new GridPane();
+        bsImage.getChildren().clear();
         ImageView view = new ImageView();
         File file_bs = new File("/com/example/is23am23/bookshelf.png");
         image = new Image(String.valueOf(file_bs));
@@ -145,7 +143,7 @@ public class GameControllerGUI {
         bsImage.add(view, 0, 0);
 
 
-        myGridPane_columns = new GridPane();
+        myGridPane_columns.getChildren().clear();
         for (int i = 0; i < 5; i++) {
             ImageView imageView = new ImageView();
 
@@ -163,7 +161,7 @@ public class GameControllerGUI {
 
 
         //MANCA IL RIFERIMENTO ALLE TESSERE GIA' PRESE(PER ORA IMMAGINI IMPOSTATE)
-        myGridPane_container = new GridPane();
+        myGridPane_container.getChildren().clear();
         if (getCurrentIstance().getTiles().size() > 0) {
             for (int i = 0; i < 3; i++) {
                 ImageView imageView = new ImageView();
@@ -179,7 +177,7 @@ public class GameControllerGUI {
             }
         }
 
-        myGridPane_choice = new GridPane();
+        myGridPane_choice.getChildren().clear();
         for (int i = 0; i < 2; i++) {
             ImageView imageView = new ImageView();
 
@@ -213,7 +211,7 @@ public class GameControllerGUI {
         stage.getIcons().add(icon);
         stage.show();
         if (firstTime) {
-            setOnMouseclicked();
+            registerClickEvent();
             firstTime = false;
         }
     }
@@ -527,13 +525,13 @@ public class GameControllerGUI {
         this.flag = flag;
     }
 
-    public void cleanTiles(ArrayList<String> coordinates) throws IOException {
+    public void cleanTiles(ArrayList<Integer> coordinates) throws IOException {
         int i = 0;
         while (coordinates.get(i) != null) {
             tiles.add(getCurrentIstance().getLivingRoom().
-                    getBoardTile(Integer.parseInt(coordinates.get(i)),Integer.parseInt(coordinates.get(i+1))).getTile());
+                    getBoardTile(coordinates.get(i),coordinates.get(i+1)).getTile());
             getCurrentIstance().getLivingRoom().getBoardTile
-                            (Integer.parseInt(coordinates.get(i)), Integer.parseInt(coordinates.get(i + 1))).
+                    (coordinates.get(i), coordinates.get(i + 1)).
                     setTile(null);
             i = i + 2;
         }
@@ -543,16 +541,18 @@ public class GameControllerGUI {
     public List<ItemTile> getTiles() {
         return tiles;
     }
-    public void setOnMouseclicked(){
+    public void registerClickEvent(){
         ObservableList<Node> children = myGridPane_lr.getChildren();
             for(Node node : children){
                 if (node instanceof ImageView){
                     ImageView imageView = (ImageView) node;
-                    imageView.setOnTouchPressed(event -> {
+                    imageView.setOnMouseClicked(event -> {
                         if(getCurrentIstance().getPlayer().getNickName().equals(getCurrentIstance().getPlayers().get
                                 (getCurrentIstance().getCurrPlaying()-1).getNickName())) {
-                            coordinates.add(Integer.toString(myGridPane_lr.getRowIndex(imageView)));
-                            coordinates.add(Integer.toString(myGridPane_lr.getColumnIndex(imageView)));
+                            Node node1=event.getPickResult().getIntersectedNode();
+                            coordinates.add(GridPane.getRowIndex(node1));
+                            coordinates.add(GridPane.getColumnIndex(node1));
+                            System.out.println("Luca il Goat");
                         }//ELSE SI PUO' FAR COMPARIRE UNA LABEL CHE RECITA "IT'S NOT YOUR TURN"
                     });
                 }
