@@ -1,3 +1,4 @@
+/*
 package it.polimi.ingsw.view.gui;
 
 import it.polimi.ingsw.view.View;
@@ -31,10 +32,12 @@ public class GUIMain extends Application implements View {
             Image icon = new Image("com/example/is23am23/little_icon.png");
             stage.getIcons().add(icon);
             //stage.setFullScreen(true);
-          /*  stage.setOnCloseRequest(event ->{
+          */
+/*  stage.setOnCloseRequest(event ->{
                 event.consume();
                 exit(stage);
-            });*/
+            });*//*
+
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -43,6 +46,7 @@ public class GUIMain extends Application implements View {
     public static void main(String[] args) {
         launch(args);
     }
+*/
 /*
     public void exit() {
 
@@ -57,10 +61,12 @@ public class GUIMain extends Application implements View {
 
         }
     }
-*/
+*//*
+
     @Override
     public void run() {
         main(null);
     }
 }
 
+*/

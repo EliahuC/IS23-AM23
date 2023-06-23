@@ -1,3 +1,4 @@
+/*
 package it.polimi.ingsw.view.gui;
 
 import it.polimi.ingsw.Messages.ClientToServer.ClientMessage;
@@ -396,7 +397,8 @@ public class GameControllerGUI {
 
 
 
-    /*private void displayBookshelfColumn() {
+    */
+/*private void displayBookshelfColumn() {
         Scanner input = new Scanner(System.in);
         System.out.print("YOUR BOOKSHELF\n");
         //player.getPlayerBookshelf().print();
@@ -422,7 +424,8 @@ public class GameControllerGUI {
             System.out.print("The chosen column is too full. Please, choose another one.\n");
         }
     }
-*/
+*//*
+
 
     private void printSelection() {
         for (int i = 0; tiles.get(i) != null; i++)
@@ -445,7 +448,8 @@ public class GameControllerGUI {
         this.receiver = receiver;
     }
 
-    /*public void startGame() throws IOException {
+    */
+/*public void startGame() throws IOException {
         ArrayList<String> coordinates = new ArrayList<>();
         String command = null;
         ClientMessage message = null;
@@ -484,7 +488,8 @@ public class GameControllerGUI {
             cleanTiles(coordinates);
         }
     //INSERIRE LE TESSERE NELLA BOOKSHELF SCEGLIENDO LA COLONNA CON LA FRECCIA
-    }*/
+    }*//*
+
 
 
 
@@ -647,7 +652,8 @@ public class GameControllerGUI {
     public boolean getendSelection(){
         return endSelection;
     }
-    /*public void pickTiles(ArrayList<String> coordinates){
+    */
+/*public void pickTiles(ArrayList<String> coordinates){
          if(getCurrentIstance().getPlayer().getNickName().equals(getCurrentIstance().getPlayers().
                  get(getCurrentIstance().getCurrPlaying()-1).getNickName())){
              while(!getCurrentIstance().getendSelection()){
@@ -656,10 +662,12 @@ public class GameControllerGUI {
                  }
              }
          }
-    }*/
+    }*//*
+
 
 }
 
 
 
 
+*/

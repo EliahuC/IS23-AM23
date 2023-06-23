@@ -1,3 +1,4 @@
+/*
 package it.polimi.ingsw.view.gui;
 
 import it.polimi.ingsw.Messages.Message;
@@ -162,3 +163,4 @@ public class MenuController {
     }
 }
 
+*/

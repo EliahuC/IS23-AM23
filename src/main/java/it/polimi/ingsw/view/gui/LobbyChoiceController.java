@@ -1,3 +1,4 @@
+/*
 package it.polimi.ingsw.view.gui;
 
 import it.polimi.ingsw.Messages.ClientToServer.ClientMessage;
@@ -150,3 +151,4 @@ public class LobbyChoiceController implements Initializable {
 
     public void setReceiver(GUIEvent receiver){this.receiver = receiver;}
 }
+*/
