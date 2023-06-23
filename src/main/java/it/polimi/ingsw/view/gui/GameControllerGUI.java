@@ -67,8 +67,9 @@ public class GameControllerGUI {
     private CommonGoalCard commonGoalCard2;
     @FXML
     GridPane myGridpane_turn;
+    /*
     @FXML
-    GridPane myGridpane_me;
+    GridPane myGridpane_me;*/
     @FXML
     GridPane myGridPane_choice;
     @FXML
@@ -160,15 +161,16 @@ public class GameControllerGUI {
         myGridpane_turn.setLayoutY(16);
         myGridpane_turn.add(label, 0, 0);
 
-
+/*
         myGridpane_me = new GridPane();
         Label labelMe = new Label();
-        labelMe.setText("Now playing: " + currentPlayer);
+        MenuController menuController;
+        labelMe.setText(menuController.getNickname());
         labelMe.setFont(new Font(15));
         myGridpane_me.setLayoutX(14);
         myGridpane_me.setLayoutY(16);
         myGridpane_me.add(labelMe, 0, 0);
-
+*/
 
         myGridPane_columns = new GridPane();
         for (int i = 0; i < 5; i++) {
@@ -232,7 +234,7 @@ public class GameControllerGUI {
         root.getChildren().add(myGridPane_columns);
         root.getChildren().add(myGridPane_choice);
         root.getChildren().add(myGridpane_turn);
-        root.getChildren().add(myGridpane_me);
+        //root.getChildren().add(myGridpane_me);
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setTitle("My Shelfie");

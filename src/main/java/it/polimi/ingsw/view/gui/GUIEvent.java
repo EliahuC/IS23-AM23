@@ -17,12 +17,11 @@ public class GUIEvent implements PropertyChangeListener {
     private Boolean inUsedNickname=false;
     private final MenuController menuController;
     private GameControllerGUI gamecontrollerGUI;
-    private WinnerController winnerController;
     private LobbyChoiceController lobbyChoiceController;
     private UsedNicknameController usedNicknameController;
     private URL url;
     private ServerMessage serverMessage;
-    private Stage stage = new Stage();
+    private Stage stage;
     private ConnectionClient connectionClient;
 
 
@@ -44,6 +43,9 @@ public class GUIEvent implements PropertyChangeListener {
                             gamecontrollerGUI.setPlayer(temp_startingGameMessage.getPlayers().stream().filter(player -> Objects.equals(player.getNickName(), gamecontrollerGUI.getConnectionClient().getPlayerName())).findFirst().orElseThrow(() -> new IllegalArgumentException("Player not found")));
                             gamecontrollerGUI.setCurrentPlayer(temp_startingGameMessage.getCurrPlaying());
                             gamecontrollerGUI.setSeed(gamecontrollerGUI.getPlayer().getPersonalGoalCard().getNumeroCarta());
+                            stage = menuController.getStage();
+                            stage.close();
+                            //stage = new Stage();
                             gamecontrollerGUI.setStage(stage);
                             gamecontrollerGUI.setReceiver(this);
                         try {

@@ -168,6 +168,16 @@ public class MenuController {
         gameControllerGUI.setReceiver(receiver);
         gameControllerGUI.setRoot(loaderGame);
     }*/
+/*
+    public String getNickname(){
+        return nickname;
+    }
+*/
+
+    public Stage getStage(){
+        return stage;
+    }
+
     public void setResponse(ServerMessage response) {
         this.response = response;
     }
