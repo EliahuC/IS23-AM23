@@ -38,7 +38,6 @@ public class GUIEvent implements PropertyChangeListener {
             Platform.runLater(()-> {
                 switch (serverMessage.getCategory()) {
                     case STARTING_GAME_MESSAGE:
-                        try {
                             GameIsStartingMessage temp_startingGameMessage = (GameIsStartingMessage) serverMessage;
                             gamecontrollerGUI.setPlayers(temp_startingGameMessage.getPlayers());
                             gamecontrollerGUI.setLivingRoom(temp_startingGameMessage.getLivingRoom());
@@ -47,7 +46,8 @@ public class GUIEvent implements PropertyChangeListener {
                             gamecontrollerGUI.setSeed(gamecontrollerGUI.getPlayer().getPersonalGoalCard().getNumeroCarta());
                             gamecontrollerGUI.setStage(stage);
                             gamecontrollerGUI.setReceiver(this);
-                            gamecontrollerGUI.startGame();
+                        try {
+                            gamecontrollerGUI.displayScene();
                         } catch (IOException e) {
                             throw new RuntimeException(e);
                         }
@@ -61,7 +61,7 @@ public class GUIEvent implements PropertyChangeListener {
                         gamecontrollerGUI.setPlayer(temp_updateStateMessage.getGame().getPlayers().stream().filter(player -> Objects.equals(player.getNickName(), gamecontrollerGUI.getConnectionClient().getPlayerName())).findFirst().orElseThrow(() -> new IllegalArgumentException("Player not found")));
                         gamecontrollerGUI.setCurrPlaying(temp_updateStateMessage.getGame().getWhoIsPlaying());
                         try {
-                            gamecontrollerGUI.startGame();
+                            gamecontrollerGUI.displayScene();
                         } catch (IOException e) {
                             throw new RuntimeException();
                         }
@@ -70,7 +70,7 @@ public class GUIEvent implements PropertyChangeListener {
                         CurrPlayingMessage temp_currPlayingMessage = (CurrPlayingMessage) serverMessage;
                         gamecontrollerGUI.setCurrPlaying(temp_currPlayingMessage.getCurrPlaying());
                         try {
-                            gamecontrollerGUI.startGame();
+                            gamecontrollerGUI.displayScene();
                         } catch (IOException e) {
                             throw new RuntimeException(e);
                         }

@@ -81,6 +81,7 @@ public class GameControllerGUI {
     private Integer columnIndex=null;
     private boolean endSelection=false;
     private Integer Bcolumn;
+    private ArrayList<String> coordinates = new ArrayList<>();
 
     public void displayScene() throws IOException {
         if (instance()) {
@@ -444,7 +445,7 @@ public class GameControllerGUI {
         this.receiver = receiver;
     }
 
-    public void startGame() throws IOException {
+    /*public void startGame() throws IOException {
         ArrayList<String> coordinates = new ArrayList<>();
         String command = null;
         ClientMessage message = null;
@@ -483,7 +484,7 @@ public class GameControllerGUI {
             cleanTiles(coordinates);
         }
     //INSERIRE LE TESSERE NELLA BOOKSHELF SCEGLIENDO LA COLONNA CON LA FRECCIA
-    }
+    }*/
 
 
 
@@ -547,9 +548,12 @@ public class GameControllerGUI {
             for(Node node : children){
                 if (node instanceof ImageView){
                     ImageView imageView = (ImageView) node;
-                    imageView.setOnMouseClicked(event -> {
-                        rowIndex = myGridPane_lr.getRowIndex(imageView);
-                        columnIndex = myGridPane_lr.getColumnIndex(imageView);
+                    imageView.setOnTouchPressed(event -> {
+                        if(getCurrentIstance().getPlayer().getNickName().equals(getCurrentIstance().getPlayers().get
+                                (getCurrentIstance().getCurrPlaying()-1).getNickName())) {
+                            coordinates.add(Integer.toString(myGridPane_lr.getRowIndex(imageView)));
+                            coordinates.add(Integer.toString(myGridPane_lr.getColumnIndex(imageView)));
+                        }//ELSE SI PUO' FAR COMPARIRE UNA LABEL CHE RECITA "IT'S NOT YOUR TURN"
                     });
                 }
             }
@@ -594,9 +598,9 @@ public class GameControllerGUI {
         return columnIndex;
     }
 
-    public boolean isEndSelection() {
-        return endSelection;
-    }
+    //public boolean isEndSelection() {
+      //  return endSelection;
+    //}
     public void setOnArrowclicked(){
         ObservableList<Node> children = myGridPane_columns.getChildren();
         for(Node node : children){
@@ -609,7 +613,32 @@ public class GameControllerGUI {
         }
     }
     public void Endselection(ActionEvent event){
-        endSelection=true;
+        if(getCurrentIstance().getPlayer().getNickName().equals(getCurrentIstance().getPlayers().
+                get(getCurrentIstance().getCurrPlaying()-1).getNickName())){
+            String command = null;
+            ClientMessage message = null;
+            switch(coordinates.size()){
+                case 2 -> command = "/SELECT" + " " + coordinates.get(0) + " " + coordinates.get(1);
+                case 4 -> command = "/SELECT" + " " + coordinates.get(0) + " " + coordinates.get(1) + " " +
+                        coordinates.get(2) + " " + coordinates.get(3);
+                case 6 -> command = "/SELECT" + " " + coordinates.get(0) + " " + coordinates.get(1) + " " +
+                        coordinates.get(2) + " " + coordinates.get(3) + " " + coordinates.get(4) + " " + coordinates.get(5);
+            }
+            message = (ClientMessage) MoveSerializer.serializeInput(command);
+            getCurrentIstance().getConnectionClient().sendMessage(message);
+            try{
+                TimeUnit.MILLISECONDS.sleep(200);
+            }catch(InterruptedException e ){
+                e.printStackTrace();
+            }
+            if(getCurrentIstance().getResponse().getCategory()==Message.MessageCategory.VALID_MESSAGE) {
+                try {
+                    cleanTiles(coordinates);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }//ELSE SI PUO' STAMPARE A VIDEO "MOVE NOT VALID/LEGAL"
+        }
     }
 
     public Integer getBcolumn() {
@@ -618,6 +647,16 @@ public class GameControllerGUI {
     public boolean getendSelection(){
         return endSelection;
     }
+    /*public void pickTiles(ArrayList<String> coordinates){
+         if(getCurrentIstance().getPlayer().getNickName().equals(getCurrentIstance().getPlayers().
+                 get(getCurrentIstance().getCurrPlaying()-1).getNickName())){
+             while(!getCurrentIstance().getendSelection()){
+                 if((getCurrentIstance().getRowIndex()!=null)&&(getCurrentIstance().getColumnIndex()!=null)){
+                     coordinates.add()
+                 }
+             }
+         }
+    }*/
 
 }
 
