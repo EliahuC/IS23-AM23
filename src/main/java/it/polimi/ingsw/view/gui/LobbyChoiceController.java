@@ -72,15 +72,15 @@ public class LobbyChoiceController implements Initializable {
                 stage.setScene(scene);
                 stage.show();
             }
-        }
-        Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle("LOBBY ERROR");
-        alert.setHeaderText("No lobby available, create one!");
-        if (alert.showAndWait().get() == ButtonType.OK) {
+        } else {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("LOBBY ERROR");
+            alert.setHeaderText("No lobby available, create one!");
+            if (alert.showAndWait().get() == ButtonType.OK) {
 
+            }
         }
     }
-
     public void createLobby(ActionEvent event) throws IOException {
         receiver.setInStartGUI(false);
         receiver.setInLobbyChoice(true);

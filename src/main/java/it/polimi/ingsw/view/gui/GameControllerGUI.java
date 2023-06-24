@@ -24,6 +24,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
@@ -66,45 +67,43 @@ public class GameControllerGUI {
     private CommonGoalCard commonGoalCard1;
     private CommonGoalCard commonGoalCard2;
     @FXML
-    GridPane myGridpane_turn;
+    GridPane myGridpane_turn=new GridPane();
     /*
     @FXML
     GridPane myGridpane_me;*/
     @FXML
-    GridPane myGridPane_choice;
+    GridPane myGridPane_choice = new GridPane();
     @FXML
-    GridPane myGridPane_lr;
+    GridPane myGridPane_lr = new GridPane();
     @FXML
-    GridPane bsImage;
+    GridPane bsImage = new GridPane();
     @FXML
-    GridPane myGridPane_columns;
+    GridPane myGridPane_columns = new GridPane();
     @FXML
-    GridPane myGridPane_container;
+    GridPane myGridPane_container = new GridPane();
     @FXML
-    GridPane myGridPane_bs;
-    //private ImageView[][] imageViews = new ImageView[LivingRoomSize][LivingRoomSize];
+    GridPane myGridPane_bs = new GridPane();
     private static GameControllerGUI currentIstance = new GameControllerGUI();
     private Boolean flag = true;
     private Integer rowIndex=null;
     private Integer columnIndex=null;
     private boolean endSelection=false;
     private Integer Bcolumn;
-    private ArrayList<String> coordinates = new ArrayList<>();
+    private ArrayList<Integer> coordinates = new ArrayList<>();
 
     public void displayScene() throws IOException {
         if (instance()) {
             GameControllerGUI.currentIstance = this;
             flag = false;
+            receiver.setGamecontrollerGUI(getCurrentIstance());
         }
-        receiver.setGamecontrollerGUI(getCurrentIstance());
-        myGridPane_lr = new GridPane();
+        //myGridPane_lr = new GridPane();
         for (int i = 0; i < LivingRoomSize; i++) {
             for (int j = 0; j < LivingRoomSize; j++) {
-                if (livingRoom.getBoardTile(i, j).getCategory() != BoardToken.boardTokenCategory.UNAVAILABLE) {
-                    ItemTile tile = livingRoom.getBoardTile(i, j).getTile();
+                if (getCurrentIstance().livingRoom.getBoardTile(i, j).getCategory() != BoardToken.boardTokenCategory.UNAVAILABLE) {
+                    ItemTile tile = getCurrentIstance().livingRoom.getBoardTile(i, j).getTile();
                     ImageView imageView = new ImageView();
                     imageView.setImage(chooseCategoryImage(tile));
-                    //imageViews[i][j] = imageView;
                     imageView.setFitWidth(34);
                     imageView.setFitHeight(34);
                     myGridPane_lr.setLayoutX(29);
@@ -116,32 +115,42 @@ public class GameControllerGUI {
                 }
             }
         }
+        myGridPane_lr.setOnMouseClicked(mouseEvent -> {
+            Node clickNode = mouseEvent.getPickResult().getIntersectedNode();
+            if (clickNode instanceof ImageView && ((ImageView) clickNode).getImage() != null) {
+                if (getCurrentIstance().getPlayer().getNickName().equals(getCurrentIstance().getPlayers().get
+                        (getCurrentIstance().getCurrPlaying() - 1).getNickName())) {
+                    coordinates.add(GridPane.getRowIndex(clickNode));
+                    coordinates.add(GridPane.getColumnIndex(clickNode));
+                }else{
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("INVALID MOVE");
+                    alert.setHeaderText("It's not your turn!");
+                    if (alert.showAndWait().get() == ButtonType.OK) {
 
-        bookshelf = player.getPlayerBookshelf();
-        myGridPane_bs = new GridPane();
+                    }
+                }
+
+            }
+        });
+
+        bookshelf = getCurrentIstance().getPlayer().getPlayerBookshelf();
+        //myGridPane_bs = new GridPane();
         for (int i = 0; i < shelfRows; i++) {
             for (int j = 0; j < shelfCols; j++) {
                 ItemTile tile = bookshelf.getTile(i, j);
                 ImageView imageView = new ImageView();
                 imageView.setImage(chooseCategoryImage(tile));
-                //File file = new File("/com/example/is23am23/Cornici.png");
-                // image = new Image(String.valueOf(file));
-                //imageView.setImage(image);
-
-                //imageView.setImage(chooseCategoryImage(tile));
                 imageView.setFitWidth(33);
                 imageView.setFitHeight(33);
                 myGridPane_bs.setLayoutX(386);
                 myGridPane_bs.setLayoutY(158);
-
-                // Opzionale: Imposta il padding o altre proprietà per gli ImageView
                 GridPane.setMargin(imageView, new Insets(0, 2, 0, 2));
                 myGridPane_bs.add(imageView, j, i);
-                //}
             }
         }
 
-        bsImage = new GridPane();
+        //bsImage = new GridPane();
         ImageView view = new ImageView();
         File file_bs = new File("/com/example/is23am23/bookshelf.png");
         image = new Image(String.valueOf(file_bs));
@@ -153,7 +162,7 @@ public class GameControllerGUI {
         bsImage.add(view, 0, 0);
 
 
-        myGridpane_turn = new GridPane();
+        //myGridpane_turn = new GridPane();
         Label label = new Label();
         label.setText("Now playing: " + currentPlayer);
         label.setFont(new Font(15));
@@ -172,7 +181,7 @@ public class GameControllerGUI {
         myGridpane_me.add(labelMe, 0, 0);
 */
 
-        myGridPane_columns = new GridPane();
+        //myGridPane_columns = new GridPane();
         for (int i = 0; i < 5; i++) {
             ImageView imageView = new ImageView();
 
@@ -187,16 +196,19 @@ public class GameControllerGUI {
             myGridPane_columns.add(imageView, i, 0);
             GridPane.setMargin(imageView, new Insets(2));
         }
-
-
-        //MANCA IL RIFERIMENTO ALLE TESSERE GIA' PRESE(PER ORA IMMAGINI IMPOSTATE)
-        myGridPane_container = new GridPane();
+        myGridPane_columns.setOnMouseClicked(mouseEvent -> {
+            Node clickNode = mouseEvent.getPickResult().getIntersectedNode();
+            if (clickNode instanceof ImageView && ((ImageView) clickNode).getImage() != null) {
+                //BISOGNA CONSIDERARE E COMPLEMENTARE L'ORDINE
+                String command = "/COLUMN" + " " + GridPane.getColumnIndex(clickNode);
+                ClientMessage message = (ClientMessage) MoveSerializer.serializeInput(command);
+                getCurrentIstance().getConnectionClient().sendMessage(message);
+            }
+        });
+       // myGridPane_container = new GridPane();
         if (getCurrentIstance().getTiles().size() > 0) {
-            for (int i = 0; i < 3; i++) {
+            for (int i = 0; i < getCurrentIstance().getTiles().size(); i++) {
                 ImageView imageView = new ImageView();
-                //File file = new File("/com/example/is23am23/Cornici.png");
-                //image = new Image(String.valueOf(file));
-                //imageView.setImage(image);
                 imageView.setImage(chooseCategoryImage(getCurrentIstance().getTiles().get(i)));
                 imageView.setFitWidth(30);
                 imageView.setFitHeight(30);
@@ -206,7 +218,7 @@ public class GameControllerGUI {
             }
         }
 
-        myGridPane_choice = new GridPane();
+       // myGridPane_choice = new GridPane();
         for (int i = 0; i < 2; i++) {
             ImageView imageView = new ImageView();
 
@@ -222,7 +234,13 @@ public class GameControllerGUI {
             myGridPane_choice.add(imageView, i, 0);
             GridPane.setMargin(imageView, new Insets(5));
         }
-
+        myGridPane_choice.setOnMouseClicked(mouseEvent -> {
+            try {
+                setOnOrderClickEvent(mouseEvent);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
         File file = new File("src/main/resources/com/example/is23am23/game.fxml");
         URL url = file.toURI().toURL();
         FXMLLoader loader = new FXMLLoader(url);
@@ -236,15 +254,11 @@ public class GameControllerGUI {
         root.getChildren().add(myGridpane_turn);
         //root.getChildren().add(myGridpane_me);
         Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.setTitle("My Shelfie");
+        getCurrentIstance().stage.setScene(scene);
+        getCurrentIstance().stage.setTitle("My Shelfie");
         Image icon = new Image("com/example/is23am23/little_icon.png");
-        stage.getIcons().add(icon);
-        stage.show();
-        if (firstTime) {
-            setOnMouseclicked();
-            firstTime = false;
-        }
+        getCurrentIstance().stage.getIcons().add(icon);
+        getCurrentIstance().stage.show();
     }
 
     public Image chooseCategoryImage(ItemTile tile) {
@@ -553,13 +567,13 @@ public class GameControllerGUI {
         this.flag = flag;
     }
 
-    public void cleanTiles(ArrayList<String> coordinates) throws IOException {
+    public void cleanTiles(ArrayList<Integer> coordinates) throws IOException {
         int i = 0;
-        while (coordinates.get(i) != null) {
-            tiles.add(getCurrentIstance().getLivingRoom().
-                    getBoardTile(Integer.parseInt(coordinates.get(i)),Integer.parseInt(coordinates.get(i+1))).getTile());
+        while (i<coordinates.size()) {
+            getCurrentIstance().getTiles().add(getCurrentIstance().getLivingRoom().
+                    getBoardTile(coordinates.get(i),(coordinates.get(i+1))).getTile());
             getCurrentIstance().getLivingRoom().getBoardTile
-                            (Integer.parseInt(coordinates.get(i)), Integer.parseInt(coordinates.get(i + 1))).
+                            (coordinates.get(i), coordinates.get(i + 1)).
                     setTile(null);
             i = i + 2;
         }
@@ -569,7 +583,7 @@ public class GameControllerGUI {
     public List<ItemTile> getTiles() {
         return tiles;
     }
-    public void setOnMouseclicked(){
+    /*public void setOnMouseclicked(){
         ObservableList<Node> children = myGridPane_lr.getChildren();
             for(Node node : children){
                 if (node instanceof ImageView){
@@ -591,7 +605,7 @@ public class GameControllerGUI {
                     });
                 }
             }
-        }
+        }*/
 
     public void setFirstTime(boolean firstTime) {
         this.firstTime = firstTime;
@@ -651,12 +665,16 @@ public class GameControllerGUI {
                 get(getCurrentIstance().getCurrPlaying()-1).getNickName())){
             String command = null;
             ClientMessage message = null;
-            switch(coordinates.size()){
-                case 2 -> command = "/SELECT" + " " + coordinates.get(0) + " " + coordinates.get(1);
-                case 4 -> command = "/SELECT" + " " + coordinates.get(0) + " " + coordinates.get(1) + " " +
-                        coordinates.get(2) + " " + coordinates.get(3);
-                case 6 -> command = "/SELECT" + " " + coordinates.get(0) + " " + coordinates.get(1) + " " +
-                        coordinates.get(2) + " " + coordinates.get(3) + " " + coordinates.get(4) + " " + coordinates.get(5);
+            switch(getCurrentIstance().getCoordinates().size()){
+                case 2 -> command = "/SELECT" + " " + getCurrentIstance().getCoordinates().get(0) + " " +
+                        getCurrentIstance().getCoordinates().get(1);
+                case 4 -> command = "/SELECT" + " " + getCurrentIstance().getCoordinates().get(0) + " " +
+                        getCurrentIstance().getCoordinates().get(1) + " " +
+                        getCurrentIstance().getCoordinates().get(2) + " " + getCurrentIstance().getCoordinates().get(3);
+                case 6 -> command = "/SELECT" + " " + getCurrentIstance().getCoordinates().get(0) + " " +
+                        getCurrentIstance().getCoordinates().get(1) + " " +
+                        getCurrentIstance().getCoordinates().get(2) + " " + getCurrentIstance().getCoordinates().get(3) +
+                        " " + getCurrentIstance().getCoordinates().get(4) + " " + getCurrentIstance().getCoordinates().get(5);
             }
             message = (ClientMessage) MoveSerializer.serializeInput(command);
             getCurrentIstance().getConnectionClient().sendMessage(message);
@@ -667,7 +685,7 @@ public class GameControllerGUI {
             }
             if(getCurrentIstance().getResponse().getCategory()==Message.MessageCategory.VALID_MESSAGE) {
                 try {
-                    cleanTiles(coordinates);
+                    cleanTiles(getCurrentIstance().getCoordinates());
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -703,5 +721,66 @@ public class GameControllerGUI {
                  }
              }
          }
+    }
+    private void setOnOrderClickEvent(MouseEvent e) throws IOException {
+        int i = 0;
+        int j = 0; //contatore freccia 1
+        int k = 0; //contatore freccia 2
+        Node temp = new ImageView();
+        Node clickNode = e.getPickResult().getIntersectedNode();
+        if (getCurrentIstance().getTiles().size() == 3) {
+            if (clickNode instanceof ImageView && ((ImageView) clickNode).getImage() != null) {
+                if (GridPane.getColumnIndex(clickNode) == 0) {
+                    if (j % 2 == 0) {
+                        temp = (ImageView) myGridPane_container.getChildren().get(0 * 3 + 0);
+                        myGridPane_container.getChildren().set(0 * 3 + 0, myGridPane_container.getChildren().get(0 * 3 + 1));
+                        myGridPane_container.getChildren().set(0 * 3 + 1, temp);
+                        i = i + 2;
+                    } else {
+                        temp = (ImageView) myGridPane_container.getChildren().get(0 * 3 + 0);
+                        myGridPane_container.getChildren().set(0 * 3 + 0, myGridPane_container.getChildren().get(0 * 3 + 1));
+                        myGridPane_container.getChildren().set(0 * 3 + 1, temp);
+                        i = i - 2;
+                    }
+                    j++;
+                    displayScene();
+                } else if (GridPane.getRowIndex(clickNode) == 1) {
+                    if (k % 2 == 0) {
+                        temp = (ImageView) myGridPane_container.getChildren().get(0 * 3 + 1);
+                        myGridPane_container.getChildren().set(0 * 3 + 1, myGridPane_container.getChildren().get(0 * 3 + 2));
+                        myGridPane_container.getChildren().set(0 * 3 + 2, temp);
+                        i = i + 1;
+                    } else {
+                        temp = (ImageView) myGridPane_container.getChildren().get(0 * 3 + 0);
+                        myGridPane_container.getChildren().set(0 * 3 + 0, myGridPane_container.getChildren().get(0 * 3 + 1));
+                        myGridPane_container.getChildren().set(0 * 3 + 1, temp);
+                        i = i - 1;
+                    }
+                    k++;
+                    displayScene();
+
+                }
+            }
+        } else if (getCurrentIstance().getTiles().size() == 2) {
+            if (GridPane.getColumnIndex(clickNode) == 0) {
+                if (j % 2 == 0) {
+                    temp = (ImageView) myGridPane_container.getChildren().get(0 * 3 + 0);
+                    myGridPane_container.getChildren().set(0 * 3 + 0, myGridPane_container.getChildren().get(0 * 3 + 1));
+                    myGridPane_container.getChildren().set(0 * 3 + 1, temp);
+                    i = i + 2;
+                } else {
+                    temp = (ImageView) myGridPane_container.getChildren().get(0 * 3 + 0);
+                    myGridPane_container.getChildren().set(0 * 3 + 0, myGridPane_container.getChildren().get(0 * 3 + 1));
+                    myGridPane_container.getChildren().set(0 * 3 + 1, temp);
+                    i = i - 2;
+                }
+                j++;
+                displayScene();
+            }
+        }
+    }
+
+    public ArrayList<Integer> getCoordinates() {
+        return coordinates;
     }
 }
