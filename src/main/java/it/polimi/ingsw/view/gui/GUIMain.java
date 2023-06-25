@@ -4,10 +4,7 @@ import it.polimi.ingsw.view.View;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import java.io.File;
@@ -16,7 +13,6 @@ import java.net.URL;
 
 public class GUIMain extends Application implements View {
 
-    AnchorPane scenePane;
 
     public void start(Stage stage) throws IOException {
         try {
@@ -25,13 +21,12 @@ public class GUIMain extends Application implements View {
             FXMLLoader loader = new FXMLLoader(url);
             Parent root = loader.load();
             Scene mainMenu = new Scene(root);
-            //String css = this.getClass().getResource("application.css").toExternalForm();
-            //mainMenu.getStylesheets().add(css);
             stage.setTitle("My Shelfie");
             stage.setScene(mainMenu);
             stage.show();
             Image icon = new Image("com/example/is23am23/little_icon.png");
             stage.getIcons().add(icon);
+            //stage.setResizable(false);
             //stage.setFullScreen(true);
 /*
     stage.setOnCloseRequest(event ->{

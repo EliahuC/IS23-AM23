@@ -1,8 +1,7 @@
-.root{
-    -fx-background-image: url(background.jpg);
+.title{
+    -fx-background-image: url(title.png);
     -fx-background-size: contain;
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
     -fx-background-size: cover;
 }
-

@@ -41,6 +41,7 @@ public class LobbyChoiceController implements Initializable {
     private ConnectionClient connectionClient;
     private GUIEvent receiver;
     private GameControllerGUI gameControllerGUI;
+    private MenuController menuController = new MenuController();
 
     public void joinLobby(ActionEvent event) throws IOException {
         receiver.setInStartGUI(false);

@@ -46,6 +46,7 @@ public class GameControllerGUI {
     private Scene scene;
     private Parent root;
     private ConnectionClient connectionClient;
+    private String nickname;
     private GUIEvent receiver;
     private BookShelf bookshelf = new BookShelf();
     private ServerMessage response;
@@ -69,9 +70,8 @@ public class GameControllerGUI {
     private CommonGoalCard commonGoalCard2;
     @FXML
     GridPane myGridpane_turn = new GridPane();
-    /*
     @FXML
-    GridPane myGridpane_me;*/
+    GridPane myGridpane_me = new GridPane();
     @FXML
     GridPane myGridPane_choice = new GridPane();
     @FXML
@@ -167,21 +167,18 @@ public class GameControllerGUI {
         //myGridpane_turn = new GridPane();
         Label label = new Label();
         label.setText("Now playing: " + getCurrentIstance().currentPlayer);
-        label.setFont(new Font(15));
+        label.setFont(new Font(14));
         myGridpane_turn.setLayoutX(14);
         myGridpane_turn.setLayoutY(16);
         myGridpane_turn.add(label, 0, 0);
 
-/*
-        myGridpane_me = new GridPane();
+        //myGridpane_me = new GridPane();
         Label labelMe = new Label();
-        MenuController menuController;
-        labelMe.setText(menuController.getNickname());
-        labelMe.setFont(new Font(15));
-        myGridpane_me.setLayoutX(14);
+        displayNickname(nickname, labelMe);
+        labelMe.setFont(new Font(14));
+        myGridpane_me.setLayoutX(258);
         myGridpane_me.setLayoutY(16);
         myGridpane_me.add(labelMe, 0, 0);
-*/
 
         //myGridPane_columns = new GridPane();
         for (int i = 0; i < 5; i++) {
@@ -266,7 +263,7 @@ public class GameControllerGUI {
         root.getChildren().add(myGridPane_columns);
         root.getChildren().add(myGridPane_choice);
         root.getChildren().add(myGridpane_turn);
-        //root.getChildren().add(myGridpane_me);
+        root.getChildren().add(myGridpane_me);
         Scene scene = new Scene(root);
         getCurrentIstance().stage.setScene(scene);
         getCurrentIstance().stage.setTitle("My Shelfie");
@@ -816,6 +813,13 @@ public class GameControllerGUI {
 
             }
         }
+    }
+    public void displayNickname(String nickname, Label label) {
+        label.setText(nickname);
+    }
+
+    public void setNickname(String nickname){
+        this.nickname = nickname;
     }
 }
 

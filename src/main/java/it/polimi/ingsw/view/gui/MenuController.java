@@ -14,7 +14,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import java.io.File;
@@ -27,6 +27,10 @@ public class MenuController {
 
     @FXML
     private TextField textField;
+    @FXML
+    private ImageView backgroundImage;
+    @FXML
+    private ImageView titleImage;
     private Stage stage;
     private Scene scene;
     private String serverAddr;
@@ -38,7 +42,6 @@ public class MenuController {
     private ServerMessage response;
 
     public void goTCP(ActionEvent event) throws IOException {
-
         nickname = textField.getText();
         if (!nickname.isEmpty()) {
             if (TCPon(event)) {
@@ -54,8 +57,11 @@ public class MenuController {
                 //loadGameFXML();
                 stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 scene = new Scene(root);
+                scene.getStylesheets().add("com/example/is23am23/title.css");
                 stage.setScene(scene);
                 stage.show();
+                //stage.setFullScreen(true);
+
             }
             else{
                 Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -203,11 +209,6 @@ public class MenuController {
         gameControllerGUI.setReceiver(receiver);
         gameControllerGUI.setRoot(loaderGame);
     }*/
-/*
-    public String getNickname(){
-        return nickname;
-    }
-*/
 
     public Stage getStage(){
         return stage;
@@ -215,5 +216,9 @@ public class MenuController {
 
     public void setResponse(ServerMessage response) {
         this.response = response;
+    }
+
+    public String getNickname(){
+        return nickname;
     }
 }
