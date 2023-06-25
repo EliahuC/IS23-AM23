@@ -29,8 +29,6 @@ public class MenuController {
     private TextField textField;
     @FXML
     private ImageView backgroundImage;
-    @FXML
-    private ImageView titleImage;
     private Stage stage;
     private Scene scene;
     private String serverAddr;
@@ -57,7 +55,6 @@ public class MenuController {
                 //loadGameFXML();
                 stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 scene = new Scene(root);
-                scene.getStylesheets().add("com/example/is23am23/title.css");
                 stage.setScene(scene);
                 stage.show();
                 //stage.setFullScreen(true);

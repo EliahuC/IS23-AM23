@@ -799,6 +799,8 @@ public class GameControllerGUI {
                     e.printStackTrace();
                 }
                 if (getCurrentIstance().getResponse().getCategory() != Message.MessageCategory.WARNING) {
+                    getCurrentIstance().getTiles().clear();
+                    getCurrentIstance().getCoordinates().clear();
                     //SI PUO MOSTRARE UN POP-UP CHE DICE "TURNO COMPLETATO"
                 } else {
                     //SI MOSTRA POP-UP CHE DICE "CHOSEN COLUMN TOO FULL"
