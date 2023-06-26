@@ -15,6 +15,10 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
+/**
+ * @author Andrea Bricchi and Giovanni di Lorenzo
+ * Controller of the waiting scene
+ */
 public class LobbyWaitingController {
 
     private Stage stage;
@@ -23,6 +27,12 @@ public class LobbyWaitingController {
     private Label Display;
     private ConnectionClient connectionClient;
 
+    /**
+     * @author Andrea Bricchi
+     * @param event click
+     * @throws IOException exception
+     * Method to go back to the menu
+     */
     public void returnToMenu(ActionEvent event) throws IOException {
 
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);

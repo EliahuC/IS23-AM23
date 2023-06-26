@@ -23,6 +23,10 @@ import java.io.IOException;
 import java.util.ResourceBundle;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * @author Andrea Bricchi and Giovanni di Lorenzo
+ * Controller that handle the player joining to a lobby
+ */
 public class LobbyChoiceController implements Initializable {
 
     @FXML
@@ -43,6 +47,12 @@ public class LobbyChoiceController implements Initializable {
     private GameControllerGUI gameControllerGUI;
     private MenuController menuController = new MenuController();
 
+    /**
+     * @author Andrea Bricchi and Giovanni di Lorenzo
+     * @param event click
+     * @throws IOException exception
+     * Method to enter a lobby
+     */
     public void joinLobby(ActionEvent event) throws IOException {
         receiver.setInStartGUI(false);
         receiver.setInLobbyChoice(true);
@@ -82,6 +92,13 @@ public class LobbyChoiceController implements Initializable {
             }
         }
     }
+
+    /**
+     * @author Andrea Bricchi and Giovanni di Lorenzo
+     * @param event click
+     * @throws IOException exception
+     * Method to create a game
+     */
     public void createLobby(ActionEvent event) throws IOException {
         receiver.setInStartGUI(false);
         receiver.setInLobbyChoice(true);
@@ -114,6 +131,12 @@ public class LobbyChoiceController implements Initializable {
         }
     }
 
+    /**
+     * @author Andrea Bricchi
+     * @param event click
+     * @throws IOException exception
+     * Method to return to the Menu
+     */
     public void returnToMenu(ActionEvent event) throws IOException {
 
         File file = new File("src/main/resources/com/example/is23am23/menu.fxml");

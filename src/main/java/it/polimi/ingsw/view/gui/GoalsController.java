@@ -7,6 +7,10 @@ import javafx.scene.image.ImageView;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * @author Andrea Bricchi and Giovanni di Lorenzo
+ * Controller of the goals
+ */
 public class GoalsController {
 
     @FXML
@@ -26,6 +30,10 @@ public class GoalsController {
             gameControllerGUI.displayScene();
     }
 
+    /**
+     * @author Andrea Bricchi and Giovanni di Lorenzo
+     * Method to display the scores of the common goal cards
+     */
     public void displayPoints(){
 
         int numPlayers = gameControllerGUI.getPlayers().size();
@@ -237,6 +245,10 @@ public class GoalsController {
         }
     }
 
+    /**
+     * @author Andrea Bricchi and Giovanni di Lorenzo
+     * Method to display the personal goal card
+     */
     public void displayPersonalGoal(){
 
         int personalCard = gameControllerGUI.getSeed();
@@ -330,6 +342,10 @@ public class GoalsController {
 
     }
 
+    /**
+     * @author Andrea Bricchi and Giovanni di Lorenzo
+     * Method to display the two personal goal card
+     */
     public void displayCommonGoal() {
 
         int card1 = gameControllerGUI.getLivingRoom().getIdCGC1();

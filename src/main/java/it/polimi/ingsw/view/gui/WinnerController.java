@@ -19,6 +19,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 
+/**
+ * @author Andrea Bricchi
+ *  Controller of the winning scene
+ */
 public class WinnerController {
 
     @FXML

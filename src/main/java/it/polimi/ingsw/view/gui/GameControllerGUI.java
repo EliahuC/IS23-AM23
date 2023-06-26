@@ -11,12 +11,12 @@ import it.polimi.ingsw.model.board.LivingRoom;
 import it.polimi.ingsw.model.board.goalCards.*;
 import it.polimi.ingsw.model.player.BookShelf;
 import it.polimi.ingsw.model.player.Player;
-import javafx.collections.ObservableList;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
-import javafx.scene.Group;
+
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -31,15 +31,19 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
-import javax.swing.text.Style;
+
 import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
+
 import java.net.URL;
 import java.util.*;
-import java.util.concurrent.Callable;
+
 import java.util.concurrent.TimeUnit;
 
+/**
+ * @author Andrea Bricchi and Giovanni di Lorenzo
+ * Controller of the game scene
+ */
 public class GameControllerGUI {
 
     private Stage stage;
@@ -67,8 +71,7 @@ public class GameControllerGUI {
     private boolean endgame;
     private boolean switchOrder = false;
     private ArrayList<ItemTile> tiles2 = new ArrayList<>();
-    private CommonGoalCard commonGoalCard1;
-    private CommonGoalCard commonGoalCard2;
+
     @FXML
     GridPane myGridpane_turn = new GridPane();
     @FXML
@@ -94,6 +97,11 @@ public class GameControllerGUI {
 
     private ArrayList<Integer> coordinates = new ArrayList<>();
 
+    /**
+     * @author Andrea Bricchi and Giovanni di Lorenzo
+     * @throws IOException exception
+     * Method to display the scene
+     */
     public void displayScene() throws IOException {
         if (instance()) {
             GameControllerGUI.currentIstance = this;
@@ -274,6 +282,11 @@ public class GameControllerGUI {
         getCurrentIstance().stage.show();
     }
 
+    /**
+     * @author Andrea Bricchi and Giovanni di Lorenzo
+     * @param tile received from the board
+     * @return the image to use
+     */
     public Image chooseCategoryImage(ItemTile tile) {
 
         image = null;
@@ -314,6 +327,12 @@ public class GameControllerGUI {
         return image;
     }
 
+    /**
+     * @author Andrea Bricchi and Giovanni di Lorenzo
+     * @param event click
+     * @throws IOException exception
+     * Method to show the goals scene
+     */
     public void goToGoals(ActionEvent event) throws IOException {
 
         File file = new File("src/main/resources/com/example/is23am23/goals.fxml");
@@ -334,6 +353,12 @@ public class GameControllerGUI {
         stage.show();
     }
 
+    /**
+     * @author Andrea Bricchi
+     * @param event click
+     * @throws IOException exception
+     * Method to return to the Menu
+     */
     public void returnToMenu(ActionEvent event) throws IOException {
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -360,44 +385,11 @@ public class GameControllerGUI {
     public void setLivingRoom(LivingRoom livingRoom) {
 
         this.livingRoom = livingRoom;
-        createCommonGoalCard1(livingRoom.getIdCGC1());
-        createCommonGoalCard2(livingRoom.getIdCGC2());
+
     }
 
-    private void createCommonGoalCard1(Integer idCGC1) {
-        switch (idCGC1) {
-            case 1 -> this.commonGoalCard1 = new CommonGoalCard1(players.size());
-            case 2 -> this.commonGoalCard1 = new CommonGoalCard2(players.size());
-            case 3 -> this.commonGoalCard1 = new CommonGoalCard3(players.size());
-            case 4 -> this.commonGoalCard1 = new CommonGoalCard4(players.size());
-            case 5 -> this.commonGoalCard1 = new CommonGoalCard5(players.size());
-            case 6 -> this.commonGoalCard1 = new CommonGoalCard6(players.size());
-            case 7 -> this.commonGoalCard1 = new CommonGoalCard7(players.size());
-            case 8 -> this.commonGoalCard1 = new CommonGoalCard8(players.size());
-            case 9 -> this.commonGoalCard1 = new CommonGoalCard9(players.size());
-            case 10 -> this.commonGoalCard1 = new CommonGoalCard10(players.size());
-            case 11 -> this.commonGoalCard1 = new CommonGoalCard11(players.size());
-            case 12 -> this.commonGoalCard1 = new CommonGoalCard12(players.size());
-        }
-    }
 
-    private void createCommonGoalCard2(Integer idCGC2) {
-        switch (idCGC2) {
-            case 1 -> this.commonGoalCard2 = new CommonGoalCard1(players.size());
-            case 2 -> this.commonGoalCard2 = new CommonGoalCard2(players.size());
-            case 3 -> this.commonGoalCard2 = new CommonGoalCard3(players.size());
-            case 4 -> this.commonGoalCard2 = new CommonGoalCard4(players.size());
-            case 5 -> this.commonGoalCard2 = new CommonGoalCard5(players.size());
-            case 6 -> this.commonGoalCard2 = new CommonGoalCard6(players.size());
-            case 7 -> this.commonGoalCard2 = new CommonGoalCard7(players.size());
-            case 8 -> this.commonGoalCard2 = new CommonGoalCard8(players.size());
-            case 9 -> this.commonGoalCard2 = new CommonGoalCard9(players.size());
-            case 10 -> this.commonGoalCard2 = new CommonGoalCard10(players.size());
-            case 11 -> this.commonGoalCard2 = new CommonGoalCard11(players.size());
-            case 12 -> this.commonGoalCard2 = new CommonGoalCard12(players.size());
 
-        }
-    }
 
     public void setPlayer(Player player) {
         this.player = player;
@@ -423,23 +415,7 @@ public class GameControllerGUI {
         this.winner = winner;
     }
 
-    private void waiting() {
-        System.out.print("It's not your turn, yet. Wait for other players to finish their turn.\n\n");
-        System.out.print("CURRENT PLAYING: ");
-        if (players.get(currPlaying).isFirstPlayerSeat())
-            System.out.print(players.get(currPlaying).getNickName() + " SEAT MASTER\n");
-        else
-            System.out.print(players.get(currPlaying).getNickName() + "\n");
-        try {
-            TimeUnit.MILLISECONDS.sleep(200);
-        } catch (InterruptedException iE) {
-            iE.printStackTrace();
-        }
-        if (response != null && response.getCategory() == Message.MessageCategory.LAST_TURN_MESSAGE)
-            System.out.print(response.getReturnMessage());
-        while (!player.getNowPlaying()) {
-        }
-    }
+
 
     public LivingRoom getLivingRoom() {
         return livingRoom;
@@ -478,14 +454,6 @@ public class GameControllerGUI {
 */
 
 
-    private void printSelection() {
-        for (int i = 0; tiles.get(i) != null; i++)
-            //System.out.print(tiles.get(i).getColor() + "   ");
-            System.out.print("\n");
-        for (int i = 0; tiles.get(i) != null; i++)
-            System.out.print("(" + i + 1 + ")   ");
-        System.out.print("\n");
-    }
 
     public void setSeed(Integer seed) {
         this.seed = seed;
@@ -557,6 +525,10 @@ public class GameControllerGUI {
         return currentIstance;
     }
 
+    /**
+     * @author Giovanni di Lorenzo
+     * @return true if the flag is true
+     */
     public boolean instance() {
         if (getCurrentIstance().getFlag() == null) {
             return false;
@@ -580,6 +552,12 @@ public class GameControllerGUI {
         this.flag = flag;
     }
 
+    /**
+     * @author Giovanni di Lorenzo
+     * @param coordinates of the tiles
+     * @throws IOException exception
+     * Method to clean the selected tiles from the board on the scene
+     */
     public void cleanTiles(ArrayList<Integer> coordinates) throws IOException {
         int i = 0;
         while (i < coordinates.size()) {
@@ -605,6 +583,11 @@ public class GameControllerGUI {
         return ranking;
     }
 
+    /**
+     * @author Andrea Bricchi
+     * @throws IOException exception
+     * Method to go to the result
+     */
     public void goToResults() throws IOException {
 
         File file = new File("src/main/resources/com/example/is23am23/winner.fxml");
@@ -617,6 +600,7 @@ public class GameControllerGUI {
         stage.setScene(scene);
         stage.show();
     }
+
 
     public String getWinner() {
         return winner;
@@ -649,6 +633,11 @@ public class GameControllerGUI {
         }
     }*/
 
+    /**
+     * @author Andrea Bricchi and Giovanni di Lorenzo
+     * @param event click
+     * Method to send the selected tiles to the server
+     */
     public void Endselection(ActionEvent event) {
         if (getCurrentIstance().getPlayer().getNickName().equals(getCurrentIstance().getPlayers().
                 get(getCurrentIstance().getCurrPlaying() - 1).getNickName())) {
@@ -690,9 +679,6 @@ public class GameControllerGUI {
         }
     }
 
-    /*public void setRoot(FXMLLoader rootGame) throws IOException {
-        root=rootGame.load();
-    }*/
 
     public Integer getBcolumn() {
         return Bcolumn;
@@ -711,6 +697,13 @@ public class GameControllerGUI {
              }
          }
     }*/
+
+    /**
+     * @author Giovanni di Lorenzo
+     * @param e mouse click
+     * @throws IOException exception
+     * Method to set the order greed
+     */
     private void setOnOrderClickEvent(MouseEvent e) throws IOException {
         ItemTile temp;
         Node clickNode = e.getPickResult().getIntersectedNode();
@@ -743,6 +736,12 @@ public class GameControllerGUI {
         return coordinates;
     }
 
+    /**
+     * @author Andrea Bricchi and Giovanni di Lorenzo
+     * @param event click
+     * @throws IOException exception
+     * Method to send the message order and column to the server
+     */
     private void PlaceTilesOntheBookshelf(MouseEvent event) throws IOException {
         String command = null;
         ClientMessage message = null;
@@ -824,13 +823,6 @@ public class GameControllerGUI {
         }
     }
 
-    public CommonGoalCard getCommonGoalCard1() {
-        return commonGoalCard1;
-    }
-
-    public CommonGoalCard getCommonGoalCard2() {
-        return commonGoalCard2;
-    }
 
 }
 

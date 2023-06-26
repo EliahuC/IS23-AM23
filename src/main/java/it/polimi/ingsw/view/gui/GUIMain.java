@@ -11,10 +11,18 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
+/**
+ * @author Andrea Bricchi
+ * Class to starts the GUI
+ */
 public class GUIMain extends Application implements View {
     private String IP;
 
-
+    /**
+     * @author Andrea Bricchi
+     * @param stage stage
+     * @throws IOException if there is a IO problem
+     */
     public void start(Stage stage) throws IOException {
         try {
             File file = new File("src/main/resources/com/example/is23am23/menu.fxml");
@@ -29,14 +37,7 @@ public class GUIMain extends Application implements View {
             stage.show();
             Image icon = new Image("com/example/is23am23/little_icon.png");
             stage.getIcons().add(icon);
-            //stage.setResizable(false);
-            //stage.setFullScreen(true);
-/*
-    stage.setOnCloseRequest(event ->{
-               event.consume();
-              exit(stage);
-        });
-*/
+
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -51,6 +52,10 @@ public class GUIMain extends Application implements View {
         main(null);
     }
 
+    /**
+     * @author Eliahu Cohen
+     * @param ip of the server to pass to the MenuController
+     */
     @Override
     public void passIP(String ip) {
         this.IP=IP;

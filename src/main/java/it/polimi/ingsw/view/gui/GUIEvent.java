@@ -10,6 +10,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
 
+/**
+ * @author Andrea Bricchi and Giovanni di Lorenzo
+ * Listener class that pass the received messages from ClientConnection to the GUI
+ */
 public class GUIEvent implements PropertyChangeListener {
     private Boolean inStartGUI = false;
     private Boolean inGameControllerGUI = false;

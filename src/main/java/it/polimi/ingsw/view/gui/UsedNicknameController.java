@@ -20,6 +20,10 @@ import java.net.Socket;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * @author Andrea Bricchi and Giovanni di Lorenzo
+ * Same class as MenuController accessed when a nickname is already used
+ */
 public class UsedNicknameController {
 
     @FXML

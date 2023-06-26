@@ -23,6 +23,11 @@ import java.net.Socket;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * @author Andrea Bricchi and Giovanni di Lorenzo
+ * Controller of the user login page
+ */
+
 public class MenuController {
 
     @FXML
@@ -39,6 +44,12 @@ public class MenuController {
     private GUIEvent receiver;
     private ServerMessage response;
 
+    /**
+     * @author Andrea Bricchi and Giovanni di Lorenzo
+     * @param event click
+     * @throws IOException
+     * Method to start a Socket Connection
+     */
     public void goTCP(ActionEvent event) throws IOException {
         nickname = textField.getText();
         if (!nickname.isEmpty()) {
@@ -79,6 +90,11 @@ public class MenuController {
         }
     }
 
+    /**
+     * @author Andrea Bricchi and Giovanni di Lorenzo
+     * @param event click
+     * @return true if connection starts
+     */
     public boolean TCPon(ActionEvent event) {
 
         try {
@@ -117,7 +133,11 @@ public class MenuController {
             return false;
         }
     }
-
+    /**
+     * @author Andrea Bricchi and Giovanni di Lorenzo
+     * @param event click
+     * @return true if connection starts
+     */
     public boolean RMIon(ActionEvent event) {
         try {
             receiver = new GUIEvent(this);
@@ -152,7 +172,12 @@ public class MenuController {
             return false;
         }
     }
-
+    /**
+     * @author Andrea Bricchi and Giovanni di Lorenzo
+     * @param event click
+     * @throws IOException
+     * Method to start a RMI Connection
+     */
     public void goRMI(ActionEvent event) throws IOException {
 
         nickname = textField.getText();
@@ -195,17 +220,7 @@ public class MenuController {
         }
     }
 
-    /*private void loadGameFXML() throws IOException {
-        File game = new File("src/main/resources/com/example/is23am23/game.fxml");
-        URL urlGame = game.toURI().toURL();
-        FXMLLoader loaderGame = new FXMLLoader(urlGame);
-        AnchorPane rootGame=loaderGame.getRoot();
-        GameControllerGUI gameControllerGUI = loaderGame.getController();
-        gameControllerGUI.setConnectionClient(connectionClient);
-        receiver.setGamecontrollerGUI(gameControllerGUI);
-        gameControllerGUI.setReceiver(receiver);
-        gameControllerGUI.setRoot(loaderGame);
-    }*/
+
 
     public Stage getStage(){
         return stage;
