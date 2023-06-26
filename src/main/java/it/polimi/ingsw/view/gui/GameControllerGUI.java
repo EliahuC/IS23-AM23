@@ -54,7 +54,7 @@ public class GameControllerGUI {
     private Player player;
     private List<Player> players;
     private List<Player> ranking;
-    private List<ItemTile> tiles = new ArrayList<>();
+    private ArrayList<ItemTile> tiles = new ArrayList<>();
     private int currPlaying = 1;
     private String currentPlayer;
     private String winner;
@@ -66,6 +66,7 @@ public class GameControllerGUI {
     private static final int shelfCols = 5;
     private boolean endgame;
     private boolean switchOrder = false;
+    private ArrayList<ItemTile> tiles2 = new ArrayList<>();
     private CommonGoalCard commonGoalCard1;
     private CommonGoalCard commonGoalCard2;
     @FXML
@@ -89,6 +90,7 @@ public class GameControllerGUI {
     private Integer rowIndex = null;
     private Integer columnIndex = null;
     private Integer Bcolumn;
+    private ArrayList<Integer> order = new ArrayList<>();
 
     private ArrayList<Integer> coordinates = new ArrayList<>();
 
@@ -96,8 +98,8 @@ public class GameControllerGUI {
         if (instance()) {
             GameControllerGUI.currentIstance = this;
             flag = false;
-            receiver.setGamecontrollerGUI(getCurrentIstance());
-            getCurrentIstance().setReceiver(receiver);
+            //receiver.setGamecontrollerGUI(getCurrentIstance());
+            //getCurrentIstance().setReceiver(receiver);
         }
         //myGridPane_lr = new GridPane();
         for (int i = 0; i < LivingRoomSize; i++) {
@@ -122,8 +124,8 @@ public class GameControllerGUI {
             if (clickNode instanceof ImageView && ((ImageView) clickNode).getImage() != null) {
                 if (getCurrentIstance().getPlayer().getNickName().equals(getCurrentIstance().getPlayers().get
                         (getCurrentIstance().getCurrPlaying() - 1).getNickName())) {
-                    coordinates.add(GridPane.getRowIndex(clickNode));
-                    coordinates.add(GridPane.getColumnIndex(clickNode));
+                    getCurrentIstance().coordinates.add(GridPane.getRowIndex(clickNode));
+                    getCurrentIstance().coordinates.add(GridPane.getColumnIndex(clickNode));
                 } else {
                     Alert alert = new Alert(Alert.AlertType.WARNING);
                     alert.setTitle("INVALID MOVE");
@@ -583,6 +585,8 @@ public class GameControllerGUI {
         while (i < coordinates.size()) {
             getCurrentIstance().getTiles().add(getCurrentIstance().getLivingRoom().
                     getBoardTile(coordinates.get(i), (coordinates.get(i + 1))).getTile());
+            getCurrentIstance().tiles2.add(getCurrentIstance().getLivingRoom().
+                    getBoardTile(coordinates.get(i), (coordinates.get(i + 1))).getTile());
             getCurrentIstance().getLivingRoom().getBoardTile
                             (coordinates.get(i), coordinates.get(i + 1)).
                     setTile(null);
@@ -591,36 +595,9 @@ public class GameControllerGUI {
         displayScene();
     }
 
-    public List<ItemTile> getTiles() {
+    public ArrayList<ItemTile> getTiles() {
         return tiles;
     }
-    /*public void setOnMouseclicked(){
-        ObservableList<Node> children = myGridPane_lr.getChildren();
-            for(Node node : children){
-                if (node instanceof ImageView){
-                    ImageView imageView = (ImageView) node;
-                    imageView.setOnTouchPressed(event -> {
-                        if(getCurrentIstance().getPlayer().getNickName().equals(getCurrentIstance().getPlayers().get
-                                (getCurrentIstance().getCurrPlaying()-1).getNickName())) {
-                            coordinates.add(Integer.toString(myGridPane_lr.getRowIndex(imageView)));
-                            coordinates.add(Integer.toString(myGridPane_lr.getColumnIndex(imageView)));
-                        }
-                        else{
-                            Alert alert = new Alert(Alert.AlertType.WARNING);
-                            alert.setTitle("INVALID MOVE");
-                            alert.setHeaderText("It's not your turn!");
-                            if (alert.showAndWait().get() == ButtonType.OK) {
-
-                            }
-                            }
-                    });
-                }
-            }
-        }*/
-
-    //public void setFirstTime(boolean firstTime) {
-    //  this.firstTime = firstTime;
-    //}
 
     public List<Player> displayLeaderbord() {
 
@@ -660,7 +637,7 @@ public class GameControllerGUI {
     //public boolean isEndSelection() {
     //  return endSelection;
     //}
-    public void setOnArrowclicked() {
+   /* public void setOnArrowclicked() {
         ObservableList<Node> children = myGridPane_columns.getChildren();
         for (Node node : children) {
             if (node instanceof ImageView) {
@@ -670,7 +647,7 @@ public class GameControllerGUI {
                 });
             }
         }
-    }
+    }*/
 
     public void Endselection(ActionEvent event) {
         if (getCurrentIstance().getPlayer().getNickName().equals(getCurrentIstance().getPlayers().
@@ -706,6 +683,7 @@ public class GameControllerGUI {
                 alert.setTitle("INVALID MOVE");
                 alert.setHeaderText("Your move is not valid!");
                 if (alert.showAndWait().get() == ButtonType.OK) {
+                    getCurrentIstance().getCoordinates().clear();
 
                 }
             }
@@ -781,7 +759,13 @@ public class GameControllerGUI {
                     else
                         command = "/ORDER 2 1";
                     break;
+                case 3 :
+                    defineOrder();
+                    command = "/ORDER" + " " + getCurrentIstance().order.get(0) + " " + getCurrentIstance().order.get(1)
+                            + " " + getCurrentIstance().order.get(2);
+                    break;
             }
+
             message = (ClientMessage) MoveSerializer.serializeInput(command);
             getCurrentIstance().getConnectionClient().sendMessage(message);
             try {
@@ -800,7 +784,9 @@ public class GameControllerGUI {
                 }
                 if (getCurrentIstance().getResponse().getCategory() != Message.MessageCategory.WARNING) {
                     getCurrentIstance().getTiles().clear();
+                    getCurrentIstance().tiles2.clear();
                     getCurrentIstance().getCoordinates().clear();
+                    getCurrentIstance().order.clear();
                     //SI PUO MOSTRARE UN POP-UP CHE DICE "TURNO COMPLETATO"
                 } else {
                     //SI MOSTRA POP-UP CHE DICE "CHOSEN COLUMN TOO FULL"
@@ -823,5 +809,28 @@ public class GameControllerGUI {
     public void setNickname(String nickname){
         this.nickname = nickname;
     }
+    private void defineOrder() {
+        int i = 0, j = 0;
+        while (i < getCurrentIstance().getTiles().size()) {
+            while (j < getCurrentIstance().tiles2.size()) {
+                if (getCurrentIstance().tiles2.get(i).equals(getCurrentIstance().getTiles().get(j))) {
+                    getCurrentIstance().order.add(j + 1);
+                    break;
+                } else
+                    j++;
+            }
+            j=0;
+            i++;
+        }
+    }
+
+    public CommonGoalCard getCommonGoalCard1() {
+        return commonGoalCard1;
+    }
+
+    public CommonGoalCard getCommonGoalCard2() {
+        return commonGoalCard2;
+    }
+
 }
 
