@@ -7,7 +7,6 @@ import it.polimi.ingsw.Messages.Message;
 import it.polimi.ingsw.Messages.ServerToClient.ErrorMessage;
 import it.polimi.ingsw.Messages.ServerToClient.ServerMessage;
 import it.polimi.ingsw.Messages.ServerToClient.ValidMoveMessage;
-import it.polimi.ingsw.Network.Server.TCP.ServerConnectionTCP;
 import it.polimi.ingsw.Savings;
 import it.polimi.ingsw.controller.ControllerCoordinator;
 import it.polimi.ingsw.model.Game;
@@ -17,6 +16,8 @@ import it.polimi.ingsw.model.player.Player;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 
 /**
@@ -31,8 +32,7 @@ public class Lobby implements Serializable {
     private final ArrayList<String> joinedUsers;
     private Boolean startedGame=false;
     private Boolean fullLobby=false;
-    //private transient String saveFilePath="../Savings"; //TODO abilitare durante la creazione del JAR
-    private transient String saveFilePath="Savings";
+    private transient String saveFilePath= "Savings";
     private final Integer idLobby;
     public Lobby(Integer numPlayersLobby,Integer ID){
         this.NumPlayersLobby=numPlayersLobby;
@@ -158,6 +158,14 @@ public class Lobby implements Serializable {
      * Method that sets the saves of the game
      */
     private void setSavesOfTheLobby() {
+        String dirPath = "Savings";
+        if (!Files.exists(Path.of(dirPath))){
+            try {
+                Files.createDirectories(Path.of(dirPath));
+            } catch (IOException e) {
+                System.out.println("Could not create directory");
+            }
+        }
         String fileName="/Lobby"+ idLobby +".json";
         saveFilePath=saveFilePath+fileName;
         myObj=new File(saveFilePath);
@@ -231,7 +239,7 @@ public class Lobby implements Serializable {
         controllerCoordinator=new ControllerCoordinator();
         connections=new ArrayList<>();
         //saveFilePath="../Savings"; //TODO abilitare durante la creazione del JAR
-        saveFilePath="Savings";
+        saveFilePath= "Savings";
         setSavesOfTheLobby();
         controllerCoordinator.setGame(gameSavings);
     }
