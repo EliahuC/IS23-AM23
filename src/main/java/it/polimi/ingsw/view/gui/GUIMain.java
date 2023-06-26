@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.net.URL;
 
 public class GUIMain extends Application implements View {
+    private String IP;
 
 
     public void start(Stage stage) throws IOException {
@@ -20,6 +21,8 @@ public class GUIMain extends Application implements View {
             URL url = file.toURI().toURL();
             FXMLLoader loader = new FXMLLoader(url);
             Parent root = loader.load();
+            MenuController controller=loader.getController();
+            controller.setIP(IP);
             Scene mainMenu = new Scene(root);
             stage.setTitle("My Shelfie");
             stage.setScene(mainMenu);
@@ -46,6 +49,11 @@ public class GUIMain extends Application implements View {
     @Override
     public void run() {
         main(null);
+    }
+
+    @Override
+    public void passIP(String ip) {
+        this.IP=IP;
     }
 }
 

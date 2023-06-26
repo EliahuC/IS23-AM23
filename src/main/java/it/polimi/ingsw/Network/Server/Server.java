@@ -10,11 +10,13 @@ import it.polimi.ingsw.Printer;
 import it.polimi.ingsw.Savings;
 
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 import java.util.Scanner;
 
 /**
@@ -45,13 +47,13 @@ public class Server implements Printer {
         Reader reader;
         Gson gson=new Gson();
         Savings savings;
-        try{
-            int i=0;
+        int i=0;
             while (true){
 
                 //String path="../Savings"+"/Lobby"+i+".json"; //TODO abilitare durante la creazione del JAR
-                String path="Savings"+"/Lobby"+i+".json";
-                reader= Files.newBufferedReader(Paths.get(path));
+                String path="/Savings"+"/Lobby"+i+".json";
+                if(Server.class.getResourceAsStream(path)==null)break;
+                reader= new InputStreamReader(Objects.requireNonNull(Server.class.getResourceAsStream(path)));
                 savings=gson.fromJson(reader, Savings.class);
                 Lobby lobby=savings.getLobby();
                 lobby.getJoinedUsers().clear();
@@ -60,9 +62,9 @@ public class Server implements Printer {
                 idLobbies++;
                 i++;
             }
-        } catch (IOException e) {
+
             System.out.println("Savings completely loaded");
-        }
+
     }
 
     @Override

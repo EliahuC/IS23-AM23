@@ -8,4 +8,7 @@ public interface View extends Runnable {
      default Player getPlayer() {
         return player;
     }
+
+
+    void passIP(String ip);
 }

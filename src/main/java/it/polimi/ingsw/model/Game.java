@@ -399,7 +399,7 @@ public class Game implements Serializable {
     private synchronized Player whoWins(){
         Optional<Player> P=Players.stream().reduce((P1,P2) ->P1.getScore()>P2.getScore()? P1 : P2);
         if(P.isEmpty()) {
-            //System.out.println("2 Players with the same score");
+
              P= Optional.ofNullable(checkManually());
 
         }
