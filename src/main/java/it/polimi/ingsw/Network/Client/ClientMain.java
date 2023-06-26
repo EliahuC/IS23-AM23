@@ -6,6 +6,7 @@ import it.polimi.ingsw.view.cli.CLI;
 import it.polimi.ingsw.view.gui.GUIMain;
 
 import java.io.IOException;
+import java.util.Scanner;
 
 /**
  * @author Eliahu Cohen
@@ -13,6 +14,7 @@ import java.io.IOException;
  */
 public class ClientMain implements Printer {
     private static View view;
+    private static String IP;
 
 
 
@@ -20,6 +22,12 @@ public class ClientMain implements Printer {
 
     public static void main(String[] args) throws IOException {
         argsParser(args);
+        if(view instanceof GUIMain){
+            System.out.println("INSERT THE IPv4 ADDRESS");
+            Scanner input = new Scanner(System.in);
+            String IP = input.nextLine();
+            view.passIP(IP);
+        }
         new Thread(view).start();
     }
 

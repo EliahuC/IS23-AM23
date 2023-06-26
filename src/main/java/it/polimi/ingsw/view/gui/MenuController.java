@@ -84,7 +84,7 @@ public class MenuController {
         try {
             receiver = new GUIEvent(this);
             receiver.setInStartGUI(true);
-            serverAddr = Settings.SERVER_NAME;
+            if(serverAddr==null)serverAddr = Settings.SERVER_NAME;
             portNum = Settings.PORT;
             socket = new Socket(serverAddr, portNum);
             connectionClient = new ClientConnectionTCP(socket, nickname);
@@ -217,5 +217,9 @@ public class MenuController {
 
     public String getNickname(){
         return nickname;
+    }
+
+    public void setIP(String ip) {
+        this.serverAddr=ip;
     }
 }

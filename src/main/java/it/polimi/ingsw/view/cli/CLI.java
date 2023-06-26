@@ -12,4 +12,9 @@ public class CLI implements Printer,View {
     public void run() {
         new StartCLI().startClient();
     }
+
+    @Override
+    public void passIP(String ip) {
+
+    }
 }
