@@ -13,6 +13,10 @@ import java.rmi.RemoteException;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * @author Simone Controguerra
+ * First page of the cli where the connection starts
+ */
 public class StartCLI {
 
     private String nickname;
@@ -27,6 +31,10 @@ public class StartCLI {
         this.response=response;
     }
 
+    /**
+     * @author Simone Controguerra
+     * Player Login page
+     */
     public void startClient(){
         boolean lock = false;
         System.out.print(CLS);

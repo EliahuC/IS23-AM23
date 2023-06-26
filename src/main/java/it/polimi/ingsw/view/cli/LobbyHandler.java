@@ -11,6 +11,11 @@ import java.util.Objects;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * @author Simone Controguerra
+ * Lobby entrance / creation page
+ *
+ */
 public class LobbyHandler {
     private final ConnectionClient connectionClient;
     private final CLIEvent receiver;
@@ -31,6 +36,10 @@ public class LobbyHandler {
         this.response=response;
     }
 
+    /**
+     * @author Simone Controguerra and Eliahu Cohen
+     * Joining Lobby Page
+     */
     public void start() {
         GameHandler gameHandler= new GameHandler(connectionClient, receiver);
         receiver.setGameHandler(gameHandler);

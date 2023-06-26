@@ -32,12 +32,15 @@ public class Game implements Serializable {
     private transient GameChecker gameChecker;
     private transient boolean startedGame=false;
     private transient final ArrayList<VirtualView> listeners ;
-  //  private transient final Timer turnTimer=new Timer();
-
     private transient boolean finishedGame=false;
 
 
-
+    /**
+     * @author Eliahu Cohen
+     * @param L launcher to pass to the game checker
+     * @param lobby of players that are part of the game
+     * Constructor used when server starts a new game
+     */
     public Game(Launcher L,ArrayList<Player> lobby){
         listeners=new ArrayList<>();
         this.Players=lobby;
@@ -48,6 +51,12 @@ public class Game implements Serializable {
         this.currPlaying=1;
         this.gameNumPlayers= lobby.size();
     }
+
+    /**
+     * @author Eliahu Cohen
+     * @param lobby of players that are part of the game
+     * Constructor used when server starts an already existing game
+     */
    public Game(ArrayList<Player> lobby){
        this.Players=lobby;
        this.listeners = new ArrayList<>();
@@ -77,9 +86,6 @@ public class Game implements Serializable {
         }
         return listeners;
     }
-   /* public void setDisconnectedPlayers(Player p){
-        disconnectedPlayers.add(p);
-    }*/
 
     /**
      * @author Eliahu Cohen
@@ -100,7 +106,7 @@ public class Game implements Serializable {
         for(Player p:Players){
             p.setPersonalGoalCard(new PersonalGoalCard());
         }
-     // turnTimer(turnTimer);
+
         PropertyChangeEvent evt = new PropertyChangeEvent(
                 this,
                 "GAME_STARTED",
@@ -501,24 +507,16 @@ public class Game implements Serializable {
         return livingRoom;
     }
 
-    /**
-     * @author Eliahu Cohen
-     * method that increase currPlaying every 2 minutes
-     */
-  /*  private void turnTimer(Timer timer)  {
-            TimerTask timerTask=new TimerTask() {
-                @Override
-                public void run() {
-                    increaseCurrPlaying();
-                }
-            };
-            timer = new Timer();
-            timer.schedule(timerTask,120000);
-    }*/
+
 
     public void setFinishedGame(boolean finishedGame) {
         this.finishedGame = finishedGame;
     }
+
+    /**
+     * @author Eliahu Cohen
+     * Method that ends the game when a player crash
+     */
     public void terminateGame(){
         if(finishedGame){
             PropertyChangeEvent evt = new PropertyChangeEvent(
@@ -542,10 +540,7 @@ public class Game implements Serializable {
         Players = players;
     }
 
-   /* public void setGameNumPlayers(Integer gameNumPlayers) {
-        this.gameNumPlayers = gameNumPlayers;
-    }
-*/
+
     public void setStartedGame(boolean startedGame) {
         this.startedGame = startedGame;
     }

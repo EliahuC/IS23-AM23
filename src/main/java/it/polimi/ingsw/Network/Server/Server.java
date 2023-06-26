@@ -45,6 +45,10 @@ public class Server implements Printer {
         thread2.start();
     }
 
+    /**
+     * @author Eliahu Cohen
+     * Method that load the saves from the disk
+     */
     private static void loadSaves()  {
         Reader reader;
         Gson gson=new Gson();

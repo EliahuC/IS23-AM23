@@ -68,9 +68,6 @@ private  String nickName;
             case "COMMON COMPLETED"->{
                 return new CommonCompletedMessage((String) evt.getNewValue());
             }
-            case "SCORE"->{
-                return new ScoreMessage((Integer) evt.getNewValue());
-            }
             case "UPDATE_STATE"->{
                 return new UpdateStateMessage((Game) evt.getNewValue());
             }

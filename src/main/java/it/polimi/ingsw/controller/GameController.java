@@ -29,6 +29,12 @@ public class GameController {
      private Integer column=-1;
      private final ArrayList<Player> players =new ArrayList<>();
      private boolean startedGame=false;
+
+    /**
+     * @author Eliahu Cohen
+     * @param players that play the game
+     * Constructor used from the server to start a new game
+     */
      public GameController(ArrayList<Player> players){
          this.launcher=new Launcher();
          this.players.addAll(players);
@@ -36,7 +42,11 @@ public class GameController {
          launcher.setNumPlayers(players.size());
          this.game =new Game(launcher, this.players);
      }
-
+    /**
+     * @author Eliahu Cohen
+     * @param savings of the game
+     * Constructor used from the server to start an existing game
+     */
      public GameController(GameSavings savings){
          this.launcher=new Launcher();
          this.players.addAll(savings.getPlayers());
@@ -185,11 +195,20 @@ public class GameController {
     public ArrayList<Player> getPlayers() {
         return players;
     }
+
+    /**
+     * @author Eliahu Cohen
+     * Method to terminate the game when a player crash
+     */
     public void terminateGame(){
         game.setFinishedGame(true);
         game.terminateGame();
     }
 
+    /**
+     * @author Eliahu Cohen
+     * @param gameSavings savings taken from the disk
+     */
     public void setGame(GameSavings gameSavings) {
         game.setLivingRoom(gameSavings.getLivingRoom());
         game.setPlayers(gameSavings.getPlayers());

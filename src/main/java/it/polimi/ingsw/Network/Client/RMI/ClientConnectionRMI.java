@@ -110,6 +110,10 @@ public class ClientConnectionRMI extends ConnectionClient implements RemoteInter
         }
     }
 
+    /**
+     * @author Eliahu Cohen
+     * Method that extract a message from the messageQueue and pass it to the view listener
+     */
     private void passToListener(){
        synchronized (queue){
            if(queue.size()!=0){

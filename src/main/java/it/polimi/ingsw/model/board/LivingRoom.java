@@ -36,6 +36,11 @@ public class LivingRoom implements Serializable {
     private Integer idCGC1;
     private Integer idCGC2;
 
+    /**
+     * @author Eliahu Cohen
+     * @param L launcher passed from the game
+     * Constructor that builds the board and the other living room components
+     */
     public LivingRoom(Launcher L) {
         this.L = L;
         this.bag = new Bag();
@@ -92,6 +97,10 @@ public class LivingRoom implements Serializable {
         Board[5][8].setCategory(BoardToken.boardTokenCategory.UNAVAILABLE);
         Board[8][3].setCategory(BoardToken.boardTokenCategory.UNAVAILABLE);
     }
+    /**
+     * @author Eliahu Cohen
+     * set the unavailable spaces in the top left
+     */
     private void setUTopLeft(){
         for (int i = 0; i < 2; i++) {
             for (int j = 0; j < 3; j++) {
@@ -99,7 +108,10 @@ public class LivingRoom implements Serializable {
             }
         }
     }
-
+    /**
+     * @author Eliahu Cohen
+     * set the unavailable spaces in the down left
+     */
     private void setUDownLeft(){
         for (int i = 7; i < MAX_Row; i++) {
             for (int j = 0; j < 3; j++) {
@@ -107,6 +119,10 @@ public class LivingRoom implements Serializable {
             }
         }
     }
+    /**
+     * @author Eliahu Cohen
+     * set the unavailable spaces in the top right
+     */
     private void setUTopRight(){
         for (int i = 0; i < 2; i++) {
             for (int j = 6; j < MAX_Column; j++) {
@@ -114,6 +130,10 @@ public class LivingRoom implements Serializable {
             }
         }
     }
+    /**
+     * @author Eliahu Cohen
+     * set the unavailable spaces in the down right
+     */
     private void setUDownRight(){
         for (int i = 7; i < MAX_Row; i++) {
             for (int j = 6; j < MAX_Column; j++) {

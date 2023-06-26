@@ -5,6 +5,10 @@ import it.polimi.ingsw.model.board.ItemTileCategory;
 
 import java.util.ArrayList;
 
+/**
+ * @author Eliahu Cohen and Andrea Bricchi
+ * Class that rapresent the players bookshelf
+ */
 public class BookShelf {
 
     private final ItemTile[][] Shelf;
@@ -23,7 +27,10 @@ public class BookShelf {
     private boolean commonGoalCard1Completed;
     private boolean commonGoalCard2Completed;
 
-
+    /**
+     * @author Eliahu Cohen and Andrea Bricchi
+     * Constructor of the class
+     */
     public BookShelf() {
 
         this.tileRow = 0;

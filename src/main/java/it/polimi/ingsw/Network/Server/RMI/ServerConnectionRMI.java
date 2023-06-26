@@ -26,6 +26,10 @@ import java.util.ConcurrentModificationException;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * @author Eliahu Cohen
+ * RMI connection handler
+ */
 public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteInterface, ServerConnection {
     private Lobby lobby;
 
@@ -162,6 +166,11 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
         }
     }
 
+    /**
+     * @author Eliahu Cohen
+     * @param nickname of the player
+     * @return a lobby where there is a player with this nickname
+     */
     private Lobby lobbyResearch(String nickname) {
         for(Lobby l: Server.lobbies){
             if(l.getJoinedUsers().contains(nickname)){

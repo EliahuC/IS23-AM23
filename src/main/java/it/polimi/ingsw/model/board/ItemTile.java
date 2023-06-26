@@ -13,23 +13,22 @@ public class ItemTile implements Serializable {
 
 
     private ItemTileCategory category=null ;
-  /*  private boolean visited;
 
-    public boolean isVisited() {
-        return visited;
-    }
-
-
-    public void setVisited(boolean visited) {
-        this.visited = visited;
-    }*/
-
+    /**
+     * @author Eliahu Cohen
+     * Constructor of the class used to pick a random Tile
+     */
     public ItemTile(){
         ItemTileCategory[] values = ItemTileCategory.values();
         int length = values.length;
         int randIndex = new Random().nextInt(length);
         this.category=values[randIndex];
     }
+
+    /**
+     * @author Eliahu Cohen
+     * Constructor of the class used to pick a specific Tile
+     */
     public ItemTile(String x) {
         switch(x){
             case "CATS":

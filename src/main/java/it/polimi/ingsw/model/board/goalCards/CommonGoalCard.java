@@ -118,10 +118,6 @@ public class CommonGoalCard {
         this.numCompleted = 0;
     }
 
-    /**
-     * @author Eliahu Cohen
-     * @return Launcher
-     */
 
     /**
      * @author Simone Controguerra

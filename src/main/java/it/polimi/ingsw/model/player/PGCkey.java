@@ -4,6 +4,10 @@ import it.polimi.ingsw.model.board.ItemTile;
 
 import java.util.HashMap;
 
+/**
+ * @author Eliahu Cohen
+ * Class that rapresent the pait < Pair , Goal >
+ */
 public class PGCkey {
     private final Integer id;
     private final HashMap<Pair, ItemTile> goal;

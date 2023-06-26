@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 /**
  * @author Eliahu Cohen,Giovanni di Lorenzo and Simone Controguerra
+ * class that rapresent the player
  */
 
 public class Player implements Serializable {
@@ -108,14 +109,9 @@ public class Player implements Serializable {
     }
 
     public void setScore(int score) {
-        PropertyChangeEvent event=new PropertyChangeEvent(
-                this,
-                "SCORE",
-                this.score,
-                score
-        );
+
         this.score = score;
-        listener.propertyChange(event);
+
     }
 
     /**

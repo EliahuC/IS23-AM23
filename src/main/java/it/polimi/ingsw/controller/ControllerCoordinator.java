@@ -54,6 +54,12 @@ public class ControllerCoordinator {
     public ArrayList<Player> getConnectedPlayers() {
         return connectedPlayers;
     }
+
+    /**
+     * @author Eliahu Cohen
+     * @param message received from the client
+     * @return Ok message or errormessage
+     */
     public Message setMessage(ClientMessage message){
         if(startedGame) {
             return gameController.readMessage(message);
@@ -74,6 +80,11 @@ public class ControllerCoordinator {
         return gameController.getDisconnectedPlayers();
     }
 
+    /**
+     * @author Eliahu Cohen
+     * @param nickname of the player
+     * @return the player that have that nickname
+     */
     public Player getConnectedPlayer(String nickname) {
         Player player=null;
         for(Player p: connectedPlayers){
@@ -86,11 +97,20 @@ public class ControllerCoordinator {
         return startedGame;
     }
 
+    /**
+     * @author Eliahu Cohen
+     * method to end the game when a player crash
+     */
     public void endgame() {
         if(gameController!=null)
             gameController.terminateGame();
     }
 
+    /**
+     * @author Eliahu Cohen
+     * @param gameSavings taken from the disk
+     * Method to set the game params
+     */
     public void setGame(GameSavings gameSavings) {
         connectedPlayers.clear();
         connectedPlayers.addAll(gameSavings.getPlayers());

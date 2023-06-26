@@ -20,7 +20,11 @@ public class Bag implements Serializable {
 
     private final ArrayList<ItemTile> Tiles = new ArrayList<>();
 
-public Bag() {
+    /**
+     * @author Eliahu Cohen
+     * Constructor to inizialize the bag
+     */
+    public Bag() {
     for(int i=0; i<23;i++){
         Tiles.add(new ItemTile("CATS"));
         Tiles.add(new ItemTile("PLANTS"));

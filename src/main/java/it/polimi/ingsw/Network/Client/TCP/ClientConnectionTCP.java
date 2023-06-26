@@ -19,7 +19,10 @@ import java.rmi.RemoteException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-
+/**
+ * @author Eliahu Cohen
+ * Socket connection of the client
+ */
 public class ClientConnectionTCP extends ConnectionClient {
     PropertyChangeListener listener;
     private final Socket socket;
@@ -35,6 +38,14 @@ public class ClientConnectionTCP extends ConnectionClient {
     private PrintWriter output;
     private final Gson gson=new Gson();
 
+    /**
+     *
+     * @author Eliahu Cohen
+     * @param socket connection with the server
+     * @param nickname of the client
+     * @throws RemoteException if the connection couldn't start
+     * Constructor to start the Socket connection and set the playerNick
+     */
     public ClientConnectionTCP(Socket socket,String nickname) throws RemoteException {
         super();
         this.playerName=nickname;
@@ -51,10 +62,10 @@ public class ClientConnectionTCP extends ConnectionClient {
     }
 
 
-
-
-
-
+    /**
+     * @author Eliahu Cohen
+     * method that start the receiving of the messages
+     */
     @Override
     public void run() {
 
@@ -70,27 +81,33 @@ public class ClientConnectionTCP extends ConnectionClient {
         }
 
     }
-@Override
-        public void receiveMessage(String s) {
-            ServerMessage serverMessage;
 
-            serverMessage= (ServerMessage) MoveDeserializer.deserializeOutput(s);
-            PropertyChangeEvent evt= new PropertyChangeEvent(
-            this,
-            "MESSAGE RECEIVED",
-            null,
-            serverMessage);
-            try{
-                if (listener != null && serverMessage!= null && serverMessage.getCategory() != Message.MessageCategory.PINGFROMSERVER) {
-                    listener.propertyChange(evt);
-        } else if(serverMessage!= null && serverMessage.getCategory()== Message.MessageCategory.PINGFROMSERVER){
-            //System.out.println("Ping arrived")
-                    sendPing();
-                }
-        } catch (InterruptedException e) {
+    /**
+     * @author Eliahu Cohen
+     * @param s message received
+     * Method thar receive the message from the server and pass it to the listener
+     */
+    @Override
+    public void receiveMessage(String s) {
+        ServerMessage serverMessage;
+
+        serverMessage= (ServerMessage) MoveDeserializer.deserializeOutput(s);
+        PropertyChangeEvent evt= new PropertyChangeEvent(
+        this,
+        "MESSAGE RECEIVED",
+        null,
+        serverMessage);
+        try{
+            if (listener != null && serverMessage!= null && serverMessage.getCategory() != Message.MessageCategory.PINGFROMSERVER) {
+                listener.propertyChange(evt);
+    } else if(serverMessage!= null && serverMessage.getCategory()== Message.MessageCategory.PINGFROMSERVER){
+        //System.out.println("Ping arrived")
+                sendPing();
+            }
+    } catch (InterruptedException e) {
             closeConnection();
         }
-        }
+    }
 
 
     /**
@@ -106,6 +123,12 @@ public class ClientConnectionTCP extends ConnectionClient {
         System.out.println("Someone crashed, please relaunch the application to play a new game");
         clientIsActive = false;
     }
+
+    /**
+     * @author Eliahu Cohen
+     * @param message to send to the server
+     * Method that sends a message to the server
+     */
     public void sendMessage(ClientMessage message){
         message.setNickname(playerName);
         String m=gson.toJson(message);
@@ -114,6 +137,11 @@ public class ClientConnectionTCP extends ConnectionClient {
         output.flush();
     }
 
+    /**
+     * @author Eliahu Cohen
+     * @throws InterruptedException if the connection crash
+     * Method to send the ping to the server
+     */
     private void sendPing() throws InterruptedException {
         PingToServer ping=new PingToServer(playerName);
         sendMessage(ping);

@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * @author Eliahu Cohen
- * class that handles the tcp connection between the server and the client
+ * class that handles the Socket connection between the server and the client
  */
 public class ServerConnectionTCP implements ServerConnection{
     private final Socket clientSocket;

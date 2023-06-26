@@ -231,15 +231,22 @@ public class Lobby implements Serializable {
         joinedUsers.add(s);
     }
 
+    /**
+     * @author Eliahu Cohen
+     * Method that ends the game if a player crash
+     */
     public void endGame() {
         controllerCoordinator.endgame();
     }
 
+    /**
+     * @author Eliahu Cohen
+     * @param gameSavings taken from the server
+     * Method that reloads the game
+     */
     public void reloadGame(GameSavings gameSavings) {
         controllerCoordinator=new ControllerCoordinator();
         connections=new ArrayList<>();
-        //saveFilePath="../Savings"; //TODO abilitare durante la creazione del JAR
-        saveFilePath= "Savings";
         setSavesOfTheLobby();
         controllerCoordinator.setGame(gameSavings);
     }
@@ -272,6 +279,12 @@ public class Lobby implements Serializable {
 
     }
 
+    /**
+     * @author Eliahu Cohen
+     * @param serverConnection of the player
+     * @param namePlayer name of the player
+     * Method that remove a player when crash
+     */
     public void removePlayer(ServerConnection serverConnection, String namePlayer) {
         for(Player p: controllerCoordinator.getConnectedPlayers())
             if(namePlayer.equals(p.getNickName())){
