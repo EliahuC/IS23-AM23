@@ -7,9 +7,9 @@ This year the final goal of the project is to develop a digital version of the b
 
 The members of the group are:  
 [Andrea Bricchi](https://github.com/andrebricchi)   
-[Eliahu Cohen](https://github.com/EliahuC) 
-[Simone Controguerra](https://github.com/simocigi) 
-[Giovanni Di Lorenzo](https://github.com/GiovanniDiLorenzo) 
+[Eliahu Cohen](https://github.com/EliahuC)   
+[Simone Controguerra](https://github.com/simocigi)   
+[Giovanni Di Lorenzo](https://github.com/GiovanniDiLorenzo)   
 
 ## Development State
 
