@@ -16,6 +16,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 import java.util.Scanner;
 
 /**
@@ -52,7 +53,7 @@ public class Server implements Printer {
                 //String path="../Savings"+"/Lobby"+i+".json"; //TODO abilitare durante la creazione del JAR
                 String path="/Savings"+"/Lobby"+i+".json";
                 if(Server.class.getResourceAsStream(path)==null)break;
-                reader= new InputStreamReader(Server.class.getResourceAsStream(path));
+                reader= new InputStreamReader(Objects.requireNonNull(Server.class.getResourceAsStream(path)));
                 savings=gson.fromJson(reader, Savings.class);
                 Lobby lobby=savings.getLobby();
                 lobby.getJoinedUsers().clear();
