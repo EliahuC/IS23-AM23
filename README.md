@@ -6,10 +6,10 @@ This year the final goal of the project is to develop a digital version of the b
 ## Credits
 
 The members of the group are:  
-[Andrea Bricchi](https://github.com/andrebricchi) (andrea2.bricchi@mail.polimi.it)  
-[Eliahu Cohen](https://github.com/EliahuC) (eliahuitamar.cohen@mail.polimi.it)  
-[Simone Controguerra](https://github.com/simocigi) (simone.controguerra@mail.polimi.it)  
-[Giovanni Di Lorenzo](https://github.com/GiovanniDiLorenzo) (giovanni.dilorenzo@mail.polimi.it)
+[Andrea Bricchi](https://github.com/andrebricchi)   
+[Eliahu Cohen](https://github.com/EliahuC) 
+[Simone Controguerra](https://github.com/simocigi) 
+[Giovanni Di Lorenzo](https://github.com/GiovanniDiLorenzo) 
 
 ## Development State
 
