@@ -20,6 +20,6 @@ The members of the group are:
 |TUI   	|🟢   	| 100%   	    |    	|
 |GUI   	|🟡   	| 50%   	     |    	|
 |TCP   	|🟢  	| 100%   	    |    	|
-|RMI   	|🟡   	| 99%   	     |   	|
+|RMI   	|🟢   	| 100%   	     |   	|
 |Persistency   	|🟢   	| 100%   	    |   	|
 |Multiple games   	|🟢   	| 100%   	    |   	|
