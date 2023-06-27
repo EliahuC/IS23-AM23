@@ -240,10 +240,10 @@ public class GameControllerGUI {
             imageView.setFitWidth(20);
             imageView.setFitHeight(20);
             imageView.setRotate(-90);
-            myGridPane_choice.setLayoutX(400);
-            myGridPane_choice.setLayoutY(68);
+            myGridPane_choice.setLayoutX(405);
+            myGridPane_choice.setLayoutY(35);
             myGridPane_choice.add(imageView, i, 0);
-            GridPane.setMargin(imageView, new Insets(5));
+            //GridPane.setMargin(imageView, new Insets(5));
         }
         myGridPane_choice.setOnMouseClicked(mouseEvent -> {
             try {

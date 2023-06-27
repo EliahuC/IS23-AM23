@@ -31,9 +31,9 @@ import java.util.concurrent.TimeUnit;
 public class MenuController {
 
     @FXML
-    private TextField textField;
+    private TextField textField_nickname;
     @FXML
-    private ImageView backgroundImage;
+    private TextField textField_IP;
     private Stage stage;
     private Scene scene;
     private String serverAddr;
@@ -51,7 +51,7 @@ public class MenuController {
      * Method to start a Socket Connection
      */
     public void goTCP(ActionEvent event) throws IOException {
-        nickname = textField.getText();
+        nickname = textField_nickname.getText();
         if (!nickname.isEmpty()) {
             if (TCPon(event)) {
                 File file = new File("src/main/resources/com/example/is23am23/lobbyChoice.fxml");
@@ -180,7 +180,7 @@ public class MenuController {
      */
     public void goRMI(ActionEvent event) throws IOException {
 
-        nickname = textField.getText();
+        nickname = textField_nickname.getText();
         if (!nickname.isEmpty()) {
             if (RMIon(event)) {
                 File file = new File("src/main/resources/com/example/is23am23/lobbyChoice.fxml");

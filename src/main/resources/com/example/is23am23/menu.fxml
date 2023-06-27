@@ -7,17 +7,17 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="600.0" snapToPixel="false" stylesheets="@application.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.gui.MenuController">
   <children>
     <Button layoutX="376.0" layoutY="250.0" mnemonicParsing="false" onAction="#goTCP" prefHeight="35.0" prefWidth="50.0" text="TCP" />
     <Button layoutX="451.0" layoutY="250.0" mnemonicParsing="false" onAction="#goRMI" prefHeight="35.0" prefWidth="50.0" text="RMI" />
-    <TextField fx:id="textField" alignment="CENTER" layoutX="75.0" layoutY="255.0" promptText="Insert your nickname" />
+    <TextField fx:id="textField_nickname" alignment="CENTER" layoutX="75.0" layoutY="255.0" promptText="Insert your nickname" />
     <Label alignment="CENTER" layoutX="286.0" layoutY="200.0" prefHeight="25.0" prefWidth="309.0" text="Choose your preferred connection method">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
       <ImageView fitHeight="125.0" fitWidth="375.0" layoutX="115.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true" styleClass="titleImage" />
+      <TextField fx:id="textField_IP" alignment="CENTER" layoutX="75.0" layoutY="315.0" promptText="Insert IP address" />
   </children>
 </AnchorPane>

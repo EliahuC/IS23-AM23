@@ -101,7 +101,7 @@
           <RowConstraints fillHeight="false" maxHeight="33.0" minHeight="33.0" percentHeight="0.0" prefHeight="33.0" valignment="CENTER" vgrow="NEVER" />
         </rowConstraints>
       </GridPane>
-      <GridPane fx:id="myGridPane_choice" layoutX="399.0" layoutY="72.0">
+      <GridPane fx:id="myGridPane_choice" layoutX="405.0" layoutY="35.0">
         <columnConstraints>
           <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" maxWidth="20.0" minWidth="20.0" percentWidth="0.0" prefWidth="20.0" />
             <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" maxWidth="20.0" minWidth="20.0" percentWidth="0.0" prefWidth="20.0" />

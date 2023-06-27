@@ -3,6 +3,8 @@ package it.polimi.ingsw.view.gui;
 import it.polimi.ingsw.Messages.ServerToClient.*;
 import it.polimi.ingsw.Network.Client.ConnectionClient;
 import javafx.application.Platform;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -65,6 +67,12 @@ public class GUIEvent implements PropertyChangeListener {
                         gamecontrollerGUI.setPlayers(temp_updateStateMessage.getGame().getPlayers());
                         gamecontrollerGUI.setPlayer(temp_updateStateMessage.getGame().getPlayers().stream().filter(player -> Objects.equals(player.getNickName(), gamecontrollerGUI.getConnectionClient().getPlayerName())).findFirst().orElseThrow(() -> new IllegalArgumentException("Player not found")));
                         gamecontrollerGUI.setCurrPlaying(temp_updateStateMessage.getGame().getWhoIsPlaying());
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("TURN NOTIFY");
+                        alert.setHeaderText("It's your turn!");
+                        if (alert.showAndWait().get() == ButtonType.OK) {
+
+                        }
                         try {
                             gamecontrollerGUI.displayScene();
                         } catch (IOException e) {
