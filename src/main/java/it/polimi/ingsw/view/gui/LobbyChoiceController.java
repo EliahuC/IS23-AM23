@@ -110,6 +110,7 @@ public class LobbyChoiceController implements Initializable {
                 case "3" -> setPlayersCounter(3);
                 case "4" -> setPlayersCounter(4);
             }
+            //playerNumber.setStyle("-fx-font: 30pt");
             command = "/CREATE " + lobby_size;
             Message message = MoveSerializer.serializeInput(command);
             connectionClient.sendMessage((ClientMessage) message);

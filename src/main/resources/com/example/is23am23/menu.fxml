@@ -3,21 +3,43 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" snapToPixel="false" stylesheets="@application.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.gui.MenuController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" snapToPixel="false" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.gui.MenuController">
   <children>
-    <Button layoutX="376.0" layoutY="250.0" mnemonicParsing="false" onAction="#goTCP" prefHeight="35.0" prefWidth="50.0" text="TCP" />
-    <Button layoutX="451.0" layoutY="250.0" mnemonicParsing="false" onAction="#goRMI" prefHeight="35.0" prefWidth="50.0" text="RMI" />
-    <TextField fx:id="textField_nickname" alignment="CENTER" layoutX="75.0" layoutY="255.0" promptText="Insert your nickname" />
-    <Label alignment="CENTER" layoutX="286.0" layoutY="200.0" prefHeight="25.0" prefWidth="309.0" text="Choose your preferred connection method">
+      <ImageView fitHeight="720.0" fitWidth="1280.0" pickOnBounds="true">
+         <image>
+            <Image url="@sfondo_parquet.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="210.0" fitWidth="650.0" layoutX="318.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true" styleClass="titleImage">
+         <image>
+            <Image url="@title.png" />
+         </image>
+      </ImageView>
+    <Button alignment="CENTER" layoutX="870.0" layoutY="460.0" mnemonicParsing="false" onAction="#goTCP" prefHeight="70.0" prefWidth="100.0" text="TCP" textAlignment="CENTER">
          <font>
-            <Font size="14.0" />
+            <Font size="24.0" />
+         </font></Button>
+    <Button alignment="CENTER" layoutX="1000.0" layoutY="460.0" mnemonicParsing="false" onAction="#goRMI" prefHeight="70.0" prefWidth="100.0" text="RMI" textAlignment="CENTER">
+         <font>
+            <Font size="24.0" />
+         </font></Button>
+    <TextField fx:id="textField_nickname" alignment="CENTER" layoutX="178.0" layoutY="395.0" prefHeight="50.0" prefWidth="280.0" promptText="Insert your nickname">
+         <font>
+            <Font size="24.0" />
+         </font></TextField>
+    <Label alignment="CENTER" layoutX="643.0" layoutY="366.0" prefHeight="40.0" prefWidth="651.0" text="Choose your preferred connection method">
+         <font>
+            <Font size="28.0" />
          </font>
       </Label>
-      <ImageView fitHeight="125.0" fitWidth="375.0" layoutX="115.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true" styleClass="titleImage" />
-      <TextField fx:id="textField_IP" alignment="CENTER" layoutX="75.0" layoutY="315.0" promptText="Insert IP address" />
+      <TextField fx:id="textField_IP" alignment="CENTER" layoutX="178.0" layoutY="479.0" prefHeight="50.0" prefWidth="280.0" promptText="Insert IP address">
+         <font>
+            <Font size="24.0" />
+         </font></TextField>
   </children>
 </AnchorPane>

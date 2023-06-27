@@ -34,7 +34,9 @@ public class GUIMain extends Application implements View {
             Scene mainMenu = new Scene(root);
             stage.setTitle("My Shelfie");
             stage.setScene(mainMenu);
+            stage.setResizable(false);
             stage.show();
+            stage.centerOnScreen();
             Image icon = new Image("com/example/is23am23/little_icon.png");
             stage.getIcons().add(icon);
 

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.URL?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
@@ -9,26 +8,34 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.gui.LobbyChoiceController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.gui.LobbyChoiceController">
     <children>
-        <ImageView fx:id="" fitHeight="400.0" fitWidth="600.0" layoutY="-1.0" pickOnBounds="true" />
-        <ImageView fitHeight="125.0" fitWidth="375.0" layoutX="115.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="" fitHeight="720.0" fitWidth="1280.0" pickOnBounds="true">
+         <image>
+            <Image url="@sfondo_parquet.jpg" />
+         </image></ImageView>
+        <ImageView fitHeight="210.0" fitWidth="650.0" layoutX="318.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@title.png" />
          </image>
         </ImageView>
-        <Button layoutX="160.0" layoutY="248.0" mnemonicParsing="false" onAction="#joinLobby" prefHeight="32.0" prefWidth="100.0" text="Join a lobby" />
-        <Button layoutX="327.0" layoutY="248.0" mnemonicParsing="false" onAction="#createLobby" prefHeight="32.0" prefWidth="126.0" text="Create a new game" />
-        <ChoiceBox fx:id="playerNumber" layoutX="453.0" layoutY="248.0" prefHeight="32.0" prefWidth="47.0" />
-      <Button alignment="CENTER" layoutX="253.0" layoutY="319.0" mnemonicParsing="false" onAction="#returnToMenu" text="Return to Menu" />
-      <Label fx:id="nameDisplay" alignment="CENTER" layoutX="-2.0" layoutY="179.0" prefHeight="30.0" prefWidth="605.0" text="Welcome!">
+        <Button layoutX="284.0" layoutY="426.0" mnemonicParsing="false" onAction="#joinLobby" prefHeight="65.0" prefWidth="182.0" text="Join a lobby">
          <font>
-            <Font size="20.0" />
+            <Font size="24.0" />
+         </font></Button>
+        <Button layoutX="790.0" layoutY="426.0" mnemonicParsing="false" onAction="#createLobby" prefHeight="65.0" prefWidth="252.0" text="Create a new game">
+         <font>
+            <Font size="24.0" />
+         </font></Button>
+        <ChoiceBox fx:id="playerNumber" layoutX="1042.0" layoutY="426.0" prefHeight="65.0" prefWidth="100.0" />
+      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="543.0" layoutY="584.0" mnemonicParsing="false" onAction="#returnToMenu" prefHeight="65.0" prefWidth="200.0" text="Return to Menu" textAlignment="CENTER">
+         <font>
+            <Font size="24.0" />
+         </font></Button>
+      <Label fx:id="nameDisplay" alignment="CENTER" layoutY="302.0" prefHeight="58.0" prefWidth="1280.0" text="Welcome!">
+         <font>
+            <Font size="35.0" />
          </font>
       </Label>
     </children>
-   <stylesheets>
-      <URL value="@application.css" />
-      <URL value="@title.css" />
-   </stylesheets>
 </AnchorPane>

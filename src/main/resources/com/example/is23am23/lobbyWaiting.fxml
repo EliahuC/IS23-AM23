@@ -7,26 +7,29 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.gui.LobbyWaitingController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.gui.LobbyWaitingController">
     <children>
-        <ImageView fx:id="" fitHeight="405.0" fitWidth="605.0" layoutY="-1.0" pickOnBounds="true">
+        <ImageView fx:id="" fitHeight="720.0" fitWidth="1280.0" pickOnBounds="true">
             <image>
                 <Image url="@sfondo_parquet.jpg" />
             </image>
         </ImageView>
-        <ImageView fitHeight="125.0" fitWidth="375.0" layoutX="115.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="210.0" fitWidth="650.0" layoutX="318.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@title.png" />
             </image>
         </ImageView>
-        <Label alignment="CENTER" layoutX="4.0" layoutY="214.0" prefHeight="30.0" prefWidth="598.0" text="Waiting for players...">
+        <Label alignment="CENTER" layoutX="344.0" layoutY="415.0" prefHeight="30.0" prefWidth="598.0" text="Waiting for players...">
             <font>
-                <Font size="20.0" />
+                <Font size="35.0" />
             </font></Label>
-        <Button layoutX="254.0" layoutY="302.0" mnemonicParsing="false" onAction="#returnToMenu" prefHeight="32.0" prefWidth="100.0" text="Return to Menu" />
-      <Label fx:id="Display" alignment="CENTER" layoutY="175.0" prefHeight="17.0" prefWidth="605.0" text="Label" textAlignment="CENTER">
+        <Button layoutX="543.0" layoutY="584.0" mnemonicParsing="false" onAction="#returnToMenu" prefHeight="65.0" prefWidth="200.0" text="Return to Menu">
          <font>
-            <Font size="20.0" />
+            <Font size="24.0" />
+         </font></Button>
+      <Label fx:id="Display" alignment="CENTER" layoutX="338.0" layoutY="327.0" prefHeight="17.0" prefWidth="605.0" text="Label" textAlignment="CENTER">
+         <font>
+            <Font size="35.0" />
          </font>
       </Label>
     </children>
