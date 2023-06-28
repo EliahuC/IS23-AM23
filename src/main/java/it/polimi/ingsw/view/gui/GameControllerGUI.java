@@ -303,8 +303,8 @@ public class GameControllerGUI implements Initializable {
         goalsController.displayCommonGoal();
         goalsController.displayPoints();
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
+        Scene scene1 = new Scene(root);
+        stage.setScene(scene1);
         stage.show();
     }
 
