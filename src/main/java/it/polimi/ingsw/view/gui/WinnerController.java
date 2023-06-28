@@ -42,12 +42,18 @@ public class WinnerController {
         int pos = 2;
         int i = -1;
         for (Player p : ranking) {
-            if(i>=0){
-            Label label = new Label();
-            label.setText(pos + "° position: " + p.getNickName());
-            leaderbord.add(label, i, 0);
+            if (i >= 0) {
+                Label label = new Label();
+                label.setText(pos + "° position: " + p.getNickName());
+                leaderbord.add(label, i, 0);
             }
             i++;
+        }
+        for (Player p : ranking) {
+            if (p.isWinner()) {
+                displayWinner(p.getNickName());
+                break;
+            }
         }
     }
 
