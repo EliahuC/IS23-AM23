@@ -14,6 +14,7 @@ import it.polimi.ingsw.model.player.Player;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 
 import javafx.scene.Node;
@@ -34,6 +35,7 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.*;
 
@@ -43,10 +45,10 @@ import java.util.concurrent.TimeUnit;
  * @author Andrea Bricchi and Giovanni di Lorenzo
  * Controller of the game scene
  */
-public class GameControllerGUI {
-
-    private Stage stage;
+public class GameControllerGUI implements Initializable {
     private Scene scene;
+    private AnchorPane root;
+    private Stage stage;
     private ConnectionClient connectionClient;
     private String nickname;
     private GUIEvent receiver;
@@ -98,16 +100,6 @@ public class GameControllerGUI {
     private Boolean fxmlLoad = true;
     FXMLLoader loader;
 
-    private void initializeGridPanes(){
-        myGridpane_turn = new GridPane();
-        myGridpane_me = new GridPane();
-        myGridPane_choice = new GridPane();
-        myGridPane_lr = new GridPane();
-        bsImage = new GridPane();
-        myGridPane_columns = new GridPane();
-        myGridPane_container = new GridPane();
-        myGridPane_bs = new GridPane();
-    }
 
     /**
      * @author Andrea Bricchi and Giovanni di Lorenzo
@@ -116,7 +108,7 @@ public class GameControllerGUI {
      */
     public void displayScene() throws IOException {
         if(getCurrentIstance().getGrids()){
-            initializeGridPanes();
+           // initializeGridPanes();
             getCurrentIstance().setGrids(false);
         }
         if (instance()) {
@@ -125,12 +117,8 @@ public class GameControllerGUI {
             //getCurrentIstance().getReceiver().setGamecontrollerGUI(getCurrentIstance());
             //getCurrentIstance().setReceiver(receiver);
         }
-        //RIGHE SPOSTATE!
-        File file1 = new File("src/main/resources/com/example/is23am23/game.fxml");
-        URL url = file1.toURI().toURL();
-        FXMLLoader loader = new FXMLLoader(url);
-        getCurrentIstance().setGrids(false);
 
+        myGridPane_lr.getChildren().clear();
         for (int i = 0; i < LivingRoomSize; i++) {
             for (int j = 0; j < LivingRoomSize; j++) {
                 if (getCurrentIstance().livingRoom.getBoardTile(i, j).getCategory() != BoardToken.boardTokenCategory.UNAVAILABLE) {
@@ -165,7 +153,7 @@ public class GameControllerGUI {
             }
         });
 
-        bookshelf = getCurrentIstance().getPlayer().getPlayerBookshelf();
+        bookshelf = player.getPlayerBookshelf();
         for (int i = 0; i < shelfRows; i++) {
             for (int j = 0; j < shelfCols; j++) {
                 ItemTile tile = bookshelf.getTile(i, j);
@@ -179,56 +167,11 @@ public class GameControllerGUI {
                 myGridPane_bs.add(imageView, j, i);
             }
         }
-        ImageView imageView = new ImageView();
-        File file_bs = new File("/com/example/is23am23/bookshelf.png");
-        image = new Image(String.valueOf(file_bs));
-        imageView.setImage(image);
-        imageView.setFitWidth(240);
-        imageView.setFitHeight(240);
-        bsImage.setLayoutX(360);
-        bsImage.setLayoutY(146);
-        bsImage.add(imageView, 0, 0);
-        Label label = new Label();
-        label.setText("Now playing: " + getCurrentIstance().getCurrentPlayer());
-        label.setFont(new Font(14));
-        myGridpane_turn.setLayoutX(14);
-        myGridpane_turn.setLayoutY(16);
-        myGridpane_turn.add(label, 0, 0);
-        Label labelMe = new Label();
-        displayNickname(getCurrentIstance().nickname, labelMe);
-        labelMe.setFont(new Font(14));
-        myGridpane_me.setLayoutX(258);
-        myGridpane_me.setLayoutY(16);
-        myGridpane_me.add(labelMe, 0, 0);
-        for (int i = 0; i < 5; i++) {
-             imageView= new ImageView();
 
-            //IMMAGINE FRECCIA DA INSERIRE
-            File file = new File("/com/example/is23am23/arrow_image.png");
-            image = new Image(String.valueOf(file));
-            imageView.setImage(image);
-            imageView.setFitWidth(33);
-            imageView.setFitHeight(33);
-            myGridPane_columns.setLayoutX(385);
-            myGridPane_columns.setLayoutY(105);
-            myGridPane_columns.add(imageView, i, 0);
-            GridPane.setMargin(imageView, new Insets(2));
-        }
-        myGridPane_columns.setOnMouseClicked(mouseEvent -> {
-            if (getCurrentIstance().getPlayer().getNickName().equals(getCurrentIstance().getPlayers().get
-                    (getCurrentIstance().getCurrPlaying() - 1).getNickName())) {
-                try {
-                    PlaceTilesIntheBookshelf(mouseEvent);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            }
 
-        });
-        // myGridPane_container = new GridPane();
         if (getCurrentIstance().getTiles().size() > 0) {
             for (int i = 0; i < getCurrentIstance().getTiles().size(); i++) {
-                imageView = new ImageView();
+                ImageView imageView = new ImageView();
                 imageView.setImage(chooseCategoryImage(getCurrentIstance().getTiles().get(i)));
                 imageView.setFitWidth(30);
                 imageView.setFitHeight(30);
@@ -238,7 +181,7 @@ public class GameControllerGUI {
             }
         }else{
             for(int i = 0; i<3;i++){
-                imageView = new ImageView();
+                ImageView imageView = new ImageView();
                 imageView.setImage(null);
                 imageView.setFitWidth(30);
                 imageView.setFitHeight(30);
@@ -250,7 +193,7 @@ public class GameControllerGUI {
 
         // myGridPane_choice = new GridPane();
         for (int i = 0; i < 2; i++) {
-            imageView = new ImageView();
+            ImageView imageView = new ImageView();
 
             //IMMAGINE FRECCIA DA INSERIRE
             File file = new File("/com/example/is23am23/arrow_image.png");
@@ -287,16 +230,9 @@ public class GameControllerGUI {
         FXMLLoader loader = new FXMLLoader(url);
         getCurrentIstance().setGrids(false);
         */
-        AnchorPane root = loader.load();
-        root.getChildren().add(myGridPane_lr);
-        root.getChildren().add(myGridPane_bs);
-        root.getChildren().add(myGridPane_container);
-        root.getChildren().add(bsImage);
-        root.getChildren().add(myGridPane_columns);
-        root.getChildren().add(myGridPane_choice);
-        root.getChildren().add(myGridpane_turn);
-        root.getChildren().add(myGridpane_me);
-        Scene scene = new Scene(root);
+
+
+
         getCurrentIstance().stage.setScene(scene);
         getCurrentIstance().stage.setTitle("My Shelfie");
         Image icon = new Image("com/example/is23am23/little_icon.png");
@@ -799,6 +735,8 @@ public class GameControllerGUI {
                 command = "/COLUMN" + " " + Bcolumn;
                 message = (ClientMessage) MoveSerializer.serializeInput(command);
                 getCurrentIstance().getConnectionClient().sendMessage(message);
+                getCurrentIstance().getCoordinates().clear();
+                getCurrentIstance().getTiles().clear();
                 try {
                     TimeUnit.MILLISECONDS.sleep(200);
                 } catch (InterruptedException e) {
@@ -886,5 +824,68 @@ public class GameControllerGUI {
             getCurrentIstance().getPlayer().getPlayerBookshelf().setTile(Bcolumn,tiles.get(i));
             i++;
         }
+    }
+
+    public void setRoot(AnchorPane root) {
+        this.root = root;
+        scene = new Scene(this.root);
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+    }
+
+    /**
+     * @author Eliahu Cohen
+     * Method that loads the bookshelf on the stage
+     */
+    public void launchBookshekf() {
+        ImageView imageView = new ImageView();
+        File file_bs = new File("/com/example/is23am23/bookshelf.png");
+        image = new Image(String.valueOf(file_bs));
+        imageView.setImage(image);
+        imageView.setFitWidth(240);
+        imageView.setFitHeight(240);
+        bsImage.setLayoutX(360);
+        bsImage.setLayoutY(146);
+        bsImage.add(imageView, 0, 0);
+        Label label = new Label();
+        label.setText("Now playing: " + getCurrentIstance().getCurrentPlayer());
+        label.setFont(new Font(14));
+        myGridpane_turn.setLayoutX(14);
+        myGridpane_turn.setLayoutY(16);
+        myGridpane_turn.add(label, 0, 0);
+        Label labelMe = new Label();
+        displayNickname(getCurrentIstance().nickname, labelMe);
+        labelMe.setFont(new Font(14));
+        myGridpane_me.setLayoutX(258);
+        myGridpane_me.setLayoutY(16);
+        myGridpane_me.add(labelMe, 0, 0);
+        for (int i = 0; i < 5; i++) {
+            imageView= new ImageView();
+
+            //IMMAGINE FRECCIA DA INSERIRE
+            File file = new File("/com/example/is23am23/arrow_image.png");
+            image = new Image(String.valueOf(file));
+            imageView.setImage(image);
+            imageView.setFitWidth(33);
+            imageView.setFitHeight(33);
+            myGridPane_columns.setLayoutX(385);
+            myGridPane_columns.setLayoutY(105);
+            myGridPane_columns.add(imageView, i, 0);
+            GridPane.setMargin(imageView, new Insets(2));
+        }
+        myGridPane_columns.setOnMouseClicked(mouseEvent -> {
+            if (getCurrentIstance().getPlayer().getNickName().equals(getCurrentIstance().getPlayers().get
+                    (getCurrentIstance().getCurrPlaying() - 1).getNickName())) {
+                try {
+                    PlaceTilesIntheBookshelf(mouseEvent);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+
+        });
     }
 }

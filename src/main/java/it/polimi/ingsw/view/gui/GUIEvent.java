@@ -3,12 +3,16 @@ package it.polimi.ingsw.view.gui;
 import it.polimi.ingsw.Messages.ServerToClient.*;
 import it.polimi.ingsw.Network.Client.ConnectionClient;
 import javafx.application.Platform;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Objects;
 
@@ -43,16 +47,17 @@ public class GUIEvent implements PropertyChangeListener {
             Platform.runLater(()-> {
                 switch (serverMessage.getCategory()) {
                     case STARTING_GAME_MESSAGE:
-                            GameIsStartingMessage temp_startingGameMessage = (GameIsStartingMessage) serverMessage;
-                            gamecontrollerGUI.setPlayers(temp_startingGameMessage.getPlayers());
-                            gamecontrollerGUI.setLivingRoom(temp_startingGameMessage.getLivingRoom());
-                            gamecontrollerGUI.setPlayer(temp_startingGameMessage.getPlayers().stream().filter(player -> Objects.equals(player.getNickName(), gamecontrollerGUI.getConnectionClient().getPlayerName())).findFirst().orElseThrow(() -> new IllegalArgumentException("Player not found")));
-                            gamecontrollerGUI.setCurrentPlayer(temp_startingGameMessage.getCurrPlaying());
-                            gamecontrollerGUI.setSeed(gamecontrollerGUI.getPlayer().getPersonalGoalCard().getNumeroCarta());
-                            gamecontrollerGUI.setNickname(menuController.getNickname());
-                            stage = menuController.getStage();
-                            gamecontrollerGUI.setStage(stage);
-                            gamecontrollerGUI.setReceiver(this);
+                        gamecontrollerGUI.launchBookshekf();
+                        GameIsStartingMessage temp_startingGameMessage = (GameIsStartingMessage) serverMessage;
+                        gamecontrollerGUI.setPlayers(temp_startingGameMessage.getPlayers());
+                        gamecontrollerGUI.setLivingRoom(temp_startingGameMessage.getLivingRoom());
+                        gamecontrollerGUI.setPlayer(temp_startingGameMessage.getPlayers().stream().filter(player -> Objects.equals(player.getNickName(), gamecontrollerGUI.getConnectionClient().getPlayerName())).findFirst().orElseThrow(() -> new IllegalArgumentException("Player not found")));
+                        gamecontrollerGUI.setCurrentPlayer(temp_startingGameMessage.getCurrPlaying());
+                        gamecontrollerGUI.setSeed(gamecontrollerGUI.getPlayer().getPersonalGoalCard().getNumeroCarta());
+                        gamecontrollerGUI.setNickname(menuController.getNickname());
+                        stage = menuController.getStage();
+                        gamecontrollerGUI.setStage(stage);
+                        gamecontrollerGUI.setReceiver(this);
                         try {
                             gamecontrollerGUI.displayScene();
                         } catch (IOException e) {
@@ -62,7 +67,7 @@ public class GUIEvent implements PropertyChangeListener {
                     case UPDATE_STATE:
                         UpdateStateMessage temp_updateStateMessage = (UpdateStateMessage) serverMessage;
                         gamecontrollerGUI.setLivingRoom(temp_updateStateMessage.getGame().getLivingRoom());
-                        gamecontrollerGUI.setFlag(true);
+                       // gamecontrollerGUI.setFlag(true);
                         //gamecontrollerGUI.setFirstTime(true);
                         gamecontrollerGUI.setPlayers(temp_updateStateMessage.getGame().getPlayers());
                         gamecontrollerGUI.setPlayer(temp_updateStateMessage.getGame().getPlayers().stream().filter(player -> Objects.equals(player.getNickName(), gamecontrollerGUI.getConnectionClient().getPlayerName())).findFirst().orElseThrow(() -> new IllegalArgumentException("Player not found")));
@@ -102,6 +107,30 @@ public class GUIEvent implements PropertyChangeListener {
             });
         }
     }
+
+    /**
+     * @author Eliahu Cohen
+     * method to load the controller and the scene of game.fxml
+     */
+    public void loadScene() {
+            File file1 = new File("src/main/resources/com/example/is23am23/game.fxml");
+            URL url = null;
+            AnchorPane root;
+            try {
+                url = file1.toURI().toURL();
+            } catch (MalformedURLException ignored) {
+
+            }
+            FXMLLoader loader = new FXMLLoader(url);
+        try {
+             root=loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        this.gamecontrollerGUI=loader.getController();
+        gamecontrollerGUI.setRoot(root);
+        }
+
 
     private void forwardMessage(ServerMessage response) {
         if (inStartGUI) {
@@ -151,5 +180,9 @@ public class GUIEvent implements PropertyChangeListener {
 
     public void setConnectionClient(ConnectionClient connectionClient) {
         this.connectionClient = connectionClient;
+    }
+
+    public GameControllerGUI getGamecontrollerGUI() {
+        return gamecontrollerGUI;
     }
 }

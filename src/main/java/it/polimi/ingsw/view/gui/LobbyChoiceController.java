@@ -56,9 +56,9 @@ public class LobbyChoiceController implements Initializable {
     public void joinLobby(ActionEvent event) throws IOException {
         receiver.setInStartGUI(false);
         receiver.setInLobbyChoice(true);
-        gameControllerGUI = new GameControllerGUI();
+         receiver.loadScene();
+         gameControllerGUI=receiver.getGamecontrollerGUI();
         gameControllerGUI.setConnectionClient(connectionClient);
-        receiver.setGamecontrollerGUI(gameControllerGUI);
         receiver.setConnectionClient(connectionClient);
         gameControllerGUI.setReceiver(receiver);
         command = "/ENTER";
@@ -121,9 +121,9 @@ public class LobbyChoiceController implements Initializable {
             LobbyWaitingController lobbyWaitingController = loader.getController();
             lobbyWaitingController.displayNickname(nickname);
             lobbyWaitingController.setConnectionClient(connectionClient);
-            gameControllerGUI = new GameControllerGUI();
+            receiver.loadScene();
+            gameControllerGUI = receiver.getGamecontrollerGUI();
             gameControllerGUI.setConnectionClient(connectionClient);
-            receiver.setGamecontrollerGUI(gameControllerGUI);
             gameControllerGUI.setReceiver(receiver);
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
