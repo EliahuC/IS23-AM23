@@ -11,9 +11,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
-import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 
 /**
  * @author Andrea Bricchi and Giovanni di Lorenzo

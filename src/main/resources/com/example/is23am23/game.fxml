@@ -46,38 +46,38 @@
         </GridPane>
         <GridPane fx:id="myGridPane_lr" layoutX="58.0" layoutY="104.0" prefHeight="553.0" prefWidth="553.0">
             <columnConstraints>
-                <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="NEVER" maxWidth="86.0" minWidth="10.0" prefWidth="64.00000762939453" />
-                <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="NEVER" maxWidth="67.0" minWidth="10.0" prefWidth="60.66667175292969" />
-                <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="NEVER" maxWidth="87.0" minWidth="0.0" prefWidth="61.33332824707031" />
-                <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="NEVER" maxWidth="139.33334350585938" minWidth="10.0" prefWidth="63.0" />
-                <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="NEVER" maxWidth="144.33331298828125" minWidth="10.0" prefWidth="61.0" />
-                <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="NEVER" maxWidth="123.66668701171875" minWidth="10.0" prefWidth="61.0" />
-                <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="NEVER" maxWidth="110.0" minWidth="10.0" prefWidth="60.333343505859375" />
-                <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="NEVER" maxWidth="116.66668701171875" minWidth="10.0" prefWidth="61.33331298828125" />
-                <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="NEVER" maxWidth="79.0" minWidth="10.0" prefWidth="60.66668701171875" />
+                <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="NEVER" maxWidth="61.5" minWidth="61.5" percentWidth="0.0" prefWidth="61.5" />
+                <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="NEVER" maxWidth="61.5" minWidth="61.5" percentWidth="0.0" prefWidth="61.5" />
+                <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="NEVER" maxWidth="61.5" minWidth="61.5" percentWidth="0.0" prefWidth="61.5" />
+                <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="NEVER" maxWidth="61.5" minWidth="61.5" percentWidth="0.0" prefWidth="61.5" />
+                <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="NEVER" maxWidth="61.5" minWidth="61.5" percentWidth="0.0" prefWidth="61.5" />
+                <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="NEVER" maxWidth="61.5" minWidth="61.5" percentWidth="0.0" prefWidth="61.5" />
+                <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="NEVER" maxWidth="61.5" minWidth="61.5" percentWidth="0.0" prefWidth="61.5" />
+                <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="NEVER" maxWidth="61.5" minWidth="61.5" percentWidth="0.0" prefWidth="61.5" />
+                <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="NEVER" maxWidth="61.5" minWidth="61.5" percentWidth="0.0" prefWidth="61.5" />
             </columnConstraints>
             <rowConstraints>
-                <RowConstraints fillHeight="false" maxHeight="74.0" minHeight="10.0" prefHeight="62.666656494140625" valignment="CENTER" vgrow="NEVER" />
-                <RowConstraints fillHeight="false" maxHeight="101.0" minHeight="10.0" prefHeight="61.33332824707031" valignment="CENTER" vgrow="NEVER" />
-                <RowConstraints fillHeight="false" maxHeight="69.33334350585938" minHeight="0.0" prefHeight="61.66667175292969" valignment="CENTER" vgrow="NEVER" />
-                <RowConstraints fillHeight="false" maxHeight="71.0" minHeight="4.0" prefHeight="60.666656494140625" valignment="CENTER" vgrow="NEVER" />
-                <RowConstraints fillHeight="false" maxHeight="90.0" minHeight="10.0" prefHeight="59.666656494140625" valignment="CENTER" vgrow="NEVER" />
-                <RowConstraints fillHeight="false" maxHeight="69.33331298828125" minHeight="10.0" prefHeight="61.66668701171875" valignment="CENTER" vgrow="NEVER" />
-                <RowConstraints fillHeight="false" maxHeight="68.0" minHeight="10.0" prefHeight="60.333343505859375" valignment="CENTER" vgrow="NEVER" />
-                <RowConstraints fillHeight="false" maxHeight="73.0" minHeight="10.0" prefHeight="61.3333740234375" valignment="CENTER" vgrow="NEVER" />
-                <RowConstraints fillHeight="false" maxHeight="66.3333740234375" minHeight="10.0" prefHeight="61.66668701171875" valignment="CENTER" vgrow="NEVER" />
+                <RowConstraints fillHeight="false" maxHeight="61.5" minHeight="61.5" percentHeight="0.0" prefHeight="61.5" valignment="CENTER" vgrow="NEVER" />
+                <RowConstraints fillHeight="false" maxHeight="61.5" minHeight="61.5" percentHeight="0.0" prefHeight="61.5" valignment="CENTER" vgrow="NEVER" />
+                <RowConstraints fillHeight="false" maxHeight="61.5" minHeight="61.5" percentHeight="0.0" prefHeight="61.5" valignment="CENTER" vgrow="NEVER" />
+                <RowConstraints fillHeight="false" maxHeight="61.5" minHeight="61.5" percentHeight="0.0" prefHeight="61.5" valignment="CENTER" vgrow="NEVER" />
+                <RowConstraints fillHeight="false" maxHeight="61.5" minHeight="61.5" percentHeight="0.0" prefHeight="61.5" valignment="CENTER" vgrow="NEVER" />
+                <RowConstraints fillHeight="false" maxHeight="61.5" minHeight="61.5" percentHeight="0.0" prefHeight="61.5" valignment="CENTER" vgrow="NEVER" />
+                <RowConstraints fillHeight="false" maxHeight="61.5" minHeight="61.5" percentHeight="0.0" prefHeight="61.5" valignment="CENTER" vgrow="NEVER" />
+                <RowConstraints fillHeight="false" maxHeight="61.5" minHeight="61.5" percentHeight="0.0" prefHeight="61.5" valignment="CENTER" vgrow="NEVER" />
+                <RowConstraints fillHeight="false" maxHeight="61.5" minHeight="61.5" percentHeight="0.0" prefHeight="61.5" valignment="CENTER" vgrow="NEVER" />
             </rowConstraints>
         </GridPane>
-        <GridPane fx:id="myGridPane_columns" layoutX="853.0" layoutY="167.0" prefHeight="51.0" prefWidth="247.0">
+        <GridPane fx:id="myGridPane_columns" layoutX="853.0" layoutY="167.0" prefHeight="62.0" prefWidth="336.0">
             <columnConstraints>
-                <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" maxWidth="62.0" minWidth="62.0" percentWidth="0.0" prefWidth="62.0" />
-                <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" maxWidth="62.0" minWidth="62.0" percentWidth="0.0" prefWidth="62.0" />
-                <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" maxWidth="62.0" minWidth="62.0" percentWidth="0.0" prefWidth="62.0" />
-                <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" maxWidth="62.0" minWidth="62.0" percentWidth="0.0" prefWidth="62.0" />
-                <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" maxWidth="62.0" minWidth="62.0" percentWidth="0.0" prefWidth="62.0" />
+                <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="NEVER" maxWidth="70.0" minWidth="70.0" percentWidth="0.0" prefWidth="70.0" />
+                <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="NEVER" maxWidth="70.0" minWidth="70.0" percentWidth="0.0" prefWidth="70.0" />
+                <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="NEVER" maxWidth="70.0" minWidth="70.0" percentWidth="0.0" prefWidth="70.0" />
+                <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="NEVER" maxWidth="70.0" minWidth="70.0" percentWidth="0.0" prefWidth="70.0" />
+                <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="NEVER" maxWidth="70.0" minWidth="70.0" percentWidth="0.0" prefWidth="70.0" />
             </columnConstraints>
             <rowConstraints>
-                <RowConstraints fillHeight="false" maxHeight="62.0" minHeight="62.0" percentHeight="0.0" prefHeight="62.0" vgrow="SOMETIMES" />
+                <RowConstraints fillHeight="false" maxHeight="70.0" minHeight="70.0" percentHeight="0.0" prefHeight="70.0" valignment="CENTER" vgrow="NEVER" />
             </rowConstraints>
             <opaqueInsets>
                 <Insets />

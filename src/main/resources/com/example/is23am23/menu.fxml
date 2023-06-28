@@ -28,7 +28,7 @@
          <font>
             <Font size="24.0" />
          </font></Button>
-    <TextField fx:id="textField_nickname" alignment="CENTER" layoutX="178.0" layoutY="395.0" prefHeight="50.0" prefWidth="280.0" promptText="Insert your nickname">
+    <TextField fx:id="textField_nickname" alignment="CENTER" layoutX="235.0" layoutY="426.0" prefHeight="50.0" prefWidth="280.0" promptText="Insert your nickname">
          <font>
             <Font size="24.0" />
          </font></TextField>
@@ -37,9 +37,5 @@
             <Font size="28.0" />
          </font>
       </Label>
-      <TextField fx:id="textField_IP" alignment="CENTER" layoutX="178.0" layoutY="479.0" prefHeight="50.0" prefWidth="280.0" promptText="Insert IP address">
-         <font>
-            <Font size="24.0" />
-         </font></TextField>
   </children>
 </AnchorPane>

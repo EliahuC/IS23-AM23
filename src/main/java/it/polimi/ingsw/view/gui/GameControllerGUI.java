@@ -122,10 +122,10 @@ public class GameControllerGUI implements Initializable {
                     ItemTile tile = getCurrentIstance().livingRoom.getBoardTile(i, j).getTile();
                     ImageView imageView = new ImageView();
                     imageView.setImage(chooseCategoryImage(tile));
-                    imageView.setFitWidth(62);
-                    imageView.setFitHeight(62);
-                    myGridPane_lr.setLayoutX(61);
-                    myGridPane_lr.setLayoutY(108);
+                    imageView.setFitWidth(60);
+                    imageView.setFitHeight(60);
+                    myGridPane_lr.setLayoutX(58);
+                    myGridPane_lr.setLayoutY(105);
                     GridPane.setMargin(imageView, new Insets(0));
                     myGridPane_lr.add(imageView, j, i);
                 }
@@ -733,12 +733,12 @@ public class GameControllerGUI implements Initializable {
             File file = new File("/com/example/is23am23/arrow_image.png");
             image = new Image(String.valueOf(file));
             imageView.setImage(image);
-            imageView.setFitWidth(62);
-            imageView.setFitHeight(62);
-            myGridPane_columns.setLayoutX(853);
+            imageView.setFitWidth(64);
+            imageView.setFitHeight(64);
+            myGridPane_columns.setLayoutX(852);
             myGridPane_columns.setLayoutY(167);
             myGridPane_columns.add(imageView, i, 0);
-            GridPane.setMargin(imageView, new Insets(2));
+            GridPane.setMargin(imageView, new Insets(25));
         }
         myGridPane_columns.setOnMouseClicked(mouseEvent -> {
             if (getCurrentIstance().getPlayer().getNickName().equals(getCurrentIstance().getPlayers().get

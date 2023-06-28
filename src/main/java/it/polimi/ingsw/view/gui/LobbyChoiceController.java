@@ -17,7 +17,6 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
-import java.io.File;
 import java.net.URL;
 import java.io.IOException;
 import java.util.ResourceBundle;

@@ -14,13 +14,10 @@ import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
-import java.io.File;
 import java.io.IOException;
 import java.net.Socket;
-import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -66,8 +63,6 @@ public class MenuController {
                 scene = new Scene(root);
                 stage.setScene(scene);
                 stage.show();
-                //stage.setFullScreen(true);
-
             }
             else{
                 Alert alert = new Alert(Alert.AlertType.WARNING);
