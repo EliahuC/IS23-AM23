@@ -9,16 +9,12 @@ import it.polimi.ingsw.Network.Server.TCP.TCPServerMain;
 import it.polimi.ingsw.Printer;
 import it.polimi.ingsw.Savings;
 
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.Reader;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Objects;
 import java.util.Scanner;
 
 /**
@@ -58,7 +54,7 @@ public class Server implements Printer {
             int i=0;
 
             while (true){
-                String path= "./Savings" +"/Lobby"+i+".json";
+                String path= "C:\\Program Files (x86)\\GitHub\\IS23-AM23\\Savings" +"/Lobby"+i+".json";
                 reader= Files.newBufferedReader(Paths.get(path));
                 savings=gson.fromJson(reader, Savings.class);
                 Lobby lobby=savings.getLobby();
