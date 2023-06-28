@@ -102,7 +102,7 @@ public class GameControllerGUI implements Initializable {
 
     /**
      * @throws IOException exception
-     *                     Method to display the scene
+     * Method to display the scene
      * @author Andrea Bricchi and Giovanni di Lorenzo
      */
     public void displayScene() throws IOException {
@@ -222,12 +222,7 @@ public class GameControllerGUI implements Initializable {
                 throw new RuntimeException(e);
             }
         });
-        /*
-        File file = new File("src/main/resources/com/example/is23am23/game.fxml");
-        URL url = file.toURI().toURL();
-        FXMLLoader loader = new FXMLLoader(url);
-        getCurrentIstance().setGrids(false);
-        */
+
 
 
         getCurrentIstance().stage.setScene(scene);
@@ -617,7 +612,7 @@ public class GameControllerGUI implements Initializable {
     }
 
     /**
-     /* @param event click
+     * @param event click
      * @throws IOException exception
      *                     Method to send the message order and column to the server
      * @author Andrea Bricchi and Giovanni di Lorenzo

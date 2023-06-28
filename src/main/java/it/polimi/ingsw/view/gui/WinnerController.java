@@ -21,7 +21,7 @@ import java.util.List;
 
 /**
  * @author Andrea Bricchi
- *  Controller of the winning scene
+ * Controller of the winning scene
  */
 public class WinnerController {
 
@@ -35,7 +35,11 @@ public class WinnerController {
     private Scene scene;
     private Stage stage;
 
-
+    /**
+     * @author Andrea Bricchi and Giovanni Di Lorenzo
+     * @param ranking of players
+     * Method to display the ranking of the players
+     */
     public void displayLeaderbord(List<Player> ranking) {
 
         leaderbord = new GridPane();
@@ -57,12 +61,23 @@ public class WinnerController {
         }
     }
 
+    /**
+     * @author Andrea Bricchi
+     * @param winner name of the player who wins
+     * Method to disply the name of the winner
+     */
     public void displayWinner(String winner){
         this.winner = winner;
         winnerLabel = new Label();
         winnerLabel.setText(winner + "!");
     }
 
+    /**
+     * @author Andrea Bricchi
+     * @param event click
+     * @throws IOException exception
+     * Method to return to the menu  scene
+     */
     public void returnToMenu(ActionEvent event) throws IOException {
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);

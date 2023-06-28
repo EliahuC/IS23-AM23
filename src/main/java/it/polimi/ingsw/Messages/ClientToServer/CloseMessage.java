@@ -1,7 +1,10 @@
 package it.polimi.ingsw.Messages.ClientToServer;
 
-import it.polimi.ingsw.Messages.ClientToServer.PossibleMoves.Move;
 
+/**
+ * @author Eliahu Cohen
+ * Message sent from client to close the connection
+ */
 public class CloseMessage extends ClientMessage{
     public CloseMessage() {
         super(MessageCategory.CLOSE, null, "nickname");

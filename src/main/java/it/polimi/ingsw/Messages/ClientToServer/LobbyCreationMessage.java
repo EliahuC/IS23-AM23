@@ -1,5 +1,9 @@
 package it.polimi.ingsw.Messages.ClientToServer;
 
+/**
+ * @author Eliahu Cohen
+ * Message sent from sìclient to create a lobby
+ */
 public class LobbyCreationMessage extends ClientMessage {
     private Integer numPlayers;
 

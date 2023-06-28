@@ -1,5 +1,9 @@
 package it.polimi.ingsw.Messages.ClientToServer;
 
+/**
+ * @author Eliahu Cohen
+ * Message sent from client to logout from a lobby
+ */
 public class LobbyLogoutMessage extends ClientMessage{
     private String nickname;
     public LobbyLogoutMessage() {
