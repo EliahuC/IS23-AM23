@@ -67,7 +67,8 @@ public class GUIEvent implements PropertyChangeListener {
                     case UPDATE_STATE:
                         UpdateStateMessage temp_updateStateMessage = (UpdateStateMessage) serverMessage;
                         gamecontrollerGUI.setLivingRoom(temp_updateStateMessage.getGame().getLivingRoom());
-                       // gamecontrollerGUI.setFlag(true);
+                        gamecontrollerGUI.setFlag(true);
+                        gamecontrollerGUI.setShowContainer(true);
                         //gamecontrollerGUI.setFirstTime(true);
                         gamecontrollerGUI.setPlayers(temp_updateStateMessage.getGame().getPlayers());
                         gamecontrollerGUI.setPlayer(temp_updateStateMessage.getGame().getPlayers().stream().filter(player -> Objects.equals(player.getNickName(), gamecontrollerGUI.getConnectionClient().getPlayerName())).findFirst().orElseThrow(() -> new IllegalArgumentException("Player not found")));
@@ -96,6 +97,8 @@ public class GUIEvent implements PropertyChangeListener {
                         break;
                     case END_GAME_MESSAGE:
                         EndGameMessage temp_endGameMessage = (EndGameMessage) serverMessage;
+                        gamecontrollerGUI.setPlayers(temp_endGameMessage.getPlayers());
+                        //gamecontrollerGUI.setEndgame(true);
                         //gamecontrollerGUI.setWinner(temp_endGameMessage.getWinner().getNickName()); MANCA METODO GETWINNER()
                         try {
                             gamecontrollerGUI.goToResults();
