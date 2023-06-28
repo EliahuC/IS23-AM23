@@ -85,9 +85,7 @@ public class WinnerController {
         alert.setHeaderText("You are about to return to the menu, are you sure?");
 
         if (alert.showAndWait().get() == ButtonType.OK) {
-            File file = new File("src/main/resources/com/example/is23am23/menu.fxml");
-            URL url = file.toURI().toURL();
-            FXMLLoader loader = new FXMLLoader(url);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/is23am23/menu.fxml"));
             Parent root = loader.load();
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);

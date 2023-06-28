@@ -40,9 +40,7 @@ public class UsedNicknameController {
 
     public void returnToMenu(ActionEvent event) throws IOException {
 
-        File file = new File("src/main/resources/com/example/is23am23/menu.fxml");
-        URL url = file.toURI().toURL();
-        FXMLLoader loader = new FXMLLoader(url);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/is23am23/menu.fxml"));
         Parent root = loader.load();
         stage = (Stage)((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -58,9 +56,7 @@ public class UsedNicknameController {
         nickname = name.getText();
         if (!nickname.isEmpty()) {
             if (TCPon(event)) {
-                File file = new File("src/main/resources/com/example/is23am23/lobbyChoice.fxml");
-                URL url = file.toURI().toURL();
-                FXMLLoader loader = new FXMLLoader(url);
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/is23am23/lobbyChoice.fxml"));
                 Parent root = loader.load();
                 LobbyChoiceController lobbyController = loader.getController();
                 receiver.setLobbyChoiceController(lobbyController);
@@ -102,9 +98,7 @@ public class UsedNicknameController {
         nickname = name.getText();
         if (!nickname.isEmpty()) {
             if (RMIon(event)) {
-                File file = new File("src/main/resources/com/example/is23am23/lobbyChoice.fxml");
-                URL url = file.toURI().toURL();
-                FXMLLoader loader = new FXMLLoader(url);
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/is23am23/lobbyChoice.fxml"));
                 Parent root = loader.load();
 
                 LobbyChoiceController lobbyController = loader.getController();

@@ -116,15 +116,9 @@ public class GUIEvent implements PropertyChangeListener {
      * method to load the controller and the scene of game.fxml
      */
     public void loadScene() {
-            File file1 = new File("src/main/resources/com/example/is23am23/game.fxml");
-            URL url = null;
-            AnchorPane root;
-            try {
-                url = file1.toURI().toURL();
-            } catch (MalformedURLException ignored) {
 
-            }
-            FXMLLoader loader = new FXMLLoader(url);
+        AnchorPane root;
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/is23am23/game.fxml"));
         try {
              root=loader.load();
         } catch (IOException e) {

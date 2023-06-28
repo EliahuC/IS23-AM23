@@ -71,9 +71,7 @@ public class LobbyChoiceController implements Initializable {
         }
         if (checklobbies()) {
             if (response.getCategory() == Message.MessageCategory.RETURN_MESSAGE) {
-                File file = new File("src/main/resources/com/example/is23am23/lobbyWaiting.fxml");
-                URL url = file.toURI().toURL();
-                FXMLLoader loader = new FXMLLoader(url);
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/is23am23/lobbyWaiting.fxml"));
                 root = loader.load();
                 LobbyWaitingController lobbyWaitingController = loader.getController();
                 lobbyWaitingController.displayNickname(nickname);
@@ -114,9 +112,7 @@ public class LobbyChoiceController implements Initializable {
             command = "/CREATE " + lobby_size;
             Message message = MoveSerializer.serializeInput(command);
             connectionClient.sendMessage((ClientMessage) message);
-            File file = new File("src/main/resources/com/example/is23am23/lobbyWaiting.fxml");
-            URL url = file.toURI().toURL();
-            FXMLLoader loader = new FXMLLoader(url);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/is23am23/lobbyWaiting.fxml"));
             Parent root = loader.load();
             LobbyWaitingController lobbyWaitingController = loader.getController();
             lobbyWaitingController.displayNickname(nickname);
@@ -140,9 +136,7 @@ public class LobbyChoiceController implements Initializable {
      */
     public void returnToMenu(ActionEvent event) throws IOException {
 
-        File file = new File("src/main/resources/com/example/is23am23/menu.fxml");
-        URL url = file.toURI().toURL();
-        FXMLLoader loader = new FXMLLoader(url);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/is23am23/menu.fxml"));
         Parent root = loader.load();
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);

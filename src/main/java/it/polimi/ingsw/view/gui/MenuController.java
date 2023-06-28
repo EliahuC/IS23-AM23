@@ -54,9 +54,7 @@ public class MenuController {
         nickname = textField_nickname.getText();
         if (!nickname.isEmpty()) {
             if (TCPon(event)) {
-                File file = new File("src/main/resources/com/example/is23am23/lobbyChoice.fxml");
-                URL url = file.toURI().toURL();
-                FXMLLoader loader = new FXMLLoader(url);
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/is23am23/lobbyChoice.fxml"));
                 Parent root = loader.load();
                 LobbyChoiceController lobbyController = loader.getController();
                 receiver.setLobbyChoiceController(lobbyController);
@@ -116,9 +114,7 @@ public class MenuController {
             if(response.getCategory()==Message.MessageCategory.VALID_NICKNAME){
                 return true;
             } else {
-            File file = new File("src/main/resources/com/example/is23am23/usedNickname.fxml");
-            URL url = file.toURI().toURL();
-            FXMLLoader loader = new FXMLLoader(url);
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/is23am23/usedNickname.fxml"));
             Parent root = loader.load();
             UsedNicknameController usedNicknameController = loader.getController();
             receiver.setUsedNicknameController(usedNicknameController);
@@ -157,9 +153,8 @@ public class MenuController {
             if(response.getCategory()==Message.MessageCategory.VALID_NICKNAME){
                 return true;
             } else {
-            File file = new File("src/main/resources/com/example/is23am23/usedNickname.fxml");
-            URL url = file.toURI().toURL();
-            FXMLLoader loader = new FXMLLoader(url);
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/is23am23/usedNickname.fxml"));
             Parent root = loader.load();
             UsedNicknameController usedNicknameController = loader.getController();
             receiver.setUsedNicknameController(usedNicknameController);
@@ -188,9 +183,7 @@ public class MenuController {
         nickname = textField_nickname.getText();
         if (!nickname.isEmpty()) {
             if (RMIon(event)) {
-                File file = new File("src/main/resources/com/example/is23am23/lobbyChoice.fxml");
-                URL url = file.toURI().toURL();
-                FXMLLoader loader = new FXMLLoader(url);
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/is23am23/lobbyChoice.fxml"));
                 Parent root = loader.load();
 
                 LobbyChoiceController lobbyController = loader.getController();

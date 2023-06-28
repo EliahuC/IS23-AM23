@@ -189,7 +189,7 @@ public class GameControllerGUI implements Initializable {
             }
         getCurrentIstance().stage.setScene(scene);
         getCurrentIstance().stage.setTitle("My Shelfie");
-        Image icon = new Image("com/example/is23am23/little_icon.png");
+        Image icon = new Image("/com/example/is23am23/little_icon.png");
         getCurrentIstance().stage.getIcons().add(icon);
         getCurrentIstance().stage.show();
     }
@@ -246,10 +246,7 @@ public class GameControllerGUI implements Initializable {
      * @author Andrea Bricchi and Giovanni di Lorenzo
      */
     public void goToGoals(ActionEvent event) throws IOException {
-
-        File file = new File("src/main/resources/com/example/is23am23/goals.fxml");
-        URL url = file.toURI().toURL();
-        FXMLLoader loader = new FXMLLoader(url);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/is23am23/goals.fxml"));
         Parent root = loader.load();
 
         GoalsController goalsController = loader.getController();
@@ -278,9 +275,7 @@ public class GameControllerGUI implements Initializable {
         alert.setHeaderText("You are about to return to the menu, are you sure?");
 
         if (alert.showAndWait().get() == ButtonType.OK) {
-            File file = new File("src/main/resources/com/example/is23am23/menu.fxml");
-            URL url = file.toURI().toURL();
-            FXMLLoader loader = new FXMLLoader(url);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/is23am23/menu.fxml"));
             Parent root = loader.load();
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
@@ -427,9 +422,7 @@ public class GameControllerGUI implements Initializable {
      */
     public void goToResults() throws IOException {
 
-        File file = new File("src/main/resources/com/example/is23am23/winner.fxml");
-        URL url = file.toURI().toURL();
-        FXMLLoader loader = new FXMLLoader(url);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/is23am23/winner.fxml"));
         WinnerController winnerController = loader.getController();
         //winnerController.displayWinner(winner);
         winnerController.displayLeaderbord(displayLeaderbord());

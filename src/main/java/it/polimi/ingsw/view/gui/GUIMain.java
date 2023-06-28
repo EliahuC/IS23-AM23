@@ -25,9 +25,7 @@ public class GUIMain extends Application implements View {
      */
     public void start(Stage stage) throws IOException {
         try {
-            File file = new File("src/main/resources/com/example/is23am23/menu.fxml");
-            URL url = file.toURI().toURL();
-            FXMLLoader loader = new FXMLLoader(url);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/is23am23/menu.fxml"));
             Parent root = loader.load();
             MenuController controller=loader.getController();
             controller.setIP(IP);
