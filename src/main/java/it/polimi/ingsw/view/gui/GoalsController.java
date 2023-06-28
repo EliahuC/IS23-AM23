@@ -30,7 +30,7 @@ public class GoalsController implements Initializable {
     private GameControllerGUI gameControllerGUI;
 
     public void goToLivingroom(ActionEvent event) throws IOException {
-        gameControllerGUI.launchBookshekf();
+        gameControllerGUI.launchBookshelf();
         gameControllerGUI.displayScene();
     }
 

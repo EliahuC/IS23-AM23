@@ -77,8 +77,6 @@ public class GameControllerGUI implements Initializable {
     @FXML
     GridPane myGridpane_me;
     @FXML
-    GridPane myGridPane_choice;
-    @FXML
     GridPane myGridPane_lr;
     @FXML
     GridPane bsImage;
@@ -124,10 +122,10 @@ public class GameControllerGUI implements Initializable {
                     ItemTile tile = getCurrentIstance().livingRoom.getBoardTile(i, j).getTile();
                     ImageView imageView = new ImageView();
                     imageView.setImage(chooseCategoryImage(tile));
-                    imageView.setFitWidth(34);
-                    imageView.setFitHeight(34);
-                    myGridPane_lr.setLayoutX(29);
-                    myGridPane_lr.setLayoutY(61);
+                    imageView.setFitWidth(62);
+                    imageView.setFitHeight(62);
+                    myGridPane_lr.setLayoutX(61);
+                    myGridPane_lr.setLayoutY(108);
                     GridPane.setMargin(imageView, new Insets(0));
                     myGridPane_lr.add(imageView, j, i);
                 }
@@ -158,11 +156,11 @@ public class GameControllerGUI implements Initializable {
                 ItemTile tile = bookshelf.getTile(i, j);
                 ImageView imageView = new ImageView();
                 imageView.setImage(chooseCategoryImage(tile));
-                imageView.setFitWidth(33);
-                imageView.setFitHeight(33);
-                myGridPane_bs.setLayoutX(386);
-                myGridPane_bs.setLayoutY(158);
-                GridPane.setMargin(imageView, new Insets(0, 2, 0, 2));
+                imageView.setFitWidth(62);
+                imageView.setFitHeight(62);
+                myGridPane_bs.setLayoutX(859);
+                myGridPane_bs.setLayoutY(268);
+                GridPane.setMargin(imageView, new Insets(0, 5, 0, 5));
                 myGridPane_bs.add(imageView, j, i);
             }
         }
@@ -170,10 +168,10 @@ public class GameControllerGUI implements Initializable {
                 for (int i = 0; i < getCurrentIstance().getTiles().size(); i++) {
                     ImageView imageView = new ImageView();
                     imageView.setImage(chooseCategoryImage(getCurrentIstance().getTiles().get(i)));
-                    imageView.setFitWidth(30);
-                    imageView.setFitHeight(30);
-                    myGridPane_container.setLayoutX(384);
-                    myGridPane_container.setLayoutY(66);
+                    imageView.setFitWidth(45);
+                    imageView.setFitHeight(45);
+                    myGridPane_container.setLayoutX(906);
+                    myGridPane_container.setLayoutY(110);
                     myGridPane_container.add(imageView, i, 0);
                 }
             }else{
@@ -182,49 +180,13 @@ public class GameControllerGUI implements Initializable {
                 for (int i = 0; i < 3; i++) {
                     ImageView imageView = new ImageView();
                     imageView.setImage(null);
-                    imageView.setFitWidth(30);
-                    imageView.setFitHeight(30);
-                    myGridPane_container.setLayoutX(384);
-                    myGridPane_container.setLayoutY(66);
+                    imageView.setFitWidth(45);
+                    imageView.setFitHeight(45);
+                    myGridPane_container.setLayoutX(906);
+                    myGridPane_container.setLayoutY(110);
                     myGridPane_container.add(imageView, i, 0);
                 }
             }
-        // myGridPane_choice = new GridPane();
-        for (int i = 0; i < 2; i++) {
-            ImageView imageView = new ImageView();
-
-            //IMMAGINE FRECCIA DA INSERIRE
-            File file = new File("/com/example/is23am23/arrow_image.png");
-            image = new Image(String.valueOf(file));
-            imageView.setImage(image);
-            imageView.setFitWidth(20);
-            imageView.setFitHeight(20);
-            imageView.setRotate(-90);
-            myGridPane_choice.setLayoutX(405);
-            myGridPane_choice.setLayoutY(35);
-            myGridPane_choice.add(imageView, i, 0);
-            //GridPane.setMargin(imageView, new Insets(5));
-        }
-        myGridPane_choice.setOnMouseClicked(mouseEvent -> {
-            try {
-                if (getCurrentIstance().getPlayer().getNickName().equals(getCurrentIstance().getPlayers().get
-                        (getCurrentIstance().getCurrPlaying() - 1).getNickName()))
-                    setOnOrderClickEvent(mouseEvent);
-                else {
-                    Alert alert = new Alert(Alert.AlertType.WARNING);
-                    alert.setTitle("INVALID MOVE");
-                    alert.setHeaderText("It's not your turn!");
-                    if (alert.showAndWait().get() == ButtonType.OK) {
-
-                    }
-                }
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        });
-
-
-
         getCurrentIstance().stage.setScene(scene);
         getCurrentIstance().stage.setTitle("My Shelfie");
         Image icon = new Image("com/example/is23am23/little_icon.png");
@@ -749,26 +711,26 @@ public class GameControllerGUI implements Initializable {
      * @author Eliahu Cohen
      * Method that loads the bookshelf on the stage
      */
-    public void launchBookshekf() {
+    public void launchBookshelf() {
         ImageView imageView = new ImageView();
         File file_bs = new File("/com/example/is23am23/bookshelf.png");
         image = new Image(String.valueOf(file_bs));
         imageView.setImage(image);
-        imageView.setFitWidth(240);
-        imageView.setFitHeight(240);
-        bsImage.setLayoutX(360);
-        bsImage.setLayoutY(146);
+        imageView.setFitWidth(440);
+        imageView.setFitHeight(440);
+        bsImage.setLayoutX(810);
+        bsImage.setLayoutY(243);
         bsImage.add(imageView, 0, 0);
         Label label = new Label();
         label.setText("Now playing: " + this.getCurrentPlayer());
-        label.setFont(new Font(14));
-        myGridpane_turn.setLayoutX(14);
+        label.setFont(new Font(28));
+        myGridpane_turn.setLayoutX(33);
         myGridpane_turn.setLayoutY(16);
         myGridpane_turn.add(label, 0, 0);
         Label labelMe = new Label();
         displayNickname(nickname, labelMe);
-        labelMe.setFont(new Font(14));
-        myGridpane_me.setLayoutX(258);
+        labelMe.setFont(new Font(28));
+        myGridpane_me.setLayoutX(514);
         myGridpane_me.setLayoutY(16);
         myGridpane_me.add(labelMe, 0, 0);
         for (int i = 0; i < 5; i++) {
@@ -778,10 +740,10 @@ public class GameControllerGUI implements Initializable {
             File file = new File("/com/example/is23am23/arrow_image.png");
             image = new Image(String.valueOf(file));
             imageView.setImage(image);
-            imageView.setFitWidth(33);
-            imageView.setFitHeight(33);
-            myGridPane_columns.setLayoutX(385);
-            myGridPane_columns.setLayoutY(105);
+            imageView.setFitWidth(62);
+            imageView.setFitHeight(62);
+            myGridPane_columns.setLayoutX(853);
+            myGridPane_columns.setLayoutY(167);
             myGridPane_columns.add(imageView, i, 0);
             GridPane.setMargin(imageView, new Insets(2));
         }

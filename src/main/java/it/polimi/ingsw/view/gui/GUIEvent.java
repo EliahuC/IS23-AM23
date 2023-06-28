@@ -47,7 +47,7 @@ public class GUIEvent implements PropertyChangeListener {
             Platform.runLater(()-> {
                 switch (serverMessage.getCategory()) {
                     case STARTING_GAME_MESSAGE:
-                        gamecontrollerGUI.launchBookshekf();
+                        gamecontrollerGUI.launchBookshelf();
                         GameIsStartingMessage temp_startingGameMessage = (GameIsStartingMessage) serverMessage;
                         gamecontrollerGUI.setPlayers(temp_startingGameMessage.getPlayers());
                         gamecontrollerGUI.setLivingRoom(temp_startingGameMessage.getLivingRoom());
