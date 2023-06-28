@@ -424,10 +424,10 @@ public class GameControllerGUI implements Initializable {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/is23am23/winner.fxml"));
         WinnerController winnerController = loader.getController();
-        //winnerController.displayWinner(winner);
+        winnerController.displayWinner(winner);
         winnerController.displayLeaderbord(displayLeaderbord());
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
+        Scene scene1 = new Scene(root);
+        stage.setScene(scene1);
         stage.show();
     }
 
