@@ -8,7 +8,6 @@ import it.polimi.ingsw.Network.Client.ConnectionClient;
 import it.polimi.ingsw.model.board.BoardToken;
 import it.polimi.ingsw.model.board.ItemTile;
 import it.polimi.ingsw.model.board.LivingRoom;
-import it.polimi.ingsw.model.board.goalCards.*;
 import it.polimi.ingsw.model.player.BookShelf;
 import it.polimi.ingsw.model.player.Player;
 
@@ -48,7 +47,6 @@ public class GameControllerGUI {
 
     private Stage stage;
     private Scene scene;
-    private Parent root;
     private ConnectionClient connectionClient;
     private String nickname;
     private GUIEvent receiver;
@@ -59,12 +57,11 @@ public class GameControllerGUI {
     private List<Player> players;
     private List<Player> ranking;
     private ArrayList<ItemTile> tiles = new ArrayList<>();
-    private int currPlaying = 1;
+    private int currPlaying=1;
     private String currentPlayer;
     private String winner;
     private Integer seed;
     private Image image;
-    private int currPlayer = 1;
     public static final int LivingRoomSize = 9;
     private static final int shelfRows = 6;
     private static final int shelfCols = 5;
@@ -72,22 +69,23 @@ public class GameControllerGUI {
     private boolean switchOrder = false;
     private ArrayList<ItemTile> tiles2 = new ArrayList<>();
 
+
     @FXML
-    GridPane myGridpane_turn = new GridPane();
+    GridPane myGridpane_turn;
     @FXML
-    GridPane myGridpane_me = new GridPane();
+    GridPane myGridpane_me;
     @FXML
-    GridPane myGridPane_choice = new GridPane();
+    GridPane myGridPane_choice;
     @FXML
-    GridPane myGridPane_lr = new GridPane();
+    GridPane myGridPane_lr;
     @FXML
-    GridPane bsImage = new GridPane();
+    GridPane bsImage;
     @FXML
-    GridPane myGridPane_columns = new GridPane();
+    GridPane myGridPane_columns;
     @FXML
-    GridPane myGridPane_container = new GridPane();
+    GridPane myGridPane_container;
     @FXML
-    GridPane myGridPane_bs = new GridPane();
+    GridPane myGridPane_bs;
     private static GameControllerGUI currentIstance = new GameControllerGUI();
     private Boolean flag = true;
     private Integer rowIndex = null;
@@ -96,6 +94,20 @@ public class GameControllerGUI {
     private ArrayList<Integer> order = new ArrayList<>();
 
     private ArrayList<Integer> coordinates = new ArrayList<>();
+    private Boolean grids = true;
+    private Boolean fxmlLoad = true;
+    FXMLLoader loader;
+
+    private void initializeGridPanes(){
+        myGridpane_turn = new GridPane();
+        myGridpane_me = new GridPane();
+        myGridPane_choice = new GridPane();
+        myGridPane_lr = new GridPane();
+        bsImage = new GridPane();
+        myGridPane_columns = new GridPane();
+        myGridPane_container = new GridPane();
+        myGridPane_bs = new GridPane();
+    }
 
     /**
      * @author Andrea Bricchi and Giovanni di Lorenzo
@@ -103,13 +115,22 @@ public class GameControllerGUI {
      * Method to display the scene
      */
     public void displayScene() throws IOException {
+        if(getCurrentIstance().getGrids()){
+            initializeGridPanes();
+            getCurrentIstance().setGrids(false);
+        }
         if (instance()) {
             GameControllerGUI.currentIstance = this;
-            flag = false;
-            //receiver.setGamecontrollerGUI(getCurrentIstance());
+            getCurrentIstance().setFlag(false);
+            //getCurrentIstance().getReceiver().setGamecontrollerGUI(getCurrentIstance());
             //getCurrentIstance().setReceiver(receiver);
         }
-        //myGridPane_lr = new GridPane();
+        //RIGHE SPOSTATE!
+        File file1 = new File("src/main/resources/com/example/is23am23/game.fxml");
+        URL url = file1.toURI().toURL();
+        FXMLLoader loader = new FXMLLoader(url);
+        getCurrentIstance().setGrids(false);
+
         for (int i = 0; i < LivingRoomSize; i++) {
             for (int j = 0; j < LivingRoomSize; j++) {
                 if (getCurrentIstance().livingRoom.getBoardTile(i, j).getCategory() != BoardToken.boardTokenCategory.UNAVAILABLE) {
@@ -120,8 +141,6 @@ public class GameControllerGUI {
                     imageView.setFitHeight(34);
                     myGridPane_lr.setLayoutX(29);
                     myGridPane_lr.setLayoutY(61);
-
-                    // Opzionale: Imposta il padding o altre proprietà per gli ImageView
                     GridPane.setMargin(imageView, new Insets(0));
                     myGridPane_lr.add(imageView, j, i);
                 }
@@ -132,8 +151,8 @@ public class GameControllerGUI {
             if (clickNode instanceof ImageView && ((ImageView) clickNode).getImage() != null) {
                 if (getCurrentIstance().getPlayer().getNickName().equals(getCurrentIstance().getPlayers().get
                         (getCurrentIstance().getCurrPlaying() - 1).getNickName())) {
-                    getCurrentIstance().coordinates.add(GridPane.getRowIndex(clickNode));
-                    getCurrentIstance().coordinates.add(GridPane.getColumnIndex(clickNode));
+                    getCurrentIstance().getCoordinates().add(GridPane.getRowIndex(clickNode));
+                    getCurrentIstance().getCoordinates().add(GridPane.getColumnIndex(clickNode));
                 } else {
                     Alert alert = new Alert(Alert.AlertType.WARNING);
                     alert.setTitle("INVALID MOVE");
@@ -147,7 +166,6 @@ public class GameControllerGUI {
         });
 
         bookshelf = getCurrentIstance().getPlayer().getPlayerBookshelf();
-        //myGridPane_bs = new GridPane();
         for (int i = 0; i < shelfRows; i++) {
             for (int j = 0; j < shelfCols; j++) {
                 ItemTile tile = bookshelf.getTile(i, j);
@@ -161,38 +179,29 @@ public class GameControllerGUI {
                 myGridPane_bs.add(imageView, j, i);
             }
         }
-
-        //bsImage = new GridPane();
-        ImageView view = new ImageView();
+        ImageView imageView = new ImageView();
         File file_bs = new File("/com/example/is23am23/bookshelf.png");
         image = new Image(String.valueOf(file_bs));
-        view.setImage(image);
-        view.setFitWidth(240);
-        view.setFitHeight(240);
+        imageView.setImage(image);
+        imageView.setFitWidth(240);
+        imageView.setFitHeight(240);
         bsImage.setLayoutX(360);
         bsImage.setLayoutY(146);
-        bsImage.add(view, 0, 0);
-
-
-        //myGridpane_turn = new GridPane();
+        bsImage.add(imageView, 0, 0);
         Label label = new Label();
-        label.setText("Now playing: " + getCurrentIstance().currentPlayer);
+        label.setText("Now playing: " + getCurrentIstance().getCurrentPlayer());
         label.setFont(new Font(14));
         myGridpane_turn.setLayoutX(14);
         myGridpane_turn.setLayoutY(16);
         myGridpane_turn.add(label, 0, 0);
-
-        //myGridpane_me = new GridPane();
         Label labelMe = new Label();
-        displayNickname(nickname, labelMe);
+        displayNickname(getCurrentIstance().nickname, labelMe);
         labelMe.setFont(new Font(14));
         myGridpane_me.setLayoutX(258);
         myGridpane_me.setLayoutY(16);
         myGridpane_me.add(labelMe, 0, 0);
-
-        //myGridPane_columns = new GridPane();
         for (int i = 0; i < 5; i++) {
-            ImageView imageView = new ImageView();
+             imageView= new ImageView();
 
             //IMMAGINE FRECCIA DA INSERIRE
             File file = new File("/com/example/is23am23/arrow_image.png");
@@ -206,21 +215,31 @@ public class GameControllerGUI {
             GridPane.setMargin(imageView, new Insets(2));
         }
         myGridPane_columns.setOnMouseClicked(mouseEvent -> {
-                if (getCurrentIstance().getPlayer().getNickName().equals(getCurrentIstance().getPlayers().get
-                        (getCurrentIstance().getCurrPlaying() - 1).getNickName())) {
-                    try {
-                        PlaceTilesOntheBookshelf(mouseEvent);
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
+            if (getCurrentIstance().getPlayer().getNickName().equals(getCurrentIstance().getPlayers().get
+                    (getCurrentIstance().getCurrPlaying() - 1).getNickName())) {
+                try {
+                    PlaceTilesIntheBookshelf(mouseEvent);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
                 }
+            }
 
         });
         // myGridPane_container = new GridPane();
         if (getCurrentIstance().getTiles().size() > 0) {
             for (int i = 0; i < getCurrentIstance().getTiles().size(); i++) {
-                ImageView imageView = new ImageView();
+                imageView = new ImageView();
                 imageView.setImage(chooseCategoryImage(getCurrentIstance().getTiles().get(i)));
+                imageView.setFitWidth(30);
+                imageView.setFitHeight(30);
+                myGridPane_container.setLayoutX(384);
+                myGridPane_container.setLayoutY(66);
+                myGridPane_container.add(imageView, i, 0);
+            }
+        }else{
+            for(int i = 0; i<3;i++){
+                imageView = new ImageView();
+                imageView.setImage(null);
                 imageView.setFitWidth(30);
                 imageView.setFitHeight(30);
                 myGridPane_container.setLayoutX(384);
@@ -231,7 +250,7 @@ public class GameControllerGUI {
 
         // myGridPane_choice = new GridPane();
         for (int i = 0; i < 2; i++) {
-            ImageView imageView = new ImageView();
+            imageView = new ImageView();
 
             //IMMAGINE FRECCIA DA INSERIRE
             File file = new File("/com/example/is23am23/arrow_image.png");
@@ -262,9 +281,12 @@ public class GameControllerGUI {
                 throw new RuntimeException(e);
             }
         });
+        /*
         File file = new File("src/main/resources/com/example/is23am23/game.fxml");
         URL url = file.toURI().toURL();
         FXMLLoader loader = new FXMLLoader(url);
+        getCurrentIstance().setGrids(false);
+        */
         AnchorPane root = loader.load();
         root.getChildren().add(myGridPane_lr);
         root.getChildren().add(myGridPane_bs);
@@ -596,7 +618,7 @@ public class GameControllerGUI {
         WinnerController winnerController = loader.getController();
         winnerController.displayWinner(winner);
         winnerController.displayLeaderbord(ranking);
-        Scene scene = new Scene(root);
+        //Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
@@ -742,7 +764,7 @@ public class GameControllerGUI {
      * @throws IOException exception
      * Method to send the message order and column to the server
      */
-    private void PlaceTilesOntheBookshelf(MouseEvent event) throws IOException {
+    private void PlaceTilesIntheBookshelf(MouseEvent event) throws IOException {
         String command = null;
         ClientMessage message = null;
         Node clickNode = event.getPickResult().getIntersectedNode();
@@ -773,7 +795,8 @@ public class GameControllerGUI {
                 iE.printStackTrace();
             }
             if (getCurrentIstance().getResponse().getCategory() == Message.MessageCategory.VALID_MESSAGE) {
-                command = "/COLUMN" + " " + GridPane.getColumnIndex(clickNode);
+                Bcolumn = GridPane.getColumnIndex(clickNode);
+                command = "/COLUMN" + " " + Bcolumn;
                 message = (ClientMessage) MoveSerializer.serializeInput(command);
                 getCurrentIstance().getConnectionClient().sendMessage(message);
                 try {
@@ -782,10 +805,14 @@ public class GameControllerGUI {
                     e.printStackTrace();
                 }
                 if (getCurrentIstance().getResponse().getCategory() != Message.MessageCategory.WARNING) {
+                    cleanTiles2(getCurrentIstance().getTiles());
                     getCurrentIstance().getTiles().clear();
                     getCurrentIstance().tiles2.clear();
                     getCurrentIstance().getCoordinates().clear();
                     getCurrentIstance().order.clear();
+                    displayScene();
+                    //SPOSTANENTO TESSERE DAL CONTAINER ALLA BOOKSHELF + DISPLAY SCENE
+
                     //SI PUO MOSTRARE UN POP-UP CHE DICE "TURNO COMPLETATO"
                 } else {
                     //SI MOSTRA POP-UP CHE DICE "CHOSEN COLUMN TOO FULL"
@@ -823,6 +850,41 @@ public class GameControllerGUI {
         }
     }
 
+    public ArrayList<ItemTile> getTiles2() {
+        return tiles2;
+    }
 
+    public Boolean getGrids() {
+        return grids;
+    }
+
+    public void setGrids(Boolean grids) {
+        this.grids = grids;
+    }
+
+    public GUIEvent getReceiver() {
+        return receiver;
+    }
+    public String getCurrentPlayer() {
+        return currentPlayer;
+    }
+
+    public Boolean getFxmlLoad() {
+        return fxmlLoad;
+    }
+
+    public void setFxmlLoad(Boolean fxmlLoad) {
+        this.fxmlLoad = fxmlLoad;
+    }
+
+    public FXMLLoader getLoader() {
+        return loader;
+    }
+    private void cleanTiles2(ArrayList<ItemTile> tiles){
+        int i = 0;
+        while (i < tiles.size()) {
+            getCurrentIstance().getPlayer().getPlayerBookshelf().setTile(Bcolumn,tiles.get(i));
+            i++;
+        }
+    }
 }
-
