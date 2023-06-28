@@ -158,7 +158,7 @@ public class Lobby implements Serializable {
      * Method that sets the saves of the game
      */
     private void setSavesOfTheLobby() {
-        String dirPath = "deliverables/Savings";
+        String dirPath = "C:\\Program Files (x86)\\GitHub\\IS23-AM23\\Savings";
         if (!Files.exists(Path.of(dirPath))){
             try {
                 Files.createDirectories(Path.of(dirPath));
