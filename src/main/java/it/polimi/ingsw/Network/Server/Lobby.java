@@ -32,7 +32,7 @@ public class Lobby implements Serializable {
     private final ArrayList<String> joinedUsers;
     private Boolean startedGame=false;
     private Boolean fullLobby=false;
-    private transient String saveFilePath= "C:\\Program Files (x86)\\GitHub\\IS23-AM23\\Savings";
+    private transient String saveFilePath= "../Savings";
     private final Integer idLobby;
     public Lobby(Integer numPlayersLobby,Integer ID){
         this.NumPlayersLobby=numPlayersLobby;
@@ -158,7 +158,7 @@ public class Lobby implements Serializable {
      * Method that sets the saves of the game
      */
     private void setSavesOfTheLobby() {
-        String dirPath = "deliverables/Savings";
+        String dirPath = "../Savings";
         if (!Files.exists(Path.of(dirPath))){
             try {
                 Files.createDirectories(Path.of(dirPath));
@@ -167,7 +167,7 @@ public class Lobby implements Serializable {
             }
         }
         String fileName="/Lobby"+ idLobby +".json";
-        saveFilePath=saveFilePath+fileName;
+        saveFilePath=dirPath+fileName;
         myObj=new File(saveFilePath);
     }
 
