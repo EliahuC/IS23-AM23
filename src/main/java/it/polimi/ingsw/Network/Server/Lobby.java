@@ -32,7 +32,8 @@ public class Lobby implements Serializable {
     private final ArrayList<String> joinedUsers;
     private Boolean startedGame=false;
     private Boolean fullLobby=false;
-    private transient String saveFilePath= "../Savings";
+    //private transient String saveFilePath= "../Savings"; //TODO *
+    private transient String saveFilePath= "Savings";
     private final Integer idLobby;
     public Lobby(Integer numPlayersLobby,Integer ID){
         this.NumPlayersLobby=numPlayersLobby;
@@ -158,7 +159,8 @@ public class Lobby implements Serializable {
      * Method that sets the saves of the game
      */
     private void setSavesOfTheLobby() {
-        String dirPath = "../Savings";
+        //String dirPath = "../Savings"; //TODO *
+        String dirPath = "Savings";
         if (!Files.exists(Path.of(dirPath))){
             try {
                 Files.createDirectories(Path.of(dirPath));
