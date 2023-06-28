@@ -2,16 +2,19 @@ package it.polimi.ingsw.view.gui;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 /**
  * @author Andrea Bricchi and Giovanni di Lorenzo
  * Controller of the goals
  */
-public class GoalsController {
+public class GoalsController implements Initializable {
 
     @FXML
     ImageView personalGoalCard;
@@ -513,5 +516,10 @@ public class GoalsController {
 
     public GameControllerGUI getGameControllerGUI() {
         return gameControllerGUI;
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
     }
 }
