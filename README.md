@@ -18,7 +18,7 @@ The members of the group are:
 |UML (Model and Controller)   	|🟢   	| 100%   	    |   	|
 |Completed Rules   	|🟢   	| 100%   	    |   	|
 |TUI   	|🟢   	| 100%   	    |    	|
-|GUI   	|🟡   	| 50%   	     |    	|
+|GUI   	|🟡   	| 70%   	     |    	|
 |TCP   	|🟢  	| 100%   	    |    	|
 |RMI   	|🟢   	| 100%   	     |   	|
 |Persistency   	|🟢   	| 100%   	    |   	|
