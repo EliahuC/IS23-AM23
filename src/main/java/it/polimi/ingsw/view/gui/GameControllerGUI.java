@@ -121,8 +121,8 @@ public class GameControllerGUI implements Initializable {
                     imageView.setImage(chooseCategoryImage(tile));
                     imageView.setFitWidth(60);
                     imageView.setFitHeight(60);
-                    myGridPane_lr.setLayoutX(58);
-                    myGridPane_lr.setLayoutY(105);
+                    myGridPane_lr.setLayoutX(57);
+                    myGridPane_lr.setLayoutY(103);
                     GridPane.setMargin(imageView, new Insets(0));
                     myGridPane_lr.add(imageView, j, i);
                 }
@@ -158,8 +158,8 @@ public class GameControllerGUI implements Initializable {
                 ItemTile tile = bookshelf.getTile(i, j);
                 ImageView imageView = new ImageView();
                 imageView.setImage(chooseCategoryImage(tile));
-                imageView.setFitWidth(62);
-                imageView.setFitHeight(62);
+                imageView.setFitWidth(60);
+                imageView.setFitHeight(60);
                 myGridPane_bs.setLayoutX(859);
                 myGridPane_bs.setLayoutY(268);
                 GridPane.setMargin(imageView, new Insets(0, 5, 0, 5));
@@ -617,6 +617,14 @@ public class GameControllerGUI implements Initializable {
                 if (alert.showAndWait().get() == ButtonType.OK) {
 
                 }
+            }
+        }
+        else{
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("INVALID MOVE");
+            alert.setHeaderText("You haven't selected any tiles yet!");
+            if (alert.showAndWait().get() == ButtonType.OK) {
+
             }
         }
     }
