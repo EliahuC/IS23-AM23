@@ -15,11 +15,18 @@ The members of the group are:
 
 |Functionality   	|State   	| Current   	 |Comment   	|
 |---	|---	|-------------|---	|
-|UML (Model and Controller)   	|🟢   	| 100%   	    |   	|
-|Completed Rules   	|🟢   	| 100%   	    |   	|
-|TUI   	|🟢   	| 100%   	    |    	|
+|UML (Model and Controller)   	|✅   	| 100%   	    |IMPLEMENTED   	|
+|Completed Rules   	|✅   	| 100%   	    |IMPLEMENTED   	|
+|TUI   	|✅   	| 100%   	    |IMPLEMENTED    	|
 |GUI   	|🟡   	| 70%   	     |    	|
-|TCP   	|🟢  	| 100%   	    |    	|
-|RMI   	|🟢   	| 100%   	     |   	|
-|Persistency   	|🟢   	| 100%   	    |   	|
-|Multiple games   	|🟢   	| 100%   	    |   	|
+|TCP   	|✅  	| 100%   	    |IMPLEMENTED    	|
+|RMI   	|✅   	| 100%   	     |IMPLEMENTED   	|
+|Persistency   	|✅   	| 100%   	    |IMPLEMENTED   	|
+|Multiple games   	|✅   	| 100%   	    |IMPLEMENTED   	|
+
+## How to run the application
+
+Download the project's repository and open the "deliverables" folder. Run here the Command Line Shell and use the commands:
+  * Run Server -> java -jar server.jar
+  * Run Client TUI -> java -jar client.jar --CLI
+  * Run Client GUI -> java -jar client.jar --GUI
