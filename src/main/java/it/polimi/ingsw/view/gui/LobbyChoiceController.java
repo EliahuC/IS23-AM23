@@ -52,7 +52,7 @@ public class LobbyChoiceController implements Initializable {
      * @throws IOException exception
      * Method to enter a lobby
      */
-    public void joinLobby(ActionEvent event) throws IOException {
+    public void joinLobby(ActionEvent event) {
         receiver.setInStartGUI(false);
         receiver.setInLobbyChoice(true);
          receiver.loadScene();
@@ -71,7 +71,12 @@ public class LobbyChoiceController implements Initializable {
         if (checklobbies()) {
             if (response.getCategory() == Message.MessageCategory.RETURN_MESSAGE) {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/is23am23/lobbyWaiting.fxml"));
-                root = loader.load();
+                try {
+                    root = loader.load();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    throw new RuntimeException();
+                }
                 LobbyWaitingController lobbyWaitingController = loader.getController();
                 lobbyWaitingController.displayNickname(nickname);
                 lobbyWaitingController.setConnectionClient(connectionClient);
@@ -96,7 +101,7 @@ public class LobbyChoiceController implements Initializable {
      * @throws IOException exception
      * Method to create a game
      */
-    public void createLobby(ActionEvent event) throws IOException {
+    public void createLobby(ActionEvent event)  {
         receiver.setInStartGUI(false);
         receiver.setInLobbyChoice(true);
         receiver.setConnectionClient(connectionClient);
@@ -112,7 +117,13 @@ public class LobbyChoiceController implements Initializable {
             Message message = MoveSerializer.serializeInput(command);
             connectionClient.sendMessage((ClientMessage) message);
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/is23am23/lobbyWaiting.fxml"));
-            Parent root = loader.load();
+            Parent root = null;
+            try {
+                root = loader.load();
+            } catch (IOException e) {
+                e.printStackTrace();
+                throw new RuntimeException(e);
+            }
             LobbyWaitingController lobbyWaitingController = loader.getController();
             lobbyWaitingController.displayNickname(nickname);
             lobbyWaitingController.setConnectionClient(connectionClient);
@@ -133,10 +144,16 @@ public class LobbyChoiceController implements Initializable {
      * @throws IOException exception
      * Method to return to the Menu
      */
-    public void returnToMenu(ActionEvent event) throws IOException {
+    public void returnToMenu(ActionEvent event)  {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/is23am23/menu.fxml"));
-        Parent root = loader.load();
+        Parent root = null;
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);

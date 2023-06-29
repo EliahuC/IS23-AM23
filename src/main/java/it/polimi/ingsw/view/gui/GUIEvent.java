@@ -120,6 +120,7 @@ public class GUIEvent implements PropertyChangeListener {
         try {
              root=loader.load();
         } catch (IOException e) {
+            e.printStackTrace();
             throw new RuntimeException(e);
         }
         this.gamecontrollerGUI=loader.getController();
