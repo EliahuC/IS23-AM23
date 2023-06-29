@@ -89,24 +89,12 @@ public class Lobby implements Serializable {
             saveGame((ValidMoveMessage) returnMessage);
         }
         if(returnMessage.getCategory()== Message.MessageCategory.END_GAME_MESSAGE){
-            deleteFile();
+            Server.startedLobbies.remove(this);
             return null;
         }
         return returnMessage;
     }
 
-    /**
-     * method that delete the lobby savings from disk
-     * @author Eliahu Cohen
-     *
-     */
-    private void deleteFile() {
-
-        boolean success = myObj.delete();
-        if(!success)
-            throw new IllegalArgumentException("Delete failed");
-        System.out.println("File correctly deleted");
-    }
 
     /**
      * Method that saves the current status of the game
