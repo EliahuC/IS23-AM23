@@ -131,13 +131,19 @@ public class GameControllerGUI implements Initializable {
                 }
             }
         }
+
+
         myGridPane_lr.setOnMouseClicked(mouseEvent -> {
             Node clickNode = mouseEvent.getPickResult().getIntersectedNode();
             if (clickNode instanceof ImageView && ((ImageView) clickNode).getImage() != null) {
                 if (getCurrentIstance().getPlayer().getNickName().equals(getCurrentIstance().getPlayers().get
                         (getCurrentIstance().getCurrPlaying() - 1).getNickName())) {
+
                     getCurrentIstance().getCoordinates().add(GridPane.getRowIndex(clickNode));
                     getCurrentIstance().getCoordinates().add(GridPane.getColumnIndex(clickNode));
+
+                    //clickNode.setStyle("-fx-border-color: yellow; -fx-border-width: 10px;");
+
                 } else {
                     Alert alert = new Alert(Alert.AlertType.WARNING);
                     alert.setTitle("INVALID MOVE");
@@ -423,10 +429,11 @@ public class GameControllerGUI implements Initializable {
     public void goToResults() throws IOException {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/is23am23/winner.fxml"));
+        AnchorPane rootWinner= loader.load();
         WinnerController winnerController = loader.getController();
         winnerController.displayWinner(winner);
         winnerController.displayLeaderbord(displayLeaderbord());
-        Scene scene1 = new Scene(root);
+        Scene scene1 = new Scene(rootWinner);
         stage.setScene(scene1);
         stage.show();
     }
