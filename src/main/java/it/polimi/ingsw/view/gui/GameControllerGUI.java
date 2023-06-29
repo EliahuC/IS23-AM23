@@ -72,9 +72,9 @@ public class GameControllerGUI implements Initializable {
 
 
     @FXML
-    GridPane myGridpane_turn;
+    Label label_turn;
     @FXML
-    GridPane myGridpane_me;
+    Label label_me;
     @FXML
     GridPane myGridPane_lr;
     @FXML
@@ -112,12 +112,8 @@ public class GameControllerGUI implements Initializable {
             //getCurrentIstance().getReceiver().setGamecontrollerGUI(getCurrentIstance());
             //getCurrentIstance().setReceiver(receiver);
         }
-        Label label = new Label();
-        label.setText("Now playing: " + getPlayers().get(getCurrPlaying()-1).getNickName());
-        label.setFont(new Font(28));
-        myGridpane_turn.setLayoutX(33);
-        myGridpane_turn.setLayoutY(16);
-        myGridpane_turn.add(label, 0, 0);
+
+        label_turn.setText("Now playing: " + getPlayers().get(getCurrPlaying()-1).getNickName());
 
         myGridPane_lr.getChildren().clear();
         for (int i = 0; i < LivingRoomSize; i++) {
@@ -186,9 +182,9 @@ public class GameControllerGUI implements Initializable {
                 }
             }else{
                 if(!showContainer){
-                    Node node = myGridPane_container.getChildren().get(0);
+                    Node nodeC = myGridPane_container.getChildren().get(0);
                     myGridPane_container.getChildren().clear();
-                    myGridPane_container.getChildren().add(0,node);
+                    myGridPane_container.getChildren().add(0,nodeC);
                     for (int i = 0; i < 3; i++) {
                         ImageView imageView = new ImageView();
                         imageView.setImage(null);
@@ -615,9 +611,21 @@ public class GameControllerGUI implements Initializable {
                         cleanTiles2(getCurrentIstance().getTiles());
                         getCurrentIstance().tiles2.clear();
                         getCurrentIstance().order.clear();
-                        //SI PUO MOSTRARE UN POP-UP CHE DICE "TURNO COMPLETATO"
+                        if(getCurrPlaying() < getPlayers().size())
+                        {
+                            label_turn.setText("Now playing: " + getPlayers().get(getCurrPlaying()).getNickName());
+                        }
+                        else {
+                            label_turn.setText("Now playing: " + getPlayers().get(0).getNickName());
+                        }
+
                     } else {
-                        //SI MOSTRA POP-UP CHE DICE "CHOSEN COLUMN TOO FULL"
+                        Alert alert = new Alert(Alert.AlertType.WARNING);
+                        alert.setTitle("INVALID MOVE");
+                        alert.setHeaderText("The chosen coloumn is too full!");
+                        if (alert.showAndWait().get() == ButtonType.OK) {
+
+                        }
                     }
                 }
 
@@ -706,18 +714,7 @@ public class GameControllerGUI implements Initializable {
         bsImage.setLayoutX(810);
         bsImage.setLayoutY(243);
         bsImage.add(imageView, 0, 0);
-        /*Label label = new Label();
-        label.setText("Now playing: " + getPlayers().get(getCurrPlaying()-1).getNickName());
-        label.setFont(new Font(28));
-        myGridpane_turn.setLayoutX(33);
-        myGridpane_turn.setLayoutY(16);
-        myGridpane_turn.add(label, 0, 0);
-       */ Label labelMe = new Label();
-        displayNickname(nickname, labelMe);
-        labelMe.setFont(new Font(28));
-        myGridpane_me.setLayoutX(514);
-        myGridpane_me.setLayoutY(16);
-        myGridpane_me.add(labelMe, 0, 0);
+        displayNickname(nickname, label_me);
         for (int i = 0; i < 5; i++) {
             imageView = new ImageView();
 
