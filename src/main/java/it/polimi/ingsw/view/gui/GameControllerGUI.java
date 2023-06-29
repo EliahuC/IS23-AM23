@@ -185,17 +185,19 @@ public class GameControllerGUI implements Initializable {
                     myGridPane_container.add(imageView, i, 0);
                 }
             }else{
-                if(!showContainer)
+                if(!showContainer){
+                    Node node = myGridPane_container.getChildren().get(0);
                     myGridPane_container.getChildren().clear();
-                for (int i = 0; i < 3; i++) {
-                    ImageView imageView = new ImageView();
-                    imageView.setImage(null);
-                    imageView.setFitWidth(45);
-                    imageView.setFitHeight(45);
-                    myGridPane_container.setLayoutX(906);
-                    myGridPane_container.setLayoutY(110);
-                    myGridPane_container.add(imageView, i, 0);
-                }
+                    myGridPane_container.getChildren().add(0,node);
+                    for (int i = 0; i < 3; i++) {
+                        ImageView imageView = new ImageView();
+                        imageView.setImage(null);
+                        imageView.setFitWidth(45);
+                        imageView.setFitHeight(45);
+                        myGridPane_container.setLayoutX(906);
+                        myGridPane_container.setLayoutY(110);
+                        myGridPane_container.add(imageView, i, 0);
+                }}
             }
         getCurrentIstance().stage.setScene(scene);
         getCurrentIstance().stage.setTitle("My Shelfie");
