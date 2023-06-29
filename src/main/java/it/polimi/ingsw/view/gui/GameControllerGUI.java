@@ -42,8 +42,9 @@ import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author Andrea Bricchi and Giovanni di Lorenzo
  * Controller of the game scene
+ * @author Andrea Bricchi and Giovanni di Lorenzo
+ *
  */
 public class GameControllerGUI implements Initializable {
     private Scene scene;
@@ -96,8 +97,8 @@ public class GameControllerGUI implements Initializable {
 
 
     /**
-     * @throws IOException exception
      * Method to display the scene
+     * @throws IOException exception
      * @author Andrea Bricchi and Giovanni di Lorenzo
      */
     public void displayScene() throws IOException {
@@ -242,9 +243,9 @@ public class GameControllerGUI implements Initializable {
     }
 
     /**
+     * Method to show the goals scene
      * @param event click
      * @throws IOException exception
-     *                     Method to show the goals scene
      * @author Andrea Bricchi and Giovanni di Lorenzo
      */
     public void goToGoals(ActionEvent event) {
@@ -271,9 +272,9 @@ public class GameControllerGUI implements Initializable {
     }
 
     /**
+     * Method to return to the Menu
      * @param event click
      * @throws IOException exception
-     *                     Method to return to the Menu
      * @author Andrea Bricchi
      */
     public void returnToMenu(ActionEvent event) {
@@ -395,9 +396,9 @@ public class GameControllerGUI implements Initializable {
     }
 
     /**
+     * Method to clean the selected tiles from the board on the scene
      * @param coordinates of the tiles
      * @throws IOException exception
-     *                     Method to clean the selected tiles from the board on the scene
      * @author Giovanni di Lorenzo
      */
     public void cleanTiles(ArrayList<Integer> coordinates) throws IOException {
@@ -426,8 +427,8 @@ public class GameControllerGUI implements Initializable {
     }
 
     /**
+     *  Method to go to the result
      * @throws IOException exception
-     *                     Method to go to the result
      * @author Andrea Bricchi
      */
     public void goToResults() throws IOException {
@@ -472,8 +473,8 @@ public class GameControllerGUI implements Initializable {
     }*/
 
     /**
+     * Method to send the selected tiles to the server
      * @param event click
-     *              Method to send the selected tiles to the server
      * @author Andrea Bricchi and Giovanni di Lorenzo
      */
     public void Endselection(ActionEvent event) {
@@ -558,9 +559,9 @@ public class GameControllerGUI implements Initializable {
     }
 
     /**
+     * Method to send the message order and column to the server
      * @param event click
      * @throws IOException exception
-     *                     Method to send the message order and column to the server
      * @author Andrea Bricchi and Giovanni di Lorenzo
      */
     private void PlaceTilesIntheBookshelf(MouseEvent event) throws IOException {
@@ -697,8 +698,9 @@ public class GameControllerGUI implements Initializable {
     }
 
     /**
-     * @author Eliahu Cohen
      * Method that loads the bookshelf on the stage
+     * @author Eliahu Cohen
+     *
      */
     public void launchBookshelf() {
         ImageView imageView = new ImageView();

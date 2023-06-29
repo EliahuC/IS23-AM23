@@ -14,8 +14,9 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 /**
- * @author Andrea Bricchi and Giovanni di Lorenzo
  * Controller of the waiting scene
+ * @author Andrea Bricchi and Giovanni di Lorenzo
+ *
  */
 public class LobbyWaitingController {
 
@@ -26,10 +27,11 @@ public class LobbyWaitingController {
     private ConnectionClient connectionClient;
 
     /**
+     * Method to go back to the menu
      * @author Andrea Bricchi
      * @param event click
      * @throws IOException exception
-     * Method to go back to the menu
+     *
      */
     public void returnToMenu(ActionEvent event) throws IOException {
 

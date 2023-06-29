@@ -4,8 +4,9 @@ import it.polimi.ingsw.Printer;
 import it.polimi.ingsw.view.View;
 
 /**
- * @author Eliahu Cohen and Simone Controguerraù
  * CLI staring method
+ * @author Eliahu Cohen and Simone Controguerraù
+ *
  */
 public class CLI implements Printer,View {
     @Override

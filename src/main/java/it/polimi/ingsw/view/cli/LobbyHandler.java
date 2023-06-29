@@ -12,8 +12,9 @@ import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author Simone Controguerra
  * Lobby entrance / creation page
+ * @author Simone Controguerra
+ *
  *
  */
 public class LobbyHandler {
@@ -37,8 +38,9 @@ public class LobbyHandler {
     }
 
     /**
-     * @author Simone Controguerra and Eliahu Cohen
      * Joining Lobby Page
+     * @author Simone Controguerra and Eliahu Cohen
+     *
      */
     public void start() {
         GameHandler gameHandler= new GameHandler(connectionClient, receiver);

@@ -10,8 +10,9 @@ import java.beans.PropertyChangeListener;
 import java.util.Objects;
 
 /**
- * @author Eliahu cohen and Simone Controguerra
  * Listener class that pass the received messages from ClientConnection to the CLI
+ * @author Eliahu cohen and Simone Controguerra
+ *
  */
 public class CLIEvent implements PropertyChangeListener {
     private Boolean inStartCLI=false;

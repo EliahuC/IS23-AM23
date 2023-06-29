@@ -10,8 +10,9 @@ import java.rmi.registry.Registry;
 
 
 /**
- * @author Eliahu Cohen
  * RMI Server
+ * @author Eliahu Cohen
+ *
  */
 public class RMIServerMain extends Server implements Runnable {
     private static int port = 22011;
@@ -19,9 +20,10 @@ public class RMIServerMain extends Server implements Runnable {
 
 
     /**
+     * Main of the server
      * @author Eliahu Cohen
      * @param args passed to the server
-     * Main of the server
+     *
      */
     public static void main(String[] args) {
          port = RMIparams.PORT;
@@ -40,8 +42,9 @@ public class RMIServerMain extends Server implements Runnable {
     }
 
     /**
-     * @author Eliahu Cohen
      * Method to start the connection with the clients
+     * @author Eliahu Cohen
+     *
      */
     @Override
     public void run() {

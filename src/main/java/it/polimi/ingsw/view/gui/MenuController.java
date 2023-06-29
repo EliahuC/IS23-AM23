@@ -21,8 +21,9 @@ import java.net.Socket;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author Andrea Bricchi and Giovanni di Lorenzo
  * Controller of the user login page
+ * @author Andrea Bricchi and Giovanni di Lorenzo
+ *
  */
 
 public class MenuController {
@@ -42,10 +43,11 @@ public class MenuController {
     private ServerMessage response;
 
     /**
+     * Method to start a Socket Connection
      * @author Andrea Bricchi and Giovanni di Lorenzo
      * @param event click
      * @throws IOException
-     * Method to start a Socket Connection
+     *
      */
     public void goTCP(ActionEvent event)  {
         nickname = textField_nickname.getText();
@@ -174,10 +176,11 @@ public class MenuController {
         }
     }
     /**
+     * Method to start an RMI Connection
      * @author Andrea Bricchi and Giovanni di Lorenzo
      * @param event click
      * @throws IOException
-     * Method to start a RMI Connection
+     *
      */
     public void goRMI(ActionEvent event){
 

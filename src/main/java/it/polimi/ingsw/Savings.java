@@ -5,8 +5,9 @@ import it.polimi.ingsw.Network.Server.Lobby;
 import java.io.Serializable;
 
 /**
- * @author Eliahu Cohen
  * Class that rapresent the savings of a particular lobby
+ * @author Eliahu Cohen
+ *
  */
 public class Savings implements Serializable {
     private Integer savingNumber;
@@ -19,9 +20,10 @@ public class Savings implements Serializable {
     }
 
     /**
-     * @author Eliahu Cohen
-     * @param savings
      * method to save a game
+     * @author Eliahu Cohen
+     * @param savings of the game
+     *
      */
     public void saveGame(GameSavings savings){
        this.gameSavings=savings;

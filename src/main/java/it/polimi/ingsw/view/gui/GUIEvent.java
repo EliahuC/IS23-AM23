@@ -15,8 +15,9 @@ import java.net.URL;
 import java.util.Objects;
 
 /**
- * @author Andrea Bricchi and Giovanni di Lorenzo
  * Listener class that pass the received messages from ClientConnection to the GUI
+ * @author Andrea Bricchi and Giovanni di Lorenzo
+ *
  */
 public class GUIEvent implements PropertyChangeListener {
     private Boolean inStartGUI = false;
@@ -110,8 +111,9 @@ public class GUIEvent implements PropertyChangeListener {
     }
 
     /**
-     * @author Eliahu Cohen
      * method to load the controller and the scene of game.fxml
+     * @author Eliahu Cohen
+     *
      */
     public void loadScene() {
 

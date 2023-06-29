@@ -11,8 +11,9 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * @author Andrea Bricchi and Giovanni di Lorenzo
  * Controller of the goals
+ * @author Andrea Bricchi and Giovanni di Lorenzo
+ *
  */
 public class GoalsController implements Initializable {
 
@@ -35,8 +36,9 @@ public class GoalsController implements Initializable {
     }
 
     /**
-     * @author Andrea Bricchi and Giovanni di Lorenzo
      * Method to display the scores of the common goal cards
+     * @author Andrea Bricchi and Giovanni di Lorenzo
+     *
      */
     public void displayPoints(){
 
@@ -250,8 +252,9 @@ public class GoalsController implements Initializable {
     }
 
     /**
-     * @author Andrea Bricchi and Giovanni di Lorenzo
      * Method to display the personal goal card
+     * @author Andrea Bricchi and Giovanni di Lorenzo
+     *
      */
     public void displayPersonalGoal(){
 
@@ -347,8 +350,9 @@ public class GoalsController implements Initializable {
     }
 
     /**
-     * @author Andrea Bricchi and Giovanni di Lorenzo
      * Method to display the two personal goal card
+     * @author Andrea Bricchi and Giovanni di Lorenzo
+     *
      */
     public void displayCommonGoal() {
 

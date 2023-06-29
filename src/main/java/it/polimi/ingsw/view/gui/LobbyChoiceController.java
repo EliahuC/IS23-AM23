@@ -23,8 +23,9 @@ import java.util.ResourceBundle;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author Andrea Bricchi and Giovanni di Lorenzo
  * Controller that handle the player joining to a lobby
+ * @author Andrea Bricchi and Giovanni di Lorenzo
+ *
  */
 public class LobbyChoiceController implements Initializable {
 
@@ -47,10 +48,11 @@ public class LobbyChoiceController implements Initializable {
     private MenuController menuController = new MenuController();
 
     /**
+     * Method to enter a lobby
      * @author Andrea Bricchi and Giovanni di Lorenzo
      * @param event click
      * @throws IOException exception
-     * Method to enter a lobby
+     *
      */
     public void joinLobby(ActionEvent event) {
         receiver.setInStartGUI(false);
@@ -96,10 +98,11 @@ public class LobbyChoiceController implements Initializable {
     }
 
     /**
+     * Method to create a game
      * @author Andrea Bricchi and Giovanni di Lorenzo
      * @param event click
      * @throws IOException exception
-     * Method to create a game
+     *
      */
     public void createLobby(ActionEvent event)  {
         receiver.setInStartGUI(false);
@@ -139,10 +142,11 @@ public class LobbyChoiceController implements Initializable {
     }
 
     /**
+     * Method to return to the Menu
      * @author Andrea Bricchi
      * @param event click
      * @throws IOException exception
-     * Method to return to the Menu
+     *
      */
     public void returnToMenu(ActionEvent event)  {
 

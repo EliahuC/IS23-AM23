@@ -1,8 +1,9 @@
 package it.polimi.ingsw;
 
 /**
- * @author Eliahu Cohen
  * interface to print personalized thinks
+ * @author Eliahu Cohen
+ *
  */
 public interface Printer {
 

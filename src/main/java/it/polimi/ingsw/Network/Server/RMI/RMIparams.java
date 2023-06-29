@@ -1,8 +1,9 @@
 package it.polimi.ingsw.Network.Server.RMI;
 
 /**
- * @author Eliahu Cohen
  * RMI Standard port
+ * @author Eliahu Cohen
+ *
  */
 public class RMIparams {
     public static final int PORT =22011;

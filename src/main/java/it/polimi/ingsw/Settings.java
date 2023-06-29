@@ -1,8 +1,9 @@
 package it.polimi.ingsw;
 
 /**
- * @author Eliahu Cohen
  * settings to run the client TCP from shell
+ * @author Eliahu Cohen
+ *
  */
 public class Settings {
     public static int PORT = 2201;

@@ -27,8 +27,9 @@ import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author Eliahu Cohen
  * RMI connection handler
+ * @author Eliahu Cohen
+ *
  */
 public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteInterface, ServerConnection {
     private Lobby lobby;
@@ -58,10 +59,11 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
     }
 
     /**
+     * Method that response to the message received with an action on the server
      * @author Eliahu Cohen
      * @param message received from client
      * @param client connection
-     * Method that response to the message received with an action on the server
+     *
      */
     private void messageParser(ClientMessage message, RemoteInterfaceClient client){
         lobby=lobbyResearch(message.getNickname());
@@ -192,10 +194,11 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
     }
 
     /**
+     * Method used to send messages to the clients
      * @author Eliahu Cohen
      * @param message to send to the client
      * @param username of the client that have to receive the message
-     * Method used to send messages to the clients
+     *
      */
     public  void sendMessage(ServerMessage message, String username) {
         if(message==null)return;
@@ -215,9 +218,10 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
 
 
     /**
+     * send an error message if there is a player logged with the nickname of the sender
      * @author Eliahu Cohen
      * @param message received from the client
-     * send an error message if there is a player logged with the nickname of the sender
+     *
      */
     private void alreadyLoggedNickName(ClientMessage message) {
         ErrorMessage errorMessage=new ErrorMessage();
@@ -225,8 +229,9 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
         sendMessage(errorMessage,message.getNickname());
     }
     /**
-     * @author Eliahu Cohen
      * method that send an error message if the client tryies to logout from an already started game
+     * @author Eliahu Cohen
+     *
      */
 
     private void gameAlreadyStarted() {
@@ -236,9 +241,10 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
 
     }
     /**
+     * method to check if the reconnected lobby is full
      * @author Eliahu Cohen
      * @return true if the lobby is full
-     * method to check if the reconnected lobby is full
+     *
      */
     private boolean checkReconnectedLobby() {
         if(lobby.getNumPlayersLobby()==lobby.getJoinedUsers().size()){
@@ -250,8 +256,9 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
 
 
     /**
-     * @author Eliahu Cohen
      * Method that checks if the lobby is full
+     * @author Eliahu Cohen
+     *
      */
     private void lobbyIsFull() {
 
@@ -261,9 +268,10 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
 
     }
     /**
+     * method that checks if the player was connected before
      * @author Eliahu Cohen
      * @param message received from client
-     * method that checks if the player was connected before
+     *
      */
     private void reconnectedPlayer(ClientMessage message) {
         for (Lobby l : Server.startedLobbies) {
@@ -279,9 +287,10 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
         }
     }
     /**
+     * Method that response to an entrance message but without any lobby
      * @author Eliahu Cohen
      * @param message received from the client
-     * Method that response to an entrance message but without any lobby
+     *
      */
     private void noLobbyInServer(ClientMessage message) {
 
@@ -291,8 +300,9 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
 
     }
     /**
-     * @author Eliahu Cohen
      * method that checks if the lobby is now full
+     * @author Eliahu Cohen
+     *
      */
     private boolean checkCompletedLobby() {
         if(lobby.getNumPlayersLobby()==lobby.getJoinedUsers().size()){
@@ -304,9 +314,10 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
         return false;
     }
     /**
+     * Method that sends an error message because the client is already into a lobby
      * @author Eliahu Cohen
      * @param message received from client
-     * Method that sends an error message because the client is already into a lobby
+     *
      */
     private void alreadyExistentLobby(ClientMessage message){
         if (lobby.getJoinedUsers().contains(message.getNickname())) {
@@ -332,9 +343,10 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
 
 
     /**
+     * Method used to send a ping to the client
      * @author Eliahu Cohen
      * @throws Exception caused from problem with the connection
-     * Method used to send a ping to the client
+     *
      */
     public void sendPing() {
         try {
@@ -357,8 +369,9 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
         }
     }
     /**
-     * @author Eliahu Cohen
      * method that end the game if a player crash
+     * @author Eliahu Cohen
+     *
      */
     private void closeConnection(String s) {
 
@@ -393,9 +406,9 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
     }
 
     /**
-     * @author Eliahu Cohen
      * Method to start the connection with the client and
      * Start the ping exchange with the client
+     * @author Eliahu Cohen
      *
      */
     public void run(){

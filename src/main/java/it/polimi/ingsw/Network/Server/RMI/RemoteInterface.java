@@ -6,8 +6,9 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 /**
- * @author Eliahu Cohen
  * Interface used to implement RMI server connection methods
+ * @author Eliahu Cohen
+ *
  */
 public interface RemoteInterface extends Remote {
 

@@ -9,8 +9,9 @@ import java.io.IOException;
 import java.util.Scanner;
 
 /**
- * @author Eliahu Cohen
  * Class to start the Client view
+ * @author Eliahu Cohen
+ *
  */
 public class ClientMain implements Printer {
     private static View view;
@@ -32,9 +33,10 @@ public class ClientMain implements Printer {
     }
 
     /**
+     * Parse the argument received from shell and starts the right view
      * @author Eliahu Cohen
      * @param args in input
-     * Parse the argument received from shell and starts the right view
+     *
      */
     private static void argsParser(String[] args) {
         String temporaryStorage=args[0];

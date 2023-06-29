@@ -19,8 +19,9 @@ import java.net.Socket;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author Andrea Bricchi and Giovanni di Lorenzo
  * Same class as MenuController accessed when a nickname is already used
+ * @author Andrea Bricchi and Giovanni di Lorenzo
+ *
  */
 public class UsedNicknameController {
 

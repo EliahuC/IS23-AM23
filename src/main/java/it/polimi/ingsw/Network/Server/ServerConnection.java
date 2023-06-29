@@ -3,8 +3,9 @@ package it.polimi.ingsw.Network.Server;
 import it.polimi.ingsw.Messages.ServerToClient.ServerMessage;
 
 /**
- * @author Eliahu Cohen
  * interface that will be implemented from RMI connection and TCP connection
+ * @author Eliahu Cohen
+ *
  */
 public interface ServerConnection extends Runnable {
     String getNamePlayer();

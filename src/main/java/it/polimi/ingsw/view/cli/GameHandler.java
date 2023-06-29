@@ -18,8 +18,9 @@ import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author Simone Controguerra and Eliahu Cohen
  * CLI game page
+ * @author Simone Controguerra and Eliahu Cohen
+ *
  */
 public class GameHandler {
     private final ConnectionClient connectionClient;
@@ -72,9 +73,10 @@ public class GameHandler {
     }
 
     /**
+     * Method that generate the common goal card 2 of the game
      * @author Eliahu Cohen
      * @param idCGC2 id of the common goal card 2
-     * Method that generate the common goal card 2 of the game
+     *
      */
     private void createCommonGoalCard2(Integer idCGC2) {
         switch (idCGC2){
@@ -96,9 +98,10 @@ public class GameHandler {
     }
 
     /**
+     * Method that generate the common goal card 1 of the game
      * @author Eliahu Cohen
      * @param idCGC1 id of the common goal card 1
-     * Method that generate the common goal card 1 of the game
+     *
      */
     private void createCommonGoalCard1(Integer idCGC1) {
         switch (idCGC1){
@@ -184,8 +187,9 @@ public class GameHandler {
     }
 
     /**
-     * @author Simone Controguerra
      * Method that put you in waiting if it's not your turn
+     * @author Simone Controguerra
+     *
      */
     private void waiting(){
         try {
@@ -225,8 +229,9 @@ public class GameHandler {
     }
 
     /**
-     * @author Simone Controguerra
      * Method to show the board and get the selection of the player
+     * @author Simone Controguerra
+     *
      */
     private void showBoard() {
         System.out.println(CLS);
@@ -325,9 +330,10 @@ public class GameHandler {
     }
 
     /**
+     * Method to show the Goals
      * @author Simone Controguerra
      * @param scenario scenario the player is in when he calls the goals command
-     * Method to show the Goals
+     *
      */
     private void showGoals(String scenario){
         System.out.println(CLS);
@@ -350,8 +356,9 @@ public class GameHandler {
     }
 
     /**
-     * @author Simone Controguerra
      * Method that display the ranking of the game
+     * @author Simone Controguerra
+     *
      */
     private void showEnd(){
         System.out.println(CLS);
@@ -384,8 +391,9 @@ public class GameHandler {
     }
 
     /**
-     * @author Simone Controguerra
      * Method that gets the order command of the player
+     * @author Simone Controguerra
+     *
      */
     private void showBookshelfOrder() {
         System.out.println(CLS);
@@ -470,8 +478,9 @@ public class GameHandler {
     }
 
     /**
-     * @author Simone Controguerra
      * Method that gets the column command of the player
+     * @author Simone Controguerra
+     *
      */
     private void showBookshelfColumn(){
         System.out.println(CLS);
@@ -553,8 +562,9 @@ public class GameHandler {
     }
 
     /**
-     * @author Simone Controguerra
      * Method that prints the player bookshelf
+     * @author Simone Controguerra
+     *
      */
     private void showBookshelf(){
         System.out.println(CLS);
@@ -567,8 +577,9 @@ public class GameHandler {
     }
 
     /**
-     * @author Simone Controguerra
      * Method that prints the selection of the player
+     * @author Simone Controguerra
+     *
      */
     private void printSelection(){
         System.out.print("\n                         ");
@@ -685,8 +696,9 @@ public class GameHandler {
     }
 
     /**
-     * @author Simone Controguerra
      * Method that builds the personal goal card
+     * @author Simone Controguerra
+     *
      */
     public void buildPersonalGoalCard(){
         PersonalGoalCard stamp = new PersonalGoalCard(seed);

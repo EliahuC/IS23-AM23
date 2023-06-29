@@ -21,8 +21,9 @@ import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author Eliahu Cohen
  * RMI Connection of the client
+ * @author Eliahu Cohen
+ *
  */
 public class ClientConnectionRMI extends ConnectionClient implements RemoteInterfaceClient {
     PropertyChangeListener listener;
@@ -34,10 +35,11 @@ public class ClientConnectionRMI extends ConnectionClient implements RemoteInter
     private final ArrayList<ServerMessage> queue=new ArrayList<>();
 
     /**
+     * Constructor to start the RMI connection and set the playerNick
      * @author Eliahu Cohen
      * @param nickname of the client
      * @throws RemoteException if the connection couldn't start
-     * Constructor to start the RMI connection and set the playerNick
+     *
      */
     public ClientConnectionRMI(String nickname,PropertyChangeListener listener, String address) throws RemoteException {
         super();
@@ -58,8 +60,9 @@ public class ClientConnectionRMI extends ConnectionClient implements RemoteInter
     }
 
     /**
-     * @author Eliahu Cohen
      * Method to start the Ping pong with the server
+     * @author Eliahu Cohen
+     *
      */
     @Override
     public void run() {
@@ -99,9 +102,10 @@ public class ClientConnectionRMI extends ConnectionClient implements RemoteInter
 
 
     /**
+     * Method that receive a message from the server and pass it to GUI/CLI handlers
      * @author Eliahu Cohen
      * @param message received from the server
-     * Method that receive a message from the server and pass it to GUI/CLI handlers
+     *
      */
     public void receiveMessage(String message) {
         synchronized (queue){
@@ -111,8 +115,9 @@ public class ClientConnectionRMI extends ConnectionClient implements RemoteInter
     }
 
     /**
-     * @author Eliahu Cohen
      * Method that extract a message from the messageQueue and pass it to the view listener
+     * @author Eliahu Cohen
+     *
      */
     private void passToListener(){
        synchronized (queue){
@@ -131,9 +136,10 @@ public class ClientConnectionRMI extends ConnectionClient implements RemoteInter
 
 
     /**
+     * Method to send a message to the server
      * @author Eliahu Cohen
      * @param message to send to the server
-     * Method to send a message to the server
+     *
      */
     public void sendMessage(ClientMessage message){
         message.setNickname(playerName);
@@ -161,9 +167,10 @@ public class ClientConnectionRMI extends ConnectionClient implements RemoteInter
     }
 
     /**
-     * @author Eliahu Cohen
-     * @throws InterruptedException
      * Method used to send a ping to the server
+     * @author Eliahu Cohen
+     * @throws InterruptedException serer crash
+     *
      */
     public void sendPing() throws InterruptedException {
         boolean pingIsOk=false;
@@ -179,8 +186,9 @@ public class ClientConnectionRMI extends ConnectionClient implements RemoteInter
     }
 
     /**
-     * @author Eliahu Cohen
      * method that close the connection and notify the client
+     * @author Eliahu Cohen
+     *
      */
     public void closeConnection() {
         try {

@@ -11,8 +11,9 @@ import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 
 /**
- * @author Eliahu Cohen
  * class that will be notificated when an event to display to the client will happen and send the message to the client
+ * @author Eliahu Cohen
+ *
  */
 
 public class VirtualView implements PropertyChangeListener {

@@ -8,8 +8,9 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 /**
- * @author Eliahu Cohen
  * Interface implemented in client connection RMI to use RMI
+ * @author Eliahu Cohen
+ *
  */
 public interface RemoteInterfaceClient extends Remote {
     void sendMessage(ClientMessage message)throws RemoteException;

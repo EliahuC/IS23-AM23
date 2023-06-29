@@ -18,8 +18,9 @@ import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author Eliahu Cohen
  * class that handles the Socket connection between the server and the client
+ * @author Eliahu Cohen
+ *
  */
 public class ServerConnectionTCP implements ServerConnection{
     private final Socket clientSocket;
@@ -63,8 +64,9 @@ public class ServerConnectionTCP implements ServerConnection{
     }
 
     /**
-     * @author Eliahu Cohen
      * method to close the connection between the server and the client
+     * @author Eliahu Cohen
+     *
      */
     private void closeConnection() {
         serverIsActive = false;
@@ -76,10 +78,11 @@ public class ServerConnectionTCP implements ServerConnection{
     }
 
     /**
+     * method to send to the client a message using Json
      * @author Eliahu Cohen
      * @param message to send to the client
      * @param namePlayer name of the player that have to receive the message
-     * method to send to the client a message using Json
+     *
      */
     public void sendMessage(ServerMessage message,String namePlayer){
         if(message==null)return;
@@ -94,8 +97,9 @@ public class ServerConnectionTCP implements ServerConnection{
     }
 
     /**
-     * @author Eliahu Cohen
      * Method to handle the received message from the client
+     * @author Eliahu Cohen
+     *
      */
     public void receiveMessage(String s) {
 
@@ -112,9 +116,10 @@ public class ServerConnectionTCP implements ServerConnection{
     }
 
     /**
+     * Method that response to the message received with an action on the server
      * @author Eliahu Cohen
      * @param message received from client
-     * Method that response to the message received with an action on the server
+     *
      */
     private void messageParser(ClientMessage message){
         switch (message.getCategory()) {
@@ -211,9 +216,10 @@ public class ServerConnectionTCP implements ServerConnection{
     }
 
     /**
+     * method to check if the reconnected lobby is full
      * @author Eliahu Cohen
      * @return true if the lobby is full
-     * method to check if the reconnected lobby is full
+     *
      */
     private boolean checkReconnectedLobby() {
         if(lobby.getNumPlayersLobby()==lobby.getJoinedUsers().size()){
@@ -225,9 +231,10 @@ public class ServerConnectionTCP implements ServerConnection{
 
 
     /**
+     * send an error message if there is a player logged with the nickname of the sender
      * @author Eliahu Cohen
      * @param message received from the client
-     * send an error message if there is a player logged with the nickname of the sender
+     *
      */
     private void alreadyLoggedNickName(ClientMessage message) {
             ErrorMessage errorMessage=new ErrorMessage();
@@ -236,8 +243,9 @@ public class ServerConnectionTCP implements ServerConnection{
     }
 
     /**
+     * method that send an error message if the client tries to log out from an already started game
      * @author Eliahu Cohen
-     * method that send an error message if the client tryies to logout from an already started game
+     *
      */
     private void gameAlreadyStarted() {
             ErrorMessage errorMessage = new ErrorMessage();
@@ -247,8 +255,9 @@ public class ServerConnectionTCP implements ServerConnection{
     }
 
     /**
-     * @author Eliahu Cohen
      * Method that checks if the lobby is full
+     * @author Eliahu Cohen
+     *
      */
     private void lobbyIsFull() {
 
@@ -259,9 +268,10 @@ public class ServerConnectionTCP implements ServerConnection{
         }
 
     /**
+     * method that checks if the player was connected before
      * @author Eliahu Cohen
      * @param message received from client
-     * method that checks if the player was connected before
+     *
      */
     private void reconnectedPlayer(ClientMessage message) {
         for (Lobby l : Server.startedLobbies) {
@@ -278,9 +288,10 @@ public class ServerConnectionTCP implements ServerConnection{
     }
 
     /**
+     * Method that response to an entrance message but without any lobby
      * @author Eliahu Cohen
      * @param message received from the client
-     * Method that responce to an entrance message but without any lobby
+     *
      */
     private void noLobbyInServer(ClientMessage message) {
 
@@ -292,8 +303,9 @@ public class ServerConnectionTCP implements ServerConnection{
 
 
     /**
-     * @author Eliahu Cohen
      * method that checks if the lobby is now full
+     * @author Eliahu Cohen
+     *
      */
     private boolean checkCompletedLobby() {
         if(lobby.getNumPlayersLobby()==lobby.getJoinedUsers().size()){
@@ -306,9 +318,10 @@ public class ServerConnectionTCP implements ServerConnection{
     }
 
     /**
+     * Method that sends an error message because the client is already into a lobby
      * @author Eliahu Cohen
      * @param message received from client
-     * Method that sends an error message because the client is already into a lobby
+     *
      */
     private void alreadyExistentLobby(ClientMessage message){
             if (lobby!= null && lobby.getJoinedUsers().contains(message.getNickname())) {
@@ -345,8 +358,9 @@ public class ServerConnectionTCP implements ServerConnection{
     }
 
     /**
-     * @author Eliahu Cohen
      * method that starts a ping exchange with the client and waits to the clients moves
+     * @author Eliahu Cohen
+     *
      */
     @Override
     public void run() {
@@ -380,8 +394,9 @@ public class ServerConnectionTCP implements ServerConnection{
     }
 
     /**
-     * @author Eliahu Cohen
      * method that end the game when a player crush
+     * @author Eliahu Cohen
+     *
      */
     private void closeClientConnection() {
         if(lobby!=null) {

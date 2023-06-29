@@ -18,8 +18,9 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 /**
- * @author Eliahu Cohen
  * Server that contains RMI and TCP servers
+ * @author Eliahu Cohen
+ *
  */
 public class Server implements Printer {
     public static Integer idLobbies = 0;
@@ -42,8 +43,9 @@ public class Server implements Printer {
     }
 
     /**
-     * @author Eliahu Cohen
      * Method that load the saves from the disk
+     * @author Eliahu Cohen
+     *
      */
     private static void loadSaves()  {
         Reader reader;

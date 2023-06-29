@@ -22,8 +22,9 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 /**
- * @author Andrea Bricchi
  * Controller of the winning scene
+ * @author Andrea Bricchi
+ *
  */
 public class WinnerController implements Initializable {
 
@@ -38,9 +39,10 @@ public class WinnerController implements Initializable {
     private Stage stage;
 
     /**
+     * Method to display the ranking of the players
      * @author Andrea Bricchi and Giovanni Di Lorenzo
      * @param ranking of players
-     * Method to display the ranking of the players
+     *
      */
     public void displayLeaderbord(List<Player> ranking) {
 
@@ -63,9 +65,10 @@ public class WinnerController implements Initializable {
     }
 
     /**
+     * Method to display the name of the winner
      * @author Andrea Bricchi
      * @param winner name of the player who wins
-     * Method to disply the name of the winner
+     *
      */
     public void displayWinner(String winner){
         this.winner = winner;
@@ -73,10 +76,11 @@ public class WinnerController implements Initializable {
     }
 
     /**
+     * Method to return to the menu  scene
      * @author Andrea Bricchi
      * @param event click
      * @throws IOException exception
-     * Method to return to the menu  scene
+     *
      */
     public void returnToMenu(ActionEvent event) throws IOException {
 

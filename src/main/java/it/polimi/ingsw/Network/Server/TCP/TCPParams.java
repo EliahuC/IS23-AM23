@@ -1,8 +1,9 @@
 package it.polimi.ingsw.Network.Server.TCP;
 
 /**
- * @author Eliahu Cohen
  * standard TCP port
+ * @author Eliahu Cohen
+ *
  */
 public class TCPParams {
 

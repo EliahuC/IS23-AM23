@@ -10,8 +10,9 @@ import java.net.Socket;
 import java.util.ArrayList;
 
 /**
- * @author Eliahu Cohen
  * TCP SERVER
+ * @author Eliahu Cohen
+ *
  */
 public class TCPServerMain extends Server implements Runnable {
     private ServerSocket serverSocket;
@@ -25,8 +26,9 @@ public class TCPServerMain extends Server implements Runnable {
     }
 
     /**
-     * @author Eliahu Cohen
      * Method to start the server
+     * @author Eliahu Cohen
+     *
      */
     public void run() {
 

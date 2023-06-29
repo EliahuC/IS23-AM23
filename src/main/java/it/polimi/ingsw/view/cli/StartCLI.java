@@ -14,8 +14,9 @@ import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author Simone Controguerra
  * First page of the cli where the connection starts
+ * @author Simone Controguerra
+ *
  */
 public class StartCLI {
 
@@ -32,8 +33,9 @@ public class StartCLI {
     }
 
     /**
-     * @author Simone Controguerra
      * Player Login page
+     * @author Simone Controguerra
+     *
      */
     public void startClient(){
         boolean lock = false;

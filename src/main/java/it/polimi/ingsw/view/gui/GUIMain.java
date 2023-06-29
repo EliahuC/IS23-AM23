@@ -12,8 +12,9 @@ import java.io.IOException;
 import java.net.URL;
 
 /**
- * @author Andrea Bricchi
  * Class to starts the GUI
+ * @author Andrea Bricchi
+ *
  */
 public class GUIMain extends Application implements View {
     private String IP;

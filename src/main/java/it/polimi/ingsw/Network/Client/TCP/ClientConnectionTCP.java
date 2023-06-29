@@ -20,8 +20,9 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 /**
- * @author Eliahu Cohen
  * Socket connection of the client
+ * @author Eliahu Cohen
+ *
  */
 public class ClientConnectionTCP extends ConnectionClient {
     PropertyChangeListener listener;
@@ -39,12 +40,12 @@ public class ClientConnectionTCP extends ConnectionClient {
     private final Gson gson=new Gson();
 
     /**
-     *
+     * Constructor to start the Socket connection and set the playerNick
      * @author Eliahu Cohen
      * @param socket connection with the server
      * @param nickname of the client
      * @throws RemoteException if the connection couldn't start
-     * Constructor to start the Socket connection and set the playerNick
+     *
      */
     public ClientConnectionTCP(Socket socket,String nickname) throws RemoteException {
         super();
@@ -63,8 +64,9 @@ public class ClientConnectionTCP extends ConnectionClient {
 
 
     /**
-     * @author Eliahu Cohen
      * method that start the receiving of the messages
+     * @author Eliahu Cohen
+     *
      */
     @Override
     public void run() {
@@ -83,9 +85,10 @@ public class ClientConnectionTCP extends ConnectionClient {
     }
 
     /**
+     * Method thar receive the message from the server and pass it to the listener
      * @author Eliahu Cohen
      * @param s message received
-     * Method thar receive the message from the server and pass it to the listener
+     *
      */
     @Override
     public void receiveMessage(String s) {
@@ -101,7 +104,7 @@ public class ClientConnectionTCP extends ConnectionClient {
             if (listener != null && serverMessage!= null && serverMessage.getCategory() != Message.MessageCategory.PINGFROMSERVER) {
                 listener.propertyChange(evt);
     } else if(serverMessage!= null && serverMessage.getCategory()== Message.MessageCategory.PINGFROMSERVER){
-        //System.out.println("Ping arrived")
+
                 sendPing();
             }
     } catch (InterruptedException e) {
@@ -111,8 +114,9 @@ public class ClientConnectionTCP extends ConnectionClient {
 
 
     /**
-     * @author Eliahu Cohen
      * method that close the connection and notify the client
+     * @author Eliahu Cohen
+     *
      */
     public void closeConnection(){
         try{
@@ -125,9 +129,10 @@ public class ClientConnectionTCP extends ConnectionClient {
     }
 
     /**
+     * Method that sends a message to the server
      * @author Eliahu Cohen
      * @param message to send to the server
-     * Method that sends a message to the server
+     *
      */
     public void sendMessage(ClientMessage message){
         message.setNickname(playerName);
@@ -138,9 +143,10 @@ public class ClientConnectionTCP extends ConnectionClient {
     }
 
     /**
+     * Method to send the ping to the server
      * @author Eliahu Cohen
      * @throws InterruptedException if the connection crash
-     * Method to send the ping to the server
+     *
      */
     private void sendPing() throws InterruptedException {
         PingToServer ping=new PingToServer(playerName);
