@@ -1,9 +1,8 @@
 package it.polimi.ingsw.Messages.ServerToClient;
 
 /**
- * @author Eliahu Cohen
  * Message to notify the client the server crushed
- *
+ * @author Eliahu Cohen
  */
 public class CrashedServerMessage extends ServerMessage{
     public CrashedServerMessage() {

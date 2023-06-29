@@ -12,16 +12,17 @@ import java.util.HashSet;
 public class CommonGoalCard5 extends CommonGoalCard implements CheckCommonGoalCard {
     private final static int numColumnsToAchieve = 3;
     private final static int numDifferentCategoriesAllowed = 3;
-    private final HashSet<ItemTileCategory> cat = new HashSet<>(); //I use an hashset to track the categories in each column
-                                      //of the bookshelf
+    private final HashSet<ItemTileCategory> cat = new HashSet<>();
 
     public CommonGoalCard5(Integer I){
         super(I);
 
     }
     /**
-     *@param bs Player's bookshelf
      * The method below checks each bookshelf's column, until three columns comply with the specifics
+     * @author Giovaanni Di Lorenzo
+     *@param bs Player's bookshelf
+     *
      */
     @Override
     public void checkGoal(BookShelf bs) {
@@ -41,10 +42,13 @@ public class CommonGoalCard5 extends CommonGoalCard implements CheckCommonGoalCa
     public HashSet<ItemTileCategory> getCat() {
         return cat;
     }
+
     /**
+     * The method below count the categories of the column with index a
+     * @author Giovaanni Di Lorenzo
      *@param bs,a,cat Player's bookshelf, column index and HashSet in order to count the number of index a
      *                column categories
-     * The method below count the categories of the column with index a
+     *
      */
     public int CategoriesAllowed(BookShelf bs, int a, HashSet<ItemTileCategory> cat) {
         for (int i = 0; i < BookShelf.getMAX_Row() && cat.size() <= numDifferentCategoriesAllowed; i++) {

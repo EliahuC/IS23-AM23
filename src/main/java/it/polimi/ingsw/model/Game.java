@@ -16,8 +16,9 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * @author Eliahu Cohen
  * Class that contains all the game logic and actions
+ * @author Eliahu Cohen
+ *
  */
 
 
@@ -36,10 +37,11 @@ public class Game implements Serializable {
 
 
     /**
+     * Constructor used when server starts a new game
      * @author Eliahu Cohen
      * @param L launcher to pass to the game checker
      * @param lobby of players that are part of the game
-     * Constructor used when server starts a new game
+     *
      */
     public Game(Launcher L,ArrayList<Player> lobby){
         listeners=new ArrayList<>();
@@ -53,9 +55,10 @@ public class Game implements Serializable {
     }
 
     /**
+     * Constructor used when server starts an already existing game
      * @author Eliahu Cohen
      * @param lobby of players that are part of the game
-     * Constructor used when server starts an already existing game
+     *
      */
    public Game(ArrayList<Player> lobby){
        this.Players=lobby;
@@ -65,8 +68,9 @@ public class Game implements Serializable {
        this.gameNumPlayers= lobby.size();
    }
     /**
-     * @author Eliahu Cohen
      * method that sets to the livingroom all his listeners
+     * @author Eliahu Cohen
+     *
      */
     private void setLivingRoomListener() {
         for(Player p:Players){
@@ -88,8 +92,9 @@ public class Game implements Serializable {
     }
 
     /**
-     * @author Eliahu Cohen
      * Method that sets what he needs and starts the game
+     * @author Eliahu Cohen
+     *
      */
     public synchronized void startGame(){
         livingRoom.start(Players.size());
@@ -196,12 +201,12 @@ public class Game implements Serializable {
     }
 
     /**
+     * Method that puts the tiles in the player bookshelf, checks if the player have fulled his bookshelf
+     * and if it's right sets the lastRound boolean to all the players
      * @author Eliahu Cohen
      * @param commands coordinates of the tiles to extract
      * @param column where the player want to put the tiles
      * @param order of the tiles to put
-     * Method that puts the tiles in the player bookshelf, checks if the player have fulled his bookshelf
-     *              and if it's right sets the lastRound boolean to all the players
      */
     private synchronized void placeTiles(ArrayList<Integer> commands, Integer column,ArrayList<Integer> order){
         if(disconnectedPlayers.contains(Players.get(currPlaying-1))){
@@ -232,8 +237,9 @@ public class Game implements Serializable {
     }
 
     /**
-     * @author Eliahu Cohen
      * Method that checks if the game is finished and sets the last turn boolean to all the players
+     * @author Eliahu Cohen
+     *
      */
     private synchronized void isLastTurn() {
         if(currPlaying == Players.size()){
@@ -318,10 +324,11 @@ public class Game implements Serializable {
     }
 
     /**
+     * Method that returns to me the coordinates sorted based on the same column of the tiles
      * @author Eliahu Cohen
      * @param commands coordinates of the tiles the player wants to extract
      * @param temporaryCommands array list I want to fill with the sorted coordinates
-     * Method that returns to me the coordinates sorted based on the same column of the tiles
+     *
      */
     private void sortColumn(ArrayList<Integer> commands, ArrayList<Integer> temporaryCommands) {
         ArrayList<Integer> y=new ArrayList<>();
@@ -344,10 +351,11 @@ public class Game implements Serializable {
 
     }
     /**
+     * Method that returns to me the coordinates sorted based on the same row of the tiles
      * @author Eliahu Cohen
      * @param commands coordinates of the tiles the player wants to extract
      * @param temporaryCommands array list I want to fill with the sorted coordinates
-     * Method that returns to me the coordinates sorted based on the same row of the tiles
+     *
      */
     private void sortRow(ArrayList<Integer> commands, ArrayList<Integer> temporaryCommands) {
         ArrayList<Integer> x=new ArrayList<>();
@@ -379,11 +387,6 @@ public class Game implements Serializable {
         return gameChecker.checkColumn(Players.get(currPlaying-1).getPlayerBookshelf(),column,numOfTiles);
     }
 
-    /*
-    public boolean checkLegalColumn(int column,int numOfTiles){
-        return Players.get(currPlaying-1).getPlayerBookshelf().getMaxPickableTiles()[column] >= numOfTiles;
-    }
-    */
 
     /**
      * @author Eliahu Cohen
@@ -397,10 +400,10 @@ public class Game implements Serializable {
 
 
     /**
-     * @return the player with the highest score
      * The method checks with a functional method who is the player with the highest score.
      * if there is a draw the player will be selected manually
      * @author Eliahu Cohen
+     * @return the player with the highest score
      */
     private synchronized Player whoWins(){
         Optional<Player> P=Players.stream().reduce((P1,P2) ->P1.getScore()>P2.getScore()? P1 : P2);
@@ -431,8 +434,9 @@ public class Game implements Serializable {
     }
 
     /**
+     *  Method that checks if the player have completed some common goal cards
      * @author Eliahu Cohen
-     * Method that checks if the player have completed some common goal cards
+     *
      */
     private void checkCGC(){
         if(!Players.get(currPlaying-1).getPlayerBookshelf().isCommonGoalCard1Completed()||
@@ -465,8 +469,9 @@ public class Game implements Serializable {
     }
 
     /**
-     * @author Eliahu Cohen
      * method that increase the value of the currPlaying variable checking if the game is finished
+     * @author Eliahu Cohen
+     *
      */
     private synchronized void increaseCurrPlaying() {
         if(Objects.equals(currPlaying, gameNumPlayers) && !finishedGame) currPlaying=1;
@@ -514,8 +519,9 @@ public class Game implements Serializable {
     }
 
     /**
-     * @author Eliahu Cohen
      * Method that ends the game when a player crash
+     * @author Eliahu Cohen
+     *
      */
     public void terminateGame(){
         if(finishedGame){

@@ -24,10 +24,11 @@ public class CommonGoalCard2 extends CommonGoalCard implements CheckCommonGoalCa
     }
 
     /**
+     *  this method checks if the Item Tiles on upper right, upper left, lower right and lower left corners are not
+     *  null
      * @author Giovanni Di Lorenzo
      * @param bs Player's bookshelf
-     * @return this method checks if the itemtiles on upper right, upper left, lower right and lower left corners are not
-     * null
+     * @return true if the tile is not null
      */
     private boolean NoItemsNull(BookShelf bs){
         if((bs.getTile(0,0)!=null) && (bs.getTile(0,4)!=null) &&

@@ -3,8 +3,9 @@ package it.polimi.ingsw.Messages.ServerToClient;
 import it.polimi.ingsw.model.player.BookShelf;
 
 /**
- * @author Eliahu Cohen
  * Message that returns the changed bookshelf to the player
+ * @author Eliahu Cohen
+ *
  */
 public class BookshelfMessage extends ServerMessage{
     private BookShelf playerBookshelf;

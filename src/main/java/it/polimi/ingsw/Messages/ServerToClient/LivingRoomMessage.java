@@ -6,8 +6,9 @@ import static it.polimi.ingsw.model.board.LivingRoom.MAX_Column;
 import static it.polimi.ingsw.model.board.LivingRoom.MAX_Row;
 
 /**
- * @author Eliahu Cohen
  * Message that returns the changed living room after the player pick the tiles
+ * @author Eliahu Cohen
+ *
  */
 public class LivingRoomMessage extends ServerMessage{
     private  BoardToken[][] Board ;

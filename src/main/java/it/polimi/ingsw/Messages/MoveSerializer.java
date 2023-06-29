@@ -12,8 +12,9 @@ import it.polimi.ingsw.Printer;
 import java.util.ArrayList;
 
 /**
- * @author Eliahu Cohen
  * Class to serialize an input string from the client
+ * @author Eliahu Cohen
+ *
  */
 public class MoveSerializer implements Printer {
 
@@ -29,10 +30,11 @@ public class MoveSerializer implements Printer {
     }
 
     /**
+     * Method that splits the input in various strings
      * @author Eliahu Cohen
      * @param string input/command from the client
      * @return the message that have to send due to the command received
-     * Method that splits the input in various strings
+     *
      */
     private static Message convertCommandToMove(String string) {
         String[] tokens = string.split(" ");
@@ -40,10 +42,11 @@ public class MoveSerializer implements Printer {
     }
 
     /**
+     * Method that generate the message based on the input
      * @author Eliahu Cohen
      * @param Command input split in parts
      * @return the message that have to send due to the command received
-     * Method that genetate the message based on the
+     *
      */
     private static Message convertCommandToMove(String[] Command) {
         try{

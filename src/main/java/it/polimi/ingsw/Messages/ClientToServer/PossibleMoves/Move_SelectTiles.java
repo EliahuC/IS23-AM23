@@ -3,8 +3,8 @@ package it.polimi.ingsw.Messages.ClientToServer.PossibleMoves;
 import java.util.ArrayList;
 
 /**
- * @author Eliahu Cohen
  * Move to choose the tiles in the living room
+ * @author Eliahu Cohen
  */
 public class Move_SelectTiles extends Move {
 

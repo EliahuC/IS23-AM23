@@ -11,8 +11,9 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
+ *  Class that checks all the legal/illegal moves of the game
  * @author Simone Controguerra
- * Class that checks all the legal/illegal moves of the game
+ *
  */
 public class GameChecker {
 
@@ -181,9 +182,7 @@ public class GameChecker {
         return lastRound;
     }
 
-    /*public void checkRound(Player p){
-        isYourTurn = p.getNowPlaying();
-    }*/
+
 
     /**
      * @author Simone Controguerra

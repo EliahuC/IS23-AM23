@@ -5,8 +5,9 @@ import it.polimi.ingsw.model.player.Player;
 import java.util.ArrayList;
 
 /**
- * @author Eliahu Cohen
  * Message that returns the winner of the game
+ * @author Eliahu Cohen
+ *
  */
 public class EndGameMessage extends ServerMessage {
     private final ArrayList<Player> players;

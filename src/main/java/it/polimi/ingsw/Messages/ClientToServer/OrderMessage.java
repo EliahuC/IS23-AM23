@@ -3,8 +3,9 @@ package it.polimi.ingsw.Messages.ClientToServer;
 import it.polimi.ingsw.Messages.ClientToServer.PossibleMoves.Move_SelectOrder;
 
 /**
- * @author Eliahu Cohen
  * Message that contains the order of the picked tiles
+ * @author Eliahu Cohen
+ *
  */
 public class OrderMessage extends ClientMessage {
 

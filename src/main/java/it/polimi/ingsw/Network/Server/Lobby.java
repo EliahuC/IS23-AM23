@@ -21,8 +21,9 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 
 /**
- * @author Eliahu Cohen
  * Lobby concept class
+ * @author Eliahu Cohen
+ *
  */
 public class Lobby implements Serializable {
     private transient File myObj;
@@ -45,11 +46,12 @@ public class Lobby implements Serializable {
     }
 
     /**
+     * method that adds a user to the lobby
      * @author Eliahu Cohen
      * @param serverConnection connection with the client
      * @param s nickname
      * @param view
-     * method that adds a user to the lobby
+     *
      */
     public synchronized void addUser(ServerConnection serverConnection, String s, VirtualView view){
         if(connections.size()==NumPlayersLobby) return;
@@ -67,20 +69,14 @@ public class Lobby implements Serializable {
     }
 
     /**
+     * Method that react to the client move
      * @author Eliahu Cohen
      * @param message received from client
      * @return the server response to the client
-     * Method that react to the client move
+     *
      */
     public synchronized Message receiveMessage(ClientMessage message){
-        /*for(Player p:getDisconnectedPlayers()) {
-            if(p.getNickName().equals(message.getNickname()))
-            {
-                ErrorMessage errorMessage= new ErrorMessage();
-                errorMessage.setReturnMessage("The player is disconnected from the game, please log in first.");
-                return errorMessage;
-            }
-        }*/
+
         if(message.getCategory()== Message.MessageCategory.START_GAME){
             if(joinedUsers.size()!=1){
                 startGameLobby();
@@ -100,8 +96,9 @@ public class Lobby implements Serializable {
     }
 
     /**
-     * @author Eliahu Cohen
      * method that delete the lobby savings from disk
+     * @author Eliahu Cohen
+     *
      */
     private void deleteFile() {
 
@@ -112,9 +109,10 @@ public class Lobby implements Serializable {
     }
 
     /**
-     * @author Eliahu Cohen
-     * @param returnMessage
      * Method that saves the current status of the game
+     * @author Eliahu Cohen
+     * @param returnMessage return message
+     *
      */
     private void saveGame(ValidMoveMessage returnMessage) {
         Gson gson=new Gson();
@@ -133,9 +131,10 @@ public class Lobby implements Serializable {
     }
 
     /**
+     * Logout the player from the lobby
      * @author Eliahu Cohen
      * @param s nickname
-     * Logout the player from the lobby
+     *
      */
     public synchronized void logoutFromLobby(String s){
         joinedUsers.remove(s);
@@ -143,8 +142,9 @@ public class Lobby implements Serializable {
     }
 
     /**
-     * @author Eliahu Cohen
      * starts the game of the lobby
+     * @author Eliahu Cohen
+     *
      */
     public synchronized void startGameLobby(){
         startedGame=true;
@@ -154,8 +154,9 @@ public class Lobby implements Serializable {
     }
 
     /**
-     * @author Eliahu Cohen
      * Method that sets the saves of the game
+     * @author Eliahu Cohen
+     *
      */
     private void setSavesOfTheLobby() {
         //String dirPath = "../Savings"; //TODO *
@@ -185,9 +186,10 @@ public class Lobby implements Serializable {
     }
 
     /**
+     * send a message to all the lobby
      * @author Eliahu Cohen
      * @param message to send.
-     * send a message to all the lobby
+     *
      */
     public synchronized void sendMessageToAllTheLobby(ServerMessage message){
         for(ServerConnection s:connections){
@@ -199,8 +201,9 @@ public class Lobby implements Serializable {
     }
 
     /**
-     * @author Eliahu Cohen
      * method to delete the lobby
+     * @author Eliahu Cohen
+     *
      */
     protected synchronized void deleteLobby() {
         ServerConnection.removeVoidLobby(this);
@@ -233,17 +236,19 @@ public class Lobby implements Serializable {
     }
 
     /**
-     * @author Eliahu Cohen
      * Method that ends the game if a player crash
+     * @author Eliahu Cohen
+     *
      */
     public void endGame() {
         controllerCoordinator.endgame();
     }
 
     /**
+     * Method that reloads the game
      * @author Eliahu Cohen
      * @param gameSavings taken from the server
-     * Method that reloads the game
+     *
      */
     public void reloadGame(GameSavings gameSavings) {
         controllerCoordinator=new ControllerCoordinator();
@@ -253,8 +258,9 @@ public class Lobby implements Serializable {
     }
 
     /**
-     * @author Eliahu Cohen
      * method to restart a lobby saved on the disk
+     * @author Eliahu Cohen
+     *
      */
     public void restartGame() {
         this.startedGame=true;
@@ -281,10 +287,11 @@ public class Lobby implements Serializable {
     }
 
     /**
+     * Method that remove a player when crash
      * @author Eliahu Cohen
      * @param serverConnection of the player
      * @param namePlayer name of the player
-     * Method that remove a player when crash
+     *
      */
     public void removePlayer(ServerConnection serverConnection, String namePlayer) {
         for(Player p: controllerCoordinator.getConnectedPlayers())

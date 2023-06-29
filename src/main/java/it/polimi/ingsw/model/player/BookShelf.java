@@ -6,8 +6,9 @@ import it.polimi.ingsw.model.board.ItemTileCategory;
 import java.util.ArrayList;
 
 /**
- * @author Eliahu Cohen and Andrea Bricchi
  * Class that rapresent the players bookshelf
+ * @author Eliahu Cohen and Andrea Bricchi
+ *
  */
 public class BookShelf {
 
@@ -28,8 +29,9 @@ public class BookShelf {
     private boolean commonGoalCard2Completed;
 
     /**
-     * @author Eliahu Cohen and Andrea Bricchi
      * Constructor of the class
+     * @author Eliahu Cohen and Andrea Bricchi
+     *
      */
     public BookShelf() {
 
@@ -46,8 +48,9 @@ public class BookShelf {
     }
 
     /**
-     * @author Andrea Bricchi
      * method that increase the score of the player caused on the adjacent tiles goals
+     * @author Andrea Bricchi
+     *
      */
 
     public void AdjacentScore(){
@@ -217,11 +220,7 @@ public class BookShelf {
         return MAX_Column;
     }
 
-    /* public void resetVisited(){
-        for(int i=0; i<5;i++){
-            for (ItemTile T:Shelf[i])T.setVisited(false);
-        }
-    } */
+
 
     public int[] getMaxPickableTiles(){
         return maxPickableTiles;

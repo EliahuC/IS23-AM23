@@ -6,8 +6,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 /**
+ * Class that represent the bag that contains the tiles
  * @author Eliahu Cohen
- * Method that rapresent the bag that contains the tiles
+ *
  */
 
 public class Bag implements Serializable {
@@ -21,8 +22,9 @@ public class Bag implements Serializable {
     private final ArrayList<ItemTile> Tiles = new ArrayList<>();
 
     /**
-     * @author Eliahu Cohen
      * Constructor to inizialize the bag
+     * @author Eliahu Cohen
+     *
      */
     public Bag() {
     for(int i=0; i<23;i++){

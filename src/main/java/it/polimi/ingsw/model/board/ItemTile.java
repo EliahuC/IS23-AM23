@@ -5,8 +5,9 @@ import java.io.Serializable;
 import java.util.Random;
 
 /**
- * @author Eliahu Cohen
  * class that rapresent the item tile
+ * @author Eliahu Cohen
+ *
  */
 
 public class ItemTile implements Serializable {
@@ -15,8 +16,9 @@ public class ItemTile implements Serializable {
     private ItemTileCategory category=null ;
 
     /**
-     * @author Eliahu Cohen
      * Constructor of the class used to pick a random Tile
+     * @author Eliahu Cohen
+     *
      */
     public ItemTile(){
         ItemTileCategory[] values = ItemTileCategory.values();
@@ -26,8 +28,9 @@ public class ItemTile implements Serializable {
     }
 
     /**
-     * @author Eliahu Cohen
      * Constructor of the class used to pick a specific Tile
+     * @author Eliahu Cohen
+     *
      */
     public ItemTile(String x) {
         switch(x){

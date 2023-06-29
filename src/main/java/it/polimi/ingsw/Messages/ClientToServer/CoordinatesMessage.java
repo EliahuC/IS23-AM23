@@ -3,8 +3,8 @@ package it.polimi.ingsw.Messages.ClientToServer;
 import it.polimi.ingsw.Messages.ClientToServer.PossibleMoves.Move_SelectTiles;
 
 /**
- * @author Eliahu Cohen
  * Message that contains the coordinates of the selected tiles
+ * @author Eliahu Cohen
  */
 public class CoordinatesMessage extends ClientMessage {
 

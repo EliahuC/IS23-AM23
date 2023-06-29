@@ -1,8 +1,9 @@
 package it.polimi.ingsw.Messages.ServerToClient;
 
 /**
- * @author Eliahu Cohen
  * Message returned when the last turn starts
+ * @author Eliahu Cohen
+ *
  */
 public class LastTurnMessage extends ServerMessage{
     public LastTurnMessage() {

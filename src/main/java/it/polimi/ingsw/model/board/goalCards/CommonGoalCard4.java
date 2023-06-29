@@ -47,10 +47,11 @@ public class CommonGoalCard4 extends CommonGoalCard implements CheckCommonGoalCa
         return counterBooks;
     }
     /**
+     * This method checks, in every possible square that can be made in the Bookshelf, if the player realized
+     * at least two squares
      * @author Giovanni Di Lorenzo
      * @param bs Player's bookshelf
-     * This method checks, in every possible square that can be made in the Bookshelf, if the player realized
-     *           at least two squares
+     *
      */
     @Override
     public void checkGoal(BookShelf bs) {
@@ -82,9 +83,10 @@ public class CommonGoalCard4 extends CommonGoalCard implements CheckCommonGoalCa
         }
     }
     /**
+     * Upper left square check
      * @author Giovanni Di Lorenzo
      * @param bs Bookshelf's player
-     * Upper left square check
+     *
      */
     private void UpperLeft(BookShelf bs) {
         if (NoItemsNull(bs, 0, 0)) {
@@ -107,9 +109,10 @@ public class CommonGoalCard4 extends CommonGoalCard implements CheckCommonGoalCa
         }
     }
     /**
+     * Upper right square check
      * @author Giovanni Di Lorenzo
      * @param bs Bookshelf's player
-     * Upper right square check
+     *
      */
     private void UpperRight(BookShelf bs){
         if(NoItemsNull(bs,0,BookShelf.getMAX_Column()-2)) {
@@ -132,9 +135,10 @@ public class CommonGoalCard4 extends CommonGoalCard implements CheckCommonGoalCa
         }
     }
     /**
+     * Mid left square check
      * @author Giovanni Di Lorenzo
      * @param bs Bookshelf's player
-     * Mid left square check
+     *
      */
 
     private void MidLeft(BookShelf bs) {
@@ -158,9 +162,10 @@ public class CommonGoalCard4 extends CommonGoalCard implements CheckCommonGoalCa
         }
     }
     /**
+     * Mid right square check
      * @author Giovanni Di Lorenzo
      * @param bs Bookshelf's player
-     * Mid right square check
+     *
      */
     private void MidRight(BookShelf bs) {
         if (NoItemsNull(bs, 2, BookShelf.getMAX_Column() - 2)) {
@@ -183,9 +188,10 @@ public class CommonGoalCard4 extends CommonGoalCard implements CheckCommonGoalCa
         }
     }
     /**
+     * Lower left square check
      * @author Giovanni Di Lorenzo
      * @param bs Bookshelf's player
-     * Lower left square check
+     *
      */
     private void LowerLeft(BookShelf bs) {
         if (NoItemsNull(bs, BookShelf.getMAX_Row() - 2, 0)) {
@@ -208,9 +214,10 @@ public class CommonGoalCard4 extends CommonGoalCard implements CheckCommonGoalCa
         }
     }
     /**
+     * Lower right square check
      * @author Giovanni Di Lorenzo
      * @param bs Bookshelf's player
-     * Lower right square check
+     *
      */
     private void LowerRight(BookShelf bs) {
         if (NoItemsNull(bs, BookShelf.getMAX_Row() - 2, BookShelf.getMAX_Column() - 2)) {
@@ -233,9 +240,10 @@ public class CommonGoalCard4 extends CommonGoalCard implements CheckCommonGoalCa
         }
     }
     /**
+     * Square with coordinates (0,1),(0,2),(1,1),(1,2) check
      * @author Giovanni Di Lorenzo
      * @param bs Bookshelf's player
-     * Square with coordinates (0,1),(0,2),(1,1),(1,2) check
+     *
      */
     private void FirstRow_SecondRow1(BookShelf bs){
         if((notContain(bs,0,1,1,2)) && (NoItemsNull(bs, 0, 1))){
@@ -258,9 +266,10 @@ public class CommonGoalCard4 extends CommonGoalCard implements CheckCommonGoalCa
         }
     }
     /**
+     * Square with coordinates (0,2),(0,3),(1,2),(1,3) check
      * @author Giovanni Di Lorenzo
      * @param bs Bookshelf's player
-     * Square with coordinates (0,2),(0,3),(1,2),(1,3) check
+     *
      */
     private void FirstRow_SecondRow2(BookShelf bs) {
         if ((notContain(bs, 0, 2, 1, BookShelf.getMAX_Column() - 2)) && (NoItemsNull(bs, 0, 2))){
@@ -283,9 +292,10 @@ public class CommonGoalCard4 extends CommonGoalCard implements CheckCommonGoalCa
         }
     }
     /**
+     * Square with coordinates (1,0),(1,1),(2,0),(2,1) check
      * @author Giovanni Di Lorenzo
      * @param bs Bookshelf's player
-     * Square with coordinates (1,0),(1,1),(2,0),(2,1) check
+     *
      */
     private void SecondRow_ThirdRow1(BookShelf bs) {
         if ((notContain(bs, 1, 0, 2, 1))&& (NoItemsNull(bs, 1, 0))) {
@@ -308,9 +318,10 @@ public class CommonGoalCard4 extends CommonGoalCard implements CheckCommonGoalCa
         }
     }
     /**
+     * Square with coordinates (1,1),(1,2),(2,1),(2,2) check
      * @author Giovanni Di Lorenzo
      * @param bs Bookshelf's player
-     * Square with coordinates (1,1),(1,2),(2,1),(2,2) check
+     *
      */
     private void SecondRow_ThirdRow2(BookShelf bs) {
         if ((notContain(bs, 1, 1, 2, 2))&& (NoItemsNull(bs, 1, 1))) {
@@ -334,9 +345,10 @@ public class CommonGoalCard4 extends CommonGoalCard implements CheckCommonGoalCa
         }
     }
     /**
+     * Square with coordinates (1,2),(1,3),(2,2),(2,3) check
      * @author Giovanni Di Lorenzo
      * @param bs Bookshelf's player
-     * Square with coordinates (1,2),(1,3),(2,2),(2,3) check
+     *
      */
     private void SecondRow_ThirdRow3(BookShelf bs){
         if ((notContain(bs, 1, 2, 2, BookShelf.getMAX_Column()-2))&& (NoItemsNull(bs, 1, 2))){
@@ -359,9 +371,10 @@ public class CommonGoalCard4 extends CommonGoalCard implements CheckCommonGoalCa
         }
     }
     /**
+     * Square with coordinates (1,3),(1,4),(2,3),(2,4) check
      * @author Giovanni Di Lorenzo
      * @param bs Bookshelf's player
-     * Square with coordinates (1,3),(1,4),(2,3),(2,4) check
+     *
      */
     private void SecondRow_ThirdRow4(BookShelf bs){
         if((notContain(bs, 1, BookShelf.getMAX_Column()-2, 2, BookShelf.getMAX_Column()-1))&& (NoItemsNull(bs, 1, BookShelf.getMAX_Column()-2))) {
@@ -384,9 +397,10 @@ public class CommonGoalCard4 extends CommonGoalCard implements CheckCommonGoalCa
         }
     }
     /**
+     * Square with coordinates (2,1),(2,2),(3,1),(3,2) check
      * @author Giovanni Di Lorenzo
      * @param bs Bookshelf's player
-     * Square with coordinates (2,1),(2,2),(3,1),(3,2) check
+     *
      */
     private void ThirdRow_FourthRow1(BookShelf bs){
         if((notContain(bs,2,1,3,2))&& (NoItemsNull(bs, 2, 1))){
@@ -409,9 +423,10 @@ public class CommonGoalCard4 extends CommonGoalCard implements CheckCommonGoalCa
         }
     }
     /**
+     * Square with coordinates (2,2),(2,3),(3,2),(3,3) check
      * @author Giovanni Di Lorenzo
      * @param bs Bookshelf's player
-     * Square with coordinates (2,2),(2,3),(3,2),(3,3) check
+     *
      */
     private void ThirdRow_FourthRow2(BookShelf bs){
         if((notContain(bs,2,2,3,BookShelf.getMAX_Column()-2))&& (NoItemsNull(bs, 2, 2))){
@@ -434,9 +449,10 @@ public class CommonGoalCard4 extends CommonGoalCard implements CheckCommonGoalCa
         }
     }
     /**
+     * Square with coordinates (3,0),(3,1),(4,0),(4,1) check
      * @author Giovanni Di Lorenzo
      * @param bs Bookshelf's player
-     * Square with coordinates (3,0),(3,1),(4,0),(4,1) check
+     *
      */
     private void FourthRow_FifthRow1(BookShelf bs){
         if ((notContain(bs, 3, 0, BookShelf.getMAX_Row()-2, 1))&& (NoItemsNull(bs, 3, 0))) {
@@ -459,9 +475,10 @@ public class CommonGoalCard4 extends CommonGoalCard implements CheckCommonGoalCa
         }
     }
     /**
+     * Square with coordinates (3,1),(3,2),(4,1),(4,2) check
      * @author Giovanni Di Lorenzo
      * @param bs Bookshelf's player
-     * Square with coordinates (3,1),(3,2),(4,1),(4,2) check
+     *
      */
     private void FourthRow_FifthRow2(BookShelf bs){
         if ((notContain(bs, 3, 1, BookShelf.getMAX_Row()-2, 2))&& (NoItemsNull(bs, 3, 1))) {
@@ -484,9 +501,10 @@ public class CommonGoalCard4 extends CommonGoalCard implements CheckCommonGoalCa
         }
     }
     /**
+     * Square with coordinates (3,2),(3,3),(4,2),(4,3) check
      * @author Giovanni Di Lorenzo
      * @param bs Bookshelf's player
-     * Square with coordinates (3,2),(3,3),(4,2),(4,3) check
+     *
      */
     private void FourthRow_FifthRow3(BookShelf bs){
         if((notContain(bs, 3, 2, BookShelf.getMAX_Row()-2, BookShelf.getMAX_Column()-2))&&
@@ -510,9 +528,10 @@ public class CommonGoalCard4 extends CommonGoalCard implements CheckCommonGoalCa
         }
     }
     /**
+     * Square with coordinates (3,3),(3,4),(4,3),(4,4) check
      * @author Giovanni Di Lorenzo
      * @param bs Bookshelf's player
-     * Square with coordinates (3,3),(3,4),(4,3),(4,4) check
+     *
      */
     private void FourthRow_FifthRow4(BookShelf bs) {
         if((notContain(bs, 3, BookShelf.getMAX_Column() - 2, BookShelf.getMAX_Row()-2, BookShelf.getMAX_Column() - 1))&&
@@ -536,9 +555,10 @@ public class CommonGoalCard4 extends CommonGoalCard implements CheckCommonGoalCa
         }
     }
     /**
+     * Square with coordinates (4,1),(4,2),(5,1),(5,2) check
      * @author Giovanni Di Lorenzo
      * @param bs Bookshelf's player
-     * Square with coordinates (4,1),(4,2),(5,1),(5,2) check
+     *
      */
     private void FifthRow_SixthRow1(BookShelf bs){
         if((notContain(bs, BookShelf.getMAX_Row()-2,1,BookShelf.getMAX_Row()-1,2))&&
@@ -562,9 +582,10 @@ public class CommonGoalCard4 extends CommonGoalCard implements CheckCommonGoalCa
         }
     }
     /**
+     * Square with coordinates (4,2),(4,3),(5,2),(5,3) check
      * @author Giovanni Di Lorenzo
      * @param bs Bookshelf's player
-     * Square with coordinates (4,2),(4,3),(5,2),(5,3) check
+     *
      */
     private void FifthRow_SixthRow2(BookShelf bs ){
         if((notContain(bs,BookShelf.getMAX_Row()-2,2,BookShelf.getMAX_Row()-1,BookShelf.getMAX_Column()-2))&&
@@ -588,8 +609,9 @@ public class CommonGoalCard4 extends CommonGoalCard implements CheckCommonGoalCa
         }
     }
     /**
+     * This method checks if the player realized at least two same category squares
      * @author Giovanni Di Lorenzo
-     *This method checks if the player realized at least two same category squares
+     *
      */
     private boolean TwoSquares(){
         if(getCounterBooks()>=2 || getCounterCats()>=2 || getCounterFrames()>=2 || getCounterGames()>=2 ||
@@ -599,9 +621,10 @@ public class CommonGoalCard4 extends CommonGoalCard implements CheckCommonGoalCa
             return false;
     }
     /**
+     * This method checks if the itemtiles at the specified coordinates are not contained in a regular square
      * @author Giovanni Di Lorenzo
      * @param bs,x,y,z,w   Players'bookshelf and itemtile coordinates
-     * This method checks if the itemtiles at the specified coordinates are not contained in a regular square
+     *
      */
     private boolean notContain(BookShelf bs,int x, int y, int z,int w){
         if((!validGroups.contains(bs.getTile(x,y))) && (!validGroups.contains(bs.getTile(x,w))) &&
@@ -611,9 +634,10 @@ public class CommonGoalCard4 extends CommonGoalCard implements CheckCommonGoalCa
         return false;
     }
     /**
+     * This method checks if the itemtiles with coordinates (k,l),(k+1,l),(k,l+1),(k+1,l+1) are not null
      * @author Giovanni Di Lorenzo
      * @param bs,k,l   Players'bookshelf, furthermore itemtile column and row indexes
-     * This method checks if the itemtiles with coordinates (k,l),(k+1,l),(k,l+1),(k+1,l+1) are not null
+     *
      */
     private boolean NoItemsNull(BookShelf bs,int k, int l){
         if((bs.getTile(k,l)!=null) && (bs.getTile(k,l+1)!=null) &&

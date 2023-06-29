@@ -16,8 +16,9 @@ public class CommonGoalCard11 extends CommonGoalCard implements CheckCommonGoalC
         super(I);
     }
     /**
-     *@param bs Player's bookshelf
      * The method below checks if there is a X scheme of same category itemtiles in the bookshelf
+     * @param bs Player's bookshelf
+     *
      */
     @Override
     public void checkGoal(BookShelf bs) {
@@ -39,9 +40,11 @@ public class CommonGoalCard11 extends CommonGoalCard implements CheckCommonGoalC
             increaseNumCompleted();
     }
     /**
-     *@param bs,k,l Player's bookshelf, furthermore itemtile column and row indexes
-     * The method below checks if itemtiles with coordinates (k,l),(k,l+2),(k+1,l+1),(k+2,l),(k+2,l+2) create an X,
-     *              complying the specifics
+     * The method below checks if Item Tiles with coordinates (k,l),(k,l+2),(k+1,l+1),(k+2,l),(k+2,l+2) create an X,
+     * complying the specifics
+     * @param bs Player's bookshelf
+     * @param k furthermore itemtile column
+     * @param l row indexes
      */
     private boolean X(BookShelf bs, int k, int l) {
         if (NoItemsNull(bs, k, l)) {
@@ -52,15 +55,20 @@ public class CommonGoalCard11 extends CommonGoalCard implements CheckCommonGoalC
         } else return false;
     }
     /**
-     *@param i,tile Two itemtiles
      * The method below checks if the input parameters have the same category
+     * @param i ItemTile1
+     * @param tile ItemTile2
+     *
      */
     private boolean IsEqualCategory(ItemTile i, ItemTile tile){
         return i.getCategory()==tile.getCategory();
     }
+
     /**
-     *@param bs,k,l Players'bookshelf, furthermore itemtile column and row indexes
      * The method below checks if the itemtiles with coordinates (k,l+2),(k+2,l),(k+1,l+1),(k+2,l+2) are not null
+     * @param bs Players'bookshelf
+     * @param l furthermore itemtile column
+     * @param k row indexes
      */
     private boolean NoItemsNull(BookShelf bs, int k, int l){
         if((bs.getTile(k,l+2)!=null) && (bs.getTile(k+1,l+1)!=null) &&

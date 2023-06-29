@@ -8,8 +8,9 @@ import java.util.HashMap;
 import java.util.Random;
 
 /**
+ *  Generator of the personal goal cards based on singleton pattern
  * @author Eliahu Cohen
- * Generator of the personal goal cards based on singleton pattern
+ *
  */
 public class PersonalGoalCardGen implements Serializable {
     private static PersonalGoalCardGen generator=null;

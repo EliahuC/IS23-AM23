@@ -5,8 +5,9 @@ import it.polimi.ingsw.model.board.ItemTile;
 import java.util.HashMap;
 
 /**
- * @author Eliahu Cohen
  * Class that rapresent the pait < Pair , Goal >
+ * @author Eliahu Cohen
+ *
  */
 public class PGCkey {
     private final Integer id;

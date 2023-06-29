@@ -3,8 +3,8 @@ package it.polimi.ingsw.Messages.ClientToServer;
 import it.polimi.ingsw.Messages.ClientToServer.PossibleMoves.Move;
 
 /**
- * @author Eliahu Cohen
  * Message sent from client to enter a lobby
+ * @author Eliahu Cohen
  */
 public class LobbyEntranceMessage extends ClientMessage{
     public LobbyEntranceMessage() {

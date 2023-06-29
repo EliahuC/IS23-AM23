@@ -12,8 +12,7 @@ import java.util.HashSet;
  */
 public class CommonGoalCard9 extends CommonGoalCard implements CheckCommonGoalCard {
     private final static int numColumnsToAchieve=2;
-    private final HashSet<ItemTileCategory> cat = new HashSet<>(); //I use an arrayList to track the categories in each column
-    //of the bookshelf
+    private final HashSet<ItemTileCategory> cat = new HashSet<>();
 
 
 
@@ -21,9 +20,11 @@ public class CommonGoalCard9 extends CommonGoalCard implements CheckCommonGoalCa
     public CommonGoalCard9(Integer I){
         super(I);
     }
+
     /**
-     *@param bs Player's bookshelf
      * The method below checks each bookshelf's column, until two columns comply with the specifics
+     * @param bs Player's bookshelf
+     *
      */
     @Override
     public void checkGoal(BookShelf bs) {
@@ -41,9 +42,10 @@ public class CommonGoalCard9 extends CommonGoalCard implements CheckCommonGoalCa
             increaseNumCompleted();
     }
     /**
-     *@param bs,a,cat Player's bookshelf, column index and HashSet in order to count the number of index a
-     *                column categories
      * The method below checks if in the column with index a there are not two itemtiles with the same category
+     * @param bs,a,cat Player's bookshelf, column index and HashSet in order to count the number of index a
+     *                column categories
+     *
      */
     public boolean SameCategory(BookShelf bs, int a, HashSet<ItemTileCategory> category) {
         for (int i = 1; i < BookShelf.getMAX_Row(); i++) {

@@ -13,8 +13,9 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * @author Eliahu Cohen
  * class that rapresent the game board
+ * @author Eliahu Cohen
+ *
  */
 
 public class LivingRoom implements Serializable {
@@ -37,9 +38,10 @@ public class LivingRoom implements Serializable {
     private Integer idCGC2;
 
     /**
+     * Constructor that builds the board and the other living room components
      * @author Eliahu Cohen
      * @param L launcher passed from the game
-     * Constructor that builds the board and the other living room components
+     *
      */
     public LivingRoom(Launcher L) {
         this.L = L;
@@ -71,8 +73,9 @@ public class LivingRoom implements Serializable {
     }
 
     /**
-     * @author Eliahu Cohen
      * set the unavailable spaces
+     * @author Eliahu Cohen
+     *
      */
     private void SetUnavailable() {
         //TOP LEFT
@@ -98,8 +101,9 @@ public class LivingRoom implements Serializable {
         Board[8][3].setCategory(BoardToken.boardTokenCategory.UNAVAILABLE);
     }
     /**
-     * @author Eliahu Cohen
      * set the unavailable spaces in the top left
+     * @author Eliahu Cohen
+     *
      */
     private void setUTopLeft(){
         for (int i = 0; i < 2; i++) {
@@ -109,8 +113,9 @@ public class LivingRoom implements Serializable {
         }
     }
     /**
-     * @author Eliahu Cohen
      * set the unavailable spaces in the down left
+     * @author Eliahu Cohen
+     *
      */
     private void setUDownLeft(){
         for (int i = 7; i < MAX_Row; i++) {
@@ -120,8 +125,9 @@ public class LivingRoom implements Serializable {
         }
     }
     /**
-     * @author Eliahu Cohen
      * set the unavailable spaces in the top right
+     * @author Eliahu Cohen
+     *
      */
     private void setUTopRight(){
         for (int i = 0; i < 2; i++) {
@@ -131,8 +137,9 @@ public class LivingRoom implements Serializable {
         }
     }
     /**
-     * @author Eliahu Cohen
      * set the unavailable spaces in the down right
+     * @author Eliahu Cohen
+     *
      */
     private void setUDownRight(){
         for (int i = 7; i < MAX_Row; i++) {
@@ -143,8 +150,9 @@ public class LivingRoom implements Serializable {
     }
 
     /**
-     * @author Eliahu Cohen
      * method that sets the 3 player spaces
+     * @author Eliahu Cohen
+     *
      */
     private void SetThree() {
         Board[2][2].setCategory(BoardToken.boardTokenCategory.THREE);
@@ -158,8 +166,9 @@ public class LivingRoom implements Serializable {
     }
 
     /**
-     * @author Eliahu Cohen
      * method that sets the 4 player spaces
+     * @author Eliahu Cohen
+     *
      */
     private void SetFour() {
         Board[0][4].setCategory(BoardToken.boardTokenCategory.FOUR);
@@ -173,8 +182,9 @@ public class LivingRoom implements Serializable {
     }
 
     /**
-     * @author Eliahu Cohen
      * method that create the 12 common goal cards
+     * @author Eliahu Cohen
+     *
      */
     private void SetCommonGoalCard(){
 
@@ -194,9 +204,10 @@ public class LivingRoom implements Serializable {
     }
 
     /**
+     * method that stars the living room based on the number of players
      * @author Eliahu Cohen
      * @param numPlayers that play the game
-     * method that stars the living room based on the number of players
+     *
      */
     public void start(int numPlayers) {
         for (int i = 0; i < MAX_Row; i++) {
@@ -242,8 +253,9 @@ public class LivingRoom implements Serializable {
     }
 
     /**
-     * @author Eliahu Cohen
      * method that restores the tiles on the living room
+     * @author Eliahu Cohen
+     *
      */
     public void restore() {
         if (gameChecker.isRestorable(Board)) {

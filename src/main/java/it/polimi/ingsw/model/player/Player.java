@@ -10,8 +10,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * @author Eliahu Cohen,Giovanni di Lorenzo and Simone Controguerra
  * class that rapresent the player
+ * @author Eliahu Cohen,Giovanni di Lorenzo and Simone Controguerra
+ *
  */
 
 public class Player implements Serializable {
@@ -29,9 +30,10 @@ public class Player implements Serializable {
     transient PropertyChangeListener listener;
 
     /**
+     * Standard constructor used in the other classes
      * @author Eliahu Cohen
      * @param nickName of the player
-     * Standard constructor used in the other classes
+     *
      */
     public Player(String nickName) {
         NickName = nickName;
@@ -78,11 +80,11 @@ public class Player implements Serializable {
     }
 
     /**
+     * method that insert the tiles in the bookshelf of the player
+     * This method uses an event to notify to the listener that the bookshelf is changed
      * @author Eliahu Cohen
      * @param selectedTiles array of the tiles extracted from the living room
      * @param column where I want to put the tiles
-     * method that insert the tiles in the bookshelf of the player
-     * This method uses an event to notify to the listener that the bookshelf is changed
      */
     public void insertToken(ArrayList<ItemTile> selectedTiles , int column){
         PropertyChangeEvent evt = new PropertyChangeEvent(
@@ -99,8 +101,9 @@ public class Player implements Serializable {
 
 
     /**
-     * @author Eliahu Cohen
      * Method to compare the playerBookshelf with the personal goal card that he have
+     * @author Eliahu Cohen
+     *
      */
     private void comparePersonalGoalCardwithBookshelf (){
 
@@ -115,9 +118,9 @@ public class Player implements Serializable {
     }
 
     /**
-     * @author Eliahu Cohen
      * Method to add the final points gained with the adjacens and the personal goal card
      * it used only when the game is finished
+     * @author Eliahu Cohen
      */
     public void endGamePoints(){
         comparePersonalGoalCardwithBookshelf();

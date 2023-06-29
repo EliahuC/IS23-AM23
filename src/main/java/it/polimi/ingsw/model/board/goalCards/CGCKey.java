@@ -1,8 +1,9 @@
 package it.polimi.ingsw.model.board.goalCards;
 
 /**
- * @author Eliahu Cohen
  * Class that rapresent the pair < CommonGoalCard , Id >
+ * @author Eliahu Cohen
+ *
  */
 public class CGCKey {
     private CommonGoalCard commonGoalCard;

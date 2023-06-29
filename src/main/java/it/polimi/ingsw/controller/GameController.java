@@ -18,8 +18,9 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * @author Eliahu Cohen
  * Controller that make the changes on the model
+ * @author Eliahu Cohen
+ *
  */
 public class GameController {
      private final Game game;
@@ -32,9 +33,10 @@ public class GameController {
      private boolean startedGame=false;
 
     /**
+     * Constructor used from the server to start a new game
      * @author Eliahu Cohen
      * @param players that play the game
-     * Constructor used from the server to start a new game
+     *
      */
      public GameController(ArrayList<Player> players){
          this.launcher=new Launcher();
@@ -44,9 +46,10 @@ public class GameController {
          this.game =new Game(launcher, this.players);
      }
     /**
+     * Constructor used from the server to start an existing game
      * @author Eliahu Cohen
      * @param savings of the game
-     * Constructor used from the server to start an existing game
+     *
      */
      public GameController(GameSavings savings){
          this.launcher=new Launcher();
@@ -57,8 +60,9 @@ public class GameController {
      }
 
     /**
+     *  method that starts the game
      * @author Eliahu Cohen
-     * method that starts the game
+     *
      */
      public synchronized void startGame(){
          startedGame=true;
@@ -146,9 +150,10 @@ public class GameController {
     }
 
     /**
+     * method that calls the Game method to play a move
      * @author Eliahu Cohen
      * @return savings of the game after a move
-     * method that calls the Game method to play a move
+     *
      */
     public synchronized GameSavings playMove(){
          GameSavings savings=game.playMove(coordinates,column,order);
@@ -199,8 +204,9 @@ public class GameController {
     }
 
     /**
-     * @author Eliahu Cohen
      * Method to terminate the game when a player crash
+     * @author Eliahu Cohen
+     *
      */
     public void terminateGame(){
         game.setFinishedGame(true);

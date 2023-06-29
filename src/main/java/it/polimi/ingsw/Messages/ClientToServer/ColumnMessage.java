@@ -4,8 +4,8 @@ import it.polimi.ingsw.Messages.ClientToServer.PossibleMoves.Move;
 import it.polimi.ingsw.Messages.ClientToServer.PossibleMoves.Move_SelectColumn;
 
 /**
+ *  Message that contains the selected column to put the tiles
  * @author Eliahu Cohen
- * Message that contains the selected column to put the tiles
  */
 public class ColumnMessage extends ClientMessage{
 

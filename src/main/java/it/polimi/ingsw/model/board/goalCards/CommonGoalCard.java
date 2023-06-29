@@ -3,8 +3,9 @@ package it.polimi.ingsw.model.board.goalCards;
 import it.polimi.ingsw.model.player.BookShelf;
 
 /**
- * @author Eliahu Cohen
  * abstract class that the specific goal card will implement
+ * @author Eliahu Cohen
+ *
  */
 public class CommonGoalCard {
     private int numCompleted = 0;
@@ -32,8 +33,9 @@ public class CommonGoalCard {
     }
 
     /**
-     * @author Eliahu Cohen
      * increase the number of players that have  reahced the goal
+     * @author Eliahu Cohen
+     *
      */
     public void increaseNumCompleted() {
         if (this.numCompleted < 4)
@@ -43,6 +45,7 @@ public class CommonGoalCard {
     public int getScore(){
         return points;
     }
+
     /**
      * @author Eliahu Cohen
      * @return points gained with the goal
@@ -111,8 +114,9 @@ public class CommonGoalCard {
     }
 
     /**
-     * @author Eliahu Cohen
      * initialization of numCompleated
+     * @author Eliahu Cohen
+     *
      */
     public void initNumCompleted(){
         this.numCompleted = 0;

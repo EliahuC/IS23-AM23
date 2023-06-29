@@ -10,8 +10,9 @@ import it.polimi.ingsw.Messages.ClientToServer.PossibleMoves.Move_SelectTiles;
 import it.polimi.ingsw.Messages.ServerToClient.*;
 
 /**
- * @author Eliahu Cohen
  * Class that deserialize the gson message received
+ * @author Eliahu Cohen
+ *
  */
 public class MoveDeserializer {
     /**

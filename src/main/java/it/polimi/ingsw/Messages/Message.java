@@ -3,8 +3,9 @@ package it.polimi.ingsw.Messages;
 import java.util.Objects;
 
 /**
- * @author Eliahu Cohen
  * abstract class that represent the concept of message
+ * @author Eliahu Cohen
+ *
  */
 public abstract class Message {
 

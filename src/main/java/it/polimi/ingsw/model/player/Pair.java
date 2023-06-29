@@ -3,8 +3,9 @@ package it.polimi.ingsw.model.player;
 import java.io.Serializable;
 
 /**
+ *  Class that represent the key for the HashMap of the Personal Goal cards
  * @author Eliahu Cohen
- * Class that represent the key for the HashMap of the Personal Goal cards
+ *
  */
 public class Pair implements Serializable {
     private  int x;

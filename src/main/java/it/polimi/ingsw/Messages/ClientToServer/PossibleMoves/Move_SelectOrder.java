@@ -3,8 +3,8 @@ package it.polimi.ingsw.Messages.ClientToServer.PossibleMoves;
 import java.util.ArrayList;
 
 /**
- * @author Eliahu Cohen
  * Move that indicates the order of the choosen tiles
+ * @author Eliahu Cohen
  */
 public class Move_SelectOrder extends Move{
     private final ArrayList<Integer> order=new ArrayList<>();

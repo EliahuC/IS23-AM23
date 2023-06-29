@@ -8,8 +8,9 @@ import it.polimi.ingsw.model.player.Player;
 import java.util.ArrayList;
 
 /**
- * @author Eliahu Cohen
  * Message that returns that the game is starting
+ * @author Eliahu Cohen
+ *
  */
 public class GameIsStartingMessage extends ServerMessage{
     private LivingRoom livingRoom;

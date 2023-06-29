@@ -1,8 +1,9 @@
 package it.polimi.ingsw.model.board;
 
-/**ù
+/**
+ *  class that rapresent the board token on the livingroom
  * @author Eliahu Cohen
- * class that rapresent the board token on the livingroom
+ *
  */
 public class BoardToken {
     private ItemTile Tile ;

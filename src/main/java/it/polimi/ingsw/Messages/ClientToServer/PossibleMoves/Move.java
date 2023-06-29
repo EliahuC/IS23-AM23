@@ -4,8 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * @author Eliahu Cohen
  * Class that represent the move made by the client
+ * @author Eliahu Cohen
  */
 public class Move implements Serializable {
      public ArrayList<Integer> getMove(){

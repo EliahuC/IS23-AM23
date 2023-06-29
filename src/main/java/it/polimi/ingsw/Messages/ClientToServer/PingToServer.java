@@ -1,8 +1,9 @@
 package it.polimi.ingsw.Messages.ClientToServer;
 
 /**
- * @author Eliahu Cohen
  * Message that returns a ping from client to server
+ * @author Eliahu Cohen
+ *
  */
 public class PingToServer extends ClientMessage{
     public PingToServer(String nickname) {

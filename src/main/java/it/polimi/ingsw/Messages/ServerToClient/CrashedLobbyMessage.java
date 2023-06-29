@@ -1,8 +1,9 @@
 package it.polimi.ingsw.Messages.ServerToClient;
 
 /**
- * @author Simone Controguerra
  * Message that appears when a lobby crash
+ * @author Simone Controguerra
+ *
  */
 public class CrashedLobbyMessage extends ServerMessage{
     public CrashedLobbyMessage(String s) {

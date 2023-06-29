@@ -2,8 +2,8 @@ package it.polimi.ingsw.Messages.ClientToServer;
 
 
 /**
- * @author Eliahu Cohen
  * Message sent from client to close the connection
+ * @author Eliahu Cohen
  */
 public class CloseMessage extends ClientMessage{
     public CloseMessage() {

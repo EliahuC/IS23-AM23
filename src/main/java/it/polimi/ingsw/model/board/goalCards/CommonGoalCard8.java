@@ -12,16 +12,18 @@ import java.util.HashSet;
 public class CommonGoalCard8 extends CommonGoalCard implements CheckCommonGoalCard {
     private final static int numRowsToAchieve=4;
     private static final int numDifferentCategoriesAllowed=3;
-    private final HashSet<ItemTileCategory> cat = new HashSet<>(); //I use a hashset to track the categories in each row
+    private final HashSet<ItemTileCategory> cat = new HashSet<>();
 
 
 
     public CommonGoalCard8(Integer I){
         super(I);
     }
+
     /**
-     *@param bs Player's bookshelf
      * The method below checks each bookshelf's row, until four rows comply with the specifics
+     *@param bs Player's bookshelf
+     *
      */
 
     @Override
@@ -39,9 +41,10 @@ public class CommonGoalCard8 extends CommonGoalCard implements CheckCommonGoalCa
             increaseNumCompleted();
     }
     /**
-     *@param bs,a,cat Player's bookshelf, row index and HashSet in order to count the number of index a
-     *                row categories
      * The method below count the categories of the row with index a
+     * @param bs,a,cat Player's bookshelf, row index and HashSet in order to count the number of index a
+     *                row categories
+     *
      */
 
     public int CategoriesAllowed(BookShelf bs, int a, HashSet<ItemTileCategory> cat){

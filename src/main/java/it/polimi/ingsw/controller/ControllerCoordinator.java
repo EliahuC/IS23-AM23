@@ -11,8 +11,9 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 /**
- * @author Eliahu Cohen
  * controller that coordinates the other controllers
+ * @author Eliahu Cohen
+ *
  */
 public class ControllerCoordinator {
     private Boolean startedGame=false;
@@ -26,10 +27,11 @@ public class ControllerCoordinator {
     }
 
     /**
+     * adding a player to the current game
      * @author Eliahu Cohen
      * @param s nickname
      * @param view listener of the player
-     * adding a player to the current game
+     *
      */
     public void joinPlayer(String s, VirtualView view) {
         for (Player p: connectedPlayers){
@@ -68,8 +70,8 @@ public class ControllerCoordinator {
     }
 
     /**
-     * @author Eliahu Cohen
      * method called to start the game
+     * @author Eliahu Cohen
      */
     public void startGame(){
         startedGame=true;
@@ -98,8 +100,9 @@ public class ControllerCoordinator {
     }
 
     /**
-     * @author Eliahu Cohen
      * method to end the game when a player crash
+     * @author Eliahu Cohen
+     *
      */
     public void endgame() {
         if(gameController!=null)
@@ -107,9 +110,10 @@ public class ControllerCoordinator {
     }
 
     /**
+     * Method to set the game params
      * @author Eliahu Cohen
      * @param gameSavings taken from the disk
-     * Method to set the game params
+     *
      */
     public void setGame(GameSavings gameSavings) {
         connectedPlayers.clear();

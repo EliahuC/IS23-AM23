@@ -4,8 +4,8 @@ import it.polimi.ingsw.Messages.ClientToServer.PossibleMoves.Move;
 import it.polimi.ingsw.Messages.Message;
 
 /**
+ *  Generic Client Message
  * @author Eliahu Cohen
- * Generic Client Message
  */
 public class ClientMessage extends Message {
     public Move move;

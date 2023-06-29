@@ -3,8 +3,9 @@ package it.polimi.ingsw.Messages.ServerToClient;
 import it.polimi.ingsw.GameSavings;
 
 /**
- * @author Eliahu Cohen
  * Method that indicates the move is valid and was saved
+ * @author Eliahu Cohen
+ *
  */
 public class ValidMoveMessage extends ServerMessage{
     private GameSavings savings=null;

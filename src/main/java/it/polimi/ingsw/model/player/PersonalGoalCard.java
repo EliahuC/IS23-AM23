@@ -7,10 +7,10 @@ import java.io.Serializable;
 import java.util.HashMap;
 
 /**
+ *  * Class that represent the Personal Goal Card
+ *  * The card is stored in a HashMap built in the following method:
+ *  * The key of the map is the coordinates (x,y) in the bookshelf of the Item Tile that may be in that position.
  * @author Eliahu Cohen
- * Class that represent the Personal Goal Card
- * The card is stored in a HashMap built in the following method:
- * The key of the map is the coordinates (x,y) in the bookshelf of the Item Tile that may be in that position.
  */
 
 public class PersonalGoalCard implements Serializable {
@@ -23,9 +23,10 @@ public class PersonalGoalCard implements Serializable {
 
 
     /**
+     *  Constructor that generate a specific personal goal card based
      * @author Eliahu Cohen
      * @param x is the number of the personal goal card that I want to generate
-     * Constructor that generate a specific personal goal card based
+     *
      */
     public  PersonalGoalCard(int x) {
         this.NumeroCarta = x;
@@ -133,9 +134,9 @@ public class PersonalGoalCard implements Serializable {
     }
 
     /**
-     * @author Eliahu Cohen
      * Constructor that generate the personal goal card with the help of a generator
      * and using the singleton pattern
+     * @author Eliahu Cohen
      */
     public PersonalGoalCard(){
         PersonalGoalCardGen istanza= PersonalGoalCardGen.getInstance();
