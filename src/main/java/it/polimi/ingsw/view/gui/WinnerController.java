@@ -44,7 +44,6 @@ public class WinnerController implements Initializable {
      */
     public void displayLeaderbord(List<Player> ranking) {
 
-        leaderbord = new GridPane();
         int pos = 2;
         int i = -1;
         for (Player p : ranking) {
@@ -70,7 +69,6 @@ public class WinnerController implements Initializable {
      */
     public void displayWinner(String winner){
         this.winner = winner;
-        winnerLabel = new Label();
         winnerLabel.setText(winner + "!");
     }
 

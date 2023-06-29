@@ -59,7 +59,7 @@ public class GameControllerGUI implements Initializable {
     private List<Player> players;
     private List<Player> ranking;
     private ArrayList<ItemTile> tiles = new ArrayList<>();
-    private int currPlaying = 1;
+    private int currPlaying;
     private String currentPlayer;
     private String winner;
     private Integer seed;
@@ -67,8 +67,6 @@ public class GameControllerGUI implements Initializable {
     public static final int LivingRoomSize = 9;
     private static final int shelfRows = 6;
     private static final int shelfCols = 5;
-    private boolean endgame;
-    private boolean switchOrder = false;
     private ArrayList<ItemTile> tiles2 = new ArrayList<>();
 
 
@@ -92,7 +90,6 @@ public class GameControllerGUI implements Initializable {
     private Integer columnIndex = null;
     private Integer Bcolumn;
     private ArrayList<Integer> order = new ArrayList<>();
-
     private ArrayList<Integer> coordinates = new ArrayList<>();
     private Boolean grids = true;
     private Boolean showContainer = true;
@@ -136,8 +133,7 @@ public class GameControllerGUI implements Initializable {
         myGridPane_lr.setOnMouseClicked(mouseEvent -> {
             Node clickNode = mouseEvent.getPickResult().getIntersectedNode();
             if (clickNode instanceof ImageView && ((ImageView) clickNode).getImage() != null) {
-                if (getCurrentIstance().getPlayer().getNickName().equals(getCurrentIstance().getPlayers().get
-                        (getCurrentIstance().getCurrPlaying() - 1).getNickName())) {
+                if (getCurrentIstance().getPlayer().getNickName().equals(getCurrentIstance().getCurrentPlayer())) {
 
                     getCurrentIstance().getCoordinates().add(GridPane.getRowIndex(clickNode));
                     getCurrentIstance().getCoordinates().add(GridPane.getColumnIndex(clickNode));
@@ -326,10 +322,6 @@ public class GameControllerGUI implements Initializable {
         return connectionClient;
     }
 
-    public void setCurrPlaying(int currPlaying) {
-        this.currPlaying = currPlaying;
-    }
-
     public void setCurrentPlayer(String currentPlayer) {
         this.currentPlayer = currentPlayer;
     }
@@ -456,10 +448,6 @@ public class GameControllerGUI implements Initializable {
         return winner;
     }
 
-    public int getCurrPlaying() {
-        return currPlaying;
-    }
-
     public Integer getRowIndex() {
         return rowIndex;
     }
@@ -490,8 +478,7 @@ public class GameControllerGUI implements Initializable {
      */
     public void Endselection(ActionEvent event) {
         Boolean check = true;
-        if ((getCurrentIstance().getPlayer().getNickName().equals(getCurrentIstance().getPlayers().
-                get(getCurrentIstance().getCurrPlaying() - 1).getNickName())) && (getCurrentIstance().getCoordinates().size() > 0)) {
+        if ((getCurrentIstance().getPlayer().getNickName().equals(getCurrentIstance().getCurrentPlayer())) && (getCurrentIstance().getCoordinates().size() > 0)) {
             String command = null;
             ClientMessage message = null;
             switch (getCurrentIstance().getCoordinates().size()) {
@@ -742,8 +729,7 @@ public class GameControllerGUI implements Initializable {
             GridPane.setMargin(imageView, new Insets(25));
         }
         myGridPane_columns.setOnMouseClicked(mouseEvent -> {
-            if (getCurrentIstance().getPlayer().getNickName().equals(getCurrentIstance().getPlayers().get
-                    (getCurrentIstance().getCurrPlaying() - 1).getNickName())) {
+            if (getCurrentIstance().getPlayer().getNickName().equals(getCurrentIstance().currentPlayer)) {
                 try {
                     PlaceTilesIntheBookshelf(mouseEvent);
                 } catch (IOException e) {
@@ -758,4 +744,13 @@ public class GameControllerGUI implements Initializable {
     public void setShowContainer(Boolean showContainer) {
         this.showContainer = showContainer;
     }
+
+    public int getCurrPlaying() {
+        return currPlaying;
+    }
+
+    public void setCurrPlaying(int currPlaying) {
+        this.currPlaying = currPlaying;
+    }
+
 }

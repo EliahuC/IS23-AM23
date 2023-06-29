@@ -7,6 +7,7 @@ import it.polimi.ingsw.Messages.ClientToServer.ClientMessage;
 import it.polimi.ingsw.Messages.ClientToServer.CoordinatesMessage;
 import it.polimi.ingsw.Messages.ClientToServer.PossibleMoves.Move_SelectTiles;
 import it.polimi.ingsw.Messages.Message;
+import it.polimi.ingsw.Messages.ServerToClient.EndGameMessage;
 import it.polimi.ingsw.Messages.ServerToClient.ErrorMessage;
 import it.polimi.ingsw.Messages.ServerToClient.ValidMoveMessage;
 import it.polimi.ingsw.model.Game;
@@ -98,6 +99,7 @@ public class GameController {
          if((order.size()!=0)&&(coordinates.size()!=0)&&(column>=0&&column<=4)){
              GameSavings savings=playMove();
              message.setSavings(savings);
+             if(game.isFinishedGame())return new EndGameMessage(null);
          }}
          return message;
      }

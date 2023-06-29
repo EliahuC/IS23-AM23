@@ -549,8 +549,9 @@ public class Game implements Serializable {
         this.currPlaying = currPlaying;
     }
 
-
-
+    public boolean isFinishedGame() {
+        return finishedGame;
+    }
 }
 
 
