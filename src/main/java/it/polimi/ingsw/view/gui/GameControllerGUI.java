@@ -476,41 +476,59 @@ public class GameControllerGUI implements Initializable {
      * @author Andrea Bricchi and Giovanni di Lorenzo
      */
     public void Endselection(ActionEvent event) {
-        if (getCurrentIstance().getPlayer().getNickName().equals(getCurrentIstance().getPlayers().
-                get(getCurrentIstance().getCurrPlaying() - 1).getNickName())) {
+        Boolean check = true;
+        if ((getCurrentIstance().getPlayer().getNickName().equals(getCurrentIstance().getPlayers().
+                get(getCurrentIstance().getCurrPlaying() - 1).getNickName())) && (getCurrentIstance().getCoordinates().size() > 0)) {
             String command = null;
             ClientMessage message = null;
             switch (getCurrentIstance().getCoordinates().size()) {
-                case 2 -> command = "/SELECT" + " " + getCurrentIstance().getCoordinates().get(0) + " " +
-                        getCurrentIstance().getCoordinates().get(1);
-                case 4 -> command = "/SELECT" + " " + getCurrentIstance().getCoordinates().get(0) + " " +
-                        getCurrentIstance().getCoordinates().get(1) + " " +
-                        getCurrentIstance().getCoordinates().get(2) + " " + getCurrentIstance().getCoordinates().get(3);
-                case 6 -> command = "/SELECT" + " " + getCurrentIstance().getCoordinates().get(0) + " " +
-                        getCurrentIstance().getCoordinates().get(1) + " " +
-                        getCurrentIstance().getCoordinates().get(2) + " " + getCurrentIstance().getCoordinates().get(3) +
-                        " " + getCurrentIstance().getCoordinates().get(4) + " " + getCurrentIstance().getCoordinates().get(5);
+                case 2:
+                    command = "/SELECT" + " " + getCurrentIstance().getCoordinates().get(0) + " " +
+                            getCurrentIstance().getCoordinates().get(1);
+                    break;
+                case 4:
+                    command = "/SELECT" + " " + getCurrentIstance().getCoordinates().get(0) + " " +
+                            getCurrentIstance().getCoordinates().get(1) + " " +
+                            getCurrentIstance().getCoordinates().get(2) + " " + getCurrentIstance().getCoordinates().get(3);
+                    break;
+                case 6:
+                    command = "/SELECT" + " " + getCurrentIstance().getCoordinates().get(0) + " " +
+                            getCurrentIstance().getCoordinates().get(1) + " " +
+                            getCurrentIstance().getCoordinates().get(2) + " " + getCurrentIstance().getCoordinates().get(3) +
+                            " " + getCurrentIstance().getCoordinates().get(4) + " " + getCurrentIstance().getCoordinates().get(5);
+                    break;
+                default:
+                    check = false;
+                    getCurrentIstance().getCoordinates().clear();
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("INVALID MOVE");
+                    alert.setHeaderText("Your move is not valid!");
+                    if (alert.showAndWait().get() == ButtonType.OK) {
+                    }
+                    break;
             }
-            message = (ClientMessage) MoveSerializer.serializeInput(command);
-            getCurrentIstance().getConnectionClient().sendMessage(message);
-            try {
-                TimeUnit.MILLISECONDS.sleep(200);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            if (getCurrentIstance().getResponse().getCategory() == Message.MessageCategory.VALID_MESSAGE) {
+            if (check) {
+                message = (ClientMessage) MoveSerializer.serializeInput(command);
+                getCurrentIstance().getConnectionClient().sendMessage(message);
                 try {
-                    cleanTiles(getCurrentIstance().getCoordinates());
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
+                    TimeUnit.MILLISECONDS.sleep(200);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
-            } else {
-                Alert alert = new Alert(Alert.AlertType.WARNING);
-                alert.setTitle("INVALID MOVE");
-                alert.setHeaderText("Your move is not valid!");
-                getCurrentIstance().getCoordinates().clear();
-                if (alert.showAndWait().get() == ButtonType.OK) {
+                if (getCurrentIstance().getResponse().getCategory() == Message.MessageCategory.VALID_MESSAGE) {
+                    try {
+                        cleanTiles(getCurrentIstance().getCoordinates());
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                } else {
+                    getCurrentIstance().getCoordinates().clear();
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("INVALID MOVE");
+                    alert.setHeaderText("Your move is not valid!");
+                    if (alert.showAndWait().get() == ButtonType.OK) {
 
+                    }
                 }
             }
         }
@@ -535,40 +553,6 @@ public class GameControllerGUI implements Initializable {
          }
     }*/
 
-    /**
-     * @param e mouse click
-     * @throws IOException exception
-     *                     Method to set the order greed
-     * @author Giovanni di Lorenzo
-     */
-    private void setOnOrderClickEvent(MouseEvent e) throws IOException {
-        ItemTile temp;
-        Node clickNode = e.getPickResult().getIntersectedNode();
-        switch (getCurrentIstance().getTiles().size()) {
-            case 2:
-                if (clickNode instanceof ImageView && ((ImageView) clickNode).getImage() != null) {
-                    if (GridPane.getColumnIndex(clickNode) == 0) {
-                        if (!getCurrentIstance().switchOrder) {
-                            temp = getCurrentIstance().getTiles().get(0);
-                            getCurrentIstance().getTiles().set(0, getCurrentIstance().getTiles().get(1));
-                            getCurrentIstance().getTiles().set(1, temp);
-                            switchOrder = true;
-                        } else {
-                            temp = getCurrentIstance().getTiles().get(0);
-                            getCurrentIstance().getTiles().set(0, getCurrentIstance().getTiles().get(1));
-                            getCurrentIstance().getTiles().set(1, temp);
-                            switchOrder = false;
-                        }
-                        displayScene();
-                        break;
-                    }
-                }
-            case 3:
-                //TO DO
-
-        }
-    }
-
     public ArrayList<Integer> getCoordinates() {
         return coordinates;
     }
@@ -580,62 +564,59 @@ public class GameControllerGUI implements Initializable {
      * @author Andrea Bricchi and Giovanni di Lorenzo
      */
     private void PlaceTilesIntheBookshelf(MouseEvent event) throws IOException {
-        String command = null;
-        ClientMessage message = null;
-        Node clickNode = event.getPickResult().getIntersectedNode();
-        if (clickNode instanceof ImageView && ((ImageView) clickNode).getImage() != null) {
-            switch (getCurrentIstance().getTiles().size()) {
+        if (getCurrentIstance().getTiles().size() > 0) {
+            String command = null;
+            ClientMessage message = null;
+            Node clickNode = event.getPickResult().getIntersectedNode();
+            if (clickNode instanceof ImageView && ((ImageView) clickNode).getImage() != null) {
+                switch (getCurrentIstance().getTiles().size()) {
 
-                case 1:
-                    command = "/ORDER 1";
-                    break;
-                case 2:
-                    if (!getCurrentIstance().switchOrder)
+                    case 1:
+                        command = "/ORDER 1";
+                        break;
+                    case 2:
                         command = "/ORDER 1 2";
-                    else
-                        command = "/ORDER 2 1";
-                    break;
-                case 3 :
-                    defineOrder();
-                    command = "/ORDER" + " " + getCurrentIstance().order.get(0) + " " + getCurrentIstance().order.get(1)
-                            + " " + getCurrentIstance().order.get(2);
-                    break;
-            }
+                        break;
+                    case 3:
+                        command = "/ORDER 1 2 3";
+                        break;
+                }
 
-            message = (ClientMessage) MoveSerializer.serializeInput(command);
-            getCurrentIstance().getConnectionClient().sendMessage(message);
-            try {
-                TimeUnit.MILLISECONDS.sleep(200);
-            } catch (InterruptedException iE) {
-                iE.printStackTrace();
-            }
-            if (getCurrentIstance().getResponse().getCategory() == Message.MessageCategory.VALID_MESSAGE) {
-                Bcolumn = GridPane.getColumnIndex(clickNode);
-                command = "/COLUMN" + " " + Bcolumn;
                 message = (ClientMessage) MoveSerializer.serializeInput(command);
                 getCurrentIstance().getConnectionClient().sendMessage(message);
-                getCurrentIstance().getCoordinates().clear();
                 try {
                     TimeUnit.MILLISECONDS.sleep(200);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                } catch (InterruptedException iE) {
+                    iE.printStackTrace();
                 }
-                if (getCurrentIstance().getResponse().getCategory() != Message.MessageCategory.WARNING) {
-                    cleanTiles2(getCurrentIstance().getTiles());
-                    getCurrentIstance().tiles2.clear();
-                    getCurrentIstance().order.clear();
-                    //SI PUO MOSTRARE UN POP-UP CHE DICE "TURNO COMPLETATO"
-                } else {
-                    //SI MOSTRA POP-UP CHE DICE "CHOSEN COLUMN TOO FULL"
+                if (getCurrentIstance().getResponse().getCategory() == Message.MessageCategory.VALID_MESSAGE) {
+                    Bcolumn = GridPane.getColumnIndex(clickNode);
+                    command = "/COLUMN" + " " + Bcolumn;
+                    message = (ClientMessage) MoveSerializer.serializeInput(command);
+                    getCurrentIstance().getConnectionClient().sendMessage(message);
+                    getCurrentIstance().getCoordinates().clear();
+                    try {
+                        TimeUnit.MILLISECONDS.sleep(200);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    if (getCurrentIstance().getResponse().getCategory() != Message.MessageCategory.WARNING) {
+                        cleanTiles2(getCurrentIstance().getTiles());
+                        getCurrentIstance().tiles2.clear();
+                        getCurrentIstance().order.clear();
+                        //SI PUO MOSTRARE UN POP-UP CHE DICE "TURNO COMPLETATO"
+                    } else {
+                        //SI MOSTRA POP-UP CHE DICE "CHOSEN COLUMN TOO FULL"
+                    }
                 }
-            }
 
-        }else{
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("INVALID MOVE");
-            alert.setHeaderText("It's not your turn!");
-            if (alert.showAndWait().get() == ButtonType.OK) {
+            } else {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("INVALID MOVE");
+                alert.setHeaderText("It's not your turn!");
+                if (alert.showAndWait().get() == ButtonType.OK) {
 
+                }
             }
         }
     }
@@ -647,7 +628,7 @@ public class GameControllerGUI implements Initializable {
         this.nickname = nickname;
     }
 
-    private void defineOrder() {
+    /*private void defineOrder() {
         int i = 0, j = 0;
         while (i < getCurrentIstance().getTiles().size()) {
             while (j < getCurrentIstance().tiles2.size()) {
@@ -660,7 +641,7 @@ public class GameControllerGUI implements Initializable {
             j = 0;
             i++;
         }
-    }
+    }*/
 
     public ArrayList<ItemTile> getTiles2() {
         return tiles2;
