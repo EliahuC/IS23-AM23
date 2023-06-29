@@ -104,9 +104,10 @@ public class Lobby implements Serializable {
      * method that delete the lobby savings from disk
      */
     private void deleteFile() {
-        if(!myObj.exists())
+        File file=new File(saveFilePath);
+        if(!file.exists())
             System.out.println("There isn't any saved game");
-        boolean success = myObj.delete();
+        boolean success = file.delete();
         if(!success)
             throw new IllegalArgumentException("Delete failed");
         System.out.println("File correctly deleted");

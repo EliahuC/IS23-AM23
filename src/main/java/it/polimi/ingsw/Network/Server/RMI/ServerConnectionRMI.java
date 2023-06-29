@@ -198,6 +198,7 @@ public class ServerConnectionRMI extends UnicastRemoteObject implements RemoteIn
      * Method used to send messages to the clients
      */
     public  void sendMessage(ServerMessage message, String username) {
+        if(message==null)return;
         Gson gson=new Gson();
         String s=gson.toJson(message);
 

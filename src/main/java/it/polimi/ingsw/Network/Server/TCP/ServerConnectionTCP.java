@@ -82,6 +82,7 @@ public class ServerConnectionTCP implements ServerConnection{
      * method to send to the client a message using Json
      */
     public void sendMessage(ServerMessage message,String namePlayer){
+        if(message==null)return;
         Gson gson =new Gson();
         String m=gson.toJson(message);
         //    output.reset();
