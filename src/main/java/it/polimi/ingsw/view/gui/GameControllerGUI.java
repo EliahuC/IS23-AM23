@@ -60,7 +60,7 @@ public class GameControllerGUI implements Initializable {
     private List<Player> players;
     private List<Player> ranking;
     private ArrayList<ItemTile> tiles = new ArrayList<>();
-    private int currPlaying;
+    private int currPlaying=1;
     private String currentPlayer;
     private String winner;
     private Integer seed;
@@ -112,6 +112,12 @@ public class GameControllerGUI implements Initializable {
             //getCurrentIstance().getReceiver().setGamecontrollerGUI(getCurrentIstance());
             //getCurrentIstance().setReceiver(receiver);
         }
+        Label label = new Label();
+        label.setText("Now playing: " + getPlayers().get(getCurrPlaying()-1).getNickName());
+        label.setFont(new Font(28));
+        myGridpane_turn.setLayoutX(33);
+        myGridpane_turn.setLayoutY(16);
+        myGridpane_turn.add(label, 0, 0);
 
         myGridPane_lr.getChildren().clear();
         for (int i = 0; i < LivingRoomSize; i++) {
@@ -134,7 +140,8 @@ public class GameControllerGUI implements Initializable {
         myGridPane_lr.setOnMouseClicked(mouseEvent -> {
             Node clickNode = mouseEvent.getPickResult().getIntersectedNode();
             if (clickNode instanceof ImageView && ((ImageView) clickNode).getImage() != null) {
-                if (getCurrentIstance().getPlayer().getNickName().equals(getCurrentIstance().getCurrentPlayer())) {
+                if (getCurrentIstance().getPlayer().getNickName().equals(getCurrentIstance().getPlayers().
+                        get(getCurrPlaying()-1).getNickName())) {
 
                     getCurrentIstance().getCoordinates().add(GridPane.getRowIndex(clickNode));
                     getCurrentIstance().getCoordinates().add(GridPane.getColumnIndex(clickNode));
@@ -422,7 +429,7 @@ public class GameControllerGUI implements Initializable {
 
     public List<Player> displayLeaderbord() {
 
-        ranking = players.stream().sorted(Comparator.comparingInt(Player::getScore)).toList();
+        ranking = getCurrentIstance().getPlayers().stream().sorted(Comparator.comparingInt(Player::getScore)).toList();
         return ranking;
     }
 
@@ -437,7 +444,7 @@ public class GameControllerGUI implements Initializable {
         AnchorPane rootWinner= null;
         rootWinner=loader.load();
         WinnerController winnerController = loader.getController();
-        winnerController.displayWinner(winner);
+        //winnerController.displayWinner(winner);
         winnerController.displayLeaderbord(displayLeaderbord());
         Scene scene1 = new Scene(rootWinner);
         stage.setScene(scene1);
@@ -479,7 +486,8 @@ public class GameControllerGUI implements Initializable {
      */
     public void Endselection(ActionEvent event) {
         Boolean check = true;
-        if ((getCurrentIstance().getPlayer().getNickName().equals(getCurrentIstance().getCurrentPlayer())) && (getCurrentIstance().getCoordinates().size() > 0)) {
+        if ((getCurrentIstance().getPlayer().getNickName().equals(getCurrentIstance().getPlayers().get(getCurrPlaying()-1).getNickName()))
+                && (getCurrentIstance().getCoordinates().size() > 0)) {
             String command = null;
             ClientMessage message = null;
             switch (getCurrentIstance().getCoordinates().size()) {
@@ -636,22 +644,6 @@ public class GameControllerGUI implements Initializable {
     public void setNickname(String nickname) {
         this.nickname = nickname;
     }
-
-    /*private void defineOrder() {
-        int i = 0, j = 0;
-        while (i < getCurrentIstance().getTiles().size()) {
-            while (j < getCurrentIstance().tiles2.size()) {
-                if (getCurrentIstance().tiles2.get(i).equals(getCurrentIstance().getTiles().get(j))) {
-                    getCurrentIstance().order.add(j + 1);
-                    break;
-                } else
-                    j++;
-            }
-            j = 0;
-            i++;
-        }
-    }*/
-
     public ArrayList<ItemTile> getTiles2() {
         return tiles2;
     }
@@ -712,13 +704,13 @@ public class GameControllerGUI implements Initializable {
         bsImage.setLayoutX(810);
         bsImage.setLayoutY(243);
         bsImage.add(imageView, 0, 0);
-        Label label = new Label();
-        label.setText("Now playing: " + this.getCurrentPlayer());
+        /*Label label = new Label();
+        label.setText("Now playing: " + getPlayers().get(getCurrPlaying()-1).getNickName());
         label.setFont(new Font(28));
         myGridpane_turn.setLayoutX(33);
         myGridpane_turn.setLayoutY(16);
         myGridpane_turn.add(label, 0, 0);
-        Label labelMe = new Label();
+       */ Label labelMe = new Label();
         displayNickname(nickname, labelMe);
         labelMe.setFont(new Font(28));
         myGridpane_me.setLayoutX(514);
@@ -739,7 +731,8 @@ public class GameControllerGUI implements Initializable {
             GridPane.setMargin(imageView, new Insets(25));
         }
         myGridPane_columns.setOnMouseClicked(mouseEvent -> {
-            if (getCurrentIstance().getPlayer().getNickName().equals(getCurrentIstance().currentPlayer)) {
+            if (getCurrentIstance().getPlayer().getNickName().equals(getCurrentIstance().getPlayers().
+                    get(getCurrPlaying()-1).getNickName())) {
                 try {
                     PlaceTilesIntheBookshelf(mouseEvent);
                 } catch (IOException e) {
