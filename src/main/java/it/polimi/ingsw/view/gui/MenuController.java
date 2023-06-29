@@ -93,8 +93,8 @@ public class MenuController {
         try {
             receiver = new GUIEvent(this);
             receiver.setInStartGUI(true);
-            serverAddr = textField_IP.getText();
-            if(serverAddr.isEmpty())
+
+            if(serverAddr==null)
                 serverAddr = Settings.SERVER_NAME;
             portNum = Settings.PORT;
             socket = new Socket(serverAddr, portNum);
@@ -135,8 +135,8 @@ public class MenuController {
         try {
             receiver = new GUIEvent(this);
             receiver.setInStartGUI(true);
-            serverAddr = textField_IP.getText();
-            if(serverAddr.isEmpty())
+
+            if(serverAddr==null)
                 serverAddr = Settings.SERVER_NAME;
             connectionClient = new ClientConnectionRMI(nickname, receiver, serverAddr);
             new Thread(connectionClient).start();
