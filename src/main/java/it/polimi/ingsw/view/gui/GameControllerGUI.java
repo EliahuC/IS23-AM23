@@ -251,9 +251,15 @@ public class GameControllerGUI implements Initializable {
      *                     Method to show the goals scene
      * @author Andrea Bricchi and Giovanni di Lorenzo
      */
-    public void goToGoals(ActionEvent event) throws IOException {
+    public void goToGoals(ActionEvent event) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/is23am23/goals.fxml"));
-        Parent root = loader.load();
+        Parent root = null;
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
 
         GoalsController goalsController = loader.getController();
         if (goalsController.getGameControllerGUI() == null) {
@@ -274,7 +280,7 @@ public class GameControllerGUI implements Initializable {
      *                     Method to return to the Menu
      * @author Andrea Bricchi
      */
-    public void returnToMenu(ActionEvent event) throws IOException {
+    public void returnToMenu(ActionEvent event) {
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("RETURN TO MENU");
@@ -282,7 +288,13 @@ public class GameControllerGUI implements Initializable {
 
         if (alert.showAndWait().get() == ButtonType.OK) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/is23am23/menu.fxml"));
-            Parent root = loader.load();
+            Parent root = null;
+            try {
+                root = loader.load();
+            } catch (IOException e) {
+                e.printStackTrace();
+                throw new RuntimeException(e);
+            }
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
@@ -429,7 +441,8 @@ public class GameControllerGUI implements Initializable {
     public void goToResults() throws IOException {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/is23am23/winner.fxml"));
-        AnchorPane rootWinner= loader.load();
+        AnchorPane rootWinner= null;
+        rootWinner=loader.load();
         WinnerController winnerController = loader.getController();
         winnerController.displayWinner(winner);
         winnerController.displayLeaderbord(displayLeaderbord());
@@ -742,6 +755,7 @@ public class GameControllerGUI implements Initializable {
                 try {
                     PlaceTilesIntheBookshelf(mouseEvent);
                 } catch (IOException e) {
+                    e.printStackTrace();
                     throw new RuntimeException(e);
                 }
             }

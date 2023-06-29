@@ -47,12 +47,18 @@ public class MenuController {
      * @throws IOException
      * Method to start a Socket Connection
      */
-    public void goTCP(ActionEvent event) throws IOException {
+    public void goTCP(ActionEvent event)  {
         nickname = textField_nickname.getText();
         if (!nickname.isEmpty()) {
             if (TCPon(event)) {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/is23am23/lobbyChoice.fxml"));
-                Parent root = loader.load();
+                Parent root = null;
+                try {
+                    root = loader.load();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    throw new RuntimeException();
+                }
                 LobbyChoiceController lobbyController = loader.getController();
                 receiver.setLobbyChoiceController(lobbyController);
                 lobbyController.displayNickname(nickname);
@@ -173,13 +179,19 @@ public class MenuController {
      * @throws IOException
      * Method to start a RMI Connection
      */
-    public void goRMI(ActionEvent event) throws IOException {
+    public void goRMI(ActionEvent event){
 
         nickname = textField_nickname.getText();
         if (!nickname.isEmpty()) {
             if (RMIon(event)) {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/is23am23/lobbyChoice.fxml"));
-                Parent root = loader.load();
+                Parent root = null;
+                try {
+                    root = loader.load();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    throw new RuntimeException();
+                }
 
                 LobbyChoiceController lobbyController = loader.getController();
                 receiver.setLobbyChoiceController(lobbyController);
