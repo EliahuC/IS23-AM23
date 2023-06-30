@@ -425,7 +425,7 @@ public class GameControllerGUI implements Initializable {
 
     public List<Player> displayLeaderbord() {
 
-        ranking = getCurrentIstance().getPlayers().stream().sorted(Comparator.comparingInt(Player::getScore)).toList();
+        ranking = new ArrayList<>(getCurrentIstance().getPlayers().stream().sorted(Comparator.comparingInt(Player::getScore)).toList());
         if(checkRanking())return ranking;
         fixRanking();
         return ranking;
