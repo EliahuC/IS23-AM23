@@ -106,6 +106,15 @@ public class GUIEvent implements PropertyChangeListener {
                             throw new RuntimeException(e);
                         }
                         break;
+                    case CRASHED:
+                        CrashedLobbyMessage temp_crashedLobbyMessage = (CrashedLobbyMessage) serverMessage;
+                        Alert alertCrashed = new Alert(Alert.AlertType.WARNING);
+                        alertCrashed.setTitle("CONNECTION ERROR");
+                        alertCrashed.setHeaderText("Server has crashed :(");
+                        if (alertCrashed.showAndWait().get() == ButtonType.OK) {
+                        }
+                        break;
+
                 }
             });
         }
