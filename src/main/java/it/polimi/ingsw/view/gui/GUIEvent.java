@@ -50,6 +50,7 @@ public class GUIEvent implements PropertyChangeListener {
                         GameIsStartingMessage temp_startingGameMessage = (GameIsStartingMessage) serverMessage;
                         gamecontrollerGUI.setPlayers(temp_startingGameMessage.getPlayers());
                         gamecontrollerGUI.setLivingRoom(temp_startingGameMessage.getLivingRoom());
+                        gamecontrollerGUI.setCurrPlaying( temp_startingGameMessage.getIsPlaying());
                         gamecontrollerGUI.setPlayer(temp_startingGameMessage.getPlayers().stream().filter(player -> Objects.equals(player.getNickName(), gamecontrollerGUI.getConnectionClient().getPlayerName())).findFirst().orElseThrow(() -> new IllegalArgumentException("Player not found")));
                         gamecontrollerGUI.setCurrentPlayer(temp_startingGameMessage.getCurrPlaying());
                         gamecontrollerGUI.setSeed(gamecontrollerGUI.getPlayer().getPersonalGoalCard().getNumeroCarta());
