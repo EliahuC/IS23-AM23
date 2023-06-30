@@ -66,7 +66,6 @@ public class GameControllerGUI implements Initializable {
     public static final int LivingRoomSize = 9;
     private static final int shelfRows = 6;
     private static final int shelfCols = 5;
-    private ArrayList<ItemTile> tiles2 = new ArrayList<>();
 
 
     @FXML
@@ -88,10 +87,8 @@ public class GameControllerGUI implements Initializable {
     private Integer rowIndex = null;
     private Integer columnIndex = null;
     private Integer Bcolumn;
-    private ArrayList<Integer> order = new ArrayList<>();
     private ArrayList<Integer> coordinates = new ArrayList<>();
     private ArrayList<Integer> columnsFreeTiles = new ArrayList<>();
-    private Boolean grids = true;
     private Boolean showContainer = true;
 
 
@@ -101,15 +98,9 @@ public class GameControllerGUI implements Initializable {
      * @author Andrea Bricchi and Giovanni di Lorenzo
      */
     public void displayScene() throws IOException {
-        /*if (getCurrentIstance().getGrids()) {
-            // initializeGridPanes();
-            getCurrentIstance().setGrids(false);
-        }*/
         if (instance()) {
             GameControllerGUI.currentIstance = this;
             getCurrentIstance().setFlag(false);
-            //getCurrentIstance().getReceiver().setGamecontrollerGUI(getCurrentIstance());
-            //getCurrentIstance().setReceiver(receiver);
         }
 
         label_turn.setText("Now playing: " + getPlayers().get(getCurrPlaying()-1).getNickName());
@@ -140,8 +131,6 @@ public class GameControllerGUI implements Initializable {
 
                     getCurrentIstance().getCoordinates().add(GridPane.getRowIndex(clickNode));
                     getCurrentIstance().getCoordinates().add(GridPane.getColumnIndex(clickNode));
-
-                    //clickNode.setStyle("-fx-border-color: yellow; -fx-border-width: 10px;");
 
                 } else {
                     Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -384,7 +373,7 @@ public class GameControllerGUI implements Initializable {
     }
 
     /**
-     * @return true if the flag is true
+     * @return true if the flag is true, in order to not set a second time before an update currentInstance
      * @author Giovanni di Lorenzo
      */
     public boolean instance() {
@@ -420,8 +409,6 @@ public class GameControllerGUI implements Initializable {
         int i = 0;
         while (i < coordinates.size()) {
             getCurrentIstance().getTiles().add(getCurrentIstance().getLivingRoom().
-                    getBoardTile(coordinates.get(i), (coordinates.get(i + 1))).getTile());
-            getCurrentIstance().tiles2.add(getCurrentIstance().getLivingRoom().
                     getBoardTile(coordinates.get(i), (coordinates.get(i + 1))).getTile());
             getCurrentIstance().getLivingRoom().getBoardTile
                             (coordinates.get(i), coordinates.get(i + 1)).
@@ -493,22 +480,6 @@ public class GameControllerGUI implements Initializable {
     public Integer getColumnIndex() {
         return columnIndex;
     }
-
-    //public boolean isEndSelection() {
-    //  return endSelection;
-    //}
-   /* public void setOnArrowclicked() {
-        ObservableList<Node> children = myGridPane_columns.getChildren();
-        for (Node node : children) {
-            if (node instanceof ImageView) {
-                ImageView imageView = (ImageView) node;
-                imageView.setOnMouseClicked(event -> {
-                    Bcolumn = myGridPane_columns.getColumnIndex(imageView);
-                });
-            }
-        }
-    }*/
-
     /**
      * Method to send the selected tiles to the server
      * @param event click
@@ -577,21 +548,6 @@ public class GameControllerGUI implements Initializable {
     public Integer getBcolumn() {
         return Bcolumn;
     }
-    /*public boolean getendSelection(){
-        return endSelection;
-    }*/
-
-    /*public void pickTiles(ArrayList<String> coordinates){
-         if(getCurrentIstance().getPlayer().getNickName().equals(getCurrentIstance().getPlayers().
-                 get(getCurrentIstance().getCurrPlaying()-1).getNickName())){
-             while(!getCurrentIstance().getendSelection()){
-                 if((getCurrentIstance().getRowIndex()!=null)&&(getCurrentIstance().getColumnIndex()!=null)){
-                     //coordinates.add();
-                 }
-             }
-         }
-    }*/
-
     public ArrayList<Integer> getCoordinates() {
         return coordinates;
     }
@@ -642,8 +598,6 @@ public class GameControllerGUI implements Initializable {
                         }
                         if (getCurrentIstance().getResponse().getCategory() != Message.MessageCategory.WARNING) {
                             cleanTiles2(getCurrentIstance().getTiles());
-                            getCurrentIstance().tiles2.clear();
-                            getCurrentIstance().order.clear();
                             if (getCurrPlaying() < getPlayers().size()) {
                                 label_turn.setText("Now playing: " + getPlayers().get(getCurrPlaying()).getNickName());
                             } else {
@@ -685,17 +639,6 @@ public class GameControllerGUI implements Initializable {
 
     public void setNickname(String nickname) {
         this.nickname = nickname;
-    }
-    public ArrayList<ItemTile> getTiles2() {
-        return tiles2;
-    }
-
-    public Boolean getGrids() {
-        return grids;
-    }
-
-    public void setGrids(Boolean grids) {
-        this.grids = grids;
     }
 
     public GUIEvent getReceiver() {
