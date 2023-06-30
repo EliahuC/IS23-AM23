@@ -463,7 +463,6 @@ public class GameControllerGUI implements Initializable {
         AnchorPane rootWinner= null;
         rootWinner=loader.load();
         WinnerController winnerController = loader.getController();
-        //winnerController.displayWinner(winner);
         winnerController.displayLeaderbord(displayLeaderbord());
         Scene scene1 = new Scene(rootWinner);
         stage.setScene(scene1);
@@ -669,7 +668,7 @@ public class GameControllerGUI implements Initializable {
         }
     }
     public void displayNickname(String nickname, Label label) {
-        label.setText(nickname);
+        label.setText("My nickname: " + nickname);
     }
 
     public void setNickname(String nickname) {

@@ -43,21 +43,21 @@ public class GoalsController implements Initializable {
     public void displayPoints(){
 
         int numPlayers = gameControllerGUI.getPlayers().size();
-        int numCompleted1 = gameControllerGUI.getLivingRoom().getPointsCGD1();
-        int numCompleted2 = gameControllerGUI.getLivingRoom().getPointsCGD2();
+        int points1 = gameControllerGUI.getLivingRoom().getPointsCGD1();
+        int points2 = gameControllerGUI.getLivingRoom().getPointsCGD2();
 
         // score common goal card 1
         switch (numPlayers) {
             case 2: {
-                switch (numCompleted1) {
-                    case 0:
+                switch (points1) {
+                    case 8:
                     {
                         File file = new File("/com/example/is23am23/scoring_8.jpg");
                         image = new Image(String.valueOf(file));
                         displayImage(pointsCGC1, image);
                         break;
                     }
-                    case 1:
+                    case 4:
                     {
                         File file = new File("/com/example/is23am23/scoring_4.jpg");
                         image = new Image(String.valueOf(file));
@@ -75,22 +75,22 @@ public class GoalsController implements Initializable {
                 break;
             }
             case 3: {
-                switch (numCompleted1) {
-                    case 0:
+                switch (points1) {
+                    case 8:
                     {
                         File file = new File("/com/example/is23am23/scoring_8.jpg");
                         image = new Image(String.valueOf(file));
                         displayImage(pointsCGC1, image);
                         break;
                     }
-                    case 1:
+                    case 6:
                     {
                         File file = new File("/com/example/is23am23/scoring_6.jpg");
                         image = new Image(String.valueOf(file));
                         displayImage(pointsCGC1, image);
                         break;
                     }
-                    case 2:
+                    case 4:
                     {
                         File file = new File("/com/example/is23am23/scoring_4.jpg");
                         image = new Image(String.valueOf(file));
@@ -108,29 +108,29 @@ public class GoalsController implements Initializable {
                 break;
             }
             case 4: {
-                switch (numCompleted1) {
-                    case 0:
+                switch (points1) {
+                    case 8:
                     {
                         File file = new File("/com/example/is23am23/scoring_8.jpg");
                         image = new Image(String.valueOf(file));
                         displayImage(pointsCGC1, image);
                         break;
                     }
-                    case 1:
+                    case 6:
                     {
                         File file = new File("/com/example/is23am23/scoring_6.jpg");
                         image = new Image(String.valueOf(file));
                         displayImage(pointsCGC1, image);
                         break;
                     }
-                    case 2:
+                    case 4:
                     {
                         File file = new File("/com/example/is23am23/scoring_4.jpg");
                         image = new Image(String.valueOf(file));
                         displayImage(pointsCGC1, image);
                         break;
                     }
-                    case 3:  {
+                    case 2:  {
                         File file = new File("/com/example/is23am23/scoring_2.jpg");
                         image = new Image(String.valueOf(file));
                         displayImage(pointsCGC1, image);
@@ -151,15 +151,15 @@ public class GoalsController implements Initializable {
         // score common goal card 2
         switch (numPlayers) {
             case 2: {
-                switch (numCompleted2) {
-                    case 0:
+                switch (points2) {
+                    case 8:
                     {
                         File file = new File("/com/example/is23am23/scoring_8.jpg");
                         image = new Image(String.valueOf(file));
                         displayImage(pointsCGC2, image);
                         break;
                     }
-                    case 1:
+                    case 4:
                     {
                         File file = new File("/com/example/is23am23/scoring_4.jpg");
                         image = new Image(String.valueOf(file));
@@ -177,22 +177,22 @@ public class GoalsController implements Initializable {
                 break;
             }
             case 3: {
-                switch (numCompleted2) {
-                    case 0:
+                switch (points2) {
+                    case 8:
                     {
                         File file = new File("/com/example/is23am23/scoring_8.jpg");
                         image = new Image(String.valueOf(file));
                         displayImage(pointsCGC2, image);
                         break;
                     }
-                    case 1:
+                    case 6:
                     {
                         File file = new File("/com/example/is23am23/scoring_6.jpg");
                         image = new Image(String.valueOf(file));
                         displayImage(pointsCGC2, image);
                         break;
                     }
-                    case 2:
+                    case 4:
                     {
                         File file = new File("/com/example/is23am23/scoring_4.jpg");
                         image = new Image(String.valueOf(file));
@@ -210,29 +210,29 @@ public class GoalsController implements Initializable {
                 break;
             }
             case 4: {
-                switch (numCompleted2) {
-                    case 0:
+                switch (points2) {
+                    case 8:
                     {
                         File file = new File("/com/example/is23am23/scoring_8.jpg");
                         image = new Image(String.valueOf(file));
                         displayImage(pointsCGC2, image);
                         break;
                     }
-                    case 1:
+                    case 6:
                     {
                         File file = new File("/com/example/is23am23/scoring_6.jpg");
                         image = new Image(String.valueOf(file));
                         displayImage(pointsCGC2, image);
                         break;
                     }
-                    case 2:
+                    case 4:
                     {
                         File file = new File("/com/example/is23am23/scoring_4.jpg");
                         image = new Image(String.valueOf(file));
                         displayImage(pointsCGC2, image);
                         break;
                     }
-                    case 3:  {
+                    case 2:  {
                         File file = new File("/com/example/is23am23/scoring_2.jpg");
                         image = new Image(String.valueOf(file));
                         displayImage(pointsCGC2, image);

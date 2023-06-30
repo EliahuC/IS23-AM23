@@ -13,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -46,21 +47,18 @@ public class WinnerController implements Initializable {
      */
     public void displayLeaderbord(List<Player> ranking) {
 
-        int pos = 2;
         int i = -1;
         for (Player p : ranking) {
             if (i >= 0) {
                 Label label = new Label();
-                label.setText(pos + "° position: " + p.getNickName());
+                label.setText(p.getNickName() + "\n Points: " + p.getScore());
+                label.setFont(new Font(30));
                 leaderbord.add(label, i, 0);
             }
-            i++;
-        }
-        for (Player p : ranking) {
-            if (p.isWinner()) {
-                displayWinner(p.getNickName());
-                break;
+            else {
+                displayWinner(p.getNickName() + "\n Points: " + p.getScore());
             }
+            i++;
         }
     }
 
