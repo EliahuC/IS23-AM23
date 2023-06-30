@@ -22,7 +22,7 @@
                 <Font size="50.0" />
             </font>
         </Label>
-        <Label fx:id="winnerLabel" alignment="CENTER" layoutX="6.0" layoutY="189.0" prefHeight="30.0" prefWidth="1278.0" text="Label">
+        <Label fx:id="winnerLabel" alignment="CENTER" layoutX="6.0" layoutY="189.0" prefHeight="30.0" prefWidth="1278.0" text="Label" textAlignment="CENTER">
          <font>
             <Font name="System Bold" size="40.0" />
          </font></Label>
