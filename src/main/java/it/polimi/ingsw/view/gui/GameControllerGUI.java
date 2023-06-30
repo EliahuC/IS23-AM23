@@ -196,7 +196,7 @@ public class GameControllerGUI implements Initializable {
             }
         getCurrentIstance().stage.setScene(scene);
         getCurrentIstance().stage.setTitle("My Shelfie");
-        Image icon = new Image("/com/example/is23am23/little_icon.png");
+        Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/example/is23am23/little_icon.png")));
         getCurrentIstance().stage.getIcons().add(icon);
         getCurrentIstance().stage.show();
     }
@@ -212,33 +212,32 @@ public class GameControllerGUI implements Initializable {
         if (tile != null) {
             switch (tile.getCategory()) {
                 case GAMES: {
-                    File file = new File("/com/example/is23am23/Giochi.png");
-                    image = new Image(String.valueOf(file));
+
+                    image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/example/is23am23/Giochi.png")));
                     break;
                 }
                 case CATS: {
-                    File file = new File("/com/example/is23am23/Gatti.png");
-                    image = new Image(String.valueOf(file));
+
+                    image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/example/is23am23/Gatti.png")));
                     break;
                 }
                 case BOOKS: {
-                    File file = new File("/com/example/is23am23/Libri.png");
-                    image = new Image(String.valueOf(file));
+                    image =new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/example/is23am23/Libri.png")));
                     break;
                 }
                 case FRAMES: {
-                    File file = new File("/com/example/is23am23/Cornici.png");
-                    image = new Image(String.valueOf(file));
+
+                    image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/example/is23am23/Cornici.png")));
                     break;
                 }
                 case PLANTS: {
-                    File file = new File("/com/example/is23am23/Piante.png");
-                    image = new Image(String.valueOf(file));
+
+                    image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/example/is23am23/Piante.png")));
                     break;
                 }
                 case TROPHIES: {
-                    File file = new File("/com/example/is23am23/Trofei.png");
-                    image = new Image(String.valueOf(file));
+
+                    image =new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/example/is23am23/Trofei.png")));
                     break;
                 }
             }
@@ -681,8 +680,8 @@ public class GameControllerGUI implements Initializable {
      */
     public void launchBookshelf() {
         ImageView imageView = new ImageView();
-        File file_bs = new File("/com/example/is23am23/bookshelf.png");
-        image = new Image(String.valueOf(file_bs));
+
+        image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/example/is23am23/bookshelf.png")));
         imageView.setImage(image);
         imageView.setFitWidth(440);
         imageView.setFitHeight(440);
@@ -694,8 +693,7 @@ public class GameControllerGUI implements Initializable {
             imageView = new ImageView();
 
             //IMMAGINE FRECCIA DA INSERIRE
-            File file = new File("/com/example/is23am23/arrow_image.png");
-            image = new Image(String.valueOf(file));
+            image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/example/is23am23/arrow_image.png")));
             imageView.setImage(image);
             imageView.setFitWidth(64);
             imageView.setFitHeight(64);
