@@ -46,7 +46,6 @@ public class GUIEvent implements PropertyChangeListener {
             Platform.runLater(()-> {
                 switch (serverMessage.getCategory()) {
                     case STARTING_GAME_MESSAGE:
-                        gamecontrollerGUI.launchBookshelf();
                         GameIsStartingMessage temp_startingGameMessage = (GameIsStartingMessage) serverMessage;
                         gamecontrollerGUI.setPlayers(temp_startingGameMessage.getPlayers());
                         gamecontrollerGUI.setLivingRoom(temp_startingGameMessage.getLivingRoom());
@@ -55,6 +54,7 @@ public class GUIEvent implements PropertyChangeListener {
                         gamecontrollerGUI.setCurrentPlayer(temp_startingGameMessage.getCurrPlaying());
                         gamecontrollerGUI.setSeed(gamecontrollerGUI.getPlayer().getPersonalGoalCard().getNumeroCarta());
                         gamecontrollerGUI.setNickname(menuController.getNickname());
+                        gamecontrollerGUI.launchBookshelf();
                         stage = menuController.getStage();
                         gamecontrollerGUI.setStage(stage);
                         gamecontrollerGUI.setReceiver(this);
