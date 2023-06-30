@@ -28,14 +28,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 
 import java.io.File;
 import java.io.IOException;
 
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.*;
 
@@ -428,11 +426,34 @@ public class GameControllerGUI implements Initializable {
     public List<Player> displayLeaderbord() {
 
         ranking = getCurrentIstance().getPlayers().stream().sorted(Comparator.comparingInt(Player::getScore)).toList();
+        if(checkRanking())return ranking;
+        fixRanking();
         return ranking;
     }
 
+    private void fixRanking() {
+        int position=0;
+        for(int i =0;i<ranking.size();i++){
+            if(ranking.get(i).isWinner())
+            {
+                position=i;
+                break;
+            }
+        }
+        if (position!=0) {
+            Player p = ranking.remove(position);
+            ranking.add(0, p);
+        }
+
+    }
+
+    private boolean checkRanking() {
+        return ranking.get(0).isWinner();
+    }
+
+
     /**
-     *  Method to go to the result
+     * Method to go to the result
      * @throws IOException exception
      * @author Andrea Bricchi
      */
