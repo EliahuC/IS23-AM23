@@ -51,12 +51,12 @@ public class WinnerController implements Initializable {
         for (Player p : ranking) {
             if (i >= 0) {
                 Label label = new Label();
-                label.setText(p.getNickName() + "\n Points: " + p.getScore());
+                label.setText(p.getNickName() + "\nPoints: " + p.getScore());
                 label.setFont(new Font(30));
                 leaderbord.add(label, i, 0);
             }
             else {
-                displayWinner(p.getNickName() + "\n Points: " + p.getScore());
+                displayWinner(p.getNickName() + "\nPoints: " + p.getScore());
             }
             i++;
         }
