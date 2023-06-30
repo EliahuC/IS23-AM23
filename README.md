@@ -18,9 +18,9 @@ The members of the group are:
 |UML (Model and Controller)   	|✅   	| 100%   	    |IMPLEMENTED   	|
 |Completed Rules   	|✅   	| 100%   	    |IMPLEMENTED   	|
 |TUI   	|✅   	| 100%   	    |IMPLEMENTED    	|
-|GUI   	|🟡   	| 70%   	     |    	|
+|GUI   	|✅   	| 1000%   	   |IMPLEMENTED    	|
 |TCP   	|✅  	| 100%   	    |IMPLEMENTED    	|
-|RMI   	|✅   	| 100%   	     |IMPLEMENTED   	|
+|RMI   	|✅   	| 100%   	    |IMPLEMENTED   	|
 |Persistency   	|✅   	| 100%   	    |IMPLEMENTED   	|
 |Multiple games   	|✅   	| 100%   	    |IMPLEMENTED   	|
 

@@ -107,8 +107,8 @@
             <configuration>
               <archive>
                 <manifest>
-                  <mainClass>it.polimi.ingsw.Network.Client.ClientMain</mainClass>
-                  <!--<mainClass>it.polimi.ingsw.Network.Server.Server</mainClass>-->
+                  <!--<mainClass>it.polimi.ingsw.Network.Client.ClientMain</mainClass>-->
+                  <mainClass>it.polimi.ingsw.Network.Server.Server</mainClass>
                 </manifest>
               </archive>
               <descriptorRefs>
