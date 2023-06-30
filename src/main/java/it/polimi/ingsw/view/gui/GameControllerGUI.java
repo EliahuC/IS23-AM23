@@ -90,6 +90,7 @@ public class GameControllerGUI implements Initializable {
     private Integer Bcolumn;
     private ArrayList<Integer> order = new ArrayList<>();
     private ArrayList<Integer> coordinates = new ArrayList<>();
+    private ArrayList<Integer> columnsFreeTiles = new ArrayList<>();
     private Boolean grids = true;
     private Boolean showContainer = true;
 
@@ -154,10 +155,21 @@ public class GameControllerGUI implements Initializable {
             }
         });
 
+        columnsFreeTiles.clear();
+        for(int i=0; i<shelfCols; i++)
+        {
+            columnsFreeTiles.add(i, 0);
+        }
+        int freeTile;
         bookshelf = getCurrentIstance().getPlayer().getPlayerBookshelf();
         for (int i = 0; i < shelfRows; i++) {
             for (int j = 0; j < shelfCols; j++) {
                 ItemTile tile = bookshelf.getTile(i, j);
+                if(tile == null)
+                {
+                    freeTile = columnsFreeTiles.get(j);
+                    columnsFreeTiles.set(j, freeTile + 1);
+                }
                 ImageView imageView = new ImageView();
                 imageView.setImage(chooseCategoryImage(tile));
                 imageView.setFitWidth(60);
@@ -618,25 +630,25 @@ public class GameControllerGUI implements Initializable {
                 }
                 if (getCurrentIstance().getResponse().getCategory() == Message.MessageCategory.VALID_MESSAGE) {
                     Bcolumn = GridPane.getColumnIndex(clickNode);
-                    command = "/COLUMN" + " " + Bcolumn;
-                    message = (ClientMessage) MoveSerializer.serializeInput(command);
-                    getCurrentIstance().getConnectionClient().sendMessage(message);
-                    getCurrentIstance().getCoordinates().clear();
-                    try {
-                        TimeUnit.MILLISECONDS.sleep(200);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    if (getCurrentIstance().getResponse().getCategory() != Message.MessageCategory.WARNING) {
-                        cleanTiles2(getCurrentIstance().getTiles());
-                        getCurrentIstance().tiles2.clear();
-                        getCurrentIstance().order.clear();
-                        if(getCurrPlaying() < getPlayers().size())
-                        {
-                            label_turn.setText("Now playing: " + getPlayers().get(getCurrPlaying()).getNickName());
+                    if(columnsFreeTiles.get(Bcolumn) >= tiles.size()){
+                        command = "/COLUMN" + " " + Bcolumn;
+                        message = (ClientMessage) MoveSerializer.serializeInput(command);
+                        getCurrentIstance().getConnectionClient().sendMessage(message);
+                        getCurrentIstance().getCoordinates().clear();
+                        try {
+                            TimeUnit.MILLISECONDS.sleep(200);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
                         }
-                        else {
-                            label_turn.setText("Now playing: " + getPlayers().get(0).getNickName());
+                        if (getCurrentIstance().getResponse().getCategory() != Message.MessageCategory.WARNING) {
+                            cleanTiles2(getCurrentIstance().getTiles());
+                            getCurrentIstance().tiles2.clear();
+                            getCurrentIstance().order.clear();
+                            if (getCurrPlaying() < getPlayers().size()) {
+                                label_turn.setText("Now playing: " + getPlayers().get(getCurrPlaying()).getNickName());
+                            } else {
+                                label_turn.setText("Now playing: " + getPlayers().get(0).getNickName());
+                            }
                         }
 
                     } else {
