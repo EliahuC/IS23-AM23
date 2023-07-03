@@ -17,7 +17,7 @@ import java.net.URL;
  *
  */
 public class GUIMain extends Application implements View {
-    private String IP;
+    private static String IP;
 
     /**
      * @author Andrea Bricchi
@@ -59,7 +59,7 @@ public class GUIMain extends Application implements View {
      */
     @Override
     public void passIP(String ip) {
-        this.IP=IP;
+        IP=ip;
     }
 }
 

@@ -15,10 +15,6 @@ import java.util.Scanner;
  */
 public class ClientMain implements Printer {
     private static View view;
-    private static String IP;
-
-
-
 
 
     public static void main(String[] args) throws IOException {
